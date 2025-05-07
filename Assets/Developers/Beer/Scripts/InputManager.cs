@@ -1,7 +1,4 @@
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.UIElements;
 
 public class InputManager : Singleton<InputManager>
 {
@@ -35,8 +32,8 @@ public class InputManager : Singleton<InputManager>
         _inputActions.Player.Enable();
         _inputActions.UI.Disable();
 
-        UnityEngine.Cursor.lockState = CursorLockMode.Locked;
-        UnityEngine.Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     public void EnableUIControls()
@@ -44,8 +41,8 @@ public class InputManager : Singleton<InputManager>
         _inputActions.Player.Disable();
         _inputActions.UI.Enable();
 
-        UnityEngine.Cursor.lockState = CursorLockMode.None;
-        UnityEngine.Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     public void DisablePlayerControls()
