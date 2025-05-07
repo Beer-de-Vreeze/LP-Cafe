@@ -13,7 +13,7 @@ public class DialogueManager : Singleton<DialogueManager>
     [SerializeField]
     private TextMeshProUGUI dialogueText;
 
-    [SerializeField, Range(0.01f,1f), Tooltip("The lower the value, the faster the typing speed.")]
+    [SerializeField, Range(0.01f,1f), Tooltip("The lower the value, the faster the typing speed.")]                                                                
     private float typingSpeed = 0.1f;
 
     [SerializeField, Range(0.5f, 5f), Tooltip("The time between messages.")]
@@ -93,6 +93,8 @@ public class DialogueManager : Singleton<DialogueManager>
     private IEnumerator TypeSentence(string sentence)
     {
         dialogueText.text = "";
+
+        //For correct spacing in the sentence
         string[] lines = sentence.ToUpper().Split(new[] { '\n' }, StringSplitOptions.None);
 
         foreach (string line in lines)
