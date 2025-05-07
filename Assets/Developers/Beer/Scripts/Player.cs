@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -36,33 +37,37 @@ public class Player : MonoBehaviour
 
     private void OnEnable()
     {
-        InputManager.Instance._inputActions.Player.Move.performed += OnMove;
-        InputManager.Instance._inputActions.Player.Move.canceled += OnMove;
-        InputManager.Instance._inputActions.Player.Look.performed += OnLook;
-        InputManager.Instance._inputActions.Player.Look.canceled += OnLook;
-        InputManager.Instance._inputActions.Player.Interact.performed += OnInteract;
+        InputManager.Instance._inputActions.Player.Move.performed += HandleMove;
+        InputManager.Instance._inputActions.Player.Move.canceled += HandleMove;
+        InputManager.Instance._inputActions.Player.Look.performed += HandleLook;
+        InputManager.Instance._inputActions.Player.Look.canceled += HandleLook;
+        InputManager.Instance._inputActions.Player.Interact.performed += HandleInteract;
     }
 
     private void OnDisable()
     {
-        InputManager.Instance._inputActions.Player.Move.performed -= OnMove;
-        InputManager.Instance._inputActions.Player.Move.canceled -= OnMove;
-        InputManager.Instance._inputActions.Player.Look.performed -= OnLook;
-        InputManager.Instance._inputActions.Player.Look.canceled -= OnLook;
-        InputManager.Instance._inputActions.Player.Interact.performed -= OnInteract;
+        InputManager.Instance._inputActions.Player.Move.performed -= HandleMove;
+        InputManager.Instance._inputActions.Player.Move.canceled -= HandleMove;
+        InputManager.Instance._inputActions.Player.Look.performed -= HandleLook;
+        InputManager.Instance._inputActions.Player.Look.canceled -= HandleLook;
+        InputManager.Instance._inputActions.Player.Interact.performed -= HandleInteract;
     }
 
-    private void OnMove(InputAction.CallbackContext context)
+    private void HandleMove(InputAction.CallbackContext context)
     {
         _moveInput = context.ReadValue<Vector2>();
     }
 
-    private void OnLook(InputAction.CallbackContext context)
+    private void HandleLook(InputAction.CallbackContext context)
     {
         _lookInput = context.ReadValue<Vector2>();
+        if (context.canceled)
+        {
+            _lookInput = Vector2.zero;
+        }
     }
 
-    private void OnInteract(InputAction.CallbackContext context)
+    private void HandleInteract(InputAction.CallbackContext context)
     {
         Interact();
     }
@@ -98,6 +103,7 @@ public class Player : MonoBehaviour
             )
         )
         {
+            Debug.Log("Hit: " + hit.collider.name);
             Interfaces.IInteractable interactable =
                 hit.collider.GetComponent<Interfaces.IInteractable>();
             if (interactable != null)
@@ -109,6 +115,12 @@ public class Player : MonoBehaviour
                 Debug.Log("No interactable found in range.");
             }
         }
+    }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawRay(_cameraTransform.position, _cameraTransform.forward * _interactionDistance);
     }
 
     void Reset()
