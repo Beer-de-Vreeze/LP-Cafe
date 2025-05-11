@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class InputManager : Singleton<InputManager>
 {
@@ -7,11 +9,17 @@ public class InputManager : Singleton<InputManager>
     public Vector2 MovementInput => _inputActions.Player.Move.ReadValue<Vector2>();
     public Vector2 LookInput => _inputActions.Player.Look.ReadValue<Vector2>();
 
+    // Event for dialogue advancement
+    public event Action OnDialogueAdvance;
+
     public override void Awake()
     {
         base.Awake();
         _inputActions = new InputSystem_Actions();
         EnablePlayerControls();
+
+        // Register for UI submit/continue action
+        _inputActions.UI.Click.performed += ctx => OnDialogueAdvance?.Invoke();
     }
 
     private void OnEnable()
@@ -41,6 +49,7 @@ public class InputManager : Singleton<InputManager>
         _inputActions.Player.Disable();
         _inputActions.UI.Enable();
 
+        // Unlock cursor for dialogue interaction
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }

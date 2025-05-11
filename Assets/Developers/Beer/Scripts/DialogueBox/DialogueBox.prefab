@@ -263,10 +263,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueText: {fileID: 6595434265077232873}
+  speakerNameText: {fileID: 0}
+  speakerImage: {fileID: 0}
+  dialogueOptionsContainer: {fileID: 0}
+  optionButtonPrefab: {fileID: 0}
   typingSpeed: 0.03
   timeBetweenMessages: 1.5
   testDialogue: {fileID: 11400000, guid: 0a8ea0f622aad544ab942e00a057a365, type: 2}
   OnDialogueEnd:
+    m_PersistentCalls:
+      m_Calls: []
+  OnNodeStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnOptionSelected:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1 &6655103241554717515

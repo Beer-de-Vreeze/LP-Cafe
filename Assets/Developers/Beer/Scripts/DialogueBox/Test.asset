@@ -12,6 +12,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e83d7a4d0b898be4da92bb1e6ff3a1c0, type: 3}
   m_Name: Test
   m_EditorClassIdentifier: 
+  startNode:
+    nodeID: 1
+    speakerName: Frans
+    text: Hallo ik ben Frans
+    options:
+    - text: 
+      targetNodeID: 
+      hasCondition: 0
+      conditionName: 
+    - text: 
+      targetNodeID: 
+      hasCondition: 0
+      conditionName: 
+    speakerImage: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+    voiceClip: {fileID: 0}
+    nextNodeID: 0
+  nodes:
+  - nodeID: 2
+    speakerName: Frans
+    text: ik ben eenzaam
+    options: []
+    speakerImage: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+    voiceClip: {fileID: 0}
+    nextNodeID: 
   messages:
   - "Beer stood at the edge of the dense forest, the pale morning sun barely penetrating
     the thick gray fog. A strange sound\u2014a low, resonant hum\u2014echoed through

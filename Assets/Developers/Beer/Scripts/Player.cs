@@ -22,6 +22,7 @@ public class Player : MonoBehaviour
     private Vector2 _moveInput;
     private Vector2 _lookInput;
     private float _cameraRotation = 0f;
+    private bool _isInDialogue = false;
 
     private void Awake()
     {
@@ -32,6 +33,26 @@ public class Player : MonoBehaviour
             _cameraTransform = Camera.main.transform;
 
         Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    private void Start()
+    {
+        // Subscribe to dialogue events
+        if (DialogueManager.Instance != null)
+        {
+            DialogueManager.Instance.OnDialogueStart.AddListener(OnDialogueStarted);
+            DialogueManager.Instance.OnDialogueEnd.AddListener(OnDialogueEnded);
+        }
+    }
+
+    private void OnDestroy()
+    {
+        // Unsubscribe from dialogue events
+        if (DialogueManager.Instance != null)
+        {
+            DialogueManager.Instance.OnDialogueStart.RemoveListener(OnDialogueStarted);
+            DialogueManager.Instance.OnDialogueEnd.RemoveListener(OnDialogueEnded);
+        }
     }
 
     private void OnEnable()
@@ -71,8 +92,22 @@ public class Player : MonoBehaviour
         Interact();
     }
 
+    private void OnDialogueStarted()
+    {
+        _isInDialogue = true;
+    }
+
+    private void OnDialogueEnded()
+    {
+        _isInDialogue = false;
+    }
+
     private void FixedUpdate()
     {
+        // Skip movement if in dialogue
+        if (_isInDialogue)
+            return;
+
         Vector3 moveDirection = transform.forward * _moveInput.y + transform.right * _moveInput.x;
         moveDirection.Normalize();
 
@@ -81,6 +116,10 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+        // Skip camera rotation if in dialogue
+        if (_isInDialogue)
+            return;
+
         float mouseX = _lookInput.x * _lookSensitivity;
         float mouseY = _lookInput.y * _lookSensitivity;
 
