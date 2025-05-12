@@ -623,6 +623,18 @@ public class DialogueManager : Singleton<DialogueManager>
     {
         OnOptionSelected.Invoke(option);
 
+        // Check if this option reveals a bachelor preference
+        if (option.isPreference && option.bachelor != null)
+        {
+            // Learn bachelor's preference
+            option.bachelor.ArrayCheck(option.preferenceText);
+
+            if (enableDebugLogs)
+                Debug.Log(
+                    $"Learned preference for {option.bachelor.m_name}: {option.preferenceText}"
+                );
+        }
+
         // Find the target node
         DialogueNode targetNode = FindNodeByID(option.targetNodeID);
         if (targetNode != null)
@@ -638,6 +650,9 @@ public class DialogueManager : Singleton<DialogueManager>
 
     public void SelectChoice(DialogueChoice choice)
     {
+        // Handle preference learning if we've added that capability to DialogueChoice
+        // This would require updating the DialogueChoice class similar to DialogueOption
+
         // Find the target node
         DialogueNode targetNode = FindNodeByID(choice.nextNodeID);
         if (targetNode != null)

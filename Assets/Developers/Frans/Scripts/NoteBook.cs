@@ -1,21 +1,24 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using System.Collections.Generic;
 
-public class Notebook : MonoBehaviour
+public class Notebook : Singleton<Notebook>
 {
     [SerializeField]
     private BachelorSO[] m_bachelors;
+
     [SerializeField]
     private TMP_Text m_name;
+
     [SerializeField]
     private List<TMP_Text> m_likes = new List<TMP_Text>();
+
     [SerializeField]
     private List<TMP_Text> m_disLikes = new List<TMP_Text>();
 
     private void Start()
     {
-        CheckBachelor(m_bachelors[0]); 
+        CheckBachelor(m_bachelors[0]);
     }
 
     [ContextMenu("LikeChecker")]
@@ -27,18 +30,21 @@ public class Notebook : MonoBehaviour
 
     public void LikesChecker(BachelorSO bachelor)
     {
-        for (int i = 0; i < bachelor.m_likes.Count; i++)
+        // Only iterate up to the minimum of bachelor likes and UI text components
+        for (int i = 0; i < Mathf.Min(bachelor.m_likes.Count, m_likes.Count); i++)
         {
-            if (bachelor.m_likesUnlocked[i])
+            if (bachelor.m_likesUnlocked.Count > i && bachelor.m_likesUnlocked[i])
                 m_likes[i].text = bachelor.m_likes[i];
             else
             {
                 m_likes[i].text = "???????";
             }
         }
-        for (int i = 0; i < bachelor.m_dislikes.Count; i++)
+
+        // Only iterate up to the minimum of bachelor dislikes and UI text components
+        for (int i = 0; i < Mathf.Min(bachelor.m_dislikes.Count, m_disLikes.Count); i++)
         {
-            if (bachelor.m_dislikesUnlocked[i])
+            if (bachelor.m_dislikesUnlocked.Count > i && bachelor.m_dislikesUnlocked[i])
                 m_disLikes[i].text = bachelor.m_dislikes[i];
             else
             {

@@ -31,6 +31,7 @@ public class DialogueNode
     public Sprite speakerImage;
     public AudioClip voiceClip;
     public string nextNodeID;
+    public bool isEndNode; // Added missing property
 
     // Main options list (replaces choices)
     public List<DialogueOption> options = new List<DialogueOption>();
@@ -74,6 +75,11 @@ public class DialogueOption
     public string targetNodeID;
     public bool hasCondition;
     public string conditionName;
+
+    // Add bachelor preference tracking
+    public bool isPreference;
+    public BachelorSO bachelor;
+    public string preferenceText;
 }
 
 // Kept for backward compatibility with existing saved data
