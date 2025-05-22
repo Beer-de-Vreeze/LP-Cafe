@@ -398,7 +398,7 @@ public class DialogueManager : Singleton<DialogueManager>
             return;
 
         // Create a canvas if needed
-        Canvas canvas = FindObjectOfType<Canvas>();
+        Canvas canvas = FindFirstObjectByType<Canvas>();
         if (canvas == null)
         {
             GameObject canvasObj = new GameObject("DialogueCanvas");
@@ -528,7 +528,7 @@ public class DialogueManager : Singleton<DialogueManager>
             return;
 
         // Create a canvas if needed
-        Canvas canvas = FindObjectOfType<Canvas>();
+        Canvas canvas = FindFirstObjectByType<Canvas>();
         if (canvas == null)
         {
             GameObject canvasObj = new GameObject("DialogueCanvas");

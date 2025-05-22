@@ -17,7 +17,7 @@ namespace LPCafe.Windows
 
         private static TextField m_fileNameTextField;
         private Button m_saveButton;
-
+        private Button m_miniMapButton;
 
         //To show within the window tab in Unity.
         [MenuItem("Window/LPCafe/DSEditorWindow")]
@@ -51,29 +51,40 @@ namespace LPCafe.Windows
         {
             Toolbar toolbar = new Toolbar();
 
-            m_fileNameTextField = DSElementUtility.CreateTextField(defaultFileName, "File Name:", callback =>
-            {
-                m_fileNameTextField.value = callback.newValue.RemoveWhitespaces().RemoveSpecialCharacters();
-            });
+            m_fileNameTextField = DSElementUtility.CreateTextField(
+                defaultFileName,
+                "File Name:",
+                callback =>
+                {
+                    m_fileNameTextField.value = callback
+                        .newValue.RemoveWhitespaces()
+                        .RemoveSpecialCharacters();
+                }
+            );
 
-            m_saveButton = DSElementUtility.CreateButton("Save", () =>
-            {
-                Save();
-            });
+            m_saveButton = DSElementUtility.CreateButton(
+                "Save",
+                () =>
+                {
+                    Save();
+                }
+            );
 
             Button loadedButton = DSElementUtility.CreateButton("LoadGraph", () => LoadGraph());
             Button clearButton = DSElementUtility.CreateButton("Clear", () => Clear());
             Button resetButton = DSElementUtility.CreateButton("Reset", () => Reset());
-            Button miniMapButton = DSElementUtility.CreateButton("Minimap", () => ToggleMiniMap());
+            m_miniMapButton = DSElementUtility.CreateButton("Minimap", () => ToggleMiniMap());
 
             toolbar.Add(m_fileNameTextField);
             toolbar.Add(m_saveButton);
             toolbar.Add(loadedButton);
             toolbar.Add(clearButton);
             toolbar.Add(resetButton);
-            toolbar.Add(miniMapButton);
+            toolbar.Add(m_miniMapButton);
 
-            toolbar.AddStyleSheets("Assets/Editor/Editor Default Resources/DialogueSystemStyle/DSToolbarStyle.uss");
+            toolbar.AddStyleSheets(
+                "Assets/Editor/Editor Default Resources/DialogueSystemStyle/DSToolbarStyle.uss"
+            );
 
             rootVisualElement.Add(toolbar);
         }
@@ -81,11 +92,14 @@ namespace LPCafe.Windows
         private void ToggleMiniMap()
         {
             m_graphView.ToggleMiniMap();
+            m_miniMapButton.ToggleInClassList("ds-toolbar__button__selected");
         }
 
         private void AddStyles()
         {
-            rootVisualElement.AddStyleSheets("Assets/Editor/Editor Default Resources/DialogueSystemStyle/StyleVariables.uss");
+            rootVisualElement.AddStyleSheets(
+                "Assets/Editor/Editor Default Resources/DialogueSystemStyle/StyleVariables.uss"
+            );
         }
         #endregion
 
@@ -97,7 +111,8 @@ namespace LPCafe.Windows
                 EditorUtility.DisplayDialog(
                     "Invalid file Name",
                     "Please ensure the file name you've typed in is valid",
-                    "Roger!");
+                    "Roger!"
+                );
 
                 return;
             }
@@ -108,7 +123,11 @@ namespace LPCafe.Windows
 
         private void LoadGraph()
         {
-           string filePath = EditorUtility.OpenFilePanel("Dialogue Graphs", "Assets/Developers/Frans/Graphs", "asset");
+            string filePath = EditorUtility.OpenFilePanel(
+                "Dialogue Graphs",
+                "Assets/Developers/Frans/Graphs",
+                "asset"
+            );
 
             if (string.IsNullOrEmpty(filePath))
             {
@@ -139,7 +158,6 @@ namespace LPCafe.Windows
         {
             m_fileNameTextField.value = newFileName;
         }
-
 
         #region Saving
         public void EnableSaving()
