@@ -1,5 +1,7 @@
 /// <summary>
 /// Provides extension methods for text manipulation and character validation.
+///  The stackoverflow page : https://stackoverflow.com/questions/6219454/efficient-way-to-remove-all-whitespace-from-string/37347881#37347881
+/// 
 /// </summary>
 public static class TextUtility
 {
