@@ -1,4 +1,4 @@
-using System;
+using System.IO;
 using UnityEditor;
 using UnityEditor.UIElements;
 using UnityEngine;
@@ -6,15 +6,16 @@ using UnityEngine.UIElements;
 
 namespace LPCafe.Windows
 {
-
+    using System;
     using Utilities;
+
     public class DSEditorWindow : EditorWindow
     {
         private DSGraphView m_graphView;
 
         private readonly string defaultFileName = "DialogueFileName";
 
-        private TextField m_fileNameTextField;
+        private static TextField m_fileNameTextField;
         private Button m_saveButton;
 
 
@@ -60,12 +61,26 @@ namespace LPCafe.Windows
                 Save();
             });
 
+            Button loadedButton = DSElementUtility.CreateButton("LoadGraph", () => LoadGraph());
+            Button clearButton = DSElementUtility.CreateButton("Clear", () => Clear());
+            Button resetButton = DSElementUtility.CreateButton("Reset", () => Reset());
+            Button miniMapButton = DSElementUtility.CreateButton("Minimap", () => ToggleMiniMap());
+
             toolbar.Add(m_fileNameTextField);
             toolbar.Add(m_saveButton);
+            toolbar.Add(loadedButton);
+            toolbar.Add(clearButton);
+            toolbar.Add(resetButton);
+            toolbar.Add(miniMapButton);
 
             toolbar.AddStyleSheets("Assets/Editor/Editor Default Resources/DialogueSystemStyle/DSToolbarStyle.uss");
 
             rootVisualElement.Add(toolbar);
+        }
+
+        private void ToggleMiniMap()
+        {
+            m_graphView.ToggleMiniMap();
         }
 
         private void AddStyles()
@@ -90,7 +105,41 @@ namespace LPCafe.Windows
             DSIOUtility.Initialize(m_graphView, m_fileNameTextField.value);
             DSIOUtility.Save();
         }
+
+        private void LoadGraph()
+        {
+           string filePath = EditorUtility.OpenFilePanel("Dialogue Graphs", "Assets/Developers/Frans/Graphs", "asset");
+
+            if (string.IsNullOrEmpty(filePath))
+            {
+                return;
+            }
+
+            Clear();
+
+            DSIOUtility.Initialize(m_graphView, Path.GetFileNameWithoutExtension(filePath));
+            DSIOUtility.Load();
+        }
+
+        private void Clear()
+        {
+            m_graphView.ClearGraph();
+        }
+
+        private void Reset()
+        {
+            Clear();
+
+            UpdateFileName(defaultFileName);
+        }
         #endregion
+
+        #region Utility Methods
+        public static void UpdateFileName(string newFileName)
+        {
+            m_fileNameTextField.value = newFileName;
+        }
+
 
         #region Saving
         public void EnableSaving()
@@ -102,6 +151,7 @@ namespace LPCafe.Windows
         {
             m_saveButton.SetEnabled(false);
         }
+        #endregion
         #endregion
     }
 }

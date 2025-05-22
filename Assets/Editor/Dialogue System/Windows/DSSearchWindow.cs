@@ -60,7 +60,7 @@ namespace LPCafe
             {
                 case DSDialogueType.SingleChoice:
                 {
-                    DSSingleChoiceNode singleChoiceNode = (DSSingleChoiceNode) m_graphView.CreateNode(DSDialogueType.SingleChoice, localMousePos);
+                    DSSingleChoiceNode singleChoiceNode = (DSSingleChoiceNode) m_graphView.CreateNode("DialogueName", DSDialogueType.SingleChoice, localMousePos);
                     m_graphView.AddElement(singleChoiceNode);
                     
                     return true;
@@ -68,7 +68,7 @@ namespace LPCafe
                     
                 case DSDialogueType.MultipleChoice:
                 {
-                    DSSingleChoiceNode multipleChoiceNode = (DSSingleChoiceNode)m_graphView.CreateNode(DSDialogueType.MultipleChoice, localMousePos);
+                    DSSingleChoiceNode multipleChoiceNode = (DSSingleChoiceNode)m_graphView.CreateNode("DialogueName", DSDialogueType.MultipleChoice, localMousePos);
                     m_graphView.AddElement(multipleChoiceNode);
 
                     return true;

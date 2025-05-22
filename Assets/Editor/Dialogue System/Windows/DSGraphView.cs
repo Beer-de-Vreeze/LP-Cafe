@@ -20,6 +20,8 @@ namespace LPCafe.Windows
         private DSEditorWindow m_editorWindow;
         private DSSearchWindow m_searchWindow;
 
+        private MiniMap m_miniMap;
+
         private SerializableDictionary<string, DSNodeErrorData> m_ungroupedNodes;
         private SerializableDictionary<string, DSGroupErrorData> m_groups;
         private SerializableDictionary<Group, SerializableDictionary<string, DSNodeErrorData>> m_groupedNodes;
@@ -49,7 +51,6 @@ namespace LPCafe.Windows
                 //However if there is a repeated name error the user can't use the save button to prevent overriding previous data.
                 else
                 {
-                    Debug.Log("Cant Save");
                     //Disables Save Button
                     m_editorWindow.DisableSaving();
                 }
@@ -66,6 +67,7 @@ namespace LPCafe.Windows
 
             AddSearchWindow();
             AddManipulators();
+            AddMiniMap();
             AddGridBackground();
 
             OnElementsDeleted();
@@ -75,6 +77,7 @@ namespace LPCafe.Windows
             OnGraphViewChanged();
 
             AddStyles();
+            AddMiniMapStyles();
         }
 
         #region Ports
@@ -137,7 +140,7 @@ namespace LPCafe.Windows
             (
                 //Will place a node at the current mouse position.
 
-                menuEvent => menuEvent.menu.AppendAction(actionTitle, actionEvent => AddElement(CreateNode(dialogueType, GetLocalMousePosition(actionEvent.eventInfo.localMousePosition))))
+                menuEvent => menuEvent.menu.AppendAction(actionTitle, actionEvent => AddElement(CreateNode("DialogueName", dialogueType, GetLocalMousePosition(actionEvent.eventInfo.localMousePosition))))
             );
 
             return contextualMenuManipulator;
@@ -171,6 +174,20 @@ namespace LPCafe.Windows
             nodeCreationRequest = context => SearchWindow.Open(new SearchWindowContext(context.screenMousePosition), m_searchWindow);
         }
 
+        private void AddMiniMap()
+        {
+            m_miniMap = new MiniMap()
+            {
+                anchored = true
+            };
+
+            m_miniMap.SetPosition(new Rect(15, 50, 200, 100));
+
+            Add(m_miniMap);
+
+            m_miniMap.visible = false;
+        }
+
         public DSGroup CreateGroup(string groupName, Vector2 localMousePosition)
         {
             DSGroup group = new DSGroup(groupName, localMousePosition);
@@ -196,7 +213,7 @@ namespace LPCafe.Windows
             return group;
         }
 
-        public NodeBase CreateNode(DSDialogueType dialogueType, Vector2 nodePos)
+        public NodeBase CreateNode(string nodeName, DSDialogueType dialogueType, Vector2 nodePos, bool shouldDraw = true)
         {
             //For instantiating a node. Uses enum value to decide which type of node to instantiate.
 
@@ -205,8 +222,12 @@ namespace LPCafe.Windows
 
             NodeBase node = (NodeBase) Activator.CreateInstance(nodeType);
 
-            node.Initialize(this, nodePos);
-            node.Draw();
+            node.Initialize(nodeName, this, nodePos);
+
+            if (shouldDraw)
+            {
+                node.Draw();
+            }
 
             AddUngroupedNode(node);
             return node;
@@ -629,6 +650,18 @@ namespace LPCafe.Windows
                 "Assets/Editor/Editor Default Resources/DialogueSystemStyle/DSNodeStyles.uss"
             );
         }
+
+        private void AddMiniMapStyles()
+        {
+            StyleColor backgroundColor = new StyleColor(new Color32(29, 29, 30, 255));
+            StyleColor borderColor = new StyleColor(new Color32(51, 51, 51, 255));
+
+            m_miniMap.style.backgroundColor = backgroundColor;
+            m_miniMap.style.borderTopColor = borderColor;
+            m_miniMap.style.borderRightColor = borderColor;
+            m_miniMap.style.borderBottomColor = borderColor;
+            m_miniMap.style.borderLeftColor = borderColor;
+        }
         #endregion
 
         #region Utility
@@ -646,6 +679,22 @@ namespace LPCafe.Windows
             Vector2 localMousePos = contentViewContainer.WorldToLocal(worldMousePos);
 
             return localMousePos;
+        }
+
+        public void ClearGraph()
+        {
+            graphElements.ForEach(graphElements => RemoveElement(graphElements));
+
+            m_groups.Clear();
+            m_groupedNodes.Clear();
+            m_ungroupedNodes.Clear();
+
+            NameErrorsAmount = 0;
+        }
+
+        public void ToggleMiniMap()
+        {
+            m_miniMap.visible = !m_miniMap.visible;
         }
         #endregion
     }

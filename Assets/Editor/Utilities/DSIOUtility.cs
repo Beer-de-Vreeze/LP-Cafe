@@ -1,5 +1,6 @@
 using System;
 using UnityEditor;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using System.Collections.Generic;
 
@@ -9,7 +10,6 @@ namespace LPCafe.Utilities
     using Data.Save;
     using ScriptableObjects;
     using Windows;
-    using Unity.VisualScripting;
     using LPCafe.Data;
     using System.Linq;
     using System.IO;
@@ -17,7 +17,7 @@ namespace LPCafe.Utilities
     public static class DSIOUtility
     {
         //IO stands for both In- and Output
-        //This script will both save and Load the graph.
+        //This script will both Save and Load the graph.
 
         private static DSGraphView m_graphView;
 
@@ -29,6 +29,9 @@ namespace LPCafe.Utilities
 
         private static Dictionary<string, DSDialogueGroupSO> m_createdDialogueGroups;
         private static Dictionary<string, DSDialogueSO> m_createdDialogues;
+
+        private static Dictionary<string, DSGroup> m_loadedGroups;
+        private static Dictionary<string, NodeBase> m_loadedNodes;
 
         public static void Initialize(DSGraphView dsGraphView, string graphName)
         {
@@ -42,6 +45,9 @@ namespace LPCafe.Utilities
 
             m_createdDialogueGroups = new Dictionary<string, DSDialogueGroupSO>();
             m_createdDialogues = new Dictionary<string, DSDialogueSO>();
+
+            m_loadedGroups = new Dictionary<string, DSGroup>();
+            m_loadedNodes = new Dictionary<string, NodeBase>();
         } 
 
         #region Save Methods
@@ -51,7 +57,7 @@ namespace LPCafe.Utilities
 
             GetElementsFromGraphView();
 
-            DSGraphSaveDataSO graphData = CreateAsset<DSGraphSaveDataSO>("Assets/Editor/DialogueSystem/Graphs", $"{m_graphFileName}Graph");
+            DSGraphSaveDataSO graphData = CreateAsset<DSGraphSaveDataSO>("Assets/Developers/Frans/Graphs", $"{m_graphFileName}Graph");
 
             graphData.Initialize(m_graphFileName);
 
@@ -80,8 +86,6 @@ namespace LPCafe.Utilities
 
             UpdateOldGroups(groupNames, graphData);
         }
-
-
 
         private static void SaveGroupToGraph(DSGroup group, DSGraphSaveDataSO graphData)
         {
@@ -130,7 +134,6 @@ namespace LPCafe.Utilities
             }
 
             graphData.m_graphOldGroupNamesData = new List<string>(currenGroupNames);
-
         }
         #endregion
 
@@ -163,16 +166,7 @@ namespace LPCafe.Utilities
 
         private static void SaveNodeToGraph(NodeBase node, DSGraphSaveDataSO graphData)
         {
-            List<DSChoiceSaveData> choiceSaveData = new List<DSChoiceSaveData>();
-
-            foreach(DSChoiceSaveData choice in node.m_nodeChoices)
-            {
-                DSChoiceSaveData choiceData = new DSChoiceSaveData()
-                {
-                    m_choiceTextData = choice.m_choiceTextData,
-                    m_choiceNodeIDData = choice.m_choiceNodeIDData
-                };
-            }
+            List<DSChoiceSaveData> choiceSaveData = CloneNodeChoices(node.m_nodeChoices);
 
             DSNodeSaveData nodeData = new DSNodeSaveData()
             {
@@ -300,6 +294,101 @@ namespace LPCafe.Utilities
         #endregion
         #endregion
 
+        #region Load
+        public static void Load()
+        {
+            DSGraphSaveDataSO graphData = LoadAsset<DSGraphSaveDataSO>("Assets/Developers/Frans/Graphs", m_graphFileName);
+
+            if(graphData == null)
+            {
+                EditorUtility.DisplayDialog
+                (
+                    "Coulnd't load the file",
+                    "The file at the following path could not be found:\n\n" +
+                    $"Assets/Developers/Frans/Graphs/{m_graphFileName}\n\n",
+                    "Make sure you chose the right file and it's placed at the folder path mentioned above.",
+                    "Thanks"
+                );
+                return;
+            }
+
+            DSEditorWindow.UpdateFileName(graphData.m_graphFileNameData);
+
+            LoadGroups(graphData.m_graphGroupsData);
+            LoadNodes(graphData.m_graphNodesData);
+            LoadNodesConnection();
+        }
+
+        private static void LoadGroups(List<DSGroupSaveData> m_graphGroupsData)
+        {
+            foreach(DSGroupSaveData groupData in m_graphGroupsData)
+            {
+                DSGroup group = m_graphView.CreateGroup(groupData.m_groupNameData, groupData.m_groupPositionData);
+
+                group.m_groupID = groupData.m_groupIDData;
+
+                m_loadedGroups.Add(group.m_groupID, group);
+            }
+        }
+
+        private static void LoadNodes(List<DSNodeSaveData> m_graphNodesData)
+        {
+            foreach(DSNodeSaveData nodeSaveData in m_graphNodesData)
+            {
+                List<DSChoiceSaveData> choices = CloneNodeChoices(nodeSaveData.m_nodeChoicesData);
+
+                NodeBase node = m_graphView.CreateNode(nodeSaveData.m_nodeNameData, nodeSaveData.m_dialogueTypeData, nodeSaveData.m_nodePositionData, false);
+            
+                node.m_nodeID = nodeSaveData.m_nodeIDData;
+                node.m_nodeChoices = choices;
+                node.m_nodeText = nodeSaveData.m_nodeTextData;
+
+                node.Draw();
+
+                m_graphView.AddElement(node);
+
+                m_loadedNodes.Add(node.m_nodeID, node);
+
+                if (string.IsNullOrEmpty(nodeSaveData.m_nodeGroupIDData))
+                {
+                    continue;
+                }
+
+                DSGroup group = m_loadedGroups[nodeSaveData.m_nodeGroupIDData];
+
+                node.m_nodeGroup = group;
+
+                group.AddElement(node);
+            }
+        }
+
+        private static void LoadNodesConnection()
+        {
+            foreach (KeyValuePair<string, NodeBase> loadedNode in m_loadedNodes)
+            {
+                foreach(Port choicePort in loadedNode.Value.outputContainer.Children())
+                {
+                    DSChoiceSaveData choiceData = (DSChoiceSaveData) choicePort.userData;
+
+                    if (string.IsNullOrEmpty(choiceData.m_choiceNodeIDData))
+                    {
+                        continue;
+                    }
+
+                    NodeBase nextNode = m_loadedNodes[choiceData.m_choiceNodeIDData];
+
+                    Port nextNodeInputPort = (Port) nextNode.inputContainer.Children().First();
+
+                    Edge edge = choicePort.ConnectTo(nextNodeInputPort);
+
+                    m_graphView.AddElement(edge);
+
+                    loadedNode.Value.RefreshPorts();
+                }
+            }
+        }
+        #endregion
+
         #region Creation Methods
         private static void CreateDefaultFolders()
         {
@@ -366,18 +455,28 @@ namespace LPCafe.Utilities
         {
             string fullPath = $"{path}/{assetName}.asset";
 
-            T asset = AssetDatabase.LoadAssetAtPath<T>(fullPath);
+            T asset = LoadAsset<T>(path, assetName);
 
             if (asset == null)
             {
                 asset = ScriptableObject.CreateInstance<T>();
-                Debug.Log(path);
-                Debug.Log(asset);
-                Debug.Log(fullPath);
+
                 AssetDatabase.CreateAsset(asset, fullPath);
             }
 
             return asset;
+        }
+
+        private static T LoadAsset<T>(string path, string assetName) where T : ScriptableObject
+        {
+            string fullPath = $"{path}/{assetName}.asset";
+
+            return AssetDatabase.LoadAssetAtPath<T>(fullPath);
+        }
+
+        private static void RemoveAsset(string path, List<string> assetName)
+        {
+            AssetDatabase.DeleteAsset($"{path}/{assetName}.asset");
         }
 
         //Type needs to be UnityEngine.Object for it to save it as dirty.(UnityEngine needs to be in there because System also has an Object type)
@@ -390,9 +489,20 @@ namespace LPCafe.Utilities
             AssetDatabase.Refresh();
         }
 
-        private static void RemoveAsset(string path, List<string> assetName)
+        private static List<DSChoiceSaveData> CloneNodeChoices(List<DSChoiceSaveData> nodeChoices)
         {
-            AssetDatabase.DeleteAsset($"{path}/{assetName}.asset");
+            List<DSChoiceSaveData> choiceSaveData = new List<DSChoiceSaveData>();
+
+            foreach (DSChoiceSaveData choice in nodeChoices)
+            {
+                DSChoiceSaveData choiceData = new DSChoiceSaveData()
+                {
+                    m_choiceTextData = choice.m_choiceTextData,
+                    m_choiceNodeIDData = choice.m_choiceNodeIDData
+                };
+            }
+
+            return choiceSaveData;
         }
         #endregion
     }

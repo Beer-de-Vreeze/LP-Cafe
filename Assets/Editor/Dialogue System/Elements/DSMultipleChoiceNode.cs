@@ -11,9 +11,9 @@ namespace LPCafe.Elements
 
     public class DSMultipleChoiceNode : NodeBase
     {
-        public override void Initialize(DSGraphView dsGraphView, Vector2 pos)
+        public override void Initialize(string nodeName, DSGraphView dsGraphView, Vector2 pos)
         {
-            base.Initialize(dsGraphView, pos);
+            base.Initialize(nodeName, dsGraphView, pos);
 
             m_nodeDialogueType = DSDialogueType.MultipleChoice;
 

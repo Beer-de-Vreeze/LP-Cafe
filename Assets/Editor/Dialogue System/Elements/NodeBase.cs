@@ -29,10 +29,10 @@ namespace LPCafe.Elements
         protected DSGraphView m_graphView;
         private Color m_defaultBackgroundColor;
 
-        public virtual void Initialize(DSGraphView dsGraphView, Vector2 pos)
+        public virtual void Initialize(string nodeName, DSGraphView dsGraphView, Vector2 pos)
         {
             m_nodeID = Guid.NewGuid().ToString();
-            m_nodeDialogueName = "DialogueName";
+            m_nodeDialogueName = nodeName;
             m_nodeChoices = new List<DSChoiceSaveData>();
             m_nodeText = "Dialogue text.";
 
