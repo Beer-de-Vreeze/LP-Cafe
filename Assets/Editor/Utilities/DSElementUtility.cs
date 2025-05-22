@@ -40,11 +40,12 @@ namespace LPCafe.Utilities
             return port;
         }
 
-        public static TextField CreateTextField(string value = null, EventCallback<ChangeEvent<string>> onValueChanged = null)
+        public static TextField CreateTextField(string value = null, string label = null, EventCallback<ChangeEvent<string>> onValueChanged = null)
         {
             TextField textField = new TextField()
             {
                 value = value,
+                label = label
             };
 
             //To make sure that the value has changed before firing of the event.
@@ -56,9 +57,9 @@ namespace LPCafe.Utilities
             return textField;
         }
 
-        public static TextField CreateTextArea(string value = null, EventCallback<ChangeEvent<string>> onValueChanged = null)
+        public static TextField CreateTextArea(string value = null, string label = null, EventCallback<ChangeEvent<string>> onValueChanged = null)
         {
-            TextField textArea = CreateTextField(value, onValueChanged);
+            TextField textArea = CreateTextField(value, label, onValueChanged);
 
             //To make a textfield a text area?
             textArea.multiline = true;

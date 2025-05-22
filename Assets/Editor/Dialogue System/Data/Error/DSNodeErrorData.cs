@@ -8,12 +8,12 @@ namespace LPCafe.Data.Error
     public class DSNodeErrorData
     {
         public DSErrorData m_errorData { get; set;}
-        public List<NodeBase> m_nodes { get; set;}
+        public List<NodeBase> m_nodesErrorData { get; set;}
 
         public DSNodeErrorData()
         {
             m_errorData = new DSErrorData();
-            m_nodes = new List<NodeBase>();
+            m_nodesErrorData = new List<NodeBase>();
         }
     }
 }

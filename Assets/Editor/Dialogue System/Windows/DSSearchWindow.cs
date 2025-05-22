@@ -75,8 +75,8 @@ namespace LPCafe
                 }
                 case Group _:
                 {
-                    DSGroup group = m_graphView.CreateGroup("DialogueGroup", localMousePos);
-                    m_graphView.AddElement(group);
+                    m_graphView.CreateGroup("DialogueGroup", localMousePos);
+
 
                     return true;
                 }

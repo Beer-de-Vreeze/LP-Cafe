@@ -6,6 +6,7 @@ namespace LPCafe.Elements
     using Windows;
     using Enumerations;
     using Utilities;
+    using LPCafe.Data.Save;
 
     public class DSSingleChoiceNode : NodeBase
     {
@@ -13,9 +14,14 @@ namespace LPCafe.Elements
         {
             base.Initialize(dsGraphView, pos);
 
-            m_dialogueType = DSDialogueType.SingleChoice;
+            m_nodeDialogueType = DSDialogueType.SingleChoice;
 
-            m_choices.Add("Next Dialogue");
+            DSChoiceSaveData choiceData = new DSChoiceSaveData()
+            {
+                m_choiceTextData = "Next Dialogue"
+            };
+
+            m_nodeChoices.Add(choiceData);
         }
 
         public override void Draw()
@@ -23,12 +29,12 @@ namespace LPCafe.Elements
             base.Draw();
 
             //OUTPUT CONTAINER.
-            foreach (string choice in m_choices)
+            foreach (DSChoiceSaveData choice in m_nodeChoices)
             {
                 //Instantiates a port to another node for each choice in the node.
-                Port choicePort = this.CreatePort(choice);
+                Port choicePort = this.CreatePort(choice.m_choiceTextData);
 
-                choicePort.portName = choice;
+                choicePort.userData = choice;
 
                 outputContainer.Add(choicePort);
             }

@@ -2,34 +2,39 @@ using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
+using System;
 
 namespace LPCafe.Elements
 {
     using Enumerations;
     using Windows;
     using Utilities;
+    using LPCafe.Data.Save;
+    using System.Linq;
 
     public class NodeBase : Node
     {
-        public string m_dialogueName { get; set; }
-        public List<string> m_choices {  get; set; }
-        public string m_text {  get; set; }
+        public string m_nodeID {  get; set;}
+        public string m_nodeDialogueName { get; set; }
+        public List<DSChoiceSaveData> m_nodeChoices {  get; set; }
+        public string m_nodeText {  get; set; }
 
         //Needs to have an audio source and an image variable later.
         //Look at the base node video comments for further reference to fix this!
 
-        public DSDialogueType m_dialogueType { get; set; }
+        public DSDialogueType m_nodeDialogueType { get; set; }
 
-        public DSGroup m_group { get; set; }
+        public DSGroup m_nodeGroup { get; set; }
 
-        private DSGraphView m_graphView;
+        protected DSGraphView m_graphView;
         private Color m_defaultBackgroundColor;
 
         public virtual void Initialize(DSGraphView dsGraphView, Vector2 pos)
         {
-            m_dialogueName = "DialogueName";
-            m_choices = new List<string>();
-            m_text = "Dialogue text.";
+            m_nodeID = Guid.NewGuid().ToString();
+            m_nodeDialogueName = "DialogueName";
+            m_nodeChoices = new List<DSChoiceSaveData>();
+            m_nodeText = "Dialogue text.";
 
             m_graphView = dsGraphView;
 
@@ -46,24 +51,44 @@ namespace LPCafe.Elements
         public virtual void Draw()
         {
             /* TITLE CONTAINER*/
-            TextField dialogueNameTextField = DSElementUtility.CreateTextField(m_dialogueName, callback =>
+            TextField dialogueNameTextField = DSElementUtility.CreateTextField(m_nodeDialogueName, null, callback =>
             {
-                if(m_group == null)
+                TextField target = (TextField) callback.target;
+
+                target.value = callback.newValue.RemoveWhitespaces().RemoveSpecialCharacters();
+
+                //Checks if there is a value to make sure no empty things are saved.
+                if (string.IsNullOrEmpty(target.value))
+                {
+                    if (!string.IsNullOrEmpty(m_nodeDialogueName))
+                    {
+                        ++m_graphView.NameErrorsAmount;
+                    }
+                }
+                else
+                {
+                    if (string.IsNullOrEmpty(m_nodeDialogueName))
+                    {
+                        --m_graphView.NameErrorsAmount;
+                    }
+                }
+
+                if (m_nodeGroup == null)
                 {
                     m_graphView.RemoveUngroupedNode(this);
 
-                    m_dialogueName = callback.newValue;
+                    m_nodeDialogueName = target.value;
 
                     m_graphView.AddUngroupedNode(this);
-                    
+
                     return;
                 }
 
-                DSGroup currentGroup = m_group;
+                DSGroup currentGroup = m_nodeGroup;
 
-                m_graphView.RemoveGroupedNode(this, m_group);
+                m_graphView.RemoveGroupedNode(this, m_nodeGroup);
 
-                m_dialogueName = callback.newValue;
+                m_nodeDialogueName = target.value;
 
                 m_graphView.AddGroupedNode(this, currentGroup);
             });
@@ -97,7 +122,10 @@ namespace LPCafe.Elements
 
             Foldout textFoldout = DSElementUtility.CreateFoldOut("Dialogue Text");
 
-            TextField textTextField = DSElementUtility.CreateTextArea(m_text);
+            TextField textTextField = DSElementUtility.CreateTextArea(m_nodeText, null, callback =>
+            {
+                m_nodeText = callback.newValue;
+            });
 
             textTextField.AddClasses
             (
@@ -111,11 +139,69 @@ namespace LPCafe.Elements
             extensionContainer.Add(customDataContainer);
         }
 
+        #region Overrided Methods
+        public override void BuildContextualMenu(ContextualMenuPopulateEvent evt)
+        {
+            //Makes a context menu action which deletes all input port edges of the selected node.
+            evt.menu.AppendAction("Disconnect Input Ports", actionEvent =>
+            {
+                DisConnectInputPorts();
+            });
+            //Makes a context menu action which deletes all output port edges of the selected node.
+            evt.menu.AppendAction("Disconnect Output Ports", actionEvent =>
+            {
+                DisConnectOutputPorts();
+            });
+
+            //Makes sure that you can still delete all the edges from both the input and output ports in one go.
+            base.BuildContextualMenu(evt);
+        }
+        #endregion
+
+        #region Utility Methos
+        public void DisconnectAllports()
+        {
+            DisConnectInputPorts();
+            DisConnectOutputPorts();
+        }
+
+        private void DisConnectInputPorts()
+        {
+            DisconnectPorts(inputContainer);
+        }
+
+        private void DisConnectOutputPorts()
+        {
+            DisconnectPorts(outputContainer);
+        }
+
+        private void DisconnectPorts(VisualElement container)
+        {
+            foreach(Port port in container.Children())
+            {
+                if (!port.connected)
+                {
+                    continue;
+                }
+
+                List<Edge> portConnections = new List<Edge>(port.connections);
+
+                m_graphView.DeleteElements(portConnections);
+            }
+        }
+
+        public bool IsStartingNode()
+        {
+            Port inputPort = (Port)inputContainer.Children().First();
+
+            return inputPort.connected;
+        }
+        #endregion
+
         #region Style
         public void SetErrorStyle(Color color)
         {
             mainContainer.style.backgroundColor = color;
-
         }
 
         public void ResetStyle()

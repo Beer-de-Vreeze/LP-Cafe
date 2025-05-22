@@ -4,6 +4,7 @@ using UnityEngine.UIElements;
 
 namespace LPCafe.Elements
 {
+    using Data.Save;
     using Windows;
     using Enumerations;
     using Utilities;
@@ -14,9 +15,15 @@ namespace LPCafe.Elements
         {
             base.Initialize(dsGraphView, pos);
 
-            m_dialogueType = DSDialogueType.MultipleChoice;
+            m_nodeDialogueType = DSDialogueType.MultipleChoice;
 
-            m_choices.Add("New Choice");
+            DSChoiceSaveData choiceData = new DSChoiceSaveData()
+            {
+                m_choiceTextData = "Next Dialogue"
+            };
+
+
+            m_nodeChoices.Add(choiceData);
         }
 
         public override void Draw()
@@ -26,11 +33,15 @@ namespace LPCafe.Elements
             /* Main Container */
             Button addChoiceButton = DSElementUtility.CreateButton("Add Choice", () =>
             {
-                m_choices.Add("New Choice");
-                Port choicePort = CreateChoicePort("New Choice");
+                DSChoiceSaveData choiceData = new DSChoiceSaveData()
+                {
+                    m_choiceTextData = "Next Dialogue"
+                };
+
+                m_nodeChoices.Add(choiceData);
+                Port choicePort = CreateChoicePort(choiceData);
 
                 outputContainer.Add(choicePort);
-
             });
 
             addChoiceButton.AddToClassList("ds-node__button");
@@ -38,7 +49,7 @@ namespace LPCafe.Elements
             mainContainer.Insert(1, addChoiceButton);
 
             //OUTPUT CONTAINER.
-            foreach (string choice in m_choices)
+            foreach (DSChoiceSaveData choice in m_nodeChoices)
             {
                 Port choicePort = CreateChoicePort(choice);
                 outputContainer.Add(choicePort);
@@ -49,20 +60,39 @@ namespace LPCafe.Elements
         }
 
         #region Element Creation
-        public Port CreateChoicePort(string choice)
+        public Port CreateChoicePort(object userData)
         {
             //Instantiates a port to another node for each choice in the node.
             Port choicePort = this.CreatePort();
 
-            //portName will bed decided by how its named in the editor.
-            choicePort.portName = "";
+            choicePort.userData = userData;
+
+            DSChoiceSaveData choiceData = (DSChoiceSaveData) userData;
 
             //Will be able to delete choices.
-            Button deleteChoiceButton = DSElementUtility.CreateButton("X");
+            Button deleteChoiceButton = DSElementUtility.CreateButton("X", () =>
+            {
+                if(m_nodeChoices.Count == 1)
+                {
+                    return;
+                }
+
+                if (choicePort.connected)
+                {
+                    m_graphView.DeleteElements(choicePort.connections);
+                }
+
+                m_nodeChoices.Remove(choiceData);
+
+                m_graphView.RemoveElement(choicePort);
+            });
 
             deleteChoiceButton.AddToClassList("ds-node__button");
 
-            TextField choiceTextField = DSElementUtility.CreateTextField(choice);
+            TextField choiceTextField = DSElementUtility.CreateTextField(choiceData.m_choiceTextData, null, callback =>
+            {
+                choiceData.m_choiceTextData = callback.newValue;
+            });
 
             choiceTextField.AddClasses
             (

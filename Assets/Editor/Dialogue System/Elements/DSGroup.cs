@@ -1,14 +1,19 @@
 using UnityEngine;
 using UnityEditor.Experimental.GraphView;
+using System;
 
 public class DSGroup : Group
 {
-    public string m_oldTitle;
+    public string m_groupID {  get; set;}
+    public string m_oldTitle { get; set;}
+
     private Color m_defaultBorderColor;
     private float m_defaultBorderWidth;
 
     public DSGroup(string groupTitle, Vector2 groupPos)
     {
+        //Generates an ID for the groupis needed for saving the group.
+        m_groupID = Guid.NewGuid().ToString();
         title = groupTitle;
         m_oldTitle = groupTitle;
 
