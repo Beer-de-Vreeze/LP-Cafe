@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEditor;
 
-namespace LPCafe.Inspectors
+namespace DS.Inspectors
 {
     using ScriptableObjects;
     using Utilities;

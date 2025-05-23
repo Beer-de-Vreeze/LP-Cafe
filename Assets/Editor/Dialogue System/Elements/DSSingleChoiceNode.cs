@@ -1,12 +1,12 @@
 using UnityEngine;
 using UnityEditor.Experimental.GraphView;
 
-namespace LPCafe.Elements
+namespace DS.Elements
 {
     using Windows;
     using Enumerations;
     using Utilities;
-    using LPCafe.Data.Save;
+    using DS.Data.Save;
 
     public class DSSingleChoiceNode : NodeBase
     {

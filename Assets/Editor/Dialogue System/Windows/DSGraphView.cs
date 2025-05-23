@@ -5,12 +5,12 @@ using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace LPCafe.Windows
+namespace DS.Windows
 {
     using Data.Error;
     using Elements;
     using Enumerations;
-    using LPCafe.Data.Save;
+    using DS.Data.Save;
     using Unity.Hierarchy;
     using Utilities;
     using static UnityEngine.GraphicsBuffer;
@@ -218,7 +218,7 @@ namespace LPCafe.Windows
             //For instantiating a node. Uses enum value to decide which type of node to instantiate.
 
             //$ means you can pass a type within a string by using {}.
-            Type nodeType = Type.GetType($"LPCafe.Elements.DS{dialogueType}Node");
+            Type nodeType = Type.GetType($"DS.Elements.DS{dialogueType}Node");
 
             NodeBase node = (NodeBase) Activator.CreateInstance(nodeType);
 
@@ -683,13 +683,16 @@ namespace LPCafe.Windows
 
         public void ClearGraph()
         {
-            graphElements.ForEach(graphElements => RemoveElement(graphElements));
+            if(graphElements != null)
+            {
+                graphElements.ForEach(graphElements => RemoveElement(graphElements));
 
-            m_groups.Clear();
-            m_groupedNodes.Clear();
-            m_ungroupedNodes.Clear();
+                m_groups.Clear();
+                m_groupedNodes.Clear();
+                m_ungroupedNodes.Clear();
 
-            NameErrorsAmount = 0;
+                NameErrorsAmount = 0;
+            }
         }
 
         public void ToggleMiniMap()

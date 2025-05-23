@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace LPCafe.Data
+namespace DS.Data
 {
     using ScriptableObjects;
     using System;

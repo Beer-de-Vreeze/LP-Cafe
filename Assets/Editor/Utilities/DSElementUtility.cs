@@ -3,7 +3,7 @@ using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace LPCafe.Utilities
+namespace DS.Utilities
 {
     using Elements;
 
@@ -68,4 +68,3 @@ namespace LPCafe.Utilities
         }
     }
 }
-

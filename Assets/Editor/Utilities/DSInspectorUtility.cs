@@ -1,7 +1,7 @@
 using System;
 using UnityEditor;
 
-namespace LPCafe.Utilities
+namespace DS.Utilities
 {
     public static class DSInspectorUtility
     {

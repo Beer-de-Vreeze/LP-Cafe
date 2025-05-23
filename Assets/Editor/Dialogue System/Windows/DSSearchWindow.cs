@@ -2,11 +2,11 @@ using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
-namespace LPCafe
+namespace DS
 {
     using Elements;
     using Enumerations;
-    using LPCafe.Windows;
+    using DS.Windows;
     using static UnityEngine.InputSystem.PlayerInput;
 
     public class DSSearchWindow : ScriptableObject, ISearchWindowProvider
@@ -35,7 +35,7 @@ namespace LPCafe
                     level = 2,
                     userData = DSDialogueType.SingleChoice,
                 },
-                new SearchTreeEntry(new GUIContent("Single Choice", m_indentationIcon))
+                new SearchTreeEntry(new GUIContent("Multiple Choice", m_indentationIcon))
                 {
                     level = 2,
                     userData = DSDialogueType.MultipleChoice,
@@ -68,7 +68,7 @@ namespace LPCafe
                     
                 case DSDialogueType.MultipleChoice:
                 {
-                    DSSingleChoiceNode multipleChoiceNode = (DSSingleChoiceNode)m_graphView.CreateNode("DialogueName", DSDialogueType.MultipleChoice, localMousePos);
+                    DSMultipleChoiceNode multipleChoiceNode = (DSMultipleChoiceNode)m_graphView.CreateNode("DialogueName", DSDialogueType.MultipleChoice, localMousePos);
                     m_graphView.AddElement(multipleChoiceNode);
 
                     return true;

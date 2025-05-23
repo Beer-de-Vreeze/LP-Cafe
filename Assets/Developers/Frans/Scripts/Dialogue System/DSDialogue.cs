@@ -1,8 +1,8 @@
 using System.Runtime.CompilerServices;
-using LPCafe.ScriptableObjects;
+using DS.ScriptableObjects;
 using UnityEngine;
 
-namespace LPCafe
+namespace DS
 {
     public class DSDialogue : MonoBehaviour
     {

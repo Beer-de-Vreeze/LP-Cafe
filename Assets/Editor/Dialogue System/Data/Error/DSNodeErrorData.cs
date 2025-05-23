@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-namespace LPCafe.Data.Error
+namespace DS.Data.Error
 {
     using Elements;
 

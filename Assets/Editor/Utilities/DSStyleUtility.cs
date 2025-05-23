@@ -1,7 +1,7 @@
 using UnityEditor;
 using UnityEngine.UIElements;
 
-namespace LPCafe.Utilities
+namespace DS.Utilities
 {
     //https://www.youtube.com/watch?v=gtZAN-vzuh4&list=PL0yxB6cCkoWK38XT4stSztcLueJ_kTx5f&index=17
     public static class DSStyleUtility

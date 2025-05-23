@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace LPCafe.ScriptableObjects
+namespace DS.ScriptableObjects
 {
     public class DSDialogueGroupSO : ScriptableObject
     {

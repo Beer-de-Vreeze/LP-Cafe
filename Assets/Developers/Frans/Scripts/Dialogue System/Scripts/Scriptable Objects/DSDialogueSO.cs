@@ -1,9 +1,9 @@
-using LPCafe.Enumerations;
+using DS.Enumerations;
 using NUnit.Framework;
 using UnityEngine;
 using System.Collections.Generic;
 
-namespace LPCafe.ScriptableObjects
+namespace DS.ScriptableObjects
 {
     using Data;
 

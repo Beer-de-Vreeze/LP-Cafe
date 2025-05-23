@@ -2,7 +2,7 @@ using NUnit.Framework;
 using UnityEngine;
 using System.Collections.Generic;
 
-namespace LPCafe.Data.Save
+namespace DS.Data.Save
 {
     public class DSGraphSaveDataSO : ScriptableObject
     {

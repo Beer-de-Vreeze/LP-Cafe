@@ -1,4 +1,4 @@
-namespace LPCafe.Enumerations
+namespace DS.Enumerations
 {
     public enum DSDialogueType
     {

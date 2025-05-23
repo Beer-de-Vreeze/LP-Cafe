@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 using NUnit.Framework;
 using UnityEngine;
 
-namespace LPCafe.ScriptableObjects
+namespace DS.ScriptableObjects
 {
     public class DSDialogueContainerSO : ScriptableObject
     {

@@ -2,36 +2,39 @@ using UnityEngine;
 using UnityEditor.Experimental.GraphView;
 using System;
 
-public class DSGroup : Group
+namespace DS.Elements
 {
-    public string m_groupID {  get; set;}
-    public string m_oldTitle { get; set;}
-
-    private Color m_defaultBorderColor;
-    private float m_defaultBorderWidth;
-
-    public DSGroup(string groupTitle, Vector2 groupPos)
+    public class DSGroup : Group
     {
-        //Generates an ID for the groupis needed for saving the group.
-        m_groupID = Guid.NewGuid().ToString();
-        title = groupTitle;
-        m_oldTitle = groupTitle;
+        public string m_groupID { get; set; }
+        public string m_oldTitle { get; set; }
 
-        SetPosition(new Rect(groupPos, Vector2.zero));
+        private Color m_defaultBorderColor;
+        private float m_defaultBorderWidth;
 
-        m_defaultBorderColor = contentContainer.style.borderBottomColor.value;
-        m_defaultBorderWidth = contentContainer.style.borderBottomWidth.value;
-    }
+        public DSGroup(string groupTitle, Vector2 groupPos)
+        {
+            //Generates an ID for the groupis needed for saving the group.
+            m_groupID = Guid.NewGuid().ToString();
+            title = groupTitle;
+            m_oldTitle = groupTitle;
 
-    public void SetErrorStyle(Color color)
-    {
-        contentContainer.style.borderBottomColor = color;
-        contentContainer.style.borderBottomWidth = 2f;
-    }
+            SetPosition(new Rect(groupPos, Vector2.zero));
 
-    public void ResetStyle()
-    {
-        contentContainer.style.borderBottomColor = m_defaultBorderColor;
-        contentContainer.style.borderBottomWidth = m_defaultBorderWidth;
+            m_defaultBorderColor = contentContainer.style.borderBottomColor.value;
+            m_defaultBorderWidth = contentContainer.style.borderBottomWidth.value;
+        }
+
+        public void SetErrorStyle(Color color)
+        {
+            contentContainer.style.borderBottomColor = color;
+            contentContainer.style.borderBottomWidth = 2f;
+        }
+
+        public void ResetStyle()
+        {
+            contentContainer.style.borderBottomColor = m_defaultBorderColor;
+            contentContainer.style.borderBottomWidth = m_defaultBorderWidth;
+        }
     }
 }

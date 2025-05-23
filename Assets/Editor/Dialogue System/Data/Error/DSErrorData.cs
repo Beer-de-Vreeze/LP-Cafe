@@ -1,7 +1,7 @@
 using UnityEngine;
 
 
-namespace LPCafe.Data.Error
+namespace DS.Data.Error
 {
     public class DSErrorData
     {

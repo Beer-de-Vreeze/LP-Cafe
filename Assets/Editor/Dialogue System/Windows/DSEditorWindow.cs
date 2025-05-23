@@ -4,7 +4,7 @@ using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace LPCafe.Windows
+namespace DS.Windows
 {
     using System;
     using Utilities;
@@ -20,7 +20,7 @@ namespace LPCafe.Windows
         private Button m_miniMapButton;
 
         //To show within the window tab in Unity.
-        [MenuItem("Window/LPCafe/DSEditorWindow")]
+        [MenuItem("Window/DS/DSEditorWindow")]
         public static void ShowExample()
         {
             //The title of the in editor window.
@@ -142,7 +142,10 @@ namespace LPCafe.Windows
 
         private void Clear()
         {
-            m_graphView.ClearGraph();
+            if(m_graphView != null)
+            {
+                m_graphView.ClearGraph();
+            }
         }
 
         private void Reset()

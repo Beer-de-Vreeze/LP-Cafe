@@ -2,7 +2,7 @@ using NUnit.Framework;
 using UnityEngine;
 using System.Collections.Generic;
 
-namespace LPCafe.Utilities
+namespace DS.Utilities
 {
     public static class CollectionUtility
     {

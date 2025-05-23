@@ -3,7 +3,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.Rendering.Universal;
 
-namespace LPCafe.Data.Save
+namespace DS.Data.Save
 {
     using Enumerations;
     using System;

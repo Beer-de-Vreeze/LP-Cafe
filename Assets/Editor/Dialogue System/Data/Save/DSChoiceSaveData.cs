@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 
-namespace LPCafe.Data.Save
+namespace DS.Data.Save
 {
     [Serializable]
     public class DSChoiceSaveData
