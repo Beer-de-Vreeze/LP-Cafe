@@ -246,6 +246,8 @@ namespace DS.Utilities
                 node.m_nodeDialogueName,
                 node.m_nodeText,
                 ConvertNodeChoics(node.m_nodeChoices),
+                node.m_nodeBachelorImage,
+                node.m_nodeAudioLines,
                 node.m_nodeDialogueType,
                 node.IsStartingNode()
             );
