@@ -204,6 +204,8 @@ namespace DS.Utilities
                 m_nodeNameData = node.m_nodeDialogueName,
                 m_nodeChoicesData = choiceSaveData,
                 m_nodeTextData = node.m_nodeText,
+                m_nodeBachelorImageData = node.m_nodeBachelorImage,
+                m_nodeAudioLinesData = node.m_nodeAudioLines,
                 m_nodeGroupIDData = node.m_nodeGroup?.m_groupID,
                 m_dialogueTypeData = node.m_nodeDialogueType,
                 m_nodePositionData = node.GetPosition().position,
@@ -442,6 +444,8 @@ namespace DS.Utilities
                 );
 
                 node.m_nodeID = nodeSaveData.m_nodeIDData;
+                node.m_nodeAudioLines = nodeSaveData.m_nodeAudioLinesData;
+                node.m_nodeBachelorImage = nodeSaveData.m_nodeBachelorImageData;
                 node.m_nodeChoices = choices;
                 node.m_nodeText = nodeSaveData.m_nodeTextData;
 

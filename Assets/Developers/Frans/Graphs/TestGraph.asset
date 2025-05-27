@@ -15,13 +15,15 @@ MonoBehaviour:
   <m_graphFileNameData>k__BackingField: Test
   <m_graphGroupsData>k__BackingField: []
   <m_graphNodesData>k__BackingField:
-  - <m_nodeIDData>k__BackingField: 95f629ba-2ea6-4372-a704-5bb827290e3d
+  - <m_nodeIDData>k__BackingField: a075f570-c87f-4509-843d-6ff6f61a7da1
     <m_nodeNameData>k__BackingField: DialogueName
+    <m_nodeBachelorImageData>k__BackingField: {fileID: 21300000, guid: 88973fea7e1be0e42a45c0aab1460c9e, type: 3}
+    <m_nodeAudioLinesData>k__BackingField: {fileID: 0}
     <m_nodeTextData>k__BackingField: Dialogue text.
     <m_nodeChoicesData>k__BackingField: []
     <m_nodeGroupIDData>k__BackingField: 
     <m_dialogueTypeData>k__BackingField: 1
-    <m_nodePositionData>k__BackingField: {x: 298.66666, y: 200.66667}
+    <m_nodePositionData>k__BackingField: {x: 811.3333, y: 276.66666}
   <m_graphOldGroupNamesData>k__BackingField: []
   <m_graphOldUngroupedNodeNamesData>k__BackingField:
   - DialogueName
