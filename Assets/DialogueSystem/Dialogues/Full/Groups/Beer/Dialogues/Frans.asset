@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Frans
   m_EditorClassIdentifier: 
   <m_dialogueNameData>k__BackingField: Frans
-  <m_dialogueTextData>k__BackingField: Frans
-  <m_dialogueChoiceData>k__BackingField: []
+  <m_dialogueTextData>k__BackingField: Frans doet rustig mee
+  <m_dialogueChoiceData>k__BackingField:
+  - <m_dialogueChoiceText>k__BackingField: Next Dialogue
+    <m_nextDialogue>k__BackingField: {fileID: 0}
   <m_dialogueTypeData>k__BackingField: 0
-  <m_isStartingDialogueData>k__BackingField: 0
+  <m_isStartingDialogueData>k__BackingField: 1

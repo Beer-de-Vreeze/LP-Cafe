@@ -15,11 +15,8 @@ MonoBehaviour:
   <m_containerFileNameData>k__BackingField: Full
   <m_containerDialogueGroupsData>k__BackingField:
     list:
-    - Key: {fileID: 11400000, guid: 666b709328709ba4eab5352501c8bc9a, type: 2}
-      Value:
-      - {fileID: 11400000, guid: 094b443b588021443a00455866d05c35, type: 2}
     - Key: {fileID: 11400000, guid: 6c543754c73a92c4393da834370caf0a, type: 2}
       Value:
+      - {fileID: 11400000, guid: d8ed88b9d2b1d0e4bb8e2b221ecfa040, type: 2}
       - {fileID: 11400000, guid: 75c42b98ea54be140a4b40fce4663a35, type: 2}
-  <m_containerUngroupedDialoguesData>k__BackingField:
-  - {fileID: 11400000, guid: ac6d6f3290c75754c9422734addadd1c, type: 2}
+  <m_containerUngroupedDialoguesData>k__BackingField: []

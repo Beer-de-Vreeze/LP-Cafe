@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8656580f96a63714d889c7daeb915b7a, type: 3}
   m_Name: Simon
   m_EditorClassIdentifier: 
-  <m_dialogueNameData>k__BackingField: 
-  <m_dialogueTextData>k__BackingField: 
+  <m_dialogueNameData>k__BackingField: Simon
+  <m_dialogueTextData>k__BackingField: Simon
   <m_dialogueChoiceData>k__BackingField: []
   <m_dialogueTypeData>k__BackingField: 0
   <m_isStartingDialogueData>k__BackingField: 0

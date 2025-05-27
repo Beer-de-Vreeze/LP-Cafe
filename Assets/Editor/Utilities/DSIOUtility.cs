@@ -9,8 +9,8 @@ namespace DS.Utilities
     using System.IO;
     using System.Linq;
     using Data.Save;
-    using Elements;
     using DS.Data;
+    using Elements;
     using ScriptableObjects;
     using Windows;
 
@@ -604,6 +604,7 @@ namespace DS.Utilities
                     m_choiceTextData = choice.m_choiceTextData,
                     m_choiceNodeIDData = choice.m_choiceNodeIDData,
                 };
+                choiceSaveData.Add(choiceData);
             }
 
             return choiceSaveData;
