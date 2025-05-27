@@ -18,11 +18,11 @@ namespace DS.ScriptableObjects
 
         public void Initialize(string dialogueName, string text, List<DSDialogueChoiceData> choices, DSDialogueType dialogueType, bool isStartingDialogue)
         {
-            dialogueName = m_dialogueNameData;
-            text = m_dialogueTextData;
-            choices = m_dialogueChoiceData;
-            dialogueType = m_dialogueTypeData;
-            isStartingDialogue = m_isStartingDialogueData;
+            m_dialogueNameData = dialogueName;
+            m_dialogueTextData = text;
+            m_dialogueChoiceData = choices;
+            m_dialogueTypeData = dialogueType;
+            m_isStartingDialogueData = isStartingDialogue;
         }
     }
 }

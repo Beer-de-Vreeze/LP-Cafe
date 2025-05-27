@@ -165,10 +165,9 @@ namespace DS.Utilities
 
         #region Nodes
         private static void SaveNodes(
-            DSGraphSaveDataSO graphData,
-            DSDialogueContainerSO dialogueContainer
-        )
-        {
+           DSGraphSaveDataSO graphData,
+           DSDialogueContainerSO dialogueContainer
+        ){
             SerializableDictionary<string, List<string>> groupedNodeNames =
                 new SerializableDictionary<string, List<string>>();
             List<string> ungroupedNodeNames = new List<string>();
@@ -608,6 +607,8 @@ namespace DS.Utilities
                     m_choiceTextData = choice.m_choiceTextData,
                     m_choiceNodeIDData = choice.m_choiceNodeIDData,
                 };
+
+                choiceSaveData.Add(choiceData);
             }
 
             return choiceSaveData;

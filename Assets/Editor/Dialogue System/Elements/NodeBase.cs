@@ -20,7 +20,6 @@ namespace DS.Elements
         public string m_nodeDialogueName { get; set;}
         public List<DSChoiceSaveData> m_nodeChoices {  get; set;}
         public string m_nodeText {  get; set;}
-
         public Sprite m_nodeBachelorImage { get; set;}
         public AudioClip m_nodeAudioLines { get; set; }
         public DSDialogueType m_nodeDialogueType { get; set;}

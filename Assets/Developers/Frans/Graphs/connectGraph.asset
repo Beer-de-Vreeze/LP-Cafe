@@ -10,36 +10,32 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: beb9a63dbd6015942ab1d5ccf8100789, type: 3}
-  m_Name: TestGraph
+  m_Name: connectGraph
   m_EditorClassIdentifier: 
-  <m_graphFileNameData>k__BackingField: Test
+  <m_graphFileNameData>k__BackingField: connect
   <m_graphGroupsData>k__BackingField: []
   <m_graphNodesData>k__BackingField:
-  - <m_nodeIDData>k__BackingField: e4046dee-354b-416d-9fc0-568412f4c01d
-    <m_nodeNameData>k__BackingField: DialogueName
+  - <m_nodeIDData>k__BackingField: efb2394c-1631-4aa8-b22d-b129b3eedbb6
+    <m_nodeNameData>k__BackingField: g
     <m_nodeBachelorImageData>k__BackingField: {fileID: 0}
     <m_nodeAudioLinesData>k__BackingField: {fileID: 0}
-    <m_nodeTextData>k__BackingField: Text
-    <m_nodeChoicesData>k__BackingField:
-    - <m_choiceTextData>k__BackingField: Next Dialogue
-      <m_choiceNodeIDData>k__BackingField: d15aa8b8-d9ae-4348-a963-3adf3e84de30
+    <m_nodeTextData>k__BackingField: Dialogue text.
+    <m_nodeChoicesData>k__BackingField: []
     <m_nodeGroupIDData>k__BackingField: 
     <m_dialogueTypeData>k__BackingField: 1
-    <m_nodePositionData>k__BackingField: {x: 371, y: 213}
-  - <m_nodeIDData>k__BackingField: d15aa8b8-d9ae-4348-a963-3adf3e84de30
-    <m_nodeNameData>k__BackingField: fg
+    <m_nodePositionData>k__BackingField: {x: 813, y: 375}
+  - <m_nodeIDData>k__BackingField: 42ff91e2-7f11-4726-a2b8-b847a3f6335c
+    <m_nodeNameData>k__BackingField: f
     <m_nodeBachelorImageData>k__BackingField: {fileID: 0}
     <m_nodeAudioLinesData>k__BackingField: {fileID: 0}
-    <m_nodeTextData>k__BackingField: Text
-    <m_nodeChoicesData>k__BackingField:
-    - <m_choiceTextData>k__BackingField: Next Dialogue
-      <m_choiceNodeIDData>k__BackingField: 
+    <m_nodeTextData>k__BackingField: Dialogue text.
+    <m_nodeChoicesData>k__BackingField: []
     <m_nodeGroupIDData>k__BackingField: 
-    <m_dialogueTypeData>k__BackingField: 0
-    <m_nodePositionData>k__BackingField: {x: 746, y: 391}
+    <m_dialogueTypeData>k__BackingField: 1
+    <m_nodePositionData>k__BackingField: {x: 288, y: 313}
   <m_graphOldGroupNamesData>k__BackingField: []
   <m_graphOldUngroupedNodeNamesData>k__BackingField:
-  - DialogueName
-  - fg
+  - g
+  - f
   <m_graphOldGroupedNodeNamesData>k__BackingField:
     list: []
