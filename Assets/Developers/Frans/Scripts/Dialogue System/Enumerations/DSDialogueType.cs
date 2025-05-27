@@ -5,5 +5,4 @@ namespace DS.Enumerations
         SingleChoice,
         MultipleChoice
     }
-
 }

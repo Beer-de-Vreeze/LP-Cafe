@@ -12,4 +12,3 @@ namespace DS.Data
         [field: SerializeField] public DSDialogueSO m_nextDialogue { get; set;}
     }
 }
-

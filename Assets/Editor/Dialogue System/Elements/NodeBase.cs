@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.UIElements;
 using System;
 
@@ -11,20 +12,19 @@ namespace DS.Elements
     using Utilities;
     using DS.Data.Save;
     using System.Linq;
+    using UnityEditor.Search;
 
     public class NodeBase : Node
     {
         public string m_nodeID {  get; set;}
-        public string m_nodeDialogueName { get; set; }
-        public List<DSChoiceSaveData> m_nodeChoices {  get; set; }
-        public string m_nodeText {  get; set; }
+        public string m_nodeDialogueName { get; set;}
+        public List<DSChoiceSaveData> m_nodeChoices {  get; set;}
+        public string m_nodeText {  get; set;}
+        public Sprite m_nodeBachelorImage { get; set;}
+        public AudioClip m_nodeAudioLines { get; set; }
+        public DSDialogueType m_nodeDialogueType { get; set;}
 
-        //Needs to have an audio source and an image variable later.
-        //Look at the base node video comments for further reference to fix this!
-
-        public DSDialogueType m_nodeDialogueType { get; set; }
-
-        public DSGroup m_nodeGroup { get; set; }
+        public DSGroup m_nodeGroup { get; set;}
 
         protected DSGraphView m_graphView;
         private Color m_defaultBackgroundColor;
@@ -55,6 +55,7 @@ namespace DS.Elements
             {
                 TextField target = (TextField) callback.target;
 
+                //No spaces or special characters in filenames.
                 target.value = callback.newValue.RemoveWhitespaces().RemoveSpecialCharacters();
 
                 //Checks if there is a value to make sure no empty things are saved.
@@ -109,6 +110,8 @@ namespace DS.Elements
                 Capacity Can either be single or multiple (can one or multiple nodes connect to the node).
                 Episode 8: https://www.youtube.com/watch?v=6vVqBt_5nbs&list=PL0yxB6cCkoWK38XT4stSztcLueJ_kTx5f&index=9
             */
+
+            //Inport Container.
             Port inputPort = this.CreatePort("Dialogue Connection", Orientation.Horizontal, Direction.Input, Port.Capacity.Multi);
 
             inputPort.portName = "Dialogue Connection";
@@ -127,6 +130,27 @@ namespace DS.Elements
                 m_nodeText = callback.newValue;
             });
 
+            ObjectField imageField = new ObjectField("Bachelor Image")
+            {
+                objectType = typeof(Sprite),
+                value = m_nodeBachelorImage
+            };
+
+            imageField.RegisterValueChangedCallback(evt =>
+            {
+                m_nodeBachelorImage = evt.newValue as Sprite;
+            });
+
+            ObjectField audioField = new ObjectField("Audio Lines")
+            {
+                objectType = typeof(AudioClip),
+                value = m_nodeAudioLines
+            };
+            audioField.RegisterValueChangedCallback(evt =>
+            {
+                m_nodeAudioLines = evt.newValue as AudioClip;
+            });
+
             textTextField.AddClasses
             (
                 "ds-node__textfield",
@@ -134,6 +158,8 @@ namespace DS.Elements
             );
 
             textFoldout.Add(textTextField);
+            customDataContainer.Add(audioField);
+            customDataContainer.Add(imageField);
             customDataContainer.Add(textFoldout);
 
             extensionContainer.Add(customDataContainer);
@@ -159,6 +185,7 @@ namespace DS.Elements
         #endregion
 
         #region Utility Methos
+        #region Ports
         public void DisconnectAllports()
         {
             DisConnectInputPorts();
@@ -189,7 +216,7 @@ namespace DS.Elements
                 m_graphView.DeleteElements(portConnections);
             }
         }
-
+        #endregion
         public bool IsStartingNode()
         {
             Port inputPort = (Port)inputContainer.Children().First();
