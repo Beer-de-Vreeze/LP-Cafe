@@ -75,5 +75,6 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 /Assets/Feel
 Assets/Feel.meta
-/Assets/Plugins
 Assets/Plugins.meta
+/Assets/Plugins
+
