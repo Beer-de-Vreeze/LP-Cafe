@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8656580f96a63714d889c7daeb915b7a, type: 3}
-  m_Name: Frans
+  m_Name: Simon
   m_EditorClassIdentifier: 
-  <m_dialogueNameData>k__BackingField: Frans
-  <m_dialogueTextData>k__BackingField: Frans doet rustig mee
+  <m_dialogueNameData>k__BackingField: Simon
+  <m_dialogueTextData>k__BackingField: Simon praat over een boek
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Next Dialogue
-    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 586ecaaaabd15b844a6cba1b4794a4ce, type: 2}
+    <m_nextDialogue>k__BackingField: {fileID: 0}
   <m_dialogueTypeData>k__BackingField: 0
   <m_isStartingDialogueData>k__BackingField: 1
