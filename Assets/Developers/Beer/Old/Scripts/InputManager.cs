@@ -39,19 +39,12 @@ public class InputManager : Singleton<InputManager>
     {
         _inputActions.Player.Enable();
         _inputActions.UI.Disable();
-
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
     }
 
     public void EnableUIControls()
     {
         _inputActions.Player.Disable();
         _inputActions.UI.Enable();
-
-        // Unlock cursor for dialogue interaction
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
     }
 
     public void DisablePlayerControls()
