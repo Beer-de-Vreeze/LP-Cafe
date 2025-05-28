@@ -16,7 +16,7 @@ MonoBehaviour:
   <m_graphGroupsData>k__BackingField:
   - <m_groupIDData>k__BackingField: 8dd838cf-d359-4f95-b47b-0034c50deb5d
     <m_groupNameData>k__BackingField: Beer
-    <m_groupPositionData>k__BackingField: {x: 174.4, y: -49.999985}
+    <m_groupPositionData>k__BackingField: {x: 174.39996, y: -50}
   <m_graphNodesData>k__BackingField:
   - <m_nodeIDData>k__BackingField: ba042354-d444-4260-930f-d6f51ae65aa2
     <m_nodeNameData>k__BackingField: Frans
@@ -29,18 +29,6 @@ MonoBehaviour:
     <m_nodeGroupIDData>k__BackingField: 8dd838cf-d359-4f95-b47b-0034c50deb5d
     <m_dialogueTypeData>k__BackingField: 0
     <m_nodePositionData>k__BackingField: {x: 528, y: 119.2}
-  - <m_nodeIDData>k__BackingField: 731b1aa7-d846-4e3c-9b56-d91709e1d5ea
-    <m_nodeNameData>k__BackingField: Beer
-    <m_nodeBachelorImageData>k__BackingField: {fileID: 0}
-    <m_nodeAudioLinesData>k__BackingField: {fileID: 0}
-    <m_nodeTextData>k__BackingField: Beer wil hier graag weg het is traumatisernd
-      hier
-    <m_nodeChoicesData>k__BackingField:
-    - <m_choiceTextData>k__BackingField: Next Dialogue
-      <m_choiceNodeIDData>k__BackingField: ba042354-d444-4260-930f-d6f51ae65aa2
-    <m_nodeGroupIDData>k__BackingField: 8dd838cf-d359-4f95-b47b-0034c50deb5d
-    <m_dialogueTypeData>k__BackingField: 0
-    <m_nodePositionData>k__BackingField: {x: 199.6, y: 119.2}
   - <m_nodeIDData>k__BackingField: 358d2d5d-3ce4-4007-bd62-aef563689554
     <m_nodeNameData>k__BackingField: Bart
     <m_nodeBachelorImageData>k__BackingField: {fileID: 0}
@@ -90,6 +78,18 @@ MonoBehaviour:
     <m_nodeGroupIDData>k__BackingField: 8dd838cf-d359-4f95-b47b-0034c50deb5d
     <m_dialogueTypeData>k__BackingField: 0
     <m_nodePositionData>k__BackingField: {x: 1170, y: 350}
+  - <m_nodeIDData>k__BackingField: 731b1aa7-d846-4e3c-9b56-d91709e1d5ea
+    <m_nodeNameData>k__BackingField: Beer
+    <m_nodeBachelorImageData>k__BackingField: {fileID: 0}
+    <m_nodeAudioLinesData>k__BackingField: {fileID: 8300000, guid: 196f9ae8b1a028346b9c22ad087778cd, type: 3}
+    <m_nodeTextData>k__BackingField: Beer wil hier graag weg het is traumatisernd
+      hier
+    <m_nodeChoicesData>k__BackingField:
+    - <m_choiceTextData>k__BackingField: Next Dialogue
+      <m_choiceNodeIDData>k__BackingField: ba042354-d444-4260-930f-d6f51ae65aa2
+    <m_nodeGroupIDData>k__BackingField: 8dd838cf-d359-4f95-b47b-0034c50deb5d
+    <m_dialogueTypeData>k__BackingField: 0
+    <m_nodePositionData>k__BackingField: {x: 199.6, y: 119.2}
   <m_graphOldGroupNamesData>k__BackingField:
   - Beer
   <m_graphOldUngroupedNodeNamesData>k__BackingField: []
@@ -98,8 +98,8 @@ MonoBehaviour:
     - Key: Beer
       Value:
       - Frans
-      - Beer
       - Bart
       - Kim
       - Simon
       - Lance
+      - Beer
