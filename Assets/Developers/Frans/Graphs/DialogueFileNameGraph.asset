@@ -14,16 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <m_graphFileNameData>k__BackingField: DialogueFileName
   <m_graphGroupsData>k__BackingField: []
-  <m_graphNodesData>k__BackingField:
-  - <m_nodeIDData>k__BackingField: 87babb81-19f7-4476-b1fb-4cd1463bb7ef
-    <m_nodeNameData>k__BackingField: DialogueName
-    <m_nodeTextData>k__BackingField: Dialogue text.
-    <m_nodeChoicesData>k__BackingField: []
-    <m_nodeGroupIDData>k__BackingField: 
-    <m_dialogueTypeData>k__BackingField: 1
-    <m_nodePositionData>k__BackingField: {x: 575, y: 198}
+  <m_graphNodesData>k__BackingField: []
   <m_graphOldGroupNamesData>k__BackingField: []
-  <m_graphOldUngroupedNodeNamesData>k__BackingField:
-  - DialogueName
+  <m_graphOldUngroupedNodeNamesData>k__BackingField: []
   <m_graphOldGroupedNodeNamesData>k__BackingField:
     list: []

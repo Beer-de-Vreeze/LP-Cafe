@@ -3,6 +3,7 @@ using DS;
 using Febucci.UI;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DialogueDisplay : MonoBehaviour
 {
@@ -35,6 +36,7 @@ public class DialogueDisplay : MonoBehaviour
     private GameObject _choiceButtonPrefab;
 
     // Audio source for playing feedback (now used for dialogue audio)
+
     [SerializeField]
     private AudioSource _audioSource;
 
@@ -43,6 +45,10 @@ public class DialogueDisplay : MonoBehaviour
 
     // List to keep track of active choice button GameObjects
     private List<GameObject> _activeChoiceButtons = new List<GameObject>();
+
+    // Reference to the UI Image displaying the character's portrait
+    [SerializeField]
+    private Image _bachelorImage;
 
     // Called when the script instance is being loaded
     private void Start()
@@ -82,10 +88,33 @@ public class DialogueDisplay : MonoBehaviour
             _nameText.text = _bachelor._name;
             if (_nameText.text == null)
             {
-                _nameText.text = "Unknown";
+                _nameText.text = "ERROR";
             }
         }
 
+        // Set the character's image
+        if (_dialogue != null && _dialogue.m_dialogue != null && _bachelorImage != null)
+        {
+            _bachelorImage.sprite = _dialogue.m_dialogue.m_bachelorImageData;
+            _bachelorImage.color = new Color(
+                _bachelorImage.color.r,
+                _bachelorImage.color.g,
+                _bachelorImage.color.b,
+                1f
+            );
+            _bachelorImage.enabled = _dialogue.m_dialogue.m_bachelorImageData != null;
+        }
+        else if (_bachelorImage != null)
+        {
+            _bachelorImage.sprite = null;
+            _bachelorImage.color = new Color(
+                _bachelorImage.color.r,
+                _bachelorImage.color.g,
+                _bachelorImage.color.b,
+                0f
+            );
+            _bachelorImage.enabled = false;
+        }
         // Set the dialogue text and show choices if present
         if (_dialogue != null && _displayText != null && _dialogue.m_dialogue != null)
         {
@@ -138,7 +167,7 @@ public class DialogueDisplay : MonoBehaviour
         if (bachelor == null)
         {
             _bachelor = NewBachelorSO.CreateInstance<NewBachelorSO>();
-            _bachelor._name = "Unknown";
+            _bachelor._name = "Chantal";
         }
         ShowDialogue();
     }

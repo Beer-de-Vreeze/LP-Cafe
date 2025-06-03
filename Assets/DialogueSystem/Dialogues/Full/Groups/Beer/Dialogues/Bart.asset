@@ -22,7 +22,7 @@ MonoBehaviour:
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 4f12fcad15b97a24098829ff78e2b6be, type: 2}
   - <m_dialogueChoiceText>k__BackingField: Jantje
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 8615aa6afe5e6d447bf12da5fa48787f, type: 2}
-  <m_bachelorImageData>k__BackingField: {fileID: 0}
+  <m_bachelorImageData>k__BackingField: {fileID: 21300000, guid: fe4ea59cacae4d3469b7226b017da1f1, type: 3}
   <m_dialogueAudioData>k__BackingField: {fileID: 0}
   <m_dialogueTypeData>k__BackingField: 1
   <m_isStartingDialogueData>k__BackingField: 1
