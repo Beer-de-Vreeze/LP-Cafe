@@ -159,7 +159,7 @@ namespace DS.Windows
         #region Utility Methods
         public static void UpdateFileName(string newFileName)
         {
-            if (!string.IsNullOrEmpty(newFileName))
+            if (string.IsNullOrEmpty(newFileName))
             {
                 m_fileNameTextField.value = newFileName;
             }

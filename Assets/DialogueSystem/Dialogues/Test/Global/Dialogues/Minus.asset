@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8656580f96a63714d889c7daeb915b7a, type: 3}
-  m_Name: Hooi
+  m_Name: Minus
   m_EditorClassIdentifier: 
-  <m_dialogueNameData>k__BackingField: Hooi
+  <m_dialogueNameData>k__BackingField: Minus
   <m_dialogueTextData>k__BackingField: Dialogue text.
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Next Dialogue
-    <m_nextDialogue>k__BackingField: {fileID: 0}
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 063924fb0d033e14ba90cc85fbb174ab, type: 2}
   <m_bachelorImageData>k__BackingField: {fileID: 0}
   <m_dialogueAudioData>k__BackingField: {fileID: 0}
   <m_dialogueTypeData>k__BackingField: 0

@@ -20,8 +20,8 @@ namespace DS.Elements
         public string m_nodeDialogueName { get; set;}
         public List<DSChoiceSaveData> m_nodeChoices {  get; set;}
         public string m_nodeText {  get; set;}
-        public Sprite m_nodeBachelorImage { get; set;}
-        public AudioClip m_nodeAudioLines { get; set; }
+        public Sprite m_nodeCharacterImage { get; set;}
+        public AudioClip m_nodeAudio { get; set; }
         public DSDialogueType m_nodeDialogueType { get; set;}
 
         public DSGroup m_nodeGroup { get; set;}
@@ -133,22 +133,22 @@ namespace DS.Elements
             ObjectField imageField = new ObjectField("Bachelor Image")
             {
                 objectType = typeof(Sprite),
-                value = m_nodeBachelorImage
+                value = m_nodeCharacterImage
             };
 
             imageField.RegisterValueChangedCallback(evt =>
             {
-                m_nodeBachelorImage = evt.newValue as Sprite;
+                m_nodeCharacterImage = evt.newValue as Sprite;
             });
 
             ObjectField audioField = new ObjectField("Audio Lines")
             {
                 objectType = typeof(AudioClip),
-                value = m_nodeAudioLines
+                value = m_nodeAudio
             };
             audioField.RegisterValueChangedCallback(evt =>
             {
-                m_nodeAudioLines = evt.newValue as AudioClip;
+                m_nodeAudio = evt.newValue as AudioClip;
             });
 
             textTextField.AddClasses

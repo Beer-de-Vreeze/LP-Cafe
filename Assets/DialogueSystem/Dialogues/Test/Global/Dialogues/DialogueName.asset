@@ -13,9 +13,11 @@ MonoBehaviour:
   m_Name: DialogueName
   m_EditorClassIdentifier: 
   <m_dialogueNameData>k__BackingField: DialogueName
-  <m_dialogueTextData>k__BackingField: Text
+  <m_dialogueTextData>k__BackingField: Dialogue text.
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Next Dialogue
-    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 62f6334639f305a4cac44359ec8a4b7b, type: 2}
-  <m_dialogueTypeData>k__BackingField: 1
-  <m_isStartingDialogueData>k__BackingField: 0
+    <m_nextDialogue>k__BackingField: {fileID: 0}
+  <m_bachelorImageData>k__BackingField: {fileID: 0}
+  <m_dialogueAudioData>k__BackingField: {fileID: 0}
+  <m_dialogueTypeData>k__BackingField: 0
+  <m_isStartingDialogueData>k__BackingField: 1

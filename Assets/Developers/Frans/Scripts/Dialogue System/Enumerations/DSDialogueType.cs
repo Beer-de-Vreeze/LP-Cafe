@@ -3,6 +3,8 @@ namespace DS.Enumerations
     public enum DSDialogueType
     {
         SingleChoice,
-        MultipleChoice
+        MultipleChoice,
+        Setter,
+        Check
     }
 }
