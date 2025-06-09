@@ -12,12 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8656580f96a63714d889c7daeb915b7a, type: 3}
   m_Name: DialogueName
   m_EditorClassIdentifier: 
-  <m_dialogueNameData>k__BackingField: DialogueName
-  <m_dialogueTextData>k__BackingField: Dialogue text.
-  <m_dialogueChoiceData>k__BackingField:
-  - <m_dialogueChoiceText>k__BackingField: Next Dialogue
-    <m_nextDialogue>k__BackingField: {fileID: 0}
-  <m_bachelorImageData>k__BackingField: {fileID: 0}
-  <m_dialogueAudioData>k__BackingField: {fileID: 0}
+  <m_dialogueNameData>k__BackingField: 
+  <m_dialogueTextData>k__BackingField: 
+  <m_dialogueChoiceData>k__BackingField: []
   <m_dialogueTypeData>k__BackingField: 0
-  <m_isStartingDialogueData>k__BackingField: 1
+  <m_isStartingDialogueData>k__BackingField: 0

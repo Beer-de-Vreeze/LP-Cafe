@@ -8,26 +8,26 @@ namespace DS
     {
         //Dialogue ScriptableObject
         [SerializeField]
-        private DSDialogueContainerSO m_dialogueContainer;
+        public DSDialogueContainerSO m_dialogueContainer;
 
         [SerializeField]
-        private DSDialogueGroupSO m_dialogueGroup;
+        public DSDialogueGroupSO m_dialogueGroup;
 
         [SerializeField]
-        private DSDialogueSO m_dialogue;
+        public DSDialogueSO m_dialogue;
 
         // Filters
         [SerializeField]
-        private bool m_groupedDialogues;
+        public bool m_groupedDialogues;
 
         [SerializeField]
-        private bool m_startingDialoguesOnly;
+        public bool m_startingDialoguesOnly;
 
         // Indexes
         [SerializeField]
-        private int m_selectedDialogueGroupIndex;
+        public int m_selectedDialogueGroupIndex;
 
         [SerializeField]
-        private int m_selectedDialogueIndex;
+        public int m_selectedDialogueIndex;
     }
 }
