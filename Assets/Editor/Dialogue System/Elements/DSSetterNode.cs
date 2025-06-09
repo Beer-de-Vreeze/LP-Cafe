@@ -84,13 +84,14 @@ namespace DS.Elements
             titleContainer.Insert(0, dialogueNameTextField);
             #endregion
 
+            #region InputPort
             //Inport Container.
             Port inputPort = this.CreatePort("Dialogue Connection", Orientation.Horizontal, Direction.Input, Port.Capacity.Multi);
 
             inputPort.portName = "Dialogue Connection";
 
             inputContainer.Add(inputPort);
-
+            #endregion
 
             // Add custom UI for setter
             var setterContainer = new VisualElement();
@@ -113,6 +114,7 @@ namespace DS.Elements
 
             extensionContainer.Add(setterContainer);
 
+            #region OutputPorts
             //OUTPUT CONTAINER.
             foreach (DSChoiceSaveData choice in m_nodeChoices)
             {
@@ -126,6 +128,7 @@ namespace DS.Elements
 
             //Calls the RefreshPorts function which Refreshes the layout of the ports.
             RefreshExpandedState();
+            #endregion
         }
     }
 }
