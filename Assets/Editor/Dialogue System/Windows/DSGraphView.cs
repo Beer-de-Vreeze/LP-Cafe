@@ -26,7 +26,6 @@ namespace DS.Windows
         private SerializableDictionary<string, DSGroupErrorData> m_groups;
         private SerializableDictionary<Group, SerializableDictionary<string, DSNodeErrorData>> m_groupedNodes;
 
-
         private int m_nameErrorsAmount;
 
         public int NameErrorsAmount
@@ -130,16 +129,19 @@ namespace DS.Windows
             this.AddManipulator(CreateNodeContextualMenu("Add Node (Single Choice)", DSDialogueType.SingleChoice));
             this.AddManipulator(CreateNodeContextualMenu("Add Node (Multiple Choice)", DSDialogueType.MultipleChoice));
 
+            //Will add a menu item for setter/checker Nodes.
+            this.AddManipulator(CreateNodeContextualMenu("Add Node (Setter Node)", DSDialogueType.Setter));
+            this.AddManipulator(CreateNodeContextualMenu("Add Node (Checker Node)", DSDialogueType.Check));
+
             //To make the dialogue groups.
             this.AddManipulator(CreateGroupContextualMenu());
         }
 
         private IManipulator CreateNodeContextualMenu(string actionTitle, DSDialogueType dialogueType)
         {
+            //Will place a node at the current mouse position.
             ContextualMenuManipulator contextualMenuManipulator = new ContextualMenuManipulator
             (
-                //Will place a node at the current mouse position.
-
                 menuEvent => menuEvent.menu.AppendAction(actionTitle, actionEvent => AddElement(CreateNode("DialogueName", dialogueType, GetLocalMousePosition(actionEvent.eventInfo.localMousePosition))))
             );
 
@@ -156,8 +158,6 @@ namespace DS.Windows
 
             return contextualMenuManipulator;
         }
-
-
         #endregion
 
         #region Element Creation
@@ -216,8 +216,7 @@ namespace DS.Windows
         public NodeBase CreateNode(string nodeName, DSDialogueType dialogueType, Vector2 nodePos, bool shouldDraw = true)
         {
             //For instantiating a node. Uses enum value to decide which type of node to instantiate.
-
-            //$ means you can pass a type within a string by using {}.
+            //$ means you can pass a variable within a string by using {}.
             Type nodeType = Type.GetType($"DS.Elements.DS{dialogueType}Node");
 
             NodeBase node = (NodeBase) Activator.CreateInstance(nodeType);

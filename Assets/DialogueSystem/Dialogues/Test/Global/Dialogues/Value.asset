@@ -10,14 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8656580f96a63714d889c7daeb915b7a, type: 3}
-  m_Name: Hooi
+  m_Name: Value
   m_EditorClassIdentifier: 
-  <m_dialogueNameData>k__BackingField: Hooi
+  <m_dialogueNameData>k__BackingField: Value
   <m_dialogueTextData>k__BackingField: Dialogue text.
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Next Dialogue
-    <m_nextDialogue>k__BackingField: {fileID: 0}
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 7377d506eb7bda34a92665b758a67550, type: 2}
+  - <m_dialogueChoiceText>k__BackingField: Next Dialogue
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 9cbcbd5320e619b488350a22c58231d6, type: 2}
+  - <m_dialogueChoiceText>k__BackingField: Next Dialogue
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 010e492d6a89c1b41b3babb2c3fd3bbd, type: 2}
   <m_bachelorImageData>k__BackingField: {fileID: 0}
   <m_dialogueAudioData>k__BackingField: {fileID: 0}
-  <m_dialogueTypeData>k__BackingField: 0
-  <m_isStartingDialogueData>k__BackingField: 1
+  <m_dialogueTypeData>k__BackingField: 1
+  <m_isStartingDialogueData>k__BackingField: 0
