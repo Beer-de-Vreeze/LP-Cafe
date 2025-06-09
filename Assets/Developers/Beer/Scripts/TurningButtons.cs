@@ -86,6 +86,22 @@ public class TurningButtons : MonoBehaviour
                 isTransitioning = false; // Stop transitioning when target is reached
             }
         }
+
+        switch (currentPositionIndex)
+        {
+            case 0:
+                leftButton.gameObject.SetActive(true);
+                rightButton.gameObject.SetActive(true);
+                break;
+            case 1:
+                leftButton.gameObject.SetActive(true);
+                rightButton.gameObject.SetActive(false);
+                break;
+            case 2:
+                leftButton.gameObject.SetActive(false);
+                rightButton.gameObject.SetActive(true);
+                break;
+        }
     }
 
     /// <summary>
