@@ -41,7 +41,7 @@ MonoBehaviour:
     - <m_choiceTextData>k__BackingField: Klaas
       <m_choiceNodeIDData>k__BackingField: d33756df-9c9b-48c0-b14a-e7f0f286b84c
     - <m_choiceTextData>k__BackingField: Jantje
-      <m_choiceNodeIDData>k__BackingField: f6a06a8a-a232-4c87-8274-7d2168472de9
+      <m_choiceNodeIDData>k__BackingField: 538b006c-f33e-4dcf-b547-999d9730038c
     <m_nodeGroupIDData>k__BackingField: 8dd838cf-d359-4f95-b47b-0034c50deb5d
     <m_dialogueTypeData>k__BackingField: 1
     <m_nodePositionData>k__BackingField: {x: 848, y: 95}
@@ -90,7 +90,18 @@ MonoBehaviour:
     <m_nodeGroupIDData>k__BackingField: 8dd838cf-d359-4f95-b47b-0034c50deb5d
     <m_dialogueTypeData>k__BackingField: 0
     <m_nodePositionData>k__BackingField: {x: 1400, y: 365}
-  - <m_nodeIDData>k__BackingField: f6a06a8a-a232-4c87-8274-7d2168472de9
+  - <m_nodeIDData>k__BackingField: 6aabb141-c021-4ec5-9777-e6d34124b1b9
+    <m_nodeNameData>k__BackingField: Value Setter
+    <m_nodeBachelorImageData>k__BackingField: {fileID: 0}
+    <m_nodeAudioLinesData>k__BackingField: {fileID: 0}
+    <m_nodeTextData>k__BackingField: Dialogue text.
+    <m_nodeChoicesData>k__BackingField:
+    - <m_choiceTextData>k__BackingField: Next Dialogue
+      <m_choiceNodeIDData>k__BackingField: 
+    <m_nodeGroupIDData>k__BackingField: 8dd838cf-d359-4f95-b47b-0034c50deb5d
+    <m_dialogueTypeData>k__BackingField: 3
+    <m_nodePositionData>k__BackingField: {x: 758, y: 341}
+  - <m_nodeIDData>k__BackingField: 538b006c-f33e-4dcf-b547-999d9730038c
     <m_nodeNameData>k__BackingField: Condition Node
     <m_nodeBachelorImageData>k__BackingField: {fileID: 0}
     <m_nodeAudioLinesData>k__BackingField: {fileID: 0}
@@ -99,8 +110,8 @@ MonoBehaviour:
     - <m_choiceTextData>k__BackingField: Next Dialogue
       <m_choiceNodeIDData>k__BackingField: b2d1aa1e-41b1-48cd-97c4-a13a455e54d4
     <m_nodeGroupIDData>k__BackingField: 8dd838cf-d359-4f95-b47b-0034c50deb5d
-    <m_dialogueTypeData>k__BackingField: 1
-    <m_nodePositionData>k__BackingField: {x: 1120, y: 365}
+    <m_dialogueTypeData>k__BackingField: 2
+    <m_nodePositionData>k__BackingField: {x: 1157, y: 417}
   <m_graphOldGroupNamesData>k__BackingField:
   - Beer
   <m_graphOldUngroupedNodeNamesData>k__BackingField: []
@@ -114,4 +125,5 @@ MonoBehaviour:
       - Kim
       - Simon
       - Lance
+      - Value Setter
       - Condition Node
