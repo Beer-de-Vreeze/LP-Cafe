@@ -7,6 +7,7 @@ using DS.Utilities;
 using DS.Windows;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
+using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -26,17 +27,18 @@ namespace DS.Elements
         public SetterOperationType operationType { get; set; }
         public int loveScoreAmount { get; set; }
         public bool boolValue { get; set; }
-        public string loveMeterName { get; private set; } = "LoveMeterSO";
+        public LoveMeterSO loveMeterName { get; set; }
 
         // Events for different operation types
         public event Action<string, string> OnValueSet;
-        public event Action<string, int> OnLoveScoreChanged;
+        public event Action<LoveMeterSO, int> OnLoveScoreChanged;
         public event Action<string, bool> OnBooleanChanged;
 
         private DropdownField operationTypeDropdown;
         private VisualElement valueContainer;
         private VisualElement loveScoreContainer;
         private VisualElement boolContainer;
+        private ObjectField loveMeterObjectField;
 
         public override void Initialize(string nodeName, DSGraphView dsGraphView, Vector2 pos)
         {
@@ -49,7 +51,7 @@ namespace DS.Elements
             valueToSet = "";
             loveScoreAmount = 0;
             boolValue = false;
-            loveMeterName = "LoveMeterSO";
+            loveMeterName = null;
 
             DSChoiceSaveData choiceData = new DSChoiceSaveData()
             {
@@ -192,10 +194,17 @@ namespace DS.Elements
             // Container for love score
             loveScoreContainer = new VisualElement();
 
-            // Love meter name label (read-only)
-            var loveMeterLabel = new Label("Love Meter: LoveMeterSO");
-            loveMeterLabel.AddToClassList("ds-node__label");
-            loveScoreContainer.Add(loveMeterLabel);
+            // Replace the label with an ObjectField for LoveMeterSO
+            loveMeterObjectField = new ObjectField("Love Meter")
+            {
+                objectType = typeof(LoveMeterSO),
+                value = loveMeterName,
+            };
+            loveMeterObjectField.RegisterValueChangedCallback(evt =>
+            {
+                loveMeterName = evt.newValue as LoveMeterSO;
+            });
+            loveScoreContainer.Add(loveMeterObjectField);
 
             // Love amount field
             var loveAmountField = new IntegerField("Amount") { value = loveScoreAmount };
@@ -239,17 +248,6 @@ namespace DS.Elements
             setterContainer.Add(valueContainer);
             setterContainer.Add(loveScoreContainer);
             setterContainer.Add(boolContainer);
-
-            // Button to manually trigger the set event
-            var setButton = new Button(() =>
-            {
-                TriggerSetEvent();
-            })
-            {
-                text = "Apply Change",
-            };
-            setButton.AddToClassList("ds-node__button");
-            setterContainer.Add(setButton);
 
             extensionContainer.Add(setterContainer);
 
@@ -304,9 +302,16 @@ namespace DS.Elements
                     break;
 
                 case SetterOperationType.UpdateLoveScore:
-                    // Always use "LoveMeterSO" for love score operations
-                    OnLoveScoreChanged?.Invoke("LoveMeterSO", loveScoreAmount);
-                    Debug.Log($"Love score change: LoveMeterSO by {loveScoreAmount}");
+                    // Use the selected LoveMeterSO instead of a hardcoded string
+                    if (loveMeterName != null)
+                    {
+                        OnLoveScoreChanged?.Invoke(loveMeterName, loveScoreAmount);
+                        Debug.Log($"Love score change: {loveMeterName.name} by {loveScoreAmount}");
+                    }
+                    else
+                    {
+                        Debug.LogWarning("No Love Meter SO assigned!");
+                    }
                     break;
 
                 case SetterOperationType.UpdateBoolean:

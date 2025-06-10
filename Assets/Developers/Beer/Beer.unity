@@ -1272,7 +1272,7 @@ MonoBehaviour:
   _audioSource: {fileID: 1254367151}
   _bachelorImage: {fileID: 904678623}
   _loveScore: 0
-  _loveMeter: {fileID: 0}
+  _loveMeter: {fileID: 11400000, guid: c18fce8bdce1ff24ab33a75266e564c8, type: 2}
 --- !u!82 &1254367151
 AudioSource:
   m_ObjectHideFlags: 0

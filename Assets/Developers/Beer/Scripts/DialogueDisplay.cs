@@ -345,6 +345,7 @@ public class DialogueDisplay : MonoBehaviour
     // Applies changes from a setter node
     private void ApplySetterNode()
     {
+        Debug.Log("Applying setter node...");
         try
         {
             DSDialogueSO setterNode = _dialogue.m_dialogue;
@@ -353,30 +354,30 @@ public class DialogueDisplay : MonoBehaviour
             string operationType = setterNode.operationType;
 
             // Apply the setter operation based on its type
+            Debug.Log($"Applying setter operation: {operationType}");
             switch (operationType)
             {
                 case "SetValue":
+                    Debug.Log("Setting variable value...");
                     // Set a variable value
                     string variableName = setterNode.variableName;
                     string value = setterNode.valueToSet;
-
                     // Update the variable
                     _gameVariables[variableName] = value;
                     Debug.Log($"Set variable: {variableName} = {value}");
                     break;
 
                 case "UpdateLoveScore":
+                    Debug.Log("Updating love score...");
                     // Update the love score
-                    int amount = int.Parse(setterNode.loveScoreAmount);
-                    _loveScore += amount;
+                    int amount = 0;
+                    int.TryParse(setterNode.loveScoreAmount, out amount); // Parse string to int safely
 
-                    // Update the Love variable as well
-                    _gameVariables["Love"] = _loveScore.ToString();
-
-                    // Update love meter if available
+                    // Use the default love meter reference (_loveMeter)
                     if (_loveMeter != null)
                     {
-                        // Use the appropriate methods based on whether we're adding or subtracting points
+                        _loveScore += amount;
+
                         if (amount > 0)
                         {
                             _loveMeter.IncreaseLove(amount);
@@ -386,18 +387,28 @@ public class DialogueDisplay : MonoBehaviour
                             _loveMeter.DecreaseLove(Mathf.Abs(amount));
                         }
 
-                        // Update our local love score to match the love meter's current value
                         _loveScore = _loveMeter.GetCurrentLove();
                         _gameVariables["Love"] = _loveScore.ToString();
-                    }
 
-                    Debug.Log($"Updated love score: {_loveScore} (change: {amount})");
+                        Debug.Log($"Updated default love score: {_loveScore} (change: {amount})");
+                    }
+                    else
+                    {
+                        // No love meter available, just update the local variable
+                        _loveScore += amount;
+                        _gameVariables["Love"] = _loveScore.ToString();
+                        Debug.Log(
+                            $"Updated local love score: {_loveScore} (no love meter available)"
+                        );
+                    }
                     break;
 
                 case "UpdateBoolean":
-                    // Update a boolean value
+                    Debug.Log("Updating boolean value...");
+                    // Update a boolean value - parse string to bool
                     string boolName = setterNode.variableName;
-                    bool boolValue = bool.Parse(setterNode.boolValue);
+                    bool boolValue = false;
+                    bool.TryParse(setterNode.boolValue, out boolValue);
 
                     // Update the variable
                     _gameVariables[boolName] = boolValue.ToString().ToLower();
