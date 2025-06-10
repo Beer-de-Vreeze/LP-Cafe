@@ -173,8 +173,6 @@ namespace DS.Elements
                 outputContainer.Add(choicePort);
             }
 
-
-
             addChoiceButton.AddToClassList("ds-node__button");
             extensionContainer.Add(addChoiceButton);
 
@@ -190,9 +188,14 @@ namespace DS.Elements
         /// <returns>A configured Port object</returns>
         private Port CreatePort(string portName)
         {
-            Port choicePort = this.CreatePort(portName);
-            choicePort.portName = portName;
-            return choicePort;
+            Port port = Port.Create<Edge>(
+                Orientation.Horizontal,
+                Direction.Output,
+                Port.Capacity.Single,
+                typeof(float)
+            );
+            port.portName = portName;
+            return port;
         }
     }
 }
