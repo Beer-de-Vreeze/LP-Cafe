@@ -34,13 +34,13 @@ namespace DS.ScriptableObjects
 
         // New fields for condition nodes
         [field: SerializeField]
-        public string propertyToCheck { get; set; }
+        public string m_propertyToCheck { get; set; }
 
         [field: SerializeField]
-        public string comparisonType { get; set; }
+        public string m_comparisonType { get; set; }
 
         [field: SerializeField]
-        public string comparisonValue { get; set; }
+        public string m_comparisonValue { get; set; }
 
         // New fields for setter nodes
         [field: SerializeField]
@@ -79,14 +79,20 @@ namespace DS.ScriptableObjects
 
         // Additional initialize methods for different node types
         public void InitializeConditionNode(
+            string dialogueName,
             string propertyToCheck,
             string comparisonType,
-            string comparisonValue
+            string comparisonValue,
+            DSDialogueType dialogueType,
+            bool isStartingDialogue
         )
         {
-            this.propertyToCheck = propertyToCheck;
-            this.comparisonType = comparisonType;
-            this.comparisonValue = comparisonValue;
+            m_dialogueNameData = dialogueName;
+            m_propertyToCheck = propertyToCheck;
+            m_comparisonType = comparisonType;
+            m_comparisonValue = comparisonValue;
+            m_dialogueTypeData = dialogueType;
+            m_isStartingDialogueData = isStartingDialogue;
         }
 
         public void InitializeSetterNode(

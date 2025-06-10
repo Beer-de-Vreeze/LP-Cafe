@@ -29,6 +29,21 @@ namespace DS.Elements
         protected DSGraphView m_graphView;
         private Color m_defaultBackgroundColor;
 
+        // Properties that define the condition to be evaluated
+        /// <summary>Property name that will be checked during condition evaluation</summary>
+        public string propertyToCheck { get; set; } = "Love"; // Default to checking love value
+
+        /// <summary>Comparison operator used to evaluate the condition</summary>
+        public string comparisonType { get; set; } = ">="; // Default to greater than or equal
+
+        /// <summary>The value to compare the property against</summary>
+        public string comparisonValue { get; set; } = "0"; // Default value to compare against
+
+        // Available comparison operators for the condition
+        /// <summary>Array of available comparison operators for condition evaluation</summary>
+        public string[] comparisonTypes = { "==", "!=", ">", "<", ">=", "<=" };
+
+
         public virtual void Initialize(string nodeName, DSGraphView dsGraphView, Vector2 pos)
         {
             m_nodeID = Guid.NewGuid().ToString();

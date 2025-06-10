@@ -150,9 +150,8 @@ namespace DS.Windows
 
         private void Reset()
         {
-            Clear();
-
             UpdateFileName(defaultFileName);
+            Clear();
         }
         #endregion
 

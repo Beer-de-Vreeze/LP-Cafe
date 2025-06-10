@@ -247,12 +247,7 @@ namespace DS.Windows
             return group;
         }
 
-        public NodeBase CreateNode(
-            string nodeName,
-            DSDialogueType dialogueType,
-            Vector2 nodePos,
-            bool shouldDraw = true
-        )
+        public NodeBase CreateNode(string nodeName, DSDialogueType dialogueType, Vector2 nodePos, bool shouldDraw = true)
         {
             //For instantiating a node. Uses enum value to decide which type of node to instantiate.
             //$ means you can pass a variable within a string by using {}.

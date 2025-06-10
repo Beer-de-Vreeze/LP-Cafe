@@ -18,19 +18,7 @@ namespace DS.Elements
     /// </summary>
     public class DSConditionNode : NodeBase
     {
-        // Properties that define the condition to be evaluated
-        /// <summary>Property name that will be checked during condition evaluation</summary>
-        public string propertyToCheck { get; set; } = "Love"; // Default to checking love value
 
-        /// <summary>Comparison operator used to evaluate the condition</summary>
-        public string comparisonType { get; set; } = ">="; // Default to greater than or equal
-
-        /// <summary>The value to compare the property against</summary>
-        public string comparisonValue { get; set; } = "0"; // Default value to compare against
-
-        // Available comparison operators for the condition
-        /// <summary>Array of available comparison operators for condition evaluation</summary>
-        private readonly string[] comparisonTypes = { "==", "!=", ">", "<", ">=", "<=" };
 
         // Collection of properties that can be checked in conditions
         /// <summary>
@@ -162,7 +150,6 @@ namespace DS.Elements
             titleContainer.Insert(0, dialogueNameTextField);
             #endregion
 
-
             //Inport Container.
             Port inputPort = this.CreatePort(
                 "Dialogue Connection",
@@ -196,11 +183,13 @@ namespace DS.Elements
             // Create dropdown for comparison operator
             var comparisonField = new PopupField<string>(
                 comparisonTypes.ToList(),
-                comparisonType != null ? comparisonType : ">="
+                comparisonType != string.Empty ? comparisonType : ">="
             );
+            Debug.Log(comparisonField);
             comparisonField.label = "Comparison";
             comparisonField.RegisterValueChangedCallback(evt => comparisonType = evt.newValue);
             conditionContainer.Add(comparisonField);
+            
 
             // Create text field for the comparison value
             var valueCompareField = new TextField("Value") { value = comparisonValue };

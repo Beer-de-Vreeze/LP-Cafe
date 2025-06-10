@@ -11,6 +11,7 @@ namespace DS.Data.Save
     [Serializable]
     public class DSNodeSaveData
     {
+        //Base Node
         //Add Data to the variable name to know its for saving Data!
         [field: SerializeField] public string m_nodeIDData {  get; set;}
         [field: SerializeField] public string m_nodeNameData{ get; set;}
@@ -21,5 +22,11 @@ namespace DS.Data.Save
         [field: SerializeField] public string m_nodeGroupIDData {  get; set;}
         [field: SerializeField] public DSDialogueType m_dialogueTypeData { get; set;}
         [field: SerializeField] public Vector2 m_nodePositionData { get; set;}
+
+        //Condition Node
+        [field: SerializeField] public string m_nodePropertyToCheckData { get; set; }
+        [field: SerializeField] public string m_nodeComparisonTypeData { get; set; }
+        [field: SerializeField] public string m_nodeComparisonValueData { get; set; }
+        [field: SerializeField] public string m_nodeOperationTypeData { get; set; }
     }
 }
