@@ -83,6 +83,7 @@ namespace DS.ScriptableObjects
             string propertyToCheck,
             string comparisonType,
             string comparisonValue,
+            List<DSDialogueChoiceData> choices,
             DSDialogueType dialogueType,
             bool isStartingDialogue
         )
@@ -91,6 +92,7 @@ namespace DS.ScriptableObjects
             m_propertyToCheck = propertyToCheck;
             m_comparisonType = comparisonType;
             m_comparisonValue = comparisonValue;
+            m_dialogueChoiceData = choices;
             m_dialogueTypeData = dialogueType;
             m_isStartingDialogueData = isStartingDialogue;
         }

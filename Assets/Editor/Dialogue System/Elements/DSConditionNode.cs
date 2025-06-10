@@ -185,7 +185,7 @@ namespace DS.Elements
                 comparisonTypes.ToList(),
                 comparisonType != string.Empty ? comparisonType : ">="
             );
-            Debug.Log(comparisonField);
+
             comparisonField.label = "Comparison";
             comparisonField.RegisterValueChangedCallback(evt => comparisonType = evt.newValue);
             conditionContainer.Add(comparisonField);
