@@ -4,9 +4,9 @@ using UnityEngine;
 
 namespace DS
 {
+    using DS.Windows;
     using Elements;
     using Enumerations;
-    using DS.Windows;
     using static UnityEngine.InputSystem.PlayerInput;
 
     public class DSSearchWindow : ScriptableObject, ISearchWindowProvider
@@ -50,13 +50,12 @@ namespace DS
                     level = 2,
                     userData = DSDialogueType.Check,
                 },
-
                 new SearchTreeGroupEntry(new GUIContent("Dialogue Group"), 1),
                 new SearchTreeEntry(new GUIContent("Single Group", m_indentationIcon))
                 {
                     level = 2,
-                    userData =  new Group()
-                }
+                    userData = new Group(),
+                },
             };
 
             return searchTreeEntries;
@@ -65,21 +64,34 @@ namespace DS
         //What needs to happen when pressed
         public bool OnSelectEntry(SearchTreeEntry SearchTreeEntry, SearchWindowContext context)
         {
-            Vector2 localMousePos = m_graphView.GetLocalMousePosition(context.screenMousePosition, true);
+            Vector2 localMousePos = m_graphView.GetLocalMousePosition(
+                context.screenMousePosition,
+                true
+            );
 
             switch (SearchTreeEntry.userData)
             {
                 case DSDialogueType.SingleChoice:
                 {
-                    DSSingleChoiceNode singleChoiceNode = (DSSingleChoiceNode) m_graphView.CreateNode("DialogueName", DSDialogueType.SingleChoice, localMousePos);
+                    DSSingleChoiceNode singleChoiceNode = (DSSingleChoiceNode)
+                        m_graphView.CreateNode(
+                            "DialogueName",
+                            DSDialogueType.SingleChoice,
+                            localMousePos
+                        );
                     m_graphView.AddElement(singleChoiceNode);
-                    
+
                     return true;
                 }
-                    
+
                 case DSDialogueType.MultipleChoice:
                 {
-                    DSMultipleChoiceNode multipleChoiceNode = (DSMultipleChoiceNode)m_graphView.CreateNode("DialogueName", DSDialogueType.MultipleChoice, localMousePos);
+                    DSMultipleChoiceNode multipleChoiceNode = (DSMultipleChoiceNode)
+                        m_graphView.CreateNode(
+                            "DialogueName",
+                            DSDialogueType.MultipleChoice,
+                            localMousePos
+                        );
                     m_graphView.AddElement(multipleChoiceNode);
 
                     return true;
@@ -87,7 +99,12 @@ namespace DS
 
                 case DSDialogueType.Setter:
                 {
-                    DSSetterNode setterNode = (DSSetterNode)m_graphView.CreateNode("DialogueName", DSDialogueType.Setter, localMousePos);
+                    DSConditionNode setterNode = (DSConditionNode)
+                        m_graphView.CreateNode(
+                            "DialogueName",
+                            DSDialogueType.Setter,
+                            localMousePos
+                        );
                     m_graphView.AddElement(setterNode);
 
                     return true;
@@ -95,8 +112,9 @@ namespace DS
 
                 case DSDialogueType.Check:
                 {
-                    DSCheckNode checkNode = (DSCheckNode)m_graphView.CreateNode("DialogueName", DSDialogueType.Check, localMousePos);
-                        return true;
+                    DSCheckNode checkNode = (DSCheckNode)
+                        m_graphView.CreateNode("DialogueName", DSDialogueType.Check, localMousePos);
+                    return true;
                 }
 
                 case Group _:

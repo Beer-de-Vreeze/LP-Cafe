@@ -10,4 +10,5 @@ public class NewBachelorSO : ScriptableObject
     public bool _isLikeDiscovered;
     public bool _isDislikeDiscovered;
     public DSDialogue _dialogue;
+    public int _LoveValue;
 }
