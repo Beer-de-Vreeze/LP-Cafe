@@ -103,32 +103,71 @@ namespace DS.Elements
         /// </summary>
         public override void Draw()
         {
-            // Call base.Draw() to set up the standard node structure
-            base.Draw();
+            #region DialogueName
+            /* TITLE CONTAINER*/
+            TextField dialogueNameTextField = DSElementUtility.CreateTextField(m_nodeDialogueName = "Condition Node", null, callback =>
+            {
+                TextField target = (TextField)callback.target;
+
+                //No spaces or special characters in filenames.
+                target.value = callback.newValue.RemoveWhitespaces().RemoveSpecialCharacters();
+
+                //Checks if there is a value to make sure no empty things are saved.
+                if (string.IsNullOrEmpty(target.value))
+                {
+                    if (!string.IsNullOrEmpty(m_nodeDialogueName))
+                    {
+                        ++m_graphView.NameErrorsAmount;
+                    }
+                }
+                else
+                {
+                    if (string.IsNullOrEmpty(m_nodeDialogueName))
+                    {
+                        --m_graphView.NameErrorsAmount;
+                    }
+                }
+
+                if (m_nodeGroup == null)
+                {
+                    m_graphView.RemoveUngroupedNode(this);
+
+                    m_nodeDialogueName = target.value;
+
+                    m_graphView.AddUngroupedNode(this);
+
+                    return;
+                }
+
+                DSGroup currentGroup = m_nodeGroup;
+
+                m_graphView.RemoveGroupedNode(this, m_nodeGroup);
+
+                m_nodeDialogueName = target.value;
+
+                m_graphView.AddGroupedNode(this, currentGroup);
+            });
+
+            dialogueNameTextField.AddClasses
+            (
+               "ds-node__textfield",
+               "ds-node__filename-textfield",
+               "ds-node__textfield__hidden"
+            );
+
+            titleContainer.Insert(0, dialogueNameTextField);
+            #endregion
+
+
+            //Inport Container.
+            Port inputPort = this.CreatePort("Dialogue Connection", Orientation.Horizontal, Direction.Input, Port.Capacity.Multi);
+
+            inputPort.portName = "Dialogue Connection";
+
+            inputContainer.Add(inputPort);
 
             // Set the node title
             m_nodeDialogueName = "Condition Node";
-
-            // Add button to create additional condition paths
-            Button addChoiceButton = DSElementUtility.CreateButton(
-                "Add Condition Path",
-                () =>
-                {
-                    // Create a new choice data object
-                    DSChoiceSaveData choiceData = new DSChoiceSaveData()
-                    {
-                        m_choiceTextData = "Condition Path",
-                    };
-
-                    // Add the new choice to the node's choices
-                    m_nodeChoices.Add(choiceData);
-
-                    // Create a port for this new choice
-                    Port choicePort = CreatePort(choiceData.m_choiceTextData);
-                    choicePort.userData = choiceData;
-                    outputContainer.Add(choicePort);
-                }
-            );
 
             // Create container for the condition UI elements
             var conditionContainer = new VisualElement();
@@ -173,29 +212,8 @@ namespace DS.Elements
                 outputContainer.Add(choicePort);
             }
 
-            addChoiceButton.AddToClassList("ds-node__button");
-            extensionContainer.Add(addChoiceButton);
-
             // Update the visual state of the node
             RefreshExpandedState();
-        }
-
-        /// <summary>
-        /// Helper method to create a port with a specific name.
-        /// Creates a new connection point for output paths in the condition node.
-        /// </summary>
-        /// <param name="portName">The name to display on the port</param>
-        /// <returns>A configured Port object</returns>
-        private Port CreatePort(string portName)
-        {
-            Port port = Port.Create<Edge>(
-                Orientation.Horizontal,
-                Direction.Output,
-                Port.Capacity.Single,
-                typeof(float)
-            );
-            port.portName = portName;
-            return port;
         }
     }
 }
