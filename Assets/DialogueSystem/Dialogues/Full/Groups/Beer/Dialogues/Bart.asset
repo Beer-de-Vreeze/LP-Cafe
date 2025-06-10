@@ -26,9 +26,9 @@ MonoBehaviour:
   <m_dialogueAudioData>k__BackingField: {fileID: 0}
   <m_dialogueTypeData>k__BackingField: 1
   <m_isStartingDialogueData>k__BackingField: 1
-  <propertyToCheck>k__BackingField: 
-  <comparisonType>k__BackingField: 
-  <comparisonValue>k__BackingField: 
+  <m_propertyToCheck>k__BackingField: 
+  <m_comparisonType>k__BackingField: 
+  <m_comparisonValue>k__BackingField: 
   <operationType>k__BackingField: 
   <variableName>k__BackingField: 
   <valueToSet>k__BackingField: 

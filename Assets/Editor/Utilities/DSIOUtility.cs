@@ -11,6 +11,7 @@ namespace DS.Utilities
     using Data.Save;
     using Elements;
     using DS.Data;
+    using Enumerations;
     using ScriptableObjects;
     using Windows;
 
@@ -208,6 +209,10 @@ namespace DS.Utilities
                 m_nodeGroupIDData = node.m_nodeGroup?.m_groupID,
                 m_dialogueTypeData = node.m_nodeDialogueType,
                 m_nodePositionData = node.GetPosition().position,
+                m_nodeComparisonTypeData = node.comparisonType,
+                m_nodeComparisonValueData = node.comparisonValue,
+                m_nodePropertyToCheckData = node.propertyToCheck,
+                m_nodeOperationTypeData = node.comparisonType,
             };
 
             graphData.m_graphNodesData.Add(nodeData);
@@ -242,15 +247,31 @@ namespace DS.Utilities
                 dialogueContainer.m_containerUngroupedDialoguesData.Add(dialogue);
             }
 
-            dialogue.Initialize(
-                node.m_nodeDialogueName,
-                node.m_nodeText,
-                ConvertNodeChoics(node.m_nodeChoices),
-                node.m_nodeCharacterImage,
-                node.m_nodeAudio,
-                node.m_nodeDialogueType,
-                node.IsStartingNode()
-            );
+            if(node.m_nodeDialogueType == DSDialogueType.MultipleChoice || node.m_nodeDialogueType == DSDialogueType.SingleChoice)
+            {
+                dialogue.Initialize(
+                    node.m_nodeDialogueName,
+                    node.m_nodeText,
+                    ConvertNodeChoics(node.m_nodeChoices),
+                    node.m_nodeCharacterImage,
+                    node.m_nodeAudio,
+                    node.m_nodeDialogueType,
+                    node.IsStartingNode()
+                );
+            }
+
+            else if (node.m_nodeDialogueType == DSDialogueType.Condition)
+            {
+                dialogue.InitializeConditionNode(
+                    node.m_nodeDialogueName,
+                    node.propertyToCheck,
+                    node.comparisonType,
+                    node.comparisonValue,
+                    node.m_nodeDialogueType,
+                    node.IsStartingNode()
+                );
+            }
+
 
             m_createdDialogues.Add(node.m_nodeID, dialogue);
 
@@ -444,11 +465,23 @@ namespace DS.Utilities
                     false
                 );
 
-                node.m_nodeID = nodeSaveData.m_nodeIDData;
-                node.m_nodeAudio = nodeSaveData.m_nodeAudioLinesData;
-                node.m_nodeCharacterImage = nodeSaveData.m_nodeBachelorImageData;
-                node.m_nodeChoices = choices;
-                node.m_nodeText = nodeSaveData.m_nodeTextData;
+                if (nodeSaveData.m_dialogueTypeData == DSDialogueType.SingleChoice || nodeSaveData.m_dialogueTypeData == DSDialogueType.MultipleChoice)
+                {
+                    node.m_nodeID = nodeSaveData.m_nodeIDData;
+                    node.m_nodeAudio = nodeSaveData.m_nodeAudioLinesData;
+                    node.m_nodeCharacterImage = nodeSaveData.m_nodeBachelorImageData;
+                    node.m_nodeChoices = choices;
+                    node.m_nodeText = nodeSaveData.m_nodeTextData;
+                }
+
+                if (nodeSaveData.m_dialogueTypeData == DSDialogueType.Condition)
+                {
+                    node.m_nodeID = nodeSaveData.m_nodeIDData;
+                    node.propertyToCheck = nodeSaveData.m_nodePropertyToCheckData;
+                    node.comparisonType = nodeSaveData.m_nodeComparisonTypeData;
+                    node.comparisonValue = nodeSaveData.m_nodeComparisonValueData;
+                    node.comparisonType = nodeSaveData.m_nodeComparisonTypeData;
+                }
 
                 node.Draw();
 

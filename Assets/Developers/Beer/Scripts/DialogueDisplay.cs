@@ -218,9 +218,9 @@ public class DialogueDisplay : MonoBehaviour
 
             // Get the property to check, comparison type, and value from properties in DSDialogueSO
             // Assuming these are accessible through custom properties in DSDialogueSO
-            string propertyName = conditionNode.propertyToCheck;
-            string comparisonType = conditionNode.comparisonType;
-            string comparisonValue = conditionNode.comparisonValue;
+            string propertyName = conditionNode.m_propertyToCheck;
+            string comparisonType = conditionNode.m_comparisonType;
+            string comparisonValue = conditionNode.m_comparisonValue;
 
             // Get the current value of the property
             bool conditionMet = false;
@@ -541,9 +541,9 @@ public class DialogueDisplay : MonoBehaviour
         DSDialogueSO conditionNode = choice.m_nextDialogue;
 
         // Get condition parameters
-        string propertyName = conditionNode.propertyToCheck;
-        string comparisonType = conditionNode.comparisonType;
-        string comparisonValue = conditionNode.comparisonValue;
+        string propertyName = conditionNode.m_propertyToCheck;
+        string comparisonType = conditionNode.m_comparisonType;
+        string comparisonValue = conditionNode.m_comparisonValue;
 
         // Check if we have the property
         if (!_gameVariables.TryGetValue(propertyName, out string currentValue))

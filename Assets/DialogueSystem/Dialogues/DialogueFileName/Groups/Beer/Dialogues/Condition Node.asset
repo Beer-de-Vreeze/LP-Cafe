@@ -19,5 +19,13 @@ MonoBehaviour:
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 1d2a2e40a61a5924fb92e97169f2cd52, type: 2}
   <m_bachelorImageData>k__BackingField: {fileID: 0}
   <m_dialogueAudioData>k__BackingField: {fileID: 0}
-  <m_dialogueTypeData>k__BackingField: 1
+  <m_dialogueTypeData>k__BackingField: 2
   <m_isStartingDialogueData>k__BackingField: 1
+  <m_propertyToCheck>k__BackingField: 
+  <m_comparisonType>k__BackingField: 
+  <m_comparisonValue>k__BackingField: 
+  <operationType>k__BackingField: 
+  <variableName>k__BackingField: 
+  <valueToSet>k__BackingField: 
+  <loveScoreAmount>k__BackingField: 
+  <boolValue>k__BackingField: 
