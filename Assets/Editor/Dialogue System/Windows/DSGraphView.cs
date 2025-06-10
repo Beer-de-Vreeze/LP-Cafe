@@ -130,7 +130,7 @@ namespace DS.Windows
             this.AddManipulator(CreateNodeContextualMenu("Add Node (Multiple Choice)", DSDialogueType.MultipleChoice));
 
             //Will add a menu item for setter/checker Nodes.
-            this.AddManipulator(CreateNodeContextualMenu("Add Node (Setter Node)", DSDialogueType.Setter));
+            this.AddManipulator(CreateNodeContextualMenu("Add Node (Condition Node)", DSDialogueType.Condition));
             this.AddManipulator(CreateNodeContextualMenu("Add Node (Checker Node)", DSDialogueType.Check));
 
             //To make the dialogue groups.

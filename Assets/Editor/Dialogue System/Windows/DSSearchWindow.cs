@@ -40,10 +40,10 @@ namespace DS
                     level = 2,
                     userData = DSDialogueType.MultipleChoice,
                 },
-                new SearchTreeEntry(new GUIContent("SetterNode", m_indentationIcon))
+                new SearchTreeEntry(new GUIContent("Conditional", m_indentationIcon))
                 {
                     level = 2,
-                    userData = DSDialogueType.Setter,
+                    userData = DSDialogueType.Condition,
                 },
                 new SearchTreeEntry(new GUIContent("CheckerNode", m_indentationIcon))
                 {
@@ -97,12 +97,12 @@ namespace DS
                     return true;
                 }
 
-                case DSDialogueType.Setter:
+                case DSDialogueType.Condition:
                 {
                     DSConditionNode setterNode = (DSConditionNode)
                         m_graphView.CreateNode(
                             "DialogueName",
-                            DSDialogueType.Setter,
+                            DSDialogueType.Condition,
                             localMousePos
                         );
                     m_graphView.AddElement(setterNode);

@@ -86,7 +86,7 @@ namespace DS.Elements
             base.Initialize(nodeName, dsGraphView, pos);
 
             // Set node type to single choice for the condition node
-            m_nodeDialogueType = DSDialogueType.SingleChoice;
+            m_nodeDialogueType = DSDialogueType.MultipleChoice;
 
             // Create a default "Next Dialogue" choice path
             DSChoiceSaveData choiceData = new DSChoiceSaveData()
@@ -108,6 +108,27 @@ namespace DS.Elements
 
             // Set the node title
             m_nodeDialogueName = "Condition Node";
+
+            // Add button to create additional condition paths
+            Button addChoiceButton = DSElementUtility.CreateButton(
+                "Add Condition Path",
+                () =>
+                {
+                    // Create a new choice data object
+                    DSChoiceSaveData choiceData = new DSChoiceSaveData()
+                    {
+                        m_choiceTextData = "Condition Path",
+                    };
+
+                    // Add the new choice to the node's choices
+                    m_nodeChoices.Add(choiceData);
+
+                    // Create a port for this new choice
+                    Port choicePort = CreatePort(choiceData.m_choiceTextData);
+                    choicePort.userData = choiceData;
+                    outputContainer.Add(choicePort);
+                }
+            );
 
             // Create container for the condition UI elements
             var conditionContainer = new VisualElement();
@@ -152,26 +173,7 @@ namespace DS.Elements
                 outputContainer.Add(choicePort);
             }
 
-            // Add button to create additional condition paths
-            Button addChoiceButton = DSElementUtility.CreateButton(
-                "Add Condition Path",
-                () =>
-                {
-                    // Create a new choice data object
-                    DSChoiceSaveData choiceData = new DSChoiceSaveData()
-                    {
-                        m_choiceTextData = "Condition Path",
-                    };
 
-                    // Add the new choice to the node's choices
-                    m_nodeChoices.Add(choiceData);
-
-                    // Create a port for this new choice
-                    Port choicePort = CreatePort(choiceData.m_choiceTextData);
-                    choicePort.userData = choiceData;
-                    outputContainer.Add(choicePort);
-                }
-            );
 
             addChoiceButton.AddToClassList("ds-node__button");
             extensionContainer.Add(addChoiceButton);

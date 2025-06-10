@@ -4,7 +4,7 @@ namespace DS.Enumerations
     {
         SingleChoice,
         MultipleChoice,
-        Setter,
+        Condition,
         Check
     }
 }
