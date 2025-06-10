@@ -8,9 +8,9 @@ using UnityEngine.UIElements;
 namespace DS.Windows
 {
     using Data.Error;
+    using DS.Data.Save;
     using Elements;
     using Enumerations;
-    using DS.Data.Save;
     using Unity.Hierarchy;
     using Utilities;
     using static UnityEngine.GraphicsBuffer;
@@ -24,29 +24,27 @@ namespace DS.Windows
 
         private SerializableDictionary<string, DSNodeErrorData> m_ungroupedNodes;
         private SerializableDictionary<string, DSGroupErrorData> m_groups;
-        private SerializableDictionary<Group, SerializableDictionary<string, DSNodeErrorData>> m_groupedNodes;
+        private SerializableDictionary<
+            Group,
+            SerializableDictionary<string, DSNodeErrorData>
+        > m_groupedNodes;
 
         private int m_nameErrorsAmount;
 
         public int NameErrorsAmount
         {
-            get
-            {
-                return m_nameErrorsAmount;
-            }
-
+            get { return m_nameErrorsAmount; }
             set
             {
                 //Will hold the value the property will, have can be 0 or higher.
                 m_nameErrorsAmount = value;
 
                 //Checks if there are not repeated name errors and if so enables the use to save their data.
-                if(m_nameErrorsAmount == 0)
+                if (m_nameErrorsAmount == 0)
                 {
                     //Enables Save Button
                     m_editorWindow.EnableSaving();
                 }
-
                 //However if there is a repeated name error the user can't use the save button to prevent overriding previous data.
                 else
                 {
@@ -56,13 +54,17 @@ namespace DS.Windows
             }
         }
 
-        public DSGraphView(DSEditorWindow dSEditorWindow) 
+        public DSGraphView(DSEditorWindow dSEditorWindow)
         {
             m_editorWindow = dSEditorWindow;
 
             m_ungroupedNodes = new SerializableDictionary<string, DSNodeErrorData>();
             m_groups = new SerializableDictionary<string, DSGroupErrorData>();
-            m_groupedNodes = new SerializableDictionary<Group, SerializableDictionary<string, DSNodeErrorData>>();
+            m_groupedNodes =
+                new SerializableDictionary<
+                    Group,
+                    SerializableDictionary<string, DSNodeErrorData>
+                >();
 
             AddSearchWindow();
             AddManipulators();
@@ -80,15 +82,15 @@ namespace DS.Windows
         }
 
         #region Ports
-        public override List<Port> GetCompatiblePorts(Port startPort, NodeAdapter nodeAdapter) 
-        {        
+        public override List<Port> GetCompatiblePorts(Port startPort, NodeAdapter nodeAdapter)
+        {
             List<Port> compatiblePorts = new List<Port>();
 
             //Ports variable holds all the ports currently on the graph.
             ports.ForEach(port =>
             {
-                if (startPort == port) 
-                { 
+                if (startPort == port)
+                {
                     return;
                 }
 
@@ -109,7 +111,7 @@ namespace DS.Windows
             return compatiblePorts;
         }
         #endregion
-        
+
         #region Manipulators
         private void AddManipulators()
         {
@@ -126,23 +128,47 @@ namespace DS.Windows
             this.AddManipulator(new RectangleSelector());
 
             //Will add a menu item to make a Single/Multiple Choice Node.
-            this.AddManipulator(CreateNodeContextualMenu("Add Node (Single Choice)", DSDialogueType.SingleChoice));
-            this.AddManipulator(CreateNodeContextualMenu("Add Node (Multiple Choice)", DSDialogueType.MultipleChoice));
+            this.AddManipulator(
+                CreateNodeContextualMenu("Add Node (Single Choice)", DSDialogueType.SingleChoice)
+            );
+            this.AddManipulator(
+                CreateNodeContextualMenu(
+                    "Add Node (Multiple Choice)",
+                    DSDialogueType.MultipleChoice
+                )
+            );
 
             //Will add a menu item for setter/checker Nodes.
-            this.AddManipulator(CreateNodeContextualMenu("Add Node (Condition Node)", DSDialogueType.Condition));
-            this.AddManipulator(CreateNodeContextualMenu("Add Node (Checker Node)", DSDialogueType.Check));
+            this.AddManipulator(
+                CreateNodeContextualMenu("Add Node (Condition Node)", DSDialogueType.Condition)
+            );
+            this.AddManipulator(
+                CreateNodeContextualMenu("Add Node (Setter Node)", DSDialogueType.Setter)
+            );
 
             //To make the dialogue groups.
             this.AddManipulator(CreateGroupContextualMenu());
         }
 
-        private IManipulator CreateNodeContextualMenu(string actionTitle, DSDialogueType dialogueType)
+        private IManipulator CreateNodeContextualMenu(
+            string actionTitle,
+            DSDialogueType dialogueType
+        )
         {
             //Will place a node at the current mouse position.
-            ContextualMenuManipulator contextualMenuManipulator = new ContextualMenuManipulator
-            (
-                menuEvent => menuEvent.menu.AppendAction(actionTitle, actionEvent => AddElement(CreateNode("DialogueName", dialogueType, GetLocalMousePosition(actionEvent.eventInfo.localMousePosition))))
+            ContextualMenuManipulator contextualMenuManipulator = new ContextualMenuManipulator(
+                menuEvent =>
+                    menuEvent.menu.AppendAction(
+                        actionTitle,
+                        actionEvent =>
+                            AddElement(
+                                CreateNode(
+                                    "DialogueName",
+                                    dialogueType,
+                                    GetLocalMousePosition(actionEvent.eventInfo.localMousePosition)
+                                )
+                            )
+                    )
             );
 
             return contextualMenuManipulator;
@@ -150,10 +176,17 @@ namespace DS.Windows
 
         private IManipulator CreateGroupContextualMenu()
         {
-            ContextualMenuManipulator contextualMenuManipulator = new ContextualMenuManipulator
-            (
+            ContextualMenuManipulator contextualMenuManipulator = new ContextualMenuManipulator(
                 //Will place a node at the current mouse position
-                menuEvent => menuEvent.menu.AppendAction("Add Group", actionEvent => CreateGroup("DialogueGroup", GetLocalMousePosition(actionEvent.eventInfo.localMousePosition)))
+                menuEvent =>
+                    menuEvent.menu.AppendAction(
+                        "Add Group",
+                        actionEvent =>
+                            CreateGroup(
+                                "DialogueGroup",
+                                GetLocalMousePosition(actionEvent.eventInfo.localMousePosition)
+                            )
+                    )
             );
 
             return contextualMenuManipulator;
@@ -171,15 +204,16 @@ namespace DS.Windows
                 m_searchWindow.Initializaze(this);
             }
 
-            nodeCreationRequest = context => SearchWindow.Open(new SearchWindowContext(context.screenMousePosition), m_searchWindow);
+            nodeCreationRequest = context =>
+                SearchWindow.Open(
+                    new SearchWindowContext(context.screenMousePosition),
+                    m_searchWindow
+                );
         }
 
         private void AddMiniMap()
         {
-            m_miniMap = new MiniMap()
-            {
-                anchored = true
-            };
+            m_miniMap = new MiniMap() { anchored = true };
 
             m_miniMap.SetPosition(new Rect(15, 50, 200, 100));
 
@@ -198,28 +232,33 @@ namespace DS.Windows
             AddElement(group);
 
             //Adds selected nodes to the newly made group
-            foreach(GraphElement selectedElement in selection)
+            foreach (GraphElement selectedElement in selection)
             {
-                if(!(selectedElement is NodeBase))
+                if (!(selectedElement is NodeBase))
                 {
                     continue;
                 }
 
-                NodeBase node = (NodeBase) selectedElement;
-                
+                NodeBase node = (NodeBase)selectedElement;
+
                 group.AddElement(node);
             }
 
             return group;
         }
 
-        public NodeBase CreateNode(string nodeName, DSDialogueType dialogueType, Vector2 nodePos, bool shouldDraw = true)
+        public NodeBase CreateNode(
+            string nodeName,
+            DSDialogueType dialogueType,
+            Vector2 nodePos,
+            bool shouldDraw = true
+        )
         {
             //For instantiating a node. Uses enum value to decide which type of node to instantiate.
             //$ means you can pass a variable within a string by using {}.
             Type nodeType = Type.GetType($"DS.Elements.DS{dialogueType}Node");
 
-            NodeBase node = (NodeBase) Activator.CreateInstance(nodeType);
+            NodeBase node = (NodeBase)Activator.CreateInstance(nodeType);
 
             node.Initialize(nodeName, this, nodePos);
 
@@ -240,7 +279,7 @@ namespace DS.Windows
             deleteSelection = (operationName, askUser) =>
             {
                 Type groupType = typeof(DSGroup);
-                Type edgeType  = typeof(Edge);
+                Type edgeType = typeof(Edge);
 
                 List<DSGroup> groupsToDelete = new List<DSGroup>();
                 List<NodeBase> nodesToDelete = new List<NodeBase>();
@@ -256,21 +295,21 @@ namespace DS.Windows
                         continue;
                     }
 
-                    if(selectedElement.GetType() == edgeType)
+                    if (selectedElement.GetType() == edgeType)
                     {
-                        Edge edge = (Edge) selectedElement;
+                        Edge edge = (Edge)selectedElement;
 
                         edgesToDelete.Add(edge);
 
                         continue;
                     }
 
-                    if(selectedElement.GetType() != groupType)
+                    if (selectedElement.GetType() != groupType)
                     {
                         continue;
                     }
 
-                    DSGroup group = (DSGroup) selectedElement;
+                    DSGroup group = (DSGroup)selectedElement;
 
                     groupsToDelete.Add(group);
                 }
@@ -280,16 +319,15 @@ namespace DS.Windows
                     //Make a list of nodes within the to be deleted group.
                     List<NodeBase> groupedNodes = new List<NodeBase>();
 
-                    
                     foreach (GraphElement groupelement in group.containedElements)
                     {
                         //Check for each element if its not a node and if so continue.
-                        if(!(groupelement is NodeBase node))
+                        if (!(groupelement is NodeBase node))
                         {
                             continue;
                         }
 
-                        NodeBase groupNode = (NodeBase) groupelement;
+                        NodeBase groupNode = (NodeBase)groupelement;
 
                         //Add the node to the groupedNodes Serializable Dictionary.
                         groupedNodes.Add(groupNode);
@@ -305,9 +343,9 @@ namespace DS.Windows
 
                 DeleteElements(edgesToDelete);
 
-                foreach(NodeBase node in nodesToDelete)
+                foreach (NodeBase node in nodesToDelete)
                 {
-                    if(node.m_nodeGroup != null)
+                    if (node.m_nodeGroup != null)
                     {
                         //Will call the elementsRemovedFromGroup callback.
                         node.m_nodeGroup.RemoveElement(node);
@@ -333,8 +371,8 @@ namespace DS.Windows
                         continue;
                     }
 
-                    DSGroup nodeGroup = (DSGroup) group;
-                    NodeBase node = (NodeBase) element;
+                    DSGroup nodeGroup = (DSGroup)group;
+                    NodeBase node = (NodeBase)element;
 
                     RemoveUngroupedNode(node);
                     AddGroupedNode(node, nodeGroup);
@@ -368,7 +406,7 @@ namespace DS.Windows
         {
             groupTitleChanged = (group, newTitle) =>
             {
-                DSGroup dSGroup = (DSGroup) group;
+                DSGroup dSGroup = (DSGroup)group;
 
                 dSGroup.title = newTitle.RemoveWhitespaces().RemoveSpecialCharacters();
 
@@ -401,30 +439,30 @@ namespace DS.Windows
             //Allows us to go through all the changes and get the ones with the type edge and remove them from the graph
             graphViewChanged = (changes) =>
             {
-                if(changes.edgesToCreate != null)
+                if (changes.edgesToCreate != null)
                 {
-                    foreach(Edge edge in changes.edgesToCreate)
+                    foreach (Edge edge in changes.edgesToCreate)
                     {
-                        NodeBase nextNode = (NodeBase) edge.input.node;
+                        NodeBase nextNode = (NodeBase)edge.input.node;
 
-                        DSChoiceSaveData choiceData = (DSChoiceSaveData) edge.output.userData;
+                        DSChoiceSaveData choiceData = (DSChoiceSaveData)edge.output.userData;
 
                         choiceData.m_choiceNodeIDData = nextNode.m_nodeID;
                     }
                 }
 
-                if(changes.elementsToRemove != null)
+                if (changes.elementsToRemove != null)
                 {
                     Type edgeType = typeof(Edge);
 
-                    foreach(GraphElement element in changes.elementsToRemove)
+                    foreach (GraphElement element in changes.elementsToRemove)
                     {
-                        if(element.GetType() != edgeType )
+                        if (element.GetType() != edgeType)
                         {
                             continue;
                         }
 
-                        Edge edge = (Edge) element;
+                        Edge edge = (Edge)element;
 
                         DSChoiceSaveData choiceData = (DSChoiceSaveData)edge.output.userData;
 
@@ -643,8 +681,7 @@ namespace DS.Windows
 
         private void AddStyles()
         {
-            this.AddStyleSheets
-            (
+            this.AddStyleSheets(
                 "Assets/Editor/Editor Default Resources/DialogueSystemStyle/GraphViewStyleSheet.uss",
                 "Assets/Editor/Editor Default Resources/DialogueSystemStyle/DSNodeStyles.uss"
             );
@@ -672,7 +709,6 @@ namespace DS.Windows
             if (isSearchWindow)
             {
                 worldMousePos -= m_editorWindow.position.position;
-                
             }
 
             Vector2 localMousePos = contentViewContainer.WorldToLocal(worldMousePos);
@@ -682,7 +718,7 @@ namespace DS.Windows
 
         public void ClearGraph()
         {
-            if(graphElements != null)
+            if (graphElements != null)
             {
                 graphElements.ForEach(graphElements => RemoveElement(graphElements));
 

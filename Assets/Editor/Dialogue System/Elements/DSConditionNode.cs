@@ -42,7 +42,8 @@ namespace DS.Elements
             "Love",
             "LikeDiscovered",
             "DislikeDiscovered",
-            "NotebookEntry",
+            "NotebookLikeEntry",
+            "NotebookDislikeEntry",
         };
 
         /// <summary>
@@ -86,7 +87,7 @@ namespace DS.Elements
             base.Initialize(nodeName, dsGraphView, pos);
 
             // Set node type to single choice for the condition node
-            m_nodeDialogueType = DSDialogueType.MultipleChoice;
+            m_nodeDialogueType = DSDialogueType.Condition;
 
             // Create a default "Next Dialogue" choice path
             DSChoiceSaveData choiceData = new DSChoiceSaveData()
@@ -105,54 +106,57 @@ namespace DS.Elements
         {
             #region DialogueName
             /* TITLE CONTAINER*/
-            TextField dialogueNameTextField = DSElementUtility.CreateTextField(m_nodeDialogueName = "Condition Node", null, callback =>
-            {
-                TextField target = (TextField)callback.target;
-
-                //No spaces or special characters in filenames.
-                target.value = callback.newValue.RemoveWhitespaces().RemoveSpecialCharacters();
-
-                //Checks if there is a value to make sure no empty things are saved.
-                if (string.IsNullOrEmpty(target.value))
+            TextField dialogueNameTextField = DSElementUtility.CreateTextField(
+                m_nodeDialogueName = "Condition Node",
+                null,
+                callback =>
                 {
-                    if (!string.IsNullOrEmpty(m_nodeDialogueName))
+                    TextField target = (TextField)callback.target;
+
+                    //No spaces or special characters in filenames.
+                    target.value = callback.newValue.RemoveWhitespaces().RemoveSpecialCharacters();
+
+                    //Checks if there is a value to make sure no empty things are saved.
+                    if (string.IsNullOrEmpty(target.value))
                     {
-                        ++m_graphView.NameErrorsAmount;
+                        if (!string.IsNullOrEmpty(m_nodeDialogueName))
+                        {
+                            ++m_graphView.NameErrorsAmount;
+                        }
                     }
-                }
-                else
-                {
-                    if (string.IsNullOrEmpty(m_nodeDialogueName))
+                    else
                     {
-                        --m_graphView.NameErrorsAmount;
+                        if (string.IsNullOrEmpty(m_nodeDialogueName))
+                        {
+                            --m_graphView.NameErrorsAmount;
+                        }
                     }
-                }
 
-                if (m_nodeGroup == null)
-                {
-                    m_graphView.RemoveUngroupedNode(this);
+                    if (m_nodeGroup == null)
+                    {
+                        m_graphView.RemoveUngroupedNode(this);
+
+                        m_nodeDialogueName = target.value;
+
+                        m_graphView.AddUngroupedNode(this);
+
+                        return;
+                    }
+
+                    DSGroup currentGroup = m_nodeGroup;
+
+                    m_graphView.RemoveGroupedNode(this, m_nodeGroup);
 
                     m_nodeDialogueName = target.value;
 
-                    m_graphView.AddUngroupedNode(this);
-
-                    return;
+                    m_graphView.AddGroupedNode(this, currentGroup);
                 }
+            );
 
-                DSGroup currentGroup = m_nodeGroup;
-
-                m_graphView.RemoveGroupedNode(this, m_nodeGroup);
-
-                m_nodeDialogueName = target.value;
-
-                m_graphView.AddGroupedNode(this, currentGroup);
-            });
-
-            dialogueNameTextField.AddClasses
-            (
-               "ds-node__textfield",
-               "ds-node__filename-textfield",
-               "ds-node__textfield__hidden"
+            dialogueNameTextField.AddClasses(
+                "ds-node__textfield",
+                "ds-node__filename-textfield",
+                "ds-node__textfield__hidden"
             );
 
             titleContainer.Insert(0, dialogueNameTextField);
@@ -160,7 +164,12 @@ namespace DS.Elements
 
 
             //Inport Container.
-            Port inputPort = this.CreatePort("Dialogue Connection", Orientation.Horizontal, Direction.Input, Port.Capacity.Multi);
+            Port inputPort = this.CreatePort(
+                "Dialogue Connection",
+                Orientation.Horizontal,
+                Direction.Input,
+                Port.Capacity.Multi
+            );
 
             inputPort.portName = "Dialogue Connection";
 

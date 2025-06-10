@@ -5,6 +5,6 @@ namespace DS.Enumerations
         SingleChoice,
         MultipleChoice,
         Condition,
-        Check
+        Setter,
     }
 }

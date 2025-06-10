@@ -45,10 +45,10 @@ namespace DS
                     level = 2,
                     userData = DSDialogueType.Condition,
                 },
-                new SearchTreeEntry(new GUIContent("CheckerNode", m_indentationIcon))
+                new SearchTreeEntry(new GUIContent("Setter", m_indentationIcon))
                 {
                     level = 2,
-                    userData = DSDialogueType.Check,
+                    userData = DSDialogueType.Setter,
                 },
                 new SearchTreeGroupEntry(new GUIContent("Dialogue Group"), 1),
                 new SearchTreeEntry(new GUIContent("Single Group", m_indentationIcon))
@@ -110,10 +110,16 @@ namespace DS
                     return true;
                 }
 
-                case DSDialogueType.Check:
+                case DSDialogueType.Setter:
                 {
-                    DSCheckNode checkNode = (DSCheckNode)
-                        m_graphView.CreateNode("DialogueName", DSDialogueType.Check, localMousePos);
+                    DSSetterNode setterNode = (DSSetterNode)
+                        m_graphView.CreateNode(
+                            "DialogueName",
+                            DSDialogueType.Setter,
+                            localMousePos
+                        );
+                    m_graphView.AddElement(setterNode);
+
                     return true;
                 }
 
