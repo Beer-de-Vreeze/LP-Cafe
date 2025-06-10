@@ -267,6 +267,7 @@ namespace DS.Utilities
                     node.propertyToCheck,
                     node.comparisonType,
                     node.comparisonValue,
+                    ConvertNodeChoics(node.m_nodeChoices),
                     node.m_nodeDialogueType,
                     node.IsStartingNode()
                 );
@@ -465,18 +466,17 @@ namespace DS.Utilities
                     false
                 );
 
+                node.m_nodeID = nodeSaveData.m_nodeIDData;
+                node.m_nodeChoices = choices;
                 if (nodeSaveData.m_dialogueTypeData == DSDialogueType.SingleChoice || nodeSaveData.m_dialogueTypeData == DSDialogueType.MultipleChoice)
                 {
-                    node.m_nodeID = nodeSaveData.m_nodeIDData;
                     node.m_nodeAudio = nodeSaveData.m_nodeAudioLinesData;
                     node.m_nodeCharacterImage = nodeSaveData.m_nodeBachelorImageData;
-                    node.m_nodeChoices = choices;
                     node.m_nodeText = nodeSaveData.m_nodeTextData;
                 }
 
                 if (nodeSaveData.m_dialogueTypeData == DSDialogueType.Condition)
                 {
-                    node.m_nodeID = nodeSaveData.m_nodeIDData;
                     node.propertyToCheck = nodeSaveData.m_nodePropertyToCheckData;
                     node.comparisonType = nodeSaveData.m_nodeComparisonTypeData;
                     node.comparisonValue = nodeSaveData.m_nodeComparisonValueData;

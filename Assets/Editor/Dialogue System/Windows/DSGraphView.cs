@@ -268,7 +268,6 @@ namespace DS.Windows
         #endregion
 
         #region Callbacks
-
         private void OnElementsDeleted()
         {
             deleteSelection = (operationName, askUser) =>
