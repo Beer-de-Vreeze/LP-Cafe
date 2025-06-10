@@ -584,7 +584,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 682599906}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0.000055878943, y: 0.008680275, z: -0.00090761355, w: 0.9999619}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.93989, y: 0.93989, z: 0.93989}
   m_ConstrainProportionsScale: 0
@@ -592,7 +592,7 @@ RectTransform:
   - {fileID: 1242739747}
   - {fileID: 158876037}
   m_Father: {fileID: 525598233}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -0.006, y: 0.995, z: -0.104}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -221}
@@ -1249,7 +1249,7 @@ MonoBehaviour:
   m_groupedDialogues: 1
   m_startingDialoguesOnly: 0
   m_selectedDialogueGroupIndex: 0
-  m_selectedDialogueIndex: 5
+  m_selectedDialogueIndex: 2
 --- !u!114 &1254367150
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1271,6 +1271,8 @@ MonoBehaviour:
   _choiceButtonPrefab: {fileID: 8401459337920780966, guid: 4734477dc77cb284e9d7616b07abb6bc, type: 3}
   _audioSource: {fileID: 1254367151}
   _bachelorImage: {fileID: 904678623}
+  _loveScore: 0
+  _loveMeter: {fileID: 0}
 --- !u!82 &1254367151
 AudioSource:
   m_ObjectHideFlags: 0

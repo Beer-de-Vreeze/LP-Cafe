@@ -16,7 +16,7 @@ MonoBehaviour:
   <m_graphGroupsData>k__BackingField:
   - <m_groupIDData>k__BackingField: 8dd838cf-d359-4f95-b47b-0034c50deb5d
     <m_groupNameData>k__BackingField: Beer
-    <m_groupPositionData>k__BackingField: {x: 175, y: -42}
+    <m_groupPositionData>k__BackingField: {x: 175.00003, y: -42}
   <m_graphNodesData>k__BackingField:
   - <m_nodeIDData>k__BackingField: ba042354-d444-4260-930f-d6f51ae65aa2
     <m_nodeNameData>k__BackingField: Frans
@@ -121,13 +121,13 @@ MonoBehaviour:
     <m_nodeTextData>k__BackingField: Dialogue text.
     <m_nodeChoicesData>k__BackingField:
     - <m_choiceTextData>k__BackingField: Next Dialogue
-      <m_choiceNodeIDData>k__BackingField: 
+      <m_choiceNodeIDData>k__BackingField: b2d1aa1e-41b1-48cd-97c4-a13a455e54d4
     <m_nodeGroupIDData>k__BackingField: 8dd838cf-d359-4f95-b47b-0034c50deb5d
     <m_dialogueTypeData>k__BackingField: 2
     <m_nodePositionData>k__BackingField: {x: 1260, y: 377}
     <m_nodePropertyToCheckData>k__BackingField: DislikeDiscovered
     <m_nodeComparisonTypeData>k__BackingField: '!='
-    <m_nodeComparisonValueData>k__BackingField: 0099
+    <m_nodeComparisonValueData>k__BackingField: 50
     <m_nodeOperationTypeData>k__BackingField: '!='
   <m_graphOldGroupNamesData>k__BackingField:
   - Beer
