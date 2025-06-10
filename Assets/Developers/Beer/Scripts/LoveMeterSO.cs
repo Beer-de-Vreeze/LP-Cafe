@@ -1,0 +1,120 @@
+using Unity.VisualScripting;
+using UnityEngine;
+using UnityEngine.Events;
+
+/// <summary>
+/// Scriptable Object that manages love points for a bachelor character.
+/// Tracks current love value, allows increasing/decreasing, and notifies listeners of changes.
+/// </summary>
+[CreateAssetMenu(fileName = "New Love Meter", menuName = "Bachelor/New LoveMeter", order = 1)]
+public class LoveMeterSO : ScriptableObject
+{
+    [SerializeField]
+    private NewBachelorSO _bachelor;
+
+    [Tooltip("Maximum love value this bachelor can reach")]
+    public int _maxLove = 100;
+
+    [Tooltip("Current love value")]
+    public int _currentLove = 0;
+
+    [System.NonSerialized]
+    public UnityEvent<int> LoveChangedEvent;
+
+    public virtual void OnEnable()
+    {
+        // Initialize the love value when the scriptable object is enabled
+        _currentLove = 0;
+
+        // Initialize the event if it doesn't exist yet
+        if (LoveChangedEvent == null)
+        {
+            LoveChangedEvent = new UnityEvent<int>();
+        }
+    }
+
+    /// <summary>
+    /// Increase the love value by the specified amount
+    /// </summary>
+    public virtual void IncreaseLove(int amount)
+    {
+        _currentLove += amount;
+
+        // Cap the love value at maximum
+        if (_currentLove > _maxLove)
+        {
+            _currentLove = _maxLove;
+        }
+
+        // Notify listeners about the change
+        LoveChangedEvent.Invoke(_currentLove);
+        Debug.Log($"{_bachelor._name} love increased by {amount}. Total Love: {_currentLove}");
+    }
+
+    /// <summary>
+    /// Decrease the love value by the specified amount
+    /// </summary>
+    public virtual void DecreaseLove(int amount)
+    {
+        _currentLove -= amount;
+
+        // Make sure love doesn't go below zero
+        if (_currentLove < 0)
+        {
+            _currentLove = 0;
+        }
+
+        // Notify listeners about the change
+        LoveChangedEvent.Invoke(_currentLove);
+        Debug.Log($"{_bachelor._name} love decreased by {amount}. Total Love: {_currentLove}");
+    }
+
+    /// <summary>
+    /// Set the maximum possible love value
+    /// </summary>
+    public virtual void SetMaxLove(int amount)
+    {
+        _maxLove = amount;
+
+        // Adjust current love if it exceeds the new maximum
+        if (_currentLove > _maxLove)
+        {
+            _currentLove = _maxLove;
+            LoveChangedEvent.Invoke(_currentLove);
+        }
+    }
+
+    /// <summary>
+    /// Get the current love value
+    /// </summary>
+    public virtual int GetCurrentLove()
+    {
+        return _currentLove;
+    }
+
+    /// <summary>
+    /// Reset love value back to zero
+    /// </summary>
+    public virtual void Reset()
+    {
+        _currentLove = 0;
+        LoveChangedEvent.Invoke(_currentLove);
+    }
+
+    /// <summary>
+    /// Set love to maximum value
+    /// </summary>
+    public virtual void SetToMaxLove()
+    {
+        _currentLove = _maxLove;
+        LoveChangedEvent.Invoke(_currentLove);
+    }
+
+    /// <summary>
+    /// Check if love is at maximum value
+    /// </summary>
+    public virtual bool IsMaxLove()
+    {
+        return _currentLove >= _maxLove;
+    }
+}
