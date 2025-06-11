@@ -1,11 +1,13 @@
 using System.Collections.Generic;
 using DS.Enumerations;
+
 using NUnit.Framework;
 using UnityEngine;
 
 namespace DS.ScriptableObjects
 {
     using Data;
+    using System;
 
     public class DSDialogueSO : ScriptableObject
     {
@@ -44,19 +46,19 @@ namespace DS.ScriptableObjects
 
         // New fields for setter nodes
         [field: SerializeField]
-        public string operationType { get; set; }
+        public SetterOperationType m_operationType { get; set; }
 
         [field: SerializeField]
-        public string variableName { get; set; }
+        public string m_variableName { get; set; }
 
         [field: SerializeField]
-        public string valueToSet { get; set; }
+        public string m_valueToSet { get; set; }
 
         [field: SerializeField]
-        public string loveScoreAmount { get; set; }
+        public int m_loveScoreAmount { get; set; }
 
         [field: SerializeField]
-        public string boolValue { get; set; }
+        public bool m_boolValue { get; set; }
 
         public void Initialize(
             string dialogueName,
@@ -98,18 +100,26 @@ namespace DS.ScriptableObjects
         }
 
         public void InitializeSetterNode(
-            string operationType,
-            string variableName,
+            string dialogueName,
+            List<DSDialogueChoiceData> choices,
             string valueToSet,
-            string loveScoreAmount,
-            string boolValue
+            string variableName,
+            SetterOperationType operationType,
+            int loveScoreAmount,
+            bool boolValue,
+            DSDialogueType dialogueType,
+            bool isStartingDialogue
         )
         {
-            this.operationType = operationType;
-            this.variableName = variableName;
-            this.valueToSet = valueToSet;
-            this.loveScoreAmount = loveScoreAmount;
-            this.boolValue = boolValue;
+            m_dialogueNameData = dialogueName;
+            m_dialogueChoiceData = choices;
+            m_valueToSet = valueToSet;
+            m_variableName = variableName;
+            m_operationType = operationType;
+            m_loveScoreAmount = loveScoreAmount;
+            m_boolValue = boolValue;
+            m_dialogueTypeData = dialogueType;
+            m_isStartingDialogueData = isStartingDialogue;
         }
     }
 }

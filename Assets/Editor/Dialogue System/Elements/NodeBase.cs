@@ -16,6 +16,7 @@ namespace DS.Elements
 
     public class NodeBase : Node
     {
+        //Base node
         public string m_nodeID {  get; set;}
         public string m_nodeDialogueName { get; set;}
         public List<DSChoiceSaveData> m_nodeChoices {  get; set;}
@@ -29,6 +30,7 @@ namespace DS.Elements
         protected DSGraphView m_graphView;
         private Color m_defaultBackgroundColor;
 
+        //Condition Node
         // Properties that define the condition to be evaluated
         /// <summary>Property name that will be checked during condition evaluation</summary>
         public string propertyToCheck { get; set; } = "Love"; // Default to checking love value
@@ -42,7 +44,16 @@ namespace DS.Elements
         // Available comparison operators for the condition
         /// <summary>Array of available comparison operators for condition evaluation</summary>
         public string[] comparisonTypes = { "==", "!=", ">", "<", ">=", "<=" };
+        //End Condition Node
 
+        //Setter Node
+        public string valueToSet { get; set; }
+        public string variableName { get; set; }
+        public SetterOperationType operationType { get; set; }
+        public int loveScoreAmount { get; set; }
+        public bool boolValue { get; set; }
+        public LoveMeterSO loveMeter { get; set; }
+        //End Setter Node
 
         public virtual void Initialize(string nodeName, DSGraphView dsGraphView, Vector2 pos)
         {

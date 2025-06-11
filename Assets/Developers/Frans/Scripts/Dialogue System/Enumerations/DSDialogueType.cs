@@ -7,4 +7,11 @@ namespace DS.Enumerations
         Condition,
         Setter,
     }
+
+    public enum SetterOperationType
+    {
+        SetValue,
+        UpdateLoveScore,
+        UpdateBoolean,
+    }
 }

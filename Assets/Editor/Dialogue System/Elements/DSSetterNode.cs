@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using DS.Data.Save;
-using DS.Elements;
 using DS.Enumerations;
 using DS.Utilities;
 using DS.Windows;
@@ -11,24 +10,12 @@ using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
 
+
+
 namespace DS.Elements
 {
-    public enum SetterOperationType
-    {
-        SetValue,
-        UpdateLoveScore,
-        UpdateBoolean,
-    }
-
     public class DSSetterNode : NodeBase
     {
-        public string valueToSet { get; set; }
-        public string variableName { get; set; }
-        public SetterOperationType operationType { get; set; }
-        public int loveScoreAmount { get; set; }
-        public bool boolValue { get; set; }
-        public LoveMeterSO loveMeterName { get; set; }
-
         // Events for different operation types
         public event Action<string, string> OnValueSet;
         public event Action<LoveMeterSO, int> OnLoveScoreChanged;
@@ -51,7 +38,7 @@ namespace DS.Elements
             valueToSet = "";
             loveScoreAmount = 0;
             boolValue = false;
-            loveMeterName = null;
+            loveMeter = null;
 
             DSChoiceSaveData choiceData = new DSChoiceSaveData()
             {
@@ -198,11 +185,11 @@ namespace DS.Elements
             loveMeterObjectField = new ObjectField("Love Meter")
             {
                 objectType = typeof(LoveMeterSO),
-                value = loveMeterName,
+                value = loveMeter,
             };
             loveMeterObjectField.RegisterValueChangedCallback(evt =>
             {
-                loveMeterName = evt.newValue as LoveMeterSO;
+                loveMeter = evt.newValue as LoveMeterSO;
             });
             loveScoreContainer.Add(loveMeterObjectField);
 
@@ -303,10 +290,10 @@ namespace DS.Elements
 
                 case SetterOperationType.UpdateLoveScore:
                     // Use the selected LoveMeterSO instead of a hardcoded string
-                    if (loveMeterName != null)
+                    if (loveMeter != null)
                     {
-                        OnLoveScoreChanged?.Invoke(loveMeterName, loveScoreAmount);
-                        Debug.Log($"Love score change: {loveMeterName.name} by {loveScoreAmount}");
+                        OnLoveScoreChanged?.Invoke(loveMeter, loveScoreAmount);
+                        Debug.Log($"Love score change: {loveMeter.name} by {loveScoreAmount}");
                     }
                     else
                     {

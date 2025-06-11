@@ -5,6 +5,7 @@ using UnityEngine.Rendering.Universal;
 
 namespace DS.Data.Save
 {
+    using DS.Elements;
     using Enumerations;
     using System;
 
@@ -28,5 +29,15 @@ namespace DS.Data.Save
         [field: SerializeField] public string m_nodeComparisonTypeData { get; set; }
         [field: SerializeField] public string m_nodeComparisonValueData { get; set; }
         [field: SerializeField] public string m_nodeOperationTypeData { get; set; }
+
+        //Setter Node
+        [field: SerializeField] public string m_nodeValueToSetData { get; set; }
+        [field: SerializeField] public string m_nodeVariableNameData { get; set; }
+        [field: SerializeField] public SetterOperationType m_nodeSetterOperationTypeData { get; set; }
+        [field: SerializeField] public int m_nodeLoveScoreAmountData { get; set; }
+        [field: SerializeField] public bool m_nodeBoolValueData { get; set; }
+        [field: SerializeField] public LoveMeterSO m_nodeLoveMeterData { get; set; }
+
+        
     }
 }
