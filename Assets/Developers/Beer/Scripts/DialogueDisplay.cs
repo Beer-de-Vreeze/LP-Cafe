@@ -510,11 +510,54 @@ public class DialogueDisplay : MonoBehaviour
     {
         _dialogue = dialogue;
         _bachelor = bachelor;
-        if (bachelor == null)
+
+        if (_bachelor != null)
+        {
+            // Use the bachelor's love meter if available
+            if (_bachelor._loveMeter != null)
+            {
+                _loveMeter = _bachelor._loveMeter;
+                _loveScore = _loveMeter.GetCurrentLove();
+                _gameVariables["Love"] = _loveScore.ToString();
+            }
+
+            // Initialize preference discovery status variables
+            bool hasAnyLikeDiscovered = false;
+            bool hasAnyDislikeDiscovered = false;
+
+            if (_bachelor._likes != null)
+            {
+                foreach (var like in _bachelor._likes)
+                {
+                    if (like.discovered)
+                    {
+                        hasAnyLikeDiscovered = true;
+                        break;
+                    }
+                }
+            }
+
+            if (_bachelor._dislikes != null)
+            {
+                foreach (var dislike in _bachelor._dislikes)
+                {
+                    if (dislike.discovered)
+                    {
+                        hasAnyDislikeDiscovered = true;
+                        break;
+                    }
+                }
+            }
+
+            _gameVariables["LikeDiscovered"] = hasAnyLikeDiscovered.ToString().ToLower();
+            _gameVariables["DislikeDiscovered"] = hasAnyDislikeDiscovered.ToString().ToLower();
+        }
+        else
         {
             _bachelor = NewBachelorSO.CreateInstance<NewBachelorSO>();
             _bachelor._name = "Chantal";
         }
+
         ShowDialogue();
     }
 
@@ -823,6 +866,48 @@ public class DialogueDisplay : MonoBehaviour
                 vertLayout.childControlHeight = true;
                 vertLayout.childForceExpandHeight = false;
                 vertLayout.spacing = 8f;
+            }
+        }
+    }
+
+    // New method to handle preference discoveries through dialogue
+    public void DiscoverBachelorPreference(string preferenceName, bool isLike)
+    {
+        if (_bachelor == null)
+            return;
+
+        if (isLike)
+        {
+            // Find the like by description and discover it
+            for (int i = 0; i < _bachelor._likes.Length; i++)
+            {
+                if (_bachelor._likes[i].description == preferenceName)
+                {
+                    _bachelor.DiscoverLike(i);
+                    Debug.Log($"Discovered like: {preferenceName}");
+
+                    // Also update our game variables
+                    _gameVariables["LikeDiscovered"] = "true";
+                    _gameVariables["NotebookLikeEntry"] = "true";
+                    break;
+                }
+            }
+        }
+        else
+        {
+            // Find the dislike by description and discover it
+            for (int i = 0; i < _bachelor._dislikes.Length; i++)
+            {
+                if (_bachelor._dislikes[i].description == preferenceName)
+                {
+                    _bachelor.DiscoverDislike(i);
+                    Debug.Log($"Discovered dislike: {preferenceName}");
+
+                    // Also update our game variables
+                    _gameVariables["DislikeDiscovered"] = "true";
+                    _gameVariables["NotebookDislikeEntry"] = "true";
+                    break;
+                }
             }
         }
     }

@@ -13,5 +13,6 @@ namespace DS.Enumerations
         SetValue,
         UpdateLoveScore,
         UpdateBoolean,
+        DiscoverPreference
     }
 }
