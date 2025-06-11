@@ -12,34 +12,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: beb9a63dbd6015942ab1d5ccf8100789, type: 3}
   m_Name: TestGraph
   m_EditorClassIdentifier: 
-  <m_graphFileNameData>k__BackingField: Test
+  <m_graphFileNameData>k__BackingField: test
   <m_graphGroupsData>k__BackingField: []
   <m_graphNodesData>k__BackingField:
-  - <m_nodeIDData>k__BackingField: e4046dee-354b-416d-9fc0-568412f4c01d
-    <m_nodeNameData>k__BackingField: DialogueName
+  - <m_nodeIDData>k__BackingField: 94d4ea0d-47e7-492d-918a-6713798d35dc
+    <m_nodeNameData>k__BackingField: Value Setter
     <m_nodeBachelorImageData>k__BackingField: {fileID: 0}
     <m_nodeAudioLinesData>k__BackingField: {fileID: 0}
-    <m_nodeTextData>k__BackingField: Text
-    <m_nodeChoicesData>k__BackingField:
-    - <m_choiceTextData>k__BackingField: Next Dialogue
-      <m_choiceNodeIDData>k__BackingField: d15aa8b8-d9ae-4348-a963-3adf3e84de30
-    <m_nodeGroupIDData>k__BackingField: 
-    <m_dialogueTypeData>k__BackingField: 1
-    <m_nodePositionData>k__BackingField: {x: 371, y: 213}
-  - <m_nodeIDData>k__BackingField: d15aa8b8-d9ae-4348-a963-3adf3e84de30
-    <m_nodeNameData>k__BackingField: fg
-    <m_nodeBachelorImageData>k__BackingField: {fileID: 0}
-    <m_nodeAudioLinesData>k__BackingField: {fileID: 0}
-    <m_nodeTextData>k__BackingField: Text
+    <m_nodeTextData>k__BackingField: Dialogue text.
     <m_nodeChoicesData>k__BackingField:
     - <m_choiceTextData>k__BackingField: Next Dialogue
       <m_choiceNodeIDData>k__BackingField: 
     <m_nodeGroupIDData>k__BackingField: 
-    <m_dialogueTypeData>k__BackingField: 0
-    <m_nodePositionData>k__BackingField: {x: 746, y: 391}
+    <m_dialogueTypeData>k__BackingField: 3
+    <m_nodePositionData>k__BackingField: {x: 662.6667, y: 310.66666}
+    <m_nodePropertyToCheckData>k__BackingField: Love
+    <m_nodeComparisonTypeData>k__BackingField: '>='
+    <m_nodeComparisonValueData>k__BackingField: 0
+    <m_nodeOperationTypeData>k__BackingField: '>='
+    <m_nodeValueToSetData>k__BackingField: 509
+    <m_nodeVariableNameData>k__BackingField: yes
+    <m_nodeSetterOperationTypeData>k__BackingField: 2
+    <m_nodeLoveScoreAmountData>k__BackingField: 0
+    <m_nodeBoolValueData>k__BackingField: 1
+    <m_nodeLoveMeterData>k__BackingField: {fileID: 0}
   <m_graphOldGroupNamesData>k__BackingField: []
   <m_graphOldUngroupedNodeNamesData>k__BackingField:
-  - DialogueName
-  - fg
+  - Value Setter
   <m_graphOldGroupedNodeNamesData>k__BackingField:
     list: []

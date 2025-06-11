@@ -351,7 +351,7 @@ public class DialogueDisplay : MonoBehaviour
             DSDialogueSO setterNode = _dialogue.m_dialogue;
 
             // Get setter operation type from DSDialogueSO
-            string operationType = setterNode.operationType;
+            string operationType = setterNode.m_operationType.ToString();
 
             // Apply the setter operation based on its type
             Debug.Log($"Applying setter operation: {operationType}");
@@ -360,8 +360,8 @@ public class DialogueDisplay : MonoBehaviour
                 case "SetValue":
                     Debug.Log("Setting variable value...");
                     // Set a variable value
-                    string variableName = setterNode.variableName;
-                    string value = setterNode.valueToSet;
+                    string variableName = setterNode.m_variableName;
+                    string value = setterNode.m_valueToSet;
                     // Update the variable
                     _gameVariables[variableName] = value;
                     Debug.Log($"Set variable: {variableName} = {value}");
@@ -371,7 +371,7 @@ public class DialogueDisplay : MonoBehaviour
                     Debug.Log("Updating love score...");
                     // Update the love score
                     int amount = 0;
-                    int.TryParse(setterNode.loveScoreAmount, out amount); // Parse string to int safely
+                    int.TryParse(setterNode.m_loveScoreAmount.ToString(), out amount); // Parse string to int safely
 
                     // Use the default love meter reference (_loveMeter)
                     if (_loveMeter != null)
@@ -406,9 +406,9 @@ public class DialogueDisplay : MonoBehaviour
                 case "UpdateBoolean":
                     Debug.Log("Updating boolean value...");
                     // Update a boolean value - parse string to bool
-                    string boolName = setterNode.variableName;
+                    string boolName = setterNode.m_variableName;
                     bool boolValue = false;
-                    bool.TryParse(setterNode.boolValue, out boolValue);
+                    bool.TryParse(setterNode.m_boolValue.ToString(), out boolValue);
 
                     // Update the variable
                     _gameVariables[boolName] = boolValue.ToString().ToLower();

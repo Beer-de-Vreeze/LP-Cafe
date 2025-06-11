@@ -200,6 +200,7 @@ namespace DS.Utilities
 
             DSNodeSaveData nodeData = new DSNodeSaveData()
             {
+                //Base Node
                 m_nodeIDData = node.m_nodeID,
                 m_nodeNameData = node.m_nodeDialogueName,
                 m_nodeChoicesData = choiceSaveData,
@@ -209,10 +210,19 @@ namespace DS.Utilities
                 m_nodeGroupIDData = node.m_nodeGroup?.m_groupID,
                 m_dialogueTypeData = node.m_nodeDialogueType,
                 m_nodePositionData = node.GetPosition().position,
+
+                //Condition Node
                 m_nodeComparisonTypeData = node.comparisonType,
                 m_nodeComparisonValueData = node.comparisonValue,
                 m_nodePropertyToCheckData = node.propertyToCheck,
                 m_nodeOperationTypeData = node.comparisonType,
+
+                //Setter Node
+                m_nodeValueToSetData = node.valueToSet,
+                m_nodeVariableNameData = node.variableName,
+                m_nodeSetterOperationTypeData = node.operationType,
+                m_nodeLoveScoreAmountData = node.loveScoreAmount,
+                m_nodeBoolValueData = node.boolValue,
             };
 
             graphData.m_graphNodesData.Add(nodeData);
@@ -268,6 +278,21 @@ namespace DS.Utilities
                     node.comparisonType,
                     node.comparisonValue,
                     ConvertNodeChoics(node.m_nodeChoices),
+                    node.m_nodeDialogueType,
+                    node.IsStartingNode()
+                );
+            }
+
+            else if(node.m_nodeDialogueType == DSDialogueType.Setter)
+            {
+                dialogue.InitializeSetterNode(
+                    node.m_nodeDialogueName,
+                    ConvertNodeChoics(node.m_nodeChoices),
+                    node.valueToSet,
+                    node.variableName,
+                    node.operationType,
+                    node.loveScoreAmount,
+                    node.boolValue,
                     node.m_nodeDialogueType,
                     node.IsStartingNode()
                 );
@@ -481,6 +506,15 @@ namespace DS.Utilities
                     node.comparisonType = nodeSaveData.m_nodeComparisonTypeData;
                     node.comparisonValue = nodeSaveData.m_nodeComparisonValueData;
                     node.comparisonType = nodeSaveData.m_nodeComparisonTypeData;
+                }
+
+                if(nodeSaveData.m_dialogueTypeData == DSDialogueType.Setter)
+                {
+                    node.valueToSet = nodeSaveData.m_nodeValueToSetData;
+                    node.variableName = nodeSaveData.m_nodeVariableNameData;
+                    node.operationType = nodeSaveData.m_nodeSetterOperationTypeData;
+                    node.loveScoreAmount = nodeSaveData.m_nodeLoveScoreAmountData;
+                    node.boolValue = nodeSaveData.m_nodeBoolValueData;
                 }
 
                 node.Draw();
