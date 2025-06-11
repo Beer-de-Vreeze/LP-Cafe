@@ -26,12 +26,6 @@ public class NoteBook : MonoBehaviour
     [SerializeField]
     private GameObject lockedInfoText;
 
-    [SerializeField]
-    private TextMeshProUGUI bachelorNameText;
-
-    [SerializeField]
-    private Image bachelorPortrait;
-
     [Header("Animation Settings")]
     [SerializeField]
     private float revealAnimationDuration = 0.5f;
@@ -166,22 +160,6 @@ public class NoteBook : MonoBehaviour
 
         // Clear any existing entries
         ClearEntries();
-
-        // Set bachelor name and portrait
-        if (bachelorNameText != null)
-        {
-            bachelorNameText.text = currentBachelor._name;
-        }
-
-        if (bachelorPortrait != null && currentBachelor._portrait != null)
-        {
-            bachelorPortrait.sprite = currentBachelor._portrait;
-            bachelorPortrait.enabled = true;
-        }
-        else if (bachelorPortrait != null)
-        {
-            bachelorPortrait.enabled = false;
-        }
 
         // Create like entries
         if (currentBachelor._likes != null && likesContainer != null)
