@@ -4,7 +4,9 @@ using DS.ScriptableObjects;
 using Febucci.UI;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using static UnityEngine.UI.LayoutUtility;
 
 public class DialogueDisplay : MonoBehaviour
 {
@@ -60,6 +62,16 @@ public class DialogueDisplay : MonoBehaviour
     [SerializeField]
     private LoveMeterSO _loveMeter;
 
+    // Colors for button text states
+    [SerializeField]
+    private Color _normalTextColor = Color.white;
+
+    [SerializeField]
+    private Color _hoverTextColor = new Color(1f, 0.8f, 0.2f);
+
+    [SerializeField]
+    private Color _disabledTextColor = Color.gray;
+
     // Called when the script instance is being loaded
     private void Start()
     {
@@ -105,6 +117,7 @@ public class DialogueDisplay : MonoBehaviour
     public void ShowDialogue()
     {
         ClearChoices();
+        EnsureVerticalLayoutSettings(); // Add this line
 
         // If this is a condition node, evaluate it and follow the appropriate path
         if (IsConditionNode(_dialogue))
@@ -481,6 +494,10 @@ public class DialogueDisplay : MonoBehaviour
             if (btnText != null)
                 btnText.text = choice.m_dialogueChoiceText;
 
+            // Add or ensure ContentSizeFitter exists on button
+            EnsureContentSizeFitter(btnObj);
+
+            // Rest of your existing button setup code...
             var button = btnObj.GetComponent<UnityEngine.UI.Button>();
             if (button != null)
             {
@@ -494,11 +511,20 @@ public class DialogueDisplay : MonoBehaviour
 
                     // Make the text gray to indicate it's locked
                     if (btnText != null)
-                        btnText.color = Color.gray;
+                        btnText.color = _disabledTextColor;
 
                     Debug.Log(
                         $"Disabled choice button '{choice.m_dialogueChoiceText}' because condition would fail"
                     );
+                }
+                else
+                {
+                    // Set initial normal color for enabled buttons
+                    if (btnText != null)
+                        btnText.color = _normalTextColor;
+
+                    // Add hover effects using event triggers
+                    AddHoverEffects(button.gameObject, btnText);
                 }
 
                 // Always add the listener, but the button will be non-interactable if conditions fail
@@ -508,6 +534,79 @@ public class DialogueDisplay : MonoBehaviour
                 });
             }
             _activeChoiceButtons.Add(btnObj);
+        }
+
+        // Give Unity a frame to recalculate sizes
+        StartCoroutine(RefreshLayoutAfterDelay(0.05f));
+    }
+
+    // Helper method to add ContentSizeFitter if needed
+    private void EnsureContentSizeFitter(GameObject buttonObj)
+    {
+        // First, check if there's a ContentSizeFitter on the button itself
+        ContentSizeFitter fitter = buttonObj.GetComponent<ContentSizeFitter>();
+        if (fitter == null)
+        {
+            fitter = buttonObj.AddComponent<ContentSizeFitter>();
+        }
+
+        // Configure it to adjust horizontally based on text content
+        fitter.horizontalFit = ContentSizeFitter.FitMode.PreferredSize;
+        // Also set vertical fit mode to ensure proper height calculation
+        fitter.verticalFit = ContentSizeFitter.FitMode.PreferredSize;
+
+        // Set the RectTransform to anchor at the left and expand to the right
+        RectTransform rectTransform = buttonObj.GetComponent<RectTransform>();
+        if (rectTransform != null)
+        {
+            // Change from stretching to left-anchored
+            rectTransform.anchorMin = new Vector2(0, 0.5f);
+            rectTransform.anchorMax = new Vector2(0, 0.5f);
+            rectTransform.pivot = new Vector2(0, 0.5f); // Pivot at left-center
+        }
+
+        // Make sure the layout group is present to properly expand the button background
+        HorizontalLayoutGroup layout = buttonObj.GetComponent<HorizontalLayoutGroup>();
+        if (layout == null)
+        {
+            layout = buttonObj.AddComponent<HorizontalLayoutGroup>();
+            layout.childAlignment = TextAnchor.MiddleLeft; // Align content to the left
+            layout.childForceExpandWidth = true;
+            layout.padding = new RectOffset(10, 10, 5, 5); // Add some padding
+        }
+    }
+
+    // Helper coroutine to refresh layout after sizes change
+    private System.Collections.IEnumerator RefreshLayoutAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        // Refresh each button first
+        foreach (var btn in _activeChoiceButtons)
+        {
+            if (btn != null)
+            {
+                LayoutRebuilder.ForceRebuildLayoutImmediate(btn.GetComponent<RectTransform>());
+            }
+        }
+
+        // Then force layout rebuild on parent
+        if (_choicesParent != null)
+        {
+            VerticalLayoutGroup verticalLayout = _choicesParent.GetComponent<VerticalLayoutGroup>();
+            if (verticalLayout != null)
+            {
+                // Ensure the VerticalLayoutGroup has appropriate settings
+                Canvas.ForceUpdateCanvases();
+                verticalLayout.CalculateLayoutInputHorizontal();
+                verticalLayout.CalculateLayoutInputVertical();
+                verticalLayout.SetLayoutHorizontal();
+                verticalLayout.SetLayoutVertical();
+            }
+
+            LayoutRebuilder.ForceRebuildLayoutImmediate(
+                _choicesParent.GetComponent<RectTransform>()
+            );
         }
     }
 
@@ -617,6 +716,61 @@ public class DialogueDisplay : MonoBehaviour
                     return currentValue != comparisonValue;
                 default:
                     return false;
+            }
+        }
+    }
+
+    private void AddHoverEffects(GameObject buttonObj, TextMeshProUGUI text)
+    {
+        // Make sure we have valid objects
+        if (buttonObj == null || text == null)
+            return;
+
+        // Add or get EventTrigger component
+        EventTrigger trigger = buttonObj.GetComponent<EventTrigger>();
+        if (trigger == null)
+            trigger = buttonObj.AddComponent<EventTrigger>();
+
+        if (trigger.triggers == null)
+            trigger.triggers = new List<EventTrigger.Entry>();
+
+        // Add pointer enter event (hover start)
+        EventTrigger.Entry enterEntry = new EventTrigger.Entry();
+        enterEntry.eventID = EventTriggerType.PointerEnter;
+        enterEntry.callback.AddListener(
+            (eventData) =>
+            {
+                text.color = _hoverTextColor;
+            }
+        );
+        trigger.triggers.Add(enterEntry);
+
+        // Add pointer exit event (hover end)
+        EventTrigger.Entry exitEntry = new EventTrigger.Entry();
+        exitEntry.eventID = EventTriggerType.PointerExit;
+        exitEntry.callback.AddListener(
+            (eventData) =>
+            {
+                text.color = _normalTextColor;
+            }
+        );
+        trigger.triggers.Add(exitEntry);
+    }
+
+    private void EnsureVerticalLayoutSettings()
+    {
+        if (_choicesParent != null)
+        {
+            VerticalLayoutGroup vertLayout = _choicesParent.GetComponent<VerticalLayoutGroup>();
+            if (vertLayout != null)
+            {
+                // Recommended settings for dialogue choice buttons
+                vertLayout.padding = new RectOffset(0, 0, 0, -100);
+                vertLayout.childControlWidth = true;
+                vertLayout.childForceExpandWidth = true;
+                vertLayout.childControlHeight = true;
+                vertLayout.childForceExpandHeight = false;
+                vertLayout.spacing = 8f;
             }
         }
     }

@@ -16,7 +16,7 @@ MonoBehaviour:
   <m_graphGroupsData>k__BackingField:
   - <m_groupIDData>k__BackingField: 8dd838cf-d359-4f95-b47b-0034c50deb5d
     <m_groupNameData>k__BackingField: Beer
-    <m_groupPositionData>k__BackingField: {x: -57, y: -42}
+    <m_groupPositionData>k__BackingField: {x: -57.19995, y: -41.20002}
   <m_graphNodesData>k__BackingField:
   - <m_nodeIDData>k__BackingField: d33756df-9c9b-48c0-b14a-e7f0f286b84c
     <m_nodeNameData>k__BackingField: Kim
@@ -28,7 +28,7 @@ MonoBehaviour:
       <m_choiceNodeIDData>k__BackingField: 
     <m_nodeGroupIDData>k__BackingField: 8dd838cf-d359-4f95-b47b-0034c50deb5d
     <m_dialogueTypeData>k__BackingField: 0
-    <m_nodePositionData>k__BackingField: {x: 1343, y: 177}
+    <m_nodePositionData>k__BackingField: {x: 1343.2, y: 177.2}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -43,7 +43,7 @@ MonoBehaviour:
       <m_choiceNodeIDData>k__BackingField: 
     <m_nodeGroupIDData>k__BackingField: 8dd838cf-d359-4f95-b47b-0034c50deb5d
     <m_dialogueTypeData>k__BackingField: 0
-    <m_nodePositionData>k__BackingField: {x: 1343, y: 17}
+    <m_nodePositionData>k__BackingField: {x: 1343.2, y: 17.2}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -59,7 +59,7 @@ MonoBehaviour:
       <m_choiceNodeIDData>k__BackingField: ba042354-d444-4260-930f-d6f51ae65aa2
     <m_nodeGroupIDData>k__BackingField: 8dd838cf-d359-4f95-b47b-0034c50deb5d
     <m_dialogueTypeData>k__BackingField: 0
-    <m_nodePositionData>k__BackingField: {x: -32, y: 119}
+    <m_nodePositionData>k__BackingField: {x: -32, y: 119.2}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -74,7 +74,7 @@ MonoBehaviour:
       <m_choiceNodeIDData>k__BackingField: c1d19dca-c21a-4395-a0eb-6976be32f6e9
     <m_nodeGroupIDData>k__BackingField: 8dd838cf-d359-4f95-b47b-0034c50deb5d
     <m_dialogueTypeData>k__BackingField: 0
-    <m_nodePositionData>k__BackingField: {x: 334, y: 119}
+    <m_nodePositionData>k__BackingField: {x: 334, y: 119.2}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -88,13 +88,13 @@ MonoBehaviour:
     <m_nodeChoicesData>k__BackingField:
     - <m_choiceTextData>k__BackingField: Kees
       <m_choiceNodeIDData>k__BackingField: 767800fe-5dbf-42dc-8d30-d38c9509c50d
-    - <m_choiceTextData>k__BackingField: Klaas
+    - <m_choiceTextData>k__BackingField: Klaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaas
       <m_choiceNodeIDData>k__BackingField: d33756df-9c9b-48c0-b14a-e7f0f286b84c
     - <m_choiceTextData>k__BackingField: Jantje
       <m_choiceNodeIDData>k__BackingField: 6656f675-cd28-42a2-bd55-f79ab58d95d7
     <m_nodeGroupIDData>k__BackingField: 8dd838cf-d359-4f95-b47b-0034c50deb5d
     <m_dialogueTypeData>k__BackingField: 1
-    <m_nodePositionData>k__BackingField: {x: 979, y: 105}
+    <m_nodePositionData>k__BackingField: {x: 979.2, y: 105.2}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -109,7 +109,7 @@ MonoBehaviour:
       <m_choiceNodeIDData>k__BackingField: b2d1aa1e-41b1-48cd-97c4-a13a455e54d4
     <m_nodeGroupIDData>k__BackingField: 8dd838cf-d359-4f95-b47b-0034c50deb5d
     <m_dialogueTypeData>k__BackingField: 2
-    <m_nodePositionData>k__BackingField: {x: 1343, y: 356}
+    <m_nodePositionData>k__BackingField: {x: 1343.2, y: 356}
     <m_nodePropertyToCheckData>k__BackingField: DislikeDiscovered
     <m_nodeComparisonTypeData>k__BackingField: ==
     <m_nodeComparisonValueData>k__BackingField: 50
