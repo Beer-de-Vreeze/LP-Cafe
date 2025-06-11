@@ -171,28 +171,28 @@ namespace DS.Elements
             // Create dropdown for property selection
             var propertyField = new PopupField<string>(
                 GetAvailableProperties(),
-                propertyToCheck != null && GetAvailableProperties().Contains(propertyToCheck)
-                    ? propertyToCheck
+                m_propertyToCheck != null && GetAvailableProperties().Contains(m_propertyToCheck)
+                    ? m_propertyToCheck
                     : GetAvailableProperties().FirstOrDefault() ?? "Love"
             );
             propertyField.label = "Property to Check";
-            propertyField.RegisterValueChangedCallback(evt => propertyToCheck = evt.newValue);
+            propertyField.RegisterValueChangedCallback(evt => m_propertyToCheck = evt.newValue);
             conditionContainer.Add(propertyField);
 
             // Create dropdown for comparison operator
             var comparisonField = new PopupField<string>(
-                comparisonTypes.ToList(),
-                comparisonType != string.Empty ? comparisonType : ">="
+                m_comparisonTypes.ToList(),
+                m_comparisonType != string.Empty ? m_comparisonType : ">="
             );
 
             comparisonField.label = "Comparison";
-            comparisonField.RegisterValueChangedCallback(evt => comparisonType = evt.newValue);
+            comparisonField.RegisterValueChangedCallback(evt => m_comparisonType = evt.newValue);
             conditionContainer.Add(comparisonField);
             
 
             // Create text field for the comparison value
-            var valueCompareField = new TextField("Value") { value = comparisonValue };
-            valueCompareField.RegisterValueChangedCallback(evt => comparisonValue = evt.newValue);
+            var valueCompareField = new TextField("Value") { value = m_comparisonValue };
+            valueCompareField.RegisterValueChangedCallback(evt => m_comparisonValue = evt.newValue);
             conditionContainer.Add(valueCompareField);
 
             extensionContainer.Add(conditionContainer);

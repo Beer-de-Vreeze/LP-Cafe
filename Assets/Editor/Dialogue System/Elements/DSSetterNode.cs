@@ -33,12 +33,12 @@ namespace DS.Elements
 
             m_nodeDialogueType = DSDialogueType.Setter;
 
-            operationType = SetterOperationType.SetValue;
-            variableName = "variableName";
-            valueToSet = "";
-            loveScoreAmount = 0;
-            boolValue = false;
-            loveMeter = null;
+            m_operationType = SetterOperationType.SetValue;
+            m_variableName = "variableName";
+            m_valueToSet = "";
+            m_loveScoreAmount = 0;
+            m_boolValue = false;
+            m_loveMeter = null;
 
             DSChoiceSaveData choiceData = new DSChoiceSaveData()
             {
@@ -136,13 +136,13 @@ namespace DS.Elements
                 switch (evt.newValue)
                 {
                     case "Set Value":
-                        operationType = SetterOperationType.SetValue;
+                        m_operationType = SetterOperationType.SetValue;
                         break;
                     case "Update Love Score":
-                        operationType = SetterOperationType.UpdateLoveScore;
+                        m_operationType = SetterOperationType.UpdateLoveScore;
                         break;
                     case "Update Boolean":
-                        operationType = SetterOperationType.UpdateBoolean;
+                        m_operationType = SetterOperationType.UpdateBoolean;
                         break;
                 }
                 UpdateVisibleFields();
@@ -153,10 +153,10 @@ namespace DS.Elements
             valueContainer = new VisualElement();
 
             // Variable name field
-            var variableField = new TextField("Variable Name") { value = variableName };
+            var variableField = new TextField("Variable Name") { value = m_variableName };
             variableField.RegisterValueChangedCallback(evt =>
             {
-                variableName = evt.newValue;
+                m_variableName = evt.newValue;
             });
             variableField.AddClasses(
                 "ds-node__textfield",
@@ -166,10 +166,10 @@ namespace DS.Elements
             valueContainer.Add(variableField);
 
             // Value field
-            var valueField = new TextField("Value") { value = valueToSet };
+            var valueField = new TextField("Value") { value = m_valueToSet };
             valueField.RegisterValueChangedCallback(evt =>
             {
-                valueToSet = evt.newValue;
+                m_valueToSet = evt.newValue;
             });
             valueField.AddClasses(
                 "ds-node__textfield",
@@ -185,19 +185,19 @@ namespace DS.Elements
             loveMeterObjectField = new ObjectField("Love Meter")
             {
                 objectType = typeof(LoveMeterSO),
-                value = loveMeter,
+                value = m_loveMeter,
             };
             loveMeterObjectField.RegisterValueChangedCallback(evt =>
             {
-                loveMeter = evt.newValue as LoveMeterSO;
+                m_loveMeter = evt.newValue as LoveMeterSO;
             });
             loveScoreContainer.Add(loveMeterObjectField);
 
             // Love amount field
-            var loveAmountField = new IntegerField("Amount") { value = loveScoreAmount };
+            var loveAmountField = new IntegerField("Amount") { value = m_loveScoreAmount };
             loveAmountField.RegisterValueChangedCallback(evt =>
             {
-                loveScoreAmount = evt.newValue;
+                m_loveScoreAmount = evt.newValue;
             });
             loveAmountField.AddClasses(
                 "ds-node__textfield",
@@ -210,10 +210,10 @@ namespace DS.Elements
             boolContainer = new VisualElement();
 
             // Bool variable name field
-            var boolVarField = new TextField("Boolean Name") { value = variableName };
+            var boolVarField = new TextField("Boolean Name") { value = m_variableName };
             boolVarField.RegisterValueChangedCallback(evt =>
             {
-                variableName = evt.newValue;
+                m_variableName = evt.newValue;
             });
             boolVarField.AddClasses(
                 "ds-node__textfield",
@@ -223,10 +223,10 @@ namespace DS.Elements
             boolContainer.Add(boolVarField);
 
             // Boolean toggle
-            var boolToggle = new Toggle("Value") { value = boolValue };
+            var boolToggle = new Toggle("Value") { value = m_boolValue };
             boolToggle.RegisterValueChangedCallback(evt =>
             {
-                boolValue = evt.newValue;
+                m_boolValue = evt.newValue;
             });
             boolToggle.AddToClassList("ds-node__toggle");
             boolContainer.Add(boolToggle);
@@ -262,7 +262,7 @@ namespace DS.Elements
             boolContainer.style.display = DisplayStyle.None;
 
             // Show the appropriate container based on operation type
-            switch (operationType)
+            switch (m_operationType)
             {
                 case SetterOperationType.SetValue:
                     valueContainer.style.display = DisplayStyle.Flex;
@@ -278,22 +278,22 @@ namespace DS.Elements
 
         private void TriggerSetEvent()
         {
-            switch (operationType)
+            switch (m_operationType)
             {
                 case SetterOperationType.SetValue:
-                    if (!string.IsNullOrEmpty(variableName))
+                    if (!string.IsNullOrEmpty(m_variableName))
                     {
-                        OnValueSet?.Invoke(variableName, valueToSet);
-                        Debug.Log($"Set value: {variableName} = {valueToSet}");
+                        OnValueSet?.Invoke(m_variableName, m_valueToSet);
+                        Debug.Log($"Set value: {m_variableName} = {m_valueToSet}");
                     }
                     break;
 
                 case SetterOperationType.UpdateLoveScore:
                     // Use the selected LoveMeterSO instead of a hardcoded string
-                    if (loveMeter != null)
+                    if (m_loveMeter != null)
                     {
-                        OnLoveScoreChanged?.Invoke(loveMeter, loveScoreAmount);
-                        Debug.Log($"Love score change: {loveMeter.name} by {loveScoreAmount}");
+                        OnLoveScoreChanged?.Invoke(m_loveMeter, m_loveScoreAmount);
+                        Debug.Log($"Love score change: {m_loveMeter.name} by {m_loveScoreAmount}");
                     }
                     else
                     {
@@ -302,10 +302,10 @@ namespace DS.Elements
                     break;
 
                 case SetterOperationType.UpdateBoolean:
-                    if (!string.IsNullOrEmpty(variableName))
+                    if (!string.IsNullOrEmpty(m_variableName))
                     {
-                        OnBooleanChanged?.Invoke(variableName, boolValue);
-                        Debug.Log($"Boolean changed: {variableName} = {boolValue}");
+                        OnBooleanChanged?.Invoke(m_variableName, m_boolValue);
+                        Debug.Log($"Boolean changed: {m_variableName} = {m_boolValue}");
                     }
                     break;
             }
