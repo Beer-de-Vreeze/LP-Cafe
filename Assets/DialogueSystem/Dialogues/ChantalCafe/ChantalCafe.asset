@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2651e6138de3984dbf11454fa21a045, type: 3}
+  m_Name: ChantalCafe
+  m_EditorClassIdentifier: 
+  <m_containerFileNameData>k__BackingField: ChantalCafe
+  <m_containerDialogueGroupsData>k__BackingField:
+    list: []
+  <m_containerUngroupedDialoguesData>k__BackingField:
+  - {fileID: 11400000, guid: 47765044d20016542bd1668da456edab, type: 2}
+  - {fileID: 11400000, guid: 2ae3c85ce3fb05648ac83df393a0d749, type: 2}
+  - {fileID: 11400000, guid: 641c8900848f4e244b1a7f4ef42a1020, type: 2}
+  - {fileID: 11400000, guid: 44e55d623c31b8345af985d4ea5e6724, type: 2}

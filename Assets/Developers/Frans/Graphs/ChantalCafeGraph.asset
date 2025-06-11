@@ -1,0 +1,115 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: beb9a63dbd6015942ab1d5ccf8100789, type: 3}
+  m_Name: ChantalCafeGraph
+  m_EditorClassIdentifier: 
+  <m_graphFileNameData>k__BackingField: ChantalCafe
+  <m_graphGroupsData>k__BackingField: []
+  <m_graphNodesData>k__BackingField:
+  - <m_nodeIDData>k__BackingField: 1460b73b-b5b8-4226-b07f-55cce56e8357
+    <m_nodeNameData>k__BackingField: Questions
+    <m_nodeBachelorImageData>k__BackingField: {fileID: 0}
+    <m_nodeAudioLinesData>k__BackingField: {fileID: 0}
+    <m_nodeTextData>k__BackingField: "Aren't you gunna ask me any questions? \nDoes
+      a woman have to do everything around here?\n Since you've lost your voice,
+      I'll take the lead.\n\nSo what do you do for a living?"
+    <m_nodeChoicesData>k__BackingField:
+    - <m_choiceTextData>k__BackingField: I'm a real estate agent
+      <m_choiceNodeIDData>k__BackingField: c55dd740-dcce-40a9-93ed-be1f68c19a4b
+    - <m_choiceTextData>k__BackingField: Next Dialogue
+      <m_choiceNodeIDData>k__BackingField: 
+    <m_nodeGroupIDData>k__BackingField: 
+    <m_dialogueTypeData>k__BackingField: 1
+    <m_nodePositionData>k__BackingField: {x: -350.66666, y: -1028.6667}
+    <m_nodePropertyToCheckData>k__BackingField: Love
+    <m_nodeComparisonTypeData>k__BackingField: '>='
+    <m_nodeComparisonValueData>k__BackingField: 0
+    <m_nodeOperationTypeData>k__BackingField: '>='
+    <m_nodeValueToSetData>k__BackingField: 
+    <m_nodeVariableNameData>k__BackingField: 
+    <m_nodeSetterOperationTypeData>k__BackingField: 0
+    <m_nodeLoveScoreAmountData>k__BackingField: 0
+    <m_nodeBoolValueData>k__BackingField: 0
+    <m_nodeLoveMeterData>k__BackingField: {fileID: 0}
+  - <m_nodeIDData>k__BackingField: 4d6f21b2-4b9e-4423-af5f-ee20f1530a9a
+    <m_nodeNameData>k__BackingField: DialogueName
+    <m_nodeBachelorImageData>k__BackingField: {fileID: 0}
+    <m_nodeAudioLinesData>k__BackingField: {fileID: 0}
+    <m_nodeTextData>k__BackingField: "Hey I'm Chantal, Don't even dare asking me
+      out if you're broke.\n I need a Partner that can meet my standard."
+    <m_nodeChoicesData>k__BackingField:
+    - <m_choiceTextData>k__BackingField: Silence
+      <m_choiceNodeIDData>k__BackingField: 1460b73b-b5b8-4226-b07f-55cce56e8357
+    <m_nodeGroupIDData>k__BackingField: 
+    <m_dialogueTypeData>k__BackingField: 1
+    <m_nodePositionData>k__BackingField: {x: -739.3333, y: -1028.6667}
+    <m_nodePropertyToCheckData>k__BackingField: Love
+    <m_nodeComparisonTypeData>k__BackingField: '>='
+    <m_nodeComparisonValueData>k__BackingField: 0
+    <m_nodeOperationTypeData>k__BackingField: '>='
+    <m_nodeValueToSetData>k__BackingField: 
+    <m_nodeVariableNameData>k__BackingField: 
+    <m_nodeSetterOperationTypeData>k__BackingField: 0
+    <m_nodeLoveScoreAmountData>k__BackingField: 0
+    <m_nodeBoolValueData>k__BackingField: 0
+    <m_nodeLoveMeterData>k__BackingField: {fileID: 0}
+  - <m_nodeIDData>k__BackingField: c55dd740-dcce-40a9-93ed-be1f68c19a4b
+    <m_nodeNameData>k__BackingField: Value Setter
+    <m_nodeBachelorImageData>k__BackingField: {fileID: 0}
+    <m_nodeAudioLinesData>k__BackingField: {fileID: 0}
+    <m_nodeTextData>k__BackingField: Dialogue text.
+    <m_nodeChoicesData>k__BackingField:
+    - <m_choiceTextData>k__BackingField: Next Dialogue
+      <m_choiceNodeIDData>k__BackingField: 43eb0e7d-6cdf-4645-ab1c-bf635ebbe309
+    <m_nodeGroupIDData>k__BackingField: 
+    <m_dialogueTypeData>k__BackingField: 3
+    <m_nodePositionData>k__BackingField: {x: 82, y: -1181.3334}
+    <m_nodePropertyToCheckData>k__BackingField: Love
+    <m_nodeComparisonTypeData>k__BackingField: '>='
+    <m_nodeComparisonValueData>k__BackingField: 0
+    <m_nodeOperationTypeData>k__BackingField: '>='
+    <m_nodeValueToSetData>k__BackingField: 
+    <m_nodeVariableNameData>k__BackingField: variableName
+    <m_nodeSetterOperationTypeData>k__BackingField: 1
+    <m_nodeLoveScoreAmountData>k__BackingField: 20
+    <m_nodeBoolValueData>k__BackingField: 0
+    <m_nodeLoveMeterData>k__BackingField: {fileID: 11400000, guid: c18fce8bdce1ff24ab33a75266e564c8, type: 2}
+  - <m_nodeIDData>k__BackingField: 43eb0e7d-6cdf-4645-ab1c-bf635ebbe309
+    <m_nodeNameData>k__BackingField: GoodMoney
+    <m_nodeBachelorImageData>k__BackingField: {fileID: 0}
+    <m_nodeAudioLinesData>k__BackingField: {fileID: 0}
+    <m_nodeTextData>k__BackingField: That's sooo interesting. I hear those make good
+      moneyyyy.
+    <m_nodeChoicesData>k__BackingField:
+    - <m_choiceTextData>k__BackingField: Next Dialogue
+      <m_choiceNodeIDData>k__BackingField: 
+    <m_nodeGroupIDData>k__BackingField: 
+    <m_dialogueTypeData>k__BackingField: 1
+    <m_nodePositionData>k__BackingField: {x: 515.3333, y: -1181.3334}
+    <m_nodePropertyToCheckData>k__BackingField: Love
+    <m_nodeComparisonTypeData>k__BackingField: '>='
+    <m_nodeComparisonValueData>k__BackingField: 0
+    <m_nodeOperationTypeData>k__BackingField: '>='
+    <m_nodeValueToSetData>k__BackingField: 
+    <m_nodeVariableNameData>k__BackingField: 
+    <m_nodeSetterOperationTypeData>k__BackingField: 0
+    <m_nodeLoveScoreAmountData>k__BackingField: 0
+    <m_nodeBoolValueData>k__BackingField: 0
+    <m_nodeLoveMeterData>k__BackingField: {fileID: 0}
+  <m_graphOldGroupNamesData>k__BackingField: []
+  <m_graphOldUngroupedNodeNamesData>k__BackingField:
+  - Questions
+  - DialogueName
+  - Value Setter
+  - GoodMoney
+  <m_graphOldGroupedNodeNamesData>k__BackingField:
+    list: []

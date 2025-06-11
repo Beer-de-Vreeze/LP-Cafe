@@ -35,32 +35,38 @@ namespace DS.ScriptableObjects
 
         // New fields for condition nodes
         [field: SerializeField]
-        public string m_propertyToCheck { get; set; }
+        public string m_propertyToCheckData { get; set; }
 
         [field: SerializeField]
-        public string m_comparisonType { get; set; }
+        public string m_comparisonTypeData { get; set; }
 
         [field: SerializeField]
-        public string m_comparisonValue { get; set; }
+        public string m_comparisonValueData { get; set; }
 
         // New fields for setter nodes
         [field: SerializeField]
-        public SetterOperationType m_operationType { get; set; }
+        public SetterOperationType m_operationTypeData { get; set; }
 
         [field: SerializeField]
-        public string m_variableName { get; set; }
+        public string m_variableNameData { get; set; }
 
         [field: SerializeField]
-        public string m_valueToSet { get; set; }
+        public string m_valueToSetData { get; set; }
 
         [field: SerializeField]
-        public int m_loveScoreAmount { get; set; }
+        public int m_loveScoreAmountData { get; set; }
 
         [field: SerializeField]
-        public bool m_boolValue { get; set; }
+        public bool m_boolValueData { get; set; }
 
         [field: SerializeField]
         public LoveMeterSO m_loveMeterData { get; set; }
+        [field: SerializeField]
+        public NewBachelorSO m_bachelorData { get; set; }
+        [field: SerializeField]
+        public bool m_isLikePreferenceData { get; set; }
+        [field: SerializeField]
+        public string m_selectedPreferenceData { get; set; }
 
         public void Initialize(
             string dialogueName,
@@ -93,9 +99,9 @@ namespace DS.ScriptableObjects
         )
         {
             m_dialogueNameData = dialogueName;
-            m_propertyToCheck = propertyToCheck;
-            m_comparisonType = comparisonType;
-            m_comparisonValue = comparisonValue;
+            m_propertyToCheckData = propertyToCheck;
+            m_comparisonTypeData = comparisonType;
+            m_comparisonValueData = comparisonValue;
             m_dialogueChoiceData = choices;
             m_dialogueTypeData = dialogueType;
             m_isStartingDialogueData = isStartingDialogue;
@@ -111,18 +117,24 @@ namespace DS.ScriptableObjects
             bool boolValue,
             DSDialogueType dialogueType,
             LoveMeterSO loveMeterData,
+            NewBachelorSO bachelorData,
+            bool isLikePreferenceData,
+            string selectedPreferenceData,
             bool isStartingDialogue
         )
         {
             m_dialogueNameData = dialogueName;
             m_dialogueChoiceData = choices;
-            m_valueToSet = valueToSet;
-            m_variableName = variableName;
-            m_operationType = operationType;
-            m_loveScoreAmount = loveScoreAmount;
-            m_boolValue = boolValue;
+            m_valueToSetData = valueToSet;
+            m_variableNameData = variableName;
+            m_operationTypeData = operationType;
+            m_loveScoreAmountData = loveScoreAmount;
+            m_boolValueData = boolValue;
             m_dialogueTypeData = dialogueType;
             m_loveMeterData = loveMeterData;
+            m_bachelorData = bachelorData;
+            m_isLikePreferenceData = isLikePreferenceData;
+            m_selectedPreferenceData = selectedPreferenceData;
             m_isStartingDialogueData = isStartingDialogue;
         }
     }

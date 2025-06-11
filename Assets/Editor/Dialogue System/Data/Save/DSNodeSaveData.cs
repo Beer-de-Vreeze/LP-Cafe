@@ -37,5 +37,9 @@ namespace DS.Data.Save
         [field: SerializeField] public int m_nodeLoveScoreAmountData { get; set; }
         [field: SerializeField] public bool m_nodeBoolValueData { get; set; }
         [field: SerializeField] public LoveMeterSO m_nodeLoveMeterData { get; set; }
+        [field: SerializeField] public NewBachelorSO m_bachelorData { get; set; }
+        [field: SerializeField] public bool m_isLikePreference { get; set; }
+        [field: SerializeField] public string m_selectedPreference { get; set; }
+
     }
 }
