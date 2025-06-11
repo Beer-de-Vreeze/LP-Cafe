@@ -913,18 +913,18 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1150952867}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0.113147885, y: -0, z: -0, w: 0.9935782}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.456507, y: 1.456507, z: 1.456507}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 525598233}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -566, y: 300}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 320, y: -261}
   m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &1150952869
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -943,7 +943,7 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 0
-  m_Spacing: 50
+  m_Spacing: 10
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
@@ -1268,11 +1268,14 @@ MonoBehaviour:
   _dialogue: {fileID: 1254367149}
   _bachelor: {fileID: 11400000, guid: 17897679caa48db4e901fb103d088d6d, type: 2}
   _choicesParent: {fileID: 1150952868}
-  _choiceButtonPrefab: {fileID: 8401459337920780966, guid: 4734477dc77cb284e9d7616b07abb6bc, type: 3}
+  _choiceButtonPrefab: {fileID: 9174901839020435452, guid: 97b83d4c8b7364047a0b8d9372760b5e, type: 3}
   _audioSource: {fileID: 1254367151}
   _bachelorImage: {fileID: 904678623}
   _loveScore: 0
   _loveMeter: {fileID: 11400000, guid: c18fce8bdce1ff24ab33a75266e564c8, type: 2}
+  _normalTextColor: {r: 0, g: 0, b: 0, a: 1}
+  _hoverTextColor: {r: 0.6226415, g: 0.6226415, b: 0.6226415, a: 1}
+  _disabledTextColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
 --- !u!82 &1254367151
 AudioSource:
   m_ObjectHideFlags: 0

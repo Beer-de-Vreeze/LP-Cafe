@@ -1,13 +1,12 @@
 using System.Collections.Generic;
 using DS.Enumerations;
-
 using NUnit.Framework;
 using UnityEngine;
 
 namespace DS.ScriptableObjects
 {
-    using Data;
     using System;
+    using Data;
 
     public class DSDialogueSO : ScriptableObject
     {

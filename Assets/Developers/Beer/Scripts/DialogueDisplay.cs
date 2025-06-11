@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using DS;
+using DS.Enumerations;
 using DS.ScriptableObjects;
 using Febucci.UI;
 using TMPro;
@@ -364,13 +365,13 @@ public class DialogueDisplay : MonoBehaviour
             DSDialogueSO setterNode = _dialogue.m_dialogue;
 
             // Get setter operation type from DSDialogueSO
-            string operationType = setterNode.m_operationType.ToString();
+            var operationType = setterNode.m_operationType;
 
             // Apply the setter operation based on its type
             Debug.Log($"Applying setter operation: {operationType}");
             switch (operationType)
             {
-                case "SetValue":
+                case SetterOperationType.SetValue:
                     Debug.Log("Setting variable value...");
                     // Set a variable value
                     string variableName = setterNode.m_variableName;
@@ -380,52 +381,103 @@ public class DialogueDisplay : MonoBehaviour
                     Debug.Log($"Set variable: {variableName} = {value}");
                     break;
 
-                case "UpdateLoveScore":
+                case SetterOperationType.UpdateLoveScore:
                     Debug.Log("Updating love score...");
                     // Update the love score
-                    int amount = 0;
-                    int.TryParse(setterNode.m_loveScoreAmount.ToString(), out amount); // Parse string to int safely
+                    int amount = setterNode.m_loveScoreAmount;
 
-                    // Use the default love meter reference (_loveMeter)
-                    if (_loveMeter != null)
+                    try
                     {
-                        _loveScore += amount;
+                        // Check if there's a specific love meter assigned in the setter node
+                        LoveMeterSO targetLoveMeter = null;
 
-                        if (amount > 0)
+                        // First try to get the love meter from the setter node
+                        if (setterNode.m_loveMeterData != null)
                         {
-                            _loveMeter.IncreaseLove(amount);
+                            targetLoveMeter = setterNode.m_loveMeterData as LoveMeterSO;
+                            Debug.Log(
+                                $"Using love meter from setter node: {targetLoveMeter?.name ?? "null"}"
+                            );
                         }
-                        else if (amount < 0)
+
+                        // If that fails, use the default love meter
+                        if (targetLoveMeter == null)
                         {
-                            _loveMeter.DecreaseLove(Mathf.Abs(amount));
+                            targetLoveMeter = _loveMeter;
+                            Debug.Log(
+                                $"Using default love meter: {targetLoveMeter?.name ?? "null"}"
+                            );
                         }
 
-                        _loveScore = _loveMeter.GetCurrentLove();
-                        _gameVariables["Love"] = _loveScore.ToString();
+                        if (targetLoveMeter != null)
+                        {
+                            // Verify that the love meter is properly initialized before using it
+                            if (targetLoveMeter.IsInitialized())
+                            {
+                                if (amount > 0)
+                                {
+                                    Debug.Log($"Increasing love by {amount}");
+                                    targetLoveMeter.IncreaseLove(amount);
+                                }
+                                else if (amount < 0)
+                                {
+                                    Debug.Log($"Decreasing love by {Mathf.Abs(amount)}");
+                                    targetLoveMeter.DecreaseLove(Mathf.Abs(amount));
+                                }
 
-                        Debug.Log($"Updated default love score: {_loveScore} (change: {amount})");
+                                // If we're affecting the default love meter, update the local score variable
+                                if (targetLoveMeter == _loveMeter)
+                                {
+                                    _loveScore = _loveMeter.GetCurrentLove();
+                                    _gameVariables["Love"] = _loveScore.ToString();
+                                    Debug.Log(
+                                        $"Updated default love score: {_loveScore} (change: {amount})"
+                                    );
+                                }
+                            }
+                            else
+                            {
+                                Debug.LogWarning(
+                                    "Love meter is not properly initialized, using local variables instead"
+                                );
+                                // Fall back to local variable update
+                                _loveScore += amount;
+                                _gameVariables["Love"] = _loveScore.ToString();
+                            }
+                        }
+                        else
+                        {
+                            // No love meter available, just update the local variable
+                            _loveScore += amount;
+                            _gameVariables["Love"] = _loveScore.ToString();
+                            Debug.Log(
+                                $"Updated local love score: {_loveScore} (no love meter available)"
+                            );
+                        }
                     }
-                    else
+                    catch (System.Exception e)
                     {
-                        // No love meter available, just update the local variable
+                        // Fallback: just update the local variable if anything goes wrong
+                        Debug.LogError($"Error updating love score: {e.Message}\n{e.StackTrace}");
                         _loveScore += amount;
                         _gameVariables["Love"] = _loveScore.ToString();
-                        Debug.Log(
-                            $"Updated local love score: {_loveScore} (no love meter available)"
-                        );
+                        Debug.Log($"Fallback: Updated local love score: {_loveScore}");
                     }
                     break;
 
-                case "UpdateBoolean":
+                case SetterOperationType.UpdateBoolean:
                     Debug.Log("Updating boolean value...");
-                    // Update a boolean value - parse string to bool
+                    // Update a boolean value
                     string boolName = setterNode.m_variableName;
-                    bool boolValue = false;
-                    bool.TryParse(setterNode.m_boolValue.ToString(), out boolValue);
+                    bool boolValue = setterNode.m_boolValue;
 
                     // Update the variable
                     _gameVariables[boolName] = boolValue.ToString().ToLower();
                     Debug.Log($"Set boolean: {boolName} = {boolValue}");
+                    break;
+
+                default:
+                    Debug.LogWarning($"Unknown setter operation type: {operationType}");
                     break;
             }
 
@@ -443,7 +495,7 @@ public class DialogueDisplay : MonoBehaviour
         }
         catch (System.Exception e)
         {
-            Debug.LogError($"Error applying setter node: {e.Message}");
+            Debug.LogError($"Error applying setter node: {e.Message}\n{e.StackTrace}");
         }
     }
 
