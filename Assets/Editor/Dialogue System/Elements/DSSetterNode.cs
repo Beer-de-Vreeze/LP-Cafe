@@ -10,8 +10,6 @@ using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-
-
 namespace DS.Elements
 {
     public class DSSetterNode : NodeBase
@@ -25,7 +23,11 @@ namespace DS.Elements
         private VisualElement valueContainer;
         private VisualElement loveScoreContainer;
         private VisualElement boolContainer;
+        private VisualElement preferenceContainer;
         private ObjectField loveMeterObjectField;
+        private ObjectField bachelorObjectField;
+        private DropdownField preferenceTypeDropdown;
+        private DropdownField preferenceDropdown;
 
         public override void Initialize(string nodeName, DSGraphView dsGraphView, Vector2 pos)
         {
@@ -39,6 +41,9 @@ namespace DS.Elements
             m_loveScoreAmount = 0;
             m_boolValue = false;
             m_loveMeter = null;
+            m_bachelor = null;
+            m_isLikePreference = true;
+            m_selectedPreference = "";
 
             DSChoiceSaveData choiceData = new DSChoiceSaveData()
             {
@@ -128,6 +133,7 @@ namespace DS.Elements
                 "Set Value",
                 "Update Love Score",
                 "Update Boolean",
+                "Discover Preference",
             };
 
             operationTypeDropdown = new DropdownField("Operation Type", operationTypes, 0);
@@ -143,6 +149,9 @@ namespace DS.Elements
                         break;
                     case "Update Boolean":
                         m_operationType = SetterOperationType.UpdateBoolean;
+                        break;
+                    case "Discover Preference":
+                        m_operationType = SetterOperationType.DiscoverPreference;
                         break;
                 }
                 UpdateVisibleFields();
@@ -231,10 +240,45 @@ namespace DS.Elements
             boolToggle.AddToClassList("ds-node__toggle");
             boolContainer.Add(boolToggle);
 
+            // Container for preference discovery
+            preferenceContainer = new VisualElement();
+
+            // Bachelor object field
+            bachelorObjectField = new ObjectField("Bachelor")
+            {
+                objectType = typeof(NewBachelorSO),
+                value = m_bachelor
+            };
+            bachelorObjectField.RegisterValueChangedCallback(evt =>
+            {
+                m_bachelor = evt.newValue as NewBachelorSO;
+                PopulatePreferenceDropdown();
+            });
+            preferenceContainer.Add(bachelorObjectField);
+
+            // Preference type dropdown (like or dislike)
+            var preferenceTypes = new List<string>() { "Like", "Dislike" };
+            preferenceTypeDropdown = new DropdownField("Type", preferenceTypes, 0);
+            preferenceTypeDropdown.RegisterValueChangedCallback(evt =>
+            {
+                m_isLikePreference = evt.newValue == "Like";
+                PopulatePreferenceDropdown();
+            });
+            preferenceContainer.Add(preferenceTypeDropdown);
+
+            // Preference dropdown to select which one to discover
+            preferenceDropdown = new DropdownField("Preference", new List<string>(), 0);
+            preferenceDropdown.RegisterValueChangedCallback(evt =>
+            {
+                m_selectedPreference = evt.newValue;
+            });
+            preferenceContainer.Add(preferenceDropdown);
+
             // Add all containers
             setterContainer.Add(valueContainer);
             setterContainer.Add(loveScoreContainer);
             setterContainer.Add(boolContainer);
+            setterContainer.Add(preferenceContainer);
 
             extensionContainer.Add(setterContainer);
 
@@ -260,6 +304,7 @@ namespace DS.Elements
             valueContainer.style.display = DisplayStyle.None;
             loveScoreContainer.style.display = DisplayStyle.None;
             boolContainer.style.display = DisplayStyle.None;
+            preferenceContainer.style.display = DisplayStyle.None;
 
             // Show the appropriate container based on operation type
             switch (m_operationType)
@@ -272,6 +317,9 @@ namespace DS.Elements
                     break;
                 case SetterOperationType.UpdateBoolean:
                     boolContainer.style.display = DisplayStyle.Flex;
+                    break;
+                case SetterOperationType.DiscoverPreference:
+                    preferenceContainer.style.display = DisplayStyle.Flex;
                     break;
             }
         }
@@ -308,6 +356,74 @@ namespace DS.Elements
                         Debug.Log($"Boolean changed: {m_variableName} = {m_boolValue}");
                     }
                     break;
+
+                case SetterOperationType.DiscoverPreference:
+                    if (m_bachelor != null && !string.IsNullOrEmpty(m_selectedPreference))
+                    {
+                        if (m_isLikePreference)
+                        {
+                            for (int i = 0; i < m_bachelor._likes.Length; i++)
+                            {
+                                if (m_bachelor._likes[i].description == m_selectedPreference)
+                                {
+                                    m_bachelor.DiscoverLike(i);
+                                    Debug.Log($"Discovered like: {m_selectedPreference}");
+                                    break;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            for (int i = 0; i < m_bachelor._dislikes.Length; i++)
+                            {
+                                if (m_bachelor._dislikes[i].description == m_selectedPreference)
+                                {
+                                    m_bachelor.DiscoverDislike(i);
+                                    Debug.Log($"Discovered dislike: {m_selectedPreference}");
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    break;
+            }
+        }
+
+        private void PopulatePreferenceDropdown()
+        {
+            if (m_bachelor == null)
+            {
+                preferenceDropdown.choices = new List<string> { "No bachelor selected" };
+                preferenceDropdown.index = 0;
+                return;
+            }
+
+            List<string> preferences = new List<string>();
+            if (m_isLikePreference && m_bachelor._likes != null)
+            {
+                foreach (var like in m_bachelor._likes)
+                {
+                    preferences.Add(like.description);
+                }
+            }
+            else if (!m_isLikePreference && m_bachelor._dislikes != null)
+            {
+                foreach (var dislike in m_bachelor._dislikes)
+                {
+                    preferences.Add(dislike.description);
+                }
+            }
+
+            if (preferences.Count > 0)
+            {
+                preferenceDropdown.choices = preferences;
+                preferenceDropdown.index = 0;
+                m_selectedPreference = preferences[0];
+            }
+            else
+            {
+                preferenceDropdown.choices = new List<string> { "No preferences found" };
+                preferenceDropdown.index = 0;
             }
         }
     }

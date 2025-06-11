@@ -9,9 +9,6 @@ using UnityEngine.Events;
 [CreateAssetMenu(fileName = "New Love Meter", menuName = "Bachelor/New LoveMeter", order = 1)]
 public class LoveMeterSO : ScriptableObject
 {
-    [SerializeField]
-    private NewBachelorSO _bachelor;
-
     [Tooltip("Maximum love value this bachelor can reach")]
     public int _maxLove = 100;
 
@@ -48,7 +45,8 @@ public class LoveMeterSO : ScriptableObject
 
         // Notify listeners about the change
         LoveChangedEvent.Invoke(_currentLove);
-        Debug.Log($"{_bachelor._name} love increased by {amount}. Total Love: {_currentLove}");
+
+        Debug.Log($"Batchelor love increased by {amount}. Total Love: {_currentLove}");
     }
 
     /// <summary>
@@ -66,7 +64,8 @@ public class LoveMeterSO : ScriptableObject
 
         // Notify listeners about the change
         LoveChangedEvent.Invoke(_currentLove);
-        Debug.Log($"{_bachelor._name} love decreased by {amount}. Total Love: {_currentLove}");
+
+        Debug.Log($"Batchelor love decreased by {amount}. Total Love: {_currentLove}");
     }
 
     /// <summary>
@@ -116,5 +115,24 @@ public class LoveMeterSO : ScriptableObject
     public virtual bool IsMaxLove()
     {
         return _currentLove >= _maxLove;
+    }
+
+    public bool IsInitialized()
+    {
+        try
+        {
+            // Check that our event system is initialized
+            if (LoveChangedEvent == null)
+                return false;
+
+            // We don't strictly need bachelor to be non-null for the meter to work
+            // Just check that we can get the current love value
+            var currentValue = GetCurrentLove();
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
     }
 }

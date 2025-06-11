@@ -1,10 +1,13 @@
 using System.Collections.Generic;
 using DS;
+using DS.Enumerations;
 using DS.ScriptableObjects;
 using Febucci.UI;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using static UnityEngine.UI.LayoutUtility;
 
 public class DialogueDisplay : MonoBehaviour
 {
@@ -60,6 +63,16 @@ public class DialogueDisplay : MonoBehaviour
     [SerializeField]
     private LoveMeterSO _loveMeter;
 
+    // Colors for button text states
+    [SerializeField]
+    private Color _normalTextColor = Color.white;
+
+    [SerializeField]
+    private Color _hoverTextColor = new Color(1f, 0.8f, 0.2f);
+
+    [SerializeField]
+    private Color _disabledTextColor = Color.gray;
+
     // Called when the script instance is being loaded
     private void Start()
     {
@@ -105,6 +118,7 @@ public class DialogueDisplay : MonoBehaviour
     public void ShowDialogue()
     {
         ClearChoices();
+        EnsureVerticalLayoutSettings(); // Add this line
 
         // If this is a condition node, evaluate it and follow the appropriate path
         if (IsConditionNode(_dialogue))
@@ -351,13 +365,13 @@ public class DialogueDisplay : MonoBehaviour
             DSDialogueSO setterNode = _dialogue.m_dialogue;
 
             // Get setter operation type from DSDialogueSO
-            string operationType = setterNode.m_operationType.ToString();
+            var operationType = setterNode.m_operationType;
 
             // Apply the setter operation based on its type
             Debug.Log($"Applying setter operation: {operationType}");
             switch (operationType)
             {
-                case "SetValue":
+                case SetterOperationType.SetValue:
                     Debug.Log("Setting variable value...");
                     // Set a variable value
                     string variableName = setterNode.m_variableName;
@@ -367,52 +381,103 @@ public class DialogueDisplay : MonoBehaviour
                     Debug.Log($"Set variable: {variableName} = {value}");
                     break;
 
-                case "UpdateLoveScore":
+                case SetterOperationType.UpdateLoveScore:
                     Debug.Log("Updating love score...");
                     // Update the love score
-                    int amount = 0;
-                    int.TryParse(setterNode.m_loveScoreAmount.ToString(), out amount); // Parse string to int safely
+                    int amount = setterNode.m_loveScoreAmount;
 
-                    // Use the default love meter reference (_loveMeter)
-                    if (_loveMeter != null)
+                    try
                     {
-                        _loveScore += amount;
+                        // Check if there's a specific love meter assigned in the setter node
+                        LoveMeterSO targetLoveMeter = null;
 
-                        if (amount > 0)
+                        // First try to get the love meter from the setter node
+                        if (setterNode.m_loveMeterData != null)
                         {
-                            _loveMeter.IncreaseLove(amount);
+                            targetLoveMeter = setterNode.m_loveMeterData as LoveMeterSO;
+                            Debug.Log(
+                                $"Using love meter from setter node: {targetLoveMeter?.name ?? "null"}"
+                            );
                         }
-                        else if (amount < 0)
+
+                        // If that fails, use the default love meter
+                        if (targetLoveMeter == null)
                         {
-                            _loveMeter.DecreaseLove(Mathf.Abs(amount));
+                            targetLoveMeter = _loveMeter;
+                            Debug.Log(
+                                $"Using default love meter: {targetLoveMeter?.name ?? "null"}"
+                            );
                         }
 
-                        _loveScore = _loveMeter.GetCurrentLove();
-                        _gameVariables["Love"] = _loveScore.ToString();
+                        if (targetLoveMeter != null)
+                        {
+                            // Verify that the love meter is properly initialized before using it
+                            if (targetLoveMeter.IsInitialized())
+                            {
+                                if (amount > 0)
+                                {
+                                    Debug.Log($"Increasing love by {amount}");
+                                    targetLoveMeter.IncreaseLove(amount);
+                                }
+                                else if (amount < 0)
+                                {
+                                    Debug.Log($"Decreasing love by {Mathf.Abs(amount)}");
+                                    targetLoveMeter.DecreaseLove(Mathf.Abs(amount));
+                                }
 
-                        Debug.Log($"Updated default love score: {_loveScore} (change: {amount})");
+                                // If we're affecting the default love meter, update the local score variable
+                                if (targetLoveMeter == _loveMeter)
+                                {
+                                    _loveScore = _loveMeter.GetCurrentLove();
+                                    _gameVariables["Love"] = _loveScore.ToString();
+                                    Debug.Log(
+                                        $"Updated default love score: {_loveScore} (change: {amount})"
+                                    );
+                                }
+                            }
+                            else
+                            {
+                                Debug.LogWarning(
+                                    "Love meter is not properly initialized, using local variables instead"
+                                );
+                                // Fall back to local variable update
+                                _loveScore += amount;
+                                _gameVariables["Love"] = _loveScore.ToString();
+                            }
+                        }
+                        else
+                        {
+                            // No love meter available, just update the local variable
+                            _loveScore += amount;
+                            _gameVariables["Love"] = _loveScore.ToString();
+                            Debug.Log(
+                                $"Updated local love score: {_loveScore} (no love meter available)"
+                            );
+                        }
                     }
-                    else
+                    catch (System.Exception e)
                     {
-                        // No love meter available, just update the local variable
+                        // Fallback: just update the local variable if anything goes wrong
+                        Debug.LogError($"Error updating love score: {e.Message}\n{e.StackTrace}");
                         _loveScore += amount;
                         _gameVariables["Love"] = _loveScore.ToString();
-                        Debug.Log(
-                            $"Updated local love score: {_loveScore} (no love meter available)"
-                        );
+                        Debug.Log($"Fallback: Updated local love score: {_loveScore}");
                     }
                     break;
 
-                case "UpdateBoolean":
+                case SetterOperationType.UpdateBoolean:
                     Debug.Log("Updating boolean value...");
-                    // Update a boolean value - parse string to bool
+                    // Update a boolean value
                     string boolName = setterNode.m_variableName;
-                    bool boolValue = false;
-                    bool.TryParse(setterNode.m_boolValue.ToString(), out boolValue);
+                    bool boolValue = setterNode.m_boolValue;
 
                     // Update the variable
                     _gameVariables[boolName] = boolValue.ToString().ToLower();
                     Debug.Log($"Set boolean: {boolName} = {boolValue}");
+                    break;
+
+                default:
+                    Debug.LogWarning($"Unknown setter operation type: {operationType}");
                     break;
             }
 
@@ -430,7 +495,7 @@ public class DialogueDisplay : MonoBehaviour
         }
         catch (System.Exception e)
         {
-            Debug.LogError($"Error applying setter node: {e.Message}");
+            Debug.LogError($"Error applying setter node: {e.Message}\n{e.StackTrace}");
         }
     }
 
@@ -445,11 +510,54 @@ public class DialogueDisplay : MonoBehaviour
     {
         _dialogue = dialogue;
         _bachelor = bachelor;
-        if (bachelor == null)
+
+        if (_bachelor != null)
+        {
+            // Use the bachelor's love meter if available
+            if (_bachelor._loveMeter != null)
+            {
+                _loveMeter = _bachelor._loveMeter;
+                _loveScore = _loveMeter.GetCurrentLove();
+                _gameVariables["Love"] = _loveScore.ToString();
+            }
+
+            // Initialize preference discovery status variables
+            bool hasAnyLikeDiscovered = false;
+            bool hasAnyDislikeDiscovered = false;
+
+            if (_bachelor._likes != null)
+            {
+                foreach (var like in _bachelor._likes)
+                {
+                    if (like.discovered)
+                    {
+                        hasAnyLikeDiscovered = true;
+                        break;
+                    }
+                }
+            }
+
+            if (_bachelor._dislikes != null)
+            {
+                foreach (var dislike in _bachelor._dislikes)
+                {
+                    if (dislike.discovered)
+                    {
+                        hasAnyDislikeDiscovered = true;
+                        break;
+                    }
+                }
+            }
+
+            _gameVariables["LikeDiscovered"] = hasAnyLikeDiscovered.ToString().ToLower();
+            _gameVariables["DislikeDiscovered"] = hasAnyDislikeDiscovered.ToString().ToLower();
+        }
+        else
         {
             _bachelor = NewBachelorSO.CreateInstance<NewBachelorSO>();
             _bachelor._name = "Chantal";
         }
+
         ShowDialogue();
     }
 
@@ -481,6 +589,10 @@ public class DialogueDisplay : MonoBehaviour
             if (btnText != null)
                 btnText.text = choice.m_dialogueChoiceText;
 
+            // Add or ensure ContentSizeFitter exists on button
+            EnsureContentSizeFitter(btnObj);
+
+            // Rest of your existing button setup code...
             var button = btnObj.GetComponent<UnityEngine.UI.Button>();
             if (button != null)
             {
@@ -494,11 +606,20 @@ public class DialogueDisplay : MonoBehaviour
 
                     // Make the text gray to indicate it's locked
                     if (btnText != null)
-                        btnText.color = Color.gray;
+                        btnText.color = _disabledTextColor;
 
                     Debug.Log(
                         $"Disabled choice button '{choice.m_dialogueChoiceText}' because condition would fail"
                     );
+                }
+                else
+                {
+                    // Set initial normal color for enabled buttons
+                    if (btnText != null)
+                        btnText.color = _normalTextColor;
+
+                    // Add hover effects using event triggers
+                    AddHoverEffects(button.gameObject, btnText);
                 }
 
                 // Always add the listener, but the button will be non-interactable if conditions fail
@@ -508,6 +629,79 @@ public class DialogueDisplay : MonoBehaviour
                 });
             }
             _activeChoiceButtons.Add(btnObj);
+        }
+
+        // Give Unity a frame to recalculate sizes
+        StartCoroutine(RefreshLayoutAfterDelay(0.05f));
+    }
+
+    // Helper method to add ContentSizeFitter if needed
+    private void EnsureContentSizeFitter(GameObject buttonObj)
+    {
+        // First, check if there's a ContentSizeFitter on the button itself
+        ContentSizeFitter fitter = buttonObj.GetComponent<ContentSizeFitter>();
+        if (fitter == null)
+        {
+            fitter = buttonObj.AddComponent<ContentSizeFitter>();
+        }
+
+        // Configure it to adjust horizontally based on text content
+        fitter.horizontalFit = ContentSizeFitter.FitMode.PreferredSize;
+        // Also set vertical fit mode to ensure proper height calculation
+        fitter.verticalFit = ContentSizeFitter.FitMode.PreferredSize;
+
+        // Set the RectTransform to anchor at the left and expand to the right
+        RectTransform rectTransform = buttonObj.GetComponent<RectTransform>();
+        if (rectTransform != null)
+        {
+            // Change from stretching to left-anchored
+            rectTransform.anchorMin = new Vector2(0, 0.5f);
+            rectTransform.anchorMax = new Vector2(0, 0.5f);
+            rectTransform.pivot = new Vector2(0, 0.5f); // Pivot at left-center
+        }
+
+        // Make sure the layout group is present to properly expand the button background
+        HorizontalLayoutGroup layout = buttonObj.GetComponent<HorizontalLayoutGroup>();
+        if (layout == null)
+        {
+            layout = buttonObj.AddComponent<HorizontalLayoutGroup>();
+            layout.childAlignment = TextAnchor.MiddleLeft; // Align content to the left
+            layout.childForceExpandWidth = true;
+            layout.padding = new RectOffset(10, 10, 5, 5); // Add some padding
+        }
+    }
+
+    // Helper coroutine to refresh layout after sizes change
+    private System.Collections.IEnumerator RefreshLayoutAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        // Refresh each button first
+        foreach (var btn in _activeChoiceButtons)
+        {
+            if (btn != null)
+            {
+                LayoutRebuilder.ForceRebuildLayoutImmediate(btn.GetComponent<RectTransform>());
+            }
+        }
+
+        // Then force layout rebuild on parent
+        if (_choicesParent != null)
+        {
+            VerticalLayoutGroup verticalLayout = _choicesParent.GetComponent<VerticalLayoutGroup>();
+            if (verticalLayout != null)
+            {
+                // Ensure the VerticalLayoutGroup has appropriate settings
+                Canvas.ForceUpdateCanvases();
+                verticalLayout.CalculateLayoutInputHorizontal();
+                verticalLayout.CalculateLayoutInputVertical();
+                verticalLayout.SetLayoutHorizontal();
+                verticalLayout.SetLayoutVertical();
+            }
+
+            LayoutRebuilder.ForceRebuildLayoutImmediate(
+                _choicesParent.GetComponent<RectTransform>()
+            );
         }
     }
 
@@ -617,6 +811,103 @@ public class DialogueDisplay : MonoBehaviour
                     return currentValue != comparisonValue;
                 default:
                     return false;
+            }
+        }
+    }
+
+    private void AddHoverEffects(GameObject buttonObj, TextMeshProUGUI text)
+    {
+        // Make sure we have valid objects
+        if (buttonObj == null || text == null)
+            return;
+
+        // Add or get EventTrigger component
+        EventTrigger trigger = buttonObj.GetComponent<EventTrigger>();
+        if (trigger == null)
+            trigger = buttonObj.AddComponent<EventTrigger>();
+
+        if (trigger.triggers == null)
+            trigger.triggers = new List<EventTrigger.Entry>();
+
+        // Add pointer enter event (hover start)
+        EventTrigger.Entry enterEntry = new EventTrigger.Entry();
+        enterEntry.eventID = EventTriggerType.PointerEnter;
+        enterEntry.callback.AddListener(
+            (eventData) =>
+            {
+                text.color = _hoverTextColor;
+            }
+        );
+        trigger.triggers.Add(enterEntry);
+
+        // Add pointer exit event (hover end)
+        EventTrigger.Entry exitEntry = new EventTrigger.Entry();
+        exitEntry.eventID = EventTriggerType.PointerExit;
+        exitEntry.callback.AddListener(
+            (eventData) =>
+            {
+                text.color = _normalTextColor;
+            }
+        );
+        trigger.triggers.Add(exitEntry);
+    }
+
+    private void EnsureVerticalLayoutSettings()
+    {
+        if (_choicesParent != null)
+        {
+            VerticalLayoutGroup vertLayout = _choicesParent.GetComponent<VerticalLayoutGroup>();
+            if (vertLayout != null)
+            {
+                // Recommended settings for dialogue choice buttons
+                vertLayout.padding = new RectOffset(0, 0, 0, -100);
+                vertLayout.childControlWidth = true;
+                vertLayout.childForceExpandWidth = true;
+                vertLayout.childControlHeight = true;
+                vertLayout.childForceExpandHeight = false;
+                vertLayout.spacing = 8f;
+            }
+        }
+    }
+
+    // New method to handle preference discoveries through dialogue
+    public void DiscoverBachelorPreference(string preferenceName, bool isLike)
+    {
+        if (_bachelor == null)
+            return;
+
+        if (isLike)
+        {
+            // Find the like by description and discover it
+            for (int i = 0; i < _bachelor._likes.Length; i++)
+            {
+                if (_bachelor._likes[i].description == preferenceName)
+                {
+                    _bachelor.DiscoverLike(i);
+                    Debug.Log($"Discovered like: {preferenceName}");
+
+                    // Also update our game variables
+                    _gameVariables["LikeDiscovered"] = "true";
+                    _gameVariables["NotebookLikeEntry"] = "true";
+                    break;
+                }
+            }
+        }
+        else
+        {
+            // Find the dislike by description and discover it
+            for (int i = 0; i < _bachelor._dislikes.Length; i++)
+            {
+                if (_bachelor._dislikes[i].description == preferenceName)
+                {
+                    _bachelor.DiscoverDislike(i);
+                    Debug.Log($"Discovered dislike: {preferenceName}");
+
+                    // Also update our game variables
+                    _gameVariables["DislikeDiscovered"] = "true";
+                    _gameVariables["NotebookDislikeEntry"] = "true";
+                    break;
+                }
             }
         }
     }
