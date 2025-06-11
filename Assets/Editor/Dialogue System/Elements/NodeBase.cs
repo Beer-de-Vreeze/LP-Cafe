@@ -1,31 +1,31 @@
+using System;
 using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
-using System;
 
 namespace DS.Elements
 {
-    using Enumerations;
-    using Windows;
-    using Utilities;
-    using DS.Data.Save;
     using System.Linq;
+    using DS.Data.Save;
+    using Enumerations;
     using UnityEditor.Search;
+    using Utilities;
+    using Windows;
 
     public class NodeBase : Node
     {
         //Base node
-        public string m_nodeID {  get; set;}
-        public string m_nodeDialogueName { get; set;}
-        public List<DSChoiceSaveData> m_nodeChoices {  get; set;}
-        public string m_nodeText {  get; set;}
-        public Sprite m_nodeCharacterImage { get; set;}
+        public string m_nodeID { get; set; }
+        public string m_nodeDialogueName { get; set; }
+        public List<DSChoiceSaveData> m_nodeChoices { get; set; }
+        public string m_nodeText { get; set; }
+        public Sprite m_nodeCharacterImage { get; set; }
         public AudioClip m_nodeAudio { get; set; }
-        public DSDialogueType m_nodeDialogueType { get; set;}
+        public DSDialogueType m_nodeDialogueType { get; set; }
 
-        public DSGroup m_nodeGroup { get; set;}
+        public DSGroup m_nodeGroup { get; set; }
 
         protected DSGraphView m_graphView;
         private Color m_defaultBackgroundColor;
@@ -44,6 +44,7 @@ namespace DS.Elements
         // Available comparison operators for the condition
         /// <summary>Array of available comparison operators for condition evaluation</summary>
         public string[] m_comparisonTypes = { "==", "!=", ">", "<", ">=", "<=" };
+
         //End Condition Node
 
         //Setter Node
@@ -53,6 +54,10 @@ namespace DS.Elements
         public int m_loveScoreAmount { get; set; }
         public bool m_boolValue { get; set; }
         public LoveMeterSO m_loveMeter { get; set; }
+        public NewBachelorSO m_bachelor { get; set; }
+        public bool m_isLikePreference { get; set; }
+        public string m_selectedPreference { get; set; }
+
         //End Setter Node
 
         public virtual void Initialize(string nodeName, DSGraphView dsGraphView, Vector2 pos)
@@ -77,60 +82,63 @@ namespace DS.Elements
         public virtual void Draw()
         {
             /* TITLE CONTAINER*/
-            TextField dialogueNameTextField = DSElementUtility.CreateTextField(m_nodeDialogueName, null, callback =>
-            {
-                TextField target = (TextField) callback.target;
-
-                //No spaces or special characters in filenames.
-                target.value = callback.newValue.RemoveWhitespaces().RemoveSpecialCharacters();
-
-                //Checks if there is a value to make sure no empty things are saved.
-                if (string.IsNullOrEmpty(target.value))
+            TextField dialogueNameTextField = DSElementUtility.CreateTextField(
+                m_nodeDialogueName,
+                null,
+                callback =>
                 {
-                    if (!string.IsNullOrEmpty(m_nodeDialogueName))
+                    TextField target = (TextField)callback.target;
+
+                    //No spaces or special characters in filenames.
+                    target.value = callback.newValue.RemoveWhitespaces().RemoveSpecialCharacters();
+
+                    //Checks if there is a value to make sure no empty things are saved.
+                    if (string.IsNullOrEmpty(target.value))
                     {
-                        ++m_graphView.NameErrorsAmount;
+                        if (!string.IsNullOrEmpty(m_nodeDialogueName))
+                        {
+                            ++m_graphView.NameErrorsAmount;
+                        }
                     }
-                }
-                else
-                {
-                    if (string.IsNullOrEmpty(m_nodeDialogueName))
+                    else
                     {
-                        --m_graphView.NameErrorsAmount;
+                        if (string.IsNullOrEmpty(m_nodeDialogueName))
+                        {
+                            --m_graphView.NameErrorsAmount;
+                        }
                     }
-                }
 
-                if (m_nodeGroup == null)
-                {
-                    m_graphView.RemoveUngroupedNode(this);
+                    if (m_nodeGroup == null)
+                    {
+                        m_graphView.RemoveUngroupedNode(this);
+
+                        m_nodeDialogueName = target.value;
+
+                        m_graphView.AddUngroupedNode(this);
+
+                        return;
+                    }
+
+                    DSGroup currentGroup = m_nodeGroup;
+
+                    m_graphView.RemoveGroupedNode(this, m_nodeGroup);
 
                     m_nodeDialogueName = target.value;
 
-                    m_graphView.AddUngroupedNode(this);
-
-                    return;
+                    m_graphView.AddGroupedNode(this, currentGroup);
                 }
+            );
 
-                DSGroup currentGroup = m_nodeGroup;
-
-                m_graphView.RemoveGroupedNode(this, m_nodeGroup);
-
-                m_nodeDialogueName = target.value;
-
-                m_graphView.AddGroupedNode(this, currentGroup);
-            });
-
-            dialogueNameTextField.AddClasses
-            (
-               "ds-node__textfield",
-               "ds-node__filename-textfield",
-               "ds-node__textfield__hidden"
+            dialogueNameTextField.AddClasses(
+                "ds-node__textfield",
+                "ds-node__filename-textfield",
+                "ds-node__textfield__hidden"
             );
 
             titleContainer.Insert(0, dialogueNameTextField);
 
             /*
-             * Input Container 
+             * Input Container
                 Orientation is for the direction in which the port point to when trying to make a connection between nodes.
                 Direction can either be input or output.
                 Capacity Can either be single or multiple (can one or multiple nodes connect to the node).
@@ -138,10 +146,15 @@ namespace DS.Elements
             */
 
             //Inport Container.
-            Port inputPort = this.CreatePort("Dialogue Connection", Orientation.Horizontal, Direction.Input, Port.Capacity.Multi);
+            Port inputPort = this.CreatePort(
+                "Dialogue Connection",
+                Orientation.Horizontal,
+                Direction.Input,
+                Port.Capacity.Multi
+            );
 
             inputPort.portName = "Dialogue Connection";
-            
+
             inputContainer.Add(inputPort);
 
             //Extension Container.
@@ -151,10 +164,14 @@ namespace DS.Elements
 
             Foldout textFoldout = DSElementUtility.CreateFoldOut("Dialogue Text");
 
-            TextField textTextField = DSElementUtility.CreateTextArea(m_nodeText, null, callback =>
-            {
-                m_nodeText = callback.newValue;
-            });
+            TextField textTextField = DSElementUtility.CreateTextArea(
+                m_nodeText,
+                null,
+                callback =>
+                {
+                    m_nodeText = callback.newValue;
+                }
+            );
 
             ObjectField imageField = new ObjectField("Bachelor Image")
             {
@@ -177,11 +194,7 @@ namespace DS.Elements
                 m_nodeAudio = evt.newValue as AudioClip;
             });
 
-            textTextField.AddClasses
-            (
-                "ds-node__textfield",
-                "ds-node__quote-textfield"
-            );
+            textTextField.AddClasses("ds-node__textfield", "ds-node__quote-textfield");
 
             textFoldout.Add(textTextField);
             customDataContainer.Add(audioField);
@@ -195,15 +208,21 @@ namespace DS.Elements
         public override void BuildContextualMenu(ContextualMenuPopulateEvent evt)
         {
             //Makes a context menu action which deletes all input port edges of the selected node.
-            evt.menu.AppendAction("Disconnect Input Ports", actionEvent =>
-            {
-                DisConnectInputPorts();
-            });
+            evt.menu.AppendAction(
+                "Disconnect Input Ports",
+                actionEvent =>
+                {
+                    DisConnectInputPorts();
+                }
+            );
             //Makes a context menu action which deletes all output port edges of the selected node.
-            evt.menu.AppendAction("Disconnect Output Ports", actionEvent =>
-            {
-                DisConnectOutputPorts();
-            });
+            evt.menu.AppendAction(
+                "Disconnect Output Ports",
+                actionEvent =>
+                {
+                    DisConnectOutputPorts();
+                }
+            );
 
             //Makes sure that you can still delete all the edges from both the input and output ports in one go.
             base.BuildContextualMenu(evt);
@@ -230,7 +249,7 @@ namespace DS.Elements
 
         private void DisconnectPorts(VisualElement container)
         {
-            foreach(Port port in container.Children())
+            foreach (Port port in container.Children())
             {
                 if (!port.connected)
                 {
