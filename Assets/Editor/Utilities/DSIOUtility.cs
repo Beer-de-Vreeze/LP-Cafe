@@ -224,6 +224,8 @@ namespace DS.Utilities
                 m_nodeLoveScoreAmountData = node.m_loveScoreAmount,
                 m_nodeBoolValueData = node.m_boolValue,
                 m_nodeLoveMeterData = node.m_loveMeter,
+                m_bachelorData = node.m_bachelor,
+                m_isLikePreference = node.m_isLikePreference,
             };
 
             graphData.m_graphNodesData.Add(nodeData);
@@ -296,10 +298,12 @@ namespace DS.Utilities
                     node.m_boolValue,
                     node.m_nodeDialogueType,
                     node.m_loveMeter,
+                    node.m_bachelor,
+                    node.m_isLikePreference,
+                    node.m_selectedPreference,
                     node.IsStartingNode()
                 );
             }
-
 
             m_createdDialogues.Add(node.m_nodeID, dialogue);
 
@@ -518,6 +522,9 @@ namespace DS.Utilities
                     node.m_loveScoreAmount = nodeSaveData.m_nodeLoveScoreAmountData;
                     node.m_boolValue = nodeSaveData.m_nodeBoolValueData;
                     node.m_loveMeter = nodeSaveData.m_nodeLoveMeterData;
+                    node.m_bachelor = nodeSaveData.m_bachelorData;
+                    node.m_isLikePreference = nodeSaveData.m_isLikePreference;
+                    node.m_selectedPreference = nodeSaveData.m_selectedPreference;
                 }
 
                 node.Draw();

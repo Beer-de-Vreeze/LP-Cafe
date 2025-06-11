@@ -57,7 +57,6 @@ namespace DS.Elements
         public NewBachelorSO m_bachelor { get; set; }
         public bool m_isLikePreference { get; set; }
         public string m_selectedPreference { get; set; }
-
         //End Setter Node
 
         public virtual void Initialize(string nodeName, DSGraphView dsGraphView, Vector2 pos)

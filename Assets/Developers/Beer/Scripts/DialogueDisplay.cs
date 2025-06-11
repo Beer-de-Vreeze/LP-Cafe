@@ -232,9 +232,9 @@ public class DialogueDisplay : MonoBehaviour
 
             // Get the property to check, comparison type, and value from properties in DSDialogueSO
             // Assuming these are accessible through custom properties in DSDialogueSO
-            string propertyName = conditionNode.m_propertyToCheck;
-            string comparisonType = conditionNode.m_comparisonType;
-            string comparisonValue = conditionNode.m_comparisonValue;
+            string propertyName = conditionNode.m_propertyToCheckData;
+            string comparisonType = conditionNode.m_comparisonTypeData;
+            string comparisonValue = conditionNode.m_comparisonValueData;
 
             // Get the current value of the property
             bool conditionMet = false;
@@ -365,7 +365,7 @@ public class DialogueDisplay : MonoBehaviour
             DSDialogueSO setterNode = _dialogue.m_dialogue;
 
             // Get setter operation type from DSDialogueSO
-            var operationType = setterNode.m_operationType;
+            var operationType = setterNode.m_operationTypeData;
 
             // Apply the setter operation based on its type
             Debug.Log($"Applying setter operation: {operationType}");
@@ -374,8 +374,8 @@ public class DialogueDisplay : MonoBehaviour
                 case SetterOperationType.SetValue:
                     Debug.Log("Setting variable value...");
                     // Set a variable value
-                    string variableName = setterNode.m_variableName;
-                    string value = setterNode.m_valueToSet;
+                    string variableName = setterNode.m_variableNameData;
+                    string value = setterNode.m_valueToSetData;
                     // Update the variable
                     _gameVariables[variableName] = value;
                     Debug.Log($"Set variable: {variableName} = {value}");
@@ -384,7 +384,7 @@ public class DialogueDisplay : MonoBehaviour
                 case SetterOperationType.UpdateLoveScore:
                     Debug.Log("Updating love score...");
                     // Update the love score
-                    int amount = setterNode.m_loveScoreAmount;
+                    int amount = setterNode.m_loveScoreAmountData;
 
                     try
                     {
@@ -468,8 +468,8 @@ public class DialogueDisplay : MonoBehaviour
                 case SetterOperationType.UpdateBoolean:
                     Debug.Log("Updating boolean value...");
                     // Update a boolean value
-                    string boolName = setterNode.m_variableName;
-                    bool boolValue = setterNode.m_boolValue;
+                    string boolName = setterNode.m_variableNameData;
+                    bool boolValue = setterNode.m_boolValueData;
 
                     // Update the variable
                     _gameVariables[boolName] = boolValue.ToString().ToLower();
@@ -746,9 +746,9 @@ public class DialogueDisplay : MonoBehaviour
         DSDialogueSO conditionNode = choice.m_nextDialogue;
 
         // Get condition parameters
-        string propertyName = conditionNode.m_propertyToCheck;
-        string comparisonType = conditionNode.m_comparisonType;
-        string comparisonValue = conditionNode.m_comparisonValue;
+        string propertyName = conditionNode.m_propertyToCheckData;
+        string comparisonType = conditionNode.m_comparisonTypeData;
+        string comparisonValue = conditionNode.m_comparisonValueData;
 
         // Check if we have the property
         if (!_gameVariables.TryGetValue(propertyName, out string currentValue))
