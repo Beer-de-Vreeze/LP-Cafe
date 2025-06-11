@@ -212,17 +212,18 @@ namespace DS.Utilities
                 m_nodePositionData = node.GetPosition().position,
 
                 //Condition Node
-                m_nodeComparisonTypeData = node.comparisonType,
-                m_nodeComparisonValueData = node.comparisonValue,
-                m_nodePropertyToCheckData = node.propertyToCheck,
-                m_nodeOperationTypeData = node.comparisonType,
+                m_nodeComparisonTypeData = node.m_comparisonType,
+                m_nodeComparisonValueData = node.m_comparisonValue,
+                m_nodePropertyToCheckData = node.m_propertyToCheck,
+                m_nodeOperationTypeData = node.m_comparisonType,
 
                 //Setter Node
-                m_nodeValueToSetData = node.valueToSet,
-                m_nodeVariableNameData = node.variableName,
-                m_nodeSetterOperationTypeData = node.operationType,
-                m_nodeLoveScoreAmountData = node.loveScoreAmount,
-                m_nodeBoolValueData = node.boolValue,
+                m_nodeValueToSetData = node.m_valueToSet,
+                m_nodeVariableNameData = node.m_variableName,
+                m_nodeSetterOperationTypeData = node.m_operationType,
+                m_nodeLoveScoreAmountData = node.m_loveScoreAmount,
+                m_nodeBoolValueData = node.m_boolValue,
+                m_nodeLoveMeterData = node.m_loveMeter,
             };
 
             graphData.m_graphNodesData.Add(nodeData);
@@ -274,9 +275,9 @@ namespace DS.Utilities
             {
                 dialogue.InitializeConditionNode(
                     node.m_nodeDialogueName,
-                    node.propertyToCheck,
-                    node.comparisonType,
-                    node.comparisonValue,
+                    node.m_propertyToCheck,
+                    node.m_comparisonType,
+                    node.m_comparisonValue,
                     ConvertNodeChoics(node.m_nodeChoices),
                     node.m_nodeDialogueType,
                     node.IsStartingNode()
@@ -288,12 +289,13 @@ namespace DS.Utilities
                 dialogue.InitializeSetterNode(
                     node.m_nodeDialogueName,
                     ConvertNodeChoics(node.m_nodeChoices),
-                    node.valueToSet,
-                    node.variableName,
-                    node.operationType,
-                    node.loveScoreAmount,
-                    node.boolValue,
+                    node.m_valueToSet,
+                    node.m_variableName,
+                    node.m_operationType,
+                    node.m_loveScoreAmount,
+                    node.m_boolValue,
                     node.m_nodeDialogueType,
+                    node.m_loveMeter,
                     node.IsStartingNode()
                 );
             }
@@ -502,19 +504,20 @@ namespace DS.Utilities
 
                 if (nodeSaveData.m_dialogueTypeData == DSDialogueType.Condition)
                 {
-                    node.propertyToCheck = nodeSaveData.m_nodePropertyToCheckData;
-                    node.comparisonType = nodeSaveData.m_nodeComparisonTypeData;
-                    node.comparisonValue = nodeSaveData.m_nodeComparisonValueData;
-                    node.comparisonType = nodeSaveData.m_nodeComparisonTypeData;
+                    node.m_propertyToCheck = nodeSaveData.m_nodePropertyToCheckData;
+                    node.m_comparisonType = nodeSaveData.m_nodeComparisonTypeData;
+                    node.m_comparisonValue = nodeSaveData.m_nodeComparisonValueData;
+                    node.m_comparisonType = nodeSaveData.m_nodeComparisonTypeData;
                 }
 
                 if(nodeSaveData.m_dialogueTypeData == DSDialogueType.Setter)
                 {
-                    node.valueToSet = nodeSaveData.m_nodeValueToSetData;
-                    node.variableName = nodeSaveData.m_nodeVariableNameData;
-                    node.operationType = nodeSaveData.m_nodeSetterOperationTypeData;
-                    node.loveScoreAmount = nodeSaveData.m_nodeLoveScoreAmountData;
-                    node.boolValue = nodeSaveData.m_nodeBoolValueData;
+                    node.m_valueToSet = nodeSaveData.m_nodeValueToSetData;
+                    node.m_variableName = nodeSaveData.m_nodeVariableNameData;
+                    node.m_operationType = nodeSaveData.m_nodeSetterOperationTypeData;
+                    node.m_loveScoreAmount = nodeSaveData.m_nodeLoveScoreAmountData;
+                    node.m_boolValue = nodeSaveData.m_nodeBoolValueData;
+                    node.m_loveMeter = nodeSaveData.m_nodeLoveMeterData;
                 }
 
                 node.Draw();

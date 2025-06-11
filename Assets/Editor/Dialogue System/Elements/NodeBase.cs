@@ -33,26 +33,26 @@ namespace DS.Elements
         //Condition Node
         // Properties that define the condition to be evaluated
         /// <summary>Property name that will be checked during condition evaluation</summary>
-        public string propertyToCheck { get; set; } = "Love"; // Default to checking love value
+        public string m_propertyToCheck { get; set; } = "Love"; // Default to checking love value
 
         /// <summary>Comparison operator used to evaluate the condition</summary>
-        public string comparisonType { get; set; } = ">="; // Default to greater than or equal
+        public string m_comparisonType { get; set; } = ">="; // Default to greater than or equal
 
         /// <summary>The value to compare the property against</summary>
-        public string comparisonValue { get; set; } = "0"; // Default value to compare against
+        public string m_comparisonValue { get; set; } = "0"; // Default value to compare against
 
         // Available comparison operators for the condition
         /// <summary>Array of available comparison operators for condition evaluation</summary>
-        public string[] comparisonTypes = { "==", "!=", ">", "<", ">=", "<=" };
+        public string[] m_comparisonTypes = { "==", "!=", ">", "<", ">=", "<=" };
         //End Condition Node
 
         //Setter Node
-        public string valueToSet { get; set; }
-        public string variableName { get; set; }
-        public SetterOperationType operationType { get; set; }
-        public int loveScoreAmount { get; set; }
-        public bool boolValue { get; set; }
-        public LoveMeterSO loveMeter { get; set; }
+        public string m_valueToSet { get; set; }
+        public string m_variableName { get; set; }
+        public SetterOperationType m_operationType { get; set; }
+        public int m_loveScoreAmount { get; set; }
+        public bool m_boolValue { get; set; }
+        public LoveMeterSO m_loveMeter { get; set; }
         //End Setter Node
 
         public virtual void Initialize(string nodeName, DSGraphView dsGraphView, Vector2 pos)

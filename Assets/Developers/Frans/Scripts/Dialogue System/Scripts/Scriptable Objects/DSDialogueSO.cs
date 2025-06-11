@@ -60,6 +60,9 @@ namespace DS.ScriptableObjects
         [field: SerializeField]
         public bool m_boolValue { get; set; }
 
+        [field: SerializeField]
+        public LoveMeterSO m_loveMeterData { get; set; }
+
         public void Initialize(
             string dialogueName,
             string text,
@@ -108,6 +111,7 @@ namespace DS.ScriptableObjects
             int loveScoreAmount,
             bool boolValue,
             DSDialogueType dialogueType,
+            LoveMeterSO loveMeterData,
             bool isStartingDialogue
         )
         {
@@ -119,6 +123,7 @@ namespace DS.ScriptableObjects
             m_loveScoreAmount = loveScoreAmount;
             m_boolValue = boolValue;
             m_dialogueTypeData = dialogueType;
+            m_loveMeterData = loveMeterData;
             m_isStartingDialogueData = isStartingDialogue;
         }
     }
