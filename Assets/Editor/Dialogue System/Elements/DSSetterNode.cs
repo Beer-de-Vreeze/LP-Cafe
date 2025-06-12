@@ -269,19 +269,15 @@ namespace DS.Elements
 
             // Preference dropdown to select which one to discover
             preferenceDropdown = new DropdownField("Preference", new List<string>(), 0);
-            Debug.Log(m_selectedPreference.ToString());
+            preferenceDropdown.value = m_selectedPreference;
+            Debug.Log(preferenceDropdown.value);
+
+            //Event doesnt trigger on load! NEEDS FIX!
             preferenceDropdown.RegisterValueChangedCallback(evt =>
-            {
-                if(m_selectedPreference.ToString() != evt.newValue)
-                {
-                    m_selectedPreference = evt.newValue;
-                    
-                }
-                else
-                {
-                    preferenceDropdown.value = m_selectedPreference.ToString();
-                }
+            { 
+                 m_selectedPreference = evt.newValue;
             });
+            
             preferenceContainer.Add(preferenceDropdown);
             #endregion
             // Add all containers
@@ -295,7 +291,10 @@ namespace DS.Elements
             // Initialize visible fields based on current operation type
             UpdateVisibleFields();
             // Always populate preference dropdown during initialization
-            PopulatePreferenceDropdown();
+            if(m_bachelor == null)
+            {
+                PopulatePreferenceDropdown();
+            }
 
             //OUTPUT CONTAINER
             foreach (DSChoiceSaveData choice in m_nodeChoices)
@@ -312,8 +311,6 @@ namespace DS.Elements
 
         private void UpdateVisibleFields()
         {
-            Debug.Log(m_operationType);
-
             // Hide all containers first
             valueContainer.style.display = DisplayStyle.None;
             loveScoreContainer.style.display = DisplayStyle.None;
