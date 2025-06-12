@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: beb9a63dbd6015942ab1d5ccf8100789, type: 3}
   m_Name: TestGraph
   m_EditorClassIdentifier: 
-  <m_graphFileNameData>k__BackingField: TEST
+  <m_graphFileNameData>k__BackingField: test
   <m_graphGroupsData>k__BackingField: []
   <m_graphNodesData>k__BackingField:
-  - <m_nodeIDData>k__BackingField: 4b1cd385-7013-42e9-8ff0-87dd6dcbe172
+  - <m_nodeIDData>k__BackingField: 58a9190f-3170-4c13-b03c-a5ddcb6a9386
     <m_nodeNameData>k__BackingField: Value Setter
     <m_nodeBachelorImageData>k__BackingField: {fileID: 0}
     <m_nodeAudioLinesData>k__BackingField: {fileID: 0}
@@ -25,7 +25,7 @@ MonoBehaviour:
       <m_choiceNodeIDData>k__BackingField: 
     <m_nodeGroupIDData>k__BackingField: 
     <m_dialogueTypeData>k__BackingField: 3
-    <m_nodePositionData>k__BackingField: {x: 513.3333, y: 146.66667}
+    <m_nodePositionData>k__BackingField: {x: 855, y: 355}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -33,12 +33,13 @@ MonoBehaviour:
     <m_nodeValueToSetData>k__BackingField: 
     <m_nodeVariableNameData>k__BackingField: variableName
     <m_nodeSetterOperationTypeData>k__BackingField: 3
-    <m_nodeLoveScoreAmountData>k__BackingField: 0
+    <m_nodeLoveScoreAmountData>k__BackingField: 20
     <m_nodeBoolValueData>k__BackingField: 0
-    <m_nodeLoveMeterData>k__BackingField: {fileID: 0}
+    <m_nodeLoveMeterData>k__BackingField: {fileID: 11400000, guid: c18fce8bdce1ff24ab33a75266e564c8, type: 2}
     <m_bachelorData>k__BackingField: {fileID: 11400000, guid: 17897679caa48db4e901fb103d088d6d, type: 2}
     <m_isLikePreference>k__BackingField: 1
     <m_selectedPreference>k__BackingField: hooi2
+    <m_enumSetter>k__BackingField: 0
   <m_graphOldGroupNamesData>k__BackingField: []
   <m_graphOldUngroupedNodeNamesData>k__BackingField:
   - Value Setter

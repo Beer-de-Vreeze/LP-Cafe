@@ -227,6 +227,7 @@ namespace DS.Utilities
                 m_bachelorData = node.m_bachelor,
                 m_isLikePreference = node.m_isLikePreference,
                 m_selectedPreference = node.m_selectedPreference,
+                m_enumSetter = node.m_enumSetter,
             };
 
             graphData.m_graphNodesData.Add(nodeData);
@@ -290,11 +291,11 @@ namespace DS.Utilities
             else if(node.m_nodeDialogueType == DSDialogueType.Setter)
             {
                 dialogue.InitializeSetterNode(
+                    node.m_operationType,
                     node.m_nodeDialogueName,
                     ConvertNodeChoics(node.m_nodeChoices),
                     node.m_valueToSet,
                     node.m_variableName,
-                    node.m_operationType,
                     node.m_loveScoreAmount,
                     node.m_boolValue,
                     node.m_nodeDialogueType,
@@ -302,6 +303,7 @@ namespace DS.Utilities
                     node.m_bachelor,
                     node.m_isLikePreference,
                     node.m_selectedPreference,
+                    node.m_enumSetter,
                     node.IsStartingNode()
                 );
             }
@@ -517,15 +519,16 @@ namespace DS.Utilities
 
                 if(nodeSaveData.m_dialogueTypeData == DSDialogueType.Setter)
                 {
+                    node.m_operationType = nodeSaveData.m_nodeSetterOperationTypeData;
                     node.m_valueToSet = nodeSaveData.m_nodeValueToSetData;
                     node.m_variableName = nodeSaveData.m_nodeVariableNameData;
-                    node.m_operationType = nodeSaveData.m_nodeSetterOperationTypeData;
                     node.m_loveScoreAmount = nodeSaveData.m_nodeLoveScoreAmountData;
                     node.m_boolValue = nodeSaveData.m_nodeBoolValueData;
                     node.m_loveMeter = nodeSaveData.m_nodeLoveMeterData;
                     node.m_bachelor = nodeSaveData.m_bachelorData;
                     node.m_isLikePreference = nodeSaveData.m_isLikePreference;
                     node.m_selectedPreference = nodeSaveData.m_selectedPreference;
+                    node.m_enumSetter = nodeSaveData.m_enumSetter;
                 }
 
                 node.Draw();

@@ -57,6 +57,15 @@ namespace DS.Elements
         public NewBachelorSO m_bachelor { get; set; }
         public bool m_isLikePreference { get; set; }
         public string m_selectedPreference { get; set; }
+        public DropdownField m_operationTypeDropdown { get; set; }
+
+
+
+        public int m_enumSetter { get; set; }
+
+        public List<string> operationTypes = new List<string>();
+
+        public string m_operationTypesText { get; set;}
         //End Setter Node
 
         public virtual void Initialize(string nodeName, DSGraphView dsGraphView, Vector2 pos)
