@@ -16,7 +16,7 @@ MonoBehaviour:
   <m_graphGroupsData>k__BackingField:
   - <m_groupIDData>k__BackingField: 8dd838cf-d359-4f95-b47b-0034c50deb5d
     <m_groupNameData>k__BackingField: Beer
-    <m_groupPositionData>k__BackingField: {x: -57.2, y: -41.2}
+    <m_groupPositionData>k__BackingField: {x: -57, y: -42}
   <m_graphNodesData>k__BackingField:
   - <m_nodeIDData>k__BackingField: d33756df-9c9b-48c0-b14a-e7f0f286b84c
     <m_nodeNameData>k__BackingField: Kim
@@ -28,7 +28,7 @@ MonoBehaviour:
       <m_choiceNodeIDData>k__BackingField: 
     <m_nodeGroupIDData>k__BackingField: 8dd838cf-d359-4f95-b47b-0034c50deb5d
     <m_dialogueTypeData>k__BackingField: 0
-    <m_nodePositionData>k__BackingField: {x: 1343.2, y: 177.2}
+    <m_nodePositionData>k__BackingField: {x: 1343, y: 177}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -39,6 +39,9 @@ MonoBehaviour:
     <m_nodeLoveScoreAmountData>k__BackingField: 0
     <m_nodeBoolValueData>k__BackingField: 0
     <m_nodeLoveMeterData>k__BackingField: {fileID: 0}
+    <m_bachelorData>k__BackingField: {fileID: 0}
+    <m_isLikePreference>k__BackingField: 0
+    <m_selectedPreference>k__BackingField: 
   - <m_nodeIDData>k__BackingField: 767800fe-5dbf-42dc-8d30-d38c9509c50d
     <m_nodeNameData>k__BackingField: Simon
     <m_nodeBachelorImageData>k__BackingField: {fileID: 21300000, guid: 88973fea7e1be0e42a45c0aab1460c9e, type: 3}
@@ -49,7 +52,7 @@ MonoBehaviour:
       <m_choiceNodeIDData>k__BackingField: 
     <m_nodeGroupIDData>k__BackingField: 8dd838cf-d359-4f95-b47b-0034c50deb5d
     <m_dialogueTypeData>k__BackingField: 0
-    <m_nodePositionData>k__BackingField: {x: 1343.2, y: 17.2}
+    <m_nodePositionData>k__BackingField: {x: 1343, y: 17}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -60,6 +63,9 @@ MonoBehaviour:
     <m_nodeLoveScoreAmountData>k__BackingField: 0
     <m_nodeBoolValueData>k__BackingField: 0
     <m_nodeLoveMeterData>k__BackingField: {fileID: 0}
+    <m_bachelorData>k__BackingField: {fileID: 0}
+    <m_isLikePreference>k__BackingField: 0
+    <m_selectedPreference>k__BackingField: 
   - <m_nodeIDData>k__BackingField: 731b1aa7-d846-4e3c-9b56-d91709e1d5ea
     <m_nodeNameData>k__BackingField: Beer
     <m_nodeBachelorImageData>k__BackingField: {fileID: 21300000, guid: 8c6d59bba2605764b8ac661351c13817, type: 3}
@@ -71,7 +77,7 @@ MonoBehaviour:
       <m_choiceNodeIDData>k__BackingField: ba042354-d444-4260-930f-d6f51ae65aa2
     <m_nodeGroupIDData>k__BackingField: 8dd838cf-d359-4f95-b47b-0034c50deb5d
     <m_dialogueTypeData>k__BackingField: 0
-    <m_nodePositionData>k__BackingField: {x: -32, y: 119.2}
+    <m_nodePositionData>k__BackingField: {x: -32, y: 119}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -82,6 +88,9 @@ MonoBehaviour:
     <m_nodeLoveScoreAmountData>k__BackingField: 0
     <m_nodeBoolValueData>k__BackingField: 0
     <m_nodeLoveMeterData>k__BackingField: {fileID: 0}
+    <m_bachelorData>k__BackingField: {fileID: 0}
+    <m_isLikePreference>k__BackingField: 0
+    <m_selectedPreference>k__BackingField: 
   - <m_nodeIDData>k__BackingField: ba042354-d444-4260-930f-d6f51ae65aa2
     <m_nodeNameData>k__BackingField: Frans
     <m_nodeBachelorImageData>k__BackingField: {fileID: 21300000, guid: 9080932b5dd72654e8097647ebb9ba7f, type: 3}
@@ -92,7 +101,7 @@ MonoBehaviour:
       <m_choiceNodeIDData>k__BackingField: c1d19dca-c21a-4395-a0eb-6976be32f6e9
     <m_nodeGroupIDData>k__BackingField: 8dd838cf-d359-4f95-b47b-0034c50deb5d
     <m_dialogueTypeData>k__BackingField: 0
-    <m_nodePositionData>k__BackingField: {x: 334, y: 119.2}
+    <m_nodePositionData>k__BackingField: {x: 334, y: 119}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -103,6 +112,9 @@ MonoBehaviour:
     <m_nodeLoveScoreAmountData>k__BackingField: 0
     <m_nodeBoolValueData>k__BackingField: 0
     <m_nodeLoveMeterData>k__BackingField: {fileID: 0}
+    <m_bachelorData>k__BackingField: {fileID: 0}
+    <m_isLikePreference>k__BackingField: 0
+    <m_selectedPreference>k__BackingField: 
   - <m_nodeIDData>k__BackingField: 6656f675-cd28-42a2-bd55-f79ab58d95d7
     <m_nodeNameData>k__BackingField: Condition Node
     <m_nodeBachelorImageData>k__BackingField: {fileID: 0}
@@ -113,7 +125,7 @@ MonoBehaviour:
       <m_choiceNodeIDData>k__BackingField: b2d1aa1e-41b1-48cd-97c4-a13a455e54d4
     <m_nodeGroupIDData>k__BackingField: 8dd838cf-d359-4f95-b47b-0034c50deb5d
     <m_dialogueTypeData>k__BackingField: 2
-    <m_nodePositionData>k__BackingField: {x: 1343.2, y: 356}
+    <m_nodePositionData>k__BackingField: {x: 1343, y: 356}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: ==
     <m_nodeComparisonValueData>k__BackingField: 50
@@ -124,6 +136,9 @@ MonoBehaviour:
     <m_nodeLoveScoreAmountData>k__BackingField: 0
     <m_nodeBoolValueData>k__BackingField: 0
     <m_nodeLoveMeterData>k__BackingField: {fileID: 0}
+    <m_bachelorData>k__BackingField: {fileID: 0}
+    <m_isLikePreference>k__BackingField: 0
+    <m_selectedPreference>k__BackingField: 
   - <m_nodeIDData>k__BackingField: b2d1aa1e-41b1-48cd-97c4-a13a455e54d4
     <m_nodeNameData>k__BackingField: Lance
     <m_nodeBachelorImageData>k__BackingField: {fileID: 21300000, guid: 8c6d59bba2605764b8ac661351c13817, type: 3}
@@ -145,6 +160,38 @@ MonoBehaviour:
     <m_nodeLoveScoreAmountData>k__BackingField: 0
     <m_nodeBoolValueData>k__BackingField: 0
     <m_nodeLoveMeterData>k__BackingField: {fileID: 0}
+    <m_bachelorData>k__BackingField: {fileID: 0}
+    <m_isLikePreference>k__BackingField: 0
+    <m_selectedPreference>k__BackingField: 
+  - <m_nodeIDData>k__BackingField: 358d2d5d-3ce4-4007-bd62-aef563689554
+    <m_nodeNameData>k__BackingField: Bart
+    <m_nodeBachelorImageData>k__BackingField: {fileID: 21300000, guid: fe4ea59cacae4d3469b7226b017da1f1, type: 3}
+    <m_nodeAudioLinesData>k__BackingField: {fileID: 0}
+    <m_nodeTextData>k__BackingField: Kim wil naar juis om koffie te drinken en te
+      lezen
+    <m_nodeChoicesData>k__BackingField:
+    - <m_choiceTextData>k__BackingField: Kees
+      <m_choiceNodeIDData>k__BackingField: 767800fe-5dbf-42dc-8d30-d38c9509c50d
+    - <m_choiceTextData>k__BackingField: Klaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaas
+      <m_choiceNodeIDData>k__BackingField: d33756df-9c9b-48c0-b14a-e7f0f286b84c
+    - <m_choiceTextData>k__BackingField: Jantje
+      <m_choiceNodeIDData>k__BackingField: 6656f675-cd28-42a2-bd55-f79ab58d95d7
+    <m_nodeGroupIDData>k__BackingField: 8dd838cf-d359-4f95-b47b-0034c50deb5d
+    <m_dialogueTypeData>k__BackingField: 1
+    <m_nodePositionData>k__BackingField: {x: 979, y: 105}
+    <m_nodePropertyToCheckData>k__BackingField: Love
+    <m_nodeComparisonTypeData>k__BackingField: '>='
+    <m_nodeComparisonValueData>k__BackingField: 0
+    <m_nodeOperationTypeData>k__BackingField: '>='
+    <m_nodeValueToSetData>k__BackingField: 
+    <m_nodeVariableNameData>k__BackingField: 
+    <m_nodeSetterOperationTypeData>k__BackingField: 0
+    <m_nodeLoveScoreAmountData>k__BackingField: 0
+    <m_nodeBoolValueData>k__BackingField: 0
+    <m_nodeLoveMeterData>k__BackingField: {fileID: 0}
+    <m_bachelorData>k__BackingField: {fileID: 0}
+    <m_isLikePreference>k__BackingField: 0
+    <m_selectedPreference>k__BackingField: 
   - <m_nodeIDData>k__BackingField: c1d19dca-c21a-4395-a0eb-6976be32f6e9
     <m_nodeNameData>k__BackingField: Value Setter
     <m_nodeBachelorImageData>k__BackingField: {fileID: 0}
@@ -162,36 +209,13 @@ MonoBehaviour:
     <m_nodeOperationTypeData>k__BackingField: '>='
     <m_nodeValueToSetData>k__BackingField: 
     <m_nodeVariableNameData>k__BackingField: 
-    <m_nodeSetterOperationTypeData>k__BackingField: 1
+    <m_nodeSetterOperationTypeData>k__BackingField: 3
     <m_nodeLoveScoreAmountData>k__BackingField: 50
     <m_nodeBoolValueData>k__BackingField: 0
     <m_nodeLoveMeterData>k__BackingField: {fileID: 11400000, guid: c18fce8bdce1ff24ab33a75266e564c8, type: 2}
-  - <m_nodeIDData>k__BackingField: 358d2d5d-3ce4-4007-bd62-aef563689554
-    <m_nodeNameData>k__BackingField: Bart
-    <m_nodeBachelorImageData>k__BackingField: {fileID: 21300000, guid: fe4ea59cacae4d3469b7226b017da1f1, type: 3}
-    <m_nodeAudioLinesData>k__BackingField: {fileID: 0}
-    <m_nodeTextData>k__BackingField: Kim wil naar juis om koffie te drinken en te
-      lezen
-    <m_nodeChoicesData>k__BackingField:
-    - <m_choiceTextData>k__BackingField: Kees
-      <m_choiceNodeIDData>k__BackingField: 767800fe-5dbf-42dc-8d30-d38c9509c50d
-    - <m_choiceTextData>k__BackingField: Klaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaas
-      <m_choiceNodeIDData>k__BackingField: d33756df-9c9b-48c0-b14a-e7f0f286b84c
-    - <m_choiceTextData>k__BackingField: Jantje
-      <m_choiceNodeIDData>k__BackingField: 6656f675-cd28-42a2-bd55-f79ab58d95d7
-    <m_nodeGroupIDData>k__BackingField: 8dd838cf-d359-4f95-b47b-0034c50deb5d
-    <m_dialogueTypeData>k__BackingField: 1
-    <m_nodePositionData>k__BackingField: {x: 979.2, y: 105.2}
-    <m_nodePropertyToCheckData>k__BackingField: Love
-    <m_nodeComparisonTypeData>k__BackingField: '>='
-    <m_nodeComparisonValueData>k__BackingField: 0
-    <m_nodeOperationTypeData>k__BackingField: '>='
-    <m_nodeValueToSetData>k__BackingField: 
-    <m_nodeVariableNameData>k__BackingField: 
-    <m_nodeSetterOperationTypeData>k__BackingField: 0
-    <m_nodeLoveScoreAmountData>k__BackingField: 0
-    <m_nodeBoolValueData>k__BackingField: 0
-    <m_nodeLoveMeterData>k__BackingField: {fileID: 0}
+    <m_bachelorData>k__BackingField: {fileID: 11400000, guid: 17897679caa48db4e901fb103d088d6d, type: 2}
+    <m_isLikePreference>k__BackingField: 1
+    <m_selectedPreference>k__BackingField: hooi2
   <m_graphOldGroupNamesData>k__BackingField:
   - Beer
   <m_graphOldUngroupedNodeNamesData>k__BackingField: []
@@ -205,5 +229,5 @@ MonoBehaviour:
       - Frans
       - Condition Node
       - Lance
-      - Value Setter
       - Bart
+      - Value Setter

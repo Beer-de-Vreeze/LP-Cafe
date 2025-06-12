@@ -35,16 +35,6 @@ namespace DS.Elements
 
             m_nodeDialogueType = DSDialogueType.Setter;
 
-            m_operationType = SetterOperationType.SetValue;
-            m_variableName = "variableName";
-            m_valueToSet = "";
-            m_loveScoreAmount = 0;
-            m_boolValue = false;
-            m_loveMeter = null;
-            m_bachelor = null;
-            m_isLikePreference = true;
-            m_selectedPreference = "";
-
             DSChoiceSaveData choiceData = new DSChoiceSaveData()
             {
                 m_choiceTextData = "Next Dialogue",
@@ -247,7 +237,7 @@ namespace DS.Elements
             bachelorObjectField = new ObjectField("Bachelor")
             {
                 objectType = typeof(NewBachelorSO),
-                value = m_bachelor
+                value = m_bachelor,
             };
             bachelorObjectField.RegisterValueChangedCallback(evt =>
             {
@@ -284,6 +274,8 @@ namespace DS.Elements
 
             // Initialize visible fields based on current operation type
             UpdateVisibleFields();
+            // Always populate preference dropdown during initialization
+            PopulatePreferenceDropdown();
 
             //OUTPUT CONTAINER
             foreach (DSChoiceSaveData choice in m_nodeChoices)
@@ -324,70 +316,68 @@ namespace DS.Elements
             }
         }
 
-        private void TriggerSetEvent()
-        {
-            switch (m_operationType)
-            {
-                case SetterOperationType.SetValue:
-                    if (!string.IsNullOrEmpty(m_variableName))
-                    {
-                        OnValueSet?.Invoke(m_variableName, m_valueToSet);
-                        Debug.Log($"Set value: {m_variableName} = {m_valueToSet}");
-                    }
-                    break;
+        // private void TriggerSetEvent()
+        // {
+        //         case SetterOperationType.SetValue:
+        //             if (!string.IsNullOrEmpty(m_variableName))
+        //             {
+        //                 OnValueSet?.Invoke(m_variableName, m_valueToSet);
+        //                 Debug.Log($"Set value: {m_variableName} = {m_valueToSet}");
+        //             }
+        //             break;
 
-                case SetterOperationType.UpdateLoveScore:
-                    // Use the selected LoveMeterSO instead of a hardcoded string
-                    if (m_loveMeter != null)
-                    {
-                        OnLoveScoreChanged?.Invoke(m_loveMeter, m_loveScoreAmount);
-                        Debug.Log($"Love score change: {m_loveMeter.name} by {m_loveScoreAmount}");
-                    }
-                    else
-                    {
-                        Debug.LogWarning("No Love Meter SO assigned!");
-                    }
-                    break;
+        //         case SetterOperationType.UpdateLoveScore:
+        //             // Use the selected LoveMeterSO instead of a hardcoded string
+        //             if (m_loveMeter != null)
+        //             {
+        //                 OnLoveScoreChanged?.Invoke(m_loveMeter, m_loveScoreAmount);
+        //                 Debug.Log($"Love score change: {m_loveMeter.name} by {m_loveScoreAmount}");
+        //             }
+        //             else
+        //             {
+        //                 Debug.LogWarning("No Love Meter SO assigned!");
+        //             }
+        //             break;
 
-                case SetterOperationType.UpdateBoolean:
-                    if (!string.IsNullOrEmpty(m_variableName))
-                    {
-                        OnBooleanChanged?.Invoke(m_variableName, m_boolValue);
-                        Debug.Log($"Boolean changed: {m_variableName} = {m_boolValue}");
-                    }
-                    break;
+        //         case SetterOperationType.UpdateBoolean:
+        //             if (!string.IsNullOrEmpty(m_variableName))
+        //             {
+        //                 OnBooleanChanged?.Invoke(m_variableName, m_boolValue);
+        //                 Debug.Log($"Boolean changed: {m_variableName} = {m_boolValue}");
+        //             }
+        //             break;
 
-                case SetterOperationType.DiscoverPreference:
-                    if (m_bachelor != null && !string.IsNullOrEmpty(m_selectedPreference))
-                    {
-                        if (m_isLikePreference)
-                        {
-                            for (int i = 0; i < m_bachelor._likes.Length; i++)
-                            {
-                                if (m_bachelor._likes[i].description == m_selectedPreference)
-                                {
-                                    m_bachelor.DiscoverLike(i);
-                                    Debug.Log($"Discovered like: {m_selectedPreference}");
-                                    break;
-                                }
-                            }
-                        }
-                        else
-                        {
-                            for (int i = 0; i < m_bachelor._dislikes.Length; i++)
-                            {
-                                if (m_bachelor._dislikes[i].description == m_selectedPreference)
-                                {
-                                    m_bachelor.DiscoverDislike(i);
-                                    Debug.Log($"Discovered dislike: {m_selectedPreference}");
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                    break;
-            }
-        }
+        //         case SetterOperationType.DiscoverPreference:
+        //             if (m_bachelor != null && !string.IsNullOrEmpty(m_selectedPreference))
+        //             {
+        //                 if (m_isLikePreference)
+        //                 {
+        //                     for (int i = 0; i < m_bachelor._likes.Length; i++)
+        //                     {
+        //                         if (m_bachelor._likes[i].description == m_selectedPreference)
+        //                         {
+        //                             m_bachelor.DiscoverLike(i);
+        //                             Debug.Log($"Discovered like: {m_selectedPreference}");
+        //                             break;
+        //                         }
+        //                     }
+        //                 }
+        //                 else
+        //                 {
+        //                     for (int i = 0; i < m_bachelor._dislikes.Length; i++)
+        //                     {
+        //                         if (m_bachelor._dislikes[i].description == m_selectedPreference)
+        //                         {
+        //                             m_bachelor.DiscoverDislike(i);
+        //                             Debug.Log($"Discovered dislike: {m_selectedPreference}");
+        //                             break;
+        //                         }
+        //                     }
+        //                 }
+        //             }
+        //             break;
+        //     }
+        // }
 
         private void PopulatePreferenceDropdown()
         {
