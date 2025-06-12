@@ -13,7 +13,16 @@ MonoBehaviour:
   m_Name: Chantal
   m_EditorClassIdentifier: 
   _name: Chantal
-  _knownLikes: []
-  _knownDislikes: []
+  _portrait: {fileID: 0}
+  _likes:
+  - description: hooi
+    discovered: 0
+    icon: {fileID: 0}
+  - description: hooi2
+    discovered: 0
+    icon: {fileID: 0}
+  _dislikes: []
   _isLikeDiscovered: 0
   _isDislikeDiscovered: 0
+  _dialogue: {fileID: 0}
+  _loveMeter: {fileID: 0}

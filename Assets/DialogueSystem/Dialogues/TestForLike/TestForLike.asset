@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a2651e6138de3984dbf11454fa21a045, type: 3}
-  m_Name: Test
+  m_Name: TestForLike
   m_EditorClassIdentifier: 
-  <m_containerFileNameData>k__BackingField: TEST
+  <m_containerFileNameData>k__BackingField: TestForLike
   <m_containerDialogueGroupsData>k__BackingField:
     list: []
   <m_containerUngroupedDialoguesData>k__BackingField:
-  - {fileID: 11400000, guid: 79f7b30d58b0dbf479ebea3d200159d0, type: 2}
+  - {fileID: 11400000, guid: 62b90537ec1d2a747b93f12914025aa1, type: 2}
