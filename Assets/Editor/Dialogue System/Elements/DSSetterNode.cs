@@ -34,6 +34,15 @@ namespace DS.Elements
             base.Initialize(nodeName, dsGraphView, pos);
 
             m_nodeDialogueType = DSDialogueType.Setter;
+            m_operationType = SetterOperationType.SetValue;
+            m_variableName = "variableName";
+            m_valueToSet = "";
+            m_loveScoreAmount = 0;
+            m_boolValue = false;
+            m_loveMeter = null;
+            m_bachelor = null;
+            m_isLikePreference = true;
+            m_selectedPreference = "";
 
             DSChoiceSaveData choiceData = new DSChoiceSaveData()
             {
@@ -318,6 +327,8 @@ namespace DS.Elements
 
         // private void TriggerSetEvent()
         // {
+        //     switch (m_operationType)
+        //     {
         //         case SetterOperationType.SetValue:
         //             if (!string.IsNullOrEmpty(m_variableName))
         //             {
