@@ -7,6 +7,7 @@ namespace DS.ScriptableObjects
 {
     using System;
     using Data;
+    using static NewBachelorSO;
 
     public class DSDialogueSO : ScriptableObject
     {

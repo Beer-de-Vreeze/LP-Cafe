@@ -226,6 +226,7 @@ namespace DS.Utilities
                 m_nodeLoveMeterData = node.m_loveMeter,
                 m_bachelorData = node.m_bachelor,
                 m_isLikePreference = node.m_isLikePreference,
+                m_selectedPreference = node.m_selectedPreference,
             };
 
             graphData.m_graphNodesData.Add(nodeData);
