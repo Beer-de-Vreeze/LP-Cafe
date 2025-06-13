@@ -582,7 +582,7 @@ public class DialogueDisplay : MonoBehaviour
         ShowDialogue();
     }
 
-    // Public method to start a dialogue with a DSDialogueSO
+/*    // Public method to start a dialogue with a DSDialogueSO
     public void StartDialogue(DSDialogueSO dialogueSO)
     {
         if (dialogueSO == null)
@@ -590,7 +590,7 @@ public class DialogueDisplay : MonoBehaviour
         DSDialogue newDialogue = new DSDialogue { m_dialogue = dialogueSO };
         SetDialogue(newDialogue, _bachelor);
         ShowDialogue();
-    }
+    }*/
 
     // Public method to start a dialogue with a NewBachelorSO
     public void StartDialogue(NewBachelorSO bachelor)
