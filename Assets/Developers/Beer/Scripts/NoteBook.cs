@@ -343,6 +343,8 @@ public class NoteBook : MonoBehaviour
         {
             if (currentBachelor._likes[i].description == description)
             {
+                if (currentBachelor._likes[i].discovered)
+                    return;
                 currentBachelor.DiscoverLike(i);
                 return;
             }
@@ -361,6 +363,8 @@ public class NoteBook : MonoBehaviour
         {
             if (currentBachelor._dislikes[i].description == description)
             {
+                if (currentBachelor._dislikes[i].discovered)
+                    return; // Already unlocked, just stop
                 currentBachelor.DiscoverDislike(i);
                 return;
             }
