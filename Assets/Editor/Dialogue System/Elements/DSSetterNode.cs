@@ -34,12 +34,9 @@ namespace DS.Elements
             base.Initialize(nodeName, dsGraphView, pos);
 
             m_nodeDialogueType = DSDialogueType.Setter;
-            m_operationType = SetterOperationType.SetValue;
+            
             m_variableName = "variableName";
             m_valueToSet = "";
-            m_loveScoreAmount = 0;
-            m_boolValue = false;
-            m_loveMeter = null;
             m_bachelor = null;
             m_isLikePreference = true;
             m_selectedPreference = "";
@@ -136,6 +133,7 @@ namespace DS.Elements
             };
 
             operationTypeDropdown = new DropdownField("Operation Type", operationTypes, 0);
+            operationTypeDropdown.value = m_operationType.ToString();
             operationTypeDropdown.RegisterValueChangedCallback(evt =>
             {
                 switch (evt.newValue)
@@ -157,6 +155,7 @@ namespace DS.Elements
             });
             setterContainer.Add(operationTypeDropdown);
 
+            #region Value Container
             // Container for standard value setting
             valueContainer = new VisualElement();
 
@@ -185,7 +184,8 @@ namespace DS.Elements
                 "ds-node__textfield__hidden"
             );
             valueContainer.Add(valueField);
-
+            #endregion
+            #region Love Container
             // Container for love score
             loveScoreContainer = new VisualElement();
 
@@ -213,7 +213,8 @@ namespace DS.Elements
                 "ds-node__textfield__hidden"
             );
             loveScoreContainer.Add(loveAmountField);
-
+            #endregion
+            #region Boolean Container
             // Container for boolean values
             boolContainer = new VisualElement();
 
@@ -238,7 +239,8 @@ namespace DS.Elements
             });
             boolToggle.AddToClassList("ds-node__toggle");
             boolContainer.Add(boolToggle);
-
+            #endregion
+            #region Preference Container
             // Container for preference discovery
             preferenceContainer = new VisualElement();
 
@@ -267,12 +269,17 @@ namespace DS.Elements
 
             // Preference dropdown to select which one to discover
             preferenceDropdown = new DropdownField("Preference", new List<string>(), 0);
-            preferenceDropdown.RegisterValueChangedCallback(evt =>
-            {
-                m_selectedPreference = evt.newValue;
-            });
-            preferenceContainer.Add(preferenceDropdown);
+            preferenceDropdown.value = m_selectedPreference;
+            Debug.Log(preferenceDropdown.value);
 
+            //Event doesnt trigger on load! NEEDS FIX!
+            preferenceDropdown.RegisterValueChangedCallback(evt =>
+            { 
+                 m_selectedPreference = evt.newValue;
+            });
+            
+            preferenceContainer.Add(preferenceDropdown);
+            #endregion
             // Add all containers
             setterContainer.Add(valueContainer);
             setterContainer.Add(loveScoreContainer);
@@ -284,7 +291,10 @@ namespace DS.Elements
             // Initialize visible fields based on current operation type
             UpdateVisibleFields();
             // Always populate preference dropdown during initialization
-            PopulatePreferenceDropdown();
+            if(m_bachelor == null)
+            {
+                PopulatePreferenceDropdown();
+            }
 
             //OUTPUT CONTAINER
             foreach (DSChoiceSaveData choice in m_nodeChoices)

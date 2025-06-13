@@ -8,6 +8,7 @@ namespace DS.Data.Save
     using DS.Elements;
     using Enumerations;
     using System;
+    using UnityEngine.UIElements;
 
     [Serializable]
     public class DSNodeSaveData
@@ -40,6 +41,6 @@ namespace DS.Data.Save
         [field: SerializeField] public NewBachelorSO m_bachelorData { get; set; }
         [field: SerializeField] public bool m_isLikePreference { get; set; }
         [field: SerializeField] public string m_selectedPreference { get; set; }
-
+        [field: SerializeField] public int m_enumSetter { get; set; }
     }
 }

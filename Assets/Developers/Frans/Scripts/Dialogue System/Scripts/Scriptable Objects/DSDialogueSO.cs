@@ -7,6 +7,7 @@ namespace DS.ScriptableObjects
 {
     using System;
     using Data;
+    using UnityEngine.UIElements;
     using static NewBachelorSO;
 
     public class DSDialogueSO : ScriptableObject
@@ -68,6 +69,7 @@ namespace DS.ScriptableObjects
         public bool m_isLikePreferenceData { get; set; }
         [field: SerializeField]
         public string m_selectedPreferenceData { get; set; }
+        public int m_enumSetterData { get; set; }
 
         public void Initialize(
             string dialogueName,
@@ -109,11 +111,11 @@ namespace DS.ScriptableObjects
         }
 
         public void InitializeSetterNode(
+            SetterOperationType operationType,
             string dialogueName,
             List<DSDialogueChoiceData> choices,
             string valueToSet,
             string variableName,
-            SetterOperationType operationType,
             int loveScoreAmount,
             bool boolValue,
             DSDialogueType dialogueType,
@@ -121,14 +123,15 @@ namespace DS.ScriptableObjects
             NewBachelorSO bachelorData,
             bool isLikePreferenceData,
             string selectedPreferenceData,
+            int enumSetter,
             bool isStartingDialogue
         )
         {
+            m_operationTypeData = operationType;
             m_dialogueNameData = dialogueName;
             m_dialogueChoiceData = choices;
             m_valueToSetData = valueToSet;
             m_variableNameData = variableName;
-            m_operationTypeData = operationType;
             m_loveScoreAmountData = loveScoreAmount;
             m_boolValueData = boolValue;
             m_dialogueTypeData = dialogueType;
@@ -136,6 +139,7 @@ namespace DS.ScriptableObjects
             m_bachelorData = bachelorData;
             m_isLikePreferenceData = isLikePreferenceData;
             m_selectedPreferenceData = selectedPreferenceData;
+            m_enumSetterData = enumSetter;
             m_isStartingDialogueData = isStartingDialogue;
         }
     }
