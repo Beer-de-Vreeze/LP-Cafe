@@ -1403,10 +1403,10 @@ GameObject:
   m_Component:
   - component: {fileID: 200159560}
   - component: {fileID: 200159559}
-  - component: {fileID: 200159562}
-  - component: {fileID: 200159561}
   - component: {fileID: 200159564}
   - component: {fileID: 200159563}
+  - component: {fileID: 200159566}
+  - component: {fileID: 200159565}
   m_Layer: 0
   m_Name: Chantal
   m_TagString: Untagged
@@ -1484,50 +1484,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -1.419, z: 0}
---- !u!114 &200159561
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 200159558}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d8a71e2c434eb94598f73f797d0864b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_bachelor: {fileID: 11400000, guid: 17897679caa48db4e901fb103d088d6d, type: 2}
-  m_dialogueDisplay: {fileID: 0}
-  m_canvas: {fileID: 476807508}
---- !u!114 &200159562
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 200159558}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 200159561}
-          m_TargetAssemblyTypeName: BachelorSetter, Assembly-CSharp
-          m_MethodName: OnClick
-          m_Mode: 0
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!54 &200159563
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1576,6 +1532,41 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 7.1, y: 9.209999, z: 0.20000002}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &200159565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 200159558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de97b5429e9cc0c45aac19c9b876fa50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_dialogueContainer: {fileID: 11400000, guid: e15d441bd31250d44a42d947b41fe9ea, type: 2}
+  m_dialogueGroup: {fileID: 11400000, guid: b73e554cd8677bb4da74fa31bb39dcc8, type: 2}
+  m_dialogue: {fileID: 11400000, guid: a96ab1f10bfecab4191faf986cb63b95, type: 2}
+  m_groupedDialogues: 1
+  m_startingDialoguesOnly: 0
+  m_selectedDialogueGroupIndex: 0
+  m_selectedDialogueIndex: 15
+--- !u!114 &200159566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 200159558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80ed70d5596c2e143b8b6a96dd41920a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_bachelor: {fileID: 11400000, guid: 17897679caa48db4e901fb103d088d6d, type: 2}
+  m_dialogue: {fileID: 200159565}
+  m_dialogueCanvas: {fileID: 476807508}
+  m_dialogueDisplay: {fileID: 1818962892}
 --- !u!1001 &203677346
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8861,6 +8852,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7607814253935883139, guid: 3c2ca4d59a745fe46b693e64fb72771d, type: 3}
   m_PrefabInstance: {fileID: 1814166766}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1818962892 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3952595216175766055, guid: a45930d7ad5ece64d8d27e47bbcbf4a6, type: 3}
+  m_PrefabInstance: {fileID: 1983315654}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae7d40ae3eeacd44aab76da30868ee01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1828212488
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9685,6 +9687,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 465800891653423937, guid: a45930d7ad5ece64d8d27e47bbcbf4a6, type: 3}
+      propertyPath: m_dialogue
+      value: 
+      objectReference: {fileID: 11400000, guid: 85608b940441c5e40800b2ef63e0054e, type: 2}
+    - target: {fileID: 465800891653423937, guid: a45930d7ad5ece64d8d27e47bbcbf4a6, type: 3}
+      propertyPath: m_dialogueGroup
+      value: 
+      objectReference: {fileID: 11400000, guid: b73e554cd8677bb4da74fa31bb39dcc8, type: 2}
+    - target: {fileID: 465800891653423937, guid: a45930d7ad5ece64d8d27e47bbcbf4a6, type: 3}
+      propertyPath: m_groupedDialogues
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 465800891653423937, guid: a45930d7ad5ece64d8d27e47bbcbf4a6, type: 3}
+      propertyPath: m_dialogueContainer
+      value: 
+      objectReference: {fileID: 11400000, guid: e15d441bd31250d44a42d947b41fe9ea, type: 2}
+    - target: {fileID: 465800891653423937, guid: a45930d7ad5ece64d8d27e47bbcbf4a6, type: 3}
+      propertyPath: m_selectedDialogueIndex
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 746183165252153805, guid: a45930d7ad5ece64d8d27e47bbcbf4a6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 961.2221

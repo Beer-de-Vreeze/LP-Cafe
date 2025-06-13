@@ -12,18 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8656580f96a63714d889c7daeb915b7a, type: 3}
   m_Name: Value Setter
   m_EditorClassIdentifier: 
-  <m_dialogueNameData>k__BackingField: 
+  <m_dialogueNameData>k__BackingField: Value Setter
   <m_dialogueTextData>k__BackingField: 
-  <m_dialogueChoiceData>k__BackingField: []
+  <m_dialogueChoiceData>k__BackingField:
+  - <m_dialogueChoiceText>k__BackingField: Next Dialogue
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 628bbb87b5991b841990ce8049229f14, type: 2}
   <m_bachelorImageData>k__BackingField: {fileID: 0}
   <m_dialogueAudioData>k__BackingField: {fileID: 0}
-  <m_dialogueTypeData>k__BackingField: 0
-  <m_isStartingDialogueData>k__BackingField: 0
-  <m_propertyToCheck>k__BackingField: 
-  <m_comparisonType>k__BackingField: 
-  <m_comparisonValue>k__BackingField: 
-  <operationType>k__BackingField: 
-  <variableName>k__BackingField: 
-  <valueToSet>k__BackingField: 
-  <loveScoreAmount>k__BackingField: 
-  <boolValue>k__BackingField: 
+  <m_dialogueTypeData>k__BackingField: 3
+  <m_isStartingDialogueData>k__BackingField: 1
+  <m_propertyToCheckData>k__BackingField: 
+  <m_comparisonTypeData>k__BackingField: 
+  <m_comparisonValueData>k__BackingField: 
+  <m_operationTypeData>k__BackingField: 3
+  <m_variableNameData>k__BackingField: 
+  <m_valueToSetData>k__BackingField: 
+  <m_loveScoreAmountData>k__BackingField: 0
+  <m_boolValueData>k__BackingField: 0
+  <m_loveMeterData>k__BackingField: {fileID: 0}
+  <m_bachelorData>k__BackingField: {fileID: 11400000, guid: 17897679caa48db4e901fb103d088d6d, type: 2}
+  <m_isLikePreferenceData>k__BackingField: 0
+  <m_selectedPreferenceData>k__BackingField: Junk food

@@ -270,7 +270,6 @@ namespace DS.Elements
             // Preference dropdown to select which one to discover
             preferenceDropdown = new DropdownField("Preference", new List<string>(), 0);
             preferenceDropdown.value = m_selectedPreference;
-            Debug.Log(preferenceDropdown.value);
 
             //Event doesnt trigger on load! NEEDS FIX!
             preferenceDropdown.RegisterValueChangedCallback(evt =>
