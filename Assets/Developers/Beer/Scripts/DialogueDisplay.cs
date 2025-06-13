@@ -48,6 +48,10 @@ public class DialogueDisplay : MonoBehaviour
     [SerializeField]
     private Image _bachelorImage;
 
+    // Reference to the NoteBook script
+    [SerializeField]
+    private NoteBook _noteBook;
+
     // New fields for state tracking
     private bool _canAdvance = false;
     private List<GameObject> _activeChoiceButtons = new List<GameObject>();
@@ -474,6 +478,23 @@ public class DialogueDisplay : MonoBehaviour
                     // Update the variable
                     _gameVariables[boolName] = boolValue.ToString().ToLower();
                     Debug.Log($"Set boolean: {boolName} = {boolValue}");
+                    break;
+
+                case SetterOperationType.DiscoverPreference:
+                    Debug.Log("Discovering preference...");
+                    // Get info from setter node
+                    string prefName = setterNode.m_selectedPreferenceData;
+                    bool isLike = setterNode.m_isLikePreferenceData;
+                    // Update bachelor data and game variables
+                    DiscoverBachelorPreference(prefName, isLike);
+                    // Update notebook UI if available
+                    if (_noteBook != null)
+                    {
+                        if (isLike)
+                            _noteBook.DiscoverLike(prefName);
+                        else
+                            _noteBook.DiscoverDislike(prefName);
+                    }
                     break;
 
                 default:
