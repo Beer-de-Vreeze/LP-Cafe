@@ -270,7 +270,6 @@ namespace DS.Elements
             // Preference dropdown to select which one to discover
             preferenceDropdown = new DropdownField("Preference", new List<string>(), 0);
             preferenceDropdown.value = m_selectedPreference;
-            Debug.Log(preferenceDropdown.value);
 
             //Event doesnt trigger on load! NEEDS FIX!
             preferenceDropdown.RegisterValueChangedCallback(evt =>
@@ -290,8 +289,8 @@ namespace DS.Elements
 
             // Initialize visible fields based on current operation type
             UpdateVisibleFields();
-            // Always populate preference dropdown during initialization
-            if(m_bachelor == null)
+            // Only Populate at the start when there is no bachelor assigned.
+            if (m_bachelor == null)
             {
                 PopulatePreferenceDropdown();
             }
