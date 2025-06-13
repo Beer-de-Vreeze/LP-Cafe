@@ -89,7 +89,7 @@ public class DialogueDisplay : MonoBehaviour
             _typewriter.onTextShowed.RemoveListener(OnTypewriterEnd);
             _typewriter.onTextShowed.AddListener(OnTypewriterEnd);
         }
-/*        SetDialogue(_dialogue, _bachelor);*/
+        SetDialogue(_dialogue, _bachelor);
     }
 
     // Initialize game variables with default values
@@ -582,7 +582,7 @@ public class DialogueDisplay : MonoBehaviour
         ShowDialogue();
     }
 
-/*    // Public method to start a dialogue with a DSDialogueSO
+    // Public method to start a dialogue with a DSDialogueSO
     public void StartDialogue(DSDialogueSO dialogueSO)
     {
         if (dialogueSO == null)
@@ -590,12 +590,11 @@ public class DialogueDisplay : MonoBehaviour
         DSDialogue newDialogue = new DSDialogue { m_dialogue = dialogueSO };
         SetDialogue(newDialogue, _bachelor);
         ShowDialogue();
-    }*/
+    }
 
     // Public method to start a dialogue with a NewBachelorSO
     public void StartDialogue(NewBachelorSO bachelor)
     {
-        Debug.Log(bachelor);
         if (bachelor == null || bachelor._dialogue == null)
             return;
         _bachelor = bachelor;
