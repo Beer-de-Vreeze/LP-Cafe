@@ -435,6 +435,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1209939929 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 465800891653423937, guid: a45930d7ad5ece64d8d27e47bbcbf4a6, type: 3}
+  m_PrefabInstance: {fileID: 7126408759544911024}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de97b5429e9cc0c45aac19c9b876fa50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1242739748 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2959377241938159660, guid: a34b7e1289bc1d9429dbfacfc664940e, type: 3}
@@ -590,6 +601,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 465800891653423937, guid: a45930d7ad5ece64d8d27e47bbcbf4a6, type: 3}
+      propertyPath: m_dialogue
+      value: 
+      objectReference: {fileID: 11400000, guid: 85608b940441c5e40800b2ef63e0054e, type: 2}
+    - target: {fileID: 465800891653423937, guid: a45930d7ad5ece64d8d27e47bbcbf4a6, type: 3}
+      propertyPath: m_dialogueGroup
+      value: 
+      objectReference: {fileID: 11400000, guid: b73e554cd8677bb4da74fa31bb39dcc8, type: 2}
+    - target: {fileID: 465800891653423937, guid: a45930d7ad5ece64d8d27e47bbcbf4a6, type: 3}
+      propertyPath: m_dialogueContainer
+      value: 
+      objectReference: {fileID: 11400000, guid: e15d441bd31250d44a42d947b41fe9ea, type: 2}
+    - target: {fileID: 465800891653423937, guid: a45930d7ad5ece64d8d27e47bbcbf4a6, type: 3}
+      propertyPath: m_selectedDialogueIndex
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 746183165252153805, guid: a45930d7ad5ece64d8d27e47bbcbf4a6, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.0943
@@ -630,6 +657,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3952595216175766055, guid: a45930d7ad5ece64d8d27e47bbcbf4a6, type: 3}
+      propertyPath: _dialogue
+      value: 
+      objectReference: {fileID: 1209939929}
     - target: {fileID: 3952595216175766055, guid: a45930d7ad5ece64d8d27e47bbcbf4a6, type: 3}
       propertyPath: _nameText
       value: 
