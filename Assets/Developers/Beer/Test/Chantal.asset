@@ -15,13 +15,40 @@ MonoBehaviour:
   _name: Chantal
   _portrait: {fileID: 0}
   _likes:
-  - description: hooi
+  - description: Money
     discovered: 0
     icon: {fileID: 0}
-  - description: hooi2
+  - description: Financial Security
     discovered: 0
     icon: {fileID: 0}
-  _dislikes: []
+  - description: Roses
+    discovered: 0
+    icon: {fileID: 0}
+  - description: Jewelry
+    discovered: 0
+    icon: {fileID: 0}
+  - description: Dogs
+    discovered: 0
+    icon: {fileID: 0}
+  - description: Boat rides
+    discovered: 0
+    icon: {fileID: 0}
+  _dislikes:
+  - description: Broke people
+    discovered: 0
+    icon: {fileID: 0}
+  - description: Junk food
+    discovered: 0
+    icon: {fileID: 0}
+  - description: Junk food
+    discovered: 0
+    icon: {fileID: 0}
+  - description: Childish people
+    discovered: 0
+    icon: {fileID: 0}
+  - description: Unserious people
+    discovered: 0
+    icon: {fileID: 0}
   _isLikeDiscovered: 0
   _isDislikeDiscovered: 0
   _dialogue: {fileID: 0}

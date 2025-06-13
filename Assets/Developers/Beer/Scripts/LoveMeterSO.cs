@@ -30,18 +30,21 @@ public class LoveMeterSO : ScriptableObject
         }
     }
 
+    private void Update()
+    {
+        if (_currentLove < 0)
+        {
+            _currentLove = 0;
+            LoveChangedEvent.Invoke(_currentLove);
+        }
+    }
+
     /// <summary>
     /// Increase the love value by the specified amount
     /// </summary>
     public virtual void IncreaseLove(int amount)
     {
         _currentLove += amount;
-
-        // Cap the love value at maximum
-        if (_currentLove > _maxLove)
-        {
-            _currentLove = _maxLove;
-        }
 
         // Notify listeners about the change
         LoveChangedEvent.Invoke(_currentLove);
