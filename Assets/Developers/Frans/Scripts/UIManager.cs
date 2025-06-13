@@ -14,7 +14,6 @@ public class UIManager : MonoBehaviour
         
     }
 
-
     public void GoToGame()
     {
         // Load the game scene

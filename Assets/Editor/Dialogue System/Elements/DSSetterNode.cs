@@ -289,8 +289,8 @@ namespace DS.Elements
 
             // Initialize visible fields based on current operation type
             UpdateVisibleFields();
-            // Always populate preference dropdown during initialization
-            if(m_bachelor == null)
+            // Only Populate at the start when there is no bachelor assigned.
+            if (m_bachelor == null)
             {
                 PopulatePreferenceDropdown();
             }
