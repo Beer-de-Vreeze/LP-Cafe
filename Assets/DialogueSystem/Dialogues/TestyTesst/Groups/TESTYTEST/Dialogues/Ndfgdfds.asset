@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8656580f96a63714d889c7daeb915b7a, type: 3}
-  m_Name: Simon
+  m_Name: Ndfgdfds
   m_EditorClassIdentifier: 
-  <m_dialogueNameData>k__BackingField: Simon
-  <m_dialogueTextData>k__BackingField: Simon praat over een boek
+  <m_dialogueNameData>k__BackingField: Ndfgdfds
+  <m_dialogueTextData>k__BackingField: Noah vind het heel warm
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Next Dialogue
-    <m_nextDialogue>k__BackingField: {fileID: 0}
-  <m_bachelorImageData>k__BackingField: {fileID: 21300000, guid: 88973fea7e1be0e42a45c0aab1460c9e, type: 3}
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: ffcfd99db94bc1d4c9d933e9d67a1d19, type: 2}
+  <m_bachelorImageData>k__BackingField: {fileID: 21300000, guid: b5aae1c3cda47b6429f95402575d06e7, type: 3}
   <m_dialogueAudioData>k__BackingField: {fileID: 0}
   <m_dialogueTypeData>k__BackingField: 0
   <m_isStartingDialogueData>k__BackingField: 0

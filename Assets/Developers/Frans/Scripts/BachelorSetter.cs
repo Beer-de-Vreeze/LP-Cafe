@@ -35,6 +35,6 @@ public class BachelorSetter : MonoBehaviour
     public void SetBatchelor()
     {
         m_canvas.enabled = true;
-        m_dialogueDisplay.StartDialogue(m_bachelor);
+        m_dialogueDisplay.StartDialogue(m_bachelor, m_bachelor._dialogue);
     }
 }
