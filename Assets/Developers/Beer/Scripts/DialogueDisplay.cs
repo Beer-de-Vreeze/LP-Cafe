@@ -582,18 +582,7 @@ public class DialogueDisplay : MonoBehaviour
         ShowDialogue();
     }
 
-    // Public method to start a dialogue with a DSDialogueSO
-/*    public void StartDialogue(DSDialogueSO dialogueSO)
-    {
-        if (dialogueSO == null)
-            return;
-        DSDialogue newDialogue = new DSDialogue { m_dialogue = dialogueSO };
-        SetDialogue(newDialogue, _bachelor);
-        ShowDialogue();
-    }*/
-
-    // Public method to start a dialogue with a NewBachelorSO
-    public void StartDialogue(NewBachelorSO bachelor, DSDialogue dialogueSO)
+public void StartDialogue(NewBachelorSO bachelor, DSDialogue dialogueSO)
     {
         bachelor._dialogue = dialogueSO;
         if (bachelor == null || bachelor._dialogue == null)
