@@ -53,14 +53,18 @@ public class NoteBook : MonoBehaviour
 
     void OnEnable()
     {
-        if (currentBachelor != null && !isInitialized)
+        if (currentBachelor != null)
         {
-            InitializeNotebook();
-        }
-        else
-        {
-            // Just update visibility when enabled
-            UpdateVisibility();
+            if (!isInitialized)
+            {
+                InitializeNotebook();
+            }
+            else
+            {
+                // Check for any newly discovered preferences and create entries
+                RefreshDiscoveredEntries();
+                UpdateVisibility();
+            }
         }
     }
 
@@ -80,6 +84,9 @@ public class NoteBook : MonoBehaviour
 
     private void HandlePreferenceDiscovered(NewBachelorSO.BachelorPreference preference)
     {
+        // Create the entry when it's discovered
+        CreateEntryForPreference(preference);
+
         // Visual feedback for new discoveries
         UpdateVisibility();
 
@@ -161,59 +168,27 @@ public class NoteBook : MonoBehaviour
         // Clear any existing entries
         ClearEntries();
 
-        // Create like entries
+        // Only create entries for already discovered preferences
         if (currentBachelor._likes != null && likesContainer != null)
         {
             foreach (var like in currentBachelor._likes)
             {
-                GameObject entry = Instantiate(likeEntryPrefab, likesContainer);
-                TextMeshProUGUI textComponent = entry.GetComponentInChildren<TextMeshProUGUI>();
-                if (textComponent != null)
+                if (like.discovered)
                 {
-                    textComponent.text = like.description;
+                    CreateLikeEntry(like);
                 }
-
-                // Add icon if available
-                if (like.icon != null)
-                {
-                    Image iconImage = entry.GetComponentInChildren<Image>();
-                    if (iconImage != null)
-                    {
-                        iconImage.sprite = like.icon;
-                        iconImage.enabled = true;
-                    }
-                }
-
-                likeEntryObjects[like.description] = entry;
-                entry.SetActive(like.discovered);
             }
         }
 
-        // Create dislike entries
+        // Only create entries for already discovered dislikes
         if (currentBachelor._dislikes != null && dislikesContainer != null)
         {
             foreach (var dislike in currentBachelor._dislikes)
             {
-                GameObject entry = Instantiate(dislikeEntryPrefab, dislikesContainer);
-                TextMeshProUGUI textComponent = entry.GetComponentInChildren<TextMeshProUGUI>();
-                if (textComponent != null)
+                if (dislike.discovered)
                 {
-                    textComponent.text = dislike.description;
+                    CreateDislikeEntry(dislike);
                 }
-
-                // Add icon if available
-                if (dislike.icon != null)
-                {
-                    Image iconImage = entry.GetComponentInChildren<Image>();
-                    if (iconImage != null)
-                    {
-                        iconImage.sprite = dislike.icon;
-                        iconImage.enabled = true;
-                    }
-                }
-
-                dislikeEntryObjects[dislike.description] = entry;
-                entry.SetActive(dislike.discovered);
             }
         }
 
@@ -222,36 +197,12 @@ public class NoteBook : MonoBehaviour
     }
 
     /// <summary>
-    /// Updates the visibility of like/dislike entries based on discovery status
+    /// Updates the visibility of the locked info text based on discovery status
     /// </summary>
     private void UpdateVisibility()
     {
         if (currentBachelor == null)
             return;
-
-        // Update individual like entries
-        if (currentBachelor._likes != null)
-        {
-            foreach (var like in currentBachelor._likes)
-            {
-                if (likeEntryObjects.TryGetValue(like.description, out GameObject entry))
-                {
-                    entry.SetActive(like.discovered);
-                }
-            }
-        }
-
-        // Update individual dislike entries
-        if (currentBachelor._dislikes != null)
-        {
-            foreach (var dislike in currentBachelor._dislikes)
-            {
-                if (dislikeEntryObjects.TryGetValue(dislike.description, out GameObject entry))
-                {
-                    entry.SetActive(dislike.discovered);
-                }
-            }
-        }
 
         // Show locked message if nothing is discovered yet
         bool anyPreferenceDiscovered = HasAnyPreferenceDiscovered();
@@ -326,47 +277,142 @@ public class NoteBook : MonoBehaviour
         if (currentBachelor != null)
         {
             currentBachelor.OnPreferenceDiscovered += HandlePreferenceDiscovered;
+
+            // Ensure all preferences start as undiscovered when setting a new bachelor
+            currentBachelor.EnsureUndiscoveredState();
         }
 
+        // Re-initialize with the new bachelor
+        isInitialized = false;
         InitializeNotebook();
     }
 
     /// <summary>
-    /// Manually discover a specific like by description
+    /// Creates an entry for a discovered preference
     /// </summary>
-    public void DiscoverLike(string description)
+    private void CreateEntryForPreference(NewBachelorSO.BachelorPreference preference)
     {
         if (currentBachelor == null)
             return;
 
-        for (int i = 0; i < currentBachelor._likes.Length; i++)
+        // Check if it's a like preference
+        bool isLike = false;
+        foreach (var like in currentBachelor._likes)
         {
-            if (currentBachelor._likes[i].description == description)
+            if (like == preference)
             {
-                if (currentBachelor._likes[i].discovered)
-                    return;
-                currentBachelor.DiscoverLike(i);
-                return;
+                isLike = true;
+                break;
             }
+        }
+
+        if (isLike)
+        {
+            CreateLikeEntry(preference);
+        }
+        else
+        {
+            CreateDislikeEntry(preference);
         }
     }
 
     /// <summary>
-    /// Manually discover a specific dislike by description
+    /// Creates a like entry
     /// </summary>
-    public void DiscoverDislike(string description)
+    private void CreateLikeEntry(NewBachelorSO.BachelorPreference like)
+    {
+        if (likesContainer == null || likeEntryPrefab == null)
+            return;
+
+        // Don't create if already exists
+        if (likeEntryObjects.ContainsKey(like.description))
+            return;
+
+        GameObject entry = Instantiate(likeEntryPrefab, likesContainer);
+        TextMeshProUGUI textComponent = entry.GetComponentInChildren<TextMeshProUGUI>();
+        if (textComponent != null)
+        {
+            textComponent.text = like.description;
+        }
+
+        // Add icon if available
+        if (like.icon != null)
+        {
+            Image iconImage = entry.GetComponentInChildren<Image>();
+            if (iconImage != null)
+            {
+                iconImage.sprite = like.icon;
+                iconImage.enabled = true;
+            }
+        }
+
+        likeEntryObjects[like.description] = entry;
+        entry.SetActive(true); // Always active since it's only created when discovered
+    }
+
+    /// <summary>
+    /// Creates a dislike entry
+    /// </summary>
+    private void CreateDislikeEntry(NewBachelorSO.BachelorPreference dislike)
+    {
+        if (dislikesContainer == null || dislikeEntryPrefab == null)
+            return;
+
+        // Don't create if already exists
+        if (dislikeEntryObjects.ContainsKey(dislike.description))
+            return;
+
+        GameObject entry = Instantiate(dislikeEntryPrefab, dislikesContainer);
+        TextMeshProUGUI textComponent = entry.GetComponentInChildren<TextMeshProUGUI>();
+        if (textComponent != null)
+        {
+            textComponent.text = dislike.description;
+        }
+
+        // Add icon if available
+        if (dislike.icon != null)
+        {
+            Image iconImage = entry.GetComponentInChildren<Image>();
+            if (iconImage != null)
+            {
+                iconImage.sprite = dislike.icon;
+                iconImage.enabled = true;
+            }
+        }
+
+        dislikeEntryObjects[dislike.description] = entry;
+        entry.SetActive(true); // Always active since it's only created when discovered
+    }
+
+    /// <summary>
+    /// Refreshes the notebook to create entries for any newly discovered preferences
+    /// </summary>
+    private void RefreshDiscoveredEntries()
     {
         if (currentBachelor == null)
             return;
 
-        for (int i = 0; i < currentBachelor._dislikes.Length; i++)
+        // Check for newly discovered likes
+        if (currentBachelor._likes != null)
         {
-            if (currentBachelor._dislikes[i].description == description)
+            foreach (var like in currentBachelor._likes)
             {
-                if (currentBachelor._dislikes[i].discovered)
-                    return; // Already unlocked, just stop
-                currentBachelor.DiscoverDislike(i);
-                return;
+                if (like.discovered && !likeEntryObjects.ContainsKey(like.description))
+                {
+                    CreateLikeEntry(like);
+                }
+            }
+        }
+
+        // Check for newly discovered dislikes
+        if (currentBachelor._dislikes != null)
+        {
+            foreach (var dislike in currentBachelor._dislikes)
+            {
+                if (dislike.discovered && !dislikeEntryObjects.ContainsKey(dislike.description))
+                {
+                    CreateDislikeEntry(dislike);
+                }
             }
         }
     }

@@ -33,6 +33,10 @@ public class NewBachelorSO : ScriptableObject
     [SerializeField]
     public LoveMeterSO _loveMeter;
 
+    [Header("Scene Transition")]
+    [SerializeField]
+    public string _nextSceneName;
+
     public event Action<BachelorPreference> OnPreferenceDiscovered;
 
     [Serializable]
@@ -105,6 +109,56 @@ public class NewBachelorSO : ScriptableObject
     /// Resets all discoveries
     /// </summary>
     public void ResetDiscoveries()
+    {
+        if (_likes != null)
+        {
+            foreach (var like in _likes)
+            {
+                like.discovered = false;
+            }
+        }
+
+        if (_dislikes != null)
+        {
+            foreach (var dislike in _dislikes)
+            {
+                dislike.discovered = false;
+            }
+        }
+
+        _isLikeDiscovered = false;
+        _isDislikeDiscovered = false;
+    }
+
+    /// <summary>
+    /// Ensures all preferences start as undiscovered (called during initialization)
+    /// </summary>
+    [System.Runtime.CompilerServices.MethodImpl(
+        System.Runtime.CompilerServices.MethodImplOptions.NoInlining
+    )]
+    private void Awake()
+    {
+        // Ensure all preferences start as undiscovered unless explicitly set otherwise
+        EnsureUndiscoveredState();
+    }
+
+    /// <summary>
+    /// Called when the ScriptableObject is enabled
+    /// </summary>
+    private void OnEnable()
+    {
+        // Ensure preferences start undiscovered when the ScriptableObject is loaded/enabled
+        // This prevents inspector-set discovered states from persisting
+        if (Application.isPlaying)
+        {
+            EnsureUndiscoveredState();
+        }
+    }
+
+    /// <summary>
+    /// Ensures all preferences start in an undiscovered state
+    /// </summary>
+    public void EnsureUndiscoveredState()
     {
         if (_likes != null)
         {
