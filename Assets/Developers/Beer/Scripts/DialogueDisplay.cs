@@ -889,7 +889,7 @@ public class DialogueDisplay : MonoBehaviour
                 Debug.Log(verticalLayout);
                 verticalLayout.SetLayoutHorizontal();
                 verticalLayout.SetLayoutVertical();
-                
+
             }
 
             LayoutRebuilder.ForceRebuildLayoutImmediate(
@@ -910,12 +910,12 @@ public class DialogueDisplay : MonoBehaviour
         var vertLayout = _choicesParent.GetComponent<VerticalLayoutGroup>();
         if (vertLayout != null)
         {
-            vertLayout.padding = new RectOffset(0, 0, 0, -100);
+            vertLayout.padding = new RectOffset(0, 0, 0, -105);
             vertLayout.childControlWidth = true;
             vertLayout.childForceExpandWidth = true;
             vertLayout.childControlHeight = true;
             vertLayout.childForceExpandHeight = false;
-            vertLayout.spacing = 8f;
+            vertLayout.spacing = 15f;
         }
     }
     #endregion
