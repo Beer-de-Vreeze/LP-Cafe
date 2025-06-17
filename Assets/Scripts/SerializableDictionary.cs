@@ -6,6 +6,9 @@ using UnityEngine;
 using UnityEngine.Serialization;
 
 /// <summary>
+/// Pastebin : https://pastebin.com/zsy1tNRb
+/// 
+/// 
 /// Base non-generic class for SerializableDictionary to enable inspector display
 /// and custom property drawers in Unity.
 /// </summary>

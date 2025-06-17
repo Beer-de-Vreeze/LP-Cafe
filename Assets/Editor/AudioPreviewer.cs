@@ -4,61 +4,86 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
+/// <summary>
+/// Custom Unity editor window for previewing audio clips in the project.
+/// Provides functionality to scan for audio files, organize by folders,
+/// play/stop clips, visualize waveforms, and more.
+/// </summary>
 public class AudioPreviewerWindow : EditorWindow
 {
+    /// <summary>
+    /// Internal class to store data related to each audio clip
+    /// including references, playback state, and visualization.
+    /// </summary>
     private class ClipData
     {
-        public AudioClip clip;
-        public bool loop;
-        public bool isPlaying;
-        public string folderPath;
-        public Texture2D waveformTexture;
+        public AudioClip clip;      // Reference to the audio clip
+        public bool loop;           // Whether the clip should loop when playing
+        public bool isPlaying;      // Current playback state
+        public string folderPath;   // Path to folder containing the clip
+        public Texture2D waveformTexture;  // Generated waveform visualization
     }
 
+    /// <summary>
+    /// Settings for generating waveform visualizations of audio clips.
+    /// </summary>
     private class WaveformSettings
     {
-        public Color colorStart = new Color(0.2f, 0.6f, 1f, 1f);
-        public Color colorMiddle = new Color(0.4f, 0.9f, 0.4f, 1f);
-        public Color colorEnd = new Color(1f, 0.6f, 0.2f, 1f);
+        public Color colorStart = new Color(0.2f, 0.6f, 1f, 1f);     // Color at start of waveform
+        public Color colorMiddle = new Color(0.4f, 0.9f, 0.4f, 1f);  // Color at middle of waveform
+        public Color colorEnd = new Color(1f, 0.6f, 0.2f, 1f);       // Color at end of waveform
 
-        public int width = 256;
-        public int height = 64;
+        public int width = 256;   // Width of the waveform texture
+        public int height = 64;   // Height of the waveform texture
     }
 
-    private WaveformSettings waveformSettings = new WaveformSettings();
-    private Dictionary<AudioClip, Texture2D> waveformCache = new Dictionary<AudioClip, Texture2D>();
-    private Dictionary<AudioClip, float[]> clipSampleCache = new Dictionary<AudioClip, float[]>();
+    private WaveformSettings waveformSettings = new WaveformSettings();  // Default waveform settings
+    private Dictionary<AudioClip, Texture2D> waveformCache = new Dictionary<AudioClip, Texture2D>();  // Cache for generated waveforms
+    private Dictionary<AudioClip, float[]> clipSampleCache = new Dictionary<AudioClip, float[]>();    // Cache for audio samples
 
+    /// <summary>
+    /// Represents a group of audio clips from the same folder.
+    /// Used for organizing clips in the UI.
+    /// </summary>
     private class FolderGroup
     {
-        public string folderPath;
-        public string displayName;
-        public bool expanded = true;
-        public List<ClipData> clips = new List<ClipData>();
+        public string folderPath;       // Path to the folder
+        public string displayName;      // Display name shown in the UI
+        public bool expanded = true;    // Whether the folder group is expanded in UI
+        public List<ClipData> clips = new List<ClipData>();  // Clips contained in this folder
     }
 
-    private List<ClipData> clipDataList = new();
-    private List<FolderGroup> folderGroups = new();
-    private Vector2 scrollPos;
-    private string searchFilter = "";
-    private AudioClip currentlyPlayingClip;
-    private float playbackStartTime;
-    private bool autoLoadFromProject = true;
+    private List<ClipData> clipDataList = new();         // Main list of all audio clips
+    private List<FolderGroup> folderGroups = new();      // Organized groups of clips by folder
+    private Vector2 scrollPos;                          // Scroll position for the scroll view
+    private string searchFilter = "";                   // Current search term
+    private AudioClip currentlyPlayingClip;             // Reference to currently playing clip
+    private float playbackStartTime;                    // Time when playback started (for progress tracking)
+    private bool autoLoadFromProject = true;            // Whether to auto-load clips from project
 
+    // EditorPrefs keys for saving/loading preferences
     private const string PrefsKeyPrefix = "AudioPreviewer_";
     private const string PrefsKeyAutoLoadFromProject = PrefsKeyPrefix + "AutoLoadFromProject";
 
+    /// <summary>
+    /// Creates and shows the Audio Previewer window.
+    /// </summary>
     [MenuItem("Tools/Audio Previewer")]
     public static void ShowWindow()
     {
         GetWindow<AudioPreviewerWindow>("Audio Previewer");
     }
 
+    /// <summary>
+    /// Called when the window is enabled. Loads preferences and initializes data.
+    /// </summary>
     private void OnEnable()
     {
+        // Load user preferences
         autoLoadFromProject = EditorPrefs.GetBool(PrefsKeyAutoLoadFromProject, true);
         LoadSavedClips();
 
+        // Auto-scan the project if enabled and no clips are loaded
         if (autoLoadFromProject && clipDataList.Count == 0)
         {
             ScanProjectForAudioClips();
@@ -67,16 +92,24 @@ public class AudioPreviewerWindow : EditorWindow
         OrganizeClipsByFolder();
     }
 
+    /// <summary>
+    /// Called when the window is disabled. Saves preferences and clip data.
+    /// </summary>
     private void OnDisable()
     {
         EditorPrefs.SetBool(PrefsKeyAutoLoadFromProject, autoLoadFromProject);
         SaveClips();
     }
 
+    /// <summary>
+    /// Renders the editor window GUI.
+    /// </summary>
     private void OnGUI()
     {
+        // Window title
         GUILayout.Label("🎧 Audio Clip Previewer", EditorStyles.boldLabel);
 
+        // Search box
         EditorGUILayout.BeginHorizontal();
         GUI.SetNextControlName("SearchField");
 
@@ -87,12 +120,14 @@ public class AudioPreviewerWindow : EditorWindow
             EditorStyles.toolbarSearchField
         );
 
+        // Apply search filter if changed
         if (newSearchFilter != searchFilter)
         {
             searchFilter = newSearchFilter;
             OrganizeClipsByFolder();
         }
 
+        // Clear search button
         if (GUILayout.Button("Clear", EditorStyles.miniButton, GUILayout.Width(clearButtonWidth)))
         {
             searchFilter = "";
@@ -102,6 +137,7 @@ public class AudioPreviewerWindow : EditorWindow
 
         EditorGUILayout.EndHorizontal();
 
+        // Scan project button and auto-scan toggle
         EditorGUILayout.BeginHorizontal();
         float buttonWidth = Mathf.Max(120, position.width * 0.3f);
 
@@ -117,6 +153,7 @@ public class AudioPreviewerWindow : EditorWindow
 
         EditorGUILayout.EndHorizontal();
 
+        // Stop all playback button
         EditorGUILayout.BeginHorizontal();
         GUILayout.FlexibleSpace();
 
@@ -133,23 +170,28 @@ public class AudioPreviewerWindow : EditorWindow
 
         EditorGUILayout.EndHorizontal();
 
+        // Display clip count
         int visibleCount = folderGroups.Sum(g => g.clips.Count);
         int totalCount = clipDataList.Count;
         EditorGUILayout.LabelField($"Showing {visibleCount} of {totalCount} clips");
 
+        // Begin scrollable area for clip display
         scrollPos = EditorGUILayout.BeginScrollView(scrollPos);
 
+        // Draw each folder group
         List<FolderGroup> folderGroupsCopy = new List<FolderGroup>(folderGroups);
         foreach (var folderGroup in folderGroupsCopy)
         {
             if (folderGroup.clips.Count == 0)
                 continue;
 
+            // Folder header with light background
             GUI.backgroundColor = new Color(0.8f, 0.8f, 0.9f);
             EditorGUILayout.BeginHorizontal("box");
             GUI.backgroundColor = Color.white;
             GUILayout.Space(2);
 
+            // Foldout control for expanding/collapsing folder
             GUIStyle foldoutStyle = new GUIStyle(EditorStyles.foldout);
             foldoutStyle.fontStyle = FontStyle.Bold;
             folderGroup.expanded = EditorGUILayout.Foldout(
@@ -158,12 +200,14 @@ public class AudioPreviewerWindow : EditorWindow
                 foldoutStyle
             );
 
+            // Display clip count in folder
             GUILayout.FlexibleSpace();
             GUIStyle countStyle = new GUIStyle(EditorStyles.miniLabel);
             countStyle.normal.textColor = new Color(0.5f, 0.5f, 0.5f);
             GUILayout.Label($"({folderGroup.clips.Count} clips)", countStyle);
             GUILayout.Space(5);
 
+            // Remove folder button
             GUI.backgroundColor = new Color(1f, 0.7f, 0.7f);
             float removeButtonWidth = Mathf.Max(75, position.width * 0.1f);
             if (
@@ -191,6 +235,7 @@ public class AudioPreviewerWindow : EditorWindow
             GUILayout.Space(2);
             EditorGUILayout.EndHorizontal();
 
+            // If folder is expanded, show its clips
             if (folderGroup.expanded)
             {
                 GUI.backgroundColor = new Color(0.97f, 0.97f, 0.97f);
@@ -213,14 +258,19 @@ public class AudioPreviewerWindow : EditorWindow
 
         EditorGUILayout.EndScrollView();
 
+        // Repaint window while clip is playing to update progress
         if (currentlyPlayingClip != null)
         {
             Repaint();
         }
     }
 
+    /// <summary>
+    /// Scans the project for all audio clips and adds them to the list.
+    /// </summary>
     private void ScanProjectForAudioClips()
     {
+        // Find all audio clip GUIDs in the project
         string[] guids = AssetDatabase.FindAssets("t:AudioClip");
 
         foreach (string guid in guids)
@@ -228,10 +278,12 @@ public class AudioPreviewerWindow : EditorWindow
             string path = AssetDatabase.GUIDToAssetPath(guid);
             AudioClip clip = AssetDatabase.LoadAssetAtPath<AudioClip>(path);
 
+            // Add clip if it's valid and not already in the list
             if (clip != null && !clipDataList.Any(c => c.clip == clip))
             {
                 string folderPath = System.IO.Path.GetDirectoryName(path).Replace('\\', '/');
 
+                // Try to find existing saved data for this clip
                 ClipData existingData = FindSavedClipData(clip);
                 if (existingData != null)
                 {
@@ -245,20 +297,32 @@ public class AudioPreviewerWindow : EditorWindow
             }
         }
 
+        // Remove any null clips
         clipDataList = clipDataList.Where(c => c.clip != null).ToList();
 
+        // Reorganize clips by folder
         OrganizeClipsByFolder();
     }
 
+    /// <summary>
+    /// Finds saved clip data for a specific clip.
+    /// </summary>
+    /// <param name="clip">The audio clip to find saved data for.</param>
+    /// <returns>Saved clip data or null if none exists.</returns>
     private ClipData FindSavedClipData(AudioClip clip)
     {
         return null;
     }
 
+    /// <summary>
+    /// Organizes clips into folder groups based on their folder paths.
+    /// Also applies current search filter.
+    /// </summary>
     private void OrganizeClipsByFolder()
     {
         folderGroups.Clear();
 
+        // Get filtered list of clips (apply search filter)
         var filteredClips = GetFilteredClips().Where(c => c.clip != null).ToList();
         var clipsByFolder = filteredClips.GroupBy(c => c.folderPath);
 
@@ -267,6 +331,7 @@ public class AudioPreviewerWindow : EditorWindow
             string folderPath = group.Key;
             string displayName = folderPath;
 
+            // Format display name
             if (!string.IsNullOrEmpty(folderPath))
             {
                 if (folderPath.StartsWith("Assets/"))
@@ -279,6 +344,7 @@ public class AudioPreviewerWindow : EditorWindow
                 }
             }
 
+            // Create folder group and add clips
             FolderGroup folderGroup = new FolderGroup
             {
                 folderPath = folderPath,
@@ -288,11 +354,18 @@ public class AudioPreviewerWindow : EditorWindow
             folderGroups.Add(folderGroup);
         }
 
+        // Sort folders alphabetically
         folderGroups = folderGroups.OrderBy(g => g.displayName).ToList();
     }
 
+    /// <summary>
+    /// Returns filtered clips based on the current search filter.
+    /// </summary>
+    /// <returns>Filtered collection of clip data.</returns>
     private IEnumerable<ClipData> GetFilteredClips()
     {
+        // If no search filter, return all clips
+        // Otherwise, filter clips by name or folder path
         var filtered = string.IsNullOrWhiteSpace(searchFilter)
             ? clipDataList
             : clipDataList.Where(c =>
@@ -306,6 +379,10 @@ public class AudioPreviewerWindow : EditorWindow
         return filtered;
     }
 
+    /// <summary>
+    /// Draws a single audio clip entry in the UI.
+    /// </summary>
+    /// <param name="data">The clip data to draw.</param>
     private void DrawClipEntry(ClipData data)
     {
         Rect entryRect = EditorGUILayout.BeginVertical("box");
@@ -314,10 +391,12 @@ public class AudioPreviewerWindow : EditorWindow
 
         EditorGUILayout.BeginHorizontal();
 
+        // Generate or display waveform visualization
         if (data.waveformTexture == null)
         {
             data.waveformTexture = GetWaveformTexture(data.clip);
 
+            // Draw waveform in a dark box
             GUI.backgroundColor = new Color(0.15f, 0.15f, 0.15f, 0.1f);
             EditorGUILayout.BeginVertical(
                 "box",
@@ -334,6 +413,7 @@ public class AudioPreviewerWindow : EditorWindow
         }
         else
         {
+            // Draw cached waveform
             GUI.backgroundColor = new Color(0.15f, 0.15f, 0.15f, 0.1f);
             EditorGUILayout.BeginVertical(
                 "box",
@@ -351,9 +431,11 @@ public class AudioPreviewerWindow : EditorWindow
 
         float remainingWidth = position.width - waveformSettings.width - 40;
 
+        // Clip info section
         EditorGUILayout.BeginVertical(GUILayout.Width(remainingWidth));
         EditorGUILayout.BeginHorizontal();
 
+        // Show play indicator if clip is currently playing
         if (data.isPlaying)
         {
             GUIStyle playingStyle = new GUIStyle(EditorStyles.label);
@@ -371,6 +453,7 @@ public class AudioPreviewerWindow : EditorWindow
             GUILayout.Space(30);
         }
 
+        // Clip name with styling
         GUIStyle clipNameStyle = new GUIStyle(EditorStyles.boldLabel);
         clipNameStyle.fontSize += 1;
         clipNameStyle.normal.textColor = new Color(0.1f, 0.4f, 0.7f);
@@ -378,6 +461,7 @@ public class AudioPreviewerWindow : EditorWindow
 
         EditorGUILayout.EndHorizontal();
 
+        // Help text for drag and drop
         GUIStyle tooltipStyle = new GUIStyle(EditorStyles.miniLabel);
         tooltipStyle.normal.textColor = new Color(0.5f, 0.5f, 0.5f);
         tooltipStyle.fontSize -= 1;
@@ -387,44 +471,56 @@ public class AudioPreviewerWindow : EditorWindow
             tooltipStyle
         );
 
+        // Clip metadata (duration, channels, frequency)
         float duration = data.clip.length;
         string durationText = FormatTime(duration);
         EditorGUILayout.LabelField(
             $"Duration: {durationText} | Channels: {data.clip.channels} | Frequency: {data.clip.frequency}Hz"
         );
 
+        // Playback progress bar for currently playing clip
         if (data.isPlaying)
         {
             float currentTime = GetCurrentPlaybackTime();
             float normalizedProgress = duration > 0 ? Mathf.Clamp01(currentTime / duration) : 0;
             float displayTime = Mathf.Round(currentTime * 10f) / 10f;
+            
             EditorGUILayout.BeginHorizontal();
             EditorGUILayout.LabelField(FormatTime(currentTime), GUILayout.Width(40));
+            
+            // Position slider - allows seeking in the audio
             float newTimePosition = EditorGUILayout.Slider(
                 displayTime,
                 0f,
                 duration,
                 GUILayout.Height(15)
             );
+            
+            // Handle seeking if slider was changed
             if (Math.Abs(newTimePosition - displayTime) > 0.001f)
             {
                 SeekToTime(data.clip, newTimePosition);
                 playbackStartTime = (float)EditorApplication.timeSinceStartup - newTimePosition;
             }
+            
             EditorGUILayout.LabelField(durationText, GUILayout.Width(40));
             EditorGUILayout.EndHorizontal();
         }
 
         float playStopButtonWidth = Mathf.Max(60, position.width * 0.08f);
 
+        // Play and stop buttons
         EditorGUILayout.BeginHorizontal();
         if (GUILayout.Button("▶️ Play", GUILayout.Width(playStopButtonWidth)))
         {
+            // Stop any currently playing clips
             StopAllClips();
             foreach (var clip in clipDataList.ToList())
             {
                 clip.isPlaying = false;
             }
+            
+            // Play this clip
             PlayClip(data.clip, data.loop);
             data.isPlaying = true;
             currentlyPlayingClip = data.clip;
@@ -443,6 +539,7 @@ public class AudioPreviewerWindow : EditorWindow
         GUILayout.FlexibleSpace();
         EditorGUILayout.EndHorizontal();
 
+        // Loop toggle
         bool oldLoopValue = data.loop;
         data.loop = EditorGUILayout.Toggle("Loop", data.loop);
         if (data.isPlaying && oldLoopValue != data.loop)
