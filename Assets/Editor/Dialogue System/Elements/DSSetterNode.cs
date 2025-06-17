@@ -54,7 +54,7 @@ namespace DS.Elements
             #region DialogueName
             /* TITLE CONTAINER*/
             TextField dialogueNameTextField = DSElementUtility.CreateTextField(
-                m_nodeDialogueName = "Value Setter",
+                m_nodeDialogueName,
                 null,
                 callback =>
                 {
@@ -260,6 +260,7 @@ namespace DS.Elements
             // Preference type dropdown (like or dislike)
             var preferenceTypes = new List<string>() { "Like", "Dislike" };
             preferenceTypeDropdown = new DropdownField("Type", preferenceTypes, 0);
+            preferenceTypeDropdown.value = m_isLikePreference ? "Like" : "Dislike";
             preferenceTypeDropdown.RegisterValueChangedCallback(evt =>
             {
                 m_isLikePreference = evt.newValue == "Like";
