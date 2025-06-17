@@ -16,9 +16,7 @@ MonoBehaviour:
   <m_dialogueTextData>k__BackingField: 'Hey, I''m Chantal. Don''t even dare asking
     me out if you''re broke.
 
-    I need a partner that can meet my standard.
-
-    Understood?'
+    I need a partner that can meet my standard. Understood?'
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Silence
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: e343b8548298e2c43807d6ee3e1a3bae, type: 2}
