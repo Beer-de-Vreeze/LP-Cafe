@@ -30,6 +30,6 @@ MonoBehaviour:
   <m_loveScoreAmountData>k__BackingField: 0
   <m_boolValueData>k__BackingField: 0
   <m_loveMeterData>k__BackingField: {fileID: 0}
-  <m_bachelorData>k__BackingField: {fileID: 0}
-  <m_isLikePreferenceData>k__BackingField: 1
-  <m_selectedPreferenceData>k__BackingField: 
+  <m_bachelorData>k__BackingField: {fileID: 11400000, guid: 17897679caa48db4e901fb103d088d6d, type: 2}
+  <m_isLikePreferenceData>k__BackingField: 0
+  <m_selectedPreferenceData>k__BackingField: Childish people

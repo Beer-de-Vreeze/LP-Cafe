@@ -16,10 +16,7 @@ MonoBehaviour:
   _portrait: {fileID: 21300000, guid: 84a876f81e079bf40beb58c595c98cf5, type: 3}
   _likes:
   - description: Money
-    discovered: 0
-    icon: {fileID: 0}
-  - description: Financial Security
-    discovered: 0
+    discovered: 1
     icon: {fileID: 0}
   - description: Roses
     discovered: 0
@@ -28,28 +25,31 @@ MonoBehaviour:
     discovered: 0
     icon: {fileID: 0}
   - description: Dogs
-    discovered: 0
+    discovered: 1
     icon: {fileID: 0}
   - description: Boat rides
-    discovered: 0
+    discovered: 1
+    icon: {fileID: 0}
+  - description: Financial Security
+    discovered: 1
     icon: {fileID: 0}
   _dislikes:
   - description: Broke people
-    discovered: 0
+    discovered: 1
     icon: {fileID: 0}
   - description: Junk food
-    discovered: 0
+    discovered: 1
     icon: {fileID: 0}
   - description: Junk food
     discovered: 0
     icon: {fileID: 0}
   - description: Childish people
-    discovered: 0
+    discovered: 1
     icon: {fileID: 0}
   - description: Unserious people
     discovered: 0
     icon: {fileID: 0}
-  _isLikeDiscovered: 0
-  _isDislikeDiscovered: 0
+  _isLikeDiscovered: 1
+  _isDislikeDiscovered: 1
   _dialogue: {fileID: 0}
   _loveMeter: {fileID: 0}

@@ -17,7 +17,7 @@ MonoBehaviour:
     well.\nNot like a doctor though... But this will do... for now."
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Next Dialogue
-    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 6bd8bb249fabc0a44ac9c10d6c9d1528, type: 2}
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 234761d79ab547b4eb0c84f348504672, type: 2}
   <m_bachelorImageData>k__BackingField: {fileID: 0}
   <m_dialogueAudioData>k__BackingField: {fileID: 0}
   <m_dialogueTypeData>k__BackingField: 0

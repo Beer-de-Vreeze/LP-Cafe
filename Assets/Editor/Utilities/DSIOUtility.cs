@@ -291,8 +291,8 @@ namespace DS.Utilities
             else if(node.m_nodeDialogueType == DSDialogueType.Setter)
             {
                 dialogue.InitializeSetterNode(
-                    node.m_operationType,
                     node.m_nodeDialogueName,
+                    node.m_operationType,
                     ConvertNodeChoics(node.m_nodeChoices),
                     node.m_valueToSet,
                     node.m_variableName,

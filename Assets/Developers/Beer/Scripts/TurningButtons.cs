@@ -26,6 +26,9 @@ public class TurningButtons : MonoBehaviour
     [SerializeField]
     private float rotationSpeed = 2.0f; // Speed multiplier for camera rotation
 
+    [SerializeField]
+    private BoxCollider[] m_bachelorsColliders;
+
     private int currentPositionIndex = 0; // Index of the current/target position in the Positions list
     private Vector3 targetPosition; // The target position the camera is moving towards
     private Quaternion targetRotation; // The target rotation the camera is rotating towards
@@ -39,13 +42,20 @@ public class TurningButtons : MonoBehaviour
         // Set up button click listeners
         if (leftButton != null)
             leftButton.onClick.AddListener(OnLeftButtonClick);
+            leftButton.onClick.AddListener(BachelorColliderActive);
 
         if (rightButton != null)
             rightButton.onClick.AddListener(OnRightButtonClick);
+            rightButton.onClick.AddListener(BachelorColliderActive);
 
         // If no camera is assigned, use the main camera
         if (mainCamera == null)
             mainCamera = Camera.main;
+
+        foreach (var collider in m_bachelorsColliders)
+        {
+            collider.enabled = false; // Disable all bachelor colliders initially
+        }
 
         // Set initial camera position if positions are available
         if (Positions.Count > 0)
@@ -103,6 +113,30 @@ public class TurningButtons : MonoBehaviour
                 break;
         }
     }
+    
+    public void BachelorColliderActive()
+    {
+        switch (currentPositionIndex)
+        {
+            case 0:
+                foreach (var collider in m_bachelorsColliders)
+                {
+                    if (collider.enabled == true)
+                    {
+                        collider.enabled = false;
+                    }
+                }
+                break;
+            case 1:
+                
+                break;
+            case 2:
+                m_bachelorsColliders[0].enabled = true;
+
+                break;
+        }
+    }
+
 
     /// <summary>
     /// Handles left button click to move camera to previous position.

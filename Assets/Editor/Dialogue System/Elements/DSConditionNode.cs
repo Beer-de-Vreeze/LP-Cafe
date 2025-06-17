@@ -94,7 +94,7 @@ namespace DS.Elements
             #region DialogueName
             /* TITLE CONTAINER*/
             TextField dialogueNameTextField = DSElementUtility.CreateTextField(
-                m_nodeDialogueName = "Condition Node",
+                m_nodeDialogueName,
                 null,
                 callback =>
                 {

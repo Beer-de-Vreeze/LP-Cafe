@@ -111,8 +111,8 @@ namespace DS.ScriptableObjects
         }
 
         public void InitializeSetterNode(
-            SetterOperationType operationType,
             string dialogueName,
+            SetterOperationType operationType,
             List<DSDialogueChoiceData> choices,
             string valueToSet,
             string variableName,
@@ -127,8 +127,8 @@ namespace DS.ScriptableObjects
             bool isStartingDialogue
         )
         {
-            m_operationTypeData = operationType;
             m_dialogueNameData = dialogueName;
+            m_operationTypeData = operationType;
             m_dialogueChoiceData = choices;
             m_valueToSetData = valueToSet;
             m_variableNameData = variableName;

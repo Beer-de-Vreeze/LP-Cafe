@@ -17,7 +17,7 @@ MonoBehaviour:
     be an absolute doll and bring Juliet roses for me on your next trip??"
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Next Dialogue
-    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: b630984821d79bd4d99d1e47dcfe78d3, type: 2}
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 62611e4b7ac43cf4982e04ab2252b979, type: 2}
   <m_bachelorImageData>k__BackingField: {fileID: 0}
   <m_dialogueAudioData>k__BackingField: {fileID: 0}
   <m_dialogueTypeData>k__BackingField: 0
