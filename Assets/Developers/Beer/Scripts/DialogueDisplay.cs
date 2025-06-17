@@ -1242,7 +1242,7 @@ public class DialogueDisplay : MonoBehaviour
     private void OnEnterCafeClicked()
     {
         Debug.Log("Enter Cafe button clicked. Loading Test Cafe scene...");
-        SceneManager.LoadScene("Test Cafe");
+        SceneManager.LoadScene("TestCafe");
     }
 
     /// <summary>

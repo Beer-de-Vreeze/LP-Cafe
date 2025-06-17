@@ -13,9 +13,11 @@ MonoBehaviour:
   m_Name: NotSpying
   m_EditorClassIdentifier: 
   <m_dialogueNameData>k__BackingField: NotSpying
-  <m_dialogueTextData>k__BackingField: "Well you're in luck! A new program opened
-    up in this like caf\xE9 down the street.\r\nLP Caf\xE9 i think it was called??
-    You know? that cute coffee place with all the plants."
+  <m_dialogueTextData>k__BackingField: 'Well you''re in luck! A new program opened
+    up in this like cafe down the street.
+
+    LP Cafe i think it was called?? You
+    know? that cute coffee place with all the plants.'
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Next Dialogue
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: a4d5d134d0b9e6e4ea3a332dfcda10e6, type: 2}
