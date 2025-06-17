@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using DS;
 using DS.Enumerations;
@@ -73,6 +74,9 @@ public class DialogueDisplay : MonoBehaviour
     /// <summary>Tracks whether the player can advance to the next dialogue</summary>
     private bool _canAdvance = false;
 
+    /// <summary>Tracks whether the dialogue advancement delay is active</summary>
+    private bool _isDelayActive = false;
+
     /// <summary>List of currently active choice buttons for cleanup purposes</summary>
     private List<GameObject> _activeChoiceButtons = new List<GameObject>();
 
@@ -146,9 +150,10 @@ public class DialogueDisplay : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        // Allow advancing dialogue if possible and no choices are being shown
+        // Allow advancing dialogue if possible, no choices are being shown, and delay is not active
         if (
             _canAdvance
+            && !_isDelayActive
             && _activeChoiceButtons.Count == 0
             && (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
         )
@@ -430,7 +435,7 @@ public class DialogueDisplay : MonoBehaviour
                     "<" => currentFloat < compareFloat,
                     ">=" => currentFloat >= compareFloat,
                     "<=" => currentFloat <= compareFloat,
-                    _ => false
+                    _ => false,
                 };
             }
             // Handle boolean comparisons
@@ -443,7 +448,7 @@ public class DialogueDisplay : MonoBehaviour
                 {
                     "==" => currentBool == compareBool,
                     "!=" => currentBool != compareBool,
-                    _ => false
+                    _ => false,
                 };
             }
             // Handle string comparisons
@@ -453,7 +458,7 @@ public class DialogueDisplay : MonoBehaviour
                 {
                     "==" => currentValue == comparisonValue,
                     "!=" => currentValue != comparisonValue,
-                    _ => false
+                    _ => false,
                 };
             }
 
@@ -623,17 +628,34 @@ public class DialogueDisplay : MonoBehaviour
 
     /// <summary>
     /// Called when the typewriter effect finishes displaying text.
-    /// Enables dialogue advancement and shows continue icon for single dialogue lines.
+    /// Starts a delay before allowing dialogue advancement and shows the continue icon if appropriate.
     /// </summary>
     private void OnTypewriterEnd()
     {
-        _canAdvance = true;
+        // Start the delay before allowing advancement
+        StartCoroutine(DelayBeforeAdvancement());
 
         // Show continue icon only if there are no multiple choices (single dialogue)
         if (_activeChoiceButtons.Count == 0 && _continueIcon != null)
         {
             _continueIcon.SetActive(true);
         }
+    }
+
+    /// <summary>
+    /// Coroutine that waits one second before allowing the player to advance to the next dialogue.
+    /// </summary>
+    /// <returns>Coroutine enumerator</returns>
+    private IEnumerator DelayBeforeAdvancement()
+    {
+        _isDelayActive = true;
+        _canAdvance = false;
+
+        // Wait for one second
+        yield return new WaitForSeconds(1f);
+
+        _isDelayActive = false;
+        _canAdvance = true;
     }
     #endregion
 
@@ -772,7 +794,7 @@ public class DialogueDisplay : MonoBehaviour
                 "<" => currentFloat < compareFloat,
                 ">=" => currentFloat >= compareFloat,
                 "<=" => currentFloat <= compareFloat,
-                _ => false
+                _ => false,
             };
         }
         else if (
@@ -784,7 +806,7 @@ public class DialogueDisplay : MonoBehaviour
             {
                 "==" => currentBool == compareBool,
                 "!=" => currentBool != compareBool,
-                _ => false
+                _ => false,
             };
         }
         else
@@ -793,7 +815,7 @@ public class DialogueDisplay : MonoBehaviour
             {
                 "==" => currentValue == comparisonValue,
                 "!=" => currentValue != comparisonValue,
-                _ => false
+                _ => false,
             };
         }
     }
@@ -889,7 +911,6 @@ public class DialogueDisplay : MonoBehaviour
                 Debug.Log(verticalLayout);
                 verticalLayout.SetLayoutHorizontal();
                 verticalLayout.SetLayoutVertical();
-
             }
 
             LayoutRebuilder.ForceRebuildLayoutImmediate(
