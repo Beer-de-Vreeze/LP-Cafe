@@ -6,6 +6,7 @@ using Febucci.UI;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using static UnityEngine.UI.LayoutUtility;
 
@@ -52,6 +53,10 @@ public class DialogueDisplay : MonoBehaviour
     [SerializeField]
     private NoteBook _noteBook;
 
+    // Continue icon that appears when single dialogue finishes
+    [SerializeField]
+    private GameObject _continueIcon;
+
     // New fields for state tracking
     private bool _canAdvance = false;
     private List<GameObject> _activeChoiceButtons = new List<GameObject>();
@@ -77,19 +82,32 @@ public class DialogueDisplay : MonoBehaviour
     [SerializeField]
     private Color _disabledTextColor = Color.gray;
 
-    // Called when the script instance is being loaded
+    [SerializeField]
+    public int _succesfulDateCount = 0;
+
+    // Save data reference for syncing successful date count
+    private SaveData _saveData;
+
     private void Start()
     {
-        // Initialize variables with default values
-        InitializeGameVariables();
+        // Load successful date count from save data
+        LoadSuccessfulDateCountFromSave();
 
-        // Ensure typewriter events are set up correctly
+        // Initialize variables with default values
+        InitializeGameVariables(); // Ensure typewriter events are set up correctly
         if (_typewriter != null)
         {
             _typewriter.onTextShowed.RemoveListener(OnTypewriterEnd);
             _typewriter.onTextShowed.AddListener(OnTypewriterEnd);
         }
-/*        SetDialogue(_dialogue, _bachelor);*/
+
+        // Initialize continue icon as hidden
+        if (_continueIcon != null)
+        {
+            _continueIcon.SetActive(false);
+        }
+
+        /*        SetDialogue(_dialogue, _bachelor);*/
     }
 
     // Initialize game variables with default values
@@ -101,9 +119,8 @@ public class DialogueDisplay : MonoBehaviour
         _gameVariables["DislikeDiscovered"] = "false";
         _gameVariables["NotebookLikeEntry"] = "false";
         _gameVariables["NotebookDislikeEntry"] = "false";
-    }
+    } // Called once per frame
 
-    // Called once per frame
     private void Update()
     {
         // Allow advancing dialogue if possible and no choices are being shown
@@ -114,15 +131,27 @@ public class DialogueDisplay : MonoBehaviour
         )
         {
             _canAdvance = false;
+
+            // Hide continue icon when advancing
+            if (_continueIcon != null)
+            {
+                _continueIcon.SetActive(false);
+            }
+
             NextDialogue();
         }
-    }
+    } // Displays the current dialogue and sets up choices if available
 
-    // Displays the current dialogue and sets up choices if available
     public void ShowDialogue()
     {
         ClearChoices();
         EnsureVerticalLayoutSettings(); // Add this line
+
+        // Hide continue icon when starting new dialogue
+        if (_continueIcon != null)
+        {
+            _continueIcon.SetActive(false);
+        }
 
         // If this is a condition node, evaluate it and follow the appropriate path
         if (IsConditionNode(_dialogue))
@@ -479,22 +508,16 @@ public class DialogueDisplay : MonoBehaviour
                     _gameVariables[boolName] = boolValue.ToString().ToLower();
                     Debug.Log($"Set boolean: {boolName} = {boolValue}");
                     break;
-
                 case SetterOperationType.DiscoverPreference:
                     Debug.Log("Discovering preference...");
                     // Get info from setter node
                     string prefName = setterNode.m_selectedPreferenceData;
-                    bool isLike = setterNode.m_isLikePreferenceData;
-                    // Update bachelor data and game variables
-                    DiscoverBachelorPreference(prefName, isLike);
-                    // Update notebook UI if available
-                    if (_noteBook != null)
-                    {
-                        if (isLike)
-                            _noteBook.DiscoverLike(prefName);
-                        else
-                            _noteBook.DiscoverDislike(prefName);
-                    }
+                    bool isLike = setterNode.m_isLikePreferenceData; // Check if preference was actually newly discovered
+                    bool wasNewlyDiscovered = DiscoverBachelorPreference(prefName, isLike);
+
+                    // The NoteBook will automatically create entries via the OnPreferenceDiscovered event
+                    // No need to manually call NoteBook methods anymore
+
                     break;
 
                 default:
@@ -520,20 +543,26 @@ public class DialogueDisplay : MonoBehaviour
         }
     }
 
-    // Called when the typewriter effect finishes displaying text
     private void OnTypewriterEnd()
     {
         _canAdvance = true;
-    }
 
-    // Sets the current dialogue and bachelor, then displays the dialogue
+        // Show continue icon only if there are no multiple choices (single dialogue)
+        if (_activeChoiceButtons.Count == 0 && _continueIcon != null)
+        {
+            _continueIcon.SetActive(true);
+        }
+    } // Sets the current dialogue and bachelor, then displays the dialogue
+
     public void SetDialogue(DSDialogue dialogue, NewBachelorSO bachelor)
     {
         _dialogue = dialogue;
         _bachelor = bachelor;
-
         if (_bachelor != null)
         {
+            // Ensure all preferences start as undiscovered
+            _bachelor.EnsureUndiscoveredState();
+
             // Use the bachelor's love meter if available
             if (_bachelor._loveMeter != null)
             {
@@ -542,53 +571,28 @@ public class DialogueDisplay : MonoBehaviour
                 _gameVariables["Love"] = _loveScore.ToString();
             }
 
-            // Initialize preference discovery status variables
-            bool hasAnyLikeDiscovered = false;
-            bool hasAnyDislikeDiscovered = false;
-
-            if (_bachelor._likes != null)
-            {
-                foreach (var like in _bachelor._likes)
-                {
-                    if (like.discovered)
-                    {
-                        hasAnyLikeDiscovered = true;
-                        break;
-                    }
-                }
-            }
-
-            if (_bachelor._dislikes != null)
-            {
-                foreach (var dislike in _bachelor._dislikes)
-                {
-                    if (dislike.discovered)
-                    {
-                        hasAnyDislikeDiscovered = true;
-                        break;
-                    }
-                }
-            }
-
-            _gameVariables["LikeDiscovered"] = hasAnyLikeDiscovered.ToString().ToLower();
-            _gameVariables["DislikeDiscovered"] = hasAnyDislikeDiscovered.ToString().ToLower();
+            // Note: LikeDiscovered and DislikeDiscovered variables are only set
+            // when preferences are actually discovered through setter nodes
         }
         else
         {
             _bachelor = NewBachelorSO.CreateInstance<NewBachelorSO>();
             _bachelor._name = "Chantal";
         }
-
         ShowDialogue();
     }
 
-public void StartDialogue(NewBachelorSO bachelor, DSDialogue dialogueSO)
+    public void StartDialogue(NewBachelorSO bachelor, DSDialogue dialogueSO)
     {
         bachelor._dialogue = dialogueSO;
         if (bachelor == null || bachelor._dialogue == null)
             return;
         _bachelor = bachelor;
-        _loveMeter = bachelor._loveMeter; 
+
+        // Ensure all preferences start as undiscovered
+        _bachelor.EnsureUndiscoveredState();
+
+        _loveMeter = bachelor._loveMeter;
         SetDialogue(bachelor._dialogue, bachelor);
         ShowDialogue();
     }
@@ -606,14 +610,20 @@ public void StartDialogue(NewBachelorSO bachelor, DSDialogue dialogueSO)
             }
             else
             {
-                Debug.Log("No next dialogue found.");
+                Debug.Log("No next dialogue found. Showing end dialogue buttons.");
+                ShowEndDialogueButtons();
             }
         }
-    }
+    } // Instantiates choice buttons for each available choice
 
-    // Instantiates choice buttons for each available choice
     private void ShowChoices(List<DS.Data.DSDialogueChoiceData> choices)
     {
+        // Hide continue icon when showing multiple choices
+        if (_continueIcon != null)
+        {
+            _continueIcon.SetActive(false);
+        }
+
         foreach (var choice in choices)
         {
             var btnObj = Instantiate(_choiceButtonPrefab, _choicesParent);
@@ -735,9 +745,8 @@ public void StartDialogue(NewBachelorSO bachelor, DSDialogue dialogueSO)
                 _choicesParent.GetComponent<RectTransform>()
             );
         }
-    }
+    } // Destroys all active choice buttons
 
-    // Destroys all active choice buttons
     private void ClearChoices()
     {
         foreach (var btn in _activeChoiceButtons)
@@ -900,47 +909,290 @@ public void StartDialogue(NewBachelorSO bachelor, DSDialogue dialogueSO)
                 vertLayout.spacing = 8f;
             }
         }
-    }
+    } // New method to handle preference discoveries through dialogue
 
-    // New method to handle preference discoveries through dialogue
-    public void DiscoverBachelorPreference(string preferenceName, bool isLike)
+    public bool DiscoverBachelorPreference(string preferenceName, bool isLike)
     {
         if (_bachelor == null)
-            return;
+            return false;
 
         if (isLike)
         {
-            // Find the like by description and discover it
+            // Find the like by description and discover it only if not already discovered
             for (int i = 0; i < _bachelor._likes.Length; i++)
             {
                 if (_bachelor._likes[i].description == preferenceName)
-                {
-                    _bachelor.DiscoverLike(i);
-                    Debug.Log($"Discovered like: {preferenceName}");
+                { // Only set the preference if it's not already discovered
+                    if (!_bachelor._likes[i].discovered)
+                    {
+                        _bachelor.DiscoverLike(i);
+                        Debug.Log($"Discovered like: {preferenceName}");
 
-                    // Also update our game variables
-                    _gameVariables["LikeDiscovered"] = "true";
-                    _gameVariables["NotebookLikeEntry"] = "true";
-                    break;
+                        // Only update game variables when actually discovering a new preference
+                        _gameVariables["LikeDiscovered"] = "true";
+                        _gameVariables["NotebookLikeEntry"] = "true";
+                        return true; // Preference was newly discovered
+                    }
+                    else
+                    {
+                        Debug.Log(
+                            $"Like '{preferenceName}' was already discovered, skipping variable updates"
+                        );
+                        return false; // Preference was already discovered
+                    }
                 }
             }
         }
         else
         {
-            // Find the dislike by description and discover it
+            // Find the dislike by description and discover it only if not already discovered
             for (int i = 0; i < _bachelor._dislikes.Length; i++)
             {
                 if (_bachelor._dislikes[i].description == preferenceName)
-                {
-                    _bachelor.DiscoverDislike(i);
-                    Debug.Log($"Discovered dislike: {preferenceName}");
+                { // Only set the preference if it's not already discovered
+                    if (!_bachelor._dislikes[i].discovered)
+                    {
+                        _bachelor.DiscoverDislike(i);
+                        Debug.Log($"Discovered dislike: {preferenceName}");
 
-                    // Also update our game variables
-                    _gameVariables["DislikeDiscovered"] = "true";
-                    _gameVariables["NotebookDislikeEntry"] = "true";
-                    break;
+                        // Only update game variables when actually discovering a new preference
+                        _gameVariables["DislikeDiscovered"] = "true";
+                        _gameVariables["NotebookDislikeEntry"] = "true";
+                        return true; // Preference was newly discovered
+                    }
+                    else
+                    {
+                        Debug.Log(
+                            $"Dislike '{preferenceName}' was already discovered, skipping variable updates"
+                        );
+                        return false; // Preference was already discovered
+                    }
                 }
             }
+        }
+
+        // Preference not found
+        Debug.LogWarning($"Preference '{preferenceName}' not found in bachelor data");
+        return false;
+    } // Show end dialogue buttons using the same container and prefab as choice buttons
+
+    private void ShowEndDialogueButtons()
+    {
+        // Only show end dialogue buttons in the Cafe Scene
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        bool isCafeScene =
+            currentSceneName.ToLower().Contains("cafe")
+            || currentSceneName.ToLower().Contains("cafeScene")
+            || currentSceneName.Equals("CafeScene", System.StringComparison.OrdinalIgnoreCase);
+
+        if (!isCafeScene)
+        {
+            Debug.Log(
+                $"Not in Cafe Scene (current scene: {currentSceneName}). End dialogue buttons will not be shown."
+            );
+            return;
+        }
+
+        Debug.Log($"In Cafe Scene ({currentSceneName}). Showing end dialogue buttons.");
+
+        // Clear any existing choice buttons first
+        ClearChoices();
+
+        // Create "Come Back Later" button
+        var comeBackLaterBtn = Instantiate(_choiceButtonPrefab, _choicesParent);
+        var comeBackLaterText = comeBackLaterBtn.GetComponentInChildren<TextMeshProUGUI>();
+        if (comeBackLaterText != null)
+            comeBackLaterText.text = "Come Back Later";
+
+        // Add or ensure ContentSizeFitter exists on button
+        EnsureContentSizeFitter(comeBackLaterBtn);
+        var comeBackLaterButton = comeBackLaterBtn.GetComponent<UnityEngine.UI.Button>();
+        if (comeBackLaterButton != null)
+        {
+            comeBackLaterButton.onClick.AddListener(OnComeBackLaterClicked);
+
+            // Set normal color for the button
+            if (comeBackLaterText != null)
+                comeBackLaterText.color = _normalTextColor;
+
+            // Add hover effects
+            AddHoverEffects(comeBackLaterBtn, comeBackLaterText);
+        }
+
+        _activeChoiceButtons.Add(comeBackLaterBtn);
+
+        // Create "Next Scene" button
+        var nextSceneBtn = Instantiate(_choiceButtonPrefab, _choicesParent);
+        var nextSceneText = nextSceneBtn.GetComponentInChildren<TextMeshProUGUI>();
+        if (nextSceneText != null)
+        {
+            if (!string.IsNullOrEmpty(_bachelor._nextSceneName))
+            {
+                nextSceneText.text = $"Go to {_bachelor._nextSceneName}";
+            }
+            else
+            {
+                nextSceneText.text = "Continue";
+            }
+        }
+
+        // Add or ensure ContentSizeFitter exists on button
+        EnsureContentSizeFitter(nextSceneBtn);
+        var nextSceneButton = nextSceneBtn.GetComponent<UnityEngine.UI.Button>();
+        if (nextSceneButton != null)
+        {
+            nextSceneButton.onClick.AddListener(OnNextSceneClicked);
+
+            // Set normal color for the button
+            if (nextSceneText != null)
+                nextSceneText.color = _normalTextColor;
+
+            // Add hover effects
+            AddHoverEffects(nextSceneBtn, nextSceneText);
+        }
+
+        _activeChoiceButtons.Add(nextSceneBtn);
+    }
+
+    // Handle come back later button click
+    private void OnComeBackLaterClicked()
+    {
+        Debug.Log("Come Back Later button clicked - closing dialogue");
+        SceneManager.LoadScene("MainMenu");
+        // Clear the buttons
+        ClearChoices();
+
+        // Hide the entire dialogue display
+        gameObject.SetActive(false);
+    } // Handle next scene button click
+
+    private void OnNextSceneClicked()
+    {
+        Debug.Log("Next Scene button clicked");
+
+        // Check if this was a successful date completion
+        // A successful date is one where the dialogue ended normally and the user chose to continue
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        bool isDateScene =
+            !currentSceneName.ToLower().Contains("cafe")
+            && !currentSceneName.ToLower().Contains("barista")
+            && !currentSceneName.ToLower().Contains("menu")
+            && !currentSceneName.ToLower().Contains("main");
+
+        if (isDateScene)
+        {
+            // This is likely a date scene, so increment successful date count
+            IncrementSuccessfulDateCount();
+            Debug.Log("Date completed successfully!");
+        }
+
+        SceneManager.LoadScene("MainMenu");
+        if (_bachelor != null && !string.IsNullOrEmpty(_bachelor._nextSceneName))
+        {
+            Debug.Log($"Loading scene: {_bachelor._nextSceneName}");
+            SceneManager.LoadScene(_bachelor._nextSceneName);
+        }
+        else
+        {
+            // Fallback: load next scene in build settings
+            int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
+            if (nextSceneIndex < SceneManager.sceneCountInBuildSettings)
+            {
+                Debug.Log($"Loading next scene in build order: {nextSceneIndex}");
+                SceneManager.LoadScene(nextSceneIndex);
+            }
+            else
+            {
+                Debug.LogWarning(
+                    "No scene name specified in bachelor SO and no more scenes in build settings"
+                );
+            }
+        }
+    }
+
+    // Method to increment successful date count and save data
+    public void IncrementSuccessfulDateCount()
+    {
+        _succesfulDateCount++;
+        Debug.Log($"Successful date count incremented to: {_succesfulDateCount}");
+
+        // Sync with save data
+        SyncWithSaveData();
+    }
+
+    // Method to increment failed date count
+    public void IncrementFailedDateCount()
+    {
+        // Load current save data to get failed date count
+        _saveData = SaveSystem.Deserialize();
+        if (_saveData == null)
+        {
+            _saveData = new SaveData();
+        }
+
+        _saveData.FailedDateCount++;
+        SaveSystem.SerializeData(_saveData);
+
+        Debug.Log($"Failed date count incremented to: {_saveData.FailedDateCount}");
+    }
+
+    // Method to handle a failed date (can be called from dialogue choices or events)
+    public void OnDateFailed()
+    {
+        Debug.Log("Date failed!");
+
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        bool isDateScene =
+            !currentSceneName.ToLower().Contains("cafe")
+            && !currentSceneName.ToLower().Contains("barista")
+            && !currentSceneName.ToLower().Contains("menu")
+            && !currentSceneName.ToLower().Contains("main");
+
+        if (isDateScene)
+        {
+            // This is likely a date scene, so increment failed date count
+            IncrementFailedDateCount();
+            Debug.Log("Date failure tracked!");
+        } // You can add additional logic here, such as:
+        // - Showing a specific "date failed" message
+        // - Playing different audio
+        // - Changing the scene transition
+
+        SceneManager.LoadScene("MainMenu");
+    }
+
+    // Method to sync with save data
+    public void SyncWithSaveData()
+    {
+        // Load current save data
+        _saveData = SaveSystem.Deserialize();
+
+        if (_saveData == null)
+        {
+            _saveData = new SaveData();
+        }
+
+        // Update save data with current count
+        _saveData.SuccessfulDateCount = _succesfulDateCount;
+
+        // Save the data
+        SaveSystem.SerializeData(_saveData);
+        Debug.Log($"Synced successful date count with save data: {_succesfulDateCount}");
+    }
+
+    // Method to load successful date count from save data
+    public void LoadSuccessfulDateCountFromSave()
+    {
+        _saveData = SaveSystem.Deserialize();
+
+        if (_saveData != null)
+        {
+            _succesfulDateCount = _saveData.SuccessfulDateCount;
+            Debug.Log($"Loaded successful date count from save: {_succesfulDateCount}");
+        }
+        else
+        {
+            Debug.Log("No save data found, keeping current successful date count");
         }
     }
 }
