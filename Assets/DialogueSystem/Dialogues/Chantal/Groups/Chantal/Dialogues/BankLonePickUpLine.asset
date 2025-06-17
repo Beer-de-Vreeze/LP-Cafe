@@ -17,7 +17,7 @@ MonoBehaviour:
     were an adult
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Next Dialogue
-    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 670f36ffca71d7240ab5f5a81f4a6032, type: 2}
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 9e662d5343dba024999f94588e04b5e4, type: 2}
   <m_bachelorImageData>k__BackingField: {fileID: 0}
   <m_dialogueAudioData>k__BackingField: {fileID: 0}
   <m_dialogueTypeData>k__BackingField: 0

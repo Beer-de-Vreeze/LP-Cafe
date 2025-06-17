@@ -17,7 +17,7 @@ MonoBehaviour:
     of commentary,\nbut I have to agree\u2026 I do look like an angel."
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Next Dialogue
-    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 67a00638e0dd5d048801dae24820c205, type: 2}
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 08673b8fa60d1034ea11aaee00399e14, type: 2}
   <m_bachelorImageData>k__BackingField: {fileID: 0}
   <m_dialogueAudioData>k__BackingField: {fileID: 0}
   <m_dialogueTypeData>k__BackingField: 0

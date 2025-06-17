@@ -17,7 +17,7 @@ MonoBehaviour:
     broke people don\u2019t understand my questions."
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Next Dialogue
-    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 14d1f3cf032a30e48822c93e07854933, type: 2}
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 96d128314bd58764e848aef6b4156ad2, type: 2}
   <m_bachelorImageData>k__BackingField: {fileID: 0}
   <m_dialogueAudioData>k__BackingField: {fileID: 0}
   <m_dialogueTypeData>k__BackingField: 0
