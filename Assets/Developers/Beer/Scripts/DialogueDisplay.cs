@@ -886,8 +886,10 @@ public class DialogueDisplay : MonoBehaviour
                 Canvas.ForceUpdateCanvases();
                 verticalLayout.CalculateLayoutInputHorizontal();
                 verticalLayout.CalculateLayoutInputVertical();
+                Debug.Log(verticalLayout);
                 verticalLayout.SetLayoutHorizontal();
                 verticalLayout.SetLayoutVertical();
+                
             }
 
             LayoutRebuilder.ForceRebuildLayoutImmediate(

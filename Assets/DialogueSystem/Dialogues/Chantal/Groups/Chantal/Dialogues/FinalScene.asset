@@ -24,7 +24,7 @@ MonoBehaviour:
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: d2224b7088dd63e479964601c719b3f1, type: 2}
   - <m_dialogueChoiceText>k__BackingField: You better call God, he's missing an angel.
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: a04253e8c2c967f4eb41a202188b53f4, type: 2}
-  <m_bachelorImageData>k__BackingField: {fileID: 0}
+  <m_bachelorImageData>k__BackingField: {fileID: 21300000, guid: 84a876f81e079bf40beb58c595c98cf5, type: 3}
   <m_dialogueAudioData>k__BackingField: {fileID: 0}
   <m_dialogueTypeData>k__BackingField: 1
   <m_isStartingDialogueData>k__BackingField: 1
