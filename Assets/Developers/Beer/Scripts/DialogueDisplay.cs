@@ -228,17 +228,23 @@ public class DialogueDisplay : MonoBehaviour
     /// Sets up the baseline state for dialogue system variables.
     /// </summary>
     private void InitializeGameVariables()
-    {
-        // Update love score from love meter if available
+    { // Update love score from love meter if available
         if (_loveMeter != null)
         {
             _loveScore = _loveMeter.GetCurrentLove();
-        } // Default values for variables used in conditions
+        }
+
+        // Default values for variables used in conditions
         _gameVariables["Love"] = _loveScore.ToString();
         _gameVariables["LikeDiscovered"] = "false";
         _gameVariables["DislikeDiscovered"] = "false";
-        _gameVariables["NotebookLikeEntry"] = "false";
-        _gameVariables["NotebookDislikeEntry"] = "false";
+
+        // Only set notebook variables if notebook exists
+        if (_noteBook != null)
+        {
+            _gameVariables["NotebookLikeEntry"] = "false";
+            _gameVariables["NotebookDislikeEntry"] = "false";
+        }
     }
 
     /// <summary>
@@ -1062,11 +1068,12 @@ public class DialogueDisplay : MonoBehaviour
                 if (!_bachelor._likes[i].discovered)
                 {
                     _bachelor.DiscoverLike(i);
-                    Debug.Log($"Discovered like: {preferenceName}");
-
-                    // Update game variables for newly discovered preference
+                    Debug.Log($"Discovered like: {preferenceName}"); // Update game variables for newly discovered preference
                     _gameVariables["LikeDiscovered"] = "true";
-                    _gameVariables["NotebookLikeEntry"] = "true";
+                    if (_noteBook != null)
+                    {
+                        _gameVariables["NotebookLikeEntry"] = "true";
+                    }
                     return true;
                 }
                 else
@@ -1095,11 +1102,12 @@ public class DialogueDisplay : MonoBehaviour
                 if (!_bachelor._dislikes[i].discovered)
                 {
                     _bachelor.DiscoverDislike(i);
-                    Debug.Log($"Discovered dislike: {preferenceName}");
-
-                    // Update game variables for newly discovered preference
+                    Debug.Log($"Discovered dislike: {preferenceName}"); // Update game variables for newly discovered preference
                     _gameVariables["DislikeDiscovered"] = "true";
-                    _gameVariables["NotebookDislikeEntry"] = "true";
+                    if (_noteBook != null)
+                    {
+                        _gameVariables["NotebookDislikeEntry"] = "true";
+                    }
                     return true;
                 }
                 else
@@ -1115,14 +1123,38 @@ public class DialogueDisplay : MonoBehaviour
     }
     #endregion
 
-    #region End Dialogue Management
-    /// <summary>
+    #region End Dialogue Management    /// <summary>
     /// Shows end dialogue buttons when the conversation is complete.
-    /// Only displays in the Cafe Scene, provides options to continue or return later.
+    /// Shows "Enter Cafe" button only at the last dialogue of FirstDate scene, otherwise shows standard buttons in Cafe scenes.
     /// </summary>
     private void ShowEndDialogueButtons()
     {
         string currentSceneName = SceneManager.GetActiveScene().name;
+
+        // Check if we're in the FirstDate scene AND this is truly the last dialogue
+        bool isFirstDateScene = currentSceneName.ToLower().Contains("firstdate");
+        bool isLastDialogue =
+            _dialogue?.m_dialogue?.m_dialogueChoiceData == null
+            || _dialogue.m_dialogue.m_dialogueChoiceData.Count == 0
+            || _dialogue.m_dialogue.m_dialogueChoiceData[0].m_nextDialogue == null;
+
+        if (isFirstDateScene && isLastDialogue)
+        {
+            Debug.Log(
+                $"At last dialogue in FirstDate Scene ({currentSceneName}). Showing Enter Cafe button."
+            );
+            ClearChoices();
+            CreateEnterCafeButton();
+            return;
+        }
+        else if (isFirstDateScene && !isLastDialogue)
+        {
+            Debug.Log(
+                $"In FirstDate Scene ({currentSceneName}) but not at last dialogue. No buttons shown."
+            );
+            return;
+        }
+
         bool isCafeScene =
             currentSceneName.ToLower().Contains("cafe")
             || currentSceneName.ToLower().Contains("cafescene")
@@ -1176,6 +1208,41 @@ public class DialogueDisplay : MonoBehaviour
         }
 
         _activeChoiceButtons.Add(btnObj);
+    }
+
+    /// <summary>
+    /// Creates the "Enter Cafe" button specifically for the FirstDate scene
+    /// </summary>
+    private void CreateEnterCafeButton()
+    {
+        var btnObj = Instantiate(_choiceButtonPrefab, _choicesParent);
+        var btnText = btnObj.GetComponentInChildren<TextMeshProUGUI>();
+        if (btnText != null)
+            btnText.text = "Enter Cafe";
+
+        EnsureContentSizeFitter(btnObj);
+
+        var button = btnObj.GetComponent<UnityEngine.UI.Button>();
+        if (button != null)
+        {
+            button.onClick.AddListener(() => OnEnterCafeClicked());
+
+            if (btnText != null)
+                btnText.color = _normalTextColor;
+
+            AddHoverEffects(btnObj, btnText);
+        }
+
+        _activeChoiceButtons.Add(btnObj);
+    }
+
+    /// <summary>
+    /// Handles the Enter Cafe button click - transitions to Test Cafe scene
+    /// </summary>
+    private void OnEnterCafeClicked()
+    {
+        Debug.Log("Enter Cafe button clicked. Loading Test Cafe scene...");
+        SceneManager.LoadScene("Test Cafe");
     }
 
     /// <summary>
