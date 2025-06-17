@@ -3533,8 +3533,10 @@ MonoBehaviour:
   leftButton: {fileID: 1294286156}
   rightButton: {fileID: 2069975436}
   mainCamera: {fileID: 661461312}
-  moveSpeed: 2
-  rotationSpeed: 2
+  moveSpeed: 3.5
+  rotationSpeed: 3.5
+  m_bachelorsColliders:
+  - {fileID: 200159564}
 --- !u!1001 &675462300
 PrefabInstance:
   m_ObjectHideFlags: 0
