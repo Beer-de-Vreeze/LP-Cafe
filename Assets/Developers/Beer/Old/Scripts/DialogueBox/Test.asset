@@ -1,0 +1,80 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e83d7a4d0b898be4da92bb1e6ff3a1c0, type: 3}
+  m_Name: Test
+  m_EditorClassIdentifier: 
+  startNode:
+    nodeID: 1
+    speakerName: Frans
+    text: Hallo ik ben Frans
+    options:
+    - text: 
+      targetNodeID: 
+      hasCondition: 0
+      conditionName: 
+    - text: 
+      targetNodeID: 
+      hasCondition: 0
+      conditionName: 
+    speakerImage: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+    voiceClip: {fileID: 0}
+    nextNodeID: 0
+  nodes:
+  - nodeID: 2
+    speakerName: Frans
+    text: ik ben eenzaam
+    options: []
+    speakerImage: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+    voiceClip: {fileID: 0}
+    nextNodeID: 
+  messages:
+  - "Beer stood at the edge of the dense forest, the pale morning sun barely penetrating
+    the thick gray fog. A strange sound\u2014a low, resonant hum\u2014echoed through
+    the air. It seemed to call out to him, pulling him forward despite the creeping
+    sense of unease."
+  - "Niels had warned him the night before. \"Don\u2019t go near the forest. People
+    don\u2019t come back.\" Beer dismissed it as local superstition, but now, with
+    the eerie sound wrapping around him, the warning resurfaced. His curiosity got
+    the better of him."
+  - 'As Beer ventured deeper, the fog thickened, coiling around the gnarled trees
+    like living tendrils. The hum grew louder, morphing into faint whispers. He could
+    make out fragments of words: "Closer... Find us..." They were neither threatening
+    nor inviting.'
+  - "Noah, Joah, and Merijn had planned to meet him at sunrise, but they hadn\u2019t
+    shown up. Beer glanced at his phone, hoping for a signal, but the screen remained
+    dark. The realization struck him\u2014he hadn\u2019t seen the sun since entering
+    the fog."
+  - "The ground beneath Beer\u2019s feet grew soft, almost spongy, and the air carried
+    a metallic tang. He saw faint lights ahead, flickering in and out of view. Were
+    they lanterns? Eyes? His instincts screamed to turn back, but his legs carried
+    him forward.\n\n"
+  - 'He stumbled into a clearing, where the fog thinned just enough to reveal a ring
+    of ancient stones. Each was etched with symbols that seemed to shift and writhe.
+    The hum was deafening now, pulsating in time with the glowing stones.
+
+
+'
+  - "\u201CWho are you?\u201D a voice echoed, low and melodic. Beer turned to see
+    a figure emerge\u2014a woman with glowing eyes and hair like woven starlight.
+    She stood tall, her presence both regal and alien. \u201CWhy have you come to
+    the boundary?\u201D"
+  - "\u201CI... I heard the sound,\u201D Beer stammered, his courage faltering. The
+    woman tilted her head, studying him like a specimen under glass. \u201CFew hear
+    the call. Fewer still follow it. You\u2019ve crossed into the Veil, and now you
+    must decide.\u201D"
+  - "She extended a hand, her fingers shimmering like liquid silver. \u201CStay and
+    learn the truths of this world, or leave and forget you ever heard the hum.\u201D
+    Beer hesitated, his heart pounding. He thought of his friends waiting for him\u2014if
+    they even still were."
+  - Beer reached for her hand, the fog swallowing him whole as their fingers touched.
+    The hum quieted, replaced by silence. Somewhere beyond the Veil, the forest grew
+    still again, waiting for the next curious soul to hear its echo.
