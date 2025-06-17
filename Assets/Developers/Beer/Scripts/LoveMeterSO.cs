@@ -28,16 +28,9 @@ public class LoveMeterSO : ScriptableObject
         {
             LoveChangedEvent = new UnityEvent<int>();
         }
-    }
+    } // Note: ScriptableObjects don't have Update() method.
 
-    private void Update()
-    {
-        if (_currentLove < 0)
-        {
-            _currentLove = 0;
-            LoveChangedEvent.Invoke(_currentLove);
-        }
-    }
+    // Validation is handled in the methods that modify _currentLove instead.
 
     /// <summary>
     /// Increase the love value by the specified amount

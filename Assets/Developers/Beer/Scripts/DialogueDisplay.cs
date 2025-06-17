@@ -1,3 +1,34 @@
+/*
+ * =====================================================================================
+ * DIALOGUE DISPLAY SYSTEM
+ * =====================================================================================
+ *
+ * Author: Beer (LP-Cafe Development Team)
+ * Description: Core dialogue system for the dating simulation game.
+ *
+ * This script manages:
+ * - Dialogue text display with typewriter effects
+ * - Choice button generation and interaction
+ * - Love meter integration and visual feedback
+ * - Bachelor preference discovery system
+ * - Dialogue flow control (conditions, setters, branching)
+ * - Save system integration for progress tracking
+ * - Audio and visual elements synchronization
+ *
+ * Dependencies:
+ * - Dialogue System (DS) framework
+ * - TextAnimator (Febucci) for typewriter effects
+ * - DOTween for UI animations (via LoveMeter)
+ * - Custom ScriptableObjects (NewBachelorSO, LoveMeterSO)
+ *
+ * Usage:
+ * 1. Assign UI references in the inspector
+ * 2. Set bachelor and dialogue data via SetDialogue() or StartDialogue()
+ * 3. The system handles all dialogue flow automatically
+ *
+ * =====================================================================================
+ */
+
 using System.Collections;
 using System.Collections.Generic;
 using DS;
@@ -17,8 +48,12 @@ using static UnityEngine.UI.LayoutUtility;
 /// Supports advanced dialogue features like conditions, setters, and preference discovery.
 /// </summary>
 public class DialogueDisplay : MonoBehaviour
-{
+{ // =====================================================================================
+    // COMPONENT REFERENCES AND CONFIGURATION
+    // =====================================================================================
+
     #region UI References
+    [Header("📋 TEXT DISPLAY COMPONENTS")]
     /// <summary>Reference to the UI element displaying the character's name</summary>
     [SerializeField]
     private TextMeshProUGUI _nameText;
@@ -31,6 +66,7 @@ public class DialogueDisplay : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI _displayText;
 
+    [Header("🖼️ VISUAL COMPONENTS")]
     /// <summary>Reference to the UI Image displaying the character's portrait</summary>
     [SerializeField]
     private Image _bachelorImage;
@@ -39,6 +75,7 @@ public class DialogueDisplay : MonoBehaviour
     [SerializeField]
     private GameObject _continueIcon;
 
+    [Header("🔘 CHOICE SYSTEM")]
     /// <summary>Parent transform for dynamically generated choice buttons</summary>
     [SerializeField]
     private Transform _choicesParent;
@@ -46,9 +83,18 @@ public class DialogueDisplay : MonoBehaviour
     /// <summary>Prefab template for creating choice buttons</summary>
     [SerializeField]
     private GameObject _choiceButtonPrefab;
+
+    [Header("💖 LOVE METER UI")]
+    /// <summary>Reference to the love meter UI component for displaying love progress</summary>
+    [SerializeField]
+    [Tooltip(
+        "Love meter UI component that displays the visual love meter for the current bachelor"
+    )]
+    private LoveMeter _loveMeterUI;
     #endregion
 
     #region Dialogue Data
+    [Header("📝 DIALOGUE CONTENT")]
     /// <summary>The current dialogue data being displayed</summary>
     [SerializeField]
     private DSDialogue _dialogue;
@@ -59,12 +105,14 @@ public class DialogueDisplay : MonoBehaviour
     #endregion
 
     #region Audio System
+    [Header("🔊 AUDIO SYSTEM")]
     /// <summary>Audio source for playing dialogue audio clips</summary>
     [SerializeField]
     private AudioSource _audioSource;
     #endregion
 
     #region Notebook Integration
+    [Header("📖 NOTEBOOK SYSTEM")]
     /// <summary>Reference to the NoteBook script for tracking discovered preferences</summary>
     [SerializeField]
     private NoteBook _noteBook;
@@ -85,6 +133,7 @@ public class DialogueDisplay : MonoBehaviour
     #endregion
 
     #region Love System
+    [Header("💕 LOVE SCORING SYSTEM")]
     /// <summary>Current love score value with the active bachelor</summary>
     [SerializeField]
     private int _loveScore = 0;
@@ -95,6 +144,7 @@ public class DialogueDisplay : MonoBehaviour
     #endregion
 
     #region UI Styling
+    [Header("🎨 UI STYLING & COLORS")]
     /// <summary>Normal color for choice button text</summary>
     [SerializeField]
     private Color _normalTextColor = Color.white;
@@ -109,6 +159,7 @@ public class DialogueDisplay : MonoBehaviour
     #endregion
 
     #region Save System
+    [Header("💾 SAVE & PROGRESS TRACKING")]
     /// <summary>Counter for tracking successful dates completed</summary>
     [SerializeField]
     public int _succesfulDateCount = 0;
@@ -117,18 +168,18 @@ public class DialogueDisplay : MonoBehaviour
     private SaveData _saveData;
     #endregion
 
-    #region Unity Lifecycle
-    /// <summary>
+    #region Unity Lifecycle    /// <summary>
     /// Initializes the dialogue system, loads save data, and sets up event listeners.
     /// Called once when the component is first created.
     /// </summary>
     private void Start()
     {
         // Load successful date count from save data
-        LoadSuccessfulDateCountFromSave();
-
-        // Initialize variables with default values
+        LoadSuccessfulDateCountFromSave(); // Initialize variables with default values
         InitializeGameVariables();
+
+        // Initialize love meter UI if bachelor data is already available
+        EnsureLoveMeterSetup();
 
         // Ensure typewriter events are set up correctly
         if (_typewriter != null)
@@ -178,17 +229,51 @@ public class DialogueDisplay : MonoBehaviour
     /// </summary>
     private void InitializeGameVariables()
     {
-        // Default values for variables used in conditions
+        // Update love score from love meter if available
+        if (_loveMeter != null)
+        {
+            _loveScore = _loveMeter.GetCurrentLove();
+        } // Default values for variables used in conditions
         _gameVariables["Love"] = _loveScore.ToString();
         _gameVariables["LikeDiscovered"] = "false";
         _gameVariables["DislikeDiscovered"] = "false";
         _gameVariables["NotebookLikeEntry"] = "false";
         _gameVariables["NotebookDislikeEntry"] = "false";
     }
+
+    /// <summary>
+    /// Ensures the love meter UI component has the correct LoveMeterSO data.
+    /// Called whenever bachelor data changes or dialogue system initializes.
+    /// </summary>
+    private void EnsureLoveMeterSetup()
+    {
+        if (_bachelor != null && _bachelor._loveMeter != null && _loveMeterUI != null)
+        {
+            _loveMeter = _bachelor._loveMeter;
+            _loveMeterUI.SetLoveMeterData(_loveMeter);
+            _loveScore = _loveMeter.GetCurrentLove();
+
+            // Update game variables to reflect current love score
+            _gameVariables["Love"] = _loveScore.ToString();
+
+            Debug.Log(
+                $"Love meter setup complete for {_bachelor._name}. Current love: {_loveScore}"
+            );
+        }
+        else if (_loveMeterUI != null && _bachelor == null)
+        {
+            Debug.LogWarning("DialogueDisplay: Bachelor is null, cannot setup love meter.");
+        }
+        else if (_loveMeterUI != null && _bachelor._loveMeter == null)
+        {
+            Debug.LogWarning(
+                $"DialogueDisplay: Bachelor {_bachelor._name} has no LoveMeterSO assigned."
+            );
+        }
+    }
     #endregion
 
-    #region Core Dialogue Display
-    /// <summary>
+    #region Core Dialogue Display    /// <summary>
     /// Displays the current dialogue and sets up choices if available.
     /// Handles condition nodes, setter nodes, character images, audio, and choice generation.
     /// This is the main method that orchestrates dialogue presentation.
@@ -197,6 +282,9 @@ public class DialogueDisplay : MonoBehaviour
     {
         ClearChoices();
         EnsureVerticalLayoutSettings();
+
+        // Ensure love meter UI has the correct data before showing dialogue
+        EnsureLoveMeterSetup();
 
         // Hide continue icon when starting new dialogue
         if (_continueIcon != null)
@@ -325,23 +413,19 @@ public class DialogueDisplay : MonoBehaviour
         if (_bachelor != null)
         {
             // Ensure all preferences start as undiscovered
-            _bachelor.EnsureUndiscoveredState();
-
-            // Use the bachelor's love meter if available
+            _bachelor.EnsureUndiscoveredState(); // Use the bachelor's love meter if available
             if (_bachelor._loveMeter != null)
             {
                 _loveMeter = _bachelor._loveMeter;
                 _loveScore = _loveMeter.GetCurrentLove();
-                _gameVariables["Love"] = _loveScore.ToString();
-            }
 
-            // Note: LikeDiscovered and DislikeDiscovered variables are only set
-            // when preferences are actually discovered through setter nodes
+                // Initialize the love meter UI component with the bachelor's love meter data
+                EnsureLoveMeterSetup();
+            }
         }
         else
         {
-            _bachelor = NewBachelorSO.CreateInstance<NewBachelorSO>();
-            _bachelor._name = "Chantal";
+            Debug.LogWarning("Bachelor reference is null when setting dialogue!");
         }
         ShowDialogue();
     }
@@ -358,12 +442,16 @@ public class DialogueDisplay : MonoBehaviour
         if (bachelor == null || bachelor._dialogue == null)
             return;
         _bachelor = bachelor;
+        _dialogue = dialogueSO; // Initialize love meter with bachelor's data
+        if (_bachelor != null && _bachelor._loveMeter != null)
+        {
+            _loveMeter = _bachelor._loveMeter;
+            _loveScore = _loveMeter.GetCurrentLove();
 
-        // Ensure all preferences start as undiscovered
-        _bachelor.EnsureUndiscoveredState();
+            // Set up the love meter UI component
+            EnsureLoveMeterSetup();
+        }
 
-        _loveMeter = bachelor._loveMeter;
-        SetDialogue(bachelor._dialogue, bachelor);
         ShowDialogue();
     }
     #endregion
@@ -556,47 +644,33 @@ public class DialogueDisplay : MonoBehaviour
     /// </summary>
     private void HandleUpdateLoveScore(DSDialogueSO setterNode)
     {
-        int amount = setterNode.m_loveScoreAmountData;
+        if (setterNode.m_loveScoreAmountData == 0)
+            return;
 
-        try
+        if (_loveMeter != null)
         {
-            // Try to use the love meter from setter node first, then fall back to default
-            LoveMeterSO targetLoveMeter = (setterNode.m_loveMeterData as LoveMeterSO) ?? _loveMeter;
-
-            if (targetLoveMeter != null && targetLoveMeter.IsInitialized())
+            if (setterNode.m_loveScoreAmountData > 0)
             {
-                if (amount > 0)
-                {
-                    targetLoveMeter.IncreaseLove(amount);
-                }
-                else if (amount < 0)
-                {
-                    targetLoveMeter.DecreaseLove(Mathf.Abs(amount));
-                }
-
-                // Update local variables if using the default love meter
-                if (targetLoveMeter == _loveMeter)
-                {
-                    _loveScore = _loveMeter.GetCurrentLove();
-                    _gameVariables["Love"] = _loveScore.ToString();
-                }
-
-                Debug.Log($"Updated love score by {amount} using love meter");
+                _loveMeter.IncreaseLove(setterNode.m_loveScoreAmountData);
             }
             else
             {
-                // Fall back to local variable update
-                _loveScore += amount;
-                _gameVariables["Love"] = _loveScore.ToString();
-                Debug.Log($"Updated local love score by {amount} (no love meter available)");
+                _loveMeter.DecreaseLove(Mathf.Abs(setterNode.m_loveScoreAmountData));
+            }
+            _loveScore = _loveMeter.GetCurrentLove();
+
+            // Update game variables with new love score
+            _gameVariables["Love"] = _loveScore.ToString();
+
+            // Update the UI love meter to reflect the change
+            if (_loveMeterUI != null)
+            {
+                _loveMeterUI.RefreshMeter();
             }
         }
-        catch (System.Exception e)
+        else
         {
-            Debug.LogError($"Error updating love score: {e.Message}");
-            // Fallback: update local variable
-            _loveScore += amount;
-            _gameVariables["Love"] = _loveScore.ToString();
+            Debug.LogWarning("Love meter is not initialized, cannot update love score!");
         }
     }
 
@@ -1113,7 +1187,6 @@ public class DialogueDisplay : MonoBehaviour
         Debug.Log("Come Back Later button clicked - returning to main menu");
         ClearChoices();
         gameObject.SetActive(false);
-        SceneManager.LoadScene("MainMenu");
     }
 
     /// <summary>
@@ -1155,11 +1228,36 @@ public class DialogueDisplay : MonoBehaviour
             }
             else
             {
-                Debug.Log("No more scenes available, returning to main menu");
-                SceneManager.LoadScene("MainMenu");
+                Debug.Log("No more scenes available");
             }
         }
     }
+    #endregion
+
+    #region Love Meter Control
+    /// <summary>
+    /// Sets the visibility of the love meter UI
+    /// </summary>
+    /// <param name="visible">Whether the love meter should be visible</param>
+    public void SetLoveMeterVisibility(bool visible)
+    {
+        if (_loveMeterUI != null)
+        {
+            _loveMeterUI.gameObject.SetActive(visible);
+        }
+    }
+
+    /// <summary>
+    /// Updates the love meter UI with the current love value
+    /// </summary>
+    public void UpdateLoveMeterDisplay()
+    {
+        if (_loveMeterUI != null && _loveMeter != null)
+        {
+            _loveMeterUI.RefreshMeter();
+        }
+    }
+
     #endregion
 
     #region Date Tracking System
