@@ -632,8 +632,18 @@ public class DialogueDisplay : MonoBehaviour
     /// </summary>
     private void OnTypewriterEnd()
     {
-        // Start the delay before allowing advancement
-        StartCoroutine(DelayBeforeAdvancement());
+        // Only start coroutine if the GameObject is active
+        if (gameObject.activeInHierarchy)
+        {
+            // Start the delay before allowing advancement
+            StartCoroutine(DelayBeforeAdvancement());
+        }
+        else
+        {
+            // If GameObject is inactive, immediately allow advancement without delay
+            _isDelayActive = false;
+            _canAdvance = true;
+        }
 
         // Show continue icon only if there are no multiple choices (single dialogue)
         if (_activeChoiceButtons.Count == 0 && _continueIcon != null)
