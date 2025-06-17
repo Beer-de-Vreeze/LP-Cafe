@@ -16,11 +16,11 @@ MonoBehaviour:
   <m_graphGroupsData>k__BackingField:
   - <m_groupIDData>k__BackingField: 41f7c6e7-4965-4f54-a087-317be2627998
     <m_groupNameData>k__BackingField: BaristaOpeningDialogue
-    <m_groupPositionData>k__BackingField: {x: 1195, y: 270.99997}
+    <m_groupPositionData>k__BackingField: {x: 1195, y: 271}
   <m_graphNodesData>k__BackingField:
   - <m_nodeIDData>k__BackingField: aae20daa-973c-4228-9a1d-36a0aba36d33
     <m_nodeNameData>k__BackingField: MessedUpDate
-    <m_nodeBachelorImageData>k__BackingField: {fileID: 0}
+    <m_nodeBachelorImageData>k__BackingField: {fileID: 21300000, guid: 6ffe8caacb35ebc49a3fe4106b8afb48, type: 3}
     <m_nodeAudioLinesData>k__BackingField: {fileID: 0}
     <m_nodeTextData>k__BackingField: 'Soooo you messed up your date huh?...
 
@@ -48,7 +48,7 @@ MonoBehaviour:
     <m_enumSetter>k__BackingField: 0
   - <m_nodeIDData>k__BackingField: 058d8601-543c-4023-a06f-e8454d39b22c
     <m_nodeNameData>k__BackingField: NotSpying
-    <m_nodeBachelorImageData>k__BackingField: {fileID: 0}
+    <m_nodeBachelorImageData>k__BackingField: {fileID: 21300000, guid: 6ffe8caacb35ebc49a3fe4106b8afb48, type: 3}
     <m_nodeAudioLinesData>k__BackingField: {fileID: 0}
     <m_nodeTextData>k__BackingField: "Well you're in luck! A new program opened up
       in this like caf\xE9 down the street.\r\nLP Caf\xE9 i think it was called??
@@ -75,7 +75,7 @@ MonoBehaviour:
     <m_enumSetter>k__BackingField: 0
   - <m_nodeIDData>k__BackingField: 43b04ba9-24da-482e-aecc-a4369864dec1
     <m_nodeNameData>k__BackingField: SpeedDateProgram
-    <m_nodeBachelorImageData>k__BackingField: {fileID: 0}
+    <m_nodeBachelorImageData>k__BackingField: {fileID: 21300000, guid: 6ffe8caacb35ebc49a3fe4106b8afb48, type: 3}
     <m_nodeAudioLinesData>k__BackingField: {fileID: 0}
     <m_nodeTextData>k__BackingField: 'Anyways it''s a speed dating program to find
       your match!
@@ -104,7 +104,7 @@ MonoBehaviour:
     <m_enumSetter>k__BackingField: 0
   - <m_nodeIDData>k__BackingField: 449566a2-9ccc-4b8c-ba30-4998b6f4a824
     <m_nodeNameData>k__BackingField: NotebookObtained
-    <m_nodeBachelorImageData>k__BackingField: {fileID: 0}
+    <m_nodeBachelorImageData>k__BackingField: {fileID: 21300000, guid: 6ffe8caacb35ebc49a3fe4106b8afb48, type: 3}
     <m_nodeAudioLinesData>k__BackingField: {fileID: 0}
     <m_nodeTextData>k__BackingField: 'Here take my notebook, then you can write down
       what your date says!
@@ -133,7 +133,7 @@ MonoBehaviour:
     <m_enumSetter>k__BackingField: 0
   - <m_nodeIDData>k__BackingField: f6430927-b278-4b3c-a637-81c002c122e3
     <m_nodeNameData>k__BackingField: Goodluckkkkkk
-    <m_nodeBachelorImageData>k__BackingField: {fileID: 0}
+    <m_nodeBachelorImageData>k__BackingField: {fileID: 21300000, guid: 6ffe8caacb35ebc49a3fe4106b8afb48, type: 3}
     <m_nodeAudioLinesData>k__BackingField: {fileID: 0}
     <m_nodeTextData>k__BackingField: Goodluckkkkkk!!!!!
     <m_nodeChoicesData>k__BackingField:
