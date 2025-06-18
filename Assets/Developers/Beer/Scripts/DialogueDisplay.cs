@@ -186,12 +186,16 @@ public class DialogueDisplay : MonoBehaviour
         {
             _typewriter.onTextShowed.RemoveListener(OnTypewriterEnd);
             _typewriter.onTextShowed.AddListener(OnTypewriterEnd);
-        }
-
-        // Initialize continue icon as hidden
+        } // Initialize continue icon as hidden
         if (_continueIcon != null)
         {
             _continueIcon.SetActive(false);
+        }
+
+        // Initialize love meter as hidden/inactive
+        if (_loveMeterUI != null)
+        {
+            _loveMeterUI.HideLoveMeter();
         }
     }
 
@@ -732,10 +736,16 @@ public class DialogueDisplay : MonoBehaviour
             // Update game variables with new love score
             _gameVariables["Love"] = _loveScore.ToString();
 
-            // Update the UI love meter to reflect the change
+            // Show the love meter with animation when score changes
             if (_loveMeterUI != null)
             {
-                _loveMeterUI.RefreshMeter();
+                _loveMeterUI.ShowLoveMeterWithAnimation(
+                    _loveScore,
+                    () =>
+                    {
+                        Debug.Log($"Love meter animation completed. New score: {_loveScore}");
+                    }
+                );
             }
         }
         else
