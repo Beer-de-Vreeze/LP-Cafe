@@ -487,78 +487,41 @@ public class DialogueDisplay : MonoBehaviour
         return dialogue != null
             && dialogue.m_dialogue != null
             && dialogue.m_dialogue.m_dialogueTypeData == DS.Enumerations.DSDialogueType.Setter;
-    }
-
-    /// <summary>
+    }    /// <summary>
     /// Evaluates a condition node and follows the appropriate dialogue path.
-    /// Supports numeric, boolean, and string comparisons with various operators.
+    /// Supports value checks, love score checks, boolean checks, and preference discovery checks.
     /// </summary>
     private void EvaluateConditionNode()
     {
         try
         {
             DSDialogueSO conditionNode = _dialogue.m_dialogue;
-
-            // Get condition parameters from the dialogue node
-            string propertyName = conditionNode.m_propertyToCheckData;
-            string comparisonType = conditionNode.m_comparisonTypeData;
-            string comparisonValue = conditionNode.m_comparisonValueData;
+            var operationType = conditionNode.m_operationTypeData;
 
             bool conditionMet = false;
 
-            // Ensure we have the property, default to "0" if not found
-            if (!_gameVariables.TryGetValue(propertyName, out string currentValue))
+            Debug.Log($"Evaluating condition operation: {operationType}");
+
+            switch (operationType)
             {
-                Debug.LogWarning(
-                    $"Property {propertyName} not found, defaulting to false condition"
-                );
-                currentValue = "0";
+                case SetterOperationType.SetValue:
+                    conditionMet = EvaluateValueCondition(conditionNode);
+                    break;
+                case SetterOperationType.UpdateLoveScore:
+                    conditionMet = EvaluateLoveScoreCondition(conditionNode);
+                    break;
+                case SetterOperationType.UpdateBoolean:
+                    conditionMet = EvaluateBooleanCondition(conditionNode);
+                    break;
+                case SetterOperationType.DiscoverPreference:
+                    conditionMet = EvaluatePreferenceCondition(conditionNode);
+                    break;
+                default:
+                    Debug.LogWarning($"Unknown condition operation type: {operationType}");
+                    break;
             }
 
-            // Handle numeric comparisons
-            if (
-                float.TryParse(currentValue, out float currentFloat)
-                && float.TryParse(comparisonValue, out float compareFloat)
-            )
-            {
-                conditionMet = comparisonType switch
-                {
-                    "==" => Mathf.Approximately(currentFloat, compareFloat),
-                    "!=" => !Mathf.Approximately(currentFloat, compareFloat),
-                    ">" => currentFloat > compareFloat,
-                    "<" => currentFloat < compareFloat,
-                    ">=" => currentFloat >= compareFloat,
-                    "<=" => currentFloat <= compareFloat,
-                    _ => false,
-                };
-            }
-            // Handle boolean comparisons
-            else if (
-                bool.TryParse(currentValue, out bool currentBool)
-                && bool.TryParse(comparisonValue, out bool compareBool)
-            )
-            {
-                conditionMet = comparisonType switch
-                {
-                    "==" => currentBool == compareBool,
-                    "!=" => currentBool != compareBool,
-                    _ => false,
-                };
-            }
-            // Handle string comparisons
-            else
-            {
-                conditionMet = comparisonType switch
-                {
-                    "==" => currentValue == comparisonValue,
-                    "!=" => currentValue != comparisonValue,
-                    _ => false,
-                };
-            }
-
-            Debug.Log(
-                $"Condition: {propertyName} {comparisonType} {comparisonValue}, Current: {currentValue}, Result: {conditionMet}"
-            );
+            Debug.Log($"Condition result: {conditionMet}");
 
             // Follow the appropriate path based on condition result
             var choices = conditionNode.m_dialogueChoiceData;
@@ -581,6 +544,107 @@ public class DialogueDisplay : MonoBehaviour
         {
             Debug.LogError($"Error evaluating condition node: {e.Message}");
         }
+    }
+
+    /// <summary>
+    /// Evaluates a value condition by checking if a variable matches the expected value.
+    /// </summary>
+    private bool EvaluateValueCondition(DSDialogueSO conditionNode)
+    {
+        string variableName = conditionNode.m_variableNameData;
+        string expectedValue = conditionNode.m_valueToSetData;
+
+        if (!_gameVariables.TryGetValue(variableName, out string currentValue))
+        {
+            Debug.LogWarning($"Variable {variableName} not found, defaulting to empty string");
+            currentValue = "";
+        }
+
+        bool result = currentValue == expectedValue;
+        Debug.Log($"Value condition: {variableName} == {expectedValue}, Current: {currentValue}, Result: {result}");
+        return result;
+    }
+
+    /// <summary>
+    /// Evaluates a love score condition by checking if the current love score meets the minimum requirement.
+    /// </summary>
+    private bool EvaluateLoveScoreCondition(DSDialogueSO conditionNode)
+    {
+        int minimumScore = conditionNode.m_loveScoreAmountData;
+
+        if (_loveMeter != null)
+        {
+            int currentLove = _loveMeter.GetCurrentLove();
+            bool result = currentLove >= minimumScore;
+            Debug.Log($"Love score condition: {currentLove} >= {minimumScore}, Result: {result}");
+            return result;
+        }
+        else
+        {
+            Debug.LogWarning("Love meter is not initialized, condition fails");
+            return false;
+        }
+    }
+
+    /// <summary>
+    /// Evaluates a boolean condition by checking if a boolean variable matches the expected value.
+    /// </summary>
+    private bool EvaluateBooleanCondition(DSDialogueSO conditionNode)
+    {
+        string boolName = conditionNode.m_variableNameData;
+        bool expectedValue = conditionNode.m_boolValueData;
+
+        if (!_gameVariables.TryGetValue(boolName, out string currentValue))
+        {
+            Debug.LogWarning($"Boolean variable {boolName} not found, defaulting to false");
+            currentValue = "false";
+        }
+
+        bool currentBool = bool.TryParse(currentValue, out bool parsedValue) ? parsedValue : false;
+        bool result = currentBool == expectedValue;
+        Debug.Log($"Boolean condition: {boolName} == {expectedValue}, Current: {currentBool}, Result: {result}");
+        return result;
+    }
+
+    /// <summary>
+    /// Evaluates a preference condition by checking if a specific preference has been discovered.
+    /// </summary>
+    private bool EvaluatePreferenceCondition(DSDialogueSO conditionNode)
+    {
+        string prefName = conditionNode.m_selectedPreferenceData;
+        bool isLike = conditionNode.m_isLikePreferenceData;
+
+        if (_bachelor == null)
+        {
+            Debug.LogWarning("No bachelor assigned, preference condition fails");
+            return false;
+        }
+
+        bool isDiscovered = false;        if (isLike && _bachelor._likes != null)
+        {
+            for (int i = 0; i < _bachelor._likes.Length; i++)
+            {
+                if (_bachelor._likes[i].description == prefName)
+                {
+                    isDiscovered = _bachelor._likes[i].discovered;
+                    break;
+                }
+            }
+        }
+        else if (!isLike && _bachelor._dislikes != null)
+        {
+            for (int i = 0; i < _bachelor._dislikes.Length; i++)
+            {
+                if (_bachelor._dislikes[i].description == prefName)
+                {
+                    isDiscovered = _bachelor._dislikes[i].discovered;
+                    break;
+                }
+            }
+        }
+
+        Debug.Log($"Preference condition: {prefName} ({(isLike ? "Like" : "Dislike")}) is discovered: {isDiscovered}");
+        return isDiscovered;
     }
 
     /// <summary>
@@ -840,9 +904,7 @@ public class DialogueDisplay : MonoBehaviour
         {
             Debug.LogWarning("Selected choice has no valid next dialogue");
         }
-    }
-
-    /// <summary>
+    }    /// <summary>
     /// Checks if a choice would pass its condition requirements.
     /// Used to determine if a choice button should be enabled or disabled.
     /// </summary>
@@ -860,53 +922,21 @@ public class DialogueDisplay : MonoBehaviour
         }
 
         DSDialogueSO conditionNode = choice.m_nextDialogue;
-        string propertyName = conditionNode.m_propertyToCheckData;
-        string comparisonType = conditionNode.m_comparisonTypeData;
-        string comparisonValue = conditionNode.m_comparisonValueData;
+        var operationType = conditionNode.m_operationTypeData;
 
-        if (!_gameVariables.TryGetValue(propertyName, out string currentValue))
+        switch (operationType)
         {
-            Debug.LogWarning($"Property {propertyName} not found for condition check");
-            return false;
-        }
-
-        // Evaluate condition similar to EvaluateConditionNode
-        if (
-            float.TryParse(currentValue, out float currentFloat)
-            && float.TryParse(comparisonValue, out float compareFloat)
-        )
-        {
-            return comparisonType switch
-            {
-                "==" => Mathf.Approximately(currentFloat, compareFloat),
-                "!=" => !Mathf.Approximately(currentFloat, compareFloat),
-                ">" => currentFloat > compareFloat,
-                "<" => currentFloat < compareFloat,
-                ">=" => currentFloat >= compareFloat,
-                "<=" => currentFloat <= compareFloat,
-                _ => false,
-            };
-        }
-        else if (
-            bool.TryParse(currentValue, out bool currentBool)
-            && bool.TryParse(comparisonValue, out bool compareBool)
-        )
-        {
-            return comparisonType switch
-            {
-                "==" => currentBool == compareBool,
-                "!=" => currentBool != compareBool,
-                _ => false,
-            };
-        }
-        else
-        {
-            return comparisonType switch
-            {
-                "==" => currentValue == comparisonValue,
-                "!=" => currentValue != comparisonValue,
-                _ => false,
-            };
+            case SetterOperationType.SetValue:
+                return EvaluateValueCondition(conditionNode);
+            case SetterOperationType.UpdateLoveScore:
+                return EvaluateLoveScoreCondition(conditionNode);
+            case SetterOperationType.UpdateBoolean:
+                return EvaluateBooleanCondition(conditionNode);
+            case SetterOperationType.DiscoverPreference:
+                return EvaluatePreferenceCondition(conditionNode);
+            default:
+                Debug.LogWarning($"Unknown condition operation type: {operationType}");
+                return false;
         }
     }
     #endregion
