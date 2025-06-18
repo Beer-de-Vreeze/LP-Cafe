@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8656580f96a63714d889c7daeb915b7a, type: 3}
+  m_Name: Question1BroughtYouHere
+  m_EditorClassIdentifier: 
+  <m_dialogueNameData>k__BackingField: Question1BroughtYouHere
+  <m_dialogueTextData>k__BackingField: 'What brought here? '
+  <m_dialogueChoiceData>k__BackingField:
+  - <m_dialogueChoiceText>k__BackingField: Searching for love.
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: c1a051822ea8b83468186a017583cec1, type: 2}
+  - <m_dialogueChoiceText>k__BackingField: Some random barista girl from a bar send
+      me here.
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 9bfe366107639104098c0dc9d85a5a3a, type: 2}
+  - <m_dialogueChoiceText>k__BackingField: searching for friends with a little....
+      more.
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 055228d68c94eb040a6f97baf9ff4adb, type: 2}
+  - <m_dialogueChoiceText>k__BackingField: I just got ditched by a date and well
+      I'm moving on, ya know?
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 6112ef24bce7de24899ad6efb6bd5e81, type: 2}
+  <m_bachelorImageData>k__BackingField: {fileID: 0}
+  <m_dialogueAudioData>k__BackingField: {fileID: 0}
+  <m_dialogueTypeData>k__BackingField: 1
+  <m_isStartingDialogueData>k__BackingField: 1
+  <m_propertyToCheckData>k__BackingField: 
+  <m_comparisonTypeData>k__BackingField: 
+  <m_comparisonValueData>k__BackingField: 
+  <m_operationTypeData>k__BackingField: 0
+  <m_variableNameData>k__BackingField: 
+  <m_valueToSetData>k__BackingField: 
+  <m_loveScoreAmountData>k__BackingField: 0
+  <m_boolValueData>k__BackingField: 0
+  <m_loveMeterData>k__BackingField: {fileID: 0}
+  <m_bachelorData>k__BackingField: {fileID: 0}
+  <m_isLikePreferenceData>k__BackingField: 0
+  <m_selectedPreferenceData>k__BackingField: 
