@@ -23,7 +23,7 @@ MonoBehaviour:
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: ee8710f70136c4540a778ab0c5b45acc, type: 2}
   - <m_dialogueChoiceText>k__BackingField: I'm full, thank you though.
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 7609ed55a219161448841aab5623e778, type: 2}
-  <m_bachelorImageData>k__BackingField: {fileID: 0}
+  <m_bachelorImageData>k__BackingField: {fileID: 21300000, guid: 1b752948b3bd324418758c36f01fb7d3, type: 3}
   <m_dialogueAudioData>k__BackingField: {fileID: 0}
   <m_dialogueTypeData>k__BackingField: 1
   <m_isStartingDialogueData>k__BackingField: 1
