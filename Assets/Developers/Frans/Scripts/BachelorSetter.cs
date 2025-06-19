@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 public class BachelorSetter : MonoBehaviour
 {
     [SerializeField]
-    private NewBachelorSO m_bachelor;
+    public NewBachelorSO m_bachelor;
 
     [SerializeField]
     private DialogueDisplay m_dialogueDisplay;
@@ -53,11 +53,6 @@ public class BachelorSetter : MonoBehaviour
         m_dialogueDisplay.StartDialogue(m_bachelor, m_bachelor._dialogue);
     }
 
-    public NewBachelorSO GetBachelor()
-    {
-        return m_bachelor;
-    }
-
     public void DisableSetter()
     {
         if (m_canvas != null)
@@ -67,5 +62,16 @@ public class BachelorSetter : MonoBehaviour
         if (button != null)
             button.interactable = false;
         this.enabled = false;
+    }
+
+    public void EnableCanvas()
+    {
+        if (m_canvas != null)
+            m_canvas.enabled = true;
+    }
+
+    public NewBachelorSO GetBachelor()
+    {
+        return m_bachelor;
     }
 }

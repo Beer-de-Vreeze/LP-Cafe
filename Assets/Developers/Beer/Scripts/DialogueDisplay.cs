@@ -71,6 +71,10 @@ public class DialogueDisplay : MonoBehaviour
     [SerializeField]
     private Image _bachelorImage;
 
+    /// <summary>Reference to the dialogue canvas for showing/hiding the dialogue UI</summary>
+    [SerializeField]
+    private Canvas _dialogueCanvas;
+
     /// <summary>Continue icon that appears when single dialogue finishes</summary>
     [SerializeField]
     private GameObject _continueIcon;
@@ -1319,29 +1323,17 @@ public class DialogueDisplay : MonoBehaviour
         Debug.Log("Come Back Later button clicked - returning to main menu");
         ClearChoices();
         gameObject.SetActive(false);
-
+        if (_dialogueCanvas != null)
+        {
+            _dialogueCanvas.gameObject.SetActive(false);
+        }
         // Enable all BachelorSetter canvases in the scene (for cafe re-entry)
         var setters = FindObjectsByType<BachelorSetter>(FindObjectsSortMode.None);
         foreach (var setter in setters)
         {
-            if (setter != null && setter.GetComponent<Canvas>() != null)
+            if (setter != null)
             {
-                setter.GetComponent<Canvas>().enabled = true;
-            }
-            else if (setter != null)
-            {
-                // If m_canvas is private, use reflection or expose a public method/property if needed
-                var canvasField = typeof(BachelorSetter).GetField(
-                    "m_canvas",
-                    System.Reflection.BindingFlags.NonPublic
-                        | System.Reflection.BindingFlags.Instance
-                );
-                if (canvasField != null)
-                {
-                    var canvas = canvasField.GetValue(setter) as Canvas;
-                    if (canvas != null)
-                        canvas.enabled = true;
-                }
+                setter.EnableCanvas();
             }
         }
     }
@@ -1368,6 +1360,12 @@ public class DialogueDisplay : MonoBehaviour
             Debug.Log("Date completed successfully!");
             // Mark bachelor as dated and disable their setter
             MarkBachelorAsDated(_bachelor);
+        }
+
+        // Remove bachelor from notebook after date is over
+        if (_noteBook != null)
+        {
+            _noteBook.ClearBachelor();
         }
 
         // Load the next scene
@@ -1470,6 +1468,12 @@ public class DialogueDisplay : MonoBehaviour
         if (isDateScene)
         {
             Debug.Log("Date failure tracked!");
+        }
+
+        // Remove bachelor from notebook after date is over
+        if (_noteBook != null)
+        {
+            _noteBook.ClearBachelor();
         }
 
         SceneManager.LoadScene("MainMenu");
