@@ -273,17 +273,22 @@ namespace DS.Utilities
                     node.m_nodeDialogueType,
                     node.IsStartingNode()
                 );
-            }
-
-            else if (node.m_nodeDialogueType == DSDialogueType.Condition)
+            }            else if (node.m_nodeDialogueType == DSDialogueType.Condition)
             {
-                dialogue.InitializeConditionNode(
+                dialogue.InitializeSetterNode(
                     node.m_nodeDialogueName,
-                    node.m_propertyToCheck,
-                    node.m_comparisonType,
-                    node.m_comparisonValue,
+                    node.m_operationType,
                     ConvertNodeChoics(node.m_nodeChoices),
+                    node.m_valueToSet,
+                    node.m_variableName,
+                    node.m_loveScoreAmount,
+                    node.m_boolValue,
                     node.m_nodeDialogueType,
+                    node.m_loveMeter,
+                    node.m_bachelor,
+                    node.m_isLikePreference,
+                    node.m_selectedPreference,
+                    node.m_enumSetter,
                     node.IsStartingNode()
                 );
             }

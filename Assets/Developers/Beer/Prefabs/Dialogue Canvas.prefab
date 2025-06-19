@@ -16,22 +16,26 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8377416285189031861
-Transform:
+--- !u!224 &8377416285189031861
+RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 236818757381669256}
-  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -394.63, y: -68.167, z: 16.776}
+  m_LocalPosition: {x: 0, y: 0, z: 16.776}
   m_LocalScale: {x: 2.9014, y: 2.9014, z: 1.4507}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6385750115321685804}
   m_Father: {fileID: 3150716853550591477}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -394.63, y: -68.167}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1347657697019017332
 GameObject:
   m_ObjectHideFlags: 0
@@ -1199,7 +1203,6 @@ MonoBehaviour:
   crescentColor: {r: 1, g: 1, b: 1, a: 1}
   dialColor: {r: 1, g: 0, b: 0, a: 1}
   dialOffset: 0
-  horizontalMovementRange: 10
 --- !u!1 &8942964469550295426
 GameObject:
   m_ObjectHideFlags: 0

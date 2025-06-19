@@ -6,6 +6,7 @@ using DS.Enumerations;
 using DS.Utilities;
 using DS.Windows;
 using UnityEditor.Experimental.GraphView;
+using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -13,55 +14,20 @@ namespace DS.Elements
 {
     /// <summary>
     /// Represents a conditional branching node in the dialogue system.
-    /// This node evaluates a condition based on a property's value and provides different dialogue paths.
+    /// This node evaluates various conditions and provides different dialogue paths based on the result.
     /// </summary>
     public class DSConditionNode : NodeBase
     {
-
-
-        // Collection of properties that can be checked in conditions
-        /// <summary>
-        /// Static list of property names that can be used in conditions.
-        /// This list can be modified at runtime using the Register/Unregister methods.
-        /// </summary>
-        private static List<string> availableProperties = new List<string>
-        {
-            "Love",
-            "LikeDiscovered",
-            "DislikeDiscovered",
-            "NotebookLikeEntry",
-            "NotebookDislikeEntry",
-        };
-
-        /// <summary>
-        /// Adds a new property to the list of available properties for condition nodes.
-        /// </summary>
-        /// <param name="propertyName">The name of the property to register</param>
-        public static void RegisterProperty(string propertyName)
-        {
-            if (!availableProperties.Contains(propertyName))
-            {
-                availableProperties.Add(propertyName);
-            }
-        }
-
-        /// <summary>
-        /// Removes a property from the list of available properties for condition nodes.
-        /// </summary>
-        /// <param name="propertyName">The name of the property to unregister</param>
-        public static void UnregisterProperty(string propertyName)
-        {
-            availableProperties.Remove(propertyName);
-        }
-
-        /// <summary>
-        /// Gets a copy of the current available properties list.
-        /// </summary>
-        /// <returns>A new list containing all available property names</returns>
-        public static List<string> GetAvailableProperties()
-        {
-            return new List<string>(availableProperties);
-        }
+        // UI Elements for different condition types
+        private DropdownField operationTypeDropdown;
+        private VisualElement valueContainer;
+        private VisualElement loveScoreContainer;
+        private VisualElement boolContainer;
+        private VisualElement preferenceContainer;
+        private ObjectField loveMeterObjectField;
+        private ObjectField bachelorObjectField;
+        private DropdownField preferenceTypeDropdown;
+        private DropdownField preferenceDropdown;
 
         /// <summary>
         /// Initializes the condition node with default values and creates an initial choice.
@@ -73,8 +39,18 @@ namespace DS.Elements
         {
             base.Initialize(nodeName, dsGraphView, pos);
 
-            // Set node type to single choice for the condition node
+            // Set node type to condition node
             m_nodeDialogueType = DSDialogueType.Condition;
+
+            // Initialize condition-specific fields
+            m_operationType = SetterOperationType.SetValue;
+            m_variableName = "variableName";
+            m_valueToSet = "";
+            m_loveScoreAmount = 0;
+            m_boolValue = false;
+            m_bachelor = null;
+            m_isLikePreference = true;
+            m_selectedPreference = "";
 
             // Create a default "Next Dialogue" choice path
             DSChoiceSaveData choiceData = new DSChoiceSaveData()
@@ -87,7 +63,7 @@ namespace DS.Elements
 
         /// <summary>
         /// Draws the UI components of the condition node in the graph editor.
-        /// Includes property selection, comparison operator, and value input fields.
+        /// Includes all condition types: value check, boolean check, love score check, and preference discovery check.
         /// </summary>
         public override void Draw()
         {
@@ -149,7 +125,7 @@ namespace DS.Elements
             titleContainer.Insert(0, dialogueNameTextField);
             #endregion
 
-            //Inport Container.
+            //Input Container.
             Port inputPort = this.CreatePort(
                 "Dialogue Connection",
                 Orientation.Horizontal,
@@ -161,41 +137,181 @@ namespace DS.Elements
 
             inputContainer.Add(inputPort);
 
-            // Set the node title
-            m_nodeDialogueName = "Condition Node";
-
-            // Create container for the condition UI elements
+            // Create main condition container
             var conditionContainer = new VisualElement();
             conditionContainer.AddToClassList("ds-node__custom-data-container");
 
-            // Create dropdown for property selection
-            var propertyField = new PopupField<string>(
-                GetAvailableProperties(),
-                m_propertyToCheck != null && GetAvailableProperties().Contains(m_propertyToCheck)
-                    ? m_propertyToCheck
-                    : GetAvailableProperties().FirstOrDefault() ?? "Love"
+            // Operation type dropdown
+            var operationTypes = new List<string>()
+            {
+                "Check Value",
+                "Check Love Score",
+                "Check Boolean",
+                "Check Preference Discovery",
+            };
+
+            operationTypeDropdown = new DropdownField("Condition Type", operationTypes, 0);
+            operationTypeDropdown.value = GetConditionTypeString(m_operationType);
+            operationTypeDropdown.RegisterValueChangedCallback(evt =>
+            {
+                switch (evt.newValue)
+                {
+                    case "Check Value":
+                        m_operationType = SetterOperationType.SetValue;
+                        break;
+                    case "Check Love Score":
+                        m_operationType = SetterOperationType.UpdateLoveScore;
+                        break;
+                    case "Check Boolean":
+                        m_operationType = SetterOperationType.UpdateBoolean;
+                        break;
+                    case "Check Preference Discovery":
+                        m_operationType = SetterOperationType.DiscoverPreference;
+                        break;
+                }
+                UpdateVisibleFields();
+            });
+            conditionContainer.Add(operationTypeDropdown);
+
+            #region Value Container
+            // Container for standard value checking
+            valueContainer = new VisualElement();
+
+            // Variable name field
+            var variableField = new TextField("Variable Name") { value = m_variableName };
+            variableField.RegisterValueChangedCallback(evt =>
+            {
+                m_variableName = evt.newValue;
+            });
+            variableField.AddClasses(
+                "ds-node__textfield",
+                "ds-node__filename-textfield",
+                "ds-node__textfield__hidden"
             );
-            propertyField.label = "Property to Check";
-            propertyField.RegisterValueChangedCallback(evt => m_propertyToCheck = evt.newValue);
-            conditionContainer.Add(propertyField);
+            valueContainer.Add(variableField);
 
-            // Create dropdown for comparison operator
-            var comparisonField = new PopupField<string>(
-                m_comparisonTypes.ToList(),
-                m_comparisonType != string.Empty ? m_comparisonType : ">="
+            // Expected value field
+            var valueField = new TextField("Expected Value") { value = m_valueToSet };
+            valueField.RegisterValueChangedCallback(evt =>
+            {
+                m_valueToSet = evt.newValue;
+            });
+            valueField.AddClasses(
+                "ds-node__textfield",
+                "ds-node__filename-textfield",
+                "ds-node__textfield__hidden"
             );
+            valueContainer.Add(valueField);
+            #endregion
 
-            comparisonField.label = "Comparison";
-            comparisonField.RegisterValueChangedCallback(evt => m_comparisonType = evt.newValue);
-            conditionContainer.Add(comparisonField);
-            
+            #region Love Container
+            // Container for love score checking
+            loveScoreContainer = new VisualElement();
 
-            // Create text field for the comparison value
-            var valueCompareField = new TextField("Value") { value = m_comparisonValue };
-            valueCompareField.RegisterValueChangedCallback(evt => m_comparisonValue = evt.newValue);
-            conditionContainer.Add(valueCompareField);
+            // Love Meter object field
+            loveMeterObjectField = new ObjectField("Love Meter")
+            {
+                objectType = typeof(LoveMeterSO),
+                value = m_loveMeter,
+            };
+            loveMeterObjectField.RegisterValueChangedCallback(evt =>
+            {
+                m_loveMeter = evt.newValue as LoveMeterSO;
+            });
+            loveScoreContainer.Add(loveMeterObjectField);
+
+            // Minimum love amount field
+            var loveAmountField = new IntegerField("Minimum Score") { value = m_loveScoreAmount };
+            loveAmountField.RegisterValueChangedCallback(evt =>
+            {
+                m_loveScoreAmount = evt.newValue;
+            });
+            loveAmountField.AddClasses(
+                "ds-node__textfield",
+                "ds-node__filename-textfield",
+                "ds-node__textfield__hidden"
+            );
+            loveScoreContainer.Add(loveAmountField);
+            #endregion
+
+            #region Boolean Container
+            // Container for boolean checking
+            boolContainer = new VisualElement();
+
+            // Bool variable name field
+            var boolVarField = new TextField("Boolean Name") { value = m_variableName };
+            boolVarField.RegisterValueChangedCallback(evt =>
+            {
+                m_variableName = evt.newValue;
+            });
+            boolVarField.AddClasses(
+                "ds-node__textfield",
+                "ds-node__filename-textfield",
+                "ds-node__textfield__hidden"
+            );
+            boolContainer.Add(boolVarField);
+
+            // Expected boolean value toggle
+            var boolToggle = new Toggle("Expected Value") { value = m_boolValue };
+            boolToggle.RegisterValueChangedCallback(evt =>
+            {
+                m_boolValue = evt.newValue;
+            });
+            boolToggle.AddToClassList("ds-node__toggle");
+            boolContainer.Add(boolToggle);
+            #endregion
+
+            #region Preference Container
+            // Container for preference discovery checking
+            preferenceContainer = new VisualElement();
+
+            // Bachelor object field
+            bachelorObjectField = new ObjectField("Bachelor")
+            {
+                objectType = typeof(NewBachelorSO),
+                value = m_bachelor,
+            };
+            bachelorObjectField.RegisterValueChangedCallback(evt =>
+            {
+                m_bachelor = evt.newValue as NewBachelorSO;
+                PopulatePreferenceDropdown();
+            });
+            preferenceContainer.Add(bachelorObjectField);
+
+            // Preference type dropdown (like or dislike)
+            var preferenceTypes = new List<string>() { "Like", "Dislike" };
+            preferenceTypeDropdown = new DropdownField("Preference Type", preferenceTypes, 0);
+            preferenceTypeDropdown.value = m_isLikePreference ? "Like" : "Dislike";
+            preferenceTypeDropdown.RegisterValueChangedCallback(evt =>
+            {
+                m_isLikePreference = evt.newValue == "Like";
+                PopulatePreferenceDropdown();
+            });
+            preferenceContainer.Add(preferenceTypeDropdown);
+
+            // Preference dropdown to select which one to check
+            preferenceDropdown = new DropdownField("Preference to Check", new List<string>(), 0);
+            preferenceDropdown.value = m_selectedPreference;
+            preferenceDropdown.RegisterValueChangedCallback(evt =>
+            {
+                m_selectedPreference = evt.newValue;
+            });
+            preferenceContainer.Add(preferenceDropdown);
+            #endregion
+
+            // Add all containers
+            conditionContainer.Add(valueContainer);
+            conditionContainer.Add(loveScoreContainer);
+            conditionContainer.Add(boolContainer);
+            conditionContainer.Add(preferenceContainer);
 
             extensionContainer.Add(conditionContainer);
+
+            // Initialize visible fields based on current operation type
+            UpdateVisibleFields();
+
+            // Initialize preference dropdown
+            PopulatePreferenceDropdown();
 
             // Create output ports for each choice path
             foreach (DSChoiceSaveData choice in m_nodeChoices)
@@ -211,6 +327,118 @@ namespace DS.Elements
 
             // Update the visual state of the node
             RefreshExpandedState();
+        }
+
+        /// <summary>
+        /// Populates the preference dropdown based on the selected bachelor and preference type.
+        /// </summary>
+        private void PopulatePreferenceDropdown()
+        {
+            if (preferenceDropdown == null)
+                return;
+
+            if (m_bachelor == null)
+            {
+                preferenceDropdown.choices = new List<string> { "No bachelor selected" };
+                preferenceDropdown.index = 0;
+                return;
+            }
+
+            List<string> preferences = new List<string>();
+            if (m_isLikePreference && m_bachelor._likes != null)
+            {
+                foreach (var like in m_bachelor._likes)
+                {
+                    preferences.Add(like.description);
+                }
+            }
+            else if (!m_isLikePreference && m_bachelor._dislikes != null)
+            {
+                foreach (var dislike in m_bachelor._dislikes)
+                {
+                    preferences.Add(dislike.description);
+                }
+            }
+
+            if (preferences.Count > 0)
+            {
+                preferenceDropdown.choices = preferences;
+                preferenceDropdown.index = 0;
+                if (
+                    string.IsNullOrEmpty(m_selectedPreference)
+                    || !preferences.Contains(m_selectedPreference)
+                )
+                {
+                    m_selectedPreference = preferences[0];
+                }
+                else
+                {
+                    preferenceDropdown.index = preferences.IndexOf(m_selectedPreference);
+                }
+            }
+            else
+            {
+                preferenceDropdown.choices = new List<string> { "No preferences found" };
+                preferenceDropdown.index = 0;
+                m_selectedPreference = "";
+            }
+        }
+
+        /// <summary>
+        /// Updates which UI containers are visible based on the current operation type.
+        /// </summary>
+        private void UpdateVisibleFields()
+        {
+            if (
+                valueContainer == null
+                || loveScoreContainer == null
+                || boolContainer == null
+                || preferenceContainer == null
+            )
+                return;
+
+            // Hide all containers first
+            valueContainer.style.display = DisplayStyle.None;
+            loveScoreContainer.style.display = DisplayStyle.None;
+            boolContainer.style.display = DisplayStyle.None;
+            preferenceContainer.style.display = DisplayStyle.None;
+
+            // Show the appropriate container based on operation type
+            switch (m_operationType)
+            {
+                case SetterOperationType.SetValue:
+                    valueContainer.style.display = DisplayStyle.Flex;
+                    break;
+                case SetterOperationType.UpdateLoveScore:
+                    loveScoreContainer.style.display = DisplayStyle.Flex;
+                    break;
+                case SetterOperationType.UpdateBoolean:
+                    boolContainer.style.display = DisplayStyle.Flex;
+                    break;
+                case SetterOperationType.DiscoverPreference:
+                    preferenceContainer.style.display = DisplayStyle.Flex;
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// Converts the operation type enum to a string for the dropdown.
+        /// </summary>
+        private string GetConditionTypeString(SetterOperationType operationType)
+        {
+            switch (operationType)
+            {
+                case SetterOperationType.SetValue:
+                    return "Check Value";
+                case SetterOperationType.UpdateLoveScore:
+                    return "Check Love Score";
+                case SetterOperationType.UpdateBoolean:
+                    return "Check Boolean";
+                case SetterOperationType.DiscoverPreference:
+                    return "Check Preference Discovery";
+                default:
+                    return "Check Value";
+            }
         }
     }
 }
