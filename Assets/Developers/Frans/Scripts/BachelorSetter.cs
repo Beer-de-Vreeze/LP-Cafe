@@ -69,4 +69,9 @@ public class BachelorSetter : MonoBehaviour
         if (m_canvas != null)
             m_canvas.enabled = true;
     }
+
+    public NewBachelorSO GetBachelor()
+    {
+        return m_bachelor;
+    }
 }

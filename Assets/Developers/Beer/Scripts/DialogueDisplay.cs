@@ -71,6 +71,10 @@ public class DialogueDisplay : MonoBehaviour
     [SerializeField]
     private Image _bachelorImage;
 
+    /// <summary>Reference to the dialogue canvas for showing/hiding the dialogue UI</summary>
+    [SerializeField]
+    private Canvas _dialogueCanvas;
+
     /// <summary>Continue icon that appears when single dialogue finishes</summary>
     [SerializeField]
     private GameObject _continueIcon;
@@ -1319,7 +1323,10 @@ public class DialogueDisplay : MonoBehaviour
         Debug.Log("Come Back Later button clicked - returning to main menu");
         ClearChoices();
         gameObject.SetActive(false);
-
+        if (_dialogueCanvas != null)
+        {
+            _dialogueCanvas.gameObject.SetActive(false);
+        }
         // Enable all BachelorSetter canvases in the scene (for cafe re-entry)
         var setters = FindObjectsByType<BachelorSetter>(FindObjectsSortMode.None);
         foreach (var setter in setters)
