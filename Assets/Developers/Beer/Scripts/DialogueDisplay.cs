@@ -1,3 +1,35 @@
+/*
+ * =====================================================================================
+ * DIALOGUE DISPLAY SYSTEM
+ * =====================================================================================
+ *
+ * Author: Beer (LP-Cafe Development Team)
+ * Description: Core dialogue system for the dating simulation game.
+ *
+ * This script manages:
+ * - Dialogue text display with typewriter effects
+ * - Choice button generation and interaction
+ * - Love meter integration and visual feedback
+ * - Bachelor preference discovery system
+ * - Dialogue flow control (conditions, setters, branching)
+ * - Save system integration for progress tracking
+ * - Audio and visual elements synchronization
+ *
+ * Dependencies:
+ * - Dialogue System (DS) framework
+ * - TextAnimator (Febucci) for typewriter effects
+ * - DOTween for UI animations (via LoveMeter)
+ * - Custom ScriptableObjects (NewBachelorSO, LoveMeterSO)
+ *
+ * Usage:
+ * 1. Assign UI references in the inspector
+ * 2. Set bachelor and dialogue data via SetDialogue() or StartDialogue()
+ * 3. The system handles all dialogue flow automatically
+ *
+ * =====================================================================================
+ */
+
+using System.Collections;
 using System.Collections.Generic;
 using DS;
 using DS.Enumerations;
@@ -16,8 +48,12 @@ using static UnityEngine.UI.LayoutUtility;
 /// Supports advanced dialogue features like conditions, setters, and preference discovery.
 /// </summary>
 public class DialogueDisplay : MonoBehaviour
-{
+{ // =====================================================================================
+    // COMPONENT REFERENCES AND CONFIGURATION
+    // =====================================================================================
+
     #region UI References
+    [Header("📋 TEXT DISPLAY COMPONENTS")]
     /// <summary>Reference to the UI element displaying the character's name</summary>
     [SerializeField]
     private TextMeshProUGUI _nameText;
@@ -30,6 +66,7 @@ public class DialogueDisplay : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI _displayText;
 
+    [Header("🖼️ VISUAL COMPONENTS")]
     /// <summary>Reference to the UI Image displaying the character's portrait</summary>
     [SerializeField]
     private Image _bachelorImage;
@@ -38,6 +75,7 @@ public class DialogueDisplay : MonoBehaviour
     [SerializeField]
     private GameObject _continueIcon;
 
+    [Header("🔘 CHOICE SYSTEM")]
     /// <summary>Parent transform for dynamically generated choice buttons</summary>
     [SerializeField]
     private Transform _choicesParent;
@@ -45,9 +83,18 @@ public class DialogueDisplay : MonoBehaviour
     /// <summary>Prefab template for creating choice buttons</summary>
     [SerializeField]
     private GameObject _choiceButtonPrefab;
+
+    [Header("💖 LOVE METER UI")]
+    /// <summary>Reference to the love meter UI component for displaying love progress</summary>
+    [SerializeField]
+    [Tooltip(
+        "Love meter UI component that displays the visual love meter for the current bachelor"
+    )]
+    private LoveMeter _loveMeterUI;
     #endregion
 
     #region Dialogue Data
+    [Header("📝 DIALOGUE CONTENT")]
     /// <summary>The current dialogue data being displayed</summary>
     [SerializeField]
     private DSDialogue _dialogue;
@@ -58,12 +105,14 @@ public class DialogueDisplay : MonoBehaviour
     #endregion
 
     #region Audio System
+    [Header("🔊 AUDIO SYSTEM")]
     /// <summary>Audio source for playing dialogue audio clips</summary>
     [SerializeField]
     private AudioSource _audioSource;
     #endregion
 
     #region Notebook Integration
+    [Header("📖 NOTEBOOK SYSTEM")]
     /// <summary>Reference to the NoteBook script for tracking discovered preferences</summary>
     [SerializeField]
     private NoteBook _noteBook;
@@ -73,6 +122,9 @@ public class DialogueDisplay : MonoBehaviour
     /// <summary>Tracks whether the player can advance to the next dialogue</summary>
     private bool _canAdvance = false;
 
+    /// <summary>Tracks whether the dialogue advancement delay is active</summary>
+    private bool _isDelayActive = false;
+
     /// <summary>List of currently active choice buttons for cleanup purposes</summary>
     private List<GameObject> _activeChoiceButtons = new List<GameObject>();
 
@@ -81,6 +133,7 @@ public class DialogueDisplay : MonoBehaviour
     #endregion
 
     #region Love System
+    [Header("💕 LOVE SCORING SYSTEM")]
     /// <summary>Current love score value with the active bachelor</summary>
     [SerializeField]
     private int _loveScore = 0;
@@ -91,6 +144,7 @@ public class DialogueDisplay : MonoBehaviour
     #endregion
 
     #region UI Styling
+    [Header("🎨 UI STYLING & COLORS")]
     /// <summary>Normal color for choice button text</summary>
     [SerializeField]
     private Color _normalTextColor = Color.white;
@@ -105,6 +159,7 @@ public class DialogueDisplay : MonoBehaviour
     #endregion
 
     #region Save System
+    [Header("💾 SAVE & PROGRESS TRACKING")]
     /// <summary>Counter for tracking successful dates completed</summary>
     [SerializeField]
     public int _succesfulDateCount = 0;
@@ -113,30 +168,34 @@ public class DialogueDisplay : MonoBehaviour
     private SaveData _saveData;
     #endregion
 
-    #region Unity Lifecycle
-    /// <summary>
+    #region Unity Lifecycle    /// <summary>
     /// Initializes the dialogue system, loads save data, and sets up event listeners.
     /// Called once when the component is first created.
     /// </summary>
     private void Start()
     {
         // Load successful date count from save data
-        LoadSuccessfulDateCountFromSave();
-
-        // Initialize variables with default values
+        LoadSuccessfulDateCountFromSave(); // Initialize variables with default values
         InitializeGameVariables();
+
+        // Initialize love meter UI if bachelor data is already available
+        EnsureLoveMeterSetup();
 
         // Ensure typewriter events are set up correctly
         if (_typewriter != null)
         {
             _typewriter.onTextShowed.RemoveListener(OnTypewriterEnd);
             _typewriter.onTextShowed.AddListener(OnTypewriterEnd);
-        }
-
-        // Initialize continue icon as hidden
+        } // Initialize continue icon as hidden
         if (_continueIcon != null)
         {
             _continueIcon.SetActive(false);
+        }
+
+        // Initialize love meter as hidden/inactive
+        if (_loveMeterUI != null)
+        {
+            _loveMeterUI.HideLoveMeter();
         }
     }
 
@@ -146,9 +205,10 @@ public class DialogueDisplay : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        // Allow advancing dialogue if possible and no choices are being shown
+        // Allow advancing dialogue if possible, no choices are being shown, and delay is not active
         if (
             _canAdvance
+            && !_isDelayActive
             && _activeChoiceButtons.Count == 0
             && (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
         )
@@ -172,18 +232,58 @@ public class DialogueDisplay : MonoBehaviour
     /// Sets up the baseline state for dialogue system variables.
     /// </summary>
     private void InitializeGameVariables()
-    {
+    { // Update love score from love meter if available
+        if (_loveMeter != null)
+        {
+            _loveScore = _loveMeter.GetCurrentLove();
+        }
+
         // Default values for variables used in conditions
         _gameVariables["Love"] = _loveScore.ToString();
         _gameVariables["LikeDiscovered"] = "false";
         _gameVariables["DislikeDiscovered"] = "false";
-        _gameVariables["NotebookLikeEntry"] = "false";
-        _gameVariables["NotebookDislikeEntry"] = "false";
+
+        // Only set notebook variables if notebook exists
+        if (_noteBook != null)
+        {
+            _gameVariables["NotebookLikeEntry"] = "false";
+            _gameVariables["NotebookDislikeEntry"] = "false";
+        }
+    }
+
+    /// <summary>
+    /// Ensures the love meter UI component has the correct LoveMeterSO data.
+    /// Called whenever bachelor data changes or dialogue system initializes.
+    /// </summary>
+    private void EnsureLoveMeterSetup()
+    {
+        if (_bachelor != null && _bachelor._loveMeter != null && _loveMeterUI != null)
+        {
+            _loveMeter = _bachelor._loveMeter;
+            _loveMeterUI.SetLoveMeterData(_loveMeter);
+            _loveScore = _loveMeter.GetCurrentLove();
+
+            // Update game variables to reflect current love score
+            _gameVariables["Love"] = _loveScore.ToString();
+
+            Debug.Log(
+                $"Love meter setup complete for {_bachelor._name}. Current love: {_loveScore}"
+            );
+        }
+        else if (_loveMeterUI != null && _bachelor == null)
+        {
+            Debug.LogWarning("DialogueDisplay: Bachelor is null, cannot setup love meter.");
+        }
+        else if (_loveMeterUI != null && _bachelor._loveMeter == null)
+        {
+            Debug.LogWarning(
+                $"DialogueDisplay: Bachelor {_bachelor._name} has no LoveMeterSO assigned."
+            );
+        }
     }
     #endregion
 
-    #region Core Dialogue Display
-    /// <summary>
+    #region Core Dialogue Display    /// <summary>
     /// Displays the current dialogue and sets up choices if available.
     /// Handles condition nodes, setter nodes, character images, audio, and choice generation.
     /// This is the main method that orchestrates dialogue presentation.
@@ -192,6 +292,9 @@ public class DialogueDisplay : MonoBehaviour
     {
         ClearChoices();
         EnsureVerticalLayoutSettings();
+
+        // Ensure love meter UI has the correct data before showing dialogue
+        EnsureLoveMeterSetup();
 
         // Hide continue icon when starting new dialogue
         if (_continueIcon != null)
@@ -320,23 +423,19 @@ public class DialogueDisplay : MonoBehaviour
         if (_bachelor != null)
         {
             // Ensure all preferences start as undiscovered
-            _bachelor.EnsureUndiscoveredState();
-
-            // Use the bachelor's love meter if available
+            _bachelor.EnsureUndiscoveredState(); // Use the bachelor's love meter if available
             if (_bachelor._loveMeter != null)
             {
                 _loveMeter = _bachelor._loveMeter;
                 _loveScore = _loveMeter.GetCurrentLove();
-                _gameVariables["Love"] = _loveScore.ToString();
-            }
 
-            // Note: LikeDiscovered and DislikeDiscovered variables are only set
-            // when preferences are actually discovered through setter nodes
+                // Initialize the love meter UI component with the bachelor's love meter data
+                EnsureLoveMeterSetup();
+            }
         }
         else
         {
-            _bachelor = NewBachelorSO.CreateInstance<NewBachelorSO>();
-            _bachelor._name = "Chantal";
+            Debug.LogWarning("Bachelor reference is null when setting dialogue!");
         }
         ShowDialogue();
     }
@@ -353,12 +452,16 @@ public class DialogueDisplay : MonoBehaviour
         if (bachelor == null || bachelor._dialogue == null)
             return;
         _bachelor = bachelor;
+        _dialogue = dialogueSO; // Initialize love meter with bachelor's data
+        if (_bachelor != null && _bachelor._loveMeter != null)
+        {
+            _loveMeter = _bachelor._loveMeter;
+            _loveScore = _loveMeter.GetCurrentLove();
 
-        // Ensure all preferences start as undiscovered
-        _bachelor.EnsureUndiscoveredState();
+            // Set up the love meter UI component
+            EnsureLoveMeterSetup();
+        }
 
-        _loveMeter = bachelor._loveMeter;
-        SetDialogue(bachelor._dialogue, bachelor);
         ShowDialogue();
     }
     #endregion
@@ -388,78 +491,41 @@ public class DialogueDisplay : MonoBehaviour
         return dialogue != null
             && dialogue.m_dialogue != null
             && dialogue.m_dialogue.m_dialogueTypeData == DS.Enumerations.DSDialogueType.Setter;
-    }
-
-    /// <summary>
+    }    /// <summary>
     /// Evaluates a condition node and follows the appropriate dialogue path.
-    /// Supports numeric, boolean, and string comparisons with various operators.
+    /// Supports value checks, love score checks, boolean checks, and preference discovery checks.
     /// </summary>
     private void EvaluateConditionNode()
     {
         try
         {
             DSDialogueSO conditionNode = _dialogue.m_dialogue;
-
-            // Get condition parameters from the dialogue node
-            string propertyName = conditionNode.m_propertyToCheckData;
-            string comparisonType = conditionNode.m_comparisonTypeData;
-            string comparisonValue = conditionNode.m_comparisonValueData;
+            var operationType = conditionNode.m_operationTypeData;
 
             bool conditionMet = false;
 
-            // Ensure we have the property, default to "0" if not found
-            if (!_gameVariables.TryGetValue(propertyName, out string currentValue))
+            Debug.Log($"Evaluating condition operation: {operationType}");
+
+            switch (operationType)
             {
-                Debug.LogWarning(
-                    $"Property {propertyName} not found, defaulting to false condition"
-                );
-                currentValue = "0";
+                case SetterOperationType.SetValue:
+                    conditionMet = EvaluateValueCondition(conditionNode);
+                    break;
+                case SetterOperationType.UpdateLoveScore:
+                    conditionMet = EvaluateLoveScoreCondition(conditionNode);
+                    break;
+                case SetterOperationType.UpdateBoolean:
+                    conditionMet = EvaluateBooleanCondition(conditionNode);
+                    break;
+                case SetterOperationType.DiscoverPreference:
+                    conditionMet = EvaluatePreferenceCondition(conditionNode);
+                    break;
+                default:
+                    Debug.LogWarning($"Unknown condition operation type: {operationType}");
+                    break;
             }
 
-            // Handle numeric comparisons
-            if (
-                float.TryParse(currentValue, out float currentFloat)
-                && float.TryParse(comparisonValue, out float compareFloat)
-            )
-            {
-                conditionMet = comparisonType switch
-                {
-                    "==" => Mathf.Approximately(currentFloat, compareFloat),
-                    "!=" => !Mathf.Approximately(currentFloat, compareFloat),
-                    ">" => currentFloat > compareFloat,
-                    "<" => currentFloat < compareFloat,
-                    ">=" => currentFloat >= compareFloat,
-                    "<=" => currentFloat <= compareFloat,
-                    _ => false
-                };
-            }
-            // Handle boolean comparisons
-            else if (
-                bool.TryParse(currentValue, out bool currentBool)
-                && bool.TryParse(comparisonValue, out bool compareBool)
-            )
-            {
-                conditionMet = comparisonType switch
-                {
-                    "==" => currentBool == compareBool,
-                    "!=" => currentBool != compareBool,
-                    _ => false
-                };
-            }
-            // Handle string comparisons
-            else
-            {
-                conditionMet = comparisonType switch
-                {
-                    "==" => currentValue == comparisonValue,
-                    "!=" => currentValue != comparisonValue,
-                    _ => false
-                };
-            }
-
-            Debug.Log(
-                $"Condition: {propertyName} {comparisonType} {comparisonValue}, Current: {currentValue}, Result: {conditionMet}"
-            );
+            Debug.Log($"Condition result: {conditionMet}");
 
             // Follow the appropriate path based on condition result
             var choices = conditionNode.m_dialogueChoiceData;
@@ -482,6 +548,107 @@ public class DialogueDisplay : MonoBehaviour
         {
             Debug.LogError($"Error evaluating condition node: {e.Message}");
         }
+    }
+
+    /// <summary>
+    /// Evaluates a value condition by checking if a variable matches the expected value.
+    /// </summary>
+    private bool EvaluateValueCondition(DSDialogueSO conditionNode)
+    {
+        string variableName = conditionNode.m_variableNameData;
+        string expectedValue = conditionNode.m_valueToSetData;
+
+        if (!_gameVariables.TryGetValue(variableName, out string currentValue))
+        {
+            Debug.LogWarning($"Variable {variableName} not found, defaulting to empty string");
+            currentValue = "";
+        }
+
+        bool result = currentValue == expectedValue;
+        Debug.Log($"Value condition: {variableName} == {expectedValue}, Current: {currentValue}, Result: {result}");
+        return result;
+    }
+
+    /// <summary>
+    /// Evaluates a love score condition by checking if the current love score meets the minimum requirement.
+    /// </summary>
+    private bool EvaluateLoveScoreCondition(DSDialogueSO conditionNode)
+    {
+        int minimumScore = conditionNode.m_loveScoreAmountData;
+
+        if (_loveMeter != null)
+        {
+            int currentLove = _loveMeter.GetCurrentLove();
+            bool result = currentLove >= minimumScore;
+            Debug.Log($"Love score condition: {currentLove} >= {minimumScore}, Result: {result}");
+            return result;
+        }
+        else
+        {
+            Debug.LogWarning("Love meter is not initialized, condition fails");
+            return false;
+        }
+    }
+
+    /// <summary>
+    /// Evaluates a boolean condition by checking if a boolean variable matches the expected value.
+    /// </summary>
+    private bool EvaluateBooleanCondition(DSDialogueSO conditionNode)
+    {
+        string boolName = conditionNode.m_variableNameData;
+        bool expectedValue = conditionNode.m_boolValueData;
+
+        if (!_gameVariables.TryGetValue(boolName, out string currentValue))
+        {
+            Debug.LogWarning($"Boolean variable {boolName} not found, defaulting to false");
+            currentValue = "false";
+        }
+
+        bool currentBool = bool.TryParse(currentValue, out bool parsedValue) ? parsedValue : false;
+        bool result = currentBool == expectedValue;
+        Debug.Log($"Boolean condition: {boolName} == {expectedValue}, Current: {currentBool}, Result: {result}");
+        return result;
+    }
+
+    /// <summary>
+    /// Evaluates a preference condition by checking if a specific preference has been discovered.
+    /// </summary>
+    private bool EvaluatePreferenceCondition(DSDialogueSO conditionNode)
+    {
+        string prefName = conditionNode.m_selectedPreferenceData;
+        bool isLike = conditionNode.m_isLikePreferenceData;
+
+        if (_bachelor == null)
+        {
+            Debug.LogWarning("No bachelor assigned, preference condition fails");
+            return false;
+        }
+
+        bool isDiscovered = false;        if (isLike && _bachelor._likes != null)
+        {
+            for (int i = 0; i < _bachelor._likes.Length; i++)
+            {
+                if (_bachelor._likes[i].description == prefName)
+                {
+                    isDiscovered = _bachelor._likes[i].discovered;
+                    break;
+                }
+            }
+        }
+        else if (!isLike && _bachelor._dislikes != null)
+        {
+            for (int i = 0; i < _bachelor._dislikes.Length; i++)
+            {
+                if (_bachelor._dislikes[i].description == prefName)
+                {
+                    isDiscovered = _bachelor._dislikes[i].discovered;
+                    break;
+                }
+            }
+        }
+
+        Debug.Log($"Preference condition: {prefName} ({(isLike ? "Like" : "Dislike")}) is discovered: {isDiscovered}");
+        return isDiscovered;
     }
 
     /// <summary>
@@ -551,47 +718,39 @@ public class DialogueDisplay : MonoBehaviour
     /// </summary>
     private void HandleUpdateLoveScore(DSDialogueSO setterNode)
     {
-        int amount = setterNode.m_loveScoreAmountData;
+        if (setterNode.m_loveScoreAmountData == 0)
+            return;
 
-        try
+        if (_loveMeter != null)
         {
-            // Try to use the love meter from setter node first, then fall back to default
-            LoveMeterSO targetLoveMeter = (setterNode.m_loveMeterData as LoveMeterSO) ?? _loveMeter;
-
-            if (targetLoveMeter != null && targetLoveMeter.IsInitialized())
+            if (setterNode.m_loveScoreAmountData > 0)
             {
-                if (amount > 0)
-                {
-                    targetLoveMeter.IncreaseLove(amount);
-                }
-                else if (amount < 0)
-                {
-                    targetLoveMeter.DecreaseLove(Mathf.Abs(amount));
-                }
-
-                // Update local variables if using the default love meter
-                if (targetLoveMeter == _loveMeter)
-                {
-                    _loveScore = _loveMeter.GetCurrentLove();
-                    _gameVariables["Love"] = _loveScore.ToString();
-                }
-
-                Debug.Log($"Updated love score by {amount} using love meter");
+                _loveMeter.IncreaseLove(setterNode.m_loveScoreAmountData);
             }
             else
             {
-                // Fall back to local variable update
-                _loveScore += amount;
-                _gameVariables["Love"] = _loveScore.ToString();
-                Debug.Log($"Updated local love score by {amount} (no love meter available)");
+                _loveMeter.DecreaseLove(Mathf.Abs(setterNode.m_loveScoreAmountData));
+            }
+            _loveScore = _loveMeter.GetCurrentLove();
+
+            // Update game variables with new love score
+            _gameVariables["Love"] = _loveScore.ToString();
+
+            // Show the love meter with animation when score changes
+            if (_loveMeterUI != null)
+            {
+                _loveMeterUI.ShowLoveMeterWithAnimation(
+                    _loveScore,
+                    () =>
+                    {
+                        Debug.Log($"Love meter animation completed. New score: {_loveScore}");
+                    }
+                );
             }
         }
-        catch (System.Exception e)
+        else
         {
-            Debug.LogError($"Error updating love score: {e.Message}");
-            // Fallback: update local variable
-            _loveScore += amount;
-            _gameVariables["Love"] = _loveScore.ToString();
+            Debug.LogWarning("Love meter is not initialized, cannot update love score!");
         }
     }
 
@@ -623,17 +782,44 @@ public class DialogueDisplay : MonoBehaviour
 
     /// <summary>
     /// Called when the typewriter effect finishes displaying text.
-    /// Enables dialogue advancement and shows continue icon for single dialogue lines.
+    /// Starts a delay before allowing dialogue advancement and shows the continue icon if appropriate.
     /// </summary>
     private void OnTypewriterEnd()
     {
-        _canAdvance = true;
+        // Only start coroutine if the GameObject is active
+        if (gameObject.activeInHierarchy)
+        {
+            // Start the delay before allowing advancement
+            StartCoroutine(DelayBeforeAdvancement());
+        }
+        else
+        {
+            // If GameObject is inactive, immediately allow advancement without delay
+            _isDelayActive = false;
+            _canAdvance = true;
+        }
 
         // Show continue icon only if there are no multiple choices (single dialogue)
         if (_activeChoiceButtons.Count == 0 && _continueIcon != null)
         {
             _continueIcon.SetActive(true);
         }
+    }
+
+    /// <summary>
+    /// Coroutine that waits one second before allowing the player to advance to the next dialogue.
+    /// </summary>
+    /// <returns>Coroutine enumerator</returns>
+    private IEnumerator DelayBeforeAdvancement()
+    {
+        _isDelayActive = true;
+        _canAdvance = false;
+
+        // Wait for one second
+        yield return new WaitForSeconds(1f);
+
+        _isDelayActive = false;
+        _canAdvance = true;
     }
     #endregion
 
@@ -728,9 +914,7 @@ public class DialogueDisplay : MonoBehaviour
         {
             Debug.LogWarning("Selected choice has no valid next dialogue");
         }
-    }
-
-    /// <summary>
+    }    /// <summary>
     /// Checks if a choice would pass its condition requirements.
     /// Used to determine if a choice button should be enabled or disabled.
     /// </summary>
@@ -748,53 +932,21 @@ public class DialogueDisplay : MonoBehaviour
         }
 
         DSDialogueSO conditionNode = choice.m_nextDialogue;
-        string propertyName = conditionNode.m_propertyToCheckData;
-        string comparisonType = conditionNode.m_comparisonTypeData;
-        string comparisonValue = conditionNode.m_comparisonValueData;
+        var operationType = conditionNode.m_operationTypeData;
 
-        if (!_gameVariables.TryGetValue(propertyName, out string currentValue))
+        switch (operationType)
         {
-            Debug.LogWarning($"Property {propertyName} not found for condition check");
-            return false;
-        }
-
-        // Evaluate condition similar to EvaluateConditionNode
-        if (
-            float.TryParse(currentValue, out float currentFloat)
-            && float.TryParse(comparisonValue, out float compareFloat)
-        )
-        {
-            return comparisonType switch
-            {
-                "==" => Mathf.Approximately(currentFloat, compareFloat),
-                "!=" => !Mathf.Approximately(currentFloat, compareFloat),
-                ">" => currentFloat > compareFloat,
-                "<" => currentFloat < compareFloat,
-                ">=" => currentFloat >= compareFloat,
-                "<=" => currentFloat <= compareFloat,
-                _ => false
-            };
-        }
-        else if (
-            bool.TryParse(currentValue, out bool currentBool)
-            && bool.TryParse(comparisonValue, out bool compareBool)
-        )
-        {
-            return comparisonType switch
-            {
-                "==" => currentBool == compareBool,
-                "!=" => currentBool != compareBool,
-                _ => false
-            };
-        }
-        else
-        {
-            return comparisonType switch
-            {
-                "==" => currentValue == comparisonValue,
-                "!=" => currentValue != comparisonValue,
-                _ => false
-            };
+            case SetterOperationType.SetValue:
+                return EvaluateValueCondition(conditionNode);
+            case SetterOperationType.UpdateLoveScore:
+                return EvaluateLoveScoreCondition(conditionNode);
+            case SetterOperationType.UpdateBoolean:
+                return EvaluateBooleanCondition(conditionNode);
+            case SetterOperationType.DiscoverPreference:
+                return EvaluatePreferenceCondition(conditionNode);
+            default:
+                Debug.LogWarning($"Unknown condition operation type: {operationType}");
+                return false;
         }
     }
     #endregion
@@ -889,7 +1041,6 @@ public class DialogueDisplay : MonoBehaviour
                 Debug.Log(verticalLayout);
                 verticalLayout.SetLayoutHorizontal();
                 verticalLayout.SetLayoutVertical();
-
             }
 
             LayoutRebuilder.ForceRebuildLayoutImmediate(
@@ -957,11 +1108,12 @@ public class DialogueDisplay : MonoBehaviour
                 if (!_bachelor._likes[i].discovered)
                 {
                     _bachelor.DiscoverLike(i);
-                    Debug.Log($"Discovered like: {preferenceName}");
-
-                    // Update game variables for newly discovered preference
+                    Debug.Log($"Discovered like: {preferenceName}"); // Update game variables for newly discovered preference
                     _gameVariables["LikeDiscovered"] = "true";
-                    _gameVariables["NotebookLikeEntry"] = "true";
+                    if (_noteBook != null)
+                    {
+                        _gameVariables["NotebookLikeEntry"] = "true";
+                    }
                     return true;
                 }
                 else
@@ -990,11 +1142,12 @@ public class DialogueDisplay : MonoBehaviour
                 if (!_bachelor._dislikes[i].discovered)
                 {
                     _bachelor.DiscoverDislike(i);
-                    Debug.Log($"Discovered dislike: {preferenceName}");
-
-                    // Update game variables for newly discovered preference
+                    Debug.Log($"Discovered dislike: {preferenceName}"); // Update game variables for newly discovered preference
                     _gameVariables["DislikeDiscovered"] = "true";
-                    _gameVariables["NotebookDislikeEntry"] = "true";
+                    if (_noteBook != null)
+                    {
+                        _gameVariables["NotebookDislikeEntry"] = "true";
+                    }
                     return true;
                 }
                 else
@@ -1010,14 +1163,38 @@ public class DialogueDisplay : MonoBehaviour
     }
     #endregion
 
-    #region End Dialogue Management
-    /// <summary>
+    #region End Dialogue Management    /// <summary>
     /// Shows end dialogue buttons when the conversation is complete.
-    /// Only displays in the Cafe Scene, provides options to continue or return later.
+    /// Shows "Enter Cafe" button only at the last dialogue of FirstDate scene, otherwise shows standard buttons in Cafe scenes.
     /// </summary>
     private void ShowEndDialogueButtons()
     {
         string currentSceneName = SceneManager.GetActiveScene().name;
+
+        // Check if we're in the FirstDate scene AND this is truly the last dialogue
+        bool isFirstDateScene = currentSceneName.ToLower().Contains("firstdate");
+        bool isLastDialogue =
+            _dialogue?.m_dialogue?.m_dialogueChoiceData == null
+            || _dialogue.m_dialogue.m_dialogueChoiceData.Count == 0
+            || _dialogue.m_dialogue.m_dialogueChoiceData[0].m_nextDialogue == null;
+
+        if (isFirstDateScene && isLastDialogue)
+        {
+            Debug.Log(
+                $"At last dialogue in FirstDate Scene ({currentSceneName}). Showing Enter Cafe button."
+            );
+            ClearChoices();
+            CreateEnterCafeButton();
+            return;
+        }
+        else if (isFirstDateScene && !isLastDialogue)
+        {
+            Debug.Log(
+                $"In FirstDate Scene ({currentSceneName}) but not at last dialogue. No buttons shown."
+            );
+            return;
+        }
+
         bool isCafeScene =
             currentSceneName.ToLower().Contains("cafe")
             || currentSceneName.ToLower().Contains("cafescene")
@@ -1074,6 +1251,41 @@ public class DialogueDisplay : MonoBehaviour
     }
 
     /// <summary>
+    /// Creates the "Enter Cafe" button specifically for the FirstDate scene
+    /// </summary>
+    private void CreateEnterCafeButton()
+    {
+        var btnObj = Instantiate(_choiceButtonPrefab, _choicesParent);
+        var btnText = btnObj.GetComponentInChildren<TextMeshProUGUI>();
+        if (btnText != null)
+            btnText.text = "Enter Cafe";
+
+        EnsureContentSizeFitter(btnObj);
+
+        var button = btnObj.GetComponent<UnityEngine.UI.Button>();
+        if (button != null)
+        {
+            button.onClick.AddListener(() => OnEnterCafeClicked());
+
+            if (btnText != null)
+                btnText.color = _normalTextColor;
+
+            AddHoverEffects(btnObj, btnText);
+        }
+
+        _activeChoiceButtons.Add(btnObj);
+    }
+
+    /// <summary>
+    /// Handles the Enter Cafe button click - transitions to Test Cafe scene
+    /// </summary>
+    private void OnEnterCafeClicked()
+    {
+        Debug.Log("Enter Cafe button clicked. Loading Test Cafe scene...");
+        SceneManager.LoadScene("TestCafe");
+    }
+
+    /// <summary>
     /// Handles the "Come Back Later" button click.
     /// Returns to the main menu and hides the dialogue display.
     /// </summary>
@@ -1082,7 +1294,6 @@ public class DialogueDisplay : MonoBehaviour
         Debug.Log("Come Back Later button clicked - returning to main menu");
         ClearChoices();
         gameObject.SetActive(false);
-        SceneManager.LoadScene("MainMenu");
     }
 
     /// <summary>
@@ -1124,11 +1335,36 @@ public class DialogueDisplay : MonoBehaviour
             }
             else
             {
-                Debug.Log("No more scenes available, returning to main menu");
-                SceneManager.LoadScene("MainMenu");
+                Debug.Log("No more scenes available");
             }
         }
     }
+    #endregion
+
+    #region Love Meter Control
+    /// <summary>
+    /// Sets the visibility of the love meter UI
+    /// </summary>
+    /// <param name="visible">Whether the love meter should be visible</param>
+    public void SetLoveMeterVisibility(bool visible)
+    {
+        if (_loveMeterUI != null)
+        {
+            _loveMeterUI.gameObject.SetActive(visible);
+        }
+    }
+
+    /// <summary>
+    /// Updates the love meter UI with the current love value
+    /// </summary>
+    public void UpdateLoveMeterDisplay()
+    {
+        if (_loveMeterUI != null && _loveMeter != null)
+        {
+            _loveMeterUI.RefreshMeter();
+        }
+    }
+
     #endregion
 
     #region Date Tracking System

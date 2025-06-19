@@ -25,10 +25,10 @@ MonoBehaviour:
     discovered: 0
     icon: {fileID: 0}
   - description: Dogs
-    discovered: 1
+    discovered: 0
     icon: {fileID: 0}
   - description: Boat rides
-    discovered: 1
+    discovered: 0
     icon: {fileID: 0}
   - description: Financial Security
     discovered: 1
@@ -38,13 +38,13 @@ MonoBehaviour:
     discovered: 1
     icon: {fileID: 0}
   - description: Junk food
-    discovered: 1
+    discovered: 0
     icon: {fileID: 0}
   - description: Junk food
     discovered: 0
     icon: {fileID: 0}
   - description: Childish people
-    discovered: 1
+    discovered: 0
     icon: {fileID: 0}
   - description: Unserious people
     discovered: 0
@@ -52,4 +52,5 @@ MonoBehaviour:
   _isLikeDiscovered: 1
   _isDislikeDiscovered: 1
   _dialogue: {fileID: 0}
-  _loveMeter: {fileID: 0}
+  _loveMeter: {fileID: 11400000, guid: 1185f448d7f788340855341bed53796d, type: 2}
+  _nextSceneName: 
