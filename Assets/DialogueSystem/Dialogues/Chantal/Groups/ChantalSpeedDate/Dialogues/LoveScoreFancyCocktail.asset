@@ -27,7 +27,7 @@ MonoBehaviour:
   <m_operationTypeData>k__BackingField: 1
   <m_variableNameData>k__BackingField: variableName
   <m_valueToSetData>k__BackingField: 
-  <m_loveScoreAmountData>k__BackingField: 20
+  <m_loveScoreAmountData>k__BackingField: 1
   <m_boolValueData>k__BackingField: 0
   <m_loveMeterData>k__BackingField: {fileID: 11400000, guid: 1185f448d7f788340855341bed53796d, type: 2}
   <m_bachelorData>k__BackingField: {fileID: 0}
