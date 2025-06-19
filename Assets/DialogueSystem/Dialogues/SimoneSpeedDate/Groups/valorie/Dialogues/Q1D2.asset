@@ -30,6 +30,6 @@ MonoBehaviour:
   <m_loveScoreAmountData>k__BackingField: 0
   <m_boolValueData>k__BackingField: 0
   <m_loveMeterData>k__BackingField: {fileID: 0}
-  <m_bachelorData>k__BackingField: {fileID: 0}
+  <m_bachelorData>k__BackingField: {fileID: 11400000, guid: cea487173320f3f4ca881debc811a8e6, type: 2}
   <m_isLikePreferenceData>k__BackingField: 0
-  <m_selectedPreferenceData>k__BackingField: 
+  <m_selectedPreferenceData>k__BackingField: Crowded Places

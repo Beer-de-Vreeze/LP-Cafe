@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Question1BroughtYouHere
   m_EditorClassIdentifier: 
   <m_dialogueNameData>k__BackingField: Question1BroughtYouHere
-  <m_dialogueTextData>k__BackingField: 'What brought here? '
+  <m_dialogueTextData>k__BackingField: 'So what brought here? '
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Searching for love.
-    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: eae3262a69db69b45bf66e43f6de2cc9, type: 2}
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 2eb90f5ecd59dd64ebbb0a0f4d9f5b36, type: 2}
   - <m_dialogueChoiceText>k__BackingField: Some random barista girl from a bar send
       me here.
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: c351883d1943b9e46a5b2a282c27917c, type: 2}
@@ -25,9 +25,9 @@ MonoBehaviour:
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: c92f1dd4065847046bd5f5ac62965c28, type: 2}
   - <m_dialogueChoiceText>k__BackingField: I just got ditched by a date and well
       I'm moving on, ya know?
-    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 23a78578667bd3c489cfb8f8f74c0982, type: 2}
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 8beb7d9ff409bd0469e88eb322f8d6a9, type: 2}
   <m_bachelorImageData>k__BackingField: {fileID: 21300000, guid: dedee01b113aef245a775f2239a733c6, type: 3}
-  <m_dialogueAudioData>k__BackingField: {fileID: 0}
+  <m_dialogueAudioData>k__BackingField: {fileID: 8300000, guid: d69345052aad2964e83cd61567fd53ce, type: 3}
   <m_dialogueTypeData>k__BackingField: 1
   <m_isStartingDialogueData>k__BackingField: 1
   <m_propertyToCheckData>k__BackingField: 

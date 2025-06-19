@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Ending
   m_EditorClassIdentifier: 
   <m_dialogueNameData>k__BackingField: Ending
-  <m_dialogueTextData>k__BackingField: "Well...\r\nGoodluck with the next person.\r\nYou
-    seem like you need it. \r\nLike.... a lot. \r\nI have to go to the barista for
-    more Irish coffee.\r"
+  <m_dialogueTextData>k__BackingField: "Well Honey it seems like out time is up.\r\nI
+    enjoyed talking\r\nI hope you make a good choice that fits with you, even if
+    it's not me\r\nPlease enjoy the rest of your day, Darling.\r"
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Next Dialogue
     <m_nextDialogue>k__BackingField: {fileID: 0}

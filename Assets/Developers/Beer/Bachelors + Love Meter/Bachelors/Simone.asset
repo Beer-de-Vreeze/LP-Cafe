@@ -12,12 +12,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dafdbd3029b57714ba28974d73bb6956, type: 3}
   m_Name: Simone
   m_EditorClassIdentifier: 
-  _name: 
+  _name: Simone
   _portrait: {fileID: 0}
-  _likes: []
-  _dislikes: []
+  _likes:
+  - description: Yoga
+    discovered: 0
+    icon: {fileID: 0}
+  - description: Tea
+    discovered: 0
+    icon: {fileID: 0}
+  - description: Cafes
+    discovered: 0
+    icon: {fileID: 0}
+  - description: Comedy Movies
+    discovered: 0
+    icon: {fileID: 0}
+  _dislikes:
+  - description: Heavy Weights
+    discovered: 0
+    icon: {fileID: 0}
+  - description: Crowded Places
+    discovered: 0
+    icon: {fileID: 0}
+  - description: Horror
+    discovered: 0
+    icon: {fileID: 0}
+  - description: Bitter Flavors
+    discovered: 0
+    icon: {fileID: 0}
   _isLikeDiscovered: 0
   _isDislikeDiscovered: 0
   _dialogue: {fileID: 0}
-  _loveMeter: {fileID: 0}
+  _loveMeter: {fileID: 11400000, guid: 7f80e95effe6e3b48b732ad3facc2721, type: 2}
   _nextSceneName: 
