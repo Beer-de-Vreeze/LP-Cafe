@@ -288,6 +288,27 @@ public class NoteBook : MonoBehaviour
     }
 
     /// <summary>
+    /// Clears the current bachelor and all notebook entries, allowing a new bachelor to be set.
+    /// </summary>
+    public void ClearBachelor()
+    {
+        // Unregister from current bachelor events
+        if (currentBachelor != null)
+        {
+            currentBachelor.OnPreferenceDiscovered -= HandlePreferenceDiscovered;
+        }
+        // Clear all UI entries
+        ClearEntries();
+        // Hide locked info text
+        if (lockedInfoText != null)
+        {
+            lockedInfoText.SetActive(false);
+        }
+        currentBachelor = null;
+        isInitialized = false;
+    }
+
+    /// <summary>
     /// Creates an entry for a discovered preference
     /// </summary>
     private void CreateEntryForPreference(NewBachelorSO.BachelorPreference preference)

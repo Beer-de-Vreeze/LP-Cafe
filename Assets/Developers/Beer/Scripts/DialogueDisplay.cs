@@ -1370,6 +1370,12 @@ public class DialogueDisplay : MonoBehaviour
             MarkBachelorAsDated(_bachelor);
         }
 
+        // Remove bachelor from notebook after date is over
+        if (_noteBook != null)
+        {
+            _noteBook.ClearBachelor();
+        }
+
         // Load the next scene
         if (_bachelor != null && !string.IsNullOrEmpty(_bachelor._nextSceneName))
         {
@@ -1470,6 +1476,12 @@ public class DialogueDisplay : MonoBehaviour
         if (isDateScene)
         {
             Debug.Log("Date failure tracked!");
+        }
+
+        // Remove bachelor from notebook after date is over
+        if (_noteBook != null)
+        {
+            _noteBook.ClearBachelor();
         }
 
         SceneManager.LoadScene("MainMenu");
