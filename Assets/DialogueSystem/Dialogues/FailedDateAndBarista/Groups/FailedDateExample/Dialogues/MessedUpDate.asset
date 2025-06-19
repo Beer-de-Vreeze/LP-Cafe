@@ -16,7 +16,7 @@ MonoBehaviour:
   <m_dialogueTextData>k__BackingField: 'Soooo you messed up your date huh?...
 
     That
-    seemed pretty bad from where i was totes not spying on you.'
+    seemed pretty bad. I was totally not spying on you.'
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Next Dialogue
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 2e580665450fae64cbb78f8f07a9ed8a, type: 2}

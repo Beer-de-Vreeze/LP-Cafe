@@ -22,10 +22,10 @@ MonoBehaviour:
       - {fileID: 11400000, guid: 5a51737a4d40f584d913ff250f6976d7, type: 2}
       - {fileID: 11400000, guid: 385bd47296b61a74fb7ae1aac36ec6b8, type: 2}
       - {fileID: 11400000, guid: 41a6094a376944343a250f86bdcc6ceb, type: 2}
-      - {fileID: 11400000, guid: 8c2c99a88cda440419c2a0afef5e86c0, type: 2}
       - {fileID: 11400000, guid: 51c20bc9da8aae3458f013f3681b4760, type: 2}
       - {fileID: 11400000, guid: 2e580665450fae64cbb78f8f07a9ed8a, type: 2}
       - {fileID: 11400000, guid: a4d5d134d0b9e6e4ea3a332dfcda10e6, type: 2}
-      - {fileID: 11400000, guid: 49e91445bdb0162479da63c12fffe2ae, type: 2}
+      - {fileID: 11400000, guid: 8c2c99a88cda440419c2a0afef5e86c0, type: 2}
       - {fileID: 11400000, guid: 956a6e7165217804a86e4415afc5bffc, type: 2}
+      - {fileID: 11400000, guid: 49e91445bdb0162479da63c12fffe2ae, type: 2}
   <m_containerUngroupedDialoguesData>k__BackingField: []

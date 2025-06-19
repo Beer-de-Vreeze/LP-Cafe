@@ -16,7 +16,7 @@ MonoBehaviour:
   <m_graphGroupsData>k__BackingField:
   - <m_groupIDData>k__BackingField: 321d99f3-886d-467e-99a0-85a81ceb8a67
     <m_groupNameData>k__BackingField: FailedDateExample
-    <m_groupPositionData>k__BackingField: {x: -27, y: 72}
+    <m_groupPositionData>k__BackingField: {x: -27.2, y: 72.799995}
   <m_graphNodesData>k__BackingField:
   - <m_nodeIDData>k__BackingField: 2d4446b4-fd80-4f06-9555-84ef0311eae6
     <m_nodeNameData>k__BackingField: Listening
@@ -28,7 +28,7 @@ MonoBehaviour:
       <m_choiceNodeIDData>k__BackingField: e3eba488-b732-44d5-8483-a51a8842ae2a
     <m_nodeGroupIDData>k__BackingField: 321d99f3-886d-467e-99a0-85a81ceb8a67
     <m_dialogueTypeData>k__BackingField: 0
-    <m_nodePositionData>k__BackingField: {x: -2, y: 131}
+    <m_nodePositionData>k__BackingField: {x: -2, y: 131.2}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -56,7 +56,7 @@ MonoBehaviour:
       <m_choiceNodeIDData>k__BackingField: 5a51997d-3fe3-4ebb-a013-c7572202dd1c
     <m_nodeGroupIDData>k__BackingField: 321d99f3-886d-467e-99a0-85a81ceb8a67
     <m_dialogueTypeData>k__BackingField: 0
-    <m_nodePositionData>k__BackingField: {x: 301, y: 131}
+    <m_nodePositionData>k__BackingField: {x: 301.2, y: 131.2}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -83,7 +83,7 @@ MonoBehaviour:
       <m_choiceNodeIDData>k__BackingField: 9d790779-e258-437e-a1de-96fefa418311
     <m_nodeGroupIDData>k__BackingField: 321d99f3-886d-467e-99a0-85a81ceb8a67
     <m_dialogueTypeData>k__BackingField: 0
-    <m_nodePositionData>k__BackingField: {x: 616, y: 131}
+    <m_nodePositionData>k__BackingField: {x: 616, y: 131.2}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -111,7 +111,7 @@ MonoBehaviour:
       <m_choiceNodeIDData>k__BackingField: 61dbac20-180b-437b-9f1f-fb84c8226856
     <m_nodeGroupIDData>k__BackingField: 321d99f3-886d-467e-99a0-85a81ceb8a67
     <m_dialogueTypeData>k__BackingField: 0
-    <m_nodePositionData>k__BackingField: {x: 1087, y: 144}
+    <m_nodePositionData>k__BackingField: {x: 1087.2, y: 144}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -151,32 +151,6 @@ MonoBehaviour:
     <m_isLikePreference>k__BackingField: 0
     <m_selectedPreference>k__BackingField: 
     <m_enumSetter>k__BackingField: 0
-  - <m_nodeIDData>k__BackingField: a1ea5dda-43d4-44ea-9ada-29263fe6a842
-    <m_nodeNameData>k__BackingField: MutteringToSelf
-    <m_nodeBachelorImageData>k__BackingField: {fileID: 21300000, guid: 2141e28ecdd0e7248ade7201dd482b35, type: 3}
-    <m_nodeAudioLinesData>k__BackingField: {fileID: 0}
-    <m_nodeTextData>k__BackingField: '(Muttering to self): go to a cafe they said,
-      go on a date they said.'
-    <m_nodeChoicesData>k__BackingField:
-    - <m_choiceTextData>k__BackingField: Next Dialogue
-      <m_choiceNodeIDData>k__BackingField: 203ed034-62ad-4d58-bef7-9200c72b9ec2
-    <m_nodeGroupIDData>k__BackingField: 321d99f3-886d-467e-99a0-85a81ceb8a67
-    <m_dialogueTypeData>k__BackingField: 0
-    <m_nodePositionData>k__BackingField: {x: 1808, y: 144}
-    <m_nodePropertyToCheckData>k__BackingField: Love
-    <m_nodeComparisonTypeData>k__BackingField: '>='
-    <m_nodeComparisonValueData>k__BackingField: 0
-    <m_nodeOperationTypeData>k__BackingField: '>='
-    <m_nodeValueToSetData>k__BackingField: 
-    <m_nodeVariableNameData>k__BackingField: 
-    <m_nodeSetterOperationTypeData>k__BackingField: 0
-    <m_nodeLoveScoreAmountData>k__BackingField: 0
-    <m_nodeBoolValueData>k__BackingField: 0
-    <m_nodeLoveMeterData>k__BackingField: {fileID: 0}
-    <m_bachelorData>k__BackingField: {fileID: 0}
-    <m_isLikePreference>k__BackingField: 0
-    <m_selectedPreference>k__BackingField: 
-    <m_enumSetter>k__BackingField: 0
   - <m_nodeIDData>k__BackingField: 203ed034-62ad-4d58-bef7-9200c72b9ec2
     <m_nodeNameData>k__BackingField: MessedUpDate
     <m_nodeBachelorImageData>k__BackingField: {fileID: 21300000, guid: 6ffe8caacb35ebc49a3fe4106b8afb48, type: 3}
@@ -184,7 +158,7 @@ MonoBehaviour:
     <m_nodeTextData>k__BackingField: 'Soooo you messed up your date huh?...
 
       That
-      seemed pretty bad from where i was totes not spying on you.'
+      seemed pretty bad. I was totally not spying on you.'
     <m_nodeChoicesData>k__BackingField:
     - <m_choiceTextData>k__BackingField: Next Dialogue
       <m_choiceNodeIDData>k__BackingField: 50176a4e-d985-4002-8fe3-2dd08c7f9377
@@ -210,16 +184,16 @@ MonoBehaviour:
     <m_nodeBachelorImageData>k__BackingField: {fileID: 21300000, guid: 6ffe8caacb35ebc49a3fe4106b8afb48, type: 3}
     <m_nodeAudioLinesData>k__BackingField: {fileID: 0}
     <m_nodeTextData>k__BackingField: 'Well you''re in luck! A new program opened
-      up in this like cafe down the street.
+      up in this cafe down the street.
 
-      LP Cafe i think it was called??
-      You know? that cute coffee place with all the plants.'
+      LP Cafe i think it was called?? You
+      know? that cute coffee place with all the plants.'
     <m_nodeChoicesData>k__BackingField:
     - <m_choiceTextData>k__BackingField: Next Dialogue
       <m_choiceNodeIDData>k__BackingField: e5f18485-7392-4634-b13c-5235a17492cc
     <m_nodeGroupIDData>k__BackingField: 321d99f3-886d-467e-99a0-85a81ceb8a67
     <m_dialogueTypeData>k__BackingField: 0
-    <m_nodePositionData>k__BackingField: {x: 401, y: 364}
+    <m_nodePositionData>k__BackingField: {x: 401.2, y: 364}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -263,21 +237,18 @@ MonoBehaviour:
     <m_isLikePreference>k__BackingField: 0
     <m_selectedPreference>k__BackingField: 
     <m_enumSetter>k__BackingField: 0
-  - <m_nodeIDData>k__BackingField: 4dd58509-ebc2-45f5-8661-a054e96c6d17
-    <m_nodeNameData>k__BackingField: NotebookObtained
-    <m_nodeBachelorImageData>k__BackingField: {fileID: 21300000, guid: 6ffe8caacb35ebc49a3fe4106b8afb48, type: 3}
+  - <m_nodeIDData>k__BackingField: a1ea5dda-43d4-44ea-9ada-29263fe6a842
+    <m_nodeNameData>k__BackingField: MutteringToSelf
+    <m_nodeBachelorImageData>k__BackingField: {fileID: 21300000, guid: 2141e28ecdd0e7248ade7201dd482b35, type: 3}
     <m_nodeAudioLinesData>k__BackingField: {fileID: 0}
-    <m_nodeTextData>k__BackingField: 'Here take my notebook, then you can write down
-      what your date says!
-
-      maybe you''ll get a match if you pay enough attention.
-      Oh shoot! I have to go! break''s over.'
+    <m_nodeTextData>k__BackingField: '(Muttering to self): go to a cafe they said,
+      go on a date they said.'
     <m_nodeChoicesData>k__BackingField:
     - <m_choiceTextData>k__BackingField: Next Dialogue
-      <m_choiceNodeIDData>k__BackingField: 3d48d6f8-cf47-4af2-9d44-361a9c4ff8e9
+      <m_choiceNodeIDData>k__BackingField: 203ed034-62ad-4d58-bef7-9200c72b9ec2
     <m_nodeGroupIDData>k__BackingField: 321d99f3-886d-467e-99a0-85a81ceb8a67
     <m_dialogueTypeData>k__BackingField: 0
-    <m_nodePositionData>k__BackingField: {x: 1505, y: 364}
+    <m_nodePositionData>k__BackingField: {x: 1808, y: 144}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -302,7 +273,36 @@ MonoBehaviour:
       <m_choiceNodeIDData>k__BackingField: 
     <m_nodeGroupIDData>k__BackingField: 321d99f3-886d-467e-99a0-85a81ceb8a67
     <m_dialogueTypeData>k__BackingField: 0
-    <m_nodePositionData>k__BackingField: {x: 2037, y: 364}
+    <m_nodePositionData>k__BackingField: {x: 2037.2, y: 364}
+    <m_nodePropertyToCheckData>k__BackingField: Love
+    <m_nodeComparisonTypeData>k__BackingField: '>='
+    <m_nodeComparisonValueData>k__BackingField: 0
+    <m_nodeOperationTypeData>k__BackingField: '>='
+    <m_nodeValueToSetData>k__BackingField: 
+    <m_nodeVariableNameData>k__BackingField: 
+    <m_nodeSetterOperationTypeData>k__BackingField: 0
+    <m_nodeLoveScoreAmountData>k__BackingField: 0
+    <m_nodeBoolValueData>k__BackingField: 0
+    <m_nodeLoveMeterData>k__BackingField: {fileID: 0}
+    <m_bachelorData>k__BackingField: {fileID: 0}
+    <m_isLikePreference>k__BackingField: 0
+    <m_selectedPreference>k__BackingField: 
+    <m_enumSetter>k__BackingField: 0
+  - <m_nodeIDData>k__BackingField: 4dd58509-ebc2-45f5-8661-a054e96c6d17
+    <m_nodeNameData>k__BackingField: NotebookObtained
+    <m_nodeBachelorImageData>k__BackingField: {fileID: 21300000, guid: 6ffe8caacb35ebc49a3fe4106b8afb48, type: 3}
+    <m_nodeAudioLinesData>k__BackingField: {fileID: 0}
+    <m_nodeTextData>k__BackingField: 'Here take my notebook, then you can write down
+      what your date says!
+
+      maybe you''ll get a match if you pay enough attention.
+      Oh shoot! I have to go! break''s over.'
+    <m_nodeChoicesData>k__BackingField:
+    - <m_choiceTextData>k__BackingField: Next Dialogue
+      <m_choiceNodeIDData>k__BackingField: 3d48d6f8-cf47-4af2-9d44-361a9c4ff8e9
+    <m_nodeGroupIDData>k__BackingField: 321d99f3-886d-467e-99a0-85a81ceb8a67
+    <m_dialogueTypeData>k__BackingField: 0
+    <m_nodePositionData>k__BackingField: {x: 1505.2, y: 364}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -329,9 +329,9 @@ MonoBehaviour:
       - Swear
       - BetterThenYou
       - DontCall
-      - MutteringToSelf
       - MessedUpDate
       - NotSpying
       - SpeedDateProgram
-      - NotebookObtained
+      - MutteringToSelf
       - Goodluckkkkkk
+      - NotebookObtained
