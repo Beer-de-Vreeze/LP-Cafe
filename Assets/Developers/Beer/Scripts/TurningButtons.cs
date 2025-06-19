@@ -132,7 +132,7 @@ public class TurningButtons : MonoBehaviour
                 break;
             case 2:
                 m_bachelorsColliders[0].enabled = true;
-
+                m_bachelorsColliders[1].enabled = true;
                 break;
         }
     }
