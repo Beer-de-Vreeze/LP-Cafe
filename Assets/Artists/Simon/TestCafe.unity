@@ -485,6 +485,7 @@ MonoBehaviour:
   m_dialogue: {fileID: 32085728}
   m_dialogueCanvas: {fileID: 476807508}
   m_dialogueDisplay: {fileID: 1818962892}
+  currentlyDating: 0
 --- !u!54 &32085730
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1802,6 +1803,7 @@ MonoBehaviour:
   m_dialogue: {fileID: 200159565}
   m_dialogueCanvas: {fileID: 476807508}
   m_dialogueDisplay: {fileID: 1818962892}
+  currentlyDating: 0
 --- !u!1001 &203677346
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2765,6 +2767,7 @@ MonoBehaviour:
   m_dialogue: {fileID: 533133505}
   m_dialogueCanvas: {fileID: 476807508}
   m_dialogueDisplay: {fileID: 1818962892}
+  currentlyDating: 0
 --- !u!54 &533133507
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6879,6 +6882,7 @@ MonoBehaviour:
   m_dialogue: {fileID: 1260297390}
   m_dialogueCanvas: {fileID: 476807508}
   m_dialogueDisplay: {fileID: 1818962892}
+  currentlyDating: 0
 --- !u!54 &1260297392
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -10787,6 +10791,7 @@ MonoBehaviour:
   m_dialogue: {fileID: 1982111747}
   m_dialogueCanvas: {fileID: 476807508}
   m_dialogueDisplay: {fileID: 1818962892}
+  currentlyDating: 0
 --- !u!54 &1982111749
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -10989,6 +10994,10 @@ PrefabInstance:
       propertyPath: _loveMeter
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 3952595216175766055, guid: a45930d7ad5ece64d8d27e47bbcbf4a6, type: 3}
+      propertyPath: _moveCanvas
+      value: 
+      objectReference: {fileID: 1860229798}
     - target: {fileID: 3952595216175766055, guid: a45930d7ad5ece64d8d27e47bbcbf4a6, type: 3}
       propertyPath: _typewriter
       value: 

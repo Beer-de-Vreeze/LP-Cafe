@@ -75,6 +75,10 @@ public class DialogueDisplay : MonoBehaviour
     [SerializeField]
     private Canvas _dialogueCanvas;
 
+    /// <summary>Reference to the move canvas for enabling/disabling movement controls</summary>
+    [SerializeField]
+    private Canvas _moveCanvas;
+
     /// <summary>Continue icon that appears when single dialogue finishes</summary>
     [SerializeField]
     private GameObject _continueIcon;
@@ -219,7 +223,7 @@ public class DialogueDisplay : MonoBehaviour
                 System.IO.File.Delete(path);
                 Debug.Log("[TEST] Save file deleted: " + path);
             }
-            UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
+            UnityEngine.SceneManagement.SceneManager.LoadScene("Main Menu");
             return;
         }
 
@@ -1322,6 +1326,10 @@ public class DialogueDisplay : MonoBehaviour
     {
         Debug.Log("Come Back Later button clicked - returning to main menu");
         ClearChoices();
+
+        // End the date session to reset bachelor interaction states
+        EndDate();
+
         gameObject.SetActive(false);
         if (_dialogueCanvas != null)
         {
@@ -1367,6 +1375,9 @@ public class DialogueDisplay : MonoBehaviour
         {
             _noteBook.ClearBachelor();
         }
+
+        // End the date session to reset bachelor interaction states
+        EndDate();
 
         // Load the next scene
         if (_bachelor != null && !string.IsNullOrEmpty(_bachelor._nextSceneName))
@@ -1476,6 +1487,9 @@ public class DialogueDisplay : MonoBehaviour
             _noteBook.ClearBachelor();
         }
 
+        // End the date session to reset bachelor interaction states
+        EndDate();
+
         SceneManager.LoadScene("MainMenu");
     }
 
@@ -1512,5 +1526,48 @@ public class DialogueDisplay : MonoBehaviour
             Debug.Log("No save data found, keeping current successful date count");
         }
     }
+    #endregion
+
+    #region Date State Management
+    /// <summary>
+    /// Ends the current dating session and notifies any SetBachelor components to reset their state.
+    /// This allows players to interact with bachelors again after a dialogue session ends.
+    /// </summary>
+    public void EndDate()
+    { // Find all SetBachelor components in the scene and reset their dating state
+        SetBachelor[] setBachelorComponents = FindObjectsByType<SetBachelor>(FindObjectsSortMode.None);
+        foreach (SetBachelor setBachelor in setBachelorComponents)
+        {
+            setBachelor.ResetDatingState();
+        }
+
+        // Hide the dialogue canvas
+        if (_dialogueCanvas != null)
+        {
+            _dialogueCanvas.enabled = false;
+        }
+
+        // Hide the love meter
+        if (_loveMeterUI != null)
+        {
+            _loveMeterUI.HideLoveMeter();
+        }
+
+        // Clear any active choices
+        ClearChoices();
+
+        // Reset dialogue advancement state
+        _canAdvance = false;
+        _isDelayActive = false;
+
+        // Hide continue icon
+        if (_continueIcon != null)
+        {
+            _continueIcon.SetActive(false);
+        }
+
+        Debug.Log("[DialogueDisplay] Date ended - bachelor interaction reset");
+    }
+
     #endregion
 }
