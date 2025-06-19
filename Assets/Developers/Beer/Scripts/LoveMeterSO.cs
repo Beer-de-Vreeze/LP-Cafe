@@ -10,7 +10,7 @@ using UnityEngine.Events;
 public class LoveMeterSO : ScriptableObject
 {
     [Tooltip("Maximum love value this bachelor can reach")]
-    public int _maxLove = 100;
+    public int _maxLove = 5;
 
     [Tooltip("Current love value")]
     public int _currentLove = 0;

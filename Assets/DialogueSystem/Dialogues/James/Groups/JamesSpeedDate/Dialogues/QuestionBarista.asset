@@ -18,7 +18,7 @@ MonoBehaviour:
   - <m_dialogueChoiceText>k__BackingField: A burger with fries.
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: d3416c058b4e71a4bafae8d983755b27, type: 2}
   - <m_dialogueChoiceText>k__BackingField: Dirty martini shrimp cocktail.
-    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: f0a5ae9477b970c45ae0ae57a7fec9e5, type: 2}
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 79fe0b36902502e44af3509201fdfa64, type: 2}
   - <m_dialogueChoiceText>k__BackingField: An iced coffee with caramel drizzle and
       extra whipped cream.
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 486ef908e909f654ca26a42ab23bbdaf, type: 2}
