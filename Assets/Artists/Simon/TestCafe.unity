@@ -462,13 +462,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de97b5429e9cc0c45aac19c9b876fa50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_dialogueContainer: {fileID: 11400000, guid: 059eb8978738a8241a04de0bb3508fc4, type: 2}
-  m_dialogueGroup: {fileID: 11400000, guid: e5ef5a2093f11fe419aa419ec83a76df, type: 2}
-  m_dialogue: {fileID: 11400000, guid: 2d84aaf01519df942b1a4d22282b79da, type: 2}
+  m_dialogueContainer: {fileID: 11400000, guid: 5e35a02289053bf46a0d2fbdcc09a1ef, type: 2}
+  m_dialogueGroup: {fileID: 11400000, guid: 08bce78c621ba1a438d1c6bbf37daa19, type: 2}
+  m_dialogue: {fileID: 11400000, guid: cc54bdc66fcbfeb42b176fd7372d7413, type: 2}
   m_groupedDialogues: 1
   m_startingDialoguesOnly: 0
   m_selectedDialogueGroupIndex: 0
-  m_selectedDialogueIndex: 0
+  m_selectedDialogueIndex: 14
 --- !u!114 &32085729
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -481,7 +481,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80ed70d5596c2e143b8b6a96dd41920a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_bachelor: {fileID: 11400000, guid: 17897679caa48db4e901fb103d088d6d, type: 2}
+  m_bachelor: {fileID: 11400000, guid: cea487173320f3f4ca881debc811a8e6, type: 2}
   m_dialogue: {fileID: 32085728}
   m_dialogueCanvas: {fileID: 476807508}
   m_dialogueDisplay: {fileID: 1818962892}
@@ -2761,7 +2761,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80ed70d5596c2e143b8b6a96dd41920a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_bachelor: {fileID: 11400000, guid: 17897679caa48db4e901fb103d088d6d, type: 2}
+  m_bachelor: {fileID: 11400000, guid: 7e0db3f5f0480c142bb95e946112c3a2, type: 2}
   m_dialogue: {fileID: 533133505}
   m_dialogueCanvas: {fileID: 476807508}
   m_dialogueDisplay: {fileID: 1818962892}
@@ -6838,7 +6838,7 @@ GameObject:
   - component: {fileID: 1260297391}
   - component: {fileID: 1260297390}
   m_Layer: 0
-  m_Name: Valerie
+  m_Name: Valorie
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6856,13 +6856,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de97b5429e9cc0c45aac19c9b876fa50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_dialogueContainer: {fileID: 11400000, guid: 059eb8978738a8241a04de0bb3508fc4, type: 2}
-  m_dialogueGroup: {fileID: 11400000, guid: e5ef5a2093f11fe419aa419ec83a76df, type: 2}
-  m_dialogue: {fileID: 11400000, guid: 2d84aaf01519df942b1a4d22282b79da, type: 2}
+  m_dialogueContainer: {fileID: 11400000, guid: f1c3f00cf028bcb48994f35a5a5bd942, type: 2}
+  m_dialogueGroup: {fileID: 11400000, guid: a31d1fe93d33a814f90333124262bd55, type: 2}
+  m_dialogue: {fileID: 11400000, guid: a3c0de8116ea3844fbbec7b9b136d596, type: 2}
   m_groupedDialogues: 1
   m_startingDialoguesOnly: 0
   m_selectedDialogueGroupIndex: 0
-  m_selectedDialogueIndex: 0
+  m_selectedDialogueIndex: 49
 --- !u!114 &1260297391
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6875,7 +6875,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80ed70d5596c2e143b8b6a96dd41920a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_bachelor: {fileID: 11400000, guid: 17897679caa48db4e901fb103d088d6d, type: 2}
+  m_bachelor: {fileID: 11400000, guid: f61949d7b3e6a1d42b1c1c5c3a6187e5, type: 2}
   m_dialogue: {fileID: 1260297390}
   m_dialogueCanvas: {fileID: 476807508}
   m_dialogueDisplay: {fileID: 1818962892}
@@ -10712,7 +10712,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80ed70d5596c2e143b8b6a96dd41920a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_bachelor: {fileID: 11400000, guid: 17897679caa48db4e901fb103d088d6d, type: 2}
+  m_bachelor: {fileID: 11400000, guid: ac32952b566cb2a4683e4a58339bfd2e, type: 2}
   m_dialogue: {fileID: 1982111747}
   m_dialogueCanvas: {fileID: 476807508}
   m_dialogueDisplay: {fileID: 1818962892}
