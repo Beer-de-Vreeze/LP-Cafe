@@ -16,7 +16,7 @@ MonoBehaviour:
   <m_dialogueTextData>k__BackingField: 
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Next Dialogue
-    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 9e177db135073de4587945729d3967c8, type: 2}
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 96a8d21249b7b504abf84603738fb9f1, type: 2}
   <m_bachelorImageData>k__BackingField: {fileID: 0}
   <m_dialogueAudioData>k__BackingField: {fileID: 0}
   <m_dialogueTypeData>k__BackingField: 3
@@ -27,9 +27,9 @@ MonoBehaviour:
   <m_operationTypeData>k__BackingField: 1
   <m_variableNameData>k__BackingField: variableName
   <m_valueToSetData>k__BackingField: 
-  <m_loveScoreAmountData>k__BackingField: -50
+  <m_loveScoreAmountData>k__BackingField: -1
   <m_boolValueData>k__BackingField: 0
-  <m_loveMeterData>k__BackingField: {fileID: 0}
+  <m_loveMeterData>k__BackingField: {fileID: 11400000, guid: 60b63660c8262df40b22074d24b3938e, type: 2}
   <m_bachelorData>k__BackingField: {fileID: 0}
   <m_isLikePreferenceData>k__BackingField: 1
   <m_selectedPreferenceData>k__BackingField: 

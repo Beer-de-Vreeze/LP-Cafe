@@ -17,7 +17,7 @@ MonoBehaviour:
     so pretty with ears.
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Next Dialogue
-    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 827cf82c72fea6c4dbfe64d8fe98bece, type: 2}
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 9f543afc1dd05854c8a4c2592c5d5197, type: 2}
   <m_bachelorImageData>k__BackingField: {fileID: 21300000, guid: 4d7a66a9cea93b246a1057f95ed0764f, type: 3}
   <m_dialogueAudioData>k__BackingField: {fileID: 0}
   <m_dialogueTypeData>k__BackingField: 0

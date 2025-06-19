@@ -24,12 +24,12 @@ MonoBehaviour:
   <m_propertyToCheckData>k__BackingField: 
   <m_comparisonTypeData>k__BackingField: 
   <m_comparisonValueData>k__BackingField: 
-  <m_operationTypeData>k__BackingField: 0
+  <m_operationTypeData>k__BackingField: 3
   <m_variableNameData>k__BackingField: variableName
   <m_valueToSetData>k__BackingField: -20
   <m_loveScoreAmountData>k__BackingField: 0
   <m_boolValueData>k__BackingField: 0
   <m_loveMeterData>k__BackingField: {fileID: 0}
-  <m_bachelorData>k__BackingField: {fileID: 0}
-  <m_isLikePreferenceData>k__BackingField: 1
-  <m_selectedPreferenceData>k__BackingField: 
+  <m_bachelorData>k__BackingField: {fileID: 11400000, guid: ac32952b566cb2a4683e4a58339bfd2e, type: 2}
+  <m_isLikePreferenceData>k__BackingField: 0
+  <m_selectedPreferenceData>k__BackingField: Unhealthy People

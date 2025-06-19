@@ -16,7 +16,7 @@ MonoBehaviour:
   <m_dialogueTextData>k__BackingField: '*hiss* I DEMAND attention.'
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Next Dialogue
-    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: a954d6494854c81479eb6b14c2a7afbe, type: 2}
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: a1fe77b02866ea045b52aa885da0a5af, type: 2}
   <m_bachelorImageData>k__BackingField: {fileID: 21300000, guid: b5aae1c3cda47b6429f95402575d06e7, type: 3}
   <m_dialogueAudioData>k__BackingField: {fileID: 0}
   <m_dialogueTypeData>k__BackingField: 0

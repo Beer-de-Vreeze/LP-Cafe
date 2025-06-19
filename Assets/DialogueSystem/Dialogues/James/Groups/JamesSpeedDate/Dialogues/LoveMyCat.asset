@@ -17,7 +17,7 @@ MonoBehaviour:
     which irritates me. I hate rodents... so gross
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Next Dialogue
-    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 16ac851164e11b34a887765fb1aef94b, type: 2}
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 6ed57575ab0fd7b48be89a1f26e63632, type: 2}
   <m_bachelorImageData>k__BackingField: {fileID: 21300000, guid: dedee01b113aef245a775f2239a733c6, type: 3}
   <m_dialogueAudioData>k__BackingField: {fileID: 0}
   <m_dialogueTypeData>k__BackingField: 0

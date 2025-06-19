@@ -17,15 +17,15 @@ MonoBehaviour:
     boba tea getting served to the girl across the caf\xE9!"
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Erm a what now?
-    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 9b31a4ce1b06bba4795a55319edc9396, type: 2}
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 8a74089131a0aad43b88b0ee20cf41d9, type: 2}
   - <m_dialogueChoiceText>k__BackingField: Oh yea sure I love boba, I'll have whatever
       you're having.
-    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 2d7960447f31c214f9f3aaac4d1f2e15, type: 2}
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: fc3736f6a1cc77048896354835ee0414, type: 2}
   - <m_dialogueChoiceText>k__BackingField: sorry watcha say? I wasn't paying attention.
-    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: d7552f1702b833440a9fba5983333252, type: 2}
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 529c096443be6ae4ab8a33684653f84d, type: 2}
   - <m_dialogueChoiceText>k__BackingField: I think I'll skip, I had Ramen for lunch
       and I'm full
-    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: a61119190e9a2f3469ca8f91810521fb, type: 2}
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 610970132e4778f4dab39878831147c6, type: 2}
   <m_bachelorImageData>k__BackingField: {fileID: 21300000, guid: 4d7a66a9cea93b246a1057f95ed0764f, type: 3}
   <m_dialogueAudioData>k__BackingField: {fileID: 0}
   <m_dialogueTypeData>k__BackingField: 1

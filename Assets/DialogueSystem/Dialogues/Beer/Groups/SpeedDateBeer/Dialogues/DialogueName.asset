@@ -18,20 +18,20 @@ MonoBehaviour:
     I could dress you up so cute I you'd be mine\r\nBye senpai-channnnn"
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Next Dialogue
-    <m_nextDialogue>k__BackingField: {fileID: 0}
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: b91bbf39ce1cbbc4faddbf5128094847, type: 2}
   <m_bachelorImageData>k__BackingField: {fileID: 21300000, guid: 4d7a66a9cea93b246a1057f95ed0764f, type: 3}
   <m_dialogueAudioData>k__BackingField: {fileID: 0}
-  <m_dialogueTypeData>k__BackingField: 0
+  <m_dialogueTypeData>k__BackingField: 3
   <m_isStartingDialogueData>k__BackingField: 1
   <m_propertyToCheckData>k__BackingField: 
   <m_comparisonTypeData>k__BackingField: 
   <m_comparisonValueData>k__BackingField: 
-  <m_operationTypeData>k__BackingField: 0
-  <m_variableNameData>k__BackingField: 
+  <m_operationTypeData>k__BackingField: 3
+  <m_variableNameData>k__BackingField: variableName
   <m_valueToSetData>k__BackingField: 
   <m_loveScoreAmountData>k__BackingField: 0
   <m_boolValueData>k__BackingField: 0
   <m_loveMeterData>k__BackingField: {fileID: 0}
-  <m_bachelorData>k__BackingField: {fileID: 0}
+  <m_bachelorData>k__BackingField: {fileID: 11400000, guid: 7e0db3f5f0480c142bb95e946112c3a2, type: 2}
   <m_isLikePreferenceData>k__BackingField: 0
-  <m_selectedPreferenceData>k__BackingField: 
+  <m_selectedPreferenceData>k__BackingField: Blood

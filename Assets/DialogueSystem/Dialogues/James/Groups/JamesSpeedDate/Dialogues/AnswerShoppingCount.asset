@@ -17,7 +17,7 @@ MonoBehaviour:
     gambling enthousiant huh? '
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Next Dialogue
-    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 7bc835576b5975140a007d437bc27afe, type: 2}
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 9fe1153b1c47aa34187043d32dedf57b, type: 2}
   <m_bachelorImageData>k__BackingField: {fileID: 21300000, guid: a3d83c6850d504041837522c43dcf67c, type: 3}
   <m_dialogueAudioData>k__BackingField: {fileID: 0}
   <m_dialogueTypeData>k__BackingField: 0

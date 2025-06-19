@@ -18,13 +18,13 @@ MonoBehaviour:
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: oh well I dunno, my friend send me an
       anime to watch I guess, haven't started yet.
-    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 3f98a1776632f3546a51ad8f0bf69778, type: 2}
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 160dbb169caf6cc4ca613b885b169941, type: 2}
   - <m_dialogueChoiceText>k__BackingField: I'm currently rewatching all my favorite
       slasher movies.
-    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 0cf4541bf65866f4f88bfcd81b8373d2, type: 2}
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: e01c0b5f0aff1fe4eaad429036e5c9fb, type: 2}
   - <m_dialogueChoiceText>k__BackingField: I'm watching a sick action show at the
       moment
-    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 43f593e8821fe644c88deba30fdc3785, type: 2}
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: c98088b3771dad84f8d720353709b5b5, type: 2}
   - <m_dialogueChoiceText>k__BackingField: not really, I read books instead of watching
       TV
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 43f155aa52bd7424db18038e1c16869c, type: 2}

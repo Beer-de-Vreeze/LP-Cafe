@@ -16,7 +16,7 @@ MonoBehaviour:
   <m_dialogueTextData>k__BackingField: 
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Next Dialogue
-    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: d24348a292695114a9cb717440ea3caa, type: 2}
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 16ac851164e11b34a887765fb1aef94b, type: 2}
   <m_bachelorImageData>k__BackingField: {fileID: 0}
   <m_dialogueAudioData>k__BackingField: {fileID: 0}
   <m_dialogueTypeData>k__BackingField: 3
@@ -30,6 +30,6 @@ MonoBehaviour:
   <m_loveScoreAmountData>k__BackingField: 0
   <m_boolValueData>k__BackingField: 0
   <m_loveMeterData>k__BackingField: {fileID: 0}
-  <m_bachelorData>k__BackingField: {fileID: 0}
+  <m_bachelorData>k__BackingField: {fileID: 11400000, guid: ac32952b566cb2a4683e4a58339bfd2e, type: 2}
   <m_isLikePreferenceData>k__BackingField: 0
-  <m_selectedPreferenceData>k__BackingField: 
+  <m_selectedPreferenceData>k__BackingField: Rodents
