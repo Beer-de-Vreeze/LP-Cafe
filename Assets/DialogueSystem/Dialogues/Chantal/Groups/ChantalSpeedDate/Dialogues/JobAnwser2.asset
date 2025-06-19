@@ -16,9 +16,9 @@ MonoBehaviour:
   <m_dialogueTextData>k__BackingField: Is that what I'm smelling...?
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Next Dialogue
-    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: b3368948902097348808efab532c1220, type: 2}
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 78be2cbb08489744290bd49e9f20c702, type: 2}
   <m_bachelorImageData>k__BackingField: {fileID: 21300000, guid: 0e52f8f5bd2a8aa4eae89e6137cf3d06, type: 3}
-  <m_dialogueAudioData>k__BackingField: {fileID: 0}
+  <m_dialogueAudioData>k__BackingField: {fileID: 8300000, guid: a31a91917b4d2ad459cfdd6711fc4e5b, type: 3}
   <m_dialogueTypeData>k__BackingField: 0
   <m_isStartingDialogueData>k__BackingField: 1
   <m_propertyToCheckData>k__BackingField: 

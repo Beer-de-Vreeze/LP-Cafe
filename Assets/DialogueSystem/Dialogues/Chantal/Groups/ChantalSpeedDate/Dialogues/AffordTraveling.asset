@@ -16,18 +16,18 @@ MonoBehaviour:
   <m_dialogueTextData>k__BackingField: Can you afford travelling?
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: I have my own yacht.
-    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 3168b967d86c7794a8f870aa416f5640, type: 2}
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 97806a31d429bfc4c87f46c872e5596b, type: 2}
   - <m_dialogueChoiceText>k__BackingField: I like to travel with public transport...
       if that's what you mean?
-    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 072de2b90be7f494f9b7d29ebf8c9540, type: 2}
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: f9585a6b5dcaa384997b68711ee98f93, type: 2}
   - <m_dialogueChoiceText>k__BackingField: I like to go to the flower fields when
       I visit other countries.
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 470d4d43b10421848bbc0ae24f3222b6, type: 2}
   - <m_dialogueChoiceText>k__BackingField: No, I like to stay indoors. Travelling
       is a waste of money and valuable time.
-    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: a91a379caffdda3478a8f30ba25594d5, type: 2}
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 99c888c29d223b5408212fe0fac66030, type: 2}
   <m_bachelorImageData>k__BackingField: {fileID: 21300000, guid: 84a876f81e079bf40beb58c595c98cf5, type: 3}
-  <m_dialogueAudioData>k__BackingField: {fileID: 0}
+  <m_dialogueAudioData>k__BackingField: {fileID: 8300000, guid: ed4d989ee9b40f446817eb90436bceb7, type: 3}
   <m_dialogueTypeData>k__BackingField: 1
   <m_isStartingDialogueData>k__BackingField: 1
   <m_propertyToCheckData>k__BackingField: 
