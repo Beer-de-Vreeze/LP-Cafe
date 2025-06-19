@@ -1545,12 +1545,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_dialogueContainer: {fileID: 11400000, guid: e15d441bd31250d44a42d947b41fe9ea, type: 2}
-  m_dialogueGroup: {fileID: 11400000, guid: b73e554cd8677bb4da74fa31bb39dcc8, type: 2}
-  m_dialogue: {fileID: 11400000, guid: a96ab1f10bfecab4191faf986cb63b95, type: 2}
+  m_dialogueGroup: {fileID: 11400000, guid: 2e6b2f56c2a1be5498c7d493055731fa, type: 2}
+  m_dialogue: {fileID: 11400000, guid: 121b3ac2e2fa8314bab1e4d0f011ef52, type: 2}
   m_groupedDialogues: 1
   m_startingDialoguesOnly: 0
   m_selectedDialogueGroupIndex: 0
-  m_selectedDialogueIndex: 39
+  m_selectedDialogueIndex: 20
 --- !u!114 &200159566
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9893,11 +9893,11 @@ PrefabInstance:
     - target: {fileID: 465800891653423937, guid: a45930d7ad5ece64d8d27e47bbcbf4a6, type: 3}
       propertyPath: m_dialogue
       value: 
-      objectReference: {fileID: 11400000, guid: 85608b940441c5e40800b2ef63e0054e, type: 2}
+      objectReference: {fileID: 11400000, guid: 3168b967d86c7794a8f870aa416f5640, type: 2}
     - target: {fileID: 465800891653423937, guid: a45930d7ad5ece64d8d27e47bbcbf4a6, type: 3}
       propertyPath: m_dialogueGroup
       value: 
-      objectReference: {fileID: 11400000, guid: b73e554cd8677bb4da74fa31bb39dcc8, type: 2}
+      objectReference: {fileID: 11400000, guid: 2e6b2f56c2a1be5498c7d493055731fa, type: 2}
     - target: {fileID: 465800891653423937, guid: a45930d7ad5ece64d8d27e47bbcbf4a6, type: 3}
       propertyPath: m_groupedDialogues
       value: 1
@@ -9908,7 +9908,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: e15d441bd31250d44a42d947b41fe9ea, type: 2}
     - target: {fileID: 465800891653423937, guid: a45930d7ad5ece64d8d27e47bbcbf4a6, type: 3}
       propertyPath: m_selectedDialogueIndex
-      value: 0
+      value: 46
       objectReference: {fileID: 0}
     - target: {fileID: 746183165252153805, guid: a45930d7ad5ece64d8d27e47bbcbf4a6, type: 3}
       propertyPath: m_LocalPosition.x

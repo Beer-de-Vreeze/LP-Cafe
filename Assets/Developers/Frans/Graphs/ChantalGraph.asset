@@ -397,7 +397,7 @@ MonoBehaviour:
   - <m_nodeIDData>k__BackingField: 1ae16f7a-8715-41fe-aed5-fda538e8aeb7
     <m_nodeNameData>k__BackingField: Job
     <m_nodeBachelorImageData>k__BackingField: {fileID: 21300000, guid: 84a876f81e079bf40beb58c595c98cf5, type: 3}
-    <m_nodeAudioLinesData>k__BackingField: {fileID: 0}
+    <m_nodeAudioLinesData>k__BackingField: {fileID: 8300000, guid: f20a2eb9720a289478edf3d9f0fde3f2, type: 3}
     <m_nodeTextData>k__BackingField: So what do you do for a living?
     <m_nodeChoicesData>k__BackingField:
     - <m_choiceTextData>k__BackingField: I'm a real estate agent.
@@ -454,7 +454,7 @@ MonoBehaviour:
   - <m_nodeIDData>k__BackingField: 5a9bd3f4-d532-43af-be9e-ffaf7eeadb26
     <m_nodeNameData>k__BackingField: LostVoice
     <m_nodeBachelorImageData>k__BackingField: {fileID: 21300000, guid: 84a876f81e079bf40beb58c595c98cf5, type: 3}
-    <m_nodeAudioLinesData>k__BackingField: {fileID: 8300000, guid: c1c2dcd667288e1449034b039281c1e2, type: 3}
+    <m_nodeAudioLinesData>k__BackingField: {fileID: 8300000, guid: 98f883b5701197447942a18250f636d3, type: 3}
     <m_nodeTextData>k__BackingField: "Aren\u2019t you gonna ask me any questions?\nDoes
       a woman have to do everything around here???\nSince you've lost your voice,
       I'll take the lead."
