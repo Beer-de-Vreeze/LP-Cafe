@@ -23,7 +23,7 @@ MonoBehaviour:
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 91f7186fa098c5940ab1fd169171c126, type: 2}
   - <m_dialogueChoiceText>k__BackingField: Don't you love the sound of the little
       jingle the door makes, when a new customer walks in?
-    <m_nextDialogue>k__BackingField: {fileID: 0}
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: b96fd682beca2c449a4418aa16207e20, type: 2}
   - <m_dialogueChoiceText>k__BackingField: Do you ever like go out? Like clubs and
       stuff?
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: ac74b7fe9756eb54fa3d78db34360ac0, type: 2}

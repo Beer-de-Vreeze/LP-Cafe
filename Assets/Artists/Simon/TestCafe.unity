@@ -463,8 +463,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_dialogueContainer: {fileID: 11400000, guid: 5e35a02289053bf46a0d2fbdcc09a1ef, type: 2}
-  m_dialogueGroup: {fileID: 11400000, guid: 08bce78c621ba1a438d1c6bbf37daa19, type: 2}
-  m_dialogue: {fileID: 11400000, guid: cc54bdc66fcbfeb42b176fd7372d7413, type: 2}
+  m_dialogueGroup: {fileID: 11400000, guid: a3547a20de6c70043b242b0f4230918c, type: 2}
+  m_dialogue: {fileID: 11400000, guid: 338ab3a4ba49bd34b84f5b2718f2fe7d, type: 2}
   m_groupedDialogues: 1
   m_startingDialoguesOnly: 0
   m_selectedDialogueGroupIndex: 0
@@ -6862,7 +6862,7 @@ MonoBehaviour:
   m_groupedDialogues: 1
   m_startingDialoguesOnly: 0
   m_selectedDialogueGroupIndex: 0
-  m_selectedDialogueIndex: 49
+  m_selectedDialogueIndex: 40
 --- !u!114 &1260297391
 MonoBehaviour:
   m_ObjectHideFlags: 0
