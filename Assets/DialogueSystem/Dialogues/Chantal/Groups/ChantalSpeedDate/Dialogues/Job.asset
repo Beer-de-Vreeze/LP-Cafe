@@ -16,10 +16,10 @@ MonoBehaviour:
   <m_dialogueTextData>k__BackingField: So what do you do for a living?
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: I'm a real estate agent.
-    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 5426bbadaed2d0e41adc2659d073070c, type: 2}
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: a15a6ca93a771ea49a6bf35531c0a056, type: 2}
   - <m_dialogueChoiceText>k__BackingField: I currently work in a fast-food chain
       uptown.
-    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: eb2328f287769a243b28a51e8ecbb73b, type: 2}
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: b3368948902097348808efab532c1220, type: 2}
   - <m_dialogueChoiceText>k__BackingField: I'm an assistant manager at the local
       hospital.
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 28ed005c6505c824aa1fd11438f5204f, type: 2}
