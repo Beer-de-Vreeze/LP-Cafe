@@ -15,8 +15,8 @@ MonoBehaviour:
   <m_graphFileNameData>k__BackingField: SimoneSpeedDate
   <m_graphGroupsData>k__BackingField:
   - <m_groupIDData>k__BackingField: d24f43ae-e314-46ba-a377-6e352ad983dd
-    <m_groupNameData>k__BackingField: valorie
-    <m_groupPositionData>k__BackingField: {x: 2058, y: 8}
+    <m_groupNameData>k__BackingField: Simone
+    <m_groupPositionData>k__BackingField: {x: 2057.9998, y: 8.000065}
   <m_graphNodesData>k__BackingField:
   - <m_nodeIDData>k__BackingField: 634fbfe5-f396-45ea-88c5-0bf4ced01742
     <m_nodeNameData>k__BackingField: Q2L2
@@ -1196,11 +1196,11 @@ MonoBehaviour:
     <m_selectedPreference>k__BackingField: 
     <m_enumSetter>k__BackingField: 0
   <m_graphOldGroupNamesData>k__BackingField:
-  - valorie
+  - Simone
   <m_graphOldUngroupedNodeNamesData>k__BackingField: []
   <m_graphOldGroupedNodeNamesData>k__BackingField:
     list:
-    - Key: valorie
+    - Key: Simone
       Value:
       - Q2L2
       - Q2L3

@@ -15,8 +15,8 @@ MonoBehaviour:
   <m_graphFileNameData>k__BackingField: ValorieSpeedDate
   <m_graphGroupsData>k__BackingField:
   - <m_groupIDData>k__BackingField: d24f43ae-e314-46ba-a377-6e352ad983dd
-    <m_groupNameData>k__BackingField: valorie
-    <m_groupPositionData>k__BackingField: {x: 1567, y: -3.0000076}
+    <m_groupNameData>k__BackingField: Valorie
+    <m_groupPositionData>k__BackingField: {x: 1567, y: -3}
   <m_graphNodesData>k__BackingField:
   - <m_nodeIDData>k__BackingField: d45923dc-c4fc-4f5b-8dd9-ef282f90e507
     <m_nodeNameData>k__BackingField: QQ3
@@ -1329,11 +1329,11 @@ MonoBehaviour:
     <m_selectedPreference>k__BackingField: 
     <m_enumSetter>k__BackingField: 0
   <m_graphOldGroupNamesData>k__BackingField:
-  - valorie
+  - Valorie
   <m_graphOldUngroupedNodeNamesData>k__BackingField: []
   <m_graphOldGroupedNodeNamesData>k__BackingField:
     list:
-    - Key: valorie
+    - Key: Valorie
       Value:
       - QQ3
       - Q3L1
