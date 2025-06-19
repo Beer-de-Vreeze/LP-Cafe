@@ -278,8 +278,9 @@ public class NoteBook : MonoBehaviour
         {
             currentBachelor.OnPreferenceDiscovered += HandlePreferenceDiscovered;
 
-            // Ensure all preferences start as undiscovered when setting a new bachelor
-            currentBachelor.EnsureUndiscoveredState();
+            // Only reset discoveries if this is a completely new bachelor setup
+            // Comment out the line below if you want to preserve discovered preferences
+            // currentBachelor.EnsureUndiscoveredState();
         }
 
         // Re-initialize with the new bachelor
@@ -305,6 +306,25 @@ public class NoteBook : MonoBehaviour
             lockedInfoText.SetActive(false);
         }
         currentBachelor = null;
+        isInitialized = false;
+    }
+
+    /// <summary>
+    /// Resets notebook entries while keeping the current bachelor reference.
+    /// Used when restarting dialogue with the same bachelor.
+    /// </summary>
+    public void ResetNotebookEntries()
+    {
+        // Clear all UI entries but keep the bachelor reference
+        ClearEntries();
+
+        // Show locked info text since no preferences are discovered
+        if (lockedInfoText != null)
+        {
+            lockedInfoText.SetActive(true);
+        }
+
+        // Mark as uninitialized so it will rebuild when needed
         isInitialized = false;
     }
 
@@ -434,6 +454,56 @@ public class NoteBook : MonoBehaviour
                 {
                     CreateDislikeEntry(dislike);
                 }
+            }
+        }
+    }
+
+    // Debug methods for testing
+    [ContextMenu("Debug: Discover All Preferences")]
+    public void DebugDiscoverAllPreferences()
+    {
+        if (currentBachelor != null)
+        {
+            currentBachelor.DiscoverAllPreferencesForTesting();
+            Debug.Log($"Discovered all preferences for {currentBachelor._name}");
+        }
+        else
+        {
+            Debug.LogWarning("No bachelor assigned to discover preferences for!");
+        }
+    }
+
+    [ContextMenu("Debug: Log Current State")]
+    public void DebugLogCurrentState()
+    {
+        if (currentBachelor == null)
+        {
+            Debug.Log("No bachelor assigned");
+            return;
+        }
+
+        Debug.Log($"Current Bachelor: {currentBachelor._name}");
+        Debug.Log($"Initialized: {isInitialized}");
+        Debug.Log($"Like entries count: {likeEntryObjects.Count}");
+        Debug.Log($"Dislike entries count: {dislikeEntryObjects.Count}");
+
+        if (currentBachelor._likes != null)
+        {
+            for (int i = 0; i < currentBachelor._likes.Length; i++)
+            {
+                var like = currentBachelor._likes[i];
+                Debug.Log($"Like {i}: '{like.description}' - Discovered: {like.discovered}");
+            }
+        }
+
+        if (currentBachelor._dislikes != null)
+        {
+            for (int i = 0; i < currentBachelor._dislikes.Length; i++)
+            {
+                var dislike = currentBachelor._dislikes[i];
+                Debug.Log(
+                    $"Dislike {i}: '{dislike.description}' - Discovered: {dislike.discovered}"
+                );
             }
         }
     }
