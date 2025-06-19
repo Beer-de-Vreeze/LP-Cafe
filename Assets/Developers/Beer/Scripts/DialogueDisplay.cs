@@ -205,6 +205,20 @@ public class DialogueDisplay : MonoBehaviour
     /// </summary>
     private void Update()
     {
+        // Playtest reset: Press '=' to clear save and return to Main Menu
+        if (Input.GetKeyDown(KeyCode.Equals))
+        {
+            Debug.Log("[TEST] Resetting save and returning to Main Menu");
+            string path = System.IO.Path.Combine(Application.persistentDataPath, "save.json");
+            if (System.IO.File.Exists(path))
+            {
+                System.IO.File.Delete(path);
+                Debug.Log("[TEST] Save file deleted: " + path);
+            }
+            UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
+            return;
+        }
+
         // Allow advancing dialogue if possible, no choices are being shown, and delay is not active
         if (
             _canAdvance
@@ -491,7 +505,9 @@ public class DialogueDisplay : MonoBehaviour
         return dialogue != null
             && dialogue.m_dialogue != null
             && dialogue.m_dialogue.m_dialogueTypeData == DS.Enumerations.DSDialogueType.Setter;
-    }    /// <summary>
+    }
+
+    /// <summary>
     /// Evaluates a condition node and follows the appropriate dialogue path.
     /// Supports value checks, love score checks, boolean checks, and preference discovery checks.
     /// </summary>
@@ -565,7 +581,9 @@ public class DialogueDisplay : MonoBehaviour
         }
 
         bool result = currentValue == expectedValue;
-        Debug.Log($"Value condition: {variableName} == {expectedValue}, Current: {currentValue}, Result: {result}");
+        Debug.Log(
+            $"Value condition: {variableName} == {expectedValue}, Current: {currentValue}, Result: {result}"
+        );
         return result;
     }
 
@@ -606,7 +624,9 @@ public class DialogueDisplay : MonoBehaviour
 
         bool currentBool = bool.TryParse(currentValue, out bool parsedValue) ? parsedValue : false;
         bool result = currentBool == expectedValue;
-        Debug.Log($"Boolean condition: {boolName} == {expectedValue}, Current: {currentBool}, Result: {result}");
+        Debug.Log(
+            $"Boolean condition: {boolName} == {expectedValue}, Current: {currentBool}, Result: {result}"
+        );
         return result;
     }
 
@@ -624,7 +644,8 @@ public class DialogueDisplay : MonoBehaviour
             return false;
         }
 
-        bool isDiscovered = false;        if (isLike && _bachelor._likes != null)
+        bool isDiscovered = false;
+        if (isLike && _bachelor._likes != null)
         {
             for (int i = 0; i < _bachelor._likes.Length; i++)
             {
@@ -647,7 +668,9 @@ public class DialogueDisplay : MonoBehaviour
             }
         }
 
-        Debug.Log($"Preference condition: {prefName} ({(isLike ? "Like" : "Dislike")}) is discovered: {isDiscovered}");
+        Debug.Log(
+            $"Preference condition: {prefName} ({(isLike ? "Like" : "Dislike")}) is discovered: {isDiscovered}"
+        );
         return isDiscovered;
     }
 
@@ -914,7 +937,9 @@ public class DialogueDisplay : MonoBehaviour
         {
             Debug.LogWarning("Selected choice has no valid next dialogue");
         }
-    }    /// <summary>
+    }
+
+    /// <summary>
     /// Checks if a choice would pass its condition requirements.
     /// Used to determine if a choice button should be enabled or disabled.
     /// </summary>
@@ -1294,6 +1319,31 @@ public class DialogueDisplay : MonoBehaviour
         Debug.Log("Come Back Later button clicked - returning to main menu");
         ClearChoices();
         gameObject.SetActive(false);
+
+        // Enable all BachelorSetter canvases in the scene (for cafe re-entry)
+        var setters = FindObjectsByType<BachelorSetter>(FindObjectsSortMode.None);
+        foreach (var setter in setters)
+        {
+            if (setter != null && setter.GetComponent<Canvas>() != null)
+            {
+                setter.GetComponent<Canvas>().enabled = true;
+            }
+            else if (setter != null)
+            {
+                // If m_canvas is private, use reflection or expose a public method/property if needed
+                var canvasField = typeof(BachelorSetter).GetField(
+                    "m_canvas",
+                    System.Reflection.BindingFlags.NonPublic
+                        | System.Reflection.BindingFlags.Instance
+                );
+                if (canvasField != null)
+                {
+                    var canvas = canvasField.GetValue(setter) as Canvas;
+                    if (canvas != null)
+                        canvas.enabled = true;
+                }
+            }
+        }
     }
 
     /// <summary>
@@ -1316,6 +1366,8 @@ public class DialogueDisplay : MonoBehaviour
         {
             IncrementSuccessfulDateCount();
             Debug.Log("Date completed successfully!");
+            // Mark bachelor as dated and disable their setter
+            MarkBachelorAsDated(_bachelor);
         }
 
         // Load the next scene
@@ -1336,6 +1388,27 @@ public class DialogueDisplay : MonoBehaviour
             else
             {
                 Debug.Log("No more scenes available");
+            }
+        }
+    }
+
+    // Helper to mark a bachelor as dated and disable their setter
+    private void MarkBachelorAsDated(NewBachelorSO bachelor)
+    {
+        if (bachelor == null)
+            return;
+        _saveData = SaveSystem.Deserialize() ?? new SaveData();
+        if (!_saveData.DatedBachelors.Contains(bachelor.name))
+        {
+            _saveData.DatedBachelors.Add(bachelor.name);
+            SaveSystem.SerializeData(_saveData);
+        }
+        var setters = FindObjectsByType<BachelorSetter>(FindObjectsSortMode.None);
+        foreach (var setter in setters)
+        {
+            if (setter != null && setter.GetBachelor() == bachelor)
+            {
+                setter.DisableSetter();
             }
         }
     }
@@ -1380,18 +1453,6 @@ public class DialogueDisplay : MonoBehaviour
     }
 
     /// <summary>
-    /// Increments the failed date count in save data.
-    /// Called when a date fails or is abandoned.
-    /// </summary>
-    public void IncrementFailedDateCount()
-    {
-        _saveData = SaveSystem.Deserialize() ?? new SaveData();
-        _saveData.FailedDateCount++;
-        SaveSystem.SerializeData(_saveData);
-        Debug.Log($"Failed date count incremented to: {_saveData.FailedDateCount}");
-    }
-
-    /// <summary>
     /// Handles a failed date scenario.
     /// Tracks the failure and returns to the main menu.
     /// </summary>
@@ -1408,7 +1469,6 @@ public class DialogueDisplay : MonoBehaviour
 
         if (isDateScene)
         {
-            IncrementFailedDateCount();
             Debug.Log("Date failure tracked!");
         }
 
@@ -1422,7 +1482,7 @@ public class DialogueDisplay : MonoBehaviour
     public void SyncWithSaveData()
     {
         _saveData = SaveSystem.Deserialize() ?? new SaveData();
-        _saveData.SuccessfulDateCount = _succesfulDateCount;
+        // _saveData.SuccessfulDateCount = _succesfulDateCount; // No longer needed, count is from DatedBachelors
         SaveSystem.SerializeData(_saveData);
         Debug.Log($"Synced successful date count with save data: {_succesfulDateCount}");
     }
@@ -1437,8 +1497,11 @@ public class DialogueDisplay : MonoBehaviour
 
         if (_saveData != null)
         {
-            _succesfulDateCount = _saveData.SuccessfulDateCount;
-            Debug.Log($"Loaded successful date count from save: {_succesfulDateCount}");
+            _succesfulDateCount =
+                _saveData.DatedBachelors != null ? _saveData.DatedBachelors.Count : 0;
+            Debug.Log(
+                $"Loaded successful date count from DatedBachelors list: {_succesfulDateCount}"
+            );
         }
         else
         {
