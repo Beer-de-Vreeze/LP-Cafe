@@ -1324,24 +1324,9 @@ public class DialogueDisplay : MonoBehaviour
         var setters = FindObjectsByType<BachelorSetter>(FindObjectsSortMode.None);
         foreach (var setter in setters)
         {
-            if (setter != null && setter.GetComponent<Canvas>() != null)
+            if (setter != null)
             {
-                setter.GetComponent<Canvas>().enabled = true;
-            }
-            else if (setter != null)
-            {
-                // If m_canvas is private, use reflection or expose a public method/property if needed
-                var canvasField = typeof(BachelorSetter).GetField(
-                    "m_canvas",
-                    System.Reflection.BindingFlags.NonPublic
-                        | System.Reflection.BindingFlags.Instance
-                );
-                if (canvasField != null)
-                {
-                    var canvas = canvasField.GetValue(setter) as Canvas;
-                    if (canvas != null)
-                        canvas.enabled = true;
-                }
+                setter.EnableCanvas();
             }
         }
     }
