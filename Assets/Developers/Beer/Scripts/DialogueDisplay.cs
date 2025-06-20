@@ -1333,7 +1333,7 @@ public class DialogueDisplay : MonoBehaviour
         gameObject.SetActive(false);
         if (_dialogueCanvas != null)
         {
-            _dialogueCanvas.gameObject.SetActive(false);
+            _dialogueCanvas.enabled = false;
         }
         // Enable all BachelorSetter canvases in the scene (for cafe re-entry)
         var setters = FindObjectsByType<BachelorSetter>(FindObjectsSortMode.None);

@@ -19,7 +19,9 @@ public class SetBachelor : MonoBehaviour
     [SerializeField]
     private bool currentlyDating = false;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    [SerializeField]
+    private GameObject m_dialogueObject;
+
     void Start()
     {
         m_dialogueDisplay = FindFirstObjectByType<DialogueDisplay>();
@@ -31,28 +33,16 @@ public class SetBachelor : MonoBehaviour
         if (!currentlyDating)
         {
             m_dialogueCanvas.enabled = true;
-            StartCoroutine(WaitForCanvasAndSetBatchelor());
+            m_dialogueObject.SetActive(true);
+            SetBatchelor();
         }
-    }
-
-    private System.Collections.IEnumerator WaitForCanvasAndSetBatchelor()
-    {
-        // Wait until the canvas is enabled and dialogue display is ready
-        yield return new WaitUntil(() => m_dialogueCanvas.enabled && m_dialogueDisplay != null);
-
-        // Wait an additional frame for UI components to properly initialize
-        yield return new WaitForEndOfFrame();
-
-        // Wait one more frame to ensure TextMeshPro components are fully initialized
-        yield return new WaitForEndOfFrame();
-
-        SetBatchelor();
     }
 
     public void SetBatchelor()
     {
         currentlyDating = true;
         m_dialogueCanvas.enabled = true;
+        m_dialogueObject.SetActive(true);
 
         // Ensure notebook has the correct bachelor reference
         NoteBook notebook = FindFirstObjectByType<NoteBook>();
