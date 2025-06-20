@@ -216,14 +216,7 @@ public class DialogueDisplay : MonoBehaviour
         // Playtest reset: Press '=' to clear save and return to Main Menu
         if (Input.GetKeyDown(KeyCode.Equals))
         {
-            Debug.Log("[TEST] Resetting save and returning to Main Menu");
-            string path = System.IO.Path.Combine(Application.persistentDataPath, "save.json");
-            if (System.IO.File.Exists(path))
-            {
-                System.IO.File.Delete(path);
-                Debug.Log("[TEST] Save file deleted: " + path);
-            }
-            UnityEngine.SceneManagement.SceneManager.LoadScene("Main Menu");
+            ResetSaveAndReturnToMainMenu();
             return;
         }
 
@@ -1570,4 +1563,16 @@ public class DialogueDisplay : MonoBehaviour
     }
 
     #endregion
+
+    private void ResetSaveAndReturnToMainMenu()
+    {
+        Debug.Log("[TEST] Resetting save and returning to Main Menu");
+        string path = System.IO.Path.Combine(Application.persistentDataPath, "save.json");
+        if (System.IO.File.Exists(path))
+        {
+            System.IO.File.Delete(path);
+            Debug.Log("[TEST] Save file deleted: " + path);
+        }
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Main Menu");
+    }
 }
