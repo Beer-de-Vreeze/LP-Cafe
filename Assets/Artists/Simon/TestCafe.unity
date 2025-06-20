@@ -5907,7 +5907,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2959377241938159660, guid: a34b7e1289bc1d9429dbfacfc664940e, type: 3}
       propertyPath: waitForNormalChars
-      value: 0.001
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 3150716853550591477, guid: a34b7e1289bc1d9429dbfacfc664940e, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -10783,11 +10783,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_dialogueContainer: {fileID: 11400000, guid: 059eb8978738a8241a04de0bb3508fc4, type: 2}
   m_dialogueGroup: {fileID: 11400000, guid: e5ef5a2093f11fe419aa419ec83a76df, type: 2}
-  m_dialogue: {fileID: 11400000, guid: 821387203540e3342bf086764f2438a8, type: 2}
+  m_dialogue: {fileID: 11400000, guid: 2d84aaf01519df942b1a4d22282b79da, type: 2}
   m_groupedDialogues: 1
   m_startingDialoguesOnly: 0
   m_selectedDialogueGroupIndex: 0
-  m_selectedDialogueIndex: 25
+  m_selectedDialogueIndex: 0
 --- !u!114 &1982111748
 MonoBehaviour:
   m_ObjectHideFlags: 0
