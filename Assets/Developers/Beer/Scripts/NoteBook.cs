@@ -4,8 +4,13 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Manages the notebook UI for displaying discovered likes and dislikes for a bachelor character.
+/// Handles UI updates, event registration, and debug utilities.
+/// </summary>
 public class NoteBook : MonoBehaviour
 {
+    #region Inspector Fields
     [Header("Bachelor Reference")]
     [SerializeField]
     private NewBachelorSO currentBachelor;
@@ -35,14 +40,18 @@ public class NoteBook : MonoBehaviour
 
     [SerializeField]
     private float highlightDuration = 1.5f;
+    #endregion
 
+    #region Private Fields
     // Track entries for manipulation
     private Dictionary<string, GameObject> likeEntryObjects = new Dictionary<string, GameObject>();
     private Dictionary<string, GameObject> dislikeEntryObjects =
         new Dictionary<string, GameObject>();
     private bool isInitialized = false;
     private bool isEventRegistered = false;
+    #endregion
 
+    #region Unity Lifecycle
     private void RegisterBachelorEvents()
     {
         if (currentBachelor != null && !isEventRegistered)
@@ -93,7 +102,12 @@ public class NoteBook : MonoBehaviour
     {
         UnregisterBachelorEvents();
     }
+    #endregion
 
+    #region Event Handlers
+    /// <summary>
+    /// Handles the event when a new preference is discovered.
+    /// </summary>
     private void HandlePreferenceDiscovered(NewBachelorSO.BachelorPreference preference)
     {
         Debug.Log($"[NoteBook] HandlePreferenceDiscovered called for: {preference.description}");
@@ -126,7 +140,12 @@ public class NoteBook : MonoBehaviour
             StartCoroutine(AnimateHighlightEntry(dislikeObj));
         }
     }
+    #endregion
 
+    #region UI Animation
+    /// <summary>
+    /// Animates the highlight effect for a newly discovered entry.
+    /// </summary>
     private IEnumerator AnimateHighlightEntry(GameObject entry)
     {
         TextMeshProUGUI text = entry.GetComponentInChildren<TextMeshProUGUI>();
@@ -166,9 +185,11 @@ public class NoteBook : MonoBehaviour
             text.color = originalColor;
         }
     }
+    #endregion
 
+    #region Notebook Initialization & UI Management
     /// <summary>
-    /// Sets up the notebook with the current bachelor's information
+    /// Sets up the notebook with the current bachelor's information.
     /// </summary>
     private void InitializeNotebook()
     {
@@ -225,7 +246,7 @@ public class NoteBook : MonoBehaviour
     }
 
     /// <summary>
-    /// Updates the visibility of the locked info text based on discovery status
+    /// Updates the visibility of the locked info text based on discovery status.
     /// </summary>
     private void UpdateVisibility()
     {
@@ -241,7 +262,7 @@ public class NoteBook : MonoBehaviour
     }
 
     /// <summary>
-    /// Checks if any preference has been discovered
+    /// Checks if any preference has been discovered.
     /// </summary>
     private bool HasAnyPreferenceDiscovered()
     {
@@ -270,7 +291,7 @@ public class NoteBook : MonoBehaviour
     }
 
     /// <summary>
-    /// Clears all existing entries
+    /// Clears all existing entries.
     /// </summary>
     private void ClearEntries()
     {
@@ -287,9 +308,11 @@ public class NoteBook : MonoBehaviour
         dislikeEntryObjects.Clear();
         isInitialized = false;
     }
+    #endregion
 
+    #region Public API
     /// <summary>
-    /// Public method to switch to a different bachelor
+    /// Public method to switch to a different bachelor.
     /// </summary>
     public void SetBachelor(NewBachelorSO bachelor)
     {
@@ -342,9 +365,11 @@ public class NoteBook : MonoBehaviour
         // Mark as uninitialized so it will rebuild when needed
         isInitialized = false;
     }
+    #endregion
 
+    #region Entry Creation
     /// <summary>
-    /// Creates an entry for a discovered preference
+    /// Creates an entry for a discovered preference.
     /// </summary>
     private void CreateEntryForPreference(NewBachelorSO.BachelorPreference preference)
     {
@@ -373,7 +398,7 @@ public class NoteBook : MonoBehaviour
     }
 
     /// <summary>
-    /// Creates a like entry
+    /// Creates a like entry.
     /// </summary>
     private void CreateLikeEntry(NewBachelorSO.BachelorPreference like)
     {
@@ -416,7 +441,7 @@ public class NoteBook : MonoBehaviour
     }
 
     /// <summary>
-    /// Creates a dislike entry
+    /// Creates a dislike entry.
     /// </summary>
     private void CreateDislikeEntry(NewBachelorSO.BachelorPreference dislike)
     {
@@ -461,7 +486,7 @@ public class NoteBook : MonoBehaviour
     }
 
     /// <summary>
-    /// Refreshes the notebook to create entries for any newly discovered preferences
+    /// Refreshes the notebook to create entries for any newly discovered preferences.
     /// </summary>
     private void RefreshDiscoveredEntries()
     {
@@ -492,8 +517,14 @@ public class NoteBook : MonoBehaviour
             }
         }
     }
+    #endregion
 
+    #region Debug Utilities
     // Debug methods for testing
+
+    /// <summary>
+    /// Debug utility to discover all preferences for the current bachelor.
+    /// </summary>
     [ContextMenu("Debug: Discover All Preferences")]
     public void DebugDiscoverAllPreferences()
     {
@@ -508,6 +539,9 @@ public class NoteBook : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Debug utility to log the current state of the notebook and bachelor.
+    /// </summary>
     [ContextMenu("Debug: Log Current State")]
     public void DebugLogCurrentState()
     {
@@ -542,4 +576,24 @@ public class NoteBook : MonoBehaviour
             }
         }
     }
+
+    /// <summary>
+    /// Debug utility to reset all preferences for the current bachelor.
+    /// </summary>
+    [ContextMenu("Debug: Reset All Preferences")]
+    public void DebugResetAllPreferences()
+    {
+        if (currentBachelor != null)
+        {
+            currentBachelor.EnsureUndiscoveredState();
+            Debug.Log($"Reset all preferences for {currentBachelor._name}");
+            isInitialized = false;
+            InitializeNotebook();
+        }
+        else
+        {
+            Debug.LogWarning("No bachelor assigned to reset preferences for!");
+        }
+    }
+    #endregion
 }

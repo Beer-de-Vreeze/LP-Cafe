@@ -1585,6 +1585,34 @@ public class DialogueDisplay : MonoBehaviour
 
     #endregion
 
+    // ===================== TESTING =====================
+    /// <summary>
+    /// Test function to jump to the last dialogue node in the current dialogue tree.
+    /// Sets _dialogue.m_dialogue to the last node and displays it.
+    /// </summary>
+    [ContextMenu("Go To Last Dialogue (Test)")]
+    public void GoToLastDialogueForTest()
+    {
+        if (_dialogue == null || _dialogue.m_dialogue == null)
+        {
+            Debug.LogWarning("No dialogue loaded to traverse.");
+            return;
+        }
+        var current = _dialogue.m_dialogue;
+        // Traverse until there are no further choices or next dialogues
+        while (
+            current.m_dialogueChoiceData != null
+            && current.m_dialogueChoiceData.Count > 0
+            && current.m_dialogueChoiceData[0].m_nextDialogue != null
+        )
+        {
+            current = current.m_dialogueChoiceData[0].m_nextDialogue;
+        }
+        _dialogue.m_dialogue = current;
+        ShowDialogue();
+        Debug.Log("Jumped to last dialogue node for test.");
+    }
+
     private void ResetSaveAndReturnToMainMenu()
     {
         Debug.Log("[TEST] Resetting save and returning to Main Menu");
@@ -1595,38 +1623,5 @@ public class DialogueDisplay : MonoBehaviour
             Debug.Log("[TEST] Save file deleted: " + path);
         }
         UnityEngine.SceneManagement.SceneManager.LoadScene("Main Menu");
-    }
-
-    [ContextMenu("Debug: Reset All Discovered Preferences")]
-    public void DebugResetAllDiscoveredPreferences()
-    {
-        if (_bachelor == null)
-        {
-            Debug.LogWarning("No bachelor assigned to reset preferences.");
-            return;
-        }
-
-        if (_bachelor._likes != null)
-        {
-            for (int i = 0; i < _bachelor._likes.Length; i++)
-            {
-                _bachelor._likes[i].discovered = false;
-            }
-        }
-        if (_bachelor._dislikes != null)
-        {
-            for (int i = 0; i < _bachelor._dislikes.Length; i++)
-            {
-                _bachelor._dislikes[i].discovered = false;
-            }
-        }
-
-        Debug.Log($"All discovered preferences reset for bachelor: {_bachelor._name}");
-
-        // Optionally, update the notebook if present
-        if (_noteBook != null)
-        {
-            _noteBook.ResetNotebookEntries();
-        }
     }
 }
