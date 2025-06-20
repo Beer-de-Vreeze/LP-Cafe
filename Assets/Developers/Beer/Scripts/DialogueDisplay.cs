@@ -548,16 +548,26 @@ public class DialogueDisplay : MonoBehaviour
             var choices = conditionNode.m_dialogueChoiceData;
             if (choices != null && choices.Count > 0)
             {
-                int pathIndex = conditionMet ? 0 : 1;
-
-                if (pathIndex < choices.Count && choices[pathIndex].m_nextDialogue != null)
+                // Find the correct choice by label ("True" or "False")
+                string resultLabel = conditionMet ? "True" : "False";
+                var nextChoice = choices.Find(c => c.m_dialogueChoiceText == resultLabel);
+                if (nextChoice != null && nextChoice.m_nextDialogue != null)
                 {
-                    _dialogue.m_dialogue = choices[pathIndex].m_nextDialogue;
+                    _dialogue.m_dialogue = nextChoice.m_nextDialogue;
                     ShowDialogue();
                 }
                 else
                 {
-                    Debug.LogError($"No valid path found for condition result: {conditionMet}");
+                    // Fallback: if only one output, use it regardless of label
+                    if (choices.Count == 1 && choices[0].m_nextDialogue != null)
+                    {
+                        _dialogue.m_dialogue = choices[0].m_nextDialogue;
+                        ShowDialogue();
+                    }
+                    else
+                    {
+                        Debug.LogError($"No valid path found for condition result: {conditionMet}");
+                    }
                 }
             }
         }

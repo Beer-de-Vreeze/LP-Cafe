@@ -165,31 +165,46 @@ public class NoteBook : MonoBehaviour
             return;
         }
 
+        Debug.Log($"[NoteBook] Initializing notebook for bachelor: {currentBachelor._name}");
         // Clear any existing entries
         ClearEntries();
 
         // Only create entries for already discovered preferences
         if (currentBachelor._likes != null && likesContainer != null)
         {
+            Debug.Log($"[NoteBook] Likes count: {currentBachelor._likes.Length}");
             foreach (var like in currentBachelor._likes)
             {
+                Debug.Log($"[NoteBook] Like: '{like.description}', discovered: {like.discovered}");
                 if (like.discovered)
                 {
                     CreateLikeEntry(like);
                 }
             }
         }
+        else
+        {
+            Debug.LogWarning($"[NoteBook] Likes array or likesContainer is null");
+        }
 
         // Only create entries for already discovered dislikes
         if (currentBachelor._dislikes != null && dislikesContainer != null)
         {
+            Debug.Log($"[NoteBook] Dislikes count: {currentBachelor._dislikes.Length}");
             foreach (var dislike in currentBachelor._dislikes)
             {
+                Debug.Log(
+                    $"[NoteBook] Dislike: '{dislike.description}', discovered: {dislike.discovered}"
+                );
                 if (dislike.discovered)
                 {
                     CreateDislikeEntry(dislike);
                 }
             }
+        }
+        else
+        {
+            Debug.LogWarning($"[NoteBook] Dislikes array or dislikesContainer is null");
         }
 
         UpdateVisibility();
@@ -363,12 +378,21 @@ public class NoteBook : MonoBehaviour
     private void CreateLikeEntry(NewBachelorSO.BachelorPreference like)
     {
         if (likesContainer == null || likeEntryPrefab == null)
+        {
+            Debug.LogWarning(
+                $"[NoteBook] likesContainer or likeEntryPrefab is null. Cannot create like entry for '{like.description}'"
+            );
             return;
+        }
 
         // Don't create if already exists
         if (likeEntryObjects.ContainsKey(like.description))
+        {
+            Debug.Log($"[NoteBook] Like entry for '{like.description}' already exists. Skipping.");
             return;
+        }
 
+        Debug.Log($"[NoteBook] Creating like entry for '{like.description}'");
         GameObject entry = Instantiate(likeEntryPrefab, likesContainer);
         TextMeshProUGUI textComponent = entry.GetComponentInChildren<TextMeshProUGUI>();
         if (textComponent != null)
@@ -397,12 +421,23 @@ public class NoteBook : MonoBehaviour
     private void CreateDislikeEntry(NewBachelorSO.BachelorPreference dislike)
     {
         if (dislikesContainer == null || dislikeEntryPrefab == null)
+        {
+            Debug.LogWarning(
+                $"[NoteBook] dislikesContainer or dislikeEntryPrefab is null. Cannot create dislike entry for '{dislike.description}'"
+            );
             return;
+        }
 
         // Don't create if already exists
         if (dislikeEntryObjects.ContainsKey(dislike.description))
+        {
+            Debug.Log(
+                $"[NoteBook] Dislike entry for '{dislike.description}' already exists. Skipping."
+            );
             return;
+        }
 
+        Debug.Log($"[NoteBook] Creating dislike entry for '{dislike.description}'");
         GameObject entry = Instantiate(dislikeEntryPrefab, dislikesContainer);
         TextMeshProUGUI textComponent = entry.GetComponentInChildren<TextMeshProUGUI>();
         if (textComponent != null)

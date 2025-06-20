@@ -251,14 +251,19 @@ namespace DS.Elements
             );
             boolContainer.Add(boolVarField);
 
-            // Expected boolean value toggle
-            var boolToggle = new Toggle("Expected Value") { value = m_boolValue };
-            boolToggle.RegisterValueChangedCallback(evt =>
+            // Expected boolean value dropdown
+            var boolValueDropdown = new DropdownField(
+                "Expected Value",
+                new List<string> { "True", "False" },
+                m_boolValue ? 0 : 1
+            );
+            boolValueDropdown.value = m_boolValue ? "True" : "False";
+            boolValueDropdown.RegisterValueChangedCallback(evt =>
             {
-                m_boolValue = evt.newValue;
+                m_boolValue = evt.newValue == "True";
             });
-            boolToggle.AddToClassList("ds-node__toggle");
-            boolContainer.Add(boolToggle);
+            boolValueDropdown.AddToClassList("ds-node__dropdown");
+            boolContainer.Add(boolValueDropdown);
             #endregion
 
             #region Preference Container
@@ -314,16 +319,28 @@ namespace DS.Elements
             PopulatePreferenceDropdown();
 
             // Create output ports for each choice path
-            foreach (DSChoiceSaveData choice in m_nodeChoices)
+            outputContainer.Clear();
+            // Always create two output ports: True and False, for all condition types
+            // But allow the node to function if only one is present (user can disconnect one in the editor)
+            var existingPorts = outputContainer.Children().ToList();
+            bool hasTrue = existingPorts.Any(p => (p as Port)?.portName == "True");
+            bool hasFalse = existingPorts.Any(p => (p as Port)?.portName == "False");
+
+            if (!hasTrue)
             {
-                // Create a port for this choice path
-                Port choicePort = this.CreatePort(choice.m_choiceTextData);
-
-                // Store the choice data in the port's userData for reference
-                choicePort.userData = choice;
-
-                outputContainer.Add(choicePort);
+                var trueChoice = new DSChoiceSaveData { m_choiceTextData = "True" };
+                Port truePort = this.CreatePort("True");
+                truePort.userData = trueChoice;
+                outputContainer.Add(truePort);
             }
+            if (!hasFalse)
+            {
+                var falseChoice = new DSChoiceSaveData { m_choiceTextData = "False" };
+                Port falsePort = this.CreatePort("False");
+                falsePort.userData = falseChoice;
+                outputContainer.Add(falsePort);
+            }
+            // If user removed one port, only the remaining port will be present and functional
 
             // Update the visual state of the node
             RefreshExpandedState();
