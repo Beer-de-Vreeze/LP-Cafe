@@ -41,18 +41,34 @@ public class NoteBook : MonoBehaviour
     private Dictionary<string, GameObject> dislikeEntryObjects =
         new Dictionary<string, GameObject>();
     private bool isInitialized = false;
+    private bool isEventRegistered = false;
+
+    private void RegisterBachelorEvents()
+    {
+        if (currentBachelor != null && !isEventRegistered)
+        {
+            currentBachelor.OnPreferenceDiscovered += HandlePreferenceDiscovered;
+            isEventRegistered = true;
+        }
+    }
+
+    private void UnregisterBachelorEvents()
+    {
+        if (currentBachelor != null && isEventRegistered)
+        {
+            currentBachelor.OnPreferenceDiscovered -= HandlePreferenceDiscovered;
+            isEventRegistered = false;
+        }
+    }
 
     void Awake()
     {
-        // Register for bachelor events if available
-        if (currentBachelor != null)
-        {
-            currentBachelor.OnPreferenceDiscovered += HandlePreferenceDiscovered;
-        }
+        RegisterBachelorEvents();
     }
 
     void OnEnable()
     {
+        RegisterBachelorEvents();
         if (currentBachelor != null)
         {
             if (!isInitialized)
@@ -70,20 +86,17 @@ public class NoteBook : MonoBehaviour
 
     void OnDisable()
     {
-        // Extra cleanup if needed
+        UnregisterBachelorEvents();
     }
 
     void OnDestroy()
     {
-        // Unregister from events
-        if (currentBachelor != null)
-        {
-            currentBachelor.OnPreferenceDiscovered -= HandlePreferenceDiscovered;
-        }
+        UnregisterBachelorEvents();
     }
 
     private void HandlePreferenceDiscovered(NewBachelorSO.BachelorPreference preference)
     {
+        Debug.Log($"[NoteBook] HandlePreferenceDiscovered called for: {preference.description}");
         // Create the entry when it's discovered
         CreateEntryForPreference(preference);
 
@@ -281,23 +294,13 @@ public class NoteBook : MonoBehaviour
     public void SetBachelor(NewBachelorSO bachelor)
     {
         // Unregister from old bachelor events
-        if (currentBachelor != null)
-        {
-            currentBachelor.OnPreferenceDiscovered -= HandlePreferenceDiscovered;
-        }
-
+        UnregisterBachelorEvents();
         currentBachelor = bachelor;
-
         // Register for new bachelor events
-        if (currentBachelor != null)
-        {
-            currentBachelor.OnPreferenceDiscovered += HandlePreferenceDiscovered;
-
-            // Only reset discoveries if this is a completely new bachelor setup
-            // Comment out the line below if you want to preserve discovered preferences
-            // currentBachelor.EnsureUndiscoveredState();
-        }
-
+        RegisterBachelorEvents();
+        // Only reset discoveries if this is a completely new bachelor setup
+        // Comment out the line below if you want to preserve discovered preferences
+        // currentBachelor.EnsureUndiscoveredState();
         // Re-initialize with the new bachelor
         isInitialized = false;
         InitializeNotebook();
@@ -309,10 +312,7 @@ public class NoteBook : MonoBehaviour
     public void ClearBachelor()
     {
         // Unregister from current bachelor events
-        if (currentBachelor != null)
-        {
-            currentBachelor.OnPreferenceDiscovered -= HandlePreferenceDiscovered;
-        }
+        UnregisterBachelorEvents();
         // Clear all UI entries
         ClearEntries();
         // Hide locked info text

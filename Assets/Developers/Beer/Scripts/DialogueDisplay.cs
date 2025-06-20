@@ -452,6 +452,11 @@ public class DialogueDisplay : MonoBehaviour
         {
             Debug.LogWarning("Bachelor reference is null when setting dialogue!");
         }
+        // Ensure notebook is updated with the new bachelor
+        if (_noteBook != null)
+        {
+            _noteBook.SetBachelor(bachelor);
+        }
         ShowDialogue();
     }
 
@@ -475,6 +480,12 @@ public class DialogueDisplay : MonoBehaviour
 
             // Set up the love meter UI component
             EnsureLoveMeterSetup();
+        }
+
+        // Ensure notebook is updated with the new bachelor
+        if (_noteBook != null)
+        {
+            _noteBook.SetBachelor(bachelor);
         }
 
         ShowDialogue();
@@ -1584,5 +1595,38 @@ public class DialogueDisplay : MonoBehaviour
             Debug.Log("[TEST] Save file deleted: " + path);
         }
         UnityEngine.SceneManagement.SceneManager.LoadScene("Main Menu");
+    }
+
+    [ContextMenu("Debug: Reset All Discovered Preferences")]
+    public void DebugResetAllDiscoveredPreferences()
+    {
+        if (_bachelor == null)
+        {
+            Debug.LogWarning("No bachelor assigned to reset preferences.");
+            return;
+        }
+
+        if (_bachelor._likes != null)
+        {
+            for (int i = 0; i < _bachelor._likes.Length; i++)
+            {
+                _bachelor._likes[i].discovered = false;
+            }
+        }
+        if (_bachelor._dislikes != null)
+        {
+            for (int i = 0; i < _bachelor._dislikes.Length; i++)
+            {
+                _bachelor._dislikes[i].discovered = false;
+            }
+        }
+
+        Debug.Log($"All discovered preferences reset for bachelor: {_bachelor._name}");
+
+        // Optionally, update the notebook if present
+        if (_noteBook != null)
+        {
+            _noteBook.ResetNotebookEntries();
+        }
     }
 }
