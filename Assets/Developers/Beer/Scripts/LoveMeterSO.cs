@@ -10,10 +10,10 @@ using UnityEngine.Events;
 public class LoveMeterSO : ScriptableObject
 {
     [Tooltip("Maximum love value this bachelor can reach")]
-    public int _maxLove = 100;
+    public int _maxLove = 5;
 
     [Tooltip("Current love value")]
-    public int _currentLove = 0;
+    public int _currentLove;
 
     [System.NonSerialized]
     public UnityEvent<int> LoveChangedEvent;
@@ -21,7 +21,7 @@ public class LoveMeterSO : ScriptableObject
     public virtual void OnEnable()
     {
         // Initialize the love value when the scriptable object is enabled
-        _currentLove = 0;
+        _currentLove = 3;
 
         // Initialize the event if it doesn't exist yet
         if (LoveChangedEvent == null)

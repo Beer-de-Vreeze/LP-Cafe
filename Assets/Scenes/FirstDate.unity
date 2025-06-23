@@ -162,6 +162,8 @@ MonoBehaviour:
   m_dialogue: {fileID: 33582899}
   m_dialogueCanvas: {fileID: 1071829273}
   m_dialogueDisplay: {fileID: 33582898}
+  currentlyDating: 0
+  m_dialogueObject: {fileID: 0}
 --- !u!1001 &205808323
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -803,6 +805,10 @@ PrefabInstance:
       propertyPath: _choicesParent
       value: 
       objectReference: {fileID: 1759242599}
+    - target: {fileID: 3952595216175766055, guid: a45930d7ad5ece64d8d27e47bbcbf4a6, type: 3}
+      propertyPath: _dialogueCanvas
+      value: 
+      objectReference: {fileID: 1071829273}
     - target: {fileID: 3959460017288424381, guid: a45930d7ad5ece64d8d27e47bbcbf4a6, type: 3}
       propertyPath: m_Name
       value: Dialogue

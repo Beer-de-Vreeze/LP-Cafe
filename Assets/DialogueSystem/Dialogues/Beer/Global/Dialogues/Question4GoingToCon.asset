@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8656580f96a63714d889c7daeb915b7a, type: 3}
+  m_Name: Question4GoingToCon
+  m_EditorClassIdentifier: 
+  <m_dialogueNameData>k__BackingField: Question4GoingToCon
+  <m_dialogueTextData>k__BackingField: Are you going to furcon? Comiccon? renaissance
+    fare? All of them????
+  <m_dialogueChoiceData>k__BackingField:
+  - <m_dialogueChoiceText>k__BackingField: "I ehm\u2026 please don't ever ask me
+      that again"
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 73884e81cecd15444bc19694178b2f26, type: 2}
+  - <m_dialogueChoiceText>k__BackingField: going to what now? what even is that?
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: adb6c058968b4324eadb6c6390ed4b57, type: 2}
+  - <m_dialogueChoiceText>k__BackingField: Yes I'm going to a renaissance fare somewhere
+      in august.
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: b838cb65fd4bf5845b4325515be144bc, type: 2}
+  - <m_dialogueChoiceText>k__BackingField: That's not really for me
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 98c08421cadc9e048b19abc8a9adf025, type: 2}
+  <m_bachelorImageData>k__BackingField: {fileID: 0}
+  <m_dialogueAudioData>k__BackingField: {fileID: 0}
+  <m_dialogueTypeData>k__BackingField: 1
+  <m_isStartingDialogueData>k__BackingField: 1
+  <m_propertyToCheckData>k__BackingField: 
+  <m_comparisonTypeData>k__BackingField: 
+  <m_comparisonValueData>k__BackingField: 
+  <m_operationTypeData>k__BackingField: 0
+  <m_variableNameData>k__BackingField: 
+  <m_valueToSetData>k__BackingField: 
+  <m_loveScoreAmountData>k__BackingField: 0
+  <m_boolValueData>k__BackingField: 0
+  <m_loveMeterData>k__BackingField: {fileID: 0}
+  <m_bachelorData>k__BackingField: {fileID: 0}
+  <m_isLikePreferenceData>k__BackingField: 0
+  <m_selectedPreferenceData>k__BackingField: 

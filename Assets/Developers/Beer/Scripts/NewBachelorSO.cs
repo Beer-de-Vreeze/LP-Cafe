@@ -37,6 +37,9 @@ public class NewBachelorSO : ScriptableObject
     [SerializeField]
     public string _nextSceneName;
 
+    // Track if this SO has been initialized in play mode to prevent repeated resets
+    private bool hasBeenInitializedInPlayMode = false;
+
     public event Action<BachelorPreference> OnPreferenceDiscovered;
 
     [Serializable]
@@ -147,11 +150,12 @@ public class NewBachelorSO : ScriptableObject
     /// </summary>
     private void OnEnable()
     {
-        // Ensure preferences start undiscovered when the ScriptableObject is loaded/enabled
-        // This prevents inspector-set discovered states from persisting
-        if (Application.isPlaying)
+        // Only reset discoveries at the very start of the game, not every time the SO is enabled
+        // This prevents discovered preferences from being reset during gameplay
+        if (Application.isPlaying && !hasBeenInitializedInPlayMode)
         {
             EnsureUndiscoveredState();
+            hasBeenInitializedInPlayMode = true;
         }
     }
 
@@ -178,5 +182,15 @@ public class NewBachelorSO : ScriptableObject
 
         _isLikeDiscovered = false;
         _isDislikeDiscovered = false;
+    }
+
+    /// <summary>
+    /// For testing purposes - discovers all preferences
+    /// </summary>
+    [ContextMenu("Discover All Preferences (Testing)")]
+    public void DiscoverAllPreferencesForTesting()
+    {
+        DiscoverAllLikes();
+        DiscoverAllDislikes();
     }
 }

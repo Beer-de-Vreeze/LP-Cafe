@@ -492,6 +492,14 @@ namespace DS.Utilities
             }
         }
 
+        /*                if (nodeSaveData.m_dialogueTypeData == DSDialogueType.Condition)
+                {
+                    node.m_propertyToCheck = nodeSaveData.m_nodePropertyToCheckData;
+                    node.m_comparisonType = nodeSaveData.m_nodeComparisonTypeData;
+                    node.m_comparisonValue = nodeSaveData.m_nodeComparisonValueData;
+                    node.m_comparisonType = nodeSaveData.m_nodeComparisonTypeData;
+                }*/
+
         private static void LoadNodes(List<DSNodeSaveData> m_graphNodesData)
         {
             foreach (DSNodeSaveData nodeSaveData in m_graphNodesData)
@@ -514,15 +522,9 @@ namespace DS.Utilities
                     node.m_nodeText = nodeSaveData.m_nodeTextData;
                 }
 
-                if (nodeSaveData.m_dialogueTypeData == DSDialogueType.Condition)
-                {
-                    node.m_propertyToCheck = nodeSaveData.m_nodePropertyToCheckData;
-                    node.m_comparisonType = nodeSaveData.m_nodeComparisonTypeData;
-                    node.m_comparisonValue = nodeSaveData.m_nodeComparisonValueData;
-                    node.m_comparisonType = nodeSaveData.m_nodeComparisonTypeData;
-                }
 
-                if(nodeSaveData.m_dialogueTypeData == DSDialogueType.Setter)
+
+                if(nodeSaveData.m_dialogueTypeData == DSDialogueType.Setter || nodeSaveData.m_dialogueTypeData == DSDialogueType.Condition)
                 {
                     node.m_operationType = nodeSaveData.m_nodeSetterOperationTypeData;
                     node.m_valueToSet = nodeSaveData.m_nodeValueToSetData;

@@ -26,7 +26,7 @@ MonoBehaviour:
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 6ca509acd7e0c9b4f98a11ba39397b20, type: 2}
   - <m_dialogueChoiceText>k__BackingField: I like a good sappy romance.
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 88b273720e6f9cc49a9015f2ff5d65bb, type: 2}
-  <m_bachelorImageData>k__BackingField: {fileID: 0}
+  <m_bachelorImageData>k__BackingField: {fileID: 21300000, guid: 1b752948b3bd324418758c36f01fb7d3, type: 3}
   <m_dialogueAudioData>k__BackingField: {fileID: 0}
   <m_dialogueTypeData>k__BackingField: 1
   <m_isStartingDialogueData>k__BackingField: 1
