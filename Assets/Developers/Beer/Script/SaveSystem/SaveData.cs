@@ -1,26 +1,12 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
 public class SaveData
 {
-    //input whatever you want
-    [SerializeField]
-    public int _succesfulDateCount;
+    //input whatever you wan
 
     [SerializeField]
-    public int _failedDateCount;
+    public List<string> DatedBachelors = new List<string>();
 
-    // Public property to access the successful date count
-    public int SuccessfulDateCount
-    {
-        get { return _succesfulDateCount; }
-        set { _succesfulDateCount = value; }
-    }
-
-    // Public property to access the failed date count
-    public int FailedDateCount
-    {
-        get { return _failedDateCount; }
-        set { _failedDateCount = value; }
-    }
 }

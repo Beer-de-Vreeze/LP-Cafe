@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8656580f96a63714d889c7daeb915b7a, type: 3}
+  m_Name: QuestionsPets
+  m_EditorClassIdentifier: 
+  <m_dialogueNameData>k__BackingField: QuestionsPets
+  <m_dialogueTextData>k__BackingField: 'Do you have any pets? '
+  <m_dialogueChoiceData>k__BackingField:
+  - <m_dialogueChoiceText>k__BackingField: I have five cats and I love all of my
+      furyball children.
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: f9cef4d5874bfef4cb62c9d0947fe53c, type: 2}
+  - <m_dialogueChoiceText>k__BackingField: I don't like animals...
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: b618b478a16f6264792f76dc9500c0e5, type: 2}
+  - <m_dialogueChoiceText>k__BackingField: I have this super rare axanthic VPI ballpython
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: d4856947f20a6684da9c9a2227de68f8, type: 2}
+  - <m_dialogueChoiceText>k__BackingField: I don't have any.... but I love animals,
+      mostly dogs and cats
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 978c45cfc869e56419791a2baba12e1b, type: 2}
+  <m_bachelorImageData>k__BackingField: {fileID: 0}
+  <m_dialogueAudioData>k__BackingField: {fileID: 0}
+  <m_dialogueTypeData>k__BackingField: 1
+  <m_isStartingDialogueData>k__BackingField: 1
+  <m_propertyToCheckData>k__BackingField: 
+  <m_comparisonTypeData>k__BackingField: 
+  <m_comparisonValueData>k__BackingField: 
+  <m_operationTypeData>k__BackingField: 0
+  <m_variableNameData>k__BackingField: 
+  <m_valueToSetData>k__BackingField: 
+  <m_loveScoreAmountData>k__BackingField: 0
+  <m_boolValueData>k__BackingField: 0
+  <m_loveMeterData>k__BackingField: {fileID: 0}
+  <m_bachelorData>k__BackingField: {fileID: 0}
+  <m_isLikePreferenceData>k__BackingField: 0
+  <m_selectedPreferenceData>k__BackingField: 

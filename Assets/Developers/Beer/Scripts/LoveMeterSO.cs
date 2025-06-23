@@ -10,10 +10,10 @@ using UnityEngine.Events;
 public class LoveMeterSO : ScriptableObject
 {
     [Tooltip("Maximum love value this bachelor can reach")]
-    public int _maxLove = 100;
+    public int _maxLove = 5;
 
     [Tooltip("Current love value")]
-    public int _currentLove = 0;
+    public int _currentLove;
 
     [System.NonSerialized]
     public UnityEvent<int> LoveChangedEvent;
@@ -21,23 +21,16 @@ public class LoveMeterSO : ScriptableObject
     public virtual void OnEnable()
     {
         // Initialize the love value when the scriptable object is enabled
-        _currentLove = 0;
+        _currentLove = 3;
 
         // Initialize the event if it doesn't exist yet
         if (LoveChangedEvent == null)
         {
             LoveChangedEvent = new UnityEvent<int>();
         }
-    }
+    } // Note: ScriptableObjects don't have Update() method.
 
-    private void Update()
-    {
-        if (_currentLove < 0)
-        {
-            _currentLove = 0;
-            LoveChangedEvent.Invoke(_currentLove);
-        }
-    }
+    // Validation is handled in the methods that modify _currentLove instead.
 
     /// <summary>
     /// Increase the love value by the specified amount

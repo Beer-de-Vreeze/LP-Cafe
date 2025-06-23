@@ -273,17 +273,22 @@ namespace DS.Utilities
                     node.m_nodeDialogueType,
                     node.IsStartingNode()
                 );
-            }
-
-            else if (node.m_nodeDialogueType == DSDialogueType.Condition)
+            }            else if (node.m_nodeDialogueType == DSDialogueType.Condition)
             {
-                dialogue.InitializeConditionNode(
+                dialogue.InitializeSetterNode(
                     node.m_nodeDialogueName,
-                    node.m_propertyToCheck,
-                    node.m_comparisonType,
-                    node.m_comparisonValue,
+                    node.m_operationType,
                     ConvertNodeChoics(node.m_nodeChoices),
+                    node.m_valueToSet,
+                    node.m_variableName,
+                    node.m_loveScoreAmount,
+                    node.m_boolValue,
                     node.m_nodeDialogueType,
+                    node.m_loveMeter,
+                    node.m_bachelor,
+                    node.m_isLikePreference,
+                    node.m_selectedPreference,
+                    node.m_enumSetter,
                     node.IsStartingNode()
                 );
             }
@@ -487,6 +492,14 @@ namespace DS.Utilities
             }
         }
 
+        /*                if (nodeSaveData.m_dialogueTypeData == DSDialogueType.Condition)
+                {
+                    node.m_propertyToCheck = nodeSaveData.m_nodePropertyToCheckData;
+                    node.m_comparisonType = nodeSaveData.m_nodeComparisonTypeData;
+                    node.m_comparisonValue = nodeSaveData.m_nodeComparisonValueData;
+                    node.m_comparisonType = nodeSaveData.m_nodeComparisonTypeData;
+                }*/
+
         private static void LoadNodes(List<DSNodeSaveData> m_graphNodesData)
         {
             foreach (DSNodeSaveData nodeSaveData in m_graphNodesData)
@@ -509,15 +522,9 @@ namespace DS.Utilities
                     node.m_nodeText = nodeSaveData.m_nodeTextData;
                 }
 
-                if (nodeSaveData.m_dialogueTypeData == DSDialogueType.Condition)
-                {
-                    node.m_propertyToCheck = nodeSaveData.m_nodePropertyToCheckData;
-                    node.m_comparisonType = nodeSaveData.m_nodeComparisonTypeData;
-                    node.m_comparisonValue = nodeSaveData.m_nodeComparisonValueData;
-                    node.m_comparisonType = nodeSaveData.m_nodeComparisonTypeData;
-                }
 
-                if(nodeSaveData.m_dialogueTypeData == DSDialogueType.Setter)
+
+                if(nodeSaveData.m_dialogueTypeData == DSDialogueType.Setter || nodeSaveData.m_dialogueTypeData == DSDialogueType.Condition)
                 {
                     node.m_operationType = nodeSaveData.m_nodeSetterOperationTypeData;
                     node.m_valueToSet = nodeSaveData.m_nodeValueToSetData;
