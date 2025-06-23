@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: BeerLoveMeter
   m_EditorClassIdentifier: 
   _maxLove: 5
-  _currentLove: 0
+  _currentLove: 3
