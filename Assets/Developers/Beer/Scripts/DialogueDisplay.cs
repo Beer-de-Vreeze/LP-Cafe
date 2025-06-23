@@ -1570,4 +1570,28 @@ public class DialogueDisplay : MonoBehaviour
     }
 
     #endregion
+    #region Test
+      [ContextMenu("Go To Last Dialogue (Test)")]
+    public void GoToLastDialogueForTest()
+    {
+        if (_dialogue == null || _dialogue.m_dialogue == null)
+        {
+            Debug.LogWarning("No dialogue loaded to traverse.");
+            return;
+        }
+        var current = _dialogue.m_dialogue;
+        // Traverse until there are no further choices or next dialogues
+        while (
+            current.m_dialogueChoiceData != null
+            && current.m_dialogueChoiceData.Count > 0
+            && current.m_dialogueChoiceData[0].m_nextDialogue != null
+        )
+        {
+            current = current.m_dialogueChoiceData[0].m_nextDialogue;
+        }
+        _dialogue.m_dialogue = current;
+        ShowDialogue();
+        Debug.Log("Jumped to last dialogue node for test.");
+    }
+    #endregion
 }
