@@ -216,14 +216,7 @@ public class DialogueDisplay : MonoBehaviour
         // Playtest reset: Press '=' to clear save and return to Main Menu
         if (Input.GetKeyDown(KeyCode.Equals))
         {
-            Debug.Log("[TEST] Resetting save and returning to Main Menu");
-            string path = System.IO.Path.Combine(Application.persistentDataPath, "save.json");
-            if (System.IO.File.Exists(path))
-            {
-                System.IO.File.Delete(path);
-                Debug.Log("[TEST] Save file deleted: " + path);
-            }
-            UnityEngine.SceneManagement.SceneManager.LoadScene("Main Menu");
+            ResetSaveAndReturnToMainMenu();
             return;
         }
 
@@ -459,6 +452,11 @@ public class DialogueDisplay : MonoBehaviour
         {
             Debug.LogWarning("Bachelor reference is null when setting dialogue!");
         }
+        // Ensure notebook is updated with the new bachelor
+        if (_noteBook != null)
+        {
+            _noteBook.SetBachelor(bachelor);
+        }
         ShowDialogue();
     }
 
@@ -482,6 +480,12 @@ public class DialogueDisplay : MonoBehaviour
 
             // Set up the love meter UI component
             EnsureLoveMeterSetup();
+        }
+
+        // Ensure notebook is updated with the new bachelor
+        if (_noteBook != null)
+        {
+            _noteBook.SetBachelor(bachelor);
         }
 
         ShowDialogue();
@@ -555,16 +559,26 @@ public class DialogueDisplay : MonoBehaviour
             var choices = conditionNode.m_dialogueChoiceData;
             if (choices != null && choices.Count > 0)
             {
-                int pathIndex = conditionMet ? 0 : 1;
-
-                if (pathIndex < choices.Count && choices[pathIndex].m_nextDialogue != null)
+                // Find the correct choice by label ("True" or "False")
+                string resultLabel = conditionMet ? "True" : "False";
+                var nextChoice = choices.Find(c => c.m_dialogueChoiceText == resultLabel);
+                if (nextChoice != null && nextChoice.m_nextDialogue != null)
                 {
-                    _dialogue.m_dialogue = choices[pathIndex].m_nextDialogue;
+                    _dialogue.m_dialogue = nextChoice.m_nextDialogue;
                     ShowDialogue();
                 }
                 else
                 {
-                    Debug.LogError($"No valid path found for condition result: {conditionMet}");
+                    // Fallback: if only one output, use it regardless of label
+                    if (choices.Count == 1 && choices[0].m_nextDialogue != null)
+                    {
+                        _dialogue.m_dialogue = choices[0].m_nextDialogue;
+                        ShowDialogue();
+                    }
+                    else
+                    {
+                        Debug.LogError($"No valid path found for condition result: {conditionMet}");
+                    }
                 }
             }
         }
@@ -1570,4 +1584,44 @@ public class DialogueDisplay : MonoBehaviour
     }
 
     #endregion
+
+    // ===================== TESTING =====================
+    /// <summary>
+    /// Test function to jump to the last dialogue node in the current dialogue tree.
+    /// Sets _dialogue.m_dialogue to the last node and displays it.
+    /// </summary>
+    [ContextMenu("Go To Last Dialogue (Test)")]
+    public void GoToLastDialogueForTest()
+    {
+        if (_dialogue == null || _dialogue.m_dialogue == null)
+        {
+            Debug.LogWarning("No dialogue loaded to traverse.");
+            return;
+        }
+        var current = _dialogue.m_dialogue;
+        // Traverse until there are no further choices or next dialogues
+        while (
+            current.m_dialogueChoiceData != null
+            && current.m_dialogueChoiceData.Count > 0
+            && current.m_dialogueChoiceData[0].m_nextDialogue != null
+        )
+        {
+            current = current.m_dialogueChoiceData[0].m_nextDialogue;
+        }
+        _dialogue.m_dialogue = current;
+        ShowDialogue();
+        Debug.Log("Jumped to last dialogue node for test.");
+    }
+
+    private void ResetSaveAndReturnToMainMenu()
+    {
+        Debug.Log("[TEST] Resetting save and returning to Main Menu");
+        string path = System.IO.Path.Combine(Application.persistentDataPath, "save.json");
+        if (System.IO.File.Exists(path))
+        {
+            System.IO.File.Delete(path);
+            Debug.Log("[TEST] Save file deleted: " + path);
+        }
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Main Menu");
+    }
 }
