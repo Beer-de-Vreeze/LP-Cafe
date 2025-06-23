@@ -445,7 +445,7 @@ GameObject:
   - component: {fileID: 32085728}
   m_Layer: 0
   m_Name: Simone
-  m_TagString: Bachelor
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1646,7 +1646,7 @@ GameObject:
   - component: {fileID: 200159565}
   m_Layer: 0
   m_Name: Chantal
-  m_TagString: Bachelor
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2734,7 +2734,7 @@ GameObject:
   - component: {fileID: 533133505}
   m_Layer: 0
   m_Name: Beer
-  m_TagString: Bachelor
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6854,7 +6854,7 @@ GameObject:
   - component: {fileID: 1260297390}
   m_Layer: 0
   m_Name: Valorie
-  m_TagString: Bachelor
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10764,7 +10764,7 @@ GameObject:
   - component: {fileID: 1982111747}
   m_Layer: 0
   m_Name: James
-  m_TagString: Bachelor
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
