@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8656580f96a63714d889c7daeb915b7a, type: 3}
+  m_Name: LoveMyCat
+  m_EditorClassIdentifier: 
+  <m_dialogueNameData>k__BackingField: LoveMyCat
+  <m_dialogueTextData>k__BackingField: I love my cat a lot, but she often hunts rodents,
+    which irritates me. I hate rodents... so gross
+  <m_dialogueChoiceData>k__BackingField:
+  - <m_dialogueChoiceText>k__BackingField: Next Dialogue
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 6ed57575ab0fd7b48be89a1f26e63632, type: 2}
+  <m_bachelorImageData>k__BackingField: {fileID: 21300000, guid: dedee01b113aef245a775f2239a733c6, type: 3}
+  <m_dialogueAudioData>k__BackingField: {fileID: 8300000, guid: 0dd86d87cd1fa474ca496964d1a454eb, type: 3}
+  <m_dialogueTypeData>k__BackingField: 0
+  <m_isStartingDialogueData>k__BackingField: 1
+  <m_propertyToCheckData>k__BackingField: 
+  <m_comparisonTypeData>k__BackingField: 
+  <m_comparisonValueData>k__BackingField: 
+  <m_operationTypeData>k__BackingField: 0
+  <m_variableNameData>k__BackingField: 
+  <m_valueToSetData>k__BackingField: 
+  <m_loveScoreAmountData>k__BackingField: 0
+  <m_boolValueData>k__BackingField: 0
+  <m_loveMeterData>k__BackingField: {fileID: 0}
+  <m_bachelorData>k__BackingField: {fileID: 0}
+  <m_isLikePreferenceData>k__BackingField: 0
+  <m_selectedPreferenceData>k__BackingField: 

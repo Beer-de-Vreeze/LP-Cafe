@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8656580f96a63714d889c7daeb915b7a, type: 3}
+  m_Name: Job
+  m_EditorClassIdentifier: 
+  <m_dialogueNameData>k__BackingField: Job
+  <m_dialogueTextData>k__BackingField: So what do you do for a living?
+  <m_dialogueChoiceData>k__BackingField:
+  - <m_dialogueChoiceText>k__BackingField: I'm a real estate agent.
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: a15a6ca93a771ea49a6bf35531c0a056, type: 2}
+  - <m_dialogueChoiceText>k__BackingField: I currently work in a fast-food chain
+      uptown.
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: b3368948902097348808efab532c1220, type: 2}
+  - <m_dialogueChoiceText>k__BackingField: I'm an assistant manager at the local
+      hospital.
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 28ed005c6505c824aa1fd11438f5204f, type: 2}
+  - <m_dialogueChoiceText>k__BackingField: At the moment I don't have a job, but
+      I had a life insurance settlement.
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: e8dca7f4ac2a05449b7f658195872481, type: 2}
+  <m_bachelorImageData>k__BackingField: {fileID: 21300000, guid: 84a876f81e079bf40beb58c595c98cf5, type: 3}
+  <m_dialogueAudioData>k__BackingField: {fileID: 8300000, guid: f20a2eb9720a289478edf3d9f0fde3f2, type: 3}
+  <m_dialogueTypeData>k__BackingField: 1
+  <m_isStartingDialogueData>k__BackingField: 1
+  <m_propertyToCheckData>k__BackingField: 
+  <m_comparisonTypeData>k__BackingField: 
+  <m_comparisonValueData>k__BackingField: 
+  <m_operationTypeData>k__BackingField: 0
+  <m_variableNameData>k__BackingField: 
+  <m_valueToSetData>k__BackingField: 
+  <m_loveScoreAmountData>k__BackingField: 0
+  <m_boolValueData>k__BackingField: 0
+  <m_loveMeterData>k__BackingField: {fileID: 0}
+  <m_bachelorData>k__BackingField: {fileID: 0}
+  <m_isLikePreferenceData>k__BackingField: 0
+  <m_selectedPreferenceData>k__BackingField: 

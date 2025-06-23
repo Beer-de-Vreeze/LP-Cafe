@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8656580f96a63714d889c7daeb915b7a, type: 3}
+  m_Name: QuestionsPets
+  m_EditorClassIdentifier: 
+  <m_dialogueNameData>k__BackingField: QuestionsPets
+  <m_dialogueTextData>k__BackingField: 'Do you have any pets? '
+  <m_dialogueChoiceData>k__BackingField:
+  - <m_dialogueChoiceText>k__BackingField: I have five cats and I love all of my
+      furyball children.
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: ce6e292c2f6f5ff4d83ac39bef5a7dde, type: 2}
+  - <m_dialogueChoiceText>k__BackingField: I don't like animals...
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 9d975081306ad584280a1615afa4659e, type: 2}
+  - <m_dialogueChoiceText>k__BackingField: I have this super rare axanthic VPI ballpython
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: fd8bf8b13ac177542b16686573e5ecfb, type: 2}
+  - <m_dialogueChoiceText>k__BackingField: I don't have any.... but I love animals,
+      mostly dogs and cats
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 05fea5db39251e746bb178f1f951faff, type: 2}
+  <m_bachelorImageData>k__BackingField: {fileID: 21300000, guid: dedee01b113aef245a775f2239a733c6, type: 3}
+  <m_dialogueAudioData>k__BackingField: {fileID: 8300000, guid: 0790b48d9d2e20a4eb1d1c75168a04ef, type: 3}
+  <m_dialogueTypeData>k__BackingField: 1
+  <m_isStartingDialogueData>k__BackingField: 1
+  <m_propertyToCheckData>k__BackingField: 
+  <m_comparisonTypeData>k__BackingField: 
+  <m_comparisonValueData>k__BackingField: 
+  <m_operationTypeData>k__BackingField: 0
+  <m_variableNameData>k__BackingField: 
+  <m_valueToSetData>k__BackingField: 
+  <m_loveScoreAmountData>k__BackingField: 0
+  <m_boolValueData>k__BackingField: 0
+  <m_loveMeterData>k__BackingField: {fileID: 0}
+  <m_bachelorData>k__BackingField: {fileID: 0}
+  <m_isLikePreferenceData>k__BackingField: 0
+  <m_selectedPreferenceData>k__BackingField: 
