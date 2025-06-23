@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dafdbd3029b57714ba28974d73bb6956, type: 3}
+  m_Name: FailedDate + Barista
+  m_EditorClassIdentifier: 
+  _name: 
+  _portrait: {fileID: 0}
+  _likes: []
+  _dislikes: []
+  _isLikeDiscovered: 0
+  _isDislikeDiscovered: 0
+  _dialogue: {fileID: 0}
+  _loveMeter: {fileID: 11400000, guid: c18fce8bdce1ff24ab33a75266e564c8, type: 2}
+  _nextSceneName: 
