@@ -17,11 +17,11 @@ MonoBehaviour:
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: "So ehhh\u2026 are you a bank loan? 'Cause
       you got my interest."
-    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 87b95665d594d7b41867220599959411, type: 2}
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 7449e2b693a7ad14b986270edbb4cdc5, type: 2}
   - <m_dialogueChoiceText>k__BackingField: (Order a wine for her.)
-    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: aa2c6ecda27527b43adff39c3bdea4b7, type: 2}
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: df0e3332871e1704ba26d735bdf6b839, type: 2}
   - <m_dialogueChoiceText>k__BackingField: (More painful silence.)
-    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 97e5443eb09e52242bada77d79eed2db, type: 2}
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 4d3033cbb4b3e0b438940ffa17d49aa2, type: 2}
   - <m_dialogueChoiceText>k__BackingField: You better call God, he's missing an angel.
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 042907aeea79e3a4b99073d2d8ecc065, type: 2}
   <m_bachelorImageData>k__BackingField: {fileID: 21300000, guid: 84a876f81e079bf40beb58c595c98cf5, type: 3}

@@ -21,9 +21,9 @@ MonoBehaviour:
     I think Chantal sounds AMAZING.'
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Next Dialogue
-    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 97806a31d429bfc4c87f46c872e5596b, type: 2}
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: da85e7caff65467409f861205789562f, type: 2}
   <m_bachelorImageData>k__BackingField: {fileID: 21300000, guid: 6b65e191be718f247b15d5ed707111df, type: 3}
-  <m_dialogueAudioData>k__BackingField: {fileID: 0}
+  <m_dialogueAudioData>k__BackingField: {fileID: 8300000, guid: 38e760a66e3e52041a2b64299b836067, type: 3}
   <m_dialogueTypeData>k__BackingField: 0
   <m_isStartingDialogueData>k__BackingField: 1
   <m_propertyToCheckData>k__BackingField: 

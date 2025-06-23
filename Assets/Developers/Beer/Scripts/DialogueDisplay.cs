@@ -71,6 +71,14 @@ public class DialogueDisplay : MonoBehaviour
     [SerializeField]
     private Image _bachelorImage;
 
+    /// <summary>Reference to the dialogue canvas for showing/hiding the dialogue UI</summary>
+    [SerializeField]
+    private Canvas _dialogueCanvas;
+
+    /// <summary>Reference to the move canvas for enabling/disabling movement controls</summary>
+    [SerializeField]
+    private Canvas _moveCanvas;
+
     /// <summary>Continue icon that appears when single dialogue finishes</summary>
     [SerializeField]
     private GameObject _continueIcon;
@@ -205,6 +213,20 @@ public class DialogueDisplay : MonoBehaviour
     /// </summary>
     private void Update()
     {
+        // Playtest reset: Press '=' to clear save and return to Main Menu
+        if (Input.GetKeyDown(KeyCode.Equals))
+        {
+            Debug.Log("[TEST] Resetting save and returning to Main Menu");
+            string path = System.IO.Path.Combine(Application.persistentDataPath, "save.json");
+            if (System.IO.File.Exists(path))
+            {
+                System.IO.File.Delete(path);
+                Debug.Log("[TEST] Save file deleted: " + path);
+            }
+            UnityEngine.SceneManagement.SceneManager.LoadScene("Main Menu");
+            return;
+        }
+
         // Allow advancing dialogue if possible, no choices are being shown, and delay is not active
         if (
             _canAdvance
@@ -491,7 +513,9 @@ public class DialogueDisplay : MonoBehaviour
         return dialogue != null
             && dialogue.m_dialogue != null
             && dialogue.m_dialogue.m_dialogueTypeData == DS.Enumerations.DSDialogueType.Setter;
-    }    /// <summary>
+    }
+
+    /// <summary>
     /// Evaluates a condition node and follows the appropriate dialogue path.
     /// Supports value checks, love score checks, boolean checks, and preference discovery checks.
     /// </summary>
@@ -565,7 +589,9 @@ public class DialogueDisplay : MonoBehaviour
         }
 
         bool result = currentValue == expectedValue;
-        Debug.Log($"Value condition: {variableName} == {expectedValue}, Current: {currentValue}, Result: {result}");
+        Debug.Log(
+            $"Value condition: {variableName} == {expectedValue}, Current: {currentValue}, Result: {result}"
+        );
         return result;
     }
 
@@ -606,7 +632,9 @@ public class DialogueDisplay : MonoBehaviour
 
         bool currentBool = bool.TryParse(currentValue, out bool parsedValue) ? parsedValue : false;
         bool result = currentBool == expectedValue;
-        Debug.Log($"Boolean condition: {boolName} == {expectedValue}, Current: {currentBool}, Result: {result}");
+        Debug.Log(
+            $"Boolean condition: {boolName} == {expectedValue}, Current: {currentBool}, Result: {result}"
+        );
         return result;
     }
 
@@ -624,7 +652,8 @@ public class DialogueDisplay : MonoBehaviour
             return false;
         }
 
-        bool isDiscovered = false;        if (isLike && _bachelor._likes != null)
+        bool isDiscovered = false;
+        if (isLike && _bachelor._likes != null)
         {
             for (int i = 0; i < _bachelor._likes.Length; i++)
             {
@@ -647,7 +676,9 @@ public class DialogueDisplay : MonoBehaviour
             }
         }
 
-        Debug.Log($"Preference condition: {prefName} ({(isLike ? "Like" : "Dislike")}) is discovered: {isDiscovered}");
+        Debug.Log(
+            $"Preference condition: {prefName} ({(isLike ? "Like" : "Dislike")}) is discovered: {isDiscovered}"
+        );
         return isDiscovered;
     }
 
@@ -914,7 +945,9 @@ public class DialogueDisplay : MonoBehaviour
         {
             Debug.LogWarning("Selected choice has no valid next dialogue");
         }
-    }    /// <summary>
+    }
+
+    /// <summary>
     /// Checks if a choice would pass its condition requirements.
     /// Used to determine if a choice button should be enabled or disabled.
     /// </summary>
@@ -1293,7 +1326,24 @@ public class DialogueDisplay : MonoBehaviour
     {
         Debug.Log("Come Back Later button clicked - returning to main menu");
         ClearChoices();
+
+        // End the date session to reset bachelor interaction states
+        EndDate();
+
         gameObject.SetActive(false);
+        if (_dialogueCanvas != null)
+        {
+            _dialogueCanvas.enabled = false;
+        }
+        // Enable all BachelorSetter canvases in the scene (for cafe re-entry)
+        var setters = FindObjectsByType<BachelorSetter>(FindObjectsSortMode.None);
+        foreach (var setter in setters)
+        {
+            if (setter != null)
+            {
+                setter.EnableCanvas();
+            }
+        }
     }
 
     /// <summary>
@@ -1316,7 +1366,18 @@ public class DialogueDisplay : MonoBehaviour
         {
             IncrementSuccessfulDateCount();
             Debug.Log("Date completed successfully!");
+            // Mark bachelor as dated and disable their setter
+            MarkBachelorAsDated(_bachelor);
         }
+
+        // Remove bachelor from notebook after date is over
+        if (_noteBook != null)
+        {
+            _noteBook.ClearBachelor();
+        }
+
+        // End the date session to reset bachelor interaction states
+        EndDate();
 
         // Load the next scene
         if (_bachelor != null && !string.IsNullOrEmpty(_bachelor._nextSceneName))
@@ -1336,6 +1397,27 @@ public class DialogueDisplay : MonoBehaviour
             else
             {
                 Debug.Log("No more scenes available");
+            }
+        }
+    }
+
+    // Helper to mark a bachelor as dated and disable their setter
+    private void MarkBachelorAsDated(NewBachelorSO bachelor)
+    {
+        if (bachelor == null)
+            return;
+        _saveData = SaveSystem.Deserialize() ?? new SaveData();
+        if (!_saveData.DatedBachelors.Contains(bachelor.name))
+        {
+            _saveData.DatedBachelors.Add(bachelor.name);
+            SaveSystem.SerializeData(_saveData);
+        }
+        var setters = FindObjectsByType<BachelorSetter>(FindObjectsSortMode.None);
+        foreach (var setter in setters)
+        {
+            if (setter != null && setter.GetBachelor() == bachelor)
+            {
+                setter.DisableSetter();
             }
         }
     }
@@ -1380,18 +1462,6 @@ public class DialogueDisplay : MonoBehaviour
     }
 
     /// <summary>
-    /// Increments the failed date count in save data.
-    /// Called when a date fails or is abandoned.
-    /// </summary>
-    public void IncrementFailedDateCount()
-    {
-        _saveData = SaveSystem.Deserialize() ?? new SaveData();
-        _saveData.FailedDateCount++;
-        SaveSystem.SerializeData(_saveData);
-        Debug.Log($"Failed date count incremented to: {_saveData.FailedDateCount}");
-    }
-
-    /// <summary>
     /// Handles a failed date scenario.
     /// Tracks the failure and returns to the main menu.
     /// </summary>
@@ -1408,9 +1478,17 @@ public class DialogueDisplay : MonoBehaviour
 
         if (isDateScene)
         {
-            IncrementFailedDateCount();
             Debug.Log("Date failure tracked!");
         }
+
+        // Remove bachelor from notebook after date is over
+        if (_noteBook != null)
+        {
+            _noteBook.ClearBachelor();
+        }
+
+        // End the date session to reset bachelor interaction states
+        EndDate();
 
         SceneManager.LoadScene("MainMenu");
     }
@@ -1422,7 +1500,7 @@ public class DialogueDisplay : MonoBehaviour
     public void SyncWithSaveData()
     {
         _saveData = SaveSystem.Deserialize() ?? new SaveData();
-        _saveData.SuccessfulDateCount = _succesfulDateCount;
+        // _saveData.SuccessfulDateCount = _succesfulDateCount; // No longer needed, count is from DatedBachelors
         SaveSystem.SerializeData(_saveData);
         Debug.Log($"Synced successful date count with save data: {_succesfulDateCount}");
     }
@@ -1437,13 +1515,83 @@ public class DialogueDisplay : MonoBehaviour
 
         if (_saveData != null)
         {
-            _succesfulDateCount = _saveData.SuccessfulDateCount;
-            Debug.Log($"Loaded successful date count from save: {_succesfulDateCount}");
+            _succesfulDateCount =
+                _saveData.DatedBachelors != null ? _saveData.DatedBachelors.Count : 0;
+            Debug.Log(
+                $"Loaded successful date count from DatedBachelors list: {_succesfulDateCount}"
+            );
         }
         else
         {
             Debug.Log("No save data found, keeping current successful date count");
         }
+    }
+    #endregion
+
+    #region Date State Management
+    /// <summary>
+    /// Ends the current dating session and notifies any SetBachelor components to reset their state.
+    /// This allows players to interact with bachelors again after a dialogue session ends.
+    /// </summary>
+    public void EndDate()
+    { // Find all SetBachelor components in the scene and reset their dating state
+        SetBachelor[] setBachelorComponents = FindObjectsByType<SetBachelor>(FindObjectsSortMode.None);
+        foreach (SetBachelor setBachelor in setBachelorComponents)
+        {
+            setBachelor.ResetDatingState();
+        }
+
+        // Hide the dialogue canvas
+        if (_dialogueCanvas != null)
+        {
+            _dialogueCanvas.enabled = false;
+        }
+
+        // Hide the love meter
+        if (_loveMeterUI != null)
+        {
+            _loveMeterUI.HideLoveMeter();
+        }
+
+        // Clear any active choices
+        ClearChoices();
+
+        // Reset dialogue advancement state
+        _canAdvance = false;
+        _isDelayActive = false;
+
+        // Hide continue icon
+        if (_continueIcon != null)
+        {
+            _continueIcon.SetActive(false);
+        }
+
+        Debug.Log("[DialogueDisplay] Date ended - bachelor interaction reset");
+    }
+
+    #endregion
+    #region Test
+      [ContextMenu("Go To Last Dialogue (Test)")]
+    public void GoToLastDialogueForTest()
+    {
+        if (_dialogue == null || _dialogue.m_dialogue == null)
+        {
+            Debug.LogWarning("No dialogue loaded to traverse.");
+            return;
+        }
+        var current = _dialogue.m_dialogue;
+        // Traverse until there are no further choices or next dialogues
+        while (
+            current.m_dialogueChoiceData != null
+            && current.m_dialogueChoiceData.Count > 0
+            && current.m_dialogueChoiceData[0].m_nextDialogue != null
+        )
+        {
+            current = current.m_dialogueChoiceData[0].m_nextDialogue;
+        }
+        _dialogue.m_dialogue = current;
+        ShowDialogue();
+        Debug.Log("Jumped to last dialogue node for test.");
     }
     #endregion
 }
