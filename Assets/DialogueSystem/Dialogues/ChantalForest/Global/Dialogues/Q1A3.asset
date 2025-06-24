@@ -19,7 +19,7 @@ MonoBehaviour:
     like someone that enjoys this FILTH'
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Next Dialogue
-    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: b222e292fe9fcd440b179efa60d5dbdd, type: 2}
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 7ebb8c95be72bc7419274492e28b69c4, type: 2}
   <m_bachelorImageData>k__BackingField: {fileID: 0}
   <m_dialogueAudioData>k__BackingField: {fileID: 0}
   <m_dialogueTypeData>k__BackingField: 0

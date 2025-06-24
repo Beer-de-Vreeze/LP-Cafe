@@ -17,7 +17,7 @@ MonoBehaviour:
     up in this cafe down the street.
 
     LP Cafe i think it was called?? You know?
-    that cute coffee place with all the plants.'
+    the cute coffee place with all the plants.'
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Next Dialogue
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: a4d5d134d0b9e6e4ea3a332dfcda10e6, type: 2}

@@ -16,11 +16,11 @@ MonoBehaviour:
   <m_dialogueTextData>k__BackingField: Oh wow... times are rough for you huh...
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Next Dialogue
-    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: e0568ed4ec00eba4aa125938624a0ef4, type: 2}
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 497a605f9636aef43a1f91581ac75034, type: 2}
   <m_bachelorImageData>k__BackingField: {fileID: 21300000, guid: 0e52f8f5bd2a8aa4eae89e6137cf3d06, type: 3}
   <m_dialogueAudioData>k__BackingField: {fileID: 8300000, guid: c18d789f6f2b21649a12e1902f27b4cd, type: 3}
   <m_dialogueTypeData>k__BackingField: 0
-  <m_isStartingDialogueData>k__BackingField: 0
+  <m_isStartingDialogueData>k__BackingField: 1
   <m_propertyToCheckData>k__BackingField: 
   <m_comparisonTypeData>k__BackingField: 
   <m_comparisonValueData>k__BackingField: 

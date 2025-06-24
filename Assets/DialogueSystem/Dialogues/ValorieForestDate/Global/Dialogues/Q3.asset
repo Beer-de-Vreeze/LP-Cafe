@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8656580f96a63714d889c7daeb915b7a, type: 3}
+  m_Name: Q3
+  m_EditorClassIdentifier: 
+  <m_dialogueNameData>k__BackingField: Q3
+  <m_dialogueTextData>k__BackingField: 'These woods suck, there''s like no way I
+    could ride here with a bike. What were you even thinking?
+
+'
+  <m_dialogueChoiceData>k__BackingField:
+  - <m_dialogueChoiceText>k__BackingField: ' I was thinking go touch some grass instead
+      of inhaling gasoline and tripping on adrenaline.'
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 8242643a1912e874f92f5a3a82870873, type: 2}
+  - <m_dialogueChoiceText>k__BackingField: Don't you like the beautiful view?
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: c0b778e40c49c4b48be672cbf2da6bb0, type: 2}
+  - <m_dialogueChoiceText>k__BackingField: Would it help if I say I got you a to
+      go cup of coffee?
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: f15ace75ae8eddb44bf4cc2ad5ecb39a, type: 2}
+  - <m_dialogueChoiceText>k__BackingField: Thought it would be a great spot to drink
+      a bit without being noticed.
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: e68a7a03912994c41bad355bbdaff634, type: 2}
+  <m_bachelorImageData>k__BackingField: {fileID: 0}
+  <m_dialogueAudioData>k__BackingField: {fileID: 0}
+  <m_dialogueTypeData>k__BackingField: 1
+  <m_isStartingDialogueData>k__BackingField: 1
+  <m_propertyToCheckData>k__BackingField: 
+  <m_comparisonTypeData>k__BackingField: 
+  <m_comparisonValueData>k__BackingField: 
+  <m_operationTypeData>k__BackingField: 0
+  <m_variableNameData>k__BackingField: 
+  <m_valueToSetData>k__BackingField: 
+  <m_loveScoreAmountData>k__BackingField: 0
+  <m_boolValueData>k__BackingField: 0
+  <m_loveMeterData>k__BackingField: {fileID: 0}
+  <m_bachelorData>k__BackingField: {fileID: 0}
+  <m_isLikePreferenceData>k__BackingField: 0
+  <m_selectedPreferenceData>k__BackingField: 

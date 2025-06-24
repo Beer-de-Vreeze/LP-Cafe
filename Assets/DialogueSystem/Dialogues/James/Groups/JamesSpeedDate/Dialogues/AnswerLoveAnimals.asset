@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <m_dialogueNameData>k__BackingField: AnswerLoveAnimals
   <m_dialogueTextData>k__BackingField: Oh that's fair, I love cats too. I have a
-    cat named Ernst
+    cat named Ernst.
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Next Dialogue
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: d24348a292695114a9cb717440ea3caa, type: 2}

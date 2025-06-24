@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Q1
   m_EditorClassIdentifier: 
   <m_dialogueNameData>k__BackingField: Q1
-  <m_dialogueTextData>k__BackingField: Dialogue text.
+  <m_dialogueTextData>k__BackingField: What do you even want to do here?!
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Take her to walk further into the forest.
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: ea38c820d2dbea64d8409f72813ac5f9, type: 2}
