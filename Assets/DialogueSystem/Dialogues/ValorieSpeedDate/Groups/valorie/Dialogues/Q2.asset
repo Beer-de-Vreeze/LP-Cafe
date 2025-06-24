@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Q2
   m_EditorClassIdentifier: 
   <m_dialogueNameData>k__BackingField: Q2
-  <m_dialogueTextData>k__BackingField: It's so light in here, I usually don't like
-    all the soft toned colors. How about you?
+  <m_dialogueTextData>k__BackingField: I usually don't like all the soft toned colors.
+    How about you?
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: I absolutely adore everything pink.
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: befad7c00c12a224f80797eb3e076422, type: 2}

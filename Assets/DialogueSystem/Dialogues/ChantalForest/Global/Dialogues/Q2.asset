@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: Q2
   m_EditorClassIdentifier: 
   <m_dialogueNameData>k__BackingField: Q2
-  <m_dialogueTextData>k__BackingField: "Did you at least bring lunch or drinks? \r                                                                
-    Or what was your plan here?"
+  <m_dialogueTextData>k__BackingField: Or what was your plan here?
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Hand her a burger and fries you packed
       earlier for her.

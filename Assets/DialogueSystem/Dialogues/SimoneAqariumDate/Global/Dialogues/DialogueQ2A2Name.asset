@@ -20,7 +20,7 @@ MonoBehaviour:
   <m_bachelorImageData>k__BackingField: {fileID: 0}
   <m_dialogueAudioData>k__BackingField: {fileID: 0}
   <m_dialogueTypeData>k__BackingField: 0
-  <m_isStartingDialogueData>k__BackingField: 0
+  <m_isStartingDialogueData>k__BackingField: 1
   <m_propertyToCheckData>k__BackingField: 
   <m_comparisonTypeData>k__BackingField: 
   <m_comparisonValueData>k__BackingField: 

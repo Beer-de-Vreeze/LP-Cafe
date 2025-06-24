@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: Q1
   m_EditorClassIdentifier: 
   <m_dialogueNameData>k__BackingField: Q1
-  <m_dialogueTextData>k__BackingField: Looks like a sick training spot, high up and
-    you have to battle the wind, no room for mistakes!
+  <m_dialogueTextData>k__BackingField: Looks like a sick training spot.
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Ehh- I don't really train though.
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 2551ea7e3021c1a44b1ae8ad45a27712, type: 2}

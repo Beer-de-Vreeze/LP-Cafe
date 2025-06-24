@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: Q2
   m_EditorClassIdentifier: 
   <m_dialogueNameData>k__BackingField: Q2
-  <m_dialogueTextData>k__BackingField: "Does this feel real to you? It's almost like
-    we're stuck in a story waiting to see how it plays out.\r"
+  <m_dialogueTextData>k__BackingField: "Does this feel real to you?\r"
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: What do you mean? I have choices in my
       life.

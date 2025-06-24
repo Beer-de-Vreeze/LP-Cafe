@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: Q4
   m_EditorClassIdentifier: 
   <m_dialogueNameData>k__BackingField: Q4
-  <m_dialogueTextData>k__BackingField: As someone who is proficient in martial art's
-    I'm always aware of my surroundings, but you're such a distraction.
+  <m_dialogueTextData>k__BackingField: but you're such a distraction.
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Really? You look like you couldn't hurt
       a fly.

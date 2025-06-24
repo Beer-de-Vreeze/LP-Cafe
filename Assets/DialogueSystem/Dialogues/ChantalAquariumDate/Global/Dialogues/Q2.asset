@@ -13,9 +13,7 @@ MonoBehaviour:
   m_Name: Q2
   m_EditorClassIdentifier: 
   <m_dialogueNameData>k__BackingField: Q2
-  <m_dialogueTextData>k__BackingField: '* You see a puddle infront of you, probably
-    a leak somewhere, Chantal is about to walk towards it and you realise she doesn''t
-    notice'
+  <m_dialogueTextData>k__BackingField: '* You see a puddle infront of you'
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: '*Warn her about the doom she''s heading
       towards.'
@@ -25,8 +23,7 @@ MonoBehaviour:
   - <m_dialogueChoiceText>k__BackingField: "Did you ehh\u2026. the bathroom is at
       the beginning you know?"
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 5e08795cf832f8145832c131513ce194, type: 2}
-  - <m_dialogueChoiceText>k__BackingField: Such a hero! Doing as you're supposed
-      to.
+  - <m_dialogueChoiceText>k__BackingField: Throw yourself in front of it.
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 2839ae2441636284cb976fb05886311d, type: 2}
   <m_bachelorImageData>k__BackingField: {fileID: 0}
   <m_dialogueAudioData>k__BackingField: {fileID: 0}

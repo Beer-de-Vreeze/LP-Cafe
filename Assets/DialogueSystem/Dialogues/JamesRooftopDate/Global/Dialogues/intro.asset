@@ -19,7 +19,7 @@ MonoBehaviour:
     I like the chique look.'
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Next Dialogue
-    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 178cef7ac07c64e4f90bb995a3187b2c, type: 2}
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: f22b107f26d5af44085129466dcd0ba8, type: 2}
   <m_bachelorImageData>k__BackingField: {fileID: 0}
   <m_dialogueAudioData>k__BackingField: {fileID: 0}
   <m_dialogueTypeData>k__BackingField: 0

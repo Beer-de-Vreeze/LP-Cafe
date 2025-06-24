@@ -17,7 +17,7 @@ MonoBehaviour:
     these wonderous beings are good for now."
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Next Dialogue
-    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 507681feaf825c240b57beb8c16fcd7f, type: 2}
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: cd5dc73986575074aa4d5238dce54ad6, type: 2}
   <m_bachelorImageData>k__BackingField: {fileID: 0}
   <m_dialogueAudioData>k__BackingField: {fileID: 0}
   <m_dialogueTypeData>k__BackingField: 0

@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Q1A1
   m_EditorClassIdentifier: 
   <m_dialogueNameData>k__BackingField: Q1A1
-  <m_dialogueTextData>k__BackingField: I'd love to be able to fly away from you.
+  <m_dialogueTextData>k__BackingField: Oh no Honey, there's non escaping me, I'm
+    way too cute for that.
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Next Dialogue
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: da2a30d4ce2f9e24a90f15127aec2d41, type: 2}

@@ -13,10 +13,7 @@ MonoBehaviour:
   m_Name: Question1Cats
   m_EditorClassIdentifier: 
   <m_dialogueNameData>k__BackingField: Question1Cats
-  <m_dialogueTextData>k__BackingField: 'How about you start telling me how much you
-    love cats?
-
-    I have six but one of them got lost this morning...'
+  <m_dialogueTextData>k__BackingField: I have six but one of them got lost this morning...
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Erm... they're okay.. I gue- did your
       ears just move?

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Q4
   m_EditorClassIdentifier: 
   <m_dialogueNameData>k__BackingField: Q4
-  <m_dialogueTextData>k__BackingField: "So where will you take me next time? You
-    better find something more mind-blowing if you want to keep me.\r"
+  <m_dialogueTextData>k__BackingField: "You better find something more mind-blowing
+    if you want to keep me.\r"
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Bolt of you to assume there will be a
       next time.

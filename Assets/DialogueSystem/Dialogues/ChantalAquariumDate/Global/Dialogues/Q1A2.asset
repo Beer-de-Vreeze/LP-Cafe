@@ -17,7 +17,7 @@ MonoBehaviour:
     I would like.
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Next Dialogue
-    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: a9ba91d2f992c974fa0e4b3d3fd1883c, type: 2}
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 8fd6722f78e2ea44fa8209cc28e8c1a9, type: 2}
   <m_bachelorImageData>k__BackingField: {fileID: 0}
   <m_dialogueAudioData>k__BackingField: {fileID: 0}
   <m_dialogueTypeData>k__BackingField: 0
