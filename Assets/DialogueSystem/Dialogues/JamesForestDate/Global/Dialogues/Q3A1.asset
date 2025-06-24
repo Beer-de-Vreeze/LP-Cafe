@@ -17,7 +17,7 @@ MonoBehaviour:
     a bear and most certainly the better choice!
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Next Dialogue
-    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: b3e862b2f05b922478367bf8d0ad5141, type: 2}
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: e445d9b37c5d94c4d83275421b294b5a, type: 2}
   <m_bachelorImageData>k__BackingField: {fileID: 0}
   <m_dialogueAudioData>k__BackingField: {fileID: 0}
   <m_dialogueTypeData>k__BackingField: 0

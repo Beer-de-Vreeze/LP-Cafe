@@ -24,7 +24,7 @@ MonoBehaviour:
       Like the filler episode for comedic value.
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 482e3d28d4318a24cb8a546aa94d7b6e, type: 2}
   - <m_dialogueChoiceText>k__BackingField: ERROR 404- script not found.
-    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 569e4ff7843e664449685121d864d815, type: 2}
+    <m_nextDialogue>k__BackingField: {fileID: 0}
   <m_bachelorImageData>k__BackingField: {fileID: 0}
   <m_dialogueAudioData>k__BackingField: {fileID: 0}
   <m_dialogueTypeData>k__BackingField: 1

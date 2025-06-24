@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Q4A4
   m_EditorClassIdentifier: 
   <m_dialogueNameData>k__BackingField: Q4A4
-  <m_dialogueTextData>k__BackingField: '*She smirks at you as you chug your glass.
-    You spot an almost proud gleam in her glassed eyes.'
+  <m_dialogueTextData>k__BackingField: "*She smirks at you as you chug your glass.
+    \nYou spot an almost proud gleam in her glassed eyes."
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Next Dialogue
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: d4176c29425a314429d3c115329ad0a3, type: 2}

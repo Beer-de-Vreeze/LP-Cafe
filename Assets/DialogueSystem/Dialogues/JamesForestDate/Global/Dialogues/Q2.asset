@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: Q2
   m_EditorClassIdentifier: 
   <m_dialogueNameData>k__BackingField: q2
-  <m_dialogueTextData>k__BackingField: If this path we're on split in two, which
-    way would you go? Or would you trust me to guide you?
+  <m_dialogueTextData>k__BackingField: Or would you trust me to guide you?
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: I'd always take the left, at some point
       you'd circle back right?

@@ -13,10 +13,7 @@ MonoBehaviour:
   m_Name: Q4
   m_EditorClassIdentifier: 
   <m_dialogueNameData>k__BackingField: Q4
-  <m_dialogueTextData>k__BackingField: 'The way the water moves makes it all seem
-    to slow down, so calming and peaceful.
-
-'
+  <m_dialogueTextData>k__BackingField: so calming and peaceful.
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Yea almost like you can click a button
       and pause the frame.

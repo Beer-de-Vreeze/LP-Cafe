@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Q3
   m_EditorClassIdentifier: 
   <m_dialogueNameData>k__BackingField: Q3
-  <m_dialogueTextData>k__BackingField: "What was your first thought when you saw
-    me back at the caf\xE9?"
+  <m_dialogueTextData>k__BackingField: What was your first thought when you saw me
+    back at the cafe?
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: I went for you instantly, such a high
       class lady like yourself shines out the rest.

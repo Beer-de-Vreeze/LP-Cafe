@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: Q1
   m_EditorClassIdentifier: 
   <m_dialogueNameData>k__BackingField: Q1
-  <m_dialogueTextData>k__BackingField: Would you wanna be able to fly? I couldn't
-    imagine trading up my fluffiness for feathers.
+  <m_dialogueTextData>k__BackingField: Would you wanna be able to fly?
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: I'd love to be able to fly away from you.
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 3a1416937e2f72543be5b8f5a309f580, type: 2}

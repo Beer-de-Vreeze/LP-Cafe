@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: QQ3
   m_EditorClassIdentifier: 
   <m_dialogueNameData>k__BackingField: QQ3
-  <m_dialogueTextData>k__BackingField: "\r"
+  <m_dialogueTextData>k__BackingField: Would you like some, love?
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Oh that's sweet of you, yes id like some.
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: eb78358e6b6374a43b6b7994384da812, type: 2}

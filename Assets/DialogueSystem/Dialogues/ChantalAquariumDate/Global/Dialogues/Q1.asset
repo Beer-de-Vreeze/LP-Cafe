@@ -13,9 +13,8 @@ MonoBehaviour:
   m_Name: Q1
   m_EditorClassIdentifier: 
   <m_dialogueNameData>k__BackingField: Q1
-  <m_dialogueTextData>k__BackingField: "This is a new experience for me, the animals
-    look majestical. \r\nI mean not as fancy as me of course, but it compliments
-    my class nicely. "
+  <m_dialogueTextData>k__BackingField: 'I mean not as fancy as me of course, but
+    it compliments my class nicely. '
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: I thought it would be a nice place to
       stare at the wonders of the ocean.

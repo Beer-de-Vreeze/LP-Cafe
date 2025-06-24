@@ -16,7 +16,7 @@ MonoBehaviour:
   <m_dialogueTextData>k__BackingField: Oh my goshhh!! Samesiessss, look at us twinninggggg
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Next Dialogue
-    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 632d6c0e45ea4d647bd84b6d16e59e9d, type: 2}
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 4e34fbef3a4c949489ba683718180416, type: 2}
   <m_bachelorImageData>k__BackingField: {fileID: 21300000, guid: 162140bc96836f3468df2bafe26c4678, type: 3}
   <m_dialogueAudioData>k__BackingField: {fileID: 0}
   <m_dialogueTypeData>k__BackingField: 0
