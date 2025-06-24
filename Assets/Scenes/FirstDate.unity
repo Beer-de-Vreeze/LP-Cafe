@@ -894,6 +894,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2959377241938159660, guid: a34b7e1289bc1d9429dbfacfc664940e, type: 3}
+      propertyPath: avoidMultiplePunctuationWait
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5198826213203906620, guid: a34b7e1289bc1d9429dbfacfc664940e, type: 3}
       propertyPath: m_Pivot.x
       value: 0
