@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8656580f96a63714d889c7daeb915b7a, type: 3}
+  m_Name: Q3
+  m_EditorClassIdentifier: 
+  <m_dialogueNameData>k__BackingField: Q3
+  <m_dialogueTextData>k__BackingField: I feel like that octopus is watching me, do
+    you think he's judging my suit?
+  <m_dialogueChoiceData>k__BackingField:
+  - <m_dialogueChoiceText>k__BackingField: Who knows? Maybe it's a spy send by the
+      government.
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: f32c15fa20520c2468dc5899f91beb58, type: 2}
+  - <m_dialogueChoiceText>k__BackingField: You're seeing things, it's just an animal,
+      your suit doesn't matter to that little guy.
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: d5fab67dc88181e4189042dc02de37db, type: 2}
+  - <m_dialogueChoiceText>k__BackingField: Ahh yes, the sharks hired him to spy on
+      us.
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: d951260cc7ab6d348816f8a8fea5384d, type: 2}
+  - <m_dialogueChoiceText>k__BackingField: Yea the suit could've been better.
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 8a3424c6512b4c64da47310579950902, type: 2}
+  <m_bachelorImageData>k__BackingField: {fileID: 0}
+  <m_dialogueAudioData>k__BackingField: {fileID: 0}
+  <m_dialogueTypeData>k__BackingField: 1
+  <m_isStartingDialogueData>k__BackingField: 1
+  <m_propertyToCheckData>k__BackingField: 
+  <m_comparisonTypeData>k__BackingField: 
+  <m_comparisonValueData>k__BackingField: 
+  <m_operationTypeData>k__BackingField: 0
+  <m_variableNameData>k__BackingField: 
+  <m_valueToSetData>k__BackingField: 
+  <m_loveScoreAmountData>k__BackingField: 0
+  <m_boolValueData>k__BackingField: 0
+  <m_loveMeterData>k__BackingField: {fileID: 0}
+  <m_bachelorData>k__BackingField: {fileID: 0}
+  <m_isLikePreferenceData>k__BackingField: 0
+  <m_selectedPreferenceData>k__BackingField: 

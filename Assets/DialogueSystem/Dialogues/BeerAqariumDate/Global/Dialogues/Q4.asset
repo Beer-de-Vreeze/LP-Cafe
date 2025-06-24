@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8656580f96a63714d889c7daeb915b7a, type: 3}
+  m_Name: Q4
+  m_EditorClassIdentifier: 
+  <m_dialogueNameData>k__BackingField: Q4
+  <m_dialogueTextData>k__BackingField: What chapter would we be at? I hope I'm your
+    beginning??
+  <m_dialogueChoiceData>k__BackingField:
+  - <m_dialogueChoiceText>k__BackingField: I'm hoping the ending.
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 499af7ceac3115f4ca3dec6cd8e47132, type: 2}
+  - <m_dialogueChoiceText>k__BackingField: You're my beginning.
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: f3d6a901bff375f47b4e27a27b4fa8f7, type: 2}
+  - <m_dialogueChoiceText>k__BackingField: We'd be in the beach episode, ya know?
+      Like the filler episode for comedic value.
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 482e3d28d4318a24cb8a546aa94d7b6e, type: 2}
+  - <m_dialogueChoiceText>k__BackingField: ERROR 404- script not found.
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 569e4ff7843e664449685121d864d815, type: 2}
+  <m_bachelorImageData>k__BackingField: {fileID: 0}
+  <m_dialogueAudioData>k__BackingField: {fileID: 0}
+  <m_dialogueTypeData>k__BackingField: 1
+  <m_isStartingDialogueData>k__BackingField: 1
+  <m_propertyToCheckData>k__BackingField: 
+  <m_comparisonTypeData>k__BackingField: 
+  <m_comparisonValueData>k__BackingField: 
+  <m_operationTypeData>k__BackingField: 0
+  <m_variableNameData>k__BackingField: 
+  <m_valueToSetData>k__BackingField: 
+  <m_loveScoreAmountData>k__BackingField: 0
+  <m_boolValueData>k__BackingField: 0
+  <m_loveMeterData>k__BackingField: {fileID: 0}
+  <m_bachelorData>k__BackingField: {fileID: 0}
+  <m_isLikePreferenceData>k__BackingField: 0
+  <m_selectedPreferenceData>k__BackingField: 

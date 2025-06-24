@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Q4A2
   m_EditorClassIdentifier: 
   <m_dialogueNameData>k__BackingField: Q4A2
-  <m_dialogueTextData>k__BackingField: "That's a bit much don't you think? \nEven
-    for you... and that says something."
+  <m_dialogueTextData>k__BackingField: I'm sure half these fish have had more neuron
+    activation than you did.
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Next Dialogue
-    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 90609cb3dde18d048810482b2e5c4d1c, type: 2}
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 41fd2c0ce18ac4d4d95efdb91c6eb9a1, type: 2}
   <m_bachelorImageData>k__BackingField: {fileID: 0}
   <m_dialogueAudioData>k__BackingField: {fileID: 0}
   <m_dialogueTypeData>k__BackingField: 0
