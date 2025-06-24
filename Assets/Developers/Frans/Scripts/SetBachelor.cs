@@ -44,7 +44,16 @@ public class SetBachelor : MonoBehaviour
         {
             m_dialogueCanvas.enabled = true;
             m_dialogueObject.SetActive(true);
-            SetBatchelor();
+
+            // Check if this bachelor has already been dated
+            if (HasBeenDated())
+            {
+                ShowPostDateOptions();
+            }
+            else
+            {
+                SetBatchelor();
+            }
         }
     }
 
@@ -55,17 +64,17 @@ public class SetBachelor : MonoBehaviour
         if (SceneManager.GetActiveScene().name != "FirstDate")
             m_dialogueObject.SetActive(true);
         if (SceneManager.GetActiveScene().name != "FirstDate")
-    {
+        {
             // Disable all other bachelors
             otherBachelors = GameObject.FindGameObjectsWithTag("Bachelor");
-        foreach (GameObject bachelorObj in otherBachelors)
-        {
-            if (bachelorObj != this.gameObject)
+            foreach (GameObject bachelorObj in otherBachelors)
             {
-                bachelorObj.SetActive(false);
+                if (bachelorObj != this.gameObject)
+                {
+                    bachelorObj.SetActive(false);
+                }
             }
         }
-    }
         m_dialogueDisplay.StartDialogue(m_bachelor, m_dialogue);
     }
 
@@ -107,6 +116,12 @@ public class SetBachelor : MonoBehaviour
     /// </summary>
     public void FinishDateAndSave()
     {
+        // Mark the bachelor as dated in the ScriptableObject
+        if (m_bachelor != null)
+        {
+            m_bachelor.MarkAsDated();
+        }
+
         // Save this bachelor as dated
         SaveData data = SaveSystem.Deserialize();
         if (data == null)
@@ -121,5 +136,75 @@ public class SetBachelor : MonoBehaviour
 
         // Turn off this bachelor
         gameObject.SetActive(false);
+    }
+
+    /// <summary>
+    /// Checks if this bachelor has already been dated by checking both the bachelor's internal state
+    /// and the save system data.
+    /// </summary>
+    /// <returns>True if the bachelor has been dated</returns>
+    private bool HasBeenDated()
+    {
+        // Check the bachelor's internal state
+        if (m_bachelor != null && m_bachelor.HasBeenDated())
+        {
+            return true;
+        }
+
+        // Also check the save system
+        SaveData data = SaveSystem.Deserialize();
+        if (
+            data != null
+            && data.DatedBachelors != null
+            && data.DatedBachelors.Contains(m_bachelor.name)
+        )
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    /// <summary>
+    /// Shows the post-date options (Come Back Later and Ask on a Date) without starting full dialogue
+    /// </summary>
+    private void ShowPostDateOptions()
+    {
+        currentlyDating = true;
+
+        // Disable all other bachelors
+        otherBachelors = GameObject.FindGameObjectsWithTag("Bachelor");
+        foreach (GameObject bachelorObj in otherBachelors)
+        {
+            if (bachelorObj != this.gameObject)
+            {
+                bachelorObj.SetActive(false);
+            }
+        }
+
+        // Check if this bachelor has completed a real date
+        if (HasCompletedRealDate())
+        {
+            // Show personalized message and only Come Back Later option
+            m_dialogueDisplay.ShowPostRealDateOptionsInCafe(m_bachelor);
+        }
+        else
+        {
+            // Show standard post-speed-date options (Come Back Later and Ask on a Date)
+            m_dialogueDisplay.ShowPostDateOptions(m_bachelor);
+        }
+    }
+
+    /// <summary>
+    /// Checks if this bachelor has completed a real date (not just a speed date)
+    /// </summary>
+    /// <returns>True if the bachelor has completed a real date</returns>
+    private bool HasCompletedRealDate()
+    {
+        SaveData data = SaveSystem.Deserialize();
+        if (data == null || data.RealDatedBachelors == null)
+            return false;
+
+        return data.RealDatedBachelors.Contains(m_bachelor.name);
     }
 }

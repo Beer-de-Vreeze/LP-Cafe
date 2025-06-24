@@ -33,6 +33,16 @@ public class NewBachelorSO : ScriptableObject
     [SerializeField]
     public LoveMeterSO _loveMeter;
 
+    [Header("Date Dialogues")]
+    [SerializeField]
+    public DSDialogue _rooftopDateDialogue;
+
+    [SerializeField]
+    public DSDialogue _aquariumDateDialogue;
+
+    [SerializeField]
+    public DSDialogue _forestDateDialogue;
+
     [Header("Scene Transition")]
     [SerializeField]
     public string _nextSceneName;
@@ -40,6 +50,8 @@ public class NewBachelorSO : ScriptableObject
     // Track if this SO has been initialized in play mode to prevent repeated resets
     private bool hasBeenInitializedInPlayMode = false;
 
+    [SerializeField]
+    public bool _HasBeenSpeedDated = false;
     public event Action<BachelorPreference> OnPreferenceDiscovered;
 
     [Serializable]
@@ -182,6 +194,23 @@ public class NewBachelorSO : ScriptableObject
 
         _isLikeDiscovered = false;
         _isDislikeDiscovered = false;
+    }
+
+    /// <summary>
+    /// Checks if this bachelor has been dated (speed dated)
+    /// </summary>
+    /// <returns>True if the bachelor has been dated</returns>
+    public bool HasBeenDated()
+    {
+        return _HasBeenSpeedDated;
+    }
+
+    /// <summary>
+    /// Marks this bachelor as having been dated
+    /// </summary>
+    public void MarkAsDated()
+    {
+        _HasBeenSpeedDated = true;
     }
 
     /// <summary>
