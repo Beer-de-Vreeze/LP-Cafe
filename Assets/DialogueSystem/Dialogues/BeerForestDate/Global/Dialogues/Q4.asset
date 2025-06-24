@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8656580f96a63714d889c7daeb915b7a, type: 3}
+  m_Name: Q4
+  m_EditorClassIdentifier: 
+  <m_dialogueNameData>k__BackingField: Q4
+  <m_dialogueTextData>k__BackingField: Those leaves look like little hearts, oh my
+    gosh the forest is giving us a sign!!
+  <m_dialogueChoiceData>k__BackingField:
+  - <m_dialogueChoiceText>k__BackingField: How do you see that as hearts? It's a
+      weirdly shaped blob, kind of like you.
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 29a494782cc7e9a439a691a744e4b076, type: 2}
+  - <m_dialogueChoiceText>k__BackingField: Yea I see! Maybe it is a sign.
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 92803d271e1d0e648998cdfe6c7cc379, type: 2}
+  - <m_dialogueChoiceText>k__BackingField: You see what you want to see I think.
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 553d30f7af5ce9747a4a6f5759ecd61e, type: 2}
+  - <m_dialogueChoiceText>k__BackingField: '*you stare off into the distance, distracted
+      by the view of the woods around you.'
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: bb83fdcb9852c784ca30e4120685021b, type: 2}
+  <m_bachelorImageData>k__BackingField: {fileID: 0}
+  <m_dialogueAudioData>k__BackingField: {fileID: 0}
+  <m_dialogueTypeData>k__BackingField: 1
+  <m_isStartingDialogueData>k__BackingField: 1
+  <m_propertyToCheckData>k__BackingField: 
+  <m_comparisonTypeData>k__BackingField: 
+  <m_comparisonValueData>k__BackingField: 
+  <m_operationTypeData>k__BackingField: 0
+  <m_variableNameData>k__BackingField: 
+  <m_valueToSetData>k__BackingField: 
+  <m_loveScoreAmountData>k__BackingField: 0
+  <m_boolValueData>k__BackingField: 0
+  <m_loveMeterData>k__BackingField: {fileID: 0}
+  <m_bachelorData>k__BackingField: {fileID: 0}
+  <m_isLikePreferenceData>k__BackingField: 0
+  <m_selectedPreferenceData>k__BackingField: 

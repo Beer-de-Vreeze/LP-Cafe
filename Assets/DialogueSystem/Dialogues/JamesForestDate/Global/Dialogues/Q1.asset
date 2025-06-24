@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8656580f96a63714d889c7daeb915b7a, type: 3}
+  m_Name: Q1
+  m_EditorClassIdentifier: 
+  <m_dialogueNameData>k__BackingField: Q1
+  <m_dialogueTextData>k__BackingField: Do you think you'd notice if we were being
+    followed out here?
+  <m_dialogueChoiceData>k__BackingField:
+  - <m_dialogueChoiceText>k__BackingField: That's an oddly creepy thing to ask when
+      we're alone in the woods.
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: f5e3f41d2ab68674a905a45a7934bef5, type: 2}
+  - <m_dialogueChoiceText>k__BackingField: Erm- I think... I'd notice.
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 9c327e0a15984984996fc57f7ff54896, type: 2}
+  - <m_dialogueChoiceText>k__BackingField: h I'd most likely be too oblivious and
+      make all the wrong choices.
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: bffb1a49a4967084a8bdd95e60ba4c8a, type: 2}
+  - <m_dialogueChoiceText>k__BackingField: Any experience?
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 1c87dd94dbbc56c4aa634c43d3b2952c, type: 2}
+  <m_bachelorImageData>k__BackingField: {fileID: 0}
+  <m_dialogueAudioData>k__BackingField: {fileID: 0}
+  <m_dialogueTypeData>k__BackingField: 1
+  <m_isStartingDialogueData>k__BackingField: 1
+  <m_propertyToCheckData>k__BackingField: 
+  <m_comparisonTypeData>k__BackingField: 
+  <m_comparisonValueData>k__BackingField: 
+  <m_operationTypeData>k__BackingField: 0
+  <m_variableNameData>k__BackingField: 
+  <m_valueToSetData>k__BackingField: 
+  <m_loveScoreAmountData>k__BackingField: 0
+  <m_boolValueData>k__BackingField: 0
+  <m_loveMeterData>k__BackingField: {fileID: 0}
+  <m_bachelorData>k__BackingField: {fileID: 0}
+  <m_isLikePreferenceData>k__BackingField: 0
+  <m_selectedPreferenceData>k__BackingField: 

@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8656580f96a63714d889c7daeb915b7a, type: 3}
+  m_Name: DialogueName
+  m_EditorClassIdentifier: 
+  <m_dialogueNameData>k__BackingField: DialogueName
+  <m_dialogueTextData>k__BackingField: If this rooftop was the final scene in a spy
+    movie, how would it end?
+  <m_dialogueChoiceData>k__BackingField:
+  - <m_dialogueChoiceText>k__BackingField: 'Probably with a black screen saying:
+      the end.'
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 41e8d193488f49b45a3d83217a01f783, type: 2}
+  - <m_dialogueChoiceText>k__BackingField: Secret agents charging the place?
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 37f23aae0b47afb41a38b2530f761559, type: 2}
+  - <m_dialogueChoiceText>k__BackingField: I'd fall from the rooftop and you'd be
+      my saviour
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: a87c70d1abfc0e849aa455703386fd05, type: 2}
+  - <m_dialogueChoiceText>k__BackingField: Gross those movies are so lame, I don't
+      even want to think about it. Especially those crime and action movies.
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 49e8e8b96fe6d0a40906c96079912735, type: 2}
+  <m_bachelorImageData>k__BackingField: {fileID: 0}
+  <m_dialogueAudioData>k__BackingField: {fileID: 0}
+  <m_dialogueTypeData>k__BackingField: 1
+  <m_isStartingDialogueData>k__BackingField: 1
+  <m_propertyToCheckData>k__BackingField: 
+  <m_comparisonTypeData>k__BackingField: 
+  <m_comparisonValueData>k__BackingField: 
+  <m_operationTypeData>k__BackingField: 0
+  <m_variableNameData>k__BackingField: 
+  <m_valueToSetData>k__BackingField: 
+  <m_loveScoreAmountData>k__BackingField: 0
+  <m_boolValueData>k__BackingField: 0
+  <m_loveMeterData>k__BackingField: {fileID: 0}
+  <m_bachelorData>k__BackingField: {fileID: 0}
+  <m_isLikePreferenceData>k__BackingField: 0
+  <m_selectedPreferenceData>k__BackingField: 
