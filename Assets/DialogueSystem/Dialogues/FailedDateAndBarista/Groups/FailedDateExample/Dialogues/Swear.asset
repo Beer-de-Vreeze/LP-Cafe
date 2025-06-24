@@ -15,7 +15,7 @@ MonoBehaviour:
   <m_dialogueNameData>k__BackingField: Swear
   <m_dialogueTextData>k__BackingField: "I Swear, I can't believe i went on another
     date with you! \nYou're only focused on yourself and you can't remember the smallest
-    of thing?!"
+    of things?!"
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Next Dialogue
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 385bd47296b61a74fb7ae1aac36ec6b8, type: 2}
