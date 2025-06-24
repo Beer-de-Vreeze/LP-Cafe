@@ -442,10 +442,19 @@ public class DialogueDisplay : MonoBehaviour
     {
         _dialogue = dialogue;
         _bachelor = bachelor;
+
         if (_bachelor != null)
         {
+            // Ensure notebook is properly connected to the new bachelor
+            if (_noteBook != null)
+            {
+                _noteBook.EnsureBachelorConnection(_bachelor);
+            }
+
             // Ensure all preferences start as undiscovered
-            _bachelor.EnsureUndiscoveredState(); // Use the bachelor's love meter if available
+            _bachelor.EnsureUndiscoveredState();
+
+            // Use the bachelor's love meter if available
             if (_bachelor._loveMeter != null)
             {
                 _loveMeter = _bachelor._loveMeter;
@@ -473,8 +482,17 @@ public class DialogueDisplay : MonoBehaviour
         bachelor._dialogue = dialogueSO;
         if (bachelor == null || bachelor._dialogue == null)
             return;
+
         _bachelor = bachelor;
-        _dialogue = dialogueSO; // Initialize love meter with bachelor's data
+        _dialogue = dialogueSO;
+
+        // Ensure notebook is properly connected to the new bachelor
+        if (_noteBook != null)
+        {
+            _noteBook.EnsureBachelorConnection(_bachelor);
+        }
+
+        // Initialize love meter with bachelor's data
         if (_bachelor != null && _bachelor._loveMeter != null)
         {
             _loveMeter = _bachelor._loveMeter;
@@ -548,24 +566,18 @@ public class DialogueDisplay : MonoBehaviour
                     Debug.LogWarning($"Unknown condition operation type: {operationType}");
                     break;
             }
-
             Debug.Log($"Condition result: {conditionMet}");
 
-            // Follow the appropriate path based on condition result
+            // Follow the single "Next Dialogue" path after evaluating condition
             var choices = conditionNode.m_dialogueChoiceData;
-            if (choices != null && choices.Count > 0)
+            if (choices != null && choices.Count > 0 && choices[0].m_nextDialogue != null)
             {
-                int pathIndex = conditionMet ? 0 : 1;
-
-                if (pathIndex < choices.Count && choices[pathIndex].m_nextDialogue != null)
-                {
-                    _dialogue.m_dialogue = choices[pathIndex].m_nextDialogue;
-                    ShowDialogue();
-                }
-                else
-                {
-                    Debug.LogError($"No valid path found for condition result: {conditionMet}");
-                }
+                _dialogue.m_dialogue = choices[0].m_nextDialogue;
+                ShowDialogue();
+            }
+            else
+            {
+                Debug.LogError("No valid next dialogue found after condition node");
             }
         }
         catch (System.Exception e)
@@ -1571,7 +1583,7 @@ public class DialogueDisplay : MonoBehaviour
 
     #endregion
     #region Test
-      [ContextMenu("Go To Last Dialogue (Test)")]
+    [ContextMenu("Go To Last Dialogue (Test)")]
     public void GoToLastDialogueForTest()
     {
         if (_dialogue == null || _dialogue.m_dialogue == null)
