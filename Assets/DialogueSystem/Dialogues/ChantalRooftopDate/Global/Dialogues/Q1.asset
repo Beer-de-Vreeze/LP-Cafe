@@ -25,7 +25,7 @@ MonoBehaviour:
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 0481aac87f67d9c41a8e54a309ae1e3b, type: 2}
   - <m_dialogueChoiceText>k__BackingField: Order her what you think tasted good.
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: ef8bbb3fc5f647141ac883057383996d, type: 2}
-  <m_bachelorImageData>k__BackingField: {fileID: 0}
+  <m_bachelorImageData>k__BackingField: {fileID: 21300000, guid: 84a876f81e079bf40beb58c595c98cf5, type: 3}
   <m_dialogueAudioData>k__BackingField: {fileID: 0}
   <m_dialogueTypeData>k__BackingField: 1
   <m_isStartingDialogueData>k__BackingField: 1

@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8656580f96a63714d889c7daeb915b7a, type: 3}
+  m_Name: Q2
+  m_EditorClassIdentifier: 
+  <m_dialogueNameData>k__BackingField: Q2
+  <m_dialogueTextData>k__BackingField: So ya ever been on a motor before?
+  <m_dialogueChoiceData>k__BackingField:
+  - <m_dialogueChoiceText>k__BackingField: Is that like your whole personality?
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 207ab0780cd37924891518563a90c7d6, type: 2}
+  - <m_dialogueChoiceText>k__BackingField: I did but I fell off.
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: cd779e16009255645a48c47a996b8ee7, type: 2}
+  - <m_dialogueChoiceText>k__BackingField: I'd rather be someone's backpack.
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 0e2644a3b77c0b14b9c75aa2a249493e, type: 2}
+  - <m_dialogueChoiceText>k__BackingField: Nha it sounds dangerous and that's not
+      my thing.
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: a8038e71c3e8e3945964a59dabd15e46, type: 2}
+  <m_bachelorImageData>k__BackingField: {fileID: 21300000, guid: 35a4b7bef345b3f4db947b0e9547a2a6, type: 3}
+  <m_dialogueAudioData>k__BackingField: {fileID: 0}
+  <m_dialogueTypeData>k__BackingField: 1
+  <m_isStartingDialogueData>k__BackingField: 1
+  <m_propertyToCheckData>k__BackingField: 
+  <m_comparisonTypeData>k__BackingField: 
+  <m_comparisonValueData>k__BackingField: 
+  <m_operationTypeData>k__BackingField: 0
+  <m_variableNameData>k__BackingField: 
+  <m_valueToSetData>k__BackingField: 
+  <m_loveScoreAmountData>k__BackingField: 0
+  <m_boolValueData>k__BackingField: 0
+  <m_loveMeterData>k__BackingField: {fileID: 0}
+  <m_bachelorData>k__BackingField: {fileID: 0}
+  <m_isLikePreferenceData>k__BackingField: 0
+  <m_selectedPreferenceData>k__BackingField: 

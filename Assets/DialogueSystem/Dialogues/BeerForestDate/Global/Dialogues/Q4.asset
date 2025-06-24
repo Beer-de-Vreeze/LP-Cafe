@@ -26,7 +26,7 @@ MonoBehaviour:
   - <m_dialogueChoiceText>k__BackingField: '*you stare off into the distance, distracted
       by the view of the woods around you.'
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: bb83fdcb9852c784ca30e4120685021b, type: 2}
-  <m_bachelorImageData>k__BackingField: {fileID: 0}
+  <m_bachelorImageData>k__BackingField: {fileID: 21300000, guid: 4d7a66a9cea93b246a1057f95ed0764f, type: 3}
   <m_dialogueAudioData>k__BackingField: {fileID: 0}
   <m_dialogueTypeData>k__BackingField: 1
   <m_isStartingDialogueData>k__BackingField: 1
