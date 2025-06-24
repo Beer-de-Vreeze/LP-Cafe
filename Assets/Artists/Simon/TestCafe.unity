@@ -2757,7 +2757,7 @@ MonoBehaviour:
   m_groupedDialogues: 1
   m_startingDialoguesOnly: 0
   m_selectedDialogueGroupIndex: 0
-  m_selectedDialogueIndex: 0
+  m_selectedDialogueIndex: 48
 --- !u!114 &533133506
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6009,6 +6009,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5239187531193106065, guid: a34b7e1289bc1d9429dbfacfc664940e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5756749173856513607, guid: a34b7e1289bc1d9429dbfacfc664940e, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 255
@@ -6881,7 +6885,7 @@ MonoBehaviour:
   m_groupedDialogues: 1
   m_startingDialoguesOnly: 0
   m_selectedDialogueGroupIndex: 0
-  m_selectedDialogueIndex: 40
+  m_selectedDialogueIndex: 11
 --- !u!114 &1260297391
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10791,7 +10795,7 @@ MonoBehaviour:
   m_groupedDialogues: 1
   m_startingDialoguesOnly: 0
   m_selectedDialogueGroupIndex: 0
-  m_selectedDialogueIndex: 0
+  m_selectedDialogueIndex: 9
 --- !u!114 &1982111748
 MonoBehaviour:
   m_ObjectHideFlags: 0
