@@ -44,17 +44,16 @@ public class NoteBook : MonoBehaviour
 
     void Awake()
     {
-        // Register for bachelor events if available
-        if (currentBachelor != null)
-        {
-            currentBachelor.OnPreferenceDiscovered += HandlePreferenceDiscovered;
-        }
+        // Don't register events in Awake - do it in SetBachelor to ensure proper cleanup
     }
 
     void OnEnable()
     {
         if (currentBachelor != null)
         {
+            // Ensure we're properly registered to the current bachelor's events
+            RegisterToBachelorEvents(currentBachelor);
+
             if (!isInitialized)
             {
                 InitializeNotebook();
@@ -75,15 +74,55 @@ public class NoteBook : MonoBehaviour
 
     void OnDestroy()
     {
-        // Unregister from events
-        if (currentBachelor != null)
-        {
-            currentBachelor.OnPreferenceDiscovered -= HandlePreferenceDiscovered;
-        }
+        // Unregister from events using helper method
+        UnregisterFromBachelorEvents(currentBachelor);
     }
 
     private void HandlePreferenceDiscovered(NewBachelorSO.BachelorPreference preference)
     {
+        // Ensure we have a current bachelor and the preference belongs to it
+        if (currentBachelor == null || preference == null)
+        {
+            Debug.LogWarning(
+                "NoteBook: HandlePreferenceDiscovered called but currentBachelor or preference is null"
+            );
+            return;
+        }
+
+        // Double-check that this preference actually belongs to the current bachelor
+        bool belongsToCurrentBachelor = false;
+        if (currentBachelor._likes != null)
+        {
+            foreach (var like in currentBachelor._likes)
+            {
+                if (like == preference)
+                {
+                    belongsToCurrentBachelor = true;
+                    break;
+                }
+            }
+        }
+
+        if (!belongsToCurrentBachelor && currentBachelor._dislikes != null)
+        {
+            foreach (var dislike in currentBachelor._dislikes)
+            {
+                if (dislike == preference)
+                {
+                    belongsToCurrentBachelor = true;
+                    break;
+                }
+            }
+        }
+
+        if (!belongsToCurrentBachelor)
+        {
+            Debug.LogWarning(
+                $"NoteBook: Received preference '{preference.description}' that doesn't belong to current bachelor '{currentBachelor._name}'"
+            );
+            return;
+        }
+
         // Create the entry when it's discovered
         CreateEntryForPreference(preference);
 
@@ -265,23 +304,17 @@ public class NoteBook : MonoBehaviour
     /// </summary>
     public void SetBachelor(NewBachelorSO bachelor)
     {
-        // Unregister from old bachelor events
-        if (currentBachelor != null)
-        {
-            currentBachelor.OnPreferenceDiscovered -= HandlePreferenceDiscovered;
-        }
+        // Unregister from old bachelor events using helper method
+        UnregisterFromBachelorEvents(currentBachelor);
 
         currentBachelor = bachelor;
 
-        // Register for new bachelor events
-        if (currentBachelor != null)
-        {
-            currentBachelor.OnPreferenceDiscovered += HandlePreferenceDiscovered;
+        // Register for new bachelor events using helper method
+        RegisterToBachelorEvents(currentBachelor);
 
-            // Only reset discoveries if this is a completely new bachelor setup
-            // Comment out the line below if you want to preserve discovered preferences
-            // currentBachelor.EnsureUndiscoveredState();
-        }
+        // Only reset discoveries if this is a completely new bachelor setup
+        // Comment out the line below if you want to preserve discovered preferences
+        // currentBachelor.EnsureUndiscoveredState();
 
         // Re-initialize with the new bachelor
         isInitialized = false;
@@ -293,11 +326,9 @@ public class NoteBook : MonoBehaviour
     /// </summary>
     public void ClearBachelor()
     {
-        // Unregister from current bachelor events
-        if (currentBachelor != null)
-        {
-            currentBachelor.OnPreferenceDiscovered -= HandlePreferenceDiscovered;
-        }
+        // Unregister from current bachelor events using helper method
+        UnregisterFromBachelorEvents(currentBachelor);
+
         // Clear all UI entries
         ClearEntries();
         // Hide locked info text
@@ -454,6 +485,54 @@ public class NoteBook : MonoBehaviour
                 {
                     CreateDislikeEntry(dislike);
                 }
+            }
+        }
+    }
+
+    /// <summary>
+    /// Helper method to safely register to bachelor events
+    /// </summary>
+    private void RegisterToBachelorEvents(NewBachelorSO bachelor)
+    {
+        if (bachelor != null)
+        {
+            // Ensure we don't double-register
+            bachelor.OnPreferenceDiscovered -= HandlePreferenceDiscovered;
+            bachelor.OnPreferenceDiscovered += HandlePreferenceDiscovered;
+        }
+    }
+
+    /// <summary>
+    /// Helper method to safely unregister from bachelor events
+    /// </summary>
+    private void UnregisterFromBachelorEvents(NewBachelorSO bachelor)
+    {
+        if (bachelor != null)
+        {
+            bachelor.OnPreferenceDiscovered -= HandlePreferenceDiscovered;
+        }
+    }
+
+    /// <summary>
+    /// Ensures the notebook is properly connected to the specified bachelor.
+    /// Call this from DialogueDisplay or other systems when bachelor changes occur.
+    /// </summary>
+    public void EnsureBachelorConnection(NewBachelorSO bachelor)
+    {
+        if (currentBachelor != bachelor)
+        {
+            SetBachelor(bachelor);
+        }
+        else if (currentBachelor != null)
+        {
+            // Even if it's the same bachelor, ensure we're properly registered
+            RegisterToBachelorEvents(currentBachelor);
+
+            // Refresh the notebook to catch any state changes
+            if (isInitialized)
+            {
+                RefreshDiscoveredEntries();
+                UpdateVisibility();
             }
         }
     }

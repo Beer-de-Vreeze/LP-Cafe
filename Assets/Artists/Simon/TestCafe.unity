@@ -5909,6 +5909,10 @@ PrefabInstance:
       propertyPath: waitForNormalChars
       value: 0.05
       objectReference: {fileID: 0}
+    - target: {fileID: 2959377241938159660, guid: a34b7e1289bc1d9429dbfacfc664940e, type: 3}
+      propertyPath: avoidMultiplePunctuationWait
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3150716853550591477, guid: a34b7e1289bc1d9429dbfacfc664940e, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -692
