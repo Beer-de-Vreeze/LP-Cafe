@@ -50,15 +50,19 @@ namespace DS.Elements
             m_boolValue = false;
             m_bachelor = null;
             m_isLikePreference = true;
-            m_selectedPreference = "";
-
-            // Create a default "Next Dialogue" choice path
+            m_selectedPreference = ""; // Create the default Next Dialogue choice path for condition logic
             DSChoiceSaveData choiceData = new DSChoiceSaveData()
             {
                 m_choiceTextData = "Next Dialogue",
             };
 
             m_nodeChoices.Add(choiceData);
+
+            // Commented out True/False logic - keeping single output
+            // DSChoiceSaveData trueChoice = new DSChoiceSaveData() { m_choiceTextData = "True" };
+            // DSChoiceSaveData falseChoice = new DSChoiceSaveData() { m_choiceTextData = "False" };
+            // m_nodeChoices.Add(trueChoice);
+            // m_nodeChoices.Add(falseChoice);
         }
 
         /// <summary>
@@ -134,7 +138,6 @@ namespace DS.Elements
             );
 
             inputPort.portName = "Dialogue Connection";
-
             inputContainer.Add(inputPort);
 
             // Create main condition container
@@ -313,34 +316,32 @@ namespace DS.Elements
             extensionContainer.Add(conditionContainer);
 
             // Initialize visible fields based on current operation type
-            UpdateVisibleFields();
-
-            // Initialize preference dropdown
-            PopulatePreferenceDropdown();
-
-            // Create output ports for each choice path
+            UpdateVisibleFields(); // Initialize preference dropdown
+            PopulatePreferenceDropdown(); // Create output ports for each choice path
             outputContainer.Clear();
-            // Always create two output ports: True and False, for all condition types
-            // But allow the node to function if only one is present (user can disconnect one in the editor)
-            var existingPorts = outputContainer.Children().ToList();
-            bool hasTrue = existingPorts.Any(p => (p as Port)?.portName == "True");
-            bool hasFalse = existingPorts.Any(p => (p as Port)?.portName == "False");
 
-            if (!hasTrue)
+            // Commented out True/False logic - using single Next Dialogue output
+            // bool hasTrueChoice = m_nodeChoices.Any(choice => choice.m_choiceTextData == "True");
+            // bool hasFalseChoice = m_nodeChoices.Any(choice => choice.m_choiceTextData == "False");
+
+            // if (!hasTrueChoice)
+            // {
+            //     var trueChoice = new DSChoiceSaveData { m_choiceTextData = "True" };
+            //     m_nodeChoices.Add(trueChoice);
+            // }
+            // if (!hasFalseChoice)
+            // {
+            //     var falseChoice = new DSChoiceSaveData { m_choiceTextData = "False" };
+            //     m_nodeChoices.Add(falseChoice);
+            // }
+
+            // Create ports for all choices and link them properly
+            foreach (DSChoiceSaveData choice in m_nodeChoices)
             {
-                var trueChoice = new DSChoiceSaveData { m_choiceTextData = "True" };
-                Port truePort = this.CreatePort("True");
-                truePort.userData = trueChoice;
-                outputContainer.Add(truePort);
+                Port choicePort = this.CreatePort(choice.m_choiceTextData);
+                choicePort.userData = choice;
+                outputContainer.Add(choicePort);
             }
-            if (!hasFalse)
-            {
-                var falseChoice = new DSChoiceSaveData { m_choiceTextData = "False" };
-                Port falsePort = this.CreatePort("False");
-                falsePort.userData = falseChoice;
-                outputContainer.Add(falsePort);
-            }
-            // If user removed one port, only the remaining port will be present and functional
 
             // Update the visual state of the node
             RefreshExpandedState();
