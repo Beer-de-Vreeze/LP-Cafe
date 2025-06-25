@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8656580f96a63714d889c7daeb915b7a, type: 3}
+  m_Name: Q1
+  m_EditorClassIdentifier: 
+  <m_dialogueNameData>k__BackingField: Q1
+  <m_dialogueTextData>k__BackingField: So how about you start?
+  <m_dialogueChoiceData>k__BackingField:
+  - <m_dialogueChoiceText>k__BackingField: Why are you in complete armored leather?
+      It's like... 26 degrees in here... it's mid summer.
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: c074bd1548d5cb24382e4c6c8d4b2b76, type: 2}
+  - <m_dialogueChoiceText>k__BackingField: Do the tattoo's I see peeking out under
+      vest have any meaning? Must've hurt, if they're on your throat.
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 91f7186fa098c5940ab1fd169171c126, type: 2}
+  - <m_dialogueChoiceText>k__BackingField: Don't you love the sound of the little
+      jingle the door makes, when a new customer walks in?
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: b96fd682beca2c449a4418aa16207e20, type: 2}
+  - <m_dialogueChoiceText>k__BackingField: Do you ever like go out? Like clubs and
+      stuff?
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: ac74b7fe9756eb54fa3d78db34360ac0, type: 2}
+  <m_bachelorImageData>k__BackingField: {fileID: 21300000, guid: 35a4b7bef345b3f4db947b0e9547a2a6, type: 3}
+  <m_dialogueAudioData>k__BackingField: {fileID: 0}
+  <m_dialogueTypeData>k__BackingField: 1
+  <m_isStartingDialogueData>k__BackingField: 1
+  <m_propertyToCheckData>k__BackingField: 
+  <m_comparisonTypeData>k__BackingField: 
+  <m_comparisonValueData>k__BackingField: 
+  <m_operationTypeData>k__BackingField: 0
+  <m_variableNameData>k__BackingField: 
+  <m_valueToSetData>k__BackingField: 
+  <m_loveScoreAmountData>k__BackingField: 0
+  <m_boolValueData>k__BackingField: 0
+  <m_loveMeterData>k__BackingField: {fileID: 0}
+  <m_bachelorData>k__BackingField: {fileID: 0}
+  <m_isLikePreferenceData>k__BackingField: 0
+  <m_selectedPreferenceData>k__BackingField: 

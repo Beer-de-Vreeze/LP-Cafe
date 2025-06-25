@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8656580f96a63714d889c7daeb915b7a, type: 3}
+  m_Name: QuestionHobbiesOrSports
+  m_EditorClassIdentifier: 
+  <m_dialogueNameData>k__BackingField: QuestionHobbiesOrSports
+  <m_dialogueTextData>k__BackingField: 'Do you have any hobbies or are you in any
+    sports clubs? '
+  <m_dialogueChoiceData>k__BackingField:
+  - <m_dialogueChoiceText>k__BackingField: No ew? working out??
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: d00b1810df804414bb08a2b61c43a291, type: 2}
+  - <m_dialogueChoiceText>k__BackingField: does shopping at the mall count for sport?
+      I can also be found in a casino in my weekends off.
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: d0a925e33053b8745ad81002059dd8bf, type: 2}
+  - <m_dialogueChoiceText>k__BackingField: yes I'm a crazzyyyy gym rat (not to mention
+      rodents...).
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 25a85e3d2781d3647b694999ee56be0d, type: 2}
+  - <m_dialogueChoiceText>k__BackingField: I go to the gym from time to time, but
+      I like to try out new classes.
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 60b8157157464c64a8bb7e9cbec86626, type: 2}
+  <m_bachelorImageData>k__BackingField: {fileID: 0}
+  <m_dialogueAudioData>k__BackingField: {fileID: 0}
+  <m_dialogueTypeData>k__BackingField: 1
+  <m_isStartingDialogueData>k__BackingField: 1
+  <m_propertyToCheckData>k__BackingField: 
+  <m_comparisonTypeData>k__BackingField: 
+  <m_comparisonValueData>k__BackingField: 
+  <m_operationTypeData>k__BackingField: 0
+  <m_variableNameData>k__BackingField: 
+  <m_valueToSetData>k__BackingField: 
+  <m_loveScoreAmountData>k__BackingField: 0
+  <m_boolValueData>k__BackingField: 0
+  <m_loveMeterData>k__BackingField: {fileID: 0}
+  <m_bachelorData>k__BackingField: {fileID: 0}
+  <m_isLikePreferenceData>k__BackingField: 0
+  <m_selectedPreferenceData>k__BackingField: 
