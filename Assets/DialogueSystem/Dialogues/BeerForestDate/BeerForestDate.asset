@@ -40,6 +40,14 @@ MonoBehaviour:
       - {fileID: 11400000, guid: ad7dec01c84d53340ae13c6dca137269, type: 2}
       - {fileID: 11400000, guid: a04165f35f00bb94aaedc1be30924b7b, type: 2}
       - {fileID: 11400000, guid: 6f681f7d2d99f724288b0b78ca1344ce, type: 2}
+      - {fileID: 11400000, guid: 12b2712c4bc43604f9f4f770c28e86fd, type: 2}
+      - {fileID: 11400000, guid: 2284a6b78f16d084eaca0eb2f987dbe1, type: 2}
+      - {fileID: 11400000, guid: 5f31c14fa11be0f438c5396ea89ecac8, type: 2}
+      - {fileID: 11400000, guid: 886004799b755a544b5fd1ba69cdf779, type: 2}
+      - {fileID: 11400000, guid: 064152b79c8e26f438687f5bf5b24e06, type: 2}
+      - {fileID: 11400000, guid: 9ec64214a5ea75e4bb6f09d196d0f7a8, type: 2}
+      - {fileID: 11400000, guid: 26c68c8a344f1cd48975fbcca141782f, type: 2}
+      - {fileID: 11400000, guid: fb1215fe4d960c643b9a8fa7b386ceb0, type: 2}
       - {fileID: 11400000, guid: 6ae1ab62865f5af43af4707860abd887, type: 2}
       - {fileID: 11400000, guid: e3cd5527e0eb97045a23cf8f2bffc59e, type: 2}
       - {fileID: 11400000, guid: b809de79059bf0d4cab55e123e0c8815, type: 2}
@@ -49,12 +57,4 @@ MonoBehaviour:
       - {fileID: 11400000, guid: d5fbb9c6870134247883fe44aca9dbfa, type: 2}
       - {fileID: 11400000, guid: 44078d8a96712db43a47da1210e28dd2, type: 2}
       - {fileID: 11400000, guid: f1072835783d23f4a8821e496461effd, type: 2}
-      - {fileID: 11400000, guid: 12b2712c4bc43604f9f4f770c28e86fd, type: 2}
-      - {fileID: 11400000, guid: 2284a6b78f16d084eaca0eb2f987dbe1, type: 2}
-      - {fileID: 11400000, guid: 5f31c14fa11be0f438c5396ea89ecac8, type: 2}
-      - {fileID: 11400000, guid: 886004799b755a544b5fd1ba69cdf779, type: 2}
-      - {fileID: 11400000, guid: 064152b79c8e26f438687f5bf5b24e06, type: 2}
-      - {fileID: 11400000, guid: 9ec64214a5ea75e4bb6f09d196d0f7a8, type: 2}
-      - {fileID: 11400000, guid: 26c68c8a344f1cd48975fbcca141782f, type: 2}
-      - {fileID: 11400000, guid: fb1215fe4d960c643b9a8fa7b386ceb0, type: 2}
   <m_containerUngroupedDialoguesData>k__BackingField: []

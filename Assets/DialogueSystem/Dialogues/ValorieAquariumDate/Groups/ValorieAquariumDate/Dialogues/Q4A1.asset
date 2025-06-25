@@ -17,7 +17,7 @@ MonoBehaviour:
     line.
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Next Dialogue
-    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: ad84bc473b4ea1b4e8c9c228f30a10c8, type: 2}
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: be588ff8d7e0ec042bfc2306ee93afab, type: 2}
   <m_bachelorImageData>k__BackingField: {fileID: 21300000, guid: c5cf4cce892c8cf439b866953f89e346, type: 3}
   <m_dialogueAudioData>k__BackingField: {fileID: 0}
   <m_dialogueTypeData>k__BackingField: 0

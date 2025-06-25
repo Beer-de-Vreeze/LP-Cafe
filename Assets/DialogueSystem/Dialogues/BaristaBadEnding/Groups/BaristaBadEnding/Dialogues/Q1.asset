@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8656580f96a63714d889c7daeb915b7a, type: 3}
+  m_Name: Q1
+  m_EditorClassIdentifier: 
+  <m_dialogueNameData>k__BackingField: Q1
+  <m_dialogueTextData>k__BackingField: What would you like?
+  <m_dialogueChoiceData>k__BackingField:
+  - <m_dialogueChoiceText>k__BackingField: I think an iced coffee with salted caramel
+      flavour would really cheer me up.
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 5811f5d5a8bee84468cebc0182573106, type: 2}
+  - <m_dialogueChoiceText>k__BackingField: Can I just have a latte or something?...
+      thank you.
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 044a156b1911fdb479db461484d04dad, type: 2}
+  - <m_dialogueChoiceText>k__BackingField: Can you add liquor to whatever your favorite
+      drink is?
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 6edd58abdb928534f931288ed6b4a3c4, type: 2}
+  - <m_dialogueChoiceText>k__BackingField: I don't know, you pick something.
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: f10c095da9dd2cc4e9147ceff82d1ea8, type: 2}
+  <m_bachelorImageData>k__BackingField: {fileID: 0}
+  <m_dialogueAudioData>k__BackingField: {fileID: 0}
+  <m_dialogueTypeData>k__BackingField: 1
+  <m_isStartingDialogueData>k__BackingField: 1
+  <m_propertyToCheckData>k__BackingField: 
+  <m_comparisonTypeData>k__BackingField: 
+  <m_comparisonValueData>k__BackingField: 
+  <m_operationTypeData>k__BackingField: 0
+  <m_variableNameData>k__BackingField: 
+  <m_valueToSetData>k__BackingField: 
+  <m_loveScoreAmountData>k__BackingField: 0
+  <m_boolValueData>k__BackingField: 0
+  <m_loveMeterData>k__BackingField: {fileID: 0}
+  <m_bachelorData>k__BackingField: {fileID: 0}
+  <m_isLikePreferenceData>k__BackingField: 0
+  <m_selectedPreferenceData>k__BackingField: 

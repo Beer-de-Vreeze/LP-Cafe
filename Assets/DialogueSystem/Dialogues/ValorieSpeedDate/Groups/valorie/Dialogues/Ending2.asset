@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Ending2
   m_EditorClassIdentifier: 
   <m_dialogueNameData>k__BackingField: Ending2
-  <m_dialogueTextData>k__BackingField: 
+  <m_dialogueTextData>k__BackingField: ' '
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Next Dialogue
     <m_nextDialogue>k__BackingField: {fileID: 0}

@@ -49,7 +49,6 @@ MonoBehaviour:
       - {fileID: 11400000, guid: ab161aa6b5cd594458db56ccedba578a, type: 2}
       - {fileID: 11400000, guid: 66a14cb2faa6a4c40bcc492f63918dcc, type: 2}
       - {fileID: 11400000, guid: 7e72ff800fbac5040833e6f2ee773a85, type: 2}
-      - {fileID: 11400000, guid: cda9e8692ecf241489bcae4864454f3f, type: 2}
       - {fileID: 11400000, guid: d104bd5a1d1141841bfabc982e71a0dd, type: 2}
       - {fileID: 11400000, guid: 4c79afd27c86e7848b2ec76df430faa1, type: 2}
       - {fileID: 11400000, guid: c577406713dde35418230c13058ba076, type: 2}
@@ -58,4 +57,5 @@ MonoBehaviour:
       - {fileID: 11400000, guid: 21793f5c78c145f42b0bc8847199e80f, type: 2}
       - {fileID: 11400000, guid: 9384e156bef90e14f845e86ba8b0ee59, type: 2}
       - {fileID: 11400000, guid: fbd358fde8d044c4391b421961a65051, type: 2}
+      - {fileID: 11400000, guid: cda9e8692ecf241489bcae4864454f3f, type: 2}
   <m_containerUngroupedDialoguesData>k__BackingField: []

@@ -16,7 +16,7 @@ MonoBehaviour:
   <m_graphGroupsData>k__BackingField:
   - <m_groupIDData>k__BackingField: d4a6cc8a-cfe1-468a-8206-8bf966be57aa
     <m_groupNameData>k__BackingField: SpeedDateBeer
-    <m_groupPositionData>k__BackingField: {x: -1270, y: 13.333328}
+    <m_groupPositionData>k__BackingField: {x: -1270.0001, y: 13.333332}
   <m_graphNodesData>k__BackingField:
   - <m_nodeIDData>k__BackingField: 4387ed9d-ed71-49c2-bb1a-6f48abf09908
     <m_nodeNameData>k__BackingField: Tasty
@@ -1425,7 +1425,7 @@ MonoBehaviour:
     <m_nodeNameData>k__BackingField: ButtonEmpty
     <m_nodeBachelorImageData>k__BackingField: {fileID: 0}
     <m_nodeAudioLinesData>k__BackingField: {fileID: 0}
-    <m_nodeTextData>k__BackingField: 
+    <m_nodeTextData>k__BackingField: ' '
     <m_nodeChoicesData>k__BackingField:
     - <m_choiceTextData>k__BackingField: Next Dialogue
       <m_choiceNodeIDData>k__BackingField: 
