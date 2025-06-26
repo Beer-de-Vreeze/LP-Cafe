@@ -17,7 +17,7 @@ MonoBehaviour:
     for you... and that says something."
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Next Dialogue
-    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 1ad8a459a9d2cbb49a64da845a096918, type: 2}
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 2117007a30e1c724890abfe84afd8906, type: 2}
   <m_bachelorImageData>k__BackingField: {fileID: 21300000, guid: 35a4b7bef345b3f4db947b0e9547a2a6, type: 3}
   <m_dialogueAudioData>k__BackingField: {fileID: 0}
   <m_dialogueTypeData>k__BackingField: 0

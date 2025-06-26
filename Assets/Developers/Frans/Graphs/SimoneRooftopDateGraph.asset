@@ -16,7 +16,7 @@ MonoBehaviour:
   <m_graphGroupsData>k__BackingField:
   - <m_groupIDData>k__BackingField: ad55f0e4-091a-47cd-8a9e-8ba56f412318
     <m_groupNameData>k__BackingField: SimoneRooftopDate
-    <m_groupPositionData>k__BackingField: {x: 3503.9998, y: -921.3333}
+    <m_groupPositionData>k__BackingField: {x: 3503.9995, y: -921.3334}
   <m_graphNodesData>k__BackingField:
   - <m_nodeIDData>k__BackingField: 36bbf4c3-6bfa-42e2-82c7-9992dd2db554
     <m_nodeNameData>k__BackingField: Q2L1
@@ -261,8 +261,8 @@ MonoBehaviour:
     - <m_choiceTextData>k__BackingField: Not really, you make choices and they lead
         you further in life and that's the end
       <m_choiceNodeIDData>k__BackingField: 506f52b6-0957-4f21-ba60-12db8a230f36
-    - <m_choiceTextData>k__BackingField: If there was a reset button I wouldn't have
-        gone here and star anew with someone else.
+    - <m_choiceTextData>k__BackingField: If there was a reset button I wouldn't be
+        here and star anew with someone else.
       <m_choiceNodeIDData>k__BackingField: e1139403-1274-4c7c-a975-11a617b7c687
     <m_nodeGroupIDData>k__BackingField: ad55f0e4-091a-47cd-8a9e-8ba56f412318
     <m_dialogueTypeData>k__BackingField: 1
@@ -574,7 +574,7 @@ MonoBehaviour:
     <m_nodeBachelorImageData>k__BackingField: {fileID: 21300000, guid: 1bf1240224094ac4c98e6c1f7df08010, type: 3}
     <m_nodeAudioLinesData>k__BackingField: {fileID: 0}
     <m_nodeTextData>k__BackingField: "*Time seems to reset before your eyes, you
-      find yourself back at the caf\xE9. \nYou must've zoned out for a second there.
+      find yourself back at the cafe. \nYou must've zoned out for a second there.
       \nYou should start your date!"
     <m_nodeChoicesData>k__BackingField:
     - <m_choiceTextData>k__BackingField: Next Dialogue

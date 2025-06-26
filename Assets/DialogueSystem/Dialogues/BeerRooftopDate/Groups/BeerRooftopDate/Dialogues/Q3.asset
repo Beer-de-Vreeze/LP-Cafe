@@ -21,11 +21,11 @@ MonoBehaviour:
   - <m_dialogueChoiceText>k__BackingField: I don't... don't think clouds have feelings-
       they're inanimate  objects.
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: c6b1a899f5fa5b046998023785836bd0, type: 2}
-  - <m_dialogueChoiceText>k__BackingField: Nothing is real, everything is a collection
-      of matter we give a name to, so they're not lonely.
+  - <m_dialogueChoiceText>k__BackingField: 'Nha, nothing is real, everything is a
+      collection of matter we give a name to. '
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: ee242090ac1777c47a4a0a9d04590613, type: 2}
   - <m_dialogueChoiceText>k__BackingField: '*You stare at the sky and get lost in
-      the different shades of the clouds. The sunset is beautiful tonight.'
+      the different shades of the clouds. '
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 7a4a1434167b7ee418db6b90fc526b97, type: 2}
   <m_bachelorImageData>k__BackingField: {fileID: 21300000, guid: 4d7a66a9cea93b246a1057f95ed0764f, type: 3}
   <m_dialogueAudioData>k__BackingField: {fileID: 0}

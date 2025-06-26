@@ -15,7 +15,7 @@ MonoBehaviour:
   <m_dialogueNameData>k__BackingField: intro
   <m_dialogueTextData>k__BackingField: "The forest? really? \r\nWhere is the road,
     the fresh smell of gasoline and beers?\r\nWas this disturbing place really the
-    best idea you could manage in that brain of yours? \r\nA swamp?\nI love nature
+    best idea you could manage in that brain of yours? \r\nA swamp? I love nature
     but not whatever this place is."
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Next Dialogue

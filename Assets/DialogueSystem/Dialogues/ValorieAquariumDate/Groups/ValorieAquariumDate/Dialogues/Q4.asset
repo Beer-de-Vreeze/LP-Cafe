@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Q4
   m_EditorClassIdentifier: 
   <m_dialogueNameData>k__BackingField: Q4
-  <m_dialogueTextData>k__BackingField: Do you think those fish ever get bored? Or
-    would they be watching us like we watch them?
+  <m_dialogueTextData>k__BackingField: Or would they be watching us like we watch
+    them?
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: I don't know, I only have eyes on you.
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: abfc5289cb28913439003c47f1bdc77e, type: 2}

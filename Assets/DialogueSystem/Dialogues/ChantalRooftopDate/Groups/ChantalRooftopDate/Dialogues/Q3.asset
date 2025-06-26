@@ -24,8 +24,8 @@ MonoBehaviour:
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 08696005d3531e846a45284c9471b434, type: 2}
   - <m_dialogueChoiceText>k__BackingField: I thought you looked kind of basic.
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: dd84d215f1fa3bc49a04f29c4df26770, type: 2}
-  - <m_dialogueChoiceText>k__BackingField: To be honest I wasn't really focused on
-      you, there was someone else there that I originally w-
+  - <m_dialogueChoiceText>k__BackingField: To be honest I wasn't focused on you,
+      there was someone else there..
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: b76b16a265782764ead61dbf945a540f, type: 2}
   <m_bachelorImageData>k__BackingField: {fileID: 21300000, guid: 84a876f81e079bf40beb58c595c98cf5, type: 3}
   <m_dialogueAudioData>k__BackingField: {fileID: 0}

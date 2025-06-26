@@ -24,7 +24,7 @@ MonoBehaviour:
       enough anything will seem nice to you.
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: a28c7ce7e75ec0c4e991acfb5159049e, type: 2}
   - <m_dialogueChoiceText>k__BackingField: I just thought a dinner under the setting
-      sun would be nice, isn't that a beautiful view?
+      sun would be nice.
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 3e44ad59dcaad254f8bce4c3156d5302, type: 2}
   <m_bachelorImageData>k__BackingField: {fileID: 21300000, guid: c5cf4cce892c8cf439b866953f89e346, type: 3}
   <m_dialogueAudioData>k__BackingField: {fileID: 0}

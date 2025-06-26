@@ -10,14 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8656580f96a63714d889c7daeb915b7a, type: 3}
-  m_Name: Q2A3
+  m_Name: IntervalQ3
   m_EditorClassIdentifier: 
-  <m_dialogueNameData>k__BackingField: Q2A3
-  <m_dialogueTextData>k__BackingField: That's nice, you can be my backpack for a
-    ride, depending on how this date goes.
+  <m_dialogueNameData>k__BackingField: IntervalQ3
+  <m_dialogueTextData>k__BackingField: These woods suck.
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Next Dialogue
-    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 7b408c8010bd4844da3a0f86838104c1, type: 2}
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 1325d7da563563d4ca0da2c8d161c0a4, type: 2}
   <m_bachelorImageData>k__BackingField: {fileID: 21300000, guid: 35a4b7bef345b3f4db947b0e9547a2a6, type: 3}
   <m_dialogueAudioData>k__BackingField: {fileID: 0}
   <m_dialogueTypeData>k__BackingField: 0

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <m_dialogueNameData>k__BackingField: Q1A1
   <m_dialogueTextData>k__BackingField: "I see you remembered what I liked back at
-    that caf\xE9 we met at. \r\nSmart move of yours. \r\nThis bottle better be fancier
+    that cafe we met at. \r\nSmart move of yours. \r\nThis bottle better be fancier
     though, we're at a restaurant after all."
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Next Dialogue

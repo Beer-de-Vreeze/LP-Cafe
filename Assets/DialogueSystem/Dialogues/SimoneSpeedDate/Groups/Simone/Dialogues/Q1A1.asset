@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Q1A1
   m_EditorClassIdentifier: 
   <m_dialogueNameData>k__BackingField: Q1A1
-  <m_dialogueTextData>k__BackingField: "That sounds lovely, I also don't like bitter
-    flavors. \nBut the sweet aftertaste of caramel makes me feel warm."
+  <m_dialogueTextData>k__BackingField: "That sounds lovely, i dont like the bitter
+    after taste,\n but the sweet flavour of caramel makes me feel warm."
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Next Dialogue
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 48450f8c3f02f5f4aa6f51d0afaddead, type: 2}

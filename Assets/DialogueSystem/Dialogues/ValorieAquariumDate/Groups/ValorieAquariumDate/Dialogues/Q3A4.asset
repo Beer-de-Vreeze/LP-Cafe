@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <m_dialogueNameData>k__BackingField: Q3A4
   <m_dialogueTextData>k__BackingField: Personally I'd rather get killed by a shark
-    or drown in the tank than go into nan all pink building.
+    or drown in the tank than go into an all pink building.
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Next Dialogue
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 3e5f0a15ac7c4cc4e919b8ac25af0796, type: 2}

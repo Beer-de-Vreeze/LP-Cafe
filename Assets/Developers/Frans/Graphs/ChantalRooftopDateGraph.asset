@@ -16,7 +16,7 @@ MonoBehaviour:
   <m_graphGroupsData>k__BackingField:
   - <m_groupIDData>k__BackingField: 955c72d5-0b24-4758-840b-00e03305c39c
     <m_groupNameData>k__BackingField: ChantalRooftopDate
-    <m_groupPositionData>k__BackingField: {x: 17.999495, y: 108.66666}
+    <m_groupPositionData>k__BackingField: {x: 18.000002, y: 108.66666}
   <m_graphNodesData>k__BackingField:
   - <m_nodeIDData>k__BackingField: 1c2de1af-3f78-48eb-9681-6a1aabbfe0da
     <m_nodeNameData>k__BackingField: Intro
@@ -217,7 +217,7 @@ MonoBehaviour:
     <m_nodeBachelorImageData>k__BackingField: {fileID: 21300000, guid: 6b65e191be718f247b15d5ed707111df, type: 3}
     <m_nodeAudioLinesData>k__BackingField: {fileID: 0}
     <m_nodeTextData>k__BackingField: "I see you remembered what I liked back at that
-      caf\xE9 we met at. \r\nSmart move of yours. \r\nThis bottle better be fancier
+      cafe we met at. \r\nSmart move of yours. \r\nThis bottle better be fancier
       though, we're at a restaurant after all."
     <m_nodeChoicesData>k__BackingField:
     - <m_choiceTextData>k__BackingField: Next Dialogue
@@ -275,8 +275,7 @@ MonoBehaviour:
       <m_choiceNodeIDData>k__BackingField: 41d3972c-9ddb-4225-b6b2-bcdcf5be2af0
     - <m_choiceTextData>k__BackingField: Maybe that means we're destined to be together.
       <m_choiceNodeIDData>k__BackingField: 009e562a-5637-405d-98df-e8673a763249
-    - <m_choiceTextData>k__BackingField: "Sometimes I get a weird sense of d\xE9j\xE0
-        vu."
+    - <m_choiceTextData>k__BackingField: Sometimes I get a weird sense of deja vu.
       <m_choiceNodeIDData>k__BackingField: 3da6913e-335d-4310-a4f2-b7fc45bf565c
     - <m_choiceTextData>k__BackingField: I think you're seeing things, how much wine
         have you had?
@@ -666,8 +665,8 @@ MonoBehaviour:
       <m_choiceNodeIDData>k__BackingField: 21d19310-9d10-4a3f-9162-7a53a7c1fc9b
     - <m_choiceTextData>k__BackingField: I thought you looked kind of basic.
       <m_choiceNodeIDData>k__BackingField: 86d47b55-023a-482f-ace1-0cadcc730364
-    - <m_choiceTextData>k__BackingField: To be honest I wasn't really focused on
-        you, there was someone else there that I originally w-
+    - <m_choiceTextData>k__BackingField: To be honest I wasn't focused on you, there
+        was someone else there..
       <m_choiceNodeIDData>k__BackingField: 4eca74a2-b254-4b82-9562-421108bbbabe
     <m_nodeGroupIDData>k__BackingField: 955c72d5-0b24-4758-840b-00e03305c39c
     <m_dialogueTypeData>k__BackingField: 1

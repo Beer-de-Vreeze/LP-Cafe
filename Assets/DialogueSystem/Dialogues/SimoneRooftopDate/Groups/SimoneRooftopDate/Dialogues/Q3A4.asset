@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <m_dialogueNameData>k__BackingField: Q3A4
   <m_dialogueTextData>k__BackingField: "*Time seems to reset before your eyes, you
-    find yourself back at the caf\xE9. \nYou must've zoned out for a second there.
-    \nYou should start your date!"
+    find yourself back at the cafe. \nYou must've zoned out for a second there. \nYou
+    should start your date!"
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Next Dialogue
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: ca9ec052e8e34a84b8da81f9c9af4447, type: 2}

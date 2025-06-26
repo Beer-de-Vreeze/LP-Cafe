@@ -20,8 +20,8 @@ MonoBehaviour:
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 66e1ec92681926b489666e33ed084cb5, type: 2}
   - <m_dialogueChoiceText>k__BackingField: I thought it was a beautiful place.
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 8cf08ff175b89024f977130f658def18, type: 2}
-  - <m_dialogueChoiceText>k__BackingField: Enjoy some nature for once, when have
-      you ever touched grass? At least this is all natural, unlike you.
+  - <m_dialogueChoiceText>k__BackingField: Enjoy some nature for once.  At least
+      this is all natural, unlike you.
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: d1dea73d76879404aaa80e5c0ee0600b, type: 2}
   - <m_dialogueChoiceText>k__BackingField: I'm sorry, I'll make it up to you, just
       stay a little bit longer. Okay?

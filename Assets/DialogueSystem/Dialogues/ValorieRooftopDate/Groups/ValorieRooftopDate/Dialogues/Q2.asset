@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Q2
   m_EditorClassIdentifier: 
   <m_dialogueNameData>k__BackingField: Q2
-  <m_dialogueTextData>k__BackingField: So- what's your poison? if you say white wine,
-    I'm throwing you over the railing.
+  <m_dialogueTextData>k__BackingField: If you say white wine, I'm throwing you over
+    the railing.
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Erm- wh...white wine?
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: e38ace09c8bcc604391940f941096598, type: 2}

@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: Q2
   m_EditorClassIdentifier: 
   <m_dialogueNameData>k__BackingField: Q2
-  <m_dialogueTextData>k__BackingField: "\rI brought us some tea, it's hibiscus with
-    rose, I found it fitting for the location, would you like some?"
+  <m_dialogueTextData>k__BackingField: "\rWould you like some?"
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Gross.... *gags
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 5c5a4a001d0950c4084e101aec94e6b0, type: 2}

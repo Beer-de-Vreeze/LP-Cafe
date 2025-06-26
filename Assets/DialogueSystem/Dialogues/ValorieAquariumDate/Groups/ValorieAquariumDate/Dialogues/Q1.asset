@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Q1
   m_EditorClassIdentifier: 
   <m_dialogueNameData>k__BackingField: Q1
-  <m_dialogueTextData>k__BackingField: If you were one of these fish, would you be
-    the kind that kills their mate or would you die alone?
+  <m_dialogueTextData>k__BackingField: would you be the kind that kills their mate
+    or would you die alone?
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: That's an oddly disturbing question.
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 771ed27d14fed394fac50d13727e81a9, type: 2}

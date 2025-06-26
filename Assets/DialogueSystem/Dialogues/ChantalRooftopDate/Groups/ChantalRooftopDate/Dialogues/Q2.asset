@@ -21,8 +21,8 @@ MonoBehaviour:
   - <m_dialogueChoiceText>k__BackingField: Maybe that means we're destined to be
       together.
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: d22aa9083c1a9c0469e3120a7160d91f, type: 2}
-  - <m_dialogueChoiceText>k__BackingField: "Sometimes I get a weird sense of d\xE9j\xE0
-      vu."
+  - <m_dialogueChoiceText>k__BackingField: Sometimes I get a weird sense of deja
+      vu.
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 281559e416366f144aca415e40f6002e, type: 2}
   - <m_dialogueChoiceText>k__BackingField: I think you're seeing things, how much
       wine have you had?

@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: interval
   m_EditorClassIdentifier: 
   <m_dialogueNameData>k__BackingField: interval
-  <m_dialogueTextData>k__BackingField: let's order something, I've been off the good
-    stuff for too long.
+  <m_dialogueTextData>k__BackingField: 'let''s order something, I''ve been off the
+    good stuff for too long.
+
+    So- what''s your poison?'
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Next Dialogue
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 8b31121094d6312459bd3456bec4f213, type: 2}

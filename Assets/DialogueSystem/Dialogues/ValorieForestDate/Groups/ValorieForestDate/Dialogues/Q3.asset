@@ -13,13 +13,11 @@ MonoBehaviour:
   m_Name: Q3
   m_EditorClassIdentifier: 
   <m_dialogueNameData>k__BackingField: Q3
-  <m_dialogueTextData>k__BackingField: 'These woods suck, there''s like no way I
-    could ride here with a bike. What were you even thinking?
-
-'
+  <m_dialogueTextData>k__BackingField: There's like no way I could ride here with
+    a bike. What were you even thinking?
   <m_dialogueChoiceData>k__BackingField:
-  - <m_dialogueChoiceText>k__BackingField: ' I was thinking go touch some grass instead
-      of inhaling gasoline and tripping on adrenaline.'
+  - <m_dialogueChoiceText>k__BackingField: Go touch some grass instead of inhaling
+      gasoline and tripping on adrenaline.
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: cefcf970a03a80b40bc0635351d00dc2, type: 2}
   - <m_dialogueChoiceText>k__BackingField: Don't you like the beautiful view?
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 1e23e63bb17f87043bb53b3810abfa69, type: 2}

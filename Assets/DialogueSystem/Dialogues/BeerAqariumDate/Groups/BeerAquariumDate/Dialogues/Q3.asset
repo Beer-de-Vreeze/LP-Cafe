@@ -24,8 +24,8 @@ MonoBehaviour:
   - <m_dialogueChoiceText>k__BackingField: I wouldn't wanna be responsible for a
       creature like that.
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 971b7098a3a2e924294fd76d6be37969, type: 2}
-  - <m_dialogueChoiceText>k__BackingField: How would I be able to go travel and go
-      to conventions, who would take care of all the pets?
+  - <m_dialogueChoiceText>k__BackingField: How can I travel and go to conventions,
+      who would take care of the pets?
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 324efea694838be448e6604a652de190, type: 2}
   <m_bachelorImageData>k__BackingField: {fileID: 21300000, guid: 4d7a66a9cea93b246a1057f95ed0764f, type: 3}
   <m_dialogueAudioData>k__BackingField: {fileID: 0}
