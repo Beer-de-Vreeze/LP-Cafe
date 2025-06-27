@@ -17,7 +17,7 @@ MonoBehaviour:
     lifestyle is important and I do so love to hear the morning birds."
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Next Dialogue
-    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 2f176ec3224674b47ab35f7d948f0cec, type: 2}
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 73af95a6575f3c44f8fb983cc5a61c07, type: 2}
   <m_bachelorImageData>k__BackingField: {fileID: 21300000, guid: 1b752948b3bd324418758c36f01fb7d3, type: 3}
   <m_dialogueAudioData>k__BackingField: {fileID: 0}
   <m_dialogueTypeData>k__BackingField: 0

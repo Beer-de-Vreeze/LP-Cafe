@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <m_dialogueNameData>k__BackingField: interval2
   <m_dialogueTextData>k__BackingField: "Wouldn't this be the most adorable location
-    to have a little cabin? \nWith the cattle always on by the heard and a small
-    floral garden in the back?"
+    to have a little cabin? \nWith the cattle always close by and a small floral
+    garden in the back?"
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Next Dialogue
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 6e192005bc09565489ceb08335bd4c49, type: 2}
