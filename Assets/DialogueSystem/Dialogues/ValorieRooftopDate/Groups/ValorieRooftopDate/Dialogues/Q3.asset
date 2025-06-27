@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8656580f96a63714d889c7daeb915b7a, type: 3}
+  m_Name: Q3
+  m_EditorClassIdentifier: 
+  <m_dialogueNameData>k__BackingField: Q3
+  <m_dialogueTextData>k__BackingField: So what would be the most trouble you'd let
+    me talk you into?
+  <m_dialogueChoiceData>k__BackingField:
+  - <m_dialogueChoiceText>k__BackingField: You're trouble enough.
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: b91a3242ff6a406469aaa24f13b00cbc, type: 2}
+  - <m_dialogueChoiceText>k__BackingField: I'd go on a ride with you, that's dangerous
+      enough.
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 1604cb60107e39c4d83f64fd601136e3, type: 2}
+  - <m_dialogueChoiceText>k__BackingField: I'd do whatever you'd want me to.
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 3d47d130ebb0a56468d4b8d7a38720fa, type: 2}
+  - <m_dialogueChoiceText>k__BackingField: Bolt of you to assume I'd do anything
+      with you.
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: d7f931c04347a9b4fba428ac952ec5f9, type: 2}
+  <m_bachelorImageData>k__BackingField: {fileID: 21300000, guid: 35a4b7bef345b3f4db947b0e9547a2a6, type: 3}
+  <m_dialogueAudioData>k__BackingField: {fileID: 0}
+  <m_dialogueTypeData>k__BackingField: 1
+  <m_isStartingDialogueData>k__BackingField: 1
+  <m_propertyToCheckData>k__BackingField: 
+  <m_comparisonTypeData>k__BackingField: 
+  <m_comparisonValueData>k__BackingField: 
+  <m_operationTypeData>k__BackingField: 0
+  <m_variableNameData>k__BackingField: 
+  <m_valueToSetData>k__BackingField: 
+  <m_loveScoreAmountData>k__BackingField: 0
+  <m_boolValueData>k__BackingField: 0
+  <m_loveMeterData>k__BackingField: {fileID: 0}
+  <m_bachelorData>k__BackingField: {fileID: 0}
+  <m_isLikePreferenceData>k__BackingField: 0
+  <m_selectedPreferenceData>k__BackingField: 

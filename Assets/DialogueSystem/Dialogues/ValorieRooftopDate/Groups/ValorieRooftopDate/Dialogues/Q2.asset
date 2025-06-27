@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8656580f96a63714d889c7daeb915b7a, type: 3}
+  m_Name: Q2
+  m_EditorClassIdentifier: 
+  <m_dialogueNameData>k__BackingField: Q2
+  <m_dialogueTextData>k__BackingField: If you say white wine, I'm throwing you over
+    the railing.
+  <m_dialogueChoiceData>k__BackingField:
+  - <m_dialogueChoiceText>k__BackingField: Erm- wh...white wine?
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: e38ace09c8bcc604391940f941096598, type: 2}
+  - <m_dialogueChoiceText>k__BackingField: Oh I don't... I don't drink-
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: f07ff4ed0c20f69488135f22e9db7711, type: 2}
+  - <m_dialogueChoiceText>k__BackingField: Actually I just prefer a white mocha.
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: fa8b89b2ba2397b4e9f5549cebe51117, type: 2}
+  - <m_dialogueChoiceText>k__BackingField: Poison? What are you on about?
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 9ea0c7b85a4116e4eb2a0508573c6b00, type: 2}
+  <m_bachelorImageData>k__BackingField: {fileID: 21300000, guid: 35a4b7bef345b3f4db947b0e9547a2a6, type: 3}
+  <m_dialogueAudioData>k__BackingField: {fileID: 0}
+  <m_dialogueTypeData>k__BackingField: 1
+  <m_isStartingDialogueData>k__BackingField: 1
+  <m_propertyToCheckData>k__BackingField: 
+  <m_comparisonTypeData>k__BackingField: 
+  <m_comparisonValueData>k__BackingField: 
+  <m_operationTypeData>k__BackingField: 0
+  <m_variableNameData>k__BackingField: 
+  <m_valueToSetData>k__BackingField: 
+  <m_loveScoreAmountData>k__BackingField: 0
+  <m_boolValueData>k__BackingField: 0
+  <m_loveMeterData>k__BackingField: {fileID: 0}
+  <m_bachelorData>k__BackingField: {fileID: 0}
+  <m_isLikePreferenceData>k__BackingField: 0
+  <m_selectedPreferenceData>k__BackingField: 

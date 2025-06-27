@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8656580f96a63714d889c7daeb915b7a, type: 3}
+  m_Name: Q2
+  m_EditorClassIdentifier: 
+  <m_dialogueNameData>k__BackingField: Q2
+  <m_dialogueTextData>k__BackingField: I love going to the aquarium, it's like walking
+    through someone's dream!
+  <m_dialogueChoiceData>k__BackingField:
+  - <m_dialogueChoiceText>k__BackingField: Feels more like we're in a movie, or maybe
+      like a game?
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: dceb041ede92cca4395332efefd25658, type: 2}
+  - <m_dialogueChoiceText>k__BackingField: With you everything is a dream.
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 5f04a424000569d4f9856b9ba0903b2c, type: 2}
+  - <m_dialogueChoiceText>k__BackingField: More like a horrid nightmare.
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: f4ab314ab532fd4459e125935da48a4c, type: 2}
+  - <m_dialogueChoiceText>k__BackingField: Lucky for us this is reality.
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: dcc7cf955cf71e2459c46d38f6e212c9, type: 2}
+  <m_bachelorImageData>k__BackingField: {fileID: 21300000, guid: 1b752948b3bd324418758c36f01fb7d3, type: 3}
+  <m_dialogueAudioData>k__BackingField: {fileID: 0}
+  <m_dialogueTypeData>k__BackingField: 1
+  <m_isStartingDialogueData>k__BackingField: 1
+  <m_propertyToCheckData>k__BackingField: 
+  <m_comparisonTypeData>k__BackingField: 
+  <m_comparisonValueData>k__BackingField: 
+  <m_operationTypeData>k__BackingField: 0
+  <m_variableNameData>k__BackingField: 
+  <m_valueToSetData>k__BackingField: 
+  <m_loveScoreAmountData>k__BackingField: 0
+  <m_boolValueData>k__BackingField: 0
+  <m_loveMeterData>k__BackingField: {fileID: 0}
+  <m_bachelorData>k__BackingField: {fileID: 0}
+  <m_isLikePreferenceData>k__BackingField: 0
+  <m_selectedPreferenceData>k__BackingField: 

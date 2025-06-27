@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8656580f96a63714d889c7daeb915b7a, type: 3}
+  m_Name: Q1
+  m_EditorClassIdentifier: 
+  <m_dialogueNameData>k__BackingField: Q1
+  <m_dialogueTextData>k__BackingField: What do you even want to do here?!
+  <m_dialogueChoiceData>k__BackingField:
+  - <m_dialogueChoiceText>k__BackingField: Take her to walk further into the forest.
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 51279c6f077815f428ed9c39debf5f26, type: 2}
+  - <m_dialogueChoiceText>k__BackingField: Give her a present.
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 7035e0118db8a2d4a9266265fd9cdeb4, type: 2}
+  - <m_dialogueChoiceText>k__BackingField: Ask her what she would've liked to go
+      to if not the forest.
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: c9cda8f8f6803f843afa934418c82495, type: 2}
+  - <m_dialogueChoiceText>k__BackingField: Then what do you do with your dogs if
+      they have to go for a walk?
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 4e90fb98acfda04469da97b4cbf85b8c, type: 2}
+  <m_bachelorImageData>k__BackingField: {fileID: 21300000, guid: 0e52f8f5bd2a8aa4eae89e6137cf3d06, type: 3}
+  <m_dialogueAudioData>k__BackingField: {fileID: 0}
+  <m_dialogueTypeData>k__BackingField: 1
+  <m_isStartingDialogueData>k__BackingField: 1
+  <m_propertyToCheckData>k__BackingField: 
+  <m_comparisonTypeData>k__BackingField: 
+  <m_comparisonValueData>k__BackingField: 
+  <m_operationTypeData>k__BackingField: 0
+  <m_variableNameData>k__BackingField: 
+  <m_valueToSetData>k__BackingField: 
+  <m_loveScoreAmountData>k__BackingField: 0
+  <m_boolValueData>k__BackingField: 0
+  <m_loveMeterData>k__BackingField: {fileID: 0}
+  <m_bachelorData>k__BackingField: {fileID: 0}
+  <m_isLikePreferenceData>k__BackingField: 0
+  <m_selectedPreferenceData>k__BackingField: 

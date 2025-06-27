@@ -17,8 +17,8 @@ MonoBehaviour:
     to go. \r\nYou've come this far. \r\nApparently you've said all the right things."
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Next Dialogue
-    <m_nextDialogue>k__BackingField: {fileID: 0}
-  <m_bachelorImageData>k__BackingField: {fileID: 0}
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: e4b382cf032d7c745a21c3fef4615fdd, type: 2}
+  <m_bachelorImageData>k__BackingField: {fileID: 21300000, guid: 6ffe8caacb35ebc49a3fe4106b8afb48, type: 3}
   <m_dialogueAudioData>k__BackingField: {fileID: 0}
   <m_dialogueTypeData>k__BackingField: 0
   <m_isStartingDialogueData>k__BackingField: 1

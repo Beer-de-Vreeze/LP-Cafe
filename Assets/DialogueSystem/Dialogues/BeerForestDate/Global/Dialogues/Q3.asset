@@ -26,7 +26,7 @@ MonoBehaviour:
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: cca6d15ea7fa9104b9cf87740183fbb2, type: 2}
   - <m_dialogueChoiceText>k__BackingField: Who knows, maybe we'd get magical powers!
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 65ea005607786854d9392b5af6710659, type: 2}
-  <m_bachelorImageData>k__BackingField: {fileID: 0}
+  <m_bachelorImageData>k__BackingField: {fileID: 21300000, guid: 4d7a66a9cea93b246a1057f95ed0764f, type: 3}
   <m_dialogueAudioData>k__BackingField: {fileID: 0}
   <m_dialogueTypeData>k__BackingField: 1
   <m_isStartingDialogueData>k__BackingField: 1

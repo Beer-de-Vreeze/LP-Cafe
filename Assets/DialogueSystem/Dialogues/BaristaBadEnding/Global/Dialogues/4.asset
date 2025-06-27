@@ -16,8 +16,8 @@ MonoBehaviour:
   <m_dialogueTextData>k__BackingField: '*Mutters to self: For sure does NOT got it...'
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Next Dialogue
-    <m_nextDialogue>k__BackingField: {fileID: 0}
-  <m_bachelorImageData>k__BackingField: {fileID: 0}
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: bdbf6f6f612bf9e468dc49a16db3e1c9, type: 2}
+  <m_bachelorImageData>k__BackingField: {fileID: 21300000, guid: 6ffe8caacb35ebc49a3fe4106b8afb48, type: 3}
   <m_dialogueAudioData>k__BackingField: {fileID: 0}
   <m_dialogueTypeData>k__BackingField: 0
   <m_isStartingDialogueData>k__BackingField: 1

@@ -27,7 +27,7 @@ MonoBehaviour:
   - <m_dialogueChoiceText>k__BackingField: '*You stare at the sky and get lost in
       the different shades of the clouds. The sunset is beautiful tonight.'
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 1922e069e56e81a4d941c5f78d5b1511, type: 2}
-  <m_bachelorImageData>k__BackingField: {fileID: 0}
+  <m_bachelorImageData>k__BackingField: {fileID: 21300000, guid: 4d7a66a9cea93b246a1057f95ed0764f, type: 3}
   <m_dialogueAudioData>k__BackingField: {fileID: 0}
   <m_dialogueTypeData>k__BackingField: 1
   <m_isStartingDialogueData>k__BackingField: 1

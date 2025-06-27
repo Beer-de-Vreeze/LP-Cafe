@@ -25,7 +25,7 @@ MonoBehaviour:
   - <m_dialogueChoiceText>k__BackingField: Wanna see if you can fly? I can help you
       over?
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 9011bafba3af6f545bd158f4207085d4, type: 2}
-  <m_bachelorImageData>k__BackingField: {fileID: 0}
+  <m_bachelorImageData>k__BackingField: {fileID: 21300000, guid: 4d7a66a9cea93b246a1057f95ed0764f, type: 3}
   <m_dialogueAudioData>k__BackingField: {fileID: 0}
   <m_dialogueTypeData>k__BackingField: 1
   <m_isStartingDialogueData>k__BackingField: 1

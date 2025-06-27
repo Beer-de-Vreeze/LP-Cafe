@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8656580f96a63714d889c7daeb915b7a, type: 3}
+  m_Name: Q2
+  m_EditorClassIdentifier: 
+  <m_dialogueNameData>k__BackingField: Q2
+  <m_dialogueTextData>k__BackingField: "\rWould you like some?"
+  <m_dialogueChoiceData>k__BackingField:
+  - <m_dialogueChoiceText>k__BackingField: Gross.... *gags
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 5c5a4a001d0950c4084e101aec94e6b0, type: 2}
+  - <m_dialogueChoiceText>k__BackingField: Oh yea that sounds nice! can I have some
+      sugar with it?
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 4348dcda00ed37049b6dd4dadb37ac7d, type: 2}
+  - <m_dialogueChoiceText>k__BackingField: I'm allergic to hibiscus.... are you trying
+      to kill me?
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: f0a6fc05d7352674cb33b683a7fcdec2, type: 2}
+  - <m_dialogueChoiceText>k__BackingField: Sure I guess, it's nice you brought some.
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 7560ad1d4bc685143ae9979fd82865b9, type: 2}
+  <m_bachelorImageData>k__BackingField: {fileID: 21300000, guid: 1b752948b3bd324418758c36f01fb7d3, type: 3}
+  <m_dialogueAudioData>k__BackingField: {fileID: 0}
+  <m_dialogueTypeData>k__BackingField: 1
+  <m_isStartingDialogueData>k__BackingField: 1
+  <m_propertyToCheckData>k__BackingField: 
+  <m_comparisonTypeData>k__BackingField: 
+  <m_comparisonValueData>k__BackingField: 
+  <m_operationTypeData>k__BackingField: 0
+  <m_variableNameData>k__BackingField: 
+  <m_valueToSetData>k__BackingField: 
+  <m_loveScoreAmountData>k__BackingField: 0
+  <m_boolValueData>k__BackingField: 0
+  <m_loveMeterData>k__BackingField: {fileID: 0}
+  <m_bachelorData>k__BackingField: {fileID: 0}
+  <m_isLikePreferenceData>k__BackingField: 0
+  <m_selectedPreferenceData>k__BackingField: 

@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8656580f96a63714d889c7daeb915b7a, type: 3}
+  m_Name: Q4
+  m_EditorClassIdentifier: 
+  <m_dialogueNameData>k__BackingField: Q4
+  <m_dialogueTextData>k__BackingField: Or would they be watching us like we watch
+    them?
+  <m_dialogueChoiceData>k__BackingField:
+  - <m_dialogueChoiceText>k__BackingField: I don't know, I only have eyes on you.
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: abfc5289cb28913439003c47f1bdc77e, type: 2}
+  - <m_dialogueChoiceText>k__BackingField: I think they're too brain dead and simple
+      to understand complex emotion.
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: f62db69e3f79da241bc949a6592519b2, type: 2}
+  - <m_dialogueChoiceText>k__BackingField: Personally I just think they're vibing
+      and going with the flow.
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 41f7bf08513183d4ebda033bb25f688f, type: 2}
+  - <m_dialogueChoiceText>k__BackingField: Does it matter, not like they have much
+      choice anyways
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: d6032e1de65970f488ff47581d5f30a5, type: 2}
+  <m_bachelorImageData>k__BackingField: {fileID: 21300000, guid: 35a4b7bef345b3f4db947b0e9547a2a6, type: 3}
+  <m_dialogueAudioData>k__BackingField: {fileID: 0}
+  <m_dialogueTypeData>k__BackingField: 1
+  <m_isStartingDialogueData>k__BackingField: 1
+  <m_propertyToCheckData>k__BackingField: 
+  <m_comparisonTypeData>k__BackingField: 
+  <m_comparisonValueData>k__BackingField: 
+  <m_operationTypeData>k__BackingField: 0
+  <m_variableNameData>k__BackingField: 
+  <m_valueToSetData>k__BackingField: 
+  <m_loveScoreAmountData>k__BackingField: 0
+  <m_boolValueData>k__BackingField: 0
+  <m_loveMeterData>k__BackingField: {fileID: 0}
+  <m_bachelorData>k__BackingField: {fileID: 0}
+  <m_isLikePreferenceData>k__BackingField: 0
+  <m_selectedPreferenceData>k__BackingField: 

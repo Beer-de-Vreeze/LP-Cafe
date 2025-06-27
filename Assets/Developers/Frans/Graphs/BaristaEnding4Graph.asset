@@ -13,11 +13,14 @@ MonoBehaviour:
   m_Name: BaristaEnding4Graph
   m_EditorClassIdentifier: 
   <m_graphFileNameData>k__BackingField: BaristaEnding4
-  <m_graphGroupsData>k__BackingField: []
+  <m_graphGroupsData>k__BackingField:
+  - <m_groupIDData>k__BackingField: 61c0e621-eeef-453d-a8a1-dac70f4fa26d
+    <m_groupNameData>k__BackingField: BaristaEnding4
+    <m_groupPositionData>k__BackingField: {x: 596.6667, y: 472.6667}
   <m_graphNodesData>k__BackingField:
   - <m_nodeIDData>k__BackingField: fbaf7c7d-a9e6-454f-b269-9df268985d39
     <m_nodeNameData>k__BackingField: 1
-    <m_nodeBachelorImageData>k__BackingField: {fileID: 0}
+    <m_nodeBachelorImageData>k__BackingField: {fileID: 21300000, guid: 6ffe8caacb35ebc49a3fe4106b8afb48, type: 3}
     <m_nodeAudioLinesData>k__BackingField: {fileID: 0}
     <m_nodeTextData>k__BackingField: "You might wanna watch out with what you're
       doing.\r\nDon't worry, I already had your usual prepped. \r\nTold you you've
@@ -26,7 +29,7 @@ MonoBehaviour:
     <m_nodeChoicesData>k__BackingField:
     - <m_choiceTextData>k__BackingField: Next Dialogue
       <m_choiceNodeIDData>k__BackingField: 3d6faf8b-ee51-4f7f-bfbd-15544704b823
-    <m_nodeGroupIDData>k__BackingField: 
+    <m_nodeGroupIDData>k__BackingField: 61c0e621-eeef-453d-a8a1-dac70f4fa26d
     <m_dialogueTypeData>k__BackingField: 0
     <m_nodePositionData>k__BackingField: {x: 622, y: 531.3333}
     <m_nodePropertyToCheckData>k__BackingField: Love
@@ -45,14 +48,14 @@ MonoBehaviour:
     <m_enumSetter>k__BackingField: 0
   - <m_nodeIDData>k__BackingField: 3d6faf8b-ee51-4f7f-bfbd-15544704b823
     <m_nodeNameData>k__BackingField: 2
-    <m_nodeBachelorImageData>k__BackingField: {fileID: 0}
+    <m_nodeBachelorImageData>k__BackingField: {fileID: 21300000, guid: 6ffe8caacb35ebc49a3fe4106b8afb48, type: 3}
     <m_nodeAudioLinesData>k__BackingField: {fileID: 0}
     <m_nodeTextData>k__BackingField: "I wish you the best of luck, only one left
       to go. \r\nYou've come this far. \r\nApparently you've said all the right things."
     <m_nodeChoicesData>k__BackingField:
     - <m_choiceTextData>k__BackingField: Next Dialogue
-      <m_choiceNodeIDData>k__BackingField: 
-    <m_nodeGroupIDData>k__BackingField: 
+      <m_choiceNodeIDData>k__BackingField: ef8b0b2a-a8f6-48d8-ba65-7ebda7d407be
+    <m_nodeGroupIDData>k__BackingField: 61c0e621-eeef-453d-a8a1-dac70f4fa26d
     <m_dialogueTypeData>k__BackingField: 0
     <m_nodePositionData>k__BackingField: {x: 1195.3334, y: 556.6667}
     <m_nodePropertyToCheckData>k__BackingField: Love
@@ -69,9 +72,38 @@ MonoBehaviour:
     <m_isLikePreference>k__BackingField: 0
     <m_selectedPreference>k__BackingField: 
     <m_enumSetter>k__BackingField: 0
-  <m_graphOldGroupNamesData>k__BackingField: []
-  <m_graphOldUngroupedNodeNamesData>k__BackingField:
-  - 1
-  - 2
+  - <m_nodeIDData>k__BackingField: ef8b0b2a-a8f6-48d8-ba65-7ebda7d407be
+    <m_nodeNameData>k__BackingField: End
+    <m_nodeBachelorImageData>k__BackingField: {fileID: 0}
+    <m_nodeAudioLinesData>k__BackingField: {fileID: 0}
+    <m_nodeTextData>k__BackingField: ' '
+    <m_nodeChoicesData>k__BackingField:
+    - <m_choiceTextData>k__BackingField: Next Dialogue
+      <m_choiceNodeIDData>k__BackingField: 
+    <m_nodeGroupIDData>k__BackingField: 61c0e621-eeef-453d-a8a1-dac70f4fa26d
+    <m_dialogueTypeData>k__BackingField: 0
+    <m_nodePositionData>k__BackingField: {x: 1574, y: 582}
+    <m_nodePropertyToCheckData>k__BackingField: Love
+    <m_nodeComparisonTypeData>k__BackingField: '>='
+    <m_nodeComparisonValueData>k__BackingField: 0
+    <m_nodeOperationTypeData>k__BackingField: '>='
+    <m_nodeValueToSetData>k__BackingField: 
+    <m_nodeVariableNameData>k__BackingField: 
+    <m_nodeSetterOperationTypeData>k__BackingField: 0
+    <m_nodeLoveScoreAmountData>k__BackingField: 0
+    <m_nodeBoolValueData>k__BackingField: 0
+    <m_nodeLoveMeterData>k__BackingField: {fileID: 0}
+    <m_bachelorData>k__BackingField: {fileID: 0}
+    <m_isLikePreference>k__BackingField: 0
+    <m_selectedPreference>k__BackingField: 
+    <m_enumSetter>k__BackingField: 0
+  <m_graphOldGroupNamesData>k__BackingField:
+  - BaristaEnding4
+  <m_graphOldUngroupedNodeNamesData>k__BackingField: []
   <m_graphOldGroupedNodeNamesData>k__BackingField:
-    list: []
+    list:
+    - Key: BaristaEnding4
+      Value:
+      - 1
+      - 2
+      - End
