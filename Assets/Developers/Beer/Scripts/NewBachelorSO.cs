@@ -33,16 +33,6 @@ public class NewBachelorSO : ScriptableObject
     [SerializeField]
     public LoveMeterSO _loveMeter;
 
-    [Header("Date Dialogues")]
-    [SerializeField]
-    public DSDialogue _rooftopDateDialogue;
-
-    [SerializeField]
-    public DSDialogue _aquariumDateDialogue;
-
-    [SerializeField]
-    public DSDialogue _forestDateDialogue;
-
     [Header("Scene Transition")]
     [SerializeField]
     public string _nextSceneName;

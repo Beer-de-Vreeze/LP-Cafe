@@ -15,6 +15,9 @@ public class LoveMeterSO : ScriptableObject
     [Tooltip("Current love value")]
     public int _currentLove;
 
+    [Tooltip("Love needed to go on a real date")]
+    public int _loveNeededForRealDate;
+
     [System.NonSerialized]
     public UnityEvent<int> LoveChangedEvent;
 
@@ -111,6 +114,14 @@ public class LoveMeterSO : ScriptableObject
     public virtual bool IsMaxLove()
     {
         return _currentLove >= _maxLove;
+    }
+
+    /// <summary>
+    /// Check if current love meets the requirement for going on a real date
+    /// </summary>
+    public virtual bool CanGoOnRealDate()
+    {
+        return _currentLove >= _loveNeededForRealDate;
     }
 
     public bool IsInitialized()

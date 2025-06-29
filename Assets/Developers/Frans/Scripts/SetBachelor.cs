@@ -11,6 +11,16 @@ public class SetBachelor : MonoBehaviour
     [SerializeField]
     private DSDialogue m_dialogue;
 
+    [Header("Date Dialogues")]
+    [SerializeField]
+    private DSDialogue m_rooftopDateDialogue;
+
+    [SerializeField]
+    private DSDialogue m_aquariumDateDialogue;
+
+    [SerializeField]
+    private DSDialogue m_forestDateDialogue;
+
     [SerializeField]
     private Canvas m_dialogueCanvas;
 
@@ -75,7 +85,13 @@ public class SetBachelor : MonoBehaviour
                 }
             }
         }
-        m_dialogueDisplay.StartDialogue(m_bachelor, m_dialogue);
+        m_dialogueDisplay.StartDialogue(
+            m_bachelor,
+            m_dialogue,
+            m_rooftopDateDialogue,
+            m_aquariumDateDialogue,
+            m_forestDateDialogue
+        );
     }
 
     /// <summary>

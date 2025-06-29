@@ -443,6 +443,9 @@ GameObject:
   - component: {fileID: 32085730}
   - component: {fileID: 32085729}
   - component: {fileID: 32085728}
+  - component: {fileID: 32085736}
+  - component: {fileID: 32085735}
+  - component: {fileID: 32085734}
   m_Layer: 0
   m_Name: Simone
   m_TagString: Bachelor
@@ -483,6 +486,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_bachelor: {fileID: 11400000, guid: cea487173320f3f4ca881debc811a8e6, type: 2}
   m_dialogue: {fileID: 32085728}
+  m_rooftopDateDialogue: {fileID: 32085736}
+  m_aquariumDateDialogue: {fileID: 32085735}
+  m_forestDateDialogue: {fileID: 32085734}
   m_dialogueCanvas: {fileID: 476807508}
   m_dialogueDisplay: {fileID: 1818962892}
   currentlyDating: 0
@@ -605,6 +611,63 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1733462831}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!114 &32085734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 32085727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de97b5429e9cc0c45aac19c9b876fa50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_dialogueContainer: {fileID: 11400000, guid: 1789ea067678e0746b9bdf53e46dfeac, type: 2}
+  m_dialogueGroup: {fileID: 11400000, guid: fd37d7986a5185a41ad00c8bf52a3d88, type: 2}
+  m_dialogue: {fileID: 11400000, guid: 506d388e5c40fc8489e927c06dcfd13e, type: 2}
+  m_groupedDialogues: 1
+  m_startingDialoguesOnly: 0
+  m_selectedDialogueGroupIndex: 0
+  m_selectedDialogueIndex: 1
+--- !u!114 &32085735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 32085727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de97b5429e9cc0c45aac19c9b876fa50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_dialogueContainer: {fileID: 11400000, guid: 843bbe17639432348a3b7448e6c56761, type: 2}
+  m_dialogueGroup: {fileID: 11400000, guid: 732e1ddf3d49cda4d98533fe33640e1d, type: 2}
+  m_dialogue: {fileID: 11400000, guid: 7d2240a78be7b2b45a5f955ee48b3fc5, type: 2}
+  m_groupedDialogues: 1
+  m_startingDialoguesOnly: 0
+  m_selectedDialogueGroupIndex: 0
+  m_selectedDialogueIndex: 38
+--- !u!114 &32085736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 32085727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de97b5429e9cc0c45aac19c9b876fa50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_dialogueContainer: {fileID: 11400000, guid: 7f7fc755a1c174a469b77bfe2969148e, type: 2}
+  m_dialogueGroup: {fileID: 11400000, guid: 40ccc02b926d85d4c94210e85a409fb8, type: 2}
+  m_dialogue: {fileID: 11400000, guid: 7b1d611fc84379b4a8aef1939a8023d5, type: 2}
+  m_groupedDialogues: 1
+  m_startingDialoguesOnly: 0
+  m_selectedDialogueGroupIndex: 0
+  m_selectedDialogueIndex: 30
 --- !u!1001 &39540876
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1644,6 +1707,9 @@ GameObject:
   - component: {fileID: 200159563}
   - component: {fileID: 200159566}
   - component: {fileID: 200159565}
+  - component: {fileID: 200159567}
+  - component: {fileID: 200159569}
+  - component: {fileID: 200159568}
   m_Layer: 0
   m_Name: Chantal
   m_TagString: Bachelor
@@ -1802,10 +1868,70 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_bachelor: {fileID: 11400000, guid: 17897679caa48db4e901fb103d088d6d, type: 2}
   m_dialogue: {fileID: 200159565}
+  m_rooftopDateDialogue: {fileID: 200159567}
+  m_aquariumDateDialogue: {fileID: 200159569}
+  m_forestDateDialogue: {fileID: 200159568}
   m_dialogueCanvas: {fileID: 476807508}
   m_dialogueDisplay: {fileID: 1818962892}
   currentlyDating: 0
   m_dialogueObject: {fileID: 227314392}
+--- !u!114 &200159567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 200159558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de97b5429e9cc0c45aac19c9b876fa50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_dialogueContainer: {fileID: 11400000, guid: cc2a8fd01925c924a9c9f1f25d1bc58c, type: 2}
+  m_dialogueGroup: {fileID: 11400000, guid: 5802c63e385fb384890a66b2e8a05684, type: 2}
+  m_dialogue: {fileID: 11400000, guid: b59d07a62f355a34e9a044b119cd4363, type: 2}
+  m_groupedDialogues: 1
+  m_startingDialoguesOnly: 0
+  m_selectedDialogueGroupIndex: 0
+  m_selectedDialogueIndex: 0
+--- !u!114 &200159568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 200159558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de97b5429e9cc0c45aac19c9b876fa50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_dialogueContainer: {fileID: 11400000, guid: 4bc831f569617154c84378b3874fb97e, type: 2}
+  m_dialogueGroup: {fileID: 11400000, guid: 89182307a70b65f4c9dc0cedd6cff14e, type: 2}
+  m_dialogue: {fileID: 11400000, guid: 42ed6af9abe0de0488fe9bba3192c0fd, type: 2}
+  m_groupedDialogues: 1
+  m_startingDialoguesOnly: 0
+  m_selectedDialogueGroupIndex: 0
+  m_selectedDialogueIndex: 5
+--- !u!114 &200159569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 200159558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de97b5429e9cc0c45aac19c9b876fa50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_dialogueContainer: {fileID: 11400000, guid: b2511bf79955ec44485ea775fa5fa7a5, type: 2}
+  m_dialogueGroup: {fileID: 11400000, guid: 91097d9fea9d3ba4bb5ccd57d71a31a8, type: 2}
+  m_dialogue: {fileID: 11400000, guid: ec5e322f3c8c62e4d8d7de06e698220a, type: 2}
+  m_groupedDialogues: 1
+  m_startingDialoguesOnly: 0
+  m_selectedDialogueGroupIndex: 0
+  m_selectedDialogueIndex: 40
 --- !u!1001 &203677346
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2403,6 +2529,81 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7607814253935883139, guid: 3c2ca4d59a745fe46b693e64fb72771d, type: 3}
   m_PrefabInstance: {fileID: 370991243}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &391904478
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 391904481}
+  - component: {fileID: 391904480}
+  - component: {fileID: 391904479}
+  m_Layer: 5
+  m_Name: ForsestBG
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &391904479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 391904478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 996caed6d99369f41a489b4f9d8b016a, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &391904480
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 391904478}
+  m_CullTransparentMesh: 1
+--- !u!224 &391904481
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 391904478}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 2.5486856, y: 2.5486856, z: 2.5486856}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 476807509}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 99}
+  m_SizeDelta: {x: 750, y: 500}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &419096409
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2656,6 +2857,11 @@ Canvas:
   m_CorrespondingSourceObject: {fileID: 1316255537472295996, guid: a34b7e1289bc1d9429dbfacfc664940e, type: 3}
   m_PrefabInstance: {fileID: 1040318606}
   m_PrefabAsset: {fileID: 0}
+--- !u!224 &476807509 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 5198826213203906620, guid: a34b7e1289bc1d9429dbfacfc664940e, type: 3}
+  m_PrefabInstance: {fileID: 1040318606}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &493752456
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2732,6 +2938,9 @@ GameObject:
   - component: {fileID: 533133507}
   - component: {fileID: 533133506}
   - component: {fileID: 533133505}
+  - component: {fileID: 533133513}
+  - component: {fileID: 533133512}
+  - component: {fileID: 533133511}
   m_Layer: 0
   m_Name: Beer
   m_TagString: Bachelor
@@ -2772,6 +2981,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_bachelor: {fileID: 11400000, guid: 7e0db3f5f0480c142bb95e946112c3a2, type: 2}
   m_dialogue: {fileID: 533133505}
+  m_rooftopDateDialogue: {fileID: 533133513}
+  m_aquariumDateDialogue: {fileID: 533133513}
+  m_forestDateDialogue: {fileID: 533133512}
   m_dialogueCanvas: {fileID: 476807508}
   m_dialogueDisplay: {fileID: 1818962892}
   currentlyDating: 0
@@ -2894,6 +3106,63 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1733462831}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!114 &533133511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 533133504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de97b5429e9cc0c45aac19c9b876fa50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_dialogueContainer: {fileID: 11400000, guid: a75ef1809b400f74f92e0e5469a826d0, type: 2}
+  m_dialogueGroup: {fileID: 0}
+  m_dialogue: {fileID: 0}
+  m_groupedDialogues: 0
+  m_startingDialoguesOnly: 0
+  m_selectedDialogueGroupIndex: 0
+  m_selectedDialogueIndex: 0
+--- !u!114 &533133512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 533133504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de97b5429e9cc0c45aac19c9b876fa50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_dialogueContainer: {fileID: 11400000, guid: bc4da9d51b5fab6408610b07a1425b49, type: 2}
+  m_dialogueGroup: {fileID: 0}
+  m_dialogue: {fileID: 0}
+  m_groupedDialogues: 0
+  m_startingDialoguesOnly: 0
+  m_selectedDialogueGroupIndex: 0
+  m_selectedDialogueIndex: 0
+--- !u!114 &533133513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 533133504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de97b5429e9cc0c45aac19c9b876fa50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_dialogueContainer: {fileID: 11400000, guid: 7bdf5111e2f23c242b080b12a357cd15, type: 2}
+  m_dialogueGroup: {fileID: 0}
+  m_dialogue: {fileID: 0}
+  m_groupedDialogues: 0
+  m_startingDialoguesOnly: 0
+  m_selectedDialogueGroupIndex: 0
+  m_selectedDialogueIndex: 0
 --- !u!1001 &545349253
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5927,6 +6196,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4447893912884010291, guid: a34b7e1289bc1d9429dbfacfc664940e, type: 3}
       propertyPath: m_Spacing
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4447893912884010291, guid: a34b7e1289bc1d9429dbfacfc664940e, type: 3}
+      propertyPath: m_Padding.m_Bottom
+      value: -105
+      objectReference: {fileID: 0}
+    - target: {fileID: 4447893912884010291, guid: a34b7e1289bc1d9429dbfacfc664940e, type: 3}
+      propertyPath: m_ChildControlWidth
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4447893912884010291, guid: a34b7e1289bc1d9429dbfacfc664940e, type: 3}
+      propertyPath: m_ChildControlHeight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4447893912884010291, guid: a34b7e1289bc1d9429dbfacfc664940e, type: 3}
+      propertyPath: m_ChildForceExpandHeight
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5198826213203906620, guid: a34b7e1289bc1d9429dbfacfc664940e, type: 3}
@@ -6014,12 +6299,16 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5756749173856513607, guid: a34b7e1289bc1d9429dbfacfc664940e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5756749173856513607, guid: a34b7e1289bc1d9429dbfacfc664940e, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 255
       objectReference: {fileID: 0}
     - target: {fileID: 5756749173856513607, guid: a34b7e1289bc1d9429dbfacfc664940e, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -249
+      value: -263
       objectReference: {fileID: 0}
     - target: {fileID: 6385750115321685804, guid: a34b7e1289bc1d9429dbfacfc664940e, type: 3}
       propertyPath: m_Pivot.x
@@ -6125,6 +6414,15 @@ PrefabInstance:
     m_RemovedGameObjects:
     - {fileID: 2854523148786449451, guid: a34b7e1289bc1d9429dbfacfc664940e, type: 3}
     m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 5198826213203906620, guid: a34b7e1289bc1d9429dbfacfc664940e, type: 3}
+      insertIndex: 0
+      addedObject: {fileID: 391904481}
+    - targetCorrespondingSourceObject: {fileID: 5198826213203906620, guid: a34b7e1289bc1d9429dbfacfc664940e, type: 3}
+      insertIndex: 1
+      addedObject: {fileID: 1210162648}
+    - targetCorrespondingSourceObject: {fileID: 5198826213203906620, guid: a34b7e1289bc1d9429dbfacfc664940e, type: 3}
+      insertIndex: 2
+      addedObject: {fileID: 1836071633}
     - targetCorrespondingSourceObject: {fileID: 8377416285189031861, guid: a34b7e1289bc1d9429dbfacfc664940e, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1039494999}
@@ -6629,6 +6927,81 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7607814253935883139, guid: 3c2ca4d59a745fe46b693e64fb72771d, type: 3}
   m_PrefabInstance: {fileID: 1168749713}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1210162647
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1210162648}
+  - component: {fileID: 1210162649}
+  - component: {fileID: 1210162650}
+  m_Layer: 5
+  m_Name: RFBG
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1210162648
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1210162647}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 2.5486856, y: 2.5486856, z: 2.5486856}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 476807509}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 99}
+  m_SizeDelta: {x: 750, y: 500}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &1210162649
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1210162647}
+  m_CullTransparentMesh: 1
+--- !u!114 &1210162650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1210162647}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 9afc749c21927d143956604ae91240de, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &1221951028
 GameObject:
   m_ObjectHideFlags: 0
@@ -6860,6 +7233,9 @@ GameObject:
   - component: {fileID: 1260297392}
   - component: {fileID: 1260297391}
   - component: {fileID: 1260297390}
+  - component: {fileID: 1260297398}
+  - component: {fileID: 1260297397}
+  - component: {fileID: 1260297396}
   m_Layer: 0
   m_Name: Valorie
   m_TagString: Bachelor
@@ -6885,7 +7261,7 @@ MonoBehaviour:
   m_groupedDialogues: 1
   m_startingDialoguesOnly: 0
   m_selectedDialogueGroupIndex: 0
-  m_selectedDialogueIndex: 11
+  m_selectedDialogueIndex: 0
 --- !u!114 &1260297391
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6900,6 +7276,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_bachelor: {fileID: 11400000, guid: f61949d7b3e6a1d42b1c1c5c3a6187e5, type: 2}
   m_dialogue: {fileID: 1260297390}
+  m_rooftopDateDialogue: {fileID: 1260297398}
+  m_aquariumDateDialogue: {fileID: 1260297397}
+  m_forestDateDialogue: {fileID: 1260297396}
   m_dialogueCanvas: {fileID: 476807508}
   m_dialogueDisplay: {fileID: 1818962892}
   currentlyDating: 0
@@ -7022,6 +7401,63 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1733462831}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!114 &1260297396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1260297389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de97b5429e9cc0c45aac19c9b876fa50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_dialogueContainer: {fileID: 11400000, guid: 2e0af45549ae96842874b873f0e29844, type: 2}
+  m_dialogueGroup: {fileID: 11400000, guid: 87020ab78ce0af442a91738f5d020d8b, type: 2}
+  m_dialogue: {fileID: 11400000, guid: 7789227f14de7bd43bee538de01a4ade, type: 2}
+  m_groupedDialogues: 1
+  m_startingDialoguesOnly: 0
+  m_selectedDialogueGroupIndex: 0
+  m_selectedDialogueIndex: 4
+--- !u!114 &1260297397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1260297389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de97b5429e9cc0c45aac19c9b876fa50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_dialogueContainer: {fileID: 11400000, guid: 8a396048a0b6f4d48a62b57b3b1b22e2, type: 2}
+  m_dialogueGroup: {fileID: 11400000, guid: a7d961c624efcec49845a25e9a2858cc, type: 2}
+  m_dialogue: {fileID: 11400000, guid: 7cfe3ff46c2a6dc40805fe6078fd6d68, type: 2}
+  m_groupedDialogues: 1
+  m_startingDialoguesOnly: 0
+  m_selectedDialogueGroupIndex: 0
+  m_selectedDialogueIndex: 43
+--- !u!114 &1260297398
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1260297389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de97b5429e9cc0c45aac19c9b876fa50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_dialogueContainer: {fileID: 11400000, guid: e0a999d5bd8b147439d2e6a4e895e48c, type: 2}
+  m_dialogueGroup: {fileID: 11400000, guid: 3d36605136fa12845978b1dd54b915cd, type: 2}
+  m_dialogue: {fileID: 11400000, guid: b590952b3807c7644841f2cd9ad8fd0d, type: 2}
+  m_groupedDialogues: 1
+  m_startingDialoguesOnly: 0
+  m_selectedDialogueGroupIndex: 0
+  m_selectedDialogueIndex: 35
 --- !u!1001 &1270829065
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9997,6 +10433,81 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7607814253935883139, guid: 3c2ca4d59a745fe46b693e64fb72771d, type: 3}
   m_PrefabInstance: {fileID: 1830457644}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1836071632
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1836071633}
+  - component: {fileID: 1836071634}
+  - component: {fileID: 1836071635}
+  m_Layer: 5
+  m_Name: AqauBG
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1836071633
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1836071632}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 2.5486856, y: 2.5486856, z: 2.5486856}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 476807509}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 99}
+  m_SizeDelta: {x: 750, y: 500}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &1836071634
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1836071632}
+  m_CullTransparentMesh: 1
+--- !u!114 &1836071635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1836071632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: ba35b3a092eaa804fb5b1eb3c9db8b48, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1001 &1838906117
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10770,6 +11281,9 @@ GameObject:
   - component: {fileID: 1982111749}
   - component: {fileID: 1982111748}
   - component: {fileID: 1982111747}
+  - component: {fileID: 1982111755}
+  - component: {fileID: 1982111754}
+  - component: {fileID: 1982111753}
   m_Layer: 0
   m_Name: James
   m_TagString: Bachelor
@@ -10810,6 +11324,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_bachelor: {fileID: 11400000, guid: ac32952b566cb2a4683e4a58339bfd2e, type: 2}
   m_dialogue: {fileID: 1982111747}
+  m_rooftopDateDialogue: {fileID: 1982111755}
+  m_aquariumDateDialogue: {fileID: 1982111754}
+  m_forestDateDialogue: {fileID: 1982111753}
   m_dialogueCanvas: {fileID: 476807508}
   m_dialogueDisplay: {fileID: 1818962892}
   currentlyDating: 0
@@ -10932,6 +11449,63 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1733462831}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1982111753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1982111746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de97b5429e9cc0c45aac19c9b876fa50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_dialogueContainer: {fileID: 11400000, guid: 92ccf868c21f2344385ce36962cb63e1, type: 2}
+  m_dialogueGroup: {fileID: 11400000, guid: 308ac07c17bd6194f831fdddfa4d330f, type: 2}
+  m_dialogue: {fileID: 11400000, guid: f3fdbc14ee6446843a530e74f454b9e1, type: 2}
+  m_groupedDialogues: 1
+  m_startingDialoguesOnly: 0
+  m_selectedDialogueGroupIndex: 0
+  m_selectedDialogueIndex: 4
+--- !u!114 &1982111754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1982111746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de97b5429e9cc0c45aac19c9b876fa50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_dialogueContainer: {fileID: 11400000, guid: 5cd11aeb6ebffd040a0753e704f6b254, type: 2}
+  m_dialogueGroup: {fileID: 11400000, guid: c24d84258643f8147b65b400570c5d07, type: 2}
+  m_dialogue: {fileID: 11400000, guid: 74781e35ef5bc3f49ab86b7e17a8248e, type: 2}
+  m_groupedDialogues: 1
+  m_startingDialoguesOnly: 0
+  m_selectedDialogueGroupIndex: 0
+  m_selectedDialogueIndex: 36
+--- !u!114 &1982111755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1982111746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de97b5429e9cc0c45aac19c9b876fa50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_dialogueContainer: {fileID: 11400000, guid: cf30da00aa2d15e41b9cceb8b985e23c, type: 2}
+  m_dialogueGroup: {fileID: 11400000, guid: 6d97c7ddc6690b64280a3717ec181319, type: 2}
+  m_dialogue: {fileID: 11400000, guid: 2e669d31173e289499d1db4641b4df43, type: 2}
+  m_groupedDialogues: 1
+  m_startingDialoguesOnly: 0
+  m_selectedDialogueGroupIndex: 0
+  m_selectedDialogueIndex: 20
 --- !u!1001 &1983315654
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11048,6 +11622,18 @@ PrefabInstance:
       propertyPath: _dialogueCanvas
       value: 
       objectReference: {fileID: 476807508}
+    - target: {fileID: 3952595216175766055, guid: a45930d7ad5ece64d8d27e47bbcbf4a6, type: 3}
+      propertyPath: _forestBackground
+      value: 
+      objectReference: {fileID: 391904479}
+    - target: {fileID: 3952595216175766055, guid: a45930d7ad5ece64d8d27e47bbcbf4a6, type: 3}
+      propertyPath: _rooftopBackground
+      value: 
+      objectReference: {fileID: 1210162650}
+    - target: {fileID: 3952595216175766055, guid: a45930d7ad5ece64d8d27e47bbcbf4a6, type: 3}
+      propertyPath: _aquariumBackground
+      value: 
+      objectReference: {fileID: 1836071635}
     - target: {fileID: 3959460017288424381, guid: a45930d7ad5ece64d8d27e47bbcbf4a6, type: 3}
       propertyPath: m_Name
       value: Dialogue

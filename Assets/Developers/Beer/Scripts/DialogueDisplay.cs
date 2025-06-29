@@ -138,6 +138,9 @@ public class DialogueDisplay : MonoBehaviour
 
     /// <summary>Dictionary to store gameplay variables used in dialogue conditions</summary>
     private Dictionary<string, string> _gameVariables = new Dictionary<string, string>();
+
+    /// <summary>Stores choices that should be displayed after the typewriter finishes</summary>
+    private List<DS.Data.DSDialogueChoiceData> _pendingChoices = null;
     #endregion
 
     #region Love System
@@ -149,6 +152,38 @@ public class DialogueDisplay : MonoBehaviour
     /// <summary>Reference to the love meter scriptable object for score management</summary>
     [SerializeField]
     private LoveMeterSO _loveMeter;
+    #endregion
+
+    #region Date Dialogues
+    /// <summary>Dialogue for rooftop date location</summary>
+    private DSDialogue _rooftopDateDialogue;
+
+    /// <summary>Dialogue for aquarium date location</summary>
+    private DSDialogue _aquariumDateDialogue;
+
+    /// <summary>Dialogue for forest date location</summary>
+    private DSDialogue _forestDateDialogue;
+    #endregion
+
+    #region Background System
+    [Header("🌄 BACKGROUND SYSTEM")]
+    /// <summary>Background sprite for rooftop date location</summary>
+    [SerializeField]
+    private Image _rooftopBackground;
+
+    /// <summary>Background sprite for aquarium date location</summary>
+    [SerializeField]
+    private Image _aquariumBackground;
+
+    /// <summary>Background sprite for forest date location</summary>
+    [SerializeField]
+    private Image _forestBackground;
+
+    /// <summary>Tracks the currently loaded background to avoid unnecessary changes</summary>
+    private Image _currentBackground;
+
+    /// <summary>Tracks whether we're currently in a real date scenario</summary>
+    private bool _isInRealDate = false;
     #endregion
 
     #region UI Styling
@@ -164,6 +199,15 @@ public class DialogueDisplay : MonoBehaviour
     /// <summary>Color for disabled choice button text</summary>
     [SerializeField]
     private Color _disabledTextColor = Color.gray;
+
+    [Header("🎬 CHOICE ANIMATION SETTINGS")]
+    /// <summary>Duration for each choice button fade-in animation</summary>
+    [SerializeField]
+    private float _choiceFadeDuration = 0.3f;
+
+    /// <summary>Delay between each choice button appearing</summary>
+    [SerializeField]
+    private float _choiceAppearDelay = 0.2f;
     #endregion
 
     #region Save System
@@ -205,6 +249,9 @@ public class DialogueDisplay : MonoBehaviour
         {
             _loveMeterUI.HideLoveMeter();
         }
+
+        // Turn off all date backgrounds initially
+        TurnOffAllDateBackgrounds();
     }
 
     /// <summary>
@@ -224,6 +271,14 @@ public class DialogueDisplay : MonoBehaviour
                 Debug.Log("[TEST] Save file deleted: " + path);
             }
             UnityEngine.SceneManagement.SceneManager.LoadScene("Main Menu");
+            return;
+        }
+
+        // Test function: Press 'E' to skip to end of dialogue
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            Debug.Log("[TEST] Skipping to end of dialogue");
+            GoToEndOfDialogue();
             return;
         }
 
@@ -305,7 +360,8 @@ public class DialogueDisplay : MonoBehaviour
     }
     #endregion
 
-    #region Core Dialogue Display    /// <summary>
+    #region Core Dialogue Display
+    /// <summary>
     /// Displays the current dialogue and sets up choices if available.
     /// Handles condition nodes, setter nodes, character images, audio, and choice generation.
     /// This is the main method that orchestrates dialogue presentation.
@@ -404,8 +460,14 @@ public class DialogueDisplay : MonoBehaviour
             var choices = _dialogue.m_dialogue.m_dialogueChoiceData;
             if (choices != null && choices.Count > 1)
             {
-                ShowChoices(choices);
+                // Store choices to be shown after typewriter finishes
+                _pendingChoices = choices;
                 _canAdvance = false;
+            }
+            else
+            {
+                // No multiple choices, clear any pending choices
+                _pendingChoices = null;
             }
         }
     }
@@ -430,6 +492,104 @@ public class DialogueDisplay : MonoBehaviour
                 ShowEndDialogueButtons();
             }
         }
+    }
+
+    /// <summary>
+    /// TEST FUNCTION: Skips to the end of the current dialogue chain.
+    /// Traverses through all dialogue nodes following the first choice until reaching the end.
+    /// Useful for testing end dialogue functionality without going through the entire conversation.
+    /// </summary>
+    [ContextMenu("TEST: Go To End Of Dialogue")]
+    private void GoToEndOfDialogue()
+    {
+        if (_dialogue == null || _dialogue.m_dialogue == null)
+        {
+            Debug.LogWarning("[TEST] No dialogue to skip through");
+            return;
+        }
+
+        DSDialogueSO currentNode = _dialogue.m_dialogue;
+        int maxIterations = 100; // Safety limit to prevent infinite loops
+        int iterations = 0;
+
+        // Traverse through the dialogue chain until we reach the end
+        while (currentNode != null && iterations < maxIterations)
+        {
+            iterations++;
+
+            // Skip condition and setter nodes automatically
+            if (
+                currentNode.m_dialogueTypeData == DS.Enumerations.DSDialogueType.Condition
+                || currentNode.m_dialogueTypeData == DS.Enumerations.DSDialogueType.Setter
+            )
+            {
+                // For condition/setter nodes, just follow the first choice
+                var choices = currentNode.m_dialogueChoiceData;
+                if (choices != null && choices.Count > 0 && choices[0].m_nextDialogue != null)
+                {
+                    currentNode = choices[0].m_nextDialogue;
+                    continue;
+                }
+                else
+                {
+                    break; // No next dialogue, we've reached the end
+                }
+            }
+
+            // For regular dialogue nodes, check if there's a next dialogue
+            var dialogueChoices = currentNode.m_dialogueChoiceData;
+            if (
+                dialogueChoices != null
+                && dialogueChoices.Count > 0
+                && dialogueChoices[0].m_nextDialogue != null
+            )
+            {
+                currentNode = dialogueChoices[0].m_nextDialogue;
+            }
+            else
+            {
+                // No next dialogue, we've reached the end
+                break;
+            }
+        }
+
+        if (iterations >= maxIterations)
+        {
+            Debug.LogWarning(
+                "[TEST] Reached maximum iterations while skipping dialogue. Possible infinite loop detected."
+            );
+        }
+
+        // Set the dialogue to the final node we found
+        _dialogue.m_dialogue = currentNode;
+
+        // Clear any pending choices and active buttons
+        ClearChoices();
+        _pendingChoices = null;
+
+        // Stop any audio and typewriter
+        if (_audioSource != null)
+        {
+            _audioSource.Stop();
+        }
+
+        if (_typewriter != null)
+        {
+            _typewriter.StopShowingText();
+        }
+
+        // Show the final dialogue or end dialogue buttons
+        if (currentNode != null)
+        {
+            ShowDialogue();
+        }
+        else
+        {
+            Debug.Log("[TEST] Reached end of dialogue chain, showing end dialogue buttons");
+            ShowEndDialogueButtons();
+        }
+
+        Debug.Log($"[TEST] Skipped through {iterations} dialogue nodes to reach the end");
     }
 
     /// <summary>
@@ -485,6 +645,53 @@ public class DialogueDisplay : MonoBehaviour
 
         _bachelor = bachelor;
         _dialogue = dialogueSO;
+
+        // Ensure notebook is properly connected to the new bachelor
+        if (_noteBook != null)
+        {
+            _noteBook.EnsureBachelorConnection(_bachelor);
+        }
+
+        // Initialize love meter with bachelor's data
+        if (_bachelor != null && _bachelor._loveMeter != null)
+        {
+            _loveMeter = _bachelor._loveMeter;
+            _loveScore = _loveMeter.GetCurrentLove();
+
+            // Set up the love meter UI component
+            EnsureLoveMeterSetup();
+        }
+        ShowDialogue();
+    }
+
+    /// <summary>
+    /// Starts a new dialogue conversation with a bachelor character and sets up date dialogues.
+    /// This overloaded version allows date dialogues to be passed from SetBachelor instead of stored in the SO.
+    /// </summary>
+    /// <param name="bachelor">The bachelor character data</param>
+    /// <param name="dialogueSO">The main dialogue to display</param>
+    /// <param name="rooftopDateDialogue">Dialogue for rooftop date location</param>
+    /// <param name="aquariumDateDialogue">Dialogue for aquarium date location</param>
+    /// <param name="forestDateDialogue">Dialogue for forest date location</param>
+    public void StartDialogue(
+        NewBachelorSO bachelor,
+        DSDialogue dialogueSO,
+        DSDialogue rooftopDateDialogue,
+        DSDialogue aquariumDateDialogue,
+        DSDialogue forestDateDialogue
+    )
+    {
+        bachelor._dialogue = dialogueSO;
+        if (bachelor == null || bachelor._dialogue == null)
+            return;
+
+        _bachelor = bachelor;
+        _dialogue = dialogueSO;
+
+        // Set the date dialogues from the parameters instead of the SO
+        _rooftopDateDialogue = rooftopDateDialogue;
+        _aquariumDateDialogue = aquariumDateDialogue;
+        _forestDateDialogue = forestDateDialogue;
 
         // Ensure notebook is properly connected to the new bachelor
         if (_noteBook != null)
@@ -979,8 +1186,14 @@ public class DialogueDisplay : MonoBehaviour
             _canAdvance = true;
         }
 
+        // Show pending choices if there are any (multiple choice dialogue)
+        if (_pendingChoices != null && _pendingChoices.Count > 1)
+        {
+            ShowChoices(_pendingChoices);
+            _pendingChoices = null; // Clear pending choices after showing them
+        }
         // Show continue icon only if there are no multiple choices (single dialogue)
-        if (_activeChoiceButtons.Count == 0 && _continueIcon != null)
+        else if (_activeChoiceButtons.Count == 0 && _continueIcon != null)
         {
             _continueIcon.SetActive(true);
         }
@@ -1017,6 +1230,9 @@ public class DialogueDisplay : MonoBehaviour
             _continueIcon.SetActive(false);
         }
 
+        // Create all buttons first, but make them invisible
+        List<GameObject> buttonsToAnimate = new List<GameObject>();
+
         foreach (var choice in choices)
         {
             var btnObj = Instantiate(_choiceButtonPrefab, _choicesParent);
@@ -1026,6 +1242,14 @@ public class DialogueDisplay : MonoBehaviour
 
             // Ensure proper button sizing and layout
             EnsureContentSizeFitter(btnObj);
+
+            // Set initial alpha to 0 (invisible)
+            var canvasGroup = btnObj.GetComponent<CanvasGroup>();
+            if (canvasGroup == null)
+            {
+                canvasGroup = btnObj.AddComponent<CanvasGroup>();
+            }
+            canvasGroup.alpha = 0f;
 
             var button = btnObj.GetComponent<UnityEngine.UI.Button>();
             if (button != null)
@@ -1057,7 +1281,11 @@ public class DialogueDisplay : MonoBehaviour
             }
 
             _activeChoiceButtons.Add(btnObj);
+            buttonsToAnimate.Add(btnObj);
         }
+
+        // Start the fade-in animation for all buttons
+        StartCoroutine(FadeInChoicesSequentially(buttonsToAnimate));
 
         // Refresh layout after all buttons are created
         StartCoroutine(RefreshLayoutAfterDelay(0.05f));
@@ -1075,6 +1303,9 @@ public class DialogueDisplay : MonoBehaviour
                 Destroy(btn);
         }
         _activeChoiceButtons.Clear();
+
+        // Also clear any pending choices
+        _pendingChoices = null;
     }
 
     /// <summary>
@@ -1251,6 +1482,56 @@ public class DialogueDisplay : MonoBehaviour
             vertLayout.spacing = 15f;
         }
     }
+
+    /// <summary>
+    /// Coroutine that fades in choice buttons one by one with a smooth animation.
+    /// Creates a sequential reveal effect for dialogue choices.
+    /// </summary>
+    /// <param name="buttons">List of button GameObjects to animate</param>
+    /// <returns>Coroutine enumerator</returns>
+    private System.Collections.IEnumerator FadeInChoicesSequentially(List<GameObject> buttons)
+    {
+        for (int i = 0; i < buttons.Count; i++)
+        {
+            if (buttons[i] != null)
+            {
+                var canvasGroup = buttons[i].GetComponent<CanvasGroup>();
+                var button = buttons[i].GetComponent<UnityEngine.UI.Button>();
+
+                if (canvasGroup != null)
+                {
+                    // Disable button interaction during fade-in
+                    if (button != null && button.interactable)
+                    {
+                        canvasGroup.interactable = false;
+                    }
+
+                    // Animate alpha from 0 to 1 over the fade duration
+                    float elapsedTime = 0f;
+                    while (elapsedTime < _choiceFadeDuration)
+                    {
+                        elapsedTime += Time.deltaTime;
+                        float alpha = Mathf.Clamp01(elapsedTime / _choiceFadeDuration);
+                        canvasGroup.alpha = alpha;
+                        yield return null;
+                    }
+
+                    // Ensure final alpha is exactly 1 and re-enable interaction
+                    canvasGroup.alpha = 1f;
+                    if (button != null && button.interactable)
+                    {
+                        canvasGroup.interactable = true;
+                    }
+                }
+            }
+
+            // Wait before showing the next button (except for the last one)
+            if (i < buttons.Count - 1)
+            {
+                yield return new WaitForSeconds(_choiceAppearDelay);
+            }
+        }
+    }
     #endregion
 
     #region Preference Discovery System
@@ -1418,8 +1699,26 @@ public class DialogueDisplay : MonoBehaviour
         ClearChoices();
 
         // Create "Come Back Later" button
-        CreateEndDialogueButton("Come Back Later", OnComeBackLaterClicked); // Create "Ask on a Date" button
-        CreateEndDialogueButton("Ask on a Date", OnAskOnDateClicked);
+        CreateEndDialogueButton("Come Back Later", OnComeBackLaterClicked);
+
+        // Only create "Ask on a Date" button if bachelor has enough love for a real date
+        if (
+            _bachelor != null
+            && _bachelor._loveMeter != null
+            && _bachelor._loveMeter.CanGoOnRealDate()
+        )
+        {
+            CreateEndDialogueButton("Ask on a Date", OnAskOnDateClicked);
+            Debug.Log(
+                $"Ask on a Date button shown - {_bachelor.name} has {_bachelor._loveMeter.GetCurrentLove()}/{_bachelor._loveMeter._loveNeededForRealDate} love"
+            );
+        }
+        else
+        {
+            Debug.Log(
+                $"Ask on a Date button hidden - {_bachelor?.name ?? "Unknown"} needs more love (Current: {_bachelor?._loveMeter?.GetCurrentLove() ?? 0}, Required: {_bachelor?._loveMeter?._loveNeededForRealDate ?? 0})"
+            );
+        }
     }
 
     /// <summary>
@@ -1524,6 +1823,9 @@ public class DialogueDisplay : MonoBehaviour
             _noteBook.ClearBachelor();
         }
 
+        // Turn off all date backgrounds before leaving
+        TurnOffAllDateBackgrounds();
+
         // End the date session
         EndDate();
 
@@ -1550,6 +1852,9 @@ public class DialogueDisplay : MonoBehaviour
         {
             _noteBook.ClearBachelor();
         }
+
+        // Turn off all date backgrounds before quitting
+        TurnOffAllDateBackgrounds();
 
         // End the date session
         EndDate();
@@ -1679,6 +1984,9 @@ public class DialogueDisplay : MonoBehaviour
         Debug.Log("Come Back Later button clicked - returning to main menu");
         ClearChoices();
 
+        // Turn off all date backgrounds to return to cafe scene
+        TurnOffAllDateBackgrounds();
+
         // End the date session to reset bachelor interaction states
         EndDate();
 
@@ -1792,7 +2100,8 @@ public class DialogueDisplay : MonoBehaviour
     private void OnRooftopDateSelected()
     {
         Debug.Log("Rooftop date selected");
-        StartDateWithLocation("Rooftop", _bachelor?._rooftopDateDialogue);
+        SetDateBackground("Rooftop");
+        StartDateWithLocation("Rooftop", _rooftopDateDialogue);
     }
 
     /// <summary>
@@ -1801,7 +2110,8 @@ public class DialogueDisplay : MonoBehaviour
     private void OnAquariumDateSelected()
     {
         Debug.Log("Aquarium date selected");
-        StartDateWithLocation("Aquarium", _bachelor?._aquariumDateDialogue);
+        SetDateBackground("Aquarium");
+        StartDateWithLocation("Aquarium", _aquariumDateDialogue);
     }
 
     /// <summary>
@@ -1810,7 +2120,8 @@ public class DialogueDisplay : MonoBehaviour
     private void OnForestDateSelected()
     {
         Debug.Log("Forest date selected");
-        StartDateWithLocation("Forest", _bachelor?._forestDateDialogue);
+        SetDateBackground("Forest");
+        StartDateWithLocation("Forest", _forestDateDialogue);
     }
 
     /// <summary>
@@ -1919,19 +2230,9 @@ public class DialogueDisplay : MonoBehaviour
     }
 
     /// <summary>
-    /// Loads the successful date count from save data.
+    /// Resets all SetBachelor dating states when a date session ends.
     /// </summary>
-    private void LoadSuccessfulDateCountFromSave()
-    {
-        // For now, just initialize to 0 since SaveData doesn't have SuccessfulDateCount property
-        _succesfulDateCount = 0;
-        Debug.Log($"Initialized successful date count: {_succesfulDateCount}");
-    }
-
-    /// <summary>
-    /// Ends the current date session and resets bachelor interaction states.
-    /// </summary>
-    private void EndDate()
+    private void ResetAllBachelorStates()
     {
         // Find all SetBachelor components in the scene and reset their dating state
         SetBachelor[] setBachelors = FindObjectsByType<SetBachelor>(FindObjectsSortMode.None);
@@ -1944,4 +2245,109 @@ public class DialogueDisplay : MonoBehaviour
         }
         Debug.Log("Date session ended and bachelor states reset");
     }
+
+    /// <summary>
+    /// Loads the successful date count from save data.
+    /// </summary>
+    private void LoadSuccessfulDateCountFromSave()
+    {
+        // Initialize the successful date count
+        // Note: SaveData doesn't currently track this, so we initialize to 0
+        _succesfulDateCount = 0;
+    }
+
+    /// <summary>
+    /// Ends the current date and performs cleanup.
+    /// </summary>
+    private void EndDate()
+    {
+        ResetAllBachelorStates();
+        IncrementSuccessfulDateCount();
+
+        // Turn off all date backgrounds when ending a date
+        TurnOffAllDateBackgrounds();
+
+        // Hide dialogue UI
+        if (_dialogueCanvas != null)
+        {
+            _dialogueCanvas.enabled = false;
+        }
+
+        // Re-enable movement if move canvas exists
+        if (_moveCanvas != null)
+        {
+            _moveCanvas.enabled = true;
+        }
+    }
+
+    #region Background Management
+    /// <summary>
+    /// Turns off all date background images to ensure clean state
+    /// </summary>
+    private void TurnOffAllDateBackgrounds()
+    {
+        if (_rooftopBackground != null)
+        {
+            _rooftopBackground.gameObject.SetActive(false);
+        }
+
+        if (_aquariumBackground != null)
+        {
+            _aquariumBackground.gameObject.SetActive(false);
+        }
+
+        if (_forestBackground != null)
+        {
+            _forestBackground.gameObject.SetActive(false);
+        }
+
+        _currentBackground = null;
+        Debug.Log("All date backgrounds turned off");
+    }
+
+    /// <summary>
+    /// Sets the active background for the specified date location
+    /// </summary>
+    /// <param name="location">The date location (Rooftop, Aquarium, or Forest)</param>
+    private void SetDateBackground(string location)
+    {
+        // First turn off all backgrounds
+        TurnOffAllDateBackgrounds();
+
+        // Then turn on the appropriate background
+        switch (location.ToLower())
+        {
+            case "rooftop":
+                if (_rooftopBackground != null)
+                {
+                    _rooftopBackground.gameObject.SetActive(true);
+                    _currentBackground = _rooftopBackground;
+                    Debug.Log("Rooftop background activated");
+                }
+                break;
+
+            case "aquarium":
+                if (_aquariumBackground != null)
+                {
+                    _aquariumBackground.gameObject.SetActive(true);
+                    _currentBackground = _aquariumBackground;
+                    Debug.Log("Aquarium background activated");
+                }
+                break;
+
+            case "forest":
+                if (_forestBackground != null)
+                {
+                    _forestBackground.gameObject.SetActive(true);
+                    _currentBackground = _forestBackground;
+                    Debug.Log("Forest background activated");
+                }
+                break;
+
+            default:
+                Debug.LogWarning($"Unknown date location: {location}");
+                break;
+        }
+    }
+    #endregion
 }
