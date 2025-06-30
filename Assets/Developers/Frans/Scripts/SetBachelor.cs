@@ -39,13 +39,6 @@ public class SetBachelor : MonoBehaviour
     {
         m_dialogueDisplay = FindFirstObjectByType<DialogueDisplay>();
         m_dialogueCanvas.enabled = false;
-
-        // Load save data and check if this bachelor has been dated
-        SaveData data = SaveSystem.Deserialize();
-        if (data != null && data.DatedBachelors.Contains(m_bachelor.name))
-        {
-            gameObject.SetActive(false);
-        }
     }
 
     private void OnMouseDown()

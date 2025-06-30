@@ -1,12 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using System.IO;
+using UnityEngine;
 
 public static class SaveSystem
 {
     private static string fileName = "save.json";
-
 
     public static void SerializeData(SaveData data)
     {
@@ -24,7 +23,7 @@ public static class SaveSystem
         string path = Path.Combine(Application.persistentDataPath, fileName);
         if (!File.Exists(path))
         {
-            Debug.LogError("Save file not found in " + path);
+            Debug.Log("No save file found in " + path + " (this is normal for new players)");
             return null;
         }
         using (StreamReader reader = File.OpenText(path))

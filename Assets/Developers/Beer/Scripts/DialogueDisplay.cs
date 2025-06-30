@@ -164,6 +164,13 @@ public class DialogueDisplay : MonoBehaviour
     /// <summary>Dialogue for forest date location</summary>
     private DSDialogue _forestDateDialogue;
     #endregion
+    [Header("☕ BARISTA DIALOGUES")]
+    #region Barista Dialogues
+
+    /// <summary>List of barista dialogues to display after real dates, indexed by number of completed real dates</summary>
+    [SerializeField]
+    private List<DSDialogue> _baristaDialogues = new List<DSDialogue>();
+    #endregion
 
     #region Background System
     [Header("🌄 BACKGROUND SYSTEM")]
@@ -184,6 +191,12 @@ public class DialogueDisplay : MonoBehaviour
 
     /// <summary>Tracks whether we're currently in a real date scenario</summary>
     private bool _isInRealDate = false;
+
+    /// <summary>Tracks whether we just completed a real date and should show "Back to Cafe" button</summary>
+    private bool _justCompletedRealDate = false;
+
+    /// <summary>Stores the current real date location name for completion tracking</summary>
+    private string _currentRealDateLocation = "";
     #endregion
 
     #region UI Styling
@@ -220,7 +233,8 @@ public class DialogueDisplay : MonoBehaviour
     private SaveData _saveData;
     #endregion
 
-    #region Unity Lifecycle    /// <summary>
+    #region Unity Lifecycle
+    /// <summary>
     /// Initializes the dialogue system, loads save data, and sets up event listeners.
     /// Called once when the component is first created.
     /// </summary>
@@ -804,7 +818,7 @@ public class DialogueDisplay : MonoBehaviour
         // Show personalized message for real date completion
         if (_displayText != null)
         {
-            string personalizedMessage = $"Hey! I had such a great time on our date together.";
+            string personalizedMessage = _bachelor.GetRealDateMessage();
             _displayText.text = personalizedMessage;
 
             if (_typewriter != null)
@@ -1624,15 +1638,28 @@ public class DialogueDisplay : MonoBehaviour
         Debug.LogWarning($"Dislike preference '{preferenceName}' not found in bachelor data");
         return false;
     }
-    #endregion    #region End Dialogue Management
+    #endregion
+
+    #region End Dialogue Management
     /// <summary>
     /// Shows end dialogue buttons when the conversation is complete.
-    /// Shows "Enter Cafe" button only at the last dialogue of FirstDate scene, otherwise shows standard buttons in Cafe scenes.
+    /// Uses boolean flag to determine if showing post-real-date options or regular dialogue options.
     /// </summary>
     private void ShowEndDialogueButtons()
     {
         string currentSceneName = SceneManager.GetActiveScene().name;
         string sceneLower = currentSceneName.ToLower();
+
+        // Check if we just completed a real date - use boolean flag instead of scene detection
+        if (_justCompletedRealDate)
+        {
+            Debug.Log(
+                "Just completed real date. Showing post-real-date options (Back to Cafe only)."
+            );
+            ClearChoices();
+            ShowPostRealDateOptions();
+            return;
+        }
 
         // Check if we're in the FirstDate scene AND this is truly the last dialogue
         bool isFirstDateScene = sceneLower.Contains("firstdate");
@@ -1654,29 +1681,6 @@ public class DialogueDisplay : MonoBehaviour
         {
             Debug.Log(
                 $"In FirstDate Scene ({currentSceneName}) but not at last dialogue. No buttons shown."
-            );
-            return;
-        }
-
-        // Check if we're in a real date scene (aquarium, forest, rooftop)
-        bool isRealDateScene =
-            sceneLower.Contains("aquarium")
-            || sceneLower.Contains("forest")
-            || sceneLower.Contains("rooftop");
-
-        if (isRealDateScene && isLastDialogue)
-        {
-            Debug.Log(
-                $"At last dialogue in Real Date Scene ({currentSceneName}). Showing post-date options."
-            );
-            ClearChoices();
-            ShowPostRealDateOptions();
-            return;
-        }
-        else if (isRealDateScene && !isLastDialogue)
-        {
-            Debug.Log(
-                $"In Real Date Scene ({currentSceneName}) but not at last dialogue. No buttons shown."
             );
             return;
         }
@@ -1978,11 +1982,48 @@ public class DialogueDisplay : MonoBehaviour
     /// <summary>
     /// Handles the "Come Back Later" button click.
     /// Returns to the main menu and hides the dialogue display.
+    /// If coming from a real date, handles post-real-date cleanup.
     /// </summary>
     private void OnComeBackLaterClicked()
     {
-        Debug.Log("Come Back Later button clicked - returning to main menu");
+        Debug.Log("Come Back Later button clicked");
         ClearChoices();
+
+        // Check if this is coming from a real date
+        if (_justCompletedRealDate)
+        {
+            Debug.Log("Returning from real date - handling post-real-date cleanup");
+
+            // Mark bachelor as real dated and save progress
+            if (_bachelor != null)
+            {
+                MarkBachelorAsRealDated(_bachelor);
+                IncrementSuccessfulDateCount();
+            }
+
+            // Clear notebook
+            if (_noteBook != null)
+            {
+                _noteBook.ClearBachelor();
+            }
+
+            // Reset the flags and clear location
+            _justCompletedRealDate = false;
+            _currentRealDateLocation = "";
+
+            // Turn off all date backgrounds
+            TurnOffAllDateBackgrounds();
+
+            // End the date session
+            EndDate();
+
+            // Trigger barista event after real date completion
+            TriggerBaristaAfterRealDate();
+            return;
+        }
+
+        // Regular "Come Back Later" logic for cafe scenes
+        Debug.Log("Come Back Later button clicked - returning to main menu");
 
         // Turn off all date backgrounds to return to cafe scene
         TurnOffAllDateBackgrounds();
@@ -2138,6 +2179,13 @@ public class DialogueDisplay : MonoBehaviour
         // Set the date dialogue
         _dialogue = dateDialogue;
 
+        // Set the flag to indicate we're starting a real date and store the location
+        _justCompletedRealDate = true;
+
+        // Store the date location in a variable we can access later
+        _currentRealDateLocation = locationName;
+        Debug.Log($"Starting real date at {locationName}. Flag set to true.");
+
         // Clear choices and start the date dialogue
         ClearChoices();
         ShowDialogue();
@@ -2178,10 +2226,10 @@ public class DialogueDisplay : MonoBehaviour
         if (bachelor == null)
             return;
 
-        Debug.Log($"Marking {bachelor.name} as real dated");
+        Debug.Log($"Marking {bachelor.name} as real dated at {_currentRealDateLocation}");
 
-        // Mark in the ScriptableObject
-        bachelor.MarkAsDated();
+        // Mark in the ScriptableObject with the date location
+        bachelor.MarkAsRealDated(_currentRealDateLocation);
 
         // Save to the save system
         SaveData saveData = SaveSystem.Deserialize();
@@ -2202,7 +2250,9 @@ public class DialogueDisplay : MonoBehaviour
             SaveSystem.SerializeData(saveData);
         }
 
-        Debug.Log($"Marked {bachelor.name} as real dated and saved progress");
+        Debug.Log(
+            $"Marked {bachelor.name} as real dated at {_currentRealDateLocation} and saved progress"
+        );
     }
 
     /// <summary>
@@ -2349,5 +2399,190 @@ public class DialogueDisplay : MonoBehaviour
                 break;
         }
     }
+    #endregion
+
+    #region Barista Event
+    /// <summary>
+    /// Shows the barista event in the cafe after a real date, with no background, displaying dialogue based on number of completed real dates.
+    /// No ending buttons are created for barista dialogues.
+    /// </summary>
+    private IEnumerator ShowBaristaAfterRealDate()
+    {
+        // Hide all backgrounds
+        TurnOffAllDateBackgrounds();
+
+        // Clear any existing choices/buttons to ensure no buttons are shown
+        ClearChoices();
+
+        // Get the dialogue index based on successful date count (0-indexed)
+        int dialogueIndex = Mathf.Max(0, _succesfulDateCount - 1);
+
+        // Check if we have a dialogue for this index
+        if (
+            _baristaDialogues != null
+            && dialogueIndex < _baristaDialogues.Count
+            && _baristaDialogues[dialogueIndex] != null
+        )
+        {
+            // Use the specific dialogue for this date count
+            DSDialogue baristaDialogue = _baristaDialogues[dialogueIndex];
+
+            // Set the barista name
+            if (_nameText != null)
+            {
+                _nameText.text = "Barista";
+            }
+
+            // Hide bachelor image
+            if (_bachelorImage != null)
+            {
+                _bachelorImage.enabled = false;
+            }
+
+            // Hide continue icon and love meter - no interaction allowed
+            if (_continueIcon != null)
+            {
+                _continueIcon.SetActive(false);
+            }
+            if (_loveMeterUI != null)
+            {
+                _loveMeterUI.HideLoveMeter();
+            }
+
+            // Show the dialogue canvas
+            if (_dialogueCanvas != null)
+            {
+                _dialogueCanvas.enabled = true;
+            }
+
+            // Display the barista dialogue
+            if (baristaDialogue.m_dialogue != null && _displayText != null)
+            {
+                _displayText.text = baristaDialogue.m_dialogue.m_dialogueTextData;
+
+                if (_typewriter != null)
+                {
+                    _typewriter.ShowText(_displayText.text);
+                }
+
+                Debug.Log(
+                    $"Showing barista dialogue #{dialogueIndex + 1} after {_succesfulDateCount} real dates: {_displayText.text}"
+                );
+            }
+        }
+        else
+        {
+            // Fallback to generic message if no dialogue is available
+            if (_displayText != null)
+            {
+                _displayText.text =
+                    $"The barista approaches you after your date #{_succesfulDateCount}.";
+            }
+            if (_nameText != null)
+            {
+                _nameText.text = "Barista";
+            }
+            if (_bachelorImage != null)
+            {
+                _bachelorImage.enabled = false;
+            }
+            if (_continueIcon != null)
+            {
+                _continueIcon.SetActive(false);
+            }
+            if (_loveMeterUI != null)
+            {
+                _loveMeterUI.HideLoveMeter();
+            }
+            if (_dialogueCanvas != null)
+            {
+                _dialogueCanvas.enabled = true;
+            }
+
+            Debug.LogWarning(
+                $"No barista dialogue found for index {dialogueIndex}. Using fallback message."
+            );
+        }
+
+        // Check if this was the last barista dialogue
+        bool isLastDialogue = (
+            _baristaDialogues != null && dialogueIndex >= _baristaDialogues.Count - 1
+        );
+
+        if (isLastDialogue)
+        {
+            Debug.Log(
+                "Last barista dialogue completed. Deleting save file and returning to main menu immediately."
+            );
+
+            // Delete the save file immediately
+            DeleteSaveFile();
+
+            // Load the main menu scene immediately without waiting
+            UnityEngine.SceneManagement.SceneManager.LoadScene("Main Menu");
+        }
+        else
+        {
+            // Wait for spacebar input like regular dialogue for non-final dialogues
+            _canAdvance = false;
+            _isDelayActive = false;
+
+            // Show continue icon to indicate player can advance
+            if (_continueIcon != null)
+            {
+                _continueIcon.SetActive(true);
+            }
+
+            // Wait for player input (spacebar or mouse click)
+            yield return new WaitUntil(
+                () => (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
+            );
+
+            // Hide continue icon when advancing
+            if (_continueIcon != null)
+            {
+                _continueIcon.SetActive(false);
+            }
+
+            // Close the dialogue UI for non-final dialogues
+            if (_dialogueCanvas != null)
+            {
+                _dialogueCanvas.enabled = false;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Call this after a real date is completed to trigger the barista event.
+    /// </summary>
+    public void TriggerBaristaAfterRealDate()
+    {
+        StartCoroutine(ShowBaristaAfterRealDate());
+    }
+
+    /// <summary>
+    /// Deletes the player's save file completely.
+    /// </summary>
+    private void DeleteSaveFile()
+    {
+        try
+        {
+            string path = System.IO.Path.Combine(Application.persistentDataPath, "save.json");
+            if (System.IO.File.Exists(path))
+            {
+                System.IO.File.Delete(path);
+                Debug.Log($"Save file deleted: {path}");
+            }
+            else
+            {
+                Debug.Log("No save file found to delete.");
+            }
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError($"Failed to delete save file: {e.Message}");
+        }
+    }
+    #endregion
     #endregion
 }

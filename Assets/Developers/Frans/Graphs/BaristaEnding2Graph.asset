@@ -16,7 +16,7 @@ MonoBehaviour:
   <m_graphGroupsData>k__BackingField:
   - <m_groupIDData>k__BackingField: ebd0930c-9287-40b4-87e3-a50db2691e0d
     <m_groupNameData>k__BackingField: BaristaEnding2
-    <m_groupPositionData>k__BackingField: {x: 470, y: 372.6667}
+    <m_groupPositionData>k__BackingField: {x: 470.00003, y: 372}
   <m_graphNodesData>k__BackingField:
   - <m_nodeIDData>k__BackingField: 3550a15a-3da3-4efb-952a-a8ecccbe2912
     <m_nodeNameData>k__BackingField: 1
@@ -27,35 +27,10 @@ MonoBehaviour:
       want the same drink as last time?"
     <m_nodeChoicesData>k__BackingField:
     - <m_choiceTextData>k__BackingField: Next Dialogue
-      <m_choiceNodeIDData>k__BackingField: 10c8276b-51bf-4ece-bba3-5edcabf74500
-    <m_nodeGroupIDData>k__BackingField: ebd0930c-9287-40b4-87e3-a50db2691e0d
-    <m_dialogueTypeData>k__BackingField: 0
-    <m_nodePositionData>k__BackingField: {x: 495.33334, y: 431.33334}
-    <m_nodePropertyToCheckData>k__BackingField: Love
-    <m_nodeComparisonTypeData>k__BackingField: '>='
-    <m_nodeComparisonValueData>k__BackingField: 0
-    <m_nodeOperationTypeData>k__BackingField: '>='
-    <m_nodeValueToSetData>k__BackingField: 
-    <m_nodeVariableNameData>k__BackingField: 
-    <m_nodeSetterOperationTypeData>k__BackingField: 0
-    <m_nodeLoveScoreAmountData>k__BackingField: 0
-    <m_nodeBoolValueData>k__BackingField: 0
-    <m_nodeLoveMeterData>k__BackingField: {fileID: 0}
-    <m_bachelorData>k__BackingField: {fileID: 0}
-    <m_isLikePreference>k__BackingField: 0
-    <m_selectedPreference>k__BackingField: 
-    <m_enumSetter>k__BackingField: 0
-  - <m_nodeIDData>k__BackingField: 10c8276b-51bf-4ece-bba3-5edcabf74500
-    <m_nodeNameData>k__BackingField: End
-    <m_nodeBachelorImageData>k__BackingField: {fileID: 0}
-    <m_nodeAudioLinesData>k__BackingField: {fileID: 0}
-    <m_nodeTextData>k__BackingField: ' '
-    <m_nodeChoicesData>k__BackingField:
-    - <m_choiceTextData>k__BackingField: Next Dialogue
       <m_choiceNodeIDData>k__BackingField: 
     <m_nodeGroupIDData>k__BackingField: ebd0930c-9287-40b4-87e3-a50db2691e0d
     <m_dialogueTypeData>k__BackingField: 0
-    <m_nodePositionData>k__BackingField: {x: 841.3333, y: 431.33334}
+    <m_nodePositionData>k__BackingField: {x: 495, y: 431}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -78,4 +53,3 @@ MonoBehaviour:
     - Key: BaristaEnding2
       Value:
       - 1
-      - End

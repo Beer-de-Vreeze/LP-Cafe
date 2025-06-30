@@ -10,17 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dafdbd3029b57714ba28974d73bb6956, type: 3}
-  m_Name: Test
+  m_Name: FailedDate + Barista
   m_EditorClassIdentifier: 
   _name: 
   _portrait: {fileID: 0}
-  _likes:
-  - description: Hoooiiiii
-    discovered: 0
-    icon: {fileID: 0}
+  _likes: []
   _dislikes: []
-  _isLikeDiscovered: 1
+  _isLikeDiscovered: 0
   _isDislikeDiscovered: 0
   _dialogue: {fileID: 0}
-  _loveMeter: {fileID: 0}
+  _loveMeter: {fileID: 11400000, guid: c18fce8bdce1ff24ab33a75266e564c8, type: 2}
   _nextSceneName: 
+  _HasBeenSpeedDated: 0

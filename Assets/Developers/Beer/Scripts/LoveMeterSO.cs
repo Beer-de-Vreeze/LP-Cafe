@@ -31,6 +31,8 @@ public class LoveMeterSO : ScriptableObject
         {
             LoveChangedEvent = new UnityEvent<int>();
         }
+
+        Debug.Log($"LoveMeterSO {name} enabled with love value: {_currentLove}");
     } // Note: ScriptableObjects don't have Update() method.
 
     // Validation is handled in the methods that modify _currentLove instead.
@@ -95,8 +97,17 @@ public class LoveMeterSO : ScriptableObject
     /// </summary>
     public virtual void Reset()
     {
-        _currentLove = 0;
+        _currentLove = 3;
+
+        // Ensure the event is initialized before invoking
+        if (LoveChangedEvent == null)
+        {
+            LoveChangedEvent = new UnityEvent<int>();
+        }
+
         LoveChangedEvent.Invoke(_currentLove);
+
+        Debug.Log($"LoveMeter reset to {_currentLove}");
     }
 
     /// <summary>
@@ -141,5 +152,24 @@ public class LoveMeterSO : ScriptableObject
         {
             return false;
         }
+    }
+
+    /// <summary>
+    /// Test method to reset love meter from the inspector
+    /// </summary>
+    [ContextMenu("Test Reset Love Meter")]
+    private void TestReset()
+    {
+        Debug.Log($"Before reset - Love: {_currentLove}");
+        Reset();
+        Debug.Log($"After reset - Love: {_currentLove}");
+    }
+
+    /// <summary>
+    /// Check if this love meter is properly reset to initial state
+    /// </summary>
+    public bool IsReset()
+    {
+        return _currentLove == 3 && LoveChangedEvent != null;
     }
 }

@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: LoveMeterSO
   m_EditorClassIdentifier: 
   _maxLove: 100
-  _currentLove: 50
+  _currentLove: 3
+  _loveNeededForRealDate: 0

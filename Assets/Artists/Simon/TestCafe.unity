@@ -648,7 +648,7 @@ MonoBehaviour:
   m_groupedDialogues: 1
   m_startingDialoguesOnly: 0
   m_selectedDialogueGroupIndex: 0
-  m_selectedDialogueIndex: 38
+  m_selectedDialogueIndex: 37
 --- !u!114 &32085736
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6330,6 +6330,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -33
       objectReference: {fileID: 0}
+    - target: {fileID: 7451256246927905077, guid: a34b7e1289bc1d9429dbfacfc664940e, type: 3}
+      propertyPath: m_MatchWidthOrHeight
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7590380458319010863, guid: a34b7e1289bc1d9429dbfacfc664940e, type: 3}
       propertyPath: m_SizeDelta.x
       value: 48.2601
@@ -9585,6 +9589,137 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7607814253935883139, guid: 3c2ca4d59a745fe46b693e64fb72771d, type: 3}
   m_PrefabInstance: {fileID: 1678521775}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1681331434
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1681331440}
+  - component: {fileID: 1681331439}
+  - component: {fileID: 1681331438}
+  - component: {fileID: 1681331437}
+  - component: {fileID: 1681331436}
+  - component: {fileID: 1681331435}
+  m_Layer: 0
+  m_Name: Barista
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1681331435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1681331434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de97b5429e9cc0c45aac19c9b876fa50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_dialogueContainer: {fileID: 11400000, guid: b67d808ee4c777146b7d25b95a472fe5, type: 2}
+  m_dialogueGroup: {fileID: 11400000, guid: c8d0485c51495a846a6d04576476dc31, type: 2}
+  m_dialogue: {fileID: 11400000, guid: b17b97d3488c61f40bff1acf7ee3f186, type: 2}
+  m_groupedDialogues: 1
+  m_startingDialoguesOnly: 0
+  m_selectedDialogueGroupIndex: 0
+  m_selectedDialogueIndex: 0
+--- !u!114 &1681331436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1681331434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de97b5429e9cc0c45aac19c9b876fa50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_dialogueContainer: {fileID: 11400000, guid: 241a768c07d721b44b41b2184bb2199a, type: 2}
+  m_dialogueGroup: {fileID: 11400000, guid: 038f93e4aed091a4f8621b9317331fe9, type: 2}
+  m_dialogue: {fileID: 11400000, guid: 2ef9f61b15a16b443b736716bc4f9945, type: 2}
+  m_groupedDialogues: 1
+  m_startingDialoguesOnly: 0
+  m_selectedDialogueGroupIndex: 0
+  m_selectedDialogueIndex: 0
+--- !u!114 &1681331437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1681331434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de97b5429e9cc0c45aac19c9b876fa50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_dialogueContainer: {fileID: 11400000, guid: b452f8d0b714e6b40930c7d6d48ec4ad, type: 2}
+  m_dialogueGroup: {fileID: 11400000, guid: 47387a38d55becd4188473bb718f416d, type: 2}
+  m_dialogue: {fileID: 11400000, guid: 012b1605a9e9f924c8971c03f14182b7, type: 2}
+  m_groupedDialogues: 1
+  m_startingDialoguesOnly: 0
+  m_selectedDialogueGroupIndex: 0
+  m_selectedDialogueIndex: 0
+--- !u!114 &1681331438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1681331434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de97b5429e9cc0c45aac19c9b876fa50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_dialogueContainer: {fileID: 11400000, guid: dc4b889b5da34d14d912459187c8d4fc, type: 2}
+  m_dialogueGroup: {fileID: 11400000, guid: a158332769f6c144f803e868f72d8d05, type: 2}
+  m_dialogue: {fileID: 11400000, guid: 4c00316b7b2295b43895bd9f53c06f84, type: 2}
+  m_groupedDialogues: 1
+  m_startingDialoguesOnly: 0
+  m_selectedDialogueGroupIndex: 0
+  m_selectedDialogueIndex: 0
+--- !u!114 &1681331439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1681331434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de97b5429e9cc0c45aac19c9b876fa50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_dialogueContainer: {fileID: 11400000, guid: 1aa538f37963ba74db656d3e177b5afe, type: 2}
+  m_dialogueGroup: {fileID: 11400000, guid: de604407f2cf94148a8959e82650bd14, type: 2}
+  m_dialogue: {fileID: 11400000, guid: bf3964d199228094e9e56d379ca25a94, type: 2}
+  m_groupedDialogues: 1
+  m_startingDialoguesOnly: 0
+  m_selectedDialogueGroupIndex: 0
+  m_selectedDialogueIndex: 0
+--- !u!4 &1681331440
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1681331434}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2713.765, y: 0, z: 18416.875}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1693143531
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11634,6 +11769,30 @@ PrefabInstance:
       propertyPath: _aquariumBackground
       value: 
       objectReference: {fileID: 1836071635}
+    - target: {fileID: 3952595216175766055, guid: a45930d7ad5ece64d8d27e47bbcbf4a6, type: 3}
+      propertyPath: _baristaDialogues.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3952595216175766055, guid: a45930d7ad5ece64d8d27e47bbcbf4a6, type: 3}
+      propertyPath: '_baristaDialogues.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1681331439}
+    - target: {fileID: 3952595216175766055, guid: a45930d7ad5ece64d8d27e47bbcbf4a6, type: 3}
+      propertyPath: '_baristaDialogues.Array.data[1]'
+      value: 
+      objectReference: {fileID: 1681331438}
+    - target: {fileID: 3952595216175766055, guid: a45930d7ad5ece64d8d27e47bbcbf4a6, type: 3}
+      propertyPath: '_baristaDialogues.Array.data[2]'
+      value: 
+      objectReference: {fileID: 1681331437}
+    - target: {fileID: 3952595216175766055, guid: a45930d7ad5ece64d8d27e47bbcbf4a6, type: 3}
+      propertyPath: '_baristaDialogues.Array.data[3]'
+      value: 
+      objectReference: {fileID: 1681331436}
+    - target: {fileID: 3952595216175766055, guid: a45930d7ad5ece64d8d27e47bbcbf4a6, type: 3}
+      propertyPath: '_baristaDialogues.Array.data[4]'
+      value: 
+      objectReference: {fileID: 1681331435}
     - target: {fileID: 3959460017288424381, guid: a45930d7ad5ece64d8d27e47bbcbf4a6, type: 3}
       propertyPath: m_Name
       value: Dialogue
@@ -114647,3 +114806,4 @@ SceneRoots:
   - {fileID: 1983315654}
   - {fileID: 2058647087}
   - {fileID: 2041451617}
+  - {fileID: 1681331440}

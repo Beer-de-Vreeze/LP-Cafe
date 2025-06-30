@@ -10,7 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: af8df453e367c7641b3e16c5f4345e2f, type: 3}
-  m_Name: ChantalMeter
+  m_Name: JamesLoveMeter
   m_EditorClassIdentifier: 
   _maxLove: 5
   _currentLove: 3
+  _loveNeededForRealDate: 0
