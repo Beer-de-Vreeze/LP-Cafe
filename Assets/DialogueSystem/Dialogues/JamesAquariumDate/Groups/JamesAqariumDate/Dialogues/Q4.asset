@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Q4
   m_EditorClassIdentifier: 
   <m_dialogueNameData>k__BackingField: Q4
-  <m_dialogueTextData>k__BackingField: I bet I could guess how many fish are in that
-    tank better than you could!
+  <m_dialogueTextData>k__BackingField: I bet I could guessss how many fish are in
+    that tank better than you could!
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Not everything needs to be a bet, gambling
       isn't good for you.

@@ -16,7 +16,7 @@ MonoBehaviour:
   <m_graphGroupsData>k__BackingField:
   - <m_groupIDData>k__BackingField: 606cb09b-a00f-46dc-9846-b6555f1e73d2
     <m_groupNameData>k__BackingField: SimoneAqariumDate
-    <m_groupPositionData>k__BackingField: {x: 5514.6665, y: -837.3334}
+    <m_groupPositionData>k__BackingField: {x: 5514.6665, y: -837.3333}
   <m_graphNodesData>k__BackingField:
   - <m_nodeIDData>k__BackingField: fd8c9561-6f8c-435d-9eea-3f2fdef8ec66
     <m_nodeNameData>k__BackingField: Q2L2
@@ -105,39 +105,6 @@ MonoBehaviour:
     <m_nodeGroupIDData>k__BackingField: 606cb09b-a00f-46dc-9846-b6555f1e73d2
     <m_dialogueTypeData>k__BackingField: 0
     <m_nodePositionData>k__BackingField: {x: 8528, y: -288}
-    <m_nodePropertyToCheckData>k__BackingField: Love
-    <m_nodeComparisonTypeData>k__BackingField: '>='
-    <m_nodeComparisonValueData>k__BackingField: 0
-    <m_nodeOperationTypeData>k__BackingField: '>='
-    <m_nodeValueToSetData>k__BackingField: 
-    <m_nodeVariableNameData>k__BackingField: 
-    <m_nodeSetterOperationTypeData>k__BackingField: 0
-    <m_nodeLoveScoreAmountData>k__BackingField: 0
-    <m_nodeBoolValueData>k__BackingField: 0
-    <m_nodeLoveMeterData>k__BackingField: {fileID: 0}
-    <m_bachelorData>k__BackingField: {fileID: 0}
-    <m_isLikePreference>k__BackingField: 0
-    <m_selectedPreference>k__BackingField: 
-    <m_enumSetter>k__BackingField: 0
-  - <m_nodeIDData>k__BackingField: fd3e2ec6-7f52-4c83-920b-577cf32c4b4c
-    <m_nodeNameData>k__BackingField: Q2
-    <m_nodeBachelorImageData>k__BackingField: {fileID: 21300000, guid: 1b752948b3bd324418758c36f01fb7d3, type: 3}
-    <m_nodeAudioLinesData>k__BackingField: {fileID: 0}
-    <m_nodeTextData>k__BackingField: I love going to the aquarium, it's like walking
-      through someone's dream!
-    <m_nodeChoicesData>k__BackingField:
-    - <m_choiceTextData>k__BackingField: Feels more like we're in a movie, or maybe
-        like a game?
-      <m_choiceNodeIDData>k__BackingField: 36bbf4c3-6bfa-42e2-82c7-9992dd2db554
-    - <m_choiceTextData>k__BackingField: With you everything is a dream.
-      <m_choiceNodeIDData>k__BackingField: fd8c9561-6f8c-435d-9eea-3f2fdef8ec66
-    - <m_choiceTextData>k__BackingField: More like a horrid nightmare.
-      <m_choiceNodeIDData>k__BackingField: ff702808-d02b-4999-8aa9-251d0933742b
-    - <m_choiceTextData>k__BackingField: Lucky for us this is reality.
-      <m_choiceNodeIDData>k__BackingField: d82a3b1e-e429-4977-8ac2-149fcf8a187b
-    <m_nodeGroupIDData>k__BackingField: 606cb09b-a00f-46dc-9846-b6555f1e73d2
-    <m_dialogueTypeData>k__BackingField: 1
-    <m_nodePositionData>k__BackingField: {x: 7515.3335, y: -442.66666}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -274,10 +241,10 @@ MonoBehaviour:
     <m_nodeNameData>k__BackingField: Q4A4
     <m_nodeBachelorImageData>k__BackingField: {fileID: 21300000, guid: 1bf1240224094ac4c98e6c1f7df08010, type: 3}
     <m_nodeAudioLinesData>k__BackingField: {fileID: 0}
-    <m_nodeTextData>k__BackingField: 'Well everyone can ehh-...
+    <m_nodeTextData>k__BackingField: 'Well ehhm everyone has...
 
-      Have different
-      tastes I suppose...'
+      different
+      tastes I suppose.'
     <m_nodeChoicesData>k__BackingField:
     - <m_choiceTextData>k__BackingField: Next Dialogue
       <m_choiceNodeIDData>k__BackingField: 4eaaf4ee-0a5a-4909-a193-d046d5d70f44
@@ -1058,6 +1025,39 @@ MonoBehaviour:
     <m_isLikePreference>k__BackingField: 0
     <m_selectedPreference>k__BackingField: 
     <m_enumSetter>k__BackingField: 0
+  - <m_nodeIDData>k__BackingField: fd3e2ec6-7f52-4c83-920b-577cf32c4b4c
+    <m_nodeNameData>k__BackingField: Q2
+    <m_nodeBachelorImageData>k__BackingField: {fileID: 21300000, guid: 1b752948b3bd324418758c36f01fb7d3, type: 3}
+    <m_nodeAudioLinesData>k__BackingField: {fileID: 0}
+    <m_nodeTextData>k__BackingField: I love going to the aquarium, it's like walking
+      through someone's dream!
+    <m_nodeChoicesData>k__BackingField:
+    - <m_choiceTextData>k__BackingField: Feels more like we're in a movie, or maybe
+        like a game?
+      <m_choiceNodeIDData>k__BackingField: 36bbf4c3-6bfa-42e2-82c7-9992dd2db554
+    - <m_choiceTextData>k__BackingField: With you everything is a dream.
+      <m_choiceNodeIDData>k__BackingField: fd8c9561-6f8c-435d-9eea-3f2fdef8ec66
+    - <m_choiceTextData>k__BackingField: More like a horrid nightmare.
+      <m_choiceNodeIDData>k__BackingField: ff702808-d02b-4999-8aa9-251d0933742b
+    - <m_choiceTextData>k__BackingField: Lucky for us this is reality.
+      <m_choiceNodeIDData>k__BackingField: d82a3b1e-e429-4977-8ac2-149fcf8a187b
+    <m_nodeGroupIDData>k__BackingField: 606cb09b-a00f-46dc-9846-b6555f1e73d2
+    <m_dialogueTypeData>k__BackingField: 1
+    <m_nodePositionData>k__BackingField: {x: 7515.3335, y: -442.66666}
+    <m_nodePropertyToCheckData>k__BackingField: Love
+    <m_nodeComparisonTypeData>k__BackingField: '>='
+    <m_nodeComparisonValueData>k__BackingField: 0
+    <m_nodeOperationTypeData>k__BackingField: '>='
+    <m_nodeValueToSetData>k__BackingField: 
+    <m_nodeVariableNameData>k__BackingField: 
+    <m_nodeSetterOperationTypeData>k__BackingField: 0
+    <m_nodeLoveScoreAmountData>k__BackingField: 0
+    <m_nodeBoolValueData>k__BackingField: 0
+    <m_nodeLoveMeterData>k__BackingField: {fileID: 0}
+    <m_bachelorData>k__BackingField: {fileID: 0}
+    <m_isLikePreference>k__BackingField: 0
+    <m_selectedPreference>k__BackingField: 
+    <m_enumSetter>k__BackingField: 0
   <m_graphOldGroupNamesData>k__BackingField:
   - SimoneAqariumDate
   <m_graphOldUngroupedNodeNamesData>k__BackingField: []
@@ -1069,7 +1069,6 @@ MonoBehaviour:
       - Q2L3
       - Q2L4
       - Q2A3
-      - Q2
       - Q2A1
       - Q3
       - Q4A2
@@ -1104,3 +1103,4 @@ MonoBehaviour:
       - Q3A4
       - Q3L4
       - intro
+      - Q2

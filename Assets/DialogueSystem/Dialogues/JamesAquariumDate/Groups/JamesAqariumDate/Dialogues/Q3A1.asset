@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Q3A1
   m_EditorClassIdentifier: 
   <m_dialogueNameData>k__BackingField: Q3A1
-  <m_dialogueTextData>k__BackingField: Ahh yes a fine observation! We mustn't rule
+  <m_dialogueTextData>k__BackingField: Ahh yes a fine observation! We must not rule
     anything out.
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Next Dialogue

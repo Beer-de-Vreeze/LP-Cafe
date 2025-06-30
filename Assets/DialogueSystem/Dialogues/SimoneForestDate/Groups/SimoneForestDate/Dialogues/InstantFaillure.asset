@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8656580f96a63714d889c7daeb915b7a, type: 3}
-  m_Name: Q1A2
+  m_Name: InstantFaillure
   m_EditorClassIdentifier: 
-  <m_dialogueNameData>k__BackingField: Q1A2
-  <m_dialogueTextData>k__BackingField: "Yea I can see that... \r"
+  <m_dialogueNameData>k__BackingField: InstantFaillure
+  <m_dialogueTextData>k__BackingField: 
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Next Dialogue
-    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 32684ea20d87d0d4484bc04f2a543fae, type: 2}
-  <m_bachelorImageData>k__BackingField: {fileID: 21300000, guid: f4403704d59b42e4b91c8f234ee0ff46, type: 3}
+    <m_nextDialogue>k__BackingField: {fileID: 0}
+  <m_bachelorImageData>k__BackingField: {fileID: 0}
   <m_dialogueAudioData>k__BackingField: {fileID: 0}
   <m_dialogueTypeData>k__BackingField: 0
   <m_isStartingDialogueData>k__BackingField: 1

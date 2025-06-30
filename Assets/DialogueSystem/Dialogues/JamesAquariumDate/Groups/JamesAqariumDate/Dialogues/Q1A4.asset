@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Q1A4
   m_EditorClassIdentifier: 
   <m_dialogueNameData>k__BackingField: Q1A4
-  <m_dialogueTextData>k__BackingField: "Yea yea, you're nice but I was hoping to
-    find some gold...\r"
+  <m_dialogueTextData>k__BackingField: "Yeah, you're nice but I was hoping to find
+    some gold...\r"
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Next Dialogue
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 2a26b440e1322564f8c4e3f501edd6f5, type: 2}

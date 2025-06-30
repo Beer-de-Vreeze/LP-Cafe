@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Q4A4
   m_EditorClassIdentifier: 
   <m_dialogueNameData>k__BackingField: Q4A4
-  <m_dialogueTextData>k__BackingField: 'Well everyone can ehh-...
+  <m_dialogueTextData>k__BackingField: 'Well ehhm everyone has...
 
-    Have different
-    tastes I suppose...'
+    different
+    tastes I suppose.'
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Next Dialogue
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: f0d030d6ea3236a46b1134c2aa437c3b, type: 2}
