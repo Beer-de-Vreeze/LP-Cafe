@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Conclusion
   m_EditorClassIdentifier: 
   <m_dialogueNameData>k__BackingField: Conclusion
-  <m_dialogueTextData>k__BackingField: Chantal gets up and leaves after a timer goes
-    off.
+  <m_dialogueTextData>k__BackingField: '*Chantal gets up and leaves after a timer
+    goes off.'
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Next Dialogue
     <m_nextDialogue>k__BackingField: {fileID: 0}

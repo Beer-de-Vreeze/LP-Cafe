@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <m_dialogueNameData>k__BackingField: BaristaLines
   <m_dialogueTextData>k__BackingField: "Heyy good afternoon! \r\nThank you for waiting,
-    welcome to LP Caf\xE9\r\nWe hope you're enjoying the speed dating program so
-    far!\r\nI hope you've had the chance to look at our menu\r\nSo is there anything
-    you would like to order?\r\nWe have a wide verity of drinks and foods!\r\n"
+    welcome to LP Cafe.\r\nWe hope you're enjoying the speed dating program so far!\r\nI
+    hope you've had the chance to look at our menu.\r\r\nWe have a wide verity of
+    drinks and foods!\r"
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Next Dialogue
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 091feba2f4874b94abf04afe4f0228a2, type: 2}

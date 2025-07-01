@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <m_dialogueNameData>k__BackingField: LoveMyCat
   <m_dialogueTextData>k__BackingField: I love my cat a lot, but she often hunts rodents,
-    which irritates me. I hate rodents... so gross
+    which irritates me. I hate rodents... so gross.
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Next Dialogue
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 6ed57575ab0fd7b48be89a1f26e63632, type: 2}

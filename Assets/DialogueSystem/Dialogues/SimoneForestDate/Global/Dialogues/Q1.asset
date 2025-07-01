@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8656580f96a63714d889c7daeb915b7a, type: 3}
+  m_Name: Q1
+  m_EditorClassIdentifier: 
+  <m_dialogueNameData>k__BackingField: Q1
+  <m_dialogueTextData>k__BackingField: This is such a balanced place
+  <m_dialogueChoiceData>k__BackingField:
+  - <m_dialogueChoiceText>k__BackingField: It's-.. just a forest, it's really not
+      that deep.
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: e55f448153916874085431eb50d177db, type: 2}
+  - <m_dialogueChoiceText>k__BackingField: Why did you think I picked it out...
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 24bc911c6d9e61a4b87ca0528d33b1bd, type: 2}
+  - <m_dialogueChoiceText>k__BackingField: I know you don't like crowded places...
+      So I thought this might be a good spot.
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: ab1c62f004eeada4a8c06986b0fe1f86, type: 2}
+  - <m_dialogueChoiceText>k__BackingField: Yea I came across this place on a morning
+      walk, thought it looked all right.
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: bf1b3cd5756289447b8fa000993b6701, type: 2}
+  <m_bachelorImageData>k__BackingField: {fileID: 0}
+  <m_dialogueAudioData>k__BackingField: {fileID: 0}
+  <m_dialogueTypeData>k__BackingField: 1
+  <m_isStartingDialogueData>k__BackingField: 1
+  <m_propertyToCheckData>k__BackingField: 
+  <m_comparisonTypeData>k__BackingField: 
+  <m_comparisonValueData>k__BackingField: 
+  <m_operationTypeData>k__BackingField: 0
+  <m_variableNameData>k__BackingField: 
+  <m_valueToSetData>k__BackingField: 
+  <m_loveScoreAmountData>k__BackingField: 0
+  <m_boolValueData>k__BackingField: 0
+  <m_loveMeterData>k__BackingField: {fileID: 0}
+  <m_bachelorData>k__BackingField: {fileID: 0}
+  <m_isLikePreferenceData>k__BackingField: 0
+  <m_selectedPreferenceData>k__BackingField: 

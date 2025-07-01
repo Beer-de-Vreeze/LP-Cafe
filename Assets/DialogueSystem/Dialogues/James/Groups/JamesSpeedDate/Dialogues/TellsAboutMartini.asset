@@ -15,7 +15,7 @@ MonoBehaviour:
   <m_dialogueNameData>k__BackingField: TellsAboutMartini
   <m_dialogueTextData>k__BackingField: "\rI would like a dirty martini shrimp cocktail.
     \r\nIt's my favorite. \r\nI always order it.\r\nI always hate those overly sugary
-    and sweet nonsense drinks and foods.\r\nA healthy life style is important"
+    and sweet nonsense drinks and foods.\r\nA healthy life style is important."
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Next Dialogue
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 6d88ec3d497bcc546a958e1f7a61775b, type: 2}

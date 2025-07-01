@@ -17,11 +17,11 @@ MonoBehaviour:
     childish! Are you saying I\u2019m a child??"
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Next Dialogue
-    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 839b78553d412374093426b168e7ca25, type: 2}
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 25ffce4103371334f9a4845a45bc28fc, type: 2}
   <m_bachelorImageData>k__BackingField: {fileID: 21300000, guid: 0e52f8f5bd2a8aa4eae89e6137cf3d06, type: 3}
   <m_dialogueAudioData>k__BackingField: {fileID: 8300000, guid: 73c89940657ee784198ef08f9c1ea7f2, type: 3}
   <m_dialogueTypeData>k__BackingField: 0
-  <m_isStartingDialogueData>k__BackingField: 0
+  <m_isStartingDialogueData>k__BackingField: 1
   <m_propertyToCheckData>k__BackingField: 
   <m_comparisonTypeData>k__BackingField: 
   <m_comparisonValueData>k__BackingField: 

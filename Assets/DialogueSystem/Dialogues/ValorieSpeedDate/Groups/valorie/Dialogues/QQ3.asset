@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: QQ3
   m_EditorClassIdentifier: 
   <m_dialogueNameData>k__BackingField: QQ3
-  <m_dialogueTextData>k__BackingField: "What do you do in your free time? \r\nOther
-    than trying to find someone to date?\r"
+  <m_dialogueTextData>k__BackingField: " \rOther than trying to find someone to date?\r"
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: I stay home and game.
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 3e58d9f764767d54c94f34d5e26d490e, type: 2}

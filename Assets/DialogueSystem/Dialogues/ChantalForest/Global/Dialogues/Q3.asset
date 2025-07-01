@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: Q3
   m_EditorClassIdentifier: 
   <m_dialogueNameData>k__BackingField: Q3
-  <m_dialogueTextData>k__BackingField: This is NOT what I meant when I said I like
-    to go out and travel, what we're you thinking???
+  <m_dialogueTextData>k__BackingField: What we're you thinking???
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: If you'll give me another chance, I'll
       take you on that boat ride you wanted.

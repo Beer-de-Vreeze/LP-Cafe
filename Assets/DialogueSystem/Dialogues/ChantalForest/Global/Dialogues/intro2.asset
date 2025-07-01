@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <m_dialogueNameData>k__BackingField: intro2
   <m_dialogueTextData>k__BackingField: "EW IS THAT A BUG? \r\nThis is so gross, ew
-    ew ewwwwww.\r\nWhat do you even want to do here?!\r"
+    ew ewwwwww.\r\r"
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Next Dialogue
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 8faf144b22420c14b8901bde8b11e411, type: 2}

@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8656580f96a63714d889c7daeb915b7a, type: 3}
+  m_Name: Q4
+  m_EditorClassIdentifier: 
+  <m_dialogueNameData>k__BackingField: Q4
+  <m_dialogueTextData>k__BackingField: "You better find something more mind-blowing
+    if you want to keep me.\r"
+  <m_dialogueChoiceData>k__BackingField:
+  - <m_dialogueChoiceText>k__BackingField: Bolt of you to assume there will be a
+      next time.
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 392848d2f50f8c246b1f57126b0b5e1d, type: 2}
+  - <m_dialogueChoiceText>k__BackingField: I don't know yet, how about we decide
+      over a glass of wine?
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: bdf5bb2f4759898459e2210ab716caef, type: 2}
+  - <m_dialogueChoiceText>k__BackingField: I was thinking we could just go here again...
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: b07f9b7881b1c134a80339cb58d32076, type: 2}
+  - <m_dialogueChoiceText>k__BackingField: Whatever you want I'll do for you.
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 850d716725d1b014694900231035817b, type: 2}
+  <m_bachelorImageData>k__BackingField: {fileID: 0}
+  <m_dialogueAudioData>k__BackingField: {fileID: 0}
+  <m_dialogueTypeData>k__BackingField: 1
+  <m_isStartingDialogueData>k__BackingField: 1
+  <m_propertyToCheckData>k__BackingField: 
+  <m_comparisonTypeData>k__BackingField: 
+  <m_comparisonValueData>k__BackingField: 
+  <m_operationTypeData>k__BackingField: 0
+  <m_variableNameData>k__BackingField: 
+  <m_valueToSetData>k__BackingField: 
+  <m_loveScoreAmountData>k__BackingField: 0
+  <m_boolValueData>k__BackingField: 0
+  <m_loveMeterData>k__BackingField: {fileID: 0}
+  <m_bachelorData>k__BackingField: {fileID: 0}
+  <m_isLikePreferenceData>k__BackingField: 0
+  <m_selectedPreferenceData>k__BackingField: 
