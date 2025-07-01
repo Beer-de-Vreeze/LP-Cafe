@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <m_dialogueNameData>k__BackingField: IntroJames
   <m_dialogueTextData>k__BackingField: "Hi I'm James, call me James B.\r\nOr should
-    i rather, i'm james and I feel a bond- \r\nNice to meet you."
+    i rather, i'm James and I feel a bond- \r\nNice to meet you."
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Next Dialogue
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 255f810e9e3e4c244a28aac1155e3b6f, type: 2}
