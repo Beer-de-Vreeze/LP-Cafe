@@ -46,3 +46,5 @@ MonoBehaviour:
   _loveMeter: {fileID: 11400000, guid: 7f80e95effe6e3b48b732ad3facc2721, type: 2}
   _nextSceneName: 
   _HasBeenSpeedDated: 0
+  _HasCompletedRealDate: 0
+  _LastRealDateLocation: 
