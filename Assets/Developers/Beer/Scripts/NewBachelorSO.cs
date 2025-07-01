@@ -313,6 +313,12 @@ public class NewBachelorSO : ScriptableObject
             return "Hey! How are you doing?";
         }
 
+        // Check love meter to determine the tone of the message
+        if (_loveMeter != null && _loveMeter.GetCurrentLove() <= 0)
+        {
+            return $"Look, I don't want to be rude, but our date at the {_LastRealDateLocation} didn't go well at all. I think we're just not compatible.";
+        }
+
         return $"Hey! I had such a wonderful time at the {_LastRealDateLocation} with you.";
     }
 

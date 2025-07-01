@@ -49,3 +49,5 @@ MonoBehaviour:
   _loveMeter: {fileID: 11400000, guid: 60b63660c8262df40b22074d24b3938e, type: 2}
   _nextSceneName: 
   _HasBeenSpeedDated: 0
+  _HasCompletedRealDate: 0
+  _LastRealDateLocation: Aquarium

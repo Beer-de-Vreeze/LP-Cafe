@@ -216,4 +216,13 @@ public class SetBachelor : MonoBehaviour
 
         return data.RealDatedBachelors.Contains(m_bachelor.name);
     }
+
+    /// <summary>
+    /// Gets the bachelor data for this SetBachelor component
+    /// </summary>
+    /// <returns>The NewBachelorSO data</returns>
+    public NewBachelorSO GetBachelor()
+    {
+        return m_bachelor;
+    }
 }
