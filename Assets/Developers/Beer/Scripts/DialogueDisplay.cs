@@ -690,7 +690,7 @@ public class DialogueDisplay : MonoBehaviour
 
         _bachelor = bachelor;
         _dialogue = dialogueSO;
-        
+
         Debug.Log($"[StartDialogue] Started dialogue with bachelor: {_bachelor._name}");
 
         // Ensure notebook is properly connected to the new bachelor
@@ -1793,18 +1793,24 @@ public class DialogueDisplay : MonoBehaviour
     /// </summary>
     private void OnPostRealDateComeBackLaterClicked()
     {
-        Debug.Log($"[OnPostRealDateComeBackLaterClicked] Come Back Later button clicked after real date. Bachelor: {(_bachelor != null ? _bachelor._name : "null")}, Location: {_currentRealDateLocation}");
+        Debug.Log(
+            $"[OnPostRealDateComeBackLaterClicked] Come Back Later button clicked after real date. Bachelor: {(_bachelor != null ? _bachelor._name : "null")}, Location: {_currentRealDateLocation}"
+        );
 
         // Mark bachelor as real dated and save progress
         if (_bachelor != null)
         {
-            Debug.Log($"[OnPostRealDateComeBackLaterClicked] About to mark {_bachelor._name} as real dated at {_currentRealDateLocation}");
+            Debug.Log(
+                $"[OnPostRealDateComeBackLaterClicked] About to mark {_bachelor._name} as real dated at {_currentRealDateLocation}"
+            );
             MarkBachelorAsRealDated(_bachelor);
             IncrementRealDateCount();
         }
         else
         {
-            Debug.LogError("[OnPostRealDateComeBackLaterClicked] Bachelor is null when trying to save real date progress!");
+            Debug.LogError(
+                "[OnPostRealDateComeBackLaterClicked] Bachelor is null when trying to save real date progress!"
+            );
         }
 
         // Clear notebook
@@ -1981,7 +1987,9 @@ public class DialogueDisplay : MonoBehaviour
             && !currentSceneName.ToLower().Contains("menu")
             && !currentSceneName.ToLower().Contains("main");
 
-        Debug.Log($"[FinishDialogue] Current scene: {currentSceneName}, IsDateScene: {isDateScene}, Bachelor: {(_bachelor != null ? _bachelor._name : "null")}");
+        Debug.Log(
+            $"[FinishDialogue] Current scene: {currentSceneName}, IsDateScene: {isDateScene}, Bachelor: {(_bachelor != null ? _bachelor._name : "null")}"
+        );
 
         if (isDateScene)
         {
@@ -1990,12 +1998,16 @@ public class DialogueDisplay : MonoBehaviour
             // Mark bachelor as dated and disable their setter
             if (_bachelor != null)
             {
-                Debug.Log($"[FinishDialogue] About to mark {_bachelor._name} as dated in scene {currentSceneName}");
+                Debug.Log(
+                    $"[FinishDialogue] About to mark {_bachelor._name} as dated in scene {currentSceneName}"
+                );
                 MarkBachelorAsDated(_bachelor);
             }
             else
             {
-                Debug.LogError("[FinishDialogue] Bachelor is null when trying to save in date scene!");
+                Debug.LogError(
+                    "[FinishDialogue] Bachelor is null when trying to save in date scene!"
+                );
             }
         }
 
@@ -2254,7 +2266,9 @@ public class DialogueDisplay : MonoBehaviour
         // Mark in the ScriptableObject (this also handles saving to the save system)
         bachelor.MarkAsDated();
 
-        Debug.Log($"[MarkBachelorAsDated] Successfully marked {bachelor._name} as dated and saved progress");
+        Debug.Log(
+            $"[MarkBachelorAsDated] Successfully marked {bachelor._name} as dated and saved progress"
+        );
     }
 
     /// <summary>
@@ -2264,22 +2278,30 @@ public class DialogueDisplay : MonoBehaviour
     {
         if (bachelor == null)
         {
-            Debug.LogError("[MarkBachelorAsRealDated] Bachelor is null! Cannot save real dating progress.");
+            Debug.LogError(
+                "[MarkBachelorAsRealDated] Bachelor is null! Cannot save real dating progress."
+            );
             return;
         }
 
         if (string.IsNullOrEmpty(_currentRealDateLocation))
         {
-            Debug.LogError($"[MarkBachelorAsRealDated] Current real date location is empty! Cannot save location for {bachelor._name}");
+            Debug.LogError(
+                $"[MarkBachelorAsRealDated] Current real date location is empty! Cannot save location for {bachelor._name}"
+            );
             return;
         }
 
-        Debug.Log($"[MarkBachelorAsRealDated] About to mark {bachelor._name} as real dated at {_currentRealDateLocation}");
+        Debug.Log(
+            $"[MarkBachelorAsRealDated] About to mark {bachelor._name} as real dated at {_currentRealDateLocation}"
+        );
 
         // Mark in the ScriptableObject with the date location (this also handles saving to the save system)
         bachelor.MarkAsRealDated(_currentRealDateLocation);
 
-        Debug.Log($"[MarkBachelorAsRealDated] Successfully marked {bachelor._name} as real dated at {_currentRealDateLocation} and saved progress");
+        Debug.Log(
+            $"[MarkBachelorAsRealDated] Successfully marked {bachelor._name} as real dated at {_currentRealDateLocation} and saved progress"
+        );
     }
 
     /// <summary>

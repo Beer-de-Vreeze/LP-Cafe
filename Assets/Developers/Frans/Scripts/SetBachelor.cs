@@ -312,7 +312,10 @@ public class SetBachelor : MonoBehaviour
     {
         if (m_bachelor == null)
         {
-            Debug.LogError("[SetBachelor] No bachelor assigned to this SetBachelor component!", this);
+            Debug.LogError(
+                "[SetBachelor] No bachelor assigned to this SetBachelor component!",
+                this
+            );
             return;
         }
 
@@ -323,17 +326,17 @@ public class SetBachelor : MonoBehaviour
         }
 
         Debug.Log($"=== Testing Normal Dating Flow for {m_bachelor._name} ===", this);
-        
+
         // Step 1: Check initial state
         Debug.Log($"Step 1 - Initial State:");
         Debug.Log($"  Bachelor name: {m_bachelor._name}");
         Debug.Log($"  HasBeenDated(): {m_bachelor.HasBeenDated()}");
         Debug.Log($"  HasCompletedRealDate(): {m_bachelor.HasCompletedRealDate()}");
-        
+
         // Step 2: Simulate normal dating dialogue trigger
         Debug.Log($"Step 2 - Starting dialogue (normal flow):");
         SetBatchelor(); // This calls the normal StartDialogue flow
-        
+
         // Step 3: Check if DialogueDisplay has the bachelor set
         Debug.Log($"Step 3 - Checking DialogueDisplay state:");
         if (m_dialogueDisplay != null)
@@ -341,8 +344,10 @@ public class SetBachelor : MonoBehaviour
             // We can't access private fields, but we can check if the dialogue started
             Debug.Log("Dialogue started through normal flow");
         }
-        
-        Debug.Log($"=== Normal Dating Flow Test Started (check console for DialogueDisplay logs) ===");
+
+        Debug.Log(
+            $"=== Normal Dating Flow Test Started (check console for DialogueDisplay logs) ==="
+        );
     }
 
     /// <summary>
