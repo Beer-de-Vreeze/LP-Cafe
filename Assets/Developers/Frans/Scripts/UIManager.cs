@@ -241,88 +241,60 @@ public class UIManager : MonoBehaviour
     /// </summary>
     private void VerifyBachelorReset()
     {
+        Debug.Log("[UIManager] Starting bachelor reset verification");
+
         NewBachelorSO[] allBachelors = Resources.FindObjectsOfTypeAll<NewBachelorSO>();
         bool allResetCorrectly = true;
+        int bachelorCount = 0;
 
 #if !UNITY_EDITOR
         // In builds, also check if reset flag is set properly
         SaveData saveData = SaveSystem.Deserialize();
         if (saveData != null && !saveData.ShouldResetBachelors)
         {
-            Debug.Log("Build mode: Reset flag is properly cleared in save data");
+            Debug.Log("[UIManager] ✓ Build mode: Reset flag is properly cleared in save data");
         }
         else if (saveData != null && saveData.ShouldResetBachelors)
         {
             Debug.LogWarning(
-                "Build mode: Reset flag is still set - runtime reset may not have been applied yet"
+                "[UIManager] ⚠ Build mode: Reset flag is still set - runtime reset may not have been applied yet"
             );
         }
 #endif
+
         foreach (NewBachelorSO bachelor in allBachelors)
         {
             if (bachelor != null)
             {
-                // Check if bachelor is properly reset
-                if (bachelor._HasBeenSpeedDated)
+                bachelorCount++;
+                Debug.Log($"[UIManager] Verifying reset for bachelor: {bachelor._name}");
+
+                // Use the bachelor's own verification method for comprehensive checking
+                bool bachelorResetCorrectly = bachelor.VerifyCompleteReset();
+
+                if (!bachelorResetCorrectly)
                 {
-                    Debug.LogError($"✗ Bachelor {bachelor._name} still marked as speed dated!");
                     allResetCorrectly = false;
-                }
-
-                // Check if preferences are reset
-                bool hasDiscoveredLikes = false;
-                bool hasDiscoveredDislikes = false;
-
-                if (bachelor._likes != null)
-                {
-                    foreach (var like in bachelor._likes)
-                    {
-                        if (like.discovered)
-                        {
-                            hasDiscoveredLikes = true;
-                            break;
-                        }
-                    }
-                }
-
-                if (bachelor._dislikes != null)
-                {
-                    foreach (var dislike in bachelor._dislikes)
-                    {
-                        if (dislike.discovered)
-                        {
-                            hasDiscoveredDislikes = true;
-                            break;
-                        }
-                    }
-                }
-
-                if (hasDiscoveredLikes || hasDiscoveredDislikes)
-                {
                     Debug.LogError(
-                        $"✗ Bachelor {bachelor._name} still has discovered preferences!"
+                        $"[UIManager] ❌ Bachelor {bachelor._name} failed reset verification!"
                     );
-                    allResetCorrectly = false;
                 }
-
-                // Check love meter
-                if (bachelor._loveMeter != null && bachelor._loveMeter.GetCurrentLove() != 3)
+                else
                 {
-                    Debug.LogError(
-                        $"✗ Bachelor {bachelor._name} love meter not reset to 3! Current: {bachelor._loveMeter.GetCurrentLove()}"
-                    );
-                    allResetCorrectly = false;
+                    Debug.Log($"[UIManager] ✅ Bachelor {bachelor._name} passed reset verification");
                 }
             }
         }
 
+        Debug.Log($"[UIManager] Verified reset for {bachelorCount} bachelors");
+
         if (allResetCorrectly)
         {
-            Debug.Log("✓ All bachelors verified as properly reset!");
+            Debug.Log("[UIManager] ✅ ALL BACHELORS VERIFIED AS PROPERLY RESET!");
         }
         else
         {
-            Debug.LogError("✗ Some bachelors were not properly reset!");
+            Debug.LogError("[UIManager] ❌ SOME BACHELORS WERE NOT PROPERLY RESET!");
         }
     }
 
@@ -463,6 +435,9 @@ public class UIManager : MonoBehaviour
                 {
                     UnityEditor.EditorUtility.SetDirty(bachelor._loveMeter);
                 }
+
+                // Make sure changes are saved to the save file too
+                SaveBachelorChanges(bachelor);
             }
         }
 
@@ -483,6 +458,9 @@ public class UIManager : MonoBehaviour
         string[] bachelorGuids = UnityEditor.AssetDatabase.FindAssets("t:NewBachelorSO");
         Debug.Log($"Found {bachelorGuids.Length} bachelor assets to check");
 
+        int resetCount = 0;
+        int modifiedCount = 0;
+
         foreach (string guid in bachelorGuids)
         {
             string path = UnityEditor.AssetDatabase.GUIDToAssetPath(guid);
@@ -492,12 +470,18 @@ public class UIManager : MonoBehaviour
             {
                 Debug.Log($"Bachelor: {bachelor._name}");
                 Debug.Log($"  - Speed Dated: {bachelor._HasBeenSpeedDated}");
+                Debug.Log($"  - Real Dated: {bachelor._HasCompletedRealDate}");
+                Debug.Log($"  - Real Date Location: '{bachelor._LastRealDateLocation}'");
                 Debug.Log($"  - Like Discovered: {bachelor._isLikeDiscovered}");
                 Debug.Log($"  - Dislike Discovered: {bachelor._isDislikeDiscovered}");
 
                 if (bachelor._loveMeter != null)
                 {
                     Debug.Log($"  - Love Value: {bachelor._loveMeter.GetCurrentLove()}");
+                }
+                else
+                {
+                    Debug.Log($"  - Love Meter: Not assigned");
                 }
 
                 // Check individual preferences
@@ -522,11 +506,34 @@ public class UIManager : MonoBehaviour
                         }
                     }
                 }
+
+                // Use verification to determine if bachelor is in reset state
+                bool isInResetState = bachelor.VerifyCompleteReset();
+                if (isInResetState)
+                {
+                    resetCount++;
+                    Debug.Log($"  - STATE: ✅ Reset (Initial State)");
+                }
+                else
+                {
+                    modifiedCount++;
+                    Debug.Log($"  - STATE: ⚠️ Modified (Has Progress)");
+                }
+
+                Debug.Log(""); // Empty line for readability
             }
         }
+
+        Debug.Log(
+            $"SUMMARY: {resetCount} bachelors in reset state, {modifiedCount} bachelors with progress"
+        );
+
 #else
         NewBachelorSO[] allBachelors = Resources.FindObjectsOfTypeAll<NewBachelorSO>();
         Debug.Log($"Found {allBachelors.Length} bachelor instances to check");
+
+        int resetCount = 0;
+        int modifiedCount = 0;
 
         foreach (NewBachelorSO bachelor in allBachelors)
         {
@@ -537,8 +544,24 @@ public class UIManager : MonoBehaviour
                 {
                     Debug.Log($"  - Love Value: {bachelor._loveMeter.GetCurrentLove()}");
                 }
+
+                bool isInResetState = bachelor.VerifyCompleteReset();
+                if (isInResetState)
+                {
+                    resetCount++;
+                    Debug.Log($"  - STATE: ✅ Reset");
+                }
+                else
+                {
+                    modifiedCount++;
+                    Debug.Log($"  - STATE: ⚠️ Modified");
+                }
             }
         }
+
+        Debug.Log(
+            $"SUMMARY: {resetCount} bachelors in reset state, {modifiedCount} bachelors with progress"
+        );
 #endif
 
         Debug.Log("=== BACHELOR STATE CHECK COMPLETED ===");
@@ -573,5 +596,115 @@ public class UIManager : MonoBehaviour
             Debug.Log($"Applied runtime reset to {allBachelors.Length} bachelors");
         }
 #endif
+    }
+
+    /// <summary>
+    /// Ensures any changes to the bachelor's flags are properly saved to the save file
+    /// </summary>
+    private void SaveBachelorChanges(NewBachelorSO bachelor)
+    {
+        if (bachelor == null || string.IsNullOrEmpty(bachelor._name))
+        {
+            Debug.LogError("Cannot save changes for null or unnamed bachelor");
+            return;
+        }
+
+        Debug.Log($"Saving changes for {bachelor._name} to save file");
+
+        SaveData saveData = SaveSystem.Deserialize();
+        if (saveData == null)
+        {
+            saveData = new SaveData();
+        }
+
+        // Update the bachelor-specific data
+        BachelorPreferencesData prefData = saveData.GetOrCreateBachelorData(bachelor._name);
+
+        // Update flags from local memory to save data
+        prefData.hasBeenSpeedDated = bachelor._HasBeenSpeedDated;
+        prefData.hasCompletedRealDate = bachelor._HasCompletedRealDate;
+        prefData.lastRealDateLocation = bachelor._LastRealDateLocation;
+
+        // Also update legacy lists for backward compatibility
+        if (bachelor._HasBeenSpeedDated && !saveData.DatedBachelors.Contains(bachelor._name))
+        {
+            saveData.DatedBachelors.Add(bachelor._name);
+        }
+
+        if (bachelor._HasCompletedRealDate && !saveData.RealDatedBachelors.Contains(bachelor._name))
+        {
+            saveData.RealDatedBachelors.Add(bachelor._name);
+        }
+
+        // Synchronize preferences too
+        bachelor.SaveDiscoveredPreferences();
+
+        // Save the updated data
+        SaveSystem.SerializeData(saveData);
+        Debug.Log($"Saved changes for {bachelor._name} to save file");
+    }
+
+    /// <summary>
+    /// Comprehensive test of the complete reset system - can be called from Inspector
+    /// </summary>
+    [ContextMenu("Test Complete Reset System")]
+    public void TestCompleteResetSystem()
+    {
+        Debug.Log("=== COMPREHENSIVE RESET SYSTEM TEST ===");
+
+        // Step 1: Check initial state
+        Debug.Log("Step 1: Checking initial bachelor states...");
+        CheckBachelorStates();
+
+        // Step 2: Modify bachelors to have some data
+        Debug.Log("\nStep 2: Modifying bachelors for testing...");
+        ModifyBachelorsForTesting();
+
+        // Step 3: Verify modifications worked
+        Debug.Log("\nStep 3: Verifying modifications...");
+        CheckBachelorStates();
+
+        // Step 4: Perform reset
+        Debug.Log("\nStep 4: Performing complete reset...");
+        ResetAllBachelorData();
+
+        // Step 5: Verify reset worked
+        Debug.Log("\nStep 5: Verifying reset was successful...");
+        VerifyBachelorReset();
+
+        // Step 6: Final state check
+        Debug.Log("\nStep 6: Final state verification...");
+        CheckBachelorStates();
+
+        // Step 7: Verify individual bachelors using their own verification
+        Debug.Log("\nStep 7: Individual bachelor verification...");
+        NewBachelorSO[] allBachelors = Resources.FindObjectsOfTypeAll<NewBachelorSO>();
+        int passCount = 0;
+        int totalCount = 0;
+
+        foreach (NewBachelorSO bachelor in allBachelors)
+        {
+            if (bachelor != null)
+            {
+                totalCount++;
+                if (bachelor.VerifyCompleteReset())
+                {
+                    passCount++;
+                }
+            }
+        }
+
+        Debug.Log($"\nIndividual Verification Results: {passCount}/{totalCount} bachelors passed");
+
+        if (passCount == totalCount)
+        {
+            Debug.Log("🎉 COMPLETE RESET SYSTEM TEST PASSED! All systems working correctly.");
+        }
+        else
+        {
+            Debug.LogError("❌ COMPLETE RESET SYSTEM TEST FAILED! Some issues detected.");
+        }
+
+        Debug.Log("=== RESET SYSTEM TEST COMPLETE ===");
     }
 }

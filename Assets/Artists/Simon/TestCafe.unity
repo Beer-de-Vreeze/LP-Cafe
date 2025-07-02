@@ -7598,7 +7598,7 @@ MonoBehaviour:
   m_groupedDialogues: 1
   m_startingDialoguesOnly: 0
   m_selectedDialogueGroupIndex: 0
-  m_selectedDialogueIndex: 43
+  m_selectedDialogueIndex: 42
 --- !u!114 &1260297398
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11660,7 +11660,7 @@ MonoBehaviour:
   m_groupedDialogues: 1
   m_startingDialoguesOnly: 0
   m_selectedDialogueGroupIndex: 0
-  m_selectedDialogueIndex: 41
+  m_selectedDialogueIndex: 40
 --- !u!114 &1982111748
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11856,7 +11856,7 @@ MonoBehaviour:
   m_groupedDialogues: 1
   m_startingDialoguesOnly: 0
   m_selectedDialogueGroupIndex: 0
-  m_selectedDialogueIndex: 40
+  m_selectedDialogueIndex: 39
 --- !u!1001 &1983315654
 PrefabInstance:
   m_ObjectHideFlags: 0

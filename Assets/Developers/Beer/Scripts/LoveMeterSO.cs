@@ -13,7 +13,8 @@ public class LoveMeterSO : ScriptableObject
     public int _maxLove = 5;
 
     [Tooltip("Current love value")]
-    public int _currentLove;
+    [SerializeField]
+    private int _currentLove = 3;
 
     [Tooltip("Love needed to go on a real date")]
     public int _loveNeededForRealDate;
@@ -21,10 +22,28 @@ public class LoveMeterSO : ScriptableObject
     [System.NonSerialized]
     public UnityEvent<int> LoveChangedEvent;
 
+    /// <summary>
+    /// Public property to access the current love value
+    /// </summary>
+    public int CurrentLove
+    {
+        get { return _currentLove; }
+        set
+        {
+            _currentLove = value;
+            if (LoveChangedEvent != null)
+                LoveChangedEvent.Invoke(_currentLove);
+        }
+    }
+
     public virtual void OnEnable()
     {
-        // Initialize the love value when the scriptable object is enabled
-        _currentLove = 3;
+        // Only initialize if this is a fresh ScriptableObject with default value
+        // This preserves saved values while ensuring new instances start at 3
+        if (_currentLove == 0)
+        {
+            _currentLove = 3;
+        }
 
         // Initialize the event if it doesn't exist yet
         if (LoveChangedEvent == null)
@@ -42,10 +61,10 @@ public class LoveMeterSO : ScriptableObject
     /// </summary>
     public virtual void IncreaseLove(int amount)
     {
-        _currentLove += amount;
+        _currentLove = Mathf.Min(_currentLove + amount, _maxLove);
 
         // Notify listeners about the change
-        LoveChangedEvent.Invoke(_currentLove);
+        LoveChangedEvent?.Invoke(_currentLove);
 
         Debug.Log($"Batchelor love increased by {amount}. Total Love: {_currentLove}");
     }
@@ -55,16 +74,10 @@ public class LoveMeterSO : ScriptableObject
     /// </summary>
     public virtual void DecreaseLove(int amount)
     {
-        _currentLove -= amount;
-
-        // Make sure love doesn't go below zero
-        if (_currentLove < 0)
-        {
-            _currentLove = 0;
-        }
+        _currentLove = Mathf.Max(_currentLove - amount, 0);
 
         // Notify listeners about the change
-        LoveChangedEvent.Invoke(_currentLove);
+        LoveChangedEvent?.Invoke(_currentLove);
 
         Debug.Log($"Batchelor love decreased by {amount}. Total Love: {_currentLove}");
     }
@@ -80,7 +93,7 @@ public class LoveMeterSO : ScriptableObject
         if (_currentLove > _maxLove)
         {
             _currentLove = _maxLove;
-            LoveChangedEvent.Invoke(_currentLove);
+            LoveChangedEvent?.Invoke(_currentLove);
         }
     }
 
@@ -116,7 +129,7 @@ public class LoveMeterSO : ScriptableObject
     public virtual void SetToMaxLove()
     {
         _currentLove = _maxLove;
-        LoveChangedEvent.Invoke(_currentLove);
+        LoveChangedEvent?.Invoke(_currentLove);
     }
 
     /// <summary>

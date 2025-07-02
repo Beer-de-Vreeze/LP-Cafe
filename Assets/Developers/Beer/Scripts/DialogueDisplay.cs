@@ -125,6 +125,9 @@ public class DialogueDisplay : MonoBehaviour
     /// <summary>Reference to the NoteBook script for tracking discovered preferences</summary>
     [SerializeField]
     private NoteBook _noteBook;
+
+    /// <summary>Reference to the SetBachelor component that manages bachelor initialization</summary>
+    private SetBachelor _setBachelor;
     #endregion
 
     #region State Management
@@ -702,14 +705,14 @@ public class DialogueDisplay : MonoBehaviour
 
         if (_bachelor != null)
         {
+            // Ensure bachelor synchronizes with save data to load discovered preferences
+            _bachelor.SynchronizeWithSaveData();
+
             // Ensure notebook is properly connected to the new bachelor
             if (_noteBook != null)
             {
                 _noteBook.EnsureBachelorConnection(_bachelor);
             }
-
-            // Ensure all preferences start as undiscovered
-            _bachelor.EnsureUndiscoveredState();
 
             // Use the bachelor's love meter if available
             if (_bachelor._loveMeter != null)
@@ -748,6 +751,32 @@ public class DialogueDisplay : MonoBehaviour
 
         Debug.Log($"[StartDialogue] Started dialogue with bachelor: {_bachelor._name}");
 
+        // Find and cache the SetBachelor component for later use
+        _setBachelor = FindFirstObjectByType<SetBachelor>();
+        if (_setBachelor == null)
+        {
+            Debug.LogWarning(
+                "[DialogueDisplay] No SetBachelor found in scene, dating status may not be properly saved"
+            );
+
+            // Try a more aggressive search as a fallback
+            SetBachelor[] allSetBachelors = FindObjectsByType<SetBachelor>(
+                FindObjectsSortMode.None
+            );
+            if (allSetBachelors != null && allSetBachelors.Length > 0)
+            {
+                _setBachelor = allSetBachelors[0];
+                Debug.Log($"[DialogueDisplay] Found SetBachelor through alternative search method");
+            }
+        }
+        else
+        {
+            Debug.Log($"[DialogueDisplay] Found SetBachelor component in the scene");
+        }
+
+        // Ensure bachelor synchronizes with save data to load discovered preferences
+        _bachelor.SynchronizeWithSaveData();
+
         // Ensure notebook is properly connected to the new bachelor
         if (_noteBook != null)
         {
@@ -763,6 +792,15 @@ public class DialogueDisplay : MonoBehaviour
             // Set up the love meter UI component
             EnsureLoveMeterSetup();
         }
+
+        // Reference to SetBachelor already found above, no need to search again
+        if (_setBachelor != null)
+        {
+            Debug.Log(
+                $"[DialogueDisplay] Using SetBachelor for bachelor: {_setBachelor.GetBachelor()?._name}"
+            );
+        }
+
         ShowDialogue();
     }
 
@@ -795,6 +833,9 @@ public class DialogueDisplay : MonoBehaviour
         _aquariumDateDialogue = aquariumDateDialogue;
         _forestDateDialogue = forestDateDialogue;
 
+        // Ensure bachelor synchronizes with save data to load discovered preferences
+        _bachelor.SynchronizeWithSaveData();
+
         // Ensure notebook is properly connected to the new bachelor
         if (_noteBook != null)
         {
@@ -821,6 +862,9 @@ public class DialogueDisplay : MonoBehaviour
     public void ShowPostDateOptions(NewBachelorSO bachelor)
     {
         _bachelor = bachelor;
+
+        // Ensure bachelor synchronizes with save data to load discovered preferences
+        _bachelor.SynchronizeWithSaveData();
 
         // Reset the state for waiting to clear before end buttons
         _waitingForClearBeforeEndButtons = false;
@@ -893,6 +937,9 @@ public class DialogueDisplay : MonoBehaviour
     public void ShowPostRealDateOptionsInCafe(NewBachelorSO bachelor)
     {
         _bachelor = bachelor;
+
+        // Ensure bachelor synchronizes with save data to load discovered preferences
+        _bachelor.SynchronizeWithSaveData();
 
         // Reset the state for waiting to clear before end buttons
         _waitingForClearBeforeEndButtons = false;
@@ -1741,6 +1788,22 @@ public class DialogueDisplay : MonoBehaviour
     /// </summary>
     private void ShowEndDialogueButtons()
     {
+        // Mark the bachelor as having completed a speed date
+        if (_bachelor != null)
+        {
+            // Use the bachelor's own method which handles both local flags and save data consistency
+            MarkBachelorAsDated(_bachelor);
+
+            // Also notify SetBachelor to ensure full synchronization with save data
+            if (_setBachelor != null)
+            {
+                _setBachelor.CompleteSpeedDateAndSave();
+                Debug.Log(
+                    "[DialogueDisplay] Called CompleteSpeedDateAndSave() to ensure bachelor dating status is saved"
+                );
+            }
+        }
+
         string currentSceneName = SceneManager.GetActiveScene().name;
         string sceneLower = currentSceneName.ToLower();
 
@@ -1859,18 +1922,35 @@ public class DialogueDisplay : MonoBehaviour
         );
 
         // Mark bachelor as real dated and save progress
-        if (_bachelor != null)
+        if (_bachelor != null && !string.IsNullOrEmpty(_currentRealDateLocation))
         {
             Debug.Log(
                 $"[OnPostRealDateComeBackLaterClicked] About to mark {_bachelor._name} as real dated at {_currentRealDateLocation}"
             );
-            MarkBachelorAsRealDated(_bachelor);
+
+            // Use SetBachelor to ensure proper synchronization with save data
+            if (_setBachelor != null)
+            {
+                _setBachelor.CompleteRealDateAndSave(_currentRealDateLocation);
+                Debug.Log(
+                    $"[OnPostRealDateComeBackLaterClicked] Called CompleteRealDateAndSave({_currentRealDateLocation}) via SetBachelor"
+                );
+            }
+            else
+            {
+                // Fallback to direct method if SetBachelor isn't available
+                MarkBachelorAsRealDated(_bachelor);
+                Debug.LogWarning(
+                    "[OnPostRealDateComeBackLaterClicked] SetBachelor not found, using direct method instead"
+                );
+            }
+
             IncrementRealDateCount();
         }
         else
         {
             Debug.LogError(
-                "[OnPostRealDateComeBackLaterClicked] Bachelor is null when trying to save real date progress!"
+                "[OnPostRealDateComeBackLaterClicked] Bachelor is null or location is empty when trying to save real date progress!"
             );
         }
 
@@ -1895,9 +1975,25 @@ public class DialogueDisplay : MonoBehaviour
         Debug.Log("Return to Cafe button clicked");
 
         // Mark bachelor as real dated and save progress
-        if (_bachelor != null)
+        if (_bachelor != null && !string.IsNullOrEmpty(_currentRealDateLocation))
         {
-            MarkBachelorAsRealDated(_bachelor);
+            // Use SetBachelor to ensure proper synchronization with save data
+            if (_setBachelor != null)
+            {
+                _setBachelor.CompleteRealDateAndSave(_currentRealDateLocation);
+                Debug.Log(
+                    $"[OnReturnToCafeClicked] Called CompleteRealDateAndSave({_currentRealDateLocation}) via SetBachelor"
+                );
+            }
+            else
+            {
+                // Fallback to direct method if SetBachelor isn't available
+                MarkBachelorAsRealDated(_bachelor);
+                Debug.LogWarning(
+                    "[OnReturnToCafeClicked] SetBachelor not found, using direct method instead"
+                );
+            }
+
             IncrementRealDateCount();
         }
 
@@ -1922,9 +2018,25 @@ public class DialogueDisplay : MonoBehaviour
         Debug.Log("Back to Menu button clicked");
 
         // Mark bachelor as real dated and save progress
-        if (_bachelor != null)
+        if (_bachelor != null && !string.IsNullOrEmpty(_currentRealDateLocation))
         {
-            MarkBachelorAsRealDated(_bachelor);
+            // Use SetBachelor to ensure proper synchronization with save data
+            if (_setBachelor != null)
+            {
+                _setBachelor.CompleteRealDateAndSave(_currentRealDateLocation);
+                Debug.Log(
+                    $"[OnBackToMenuClicked] Called CompleteRealDateAndSave({_currentRealDateLocation}) via SetBachelor"
+                );
+            }
+            else
+            {
+                // Fallback to direct method if SetBachelor isn't available
+                MarkBachelorAsRealDated(_bachelor);
+                Debug.LogWarning(
+                    "[OnBackToMenuClicked] SetBachelor not found, using direct method instead"
+                );
+            }
+
             IncrementRealDateCount();
         }
 
@@ -1952,9 +2064,25 @@ public class DialogueDisplay : MonoBehaviour
         Debug.Log("Quit Game button clicked");
 
         // Mark bachelor as real dated and save progress
-        if (_bachelor != null)
+        if (_bachelor != null && !string.IsNullOrEmpty(_currentRealDateLocation))
         {
-            MarkBachelorAsRealDated(_bachelor);
+            // Use SetBachelor to ensure proper synchronization with save data
+            if (_setBachelor != null)
+            {
+                _setBachelor.CompleteRealDateAndSave(_currentRealDateLocation);
+                Debug.Log(
+                    $"[OnQuitGameClicked] Called CompleteRealDateAndSave({_currentRealDateLocation}) via SetBachelor"
+                );
+            }
+            else
+            {
+                // Fallback to direct method if SetBachelor isn't available
+                MarkBachelorAsRealDated(_bachelor);
+                Debug.LogWarning(
+                    "[OnQuitGameClicked] SetBachelor not found, using direct method instead"
+                );
+            }
+
             IncrementRealDateCount();
         }
 
@@ -2118,10 +2246,38 @@ public class DialogueDisplay : MonoBehaviour
             Debug.Log("Returning from real date - handling post-real-date cleanup");
 
             // Mark bachelor as real dated and save progress
-            if (_bachelor != null)
+            if (_bachelor != null && !string.IsNullOrEmpty(_currentRealDateLocation))
             {
-                MarkBachelorAsRealDated(_bachelor);
+                // Use SetBachelor to ensure proper synchronization with save data
+                if (_setBachelor != null)
+                {
+                    _setBachelor.CompleteRealDateAndSave(_currentRealDateLocation);
+                    Debug.Log(
+                        $"[OnComeBackLaterClicked] Called CompleteRealDateAndSave({_currentRealDateLocation}) via SetBachelor"
+                    );
+                }
+                else
+                {
+                    // Fallback to direct method if SetBachelor isn't available
+                    MarkBachelorAsRealDated(_bachelor);
+                    Debug.LogWarning(
+                        "[OnComeBackLaterClicked] SetBachelor not found, using direct method instead"
+                    );
+                }
+
                 IncrementRealDateCount();
+            }
+            else if (_bachelor == null)
+            {
+                Debug.LogError(
+                    "[OnComeBackLaterClicked] Cannot mark real dated - bachelor is null"
+                );
+            }
+            else if (string.IsNullOrEmpty(_currentRealDateLocation))
+            {
+                Debug.LogError(
+                    "[OnComeBackLaterClicked] Cannot mark real dated - location is empty"
+                );
             }
 
             // Clear notebook
@@ -2302,9 +2458,20 @@ public class DialogueDisplay : MonoBehaviour
         // Set the flag to indicate we're starting a real date and store the location
         _justCompletedRealDate = true;
 
-        // Store the date location in a variable we can access later
-        _currentRealDateLocation = locationName;
-        Debug.Log($"Starting real date at {locationName}. Flag set to true.");
+        // Validate and store the date location
+        if (string.IsNullOrEmpty(locationName))
+        {
+            Debug.LogWarning(
+                "StartRealDateDialogue called with empty location name! Using 'Unknown' as fallback."
+            );
+            _currentRealDateLocation = "Unknown"; // Fallback to ensure we don't have an empty location
+        }
+        else
+        {
+            _currentRealDateLocation = locationName;
+        }
+
+        Debug.Log($"Starting real date at {_currentRealDateLocation}. Flag set to true.");
 
         // Clear choices and start the date dialogue
         ClearChoices();
@@ -2421,11 +2588,9 @@ public class DialogueDisplay : MonoBehaviour
         SaveData saveData = SaveSystem.Deserialize();
         if (saveData != null)
         {
-            // Count successful dates (speed dates) from DatedBachelors list
-            _speedDateCount = saveData.DatedBachelors?.Count ?? 0;
-
-            // Count real dates from RealDatedBachelors list
-            _realDateCount = saveData.RealDatedBachelors?.Count ?? 0;
+            // Get counts from the new per-bachelor system
+            _speedDateCount = saveData.GetAllSpeedDatedBachelors().Count;
+            _realDateCount = saveData.GetAllRealDatedBachelors().Count;
 
             Debug.Log(
                 $"Loaded from save data - Successful dates: {_speedDateCount}, Real dates: {_realDateCount}"
@@ -2933,6 +3098,39 @@ public class DialogueDisplay : MonoBehaviour
             yield return new WaitForSeconds(3f);
         }
 
+        // Ensure real date completion is saved via SetBachelor
+        // Try to find the SetBachelor reference if it's null
+        if (_setBachelor == null)
+        {
+            _setBachelor = FindFirstObjectByType<SetBachelor>();
+            Debug.Log("[DialogueDisplay] Attempting to re-acquire SetBachelor reference");
+        }
+
+        if (_setBachelor != null && !string.IsNullOrEmpty(_currentRealDateLocation))
+        {
+            _setBachelor.CompleteRealDateAndSave(_currentRealDateLocation);
+            Debug.Log(
+                $"[DialogueDisplay] Called CompleteRealDateAndSave({_currentRealDateLocation}) to ensure real date completion is saved"
+            );
+        }
+        else
+        {
+            // Fallback: Use the bachelor directly if SetBachelor can't be found
+            if (_bachelor != null && !string.IsNullOrEmpty(_currentRealDateLocation))
+            {
+                _bachelor.MarkAsRealDated(_currentRealDateLocation);
+                Debug.Log(
+                    $"[DialogueDisplay] FALLBACK: Directly marked {_bachelor._name} as real dated at {_currentRealDateLocation}"
+                );
+            }
+            else
+            {
+                Debug.LogError(
+                    $"[DialogueDisplay] CRITICAL: Cannot save real date completion: SetBachelor is null, bachelor is null, or location is empty"
+                );
+            }
+        }
+
         // Reset the real date flag and clear location
         _justCompletedRealDate = false;
         _currentRealDateLocation = "";
@@ -2962,11 +3160,11 @@ public class DialogueDisplay : MonoBehaviour
     private bool AllDatesFailed()
     {
         SaveData saveData = SaveSystem.Deserialize();
-        if (saveData == null || saveData.RealDatedBachelors == null)
+        if (saveData == null)
             return false;
 
         // Check if all 5 real dates have been completed
-        int realDatedCount = saveData.RealDatedBachelors.Count;
+        int realDatedCount = saveData.GetAllRealDatedBachelors().Count;
         if (realDatedCount < 5)
             return false;
 
@@ -3013,11 +3211,11 @@ public class DialogueDisplay : MonoBehaviour
     private bool HasMixedResults()
     {
         SaveData saveData = SaveSystem.Deserialize();
-        if (saveData == null || saveData.RealDatedBachelors == null)
+        if (saveData == null)
             return false;
 
         // Check if all 5 real dates have been completed
-        int realDatedCount = saveData.RealDatedBachelors.Count;
+        int realDatedCount = saveData.GetAllRealDatedBachelors().Count;
         if (realDatedCount < 5)
             return false;
 
