@@ -9760,6 +9760,8 @@ GameObject:
   - component: {fileID: 1681331436}
   - component: {fileID: 1681331435}
   - component: {fileID: 1681331441}
+  - component: {fileID: 1681331443}
+  - component: {fileID: 1681331442}
   m_Layer: 0
   m_Name: Barista
   m_TagString: Untagged
@@ -9896,6 +9898,44 @@ MonoBehaviour:
   m_startingDialoguesOnly: 0
   m_selectedDialogueGroupIndex: 0
   m_selectedDialogueIndex: 4
+--- !u!114 &1681331442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1681331434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de97b5429e9cc0c45aac19c9b876fa50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_dialogueContainer: {fileID: 11400000, guid: 1a50d7125584ef1439dd3bcde929e703, type: 2}
+  m_dialogueGroup: {fileID: 11400000, guid: bfa3eebe7aeb5ca46ae5d852225d15ae, type: 2}
+  m_dialogue: {fileID: 11400000, guid: e61373db30a483a43b4b1b35efe4e407, type: 2}
+  m_groupedDialogues: 1
+  m_startingDialoguesOnly: 0
+  m_selectedDialogueGroupIndex: 0
+  m_selectedDialogueIndex: 0
+--- !u!114 &1681331443
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1681331434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de97b5429e9cc0c45aac19c9b876fa50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_dialogueContainer: {fileID: 11400000, guid: bd1625fdc4fc94b48b13134e1b5d41af, type: 2}
+  m_dialogueGroup: {fileID: 11400000, guid: dcd50ceda764e9b4291d391680374799, type: 2}
+  m_dialogue: {fileID: 11400000, guid: 3b37174bd73cdcd469c4b30d7c9fd1b8, type: 2}
+  m_groupedDialogues: 1
+  m_startingDialoguesOnly: 0
+  m_selectedDialogueGroupIndex: 0
+  m_selectedDialogueIndex: 0
 --- !u!1001 &1693143531
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11620,7 +11660,7 @@ MonoBehaviour:
   m_groupedDialogues: 1
   m_startingDialoguesOnly: 0
   m_selectedDialogueGroupIndex: 0
-  m_selectedDialogueIndex: 9
+  m_selectedDialogueIndex: 41
 --- !u!114 &1982111748
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11816,7 +11856,7 @@ MonoBehaviour:
   m_groupedDialogues: 1
   m_startingDialoguesOnly: 0
   m_selectedDialogueGroupIndex: 0
-  m_selectedDialogueIndex: 20
+  m_selectedDialogueIndex: 40
 --- !u!1001 &1983315654
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11956,11 +11996,19 @@ PrefabInstance:
     - target: {fileID: 3952595216175766055, guid: a45930d7ad5ece64d8d27e47bbcbf4a6, type: 3}
       propertyPath: _badDateBaristaDialogue
       value: 
-      objectReference: {fileID: 1681331441}
+      objectReference: {fileID: 1681331443}
     - target: {fileID: 3952595216175766055, guid: a45930d7ad5ece64d8d27e47bbcbf4a6, type: 3}
       propertyPath: _baristaDialogues.Array.size
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 3952595216175766055, guid: a45930d7ad5ece64d8d27e47bbcbf4a6, type: 3}
+      propertyPath: _mixedResultsBaristaDialogue
+      value: 
+      objectReference: {fileID: 1681331442}
+    - target: {fileID: 3952595216175766055, guid: a45930d7ad5ece64d8d27e47bbcbf4a6, type: 3}
+      propertyPath: _allDateFailedBaristaDialogue
+      value: 
+      objectReference: {fileID: 1681331441}
     - target: {fileID: 3952595216175766055, guid: a45930d7ad5ece64d8d27e47bbcbf4a6, type: 3}
       propertyPath: '_baristaDialogues.Array.data[0]'
       value: 

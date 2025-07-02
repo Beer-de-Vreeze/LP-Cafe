@@ -683,10 +683,15 @@ public class DialogueDisplay : MonoBehaviour
     {
         bachelor._dialogue = dialogueSO;
         if (bachelor == null || bachelor._dialogue == null)
+        {
+            Debug.LogError("[StartDialogue] Bachelor or dialogue is null!");
             return;
+        }
 
         _bachelor = bachelor;
         _dialogue = dialogueSO;
+        
+        Debug.Log($"[StartDialogue] Started dialogue with bachelor: {_bachelor._name}");
 
         // Ensure notebook is properly connected to the new bachelor
         if (_noteBook != null)
@@ -1744,7 +1749,7 @@ public class DialogueDisplay : MonoBehaviour
         {
             CreateEndDialogueButton("Ask on a Date", OnAskOnDateClicked);
             Debug.Log(
-                $"Ask on a Date button shown - {_bachelor.name} has {_bachelor._loveMeter.GetCurrentLove()}/{_bachelor._loveMeter._loveNeededForRealDate} love"
+                $"Ask on a Date button shown - {_bachelor._name} has {_bachelor._loveMeter.GetCurrentLove()}/{_bachelor._loveMeter._loveNeededForRealDate} love"
             );
         }
         else
@@ -1788,13 +1793,18 @@ public class DialogueDisplay : MonoBehaviour
     /// </summary>
     private void OnPostRealDateComeBackLaterClicked()
     {
-        Debug.Log("Come Back Later button clicked after real date");
+        Debug.Log($"[OnPostRealDateComeBackLaterClicked] Come Back Later button clicked after real date. Bachelor: {(_bachelor != null ? _bachelor._name : "null")}, Location: {_currentRealDateLocation}");
 
         // Mark bachelor as real dated and save progress
         if (_bachelor != null)
         {
+            Debug.Log($"[OnPostRealDateComeBackLaterClicked] About to mark {_bachelor._name} as real dated at {_currentRealDateLocation}");
             MarkBachelorAsRealDated(_bachelor);
             IncrementRealDateCount();
+        }
+        else
+        {
+            Debug.LogError("[OnPostRealDateComeBackLaterClicked] Bachelor is null when trying to save real date progress!");
         }
 
         // Clear notebook
@@ -1971,12 +1981,22 @@ public class DialogueDisplay : MonoBehaviour
             && !currentSceneName.ToLower().Contains("menu")
             && !currentSceneName.ToLower().Contains("main");
 
+        Debug.Log($"[FinishDialogue] Current scene: {currentSceneName}, IsDateScene: {isDateScene}, Bachelor: {(_bachelor != null ? _bachelor._name : "null")}");
+
         if (isDateScene)
         {
             IncrementSuccessfulDateCount();
             Debug.Log("Date completed successfully!");
             // Mark bachelor as dated and disable their setter
-            MarkBachelorAsDated(_bachelor);
+            if (_bachelor != null)
+            {
+                Debug.Log($"[FinishDialogue] About to mark {_bachelor._name} as dated in scene {currentSceneName}");
+                MarkBachelorAsDated(_bachelor);
+            }
+            else
+            {
+                Debug.LogError("[FinishDialogue] Bachelor is null when trying to save in date scene!");
+            }
         }
 
         // Remove bachelor from notebook after date is over
@@ -2224,25 +2244,17 @@ public class DialogueDisplay : MonoBehaviour
     private void MarkBachelorAsDated(NewBachelorSO bachelor)
     {
         if (bachelor == null)
+        {
+            Debug.LogError("[MarkBachelorAsDated] Bachelor is null! Cannot save dating progress.");
             return;
+        }
 
-        // Mark in the ScriptableObject
+        Debug.Log($"[MarkBachelorAsDated] About to mark {bachelor._name} as dated");
+
+        // Mark in the ScriptableObject (this also handles saving to the save system)
         bachelor.MarkAsDated();
 
-        // Save to the save system
-        SaveData saveData = SaveSystem.Deserialize();
-        if (saveData == null)
-        {
-            saveData = new SaveData();
-        }
-
-        if (!saveData.DatedBachelors.Contains(bachelor.name))
-        {
-            saveData.DatedBachelors.Add(bachelor.name);
-            SaveSystem.SerializeData(saveData);
-        }
-
-        Debug.Log($"Marked {bachelor.name} as dated and saved progress");
+        Debug.Log($"[MarkBachelorAsDated] Successfully marked {bachelor._name} as dated and saved progress");
     }
 
     /// <summary>
@@ -2251,35 +2263,23 @@ public class DialogueDisplay : MonoBehaviour
     private void MarkBachelorAsRealDated(NewBachelorSO bachelor)
     {
         if (bachelor == null)
+        {
+            Debug.LogError("[MarkBachelorAsRealDated] Bachelor is null! Cannot save real dating progress.");
             return;
+        }
 
-        Debug.Log($"Marking {bachelor.name} as real dated at {_currentRealDateLocation}");
+        if (string.IsNullOrEmpty(_currentRealDateLocation))
+        {
+            Debug.LogError($"[MarkBachelorAsRealDated] Current real date location is empty! Cannot save location for {bachelor._name}");
+            return;
+        }
 
-        // Mark in the ScriptableObject with the date location
+        Debug.Log($"[MarkBachelorAsRealDated] About to mark {bachelor._name} as real dated at {_currentRealDateLocation}");
+
+        // Mark in the ScriptableObject with the date location (this also handles saving to the save system)
         bachelor.MarkAsRealDated(_currentRealDateLocation);
 
-        // Save to the save system
-        SaveData saveData = SaveSystem.Deserialize();
-        if (saveData == null)
-        {
-            saveData = new SaveData();
-        }
-
-        // Add to both lists to ensure compatibility
-        if (!saveData.DatedBachelors.Contains(bachelor.name))
-        {
-            saveData.DatedBachelors.Add(bachelor.name);
-        }
-
-        if (!saveData.RealDatedBachelors.Contains(bachelor.name))
-        {
-            saveData.RealDatedBachelors.Add(bachelor.name);
-            SaveSystem.SerializeData(saveData);
-        }
-
-        Debug.Log(
-            $"Marked {bachelor.name} as real dated at {_currentRealDateLocation} and saved progress"
-        );
+        Debug.Log($"[MarkBachelorAsRealDated] Successfully marked {bachelor._name} as real dated at {_currentRealDateLocation} and saved progress");
     }
 
     /// <summary>
@@ -2290,11 +2290,8 @@ public class DialogueDisplay : MonoBehaviour
         if (bachelor == null)
             return false;
 
-        SaveData saveData = SaveSystem.Deserialize();
-        if (saveData == null || saveData.RealDatedBachelors == null)
-            return false;
-
-        return saveData.RealDatedBachelors.Contains(bachelor.name);
+        // Use the bachelor's own method which handles both local flags and save data consistency
+        return bachelor.HasCompletedRealDate();
     }
 
     /// <summary>
@@ -2461,11 +2458,14 @@ public class DialogueDisplay : MonoBehaviour
     /// </summary>
     private IEnumerator ShowBaristaAfterRealDate()
     {
-        // Hide all backgrounds
+        // Hide all date backgrounds to return to cafe environment
         TurnOffAllDateBackgrounds();
 
         // Clear any existing choices/buttons to ensure no buttons are shown
         ClearChoices();
+
+        // Ensure we're back in cafe environment - restore basic UI elements
+        RestoreCafeEnvironment();
 
         // Get the dialogue index based on real date count (0-indexed)
         int dialogueIndex = Mathf.Max(0, _realDateCount - 1);
@@ -2553,14 +2553,50 @@ public class DialogueDisplay : MonoBehaviour
             // Set the bachelor image from the dialogue data
             if (baristaDialogue.m_dialogue != null && _bachelorImage != null)
             {
-                _bachelorImage.sprite = baristaDialogue.m_dialogue.m_bachelorImageData;
+                Debug.Log(
+                    $"Setting up barista image. Current enabled state: {_bachelorImage.enabled}"
+                );
+
+                // If barista dialogue has a specific image, use it
+                if (baristaDialogue.m_dialogue.m_bachelorImageData != null)
+                {
+                    _bachelorImage.sprite = baristaDialogue.m_dialogue.m_bachelorImageData;
+                    Debug.Log("Set barista sprite from dialogue data");
+                }
+                else
+                {
+                    Debug.Log(
+                        "No specific barista sprite in dialogue data, keeping current sprite"
+                    );
+                }
+
+                // Always ensure the image is visible for barista dialogue
                 _bachelorImage.color = new Color(
                     _bachelorImage.color.r,
                     _bachelorImage.color.g,
                     _bachelorImage.color.b,
                     1f
                 );
-                _bachelorImage.enabled = baristaDialogue.m_dialogue.m_bachelorImageData != null;
+                _bachelorImage.enabled = true;
+                Debug.Log(
+                    $"Barista image enabled and made visible. Final state - Enabled: {_bachelorImage.enabled}, Alpha: {_bachelorImage.color.a}"
+                );
+            }
+            else if (_bachelorImage != null)
+            {
+                // Fallback: ensure image is enabled even without dialogue data
+                _bachelorImage.enabled = true;
+                _bachelorImage.color = new Color(
+                    _bachelorImage.color.r,
+                    _bachelorImage.color.g,
+                    _bachelorImage.color.b,
+                    1f
+                );
+                Debug.Log("Barista image enabled as fallback (no dialogue data)");
+            }
+            else
+            {
+                Debug.LogWarning("Bachelor image component is null - barista won't be visible!");
             }
 
             // Hide continue icon initially
@@ -2846,16 +2882,14 @@ public class DialogueDisplay : MonoBehaviour
         if (saveData == null || saveData.RealDatedBachelors == null)
             return false;
 
-        // Get all bachelors in the scene to check how many exist total
-        SetBachelor[] allSetBachelors = FindObjectsByType<SetBachelor>(FindObjectsSortMode.None);
-        if (allSetBachelors == null || allSetBachelors.Length == 0)
+        // Check if all 5 real dates have been completed
+        int realDatedCount = saveData.RealDatedBachelors.Count;
+        if (realDatedCount < 5)
             return false;
 
-        int totalBachelors = allSetBachelors.Length;
-        int realDatedCount = saveData.RealDatedBachelors.Count;
-
-        // Check if all bachelors have been real dated
-        if (realDatedCount < totalBachelors)
+        // Get all bachelors in the scene to check their love scores
+        SetBachelor[] allSetBachelors = FindObjectsByType<SetBachelor>(FindObjectsSortMode.None);
+        if (allSetBachelors == null || allSetBachelors.Length == 0)
             return false;
 
         // Count successful dates
@@ -2869,7 +2903,7 @@ public class DialogueDisplay : MonoBehaviour
                 if (bachelor != null && bachelor._loveMeter != null)
                 {
                     // Check if this bachelor was real dated
-                    if (saveData.RealDatedBachelors.Contains(bachelor.name))
+                    if (bachelor.HasCompletedRealDate())
                     {
                         int currentLove = bachelor._loveMeter.GetCurrentLove();
                         if (currentLove >= _loveNeededForSuccefulDate)
@@ -2884,10 +2918,10 @@ public class DialogueDisplay : MonoBehaviour
         // All dates failed if no successful dates
         bool allFailed = successfulDates == 0;
         Debug.Log(
-            $"All dates failed check: Total bachelors: {totalBachelors}, Real dated: {realDatedCount}, Successful: {successfulDates}, All failed: {allFailed}"
+            $"All dates failed check: Real dated: {realDatedCount}/5, Successful: {successfulDates}, All failed: {allFailed}"
         );
 
-        return realDatedCount >= totalBachelors && allFailed;
+        return realDatedCount >= 5 && allFailed;
     }
 
     /// <summary>
@@ -2899,16 +2933,14 @@ public class DialogueDisplay : MonoBehaviour
         if (saveData == null || saveData.RealDatedBachelors == null)
             return false;
 
-        // Get all bachelors in the scene to check how many exist total
-        SetBachelor[] allSetBachelors = FindObjectsByType<SetBachelor>(FindObjectsSortMode.None);
-        if (allSetBachelors == null || allSetBachelors.Length == 0)
+        // Check if all 5 real dates have been completed
+        int realDatedCount = saveData.RealDatedBachelors.Count;
+        if (realDatedCount < 5)
             return false;
 
-        int totalBachelors = allSetBachelors.Length;
-        int realDatedCount = saveData.RealDatedBachelors.Count;
-
-        // Check if all bachelors have been real dated
-        if (realDatedCount < totalBachelors)
+        // Get all bachelors in the scene to check their love scores
+        SetBachelor[] allSetBachelors = FindObjectsByType<SetBachelor>(FindObjectsSortMode.None);
+        if (allSetBachelors == null || allSetBachelors.Length == 0)
             return false;
 
         // Count successful and failed dates
@@ -2923,7 +2955,7 @@ public class DialogueDisplay : MonoBehaviour
                 if (bachelor != null && bachelor._loveMeter != null)
                 {
                     // Check if this bachelor was real dated
-                    if (saveData.RealDatedBachelors.Contains(bachelor.name))
+                    if (bachelor.HasCompletedRealDate())
                     {
                         int currentLove = bachelor._loveMeter.GetCurrentLove();
                         if (currentLove >= _loveNeededForSuccefulDate)
@@ -2942,10 +2974,59 @@ public class DialogueDisplay : MonoBehaviour
         // Mixed results if both successful and failed dates exist
         bool mixedResults = successfulDates > 0 && failedDates > 0;
         Debug.Log(
-            $"Mixed results check: Total bachelors: {totalBachelors}, Real dated: {realDatedCount}, Successful: {successfulDates}, Failed: {failedDates}, Mixed: {mixedResults}"
+            $"Mixed results check: Real dated: {realDatedCount}/5, Successful: {successfulDates}, Failed: {failedDates}, Mixed: {mixedResults}"
         );
 
-        return realDatedCount >= totalBachelors && mixedResults;
+        return realDatedCount >= 5 && mixedResults;
+    }
+
+    /// <summary>
+    /// Restores the cafe environment after a date by ensuring UI elements are properly configured
+    /// </summary>
+    private void RestoreCafeEnvironment()
+    {
+        Debug.Log("Restoring cafe environment after date");
+
+        // Ensure move canvas is enabled (player should be able to move in cafe)
+        if (_moveCanvas != null)
+        {
+            _moveCanvas.enabled = true;
+            Debug.Log("Move canvas enabled");
+        }
+
+        // Ensure dialogue canvas is ready for barista dialogue
+        if (_dialogueCanvas != null)
+        {
+            _dialogueCanvas.enabled = true;
+            Debug.Log("Dialogue canvas enabled");
+        }
+
+        // Ensure bachelor image is enabled and ready for barista sprite
+        if (_bachelorImage != null)
+        {
+            _bachelorImage.enabled = true;
+            _bachelorImage.color = new Color(
+                _bachelorImage.color.r,
+                _bachelorImage.color.g,
+                _bachelorImage.color.b,
+                1f
+            );
+            Debug.Log("Bachelor image enabled and made visible for barista");
+        }
+
+        // Hide any leftover UI elements from the date
+        if (_continueIcon != null)
+        {
+            _continueIcon.SetActive(false);
+        }
+
+        // Hide love meter as it's not relevant for barista dialogue
+        if (_loveMeterUI != null)
+        {
+            _loveMeterUI.HideLoveMeter();
+        }
+
+        Debug.Log("Cafe environment restored - all backgrounds off, UI elements ready");
     }
 }
     #endregion

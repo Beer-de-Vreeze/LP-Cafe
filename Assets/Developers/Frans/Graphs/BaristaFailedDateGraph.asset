@@ -10,12 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: beb9a63dbd6015942ab1d5ccf8100789, type: 3}
-  m_Name: FailedDateGraph
+  m_Name: BaristaFailedDateGraph
   m_EditorClassIdentifier: 
-  <m_graphFileNameData>k__BackingField: FailedDate
-  <m_graphGroupsData>k__BackingField: []
+  <m_graphFileNameData>k__BackingField: BaristaFailedDate
+  <m_graphGroupsData>k__BackingField:
+  - <m_groupIDData>k__BackingField: f9c35689-2d7d-4cb9-ab22-ede5a27684cd
+    <m_groupNameData>k__BackingField: Barista
+    <m_groupPositionData>k__BackingField: {x: 578, y: 323.6}
   <m_graphNodesData>k__BackingField:
-  - <m_nodeIDData>k__BackingField: 5f6a7e55-039d-4b6b-afb5-3205bd67868d
+  - <m_nodeIDData>k__BackingField: abd7f08f-5377-421f-af75-26c884eed56f
     <m_nodeNameData>k__BackingField: 1
     <m_nodeBachelorImageData>k__BackingField: {fileID: 21300000, guid: 6ffe8caacb35ebc49a3fe4106b8afb48, type: 3}
     <m_nodeAudioLinesData>k__BackingField: {fileID: 0}
@@ -25,9 +28,9 @@ MonoBehaviour:
     <m_nodeChoicesData>k__BackingField:
     - <m_choiceTextData>k__BackingField: Next Dialogue
       <m_choiceNodeIDData>k__BackingField: 
-    <m_nodeGroupIDData>k__BackingField: 
+    <m_nodeGroupIDData>k__BackingField: f9c35689-2d7d-4cb9-ab22-ede5a27684cd
     <m_dialogueTypeData>k__BackingField: 0
-    <m_nodePositionData>k__BackingField: {x: 347.2, y: 207.6}
+    <m_nodePositionData>k__BackingField: {x: 603.2, y: 382}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -42,8 +45,11 @@ MonoBehaviour:
     <m_isLikePreference>k__BackingField: 0
     <m_selectedPreference>k__BackingField: 
     <m_enumSetter>k__BackingField: 0
-  <m_graphOldGroupNamesData>k__BackingField: []
-  <m_graphOldUngroupedNodeNamesData>k__BackingField:
-  - 1
+  <m_graphOldGroupNamesData>k__BackingField:
+  - Barista
+  <m_graphOldUngroupedNodeNamesData>k__BackingField: []
   <m_graphOldGroupedNodeNamesData>k__BackingField:
-    list: []
+    list:
+    - Key: Barista
+      Value:
+      - 1
