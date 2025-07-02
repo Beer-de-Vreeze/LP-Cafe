@@ -15,13 +15,8 @@ public class BachelorSetter : MonoBehaviour
     void Start()
     {
         m_dialogueDisplay = FindFirstObjectByType<DialogueDisplay>();
-        // Check if this bachelor has already been dated using the save system
-        var saveData = SaveSystem.Deserialize();
-        if (
-            saveData != null
-            && saveData.DatedBachelors != null
-            && saveData.DatedBachelors.Contains(m_bachelor.name)
-        )
+        // Check if this bachelor has already been dated using the bachelor's method
+        if (m_bachelor != null && m_bachelor.HasBeenDated())
         {
             DisableSetter();
         }

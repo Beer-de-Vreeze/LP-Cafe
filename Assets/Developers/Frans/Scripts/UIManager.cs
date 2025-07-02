@@ -19,6 +19,9 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private Button newGameButton;
 
+    [SerializeField]
+    private Button quitButton;
+
     private void Start()
     {
         // Check save file and update UI on start
@@ -26,6 +29,9 @@ public class UIManager : MonoBehaviour
 
         // In builds, check if we need to reset bachelor data
         CheckForRuntimeReset();
+
+        // Hide quit button on WebGL builds
+        HideQuitButtonOnWebGL();
     }
 
     private void UpdateUIBasedOnSaveFile()
@@ -358,7 +364,34 @@ public class UIManager : MonoBehaviour
 
     public void QuitGame()
     {
+#if UNITY_EDITOR
+        // In Unity Editor, stop play mode
+        UnityEditor.EditorApplication.isPlaying = false;
+        Debug.Log("Stopping play mode in Unity Editor");
+#elif UNITY_WEBGL
+        // This should never be called on WebGL since the button is hidden
+        Debug.LogWarning(
+            "QuitGame called on WebGL build - this should not happen as the button should be hidden"
+        );
+#else
+        // For standalone builds (Windows, Mac, Linux)
         Application.Quit();
+        Debug.Log("Quitting application");
+#endif
+    }
+
+    /// <summary>
+    /// Hides the quit button on WebGL builds since quitting is not applicable
+    /// </summary>
+    private void HideQuitButtonOnWebGL()
+    {
+#if UNITY_WEBGL
+        if (quitButton != null)
+        {
+            quitButton.gameObject.SetActive(false);
+            Debug.Log("Quit button hidden on WebGL build");
+        }
+#endif
     }
 
     /// <summary>

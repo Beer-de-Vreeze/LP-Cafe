@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <m_dialogueNameData>k__BackingField: QQ1
   <m_dialogueTextData>k__BackingField: Looks like a sick training spot, high up and
-    you have to battle the wind, no room for mistakes!
+    you have to battle the wind,
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Next Dialogue
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 516e52b919c66e84a902e828d46ae20d, type: 2}
