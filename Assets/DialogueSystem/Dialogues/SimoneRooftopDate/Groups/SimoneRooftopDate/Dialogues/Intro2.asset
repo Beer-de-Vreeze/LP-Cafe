@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: Intro2
   m_EditorClassIdentifier: 
   <m_dialogueNameData>k__BackingField: Intro2
-  <m_dialogueTextData>k__BackingField: Oh this is such a lovely place for yoga don't
-    you think?
+  <m_dialogueTextData>k__BackingField: Oh this is such a lovely place, don't you
+    think?
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Next Dialogue
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 63c762bd386b0574f953a6725faef6fe, type: 2}
   <m_bachelorImageData>k__BackingField: {fileID: 21300000, guid: a941980c13e496242b3ce89720725a55, type: 3}
-  <m_dialogueAudioData>k__BackingField: {fileID: 0}
+  <m_dialogueAudioData>k__BackingField: {fileID: 8300000, guid: 81f1e1dd54c262141bcb0985602ce137, type: 3}
   <m_dialogueTypeData>k__BackingField: 0
   <m_isStartingDialogueData>k__BackingField: 1
   <m_propertyToCheckData>k__BackingField: 

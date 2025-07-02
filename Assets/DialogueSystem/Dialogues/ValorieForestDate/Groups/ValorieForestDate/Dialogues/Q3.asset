@@ -28,7 +28,7 @@ MonoBehaviour:
       a bit without being noticed.
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 00c782cf1525dcb499dd714292d04c7e, type: 2}
   <m_bachelorImageData>k__BackingField: {fileID: 21300000, guid: 35a4b7bef345b3f4db947b0e9547a2a6, type: 3}
-  <m_dialogueAudioData>k__BackingField: {fileID: 0}
+  <m_dialogueAudioData>k__BackingField: {fileID: 8300000, guid: 1dfda3b27ae54fb409d92b79dd0c9eb5, type: 3}
   <m_dialogueTypeData>k__BackingField: 1
   <m_isStartingDialogueData>k__BackingField: 1
   <m_propertyToCheckData>k__BackingField: 

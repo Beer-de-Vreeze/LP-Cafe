@@ -18,8 +18,8 @@ MonoBehaviour:
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: No ew? working out??
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: dfa8572dcf9ce6e47a06d18aaed08cb5, type: 2}
-  - <m_dialogueChoiceText>k__BackingField: does shopping at the mall count for sport?
-      I can also be found in a casino in my weekends off.
+  - <m_dialogueChoiceText>k__BackingField: does shopping count for sport? I can also
+      be found in a casino in my weekends off.
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 7bc835576b5975140a007d437bc27afe, type: 2}
   - <m_dialogueChoiceText>k__BackingField: yes I'm a crazzyyyy gym rat (not to mention
       rodents...).
@@ -28,7 +28,7 @@ MonoBehaviour:
       I like to try out new classes.
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: eb9d3f12f91d86b4bb56c7cf37afebff, type: 2}
   <m_bachelorImageData>k__BackingField: {fileID: 21300000, guid: dedee01b113aef245a775f2239a733c6, type: 3}
-  <m_dialogueAudioData>k__BackingField: {fileID: 8300000, guid: 242c3cec959b3244b941d4d3db41f334, type: 3}
+  <m_dialogueAudioData>k__BackingField: {fileID: 8300000, guid: a9115a7a6db4d7f42bf4ac0a33d9fa03, type: 3}
   <m_dialogueTypeData>k__BackingField: 1
   <m_isStartingDialogueData>k__BackingField: 1
   <m_propertyToCheckData>k__BackingField: 

@@ -26,7 +26,7 @@ MonoBehaviour:
   - <m_dialogueChoiceText>k__BackingField: I like chaos more, so I'm a little bored.
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 1c71bf0f6caf35945917811f1a19f0b6, type: 2}
   <m_bachelorImageData>k__BackingField: {fileID: 21300000, guid: 1b752948b3bd324418758c36f01fb7d3, type: 3}
-  <m_dialogueAudioData>k__BackingField: {fileID: 0}
+  <m_dialogueAudioData>k__BackingField: {fileID: 8300000, guid: 154bf7bd8609b3e42936bca1725df18f, type: 3}
   <m_dialogueTypeData>k__BackingField: 1
   <m_isStartingDialogueData>k__BackingField: 1
   <m_propertyToCheckData>k__BackingField: 

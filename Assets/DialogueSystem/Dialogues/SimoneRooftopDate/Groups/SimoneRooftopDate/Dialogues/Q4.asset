@@ -17,7 +17,7 @@ MonoBehaviour:
     what do you think would happen next?
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: I don't know, probably the endi-
-    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 1a15cd9e95dac5f4a9126002dd01a7fc, type: 2}
+    <m_nextDialogue>k__BackingField: {fileID: 0}
   - <m_dialogueChoiceText>k__BackingField: Oh I do so love to think about such hypotheticals.
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 70ad2611b93ce7d4e8c88cfaf2165028, type: 2}
   - <m_dialogueChoiceText>k__BackingField: Probably some cutscene of a dinner?
@@ -26,7 +26,7 @@ MonoBehaviour:
       off in the beginning of the movie?
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: b07cffeb02d0f9647b5c92880cf4c639, type: 2}
   <m_bachelorImageData>k__BackingField: {fileID: 21300000, guid: 1b752948b3bd324418758c36f01fb7d3, type: 3}
-  <m_dialogueAudioData>k__BackingField: {fileID: 0}
+  <m_dialogueAudioData>k__BackingField: {fileID: 8300000, guid: 79345503e6f926e45810160f1e6c25cb, type: 3}
   <m_dialogueTypeData>k__BackingField: 1
   <m_isStartingDialogueData>k__BackingField: 1
   <m_propertyToCheckData>k__BackingField: 

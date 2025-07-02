@@ -15,13 +15,12 @@ MonoBehaviour:
   <m_dialogueNameData>k__BackingField: intro
   <m_dialogueTextData>k__BackingField: "The forest? really? \r\nWhere is the road,
     the fresh smell of gasoline and beers?\r\nWas this disturbing place really the
-    best idea you could manage in that brain of yours? \r\nA swamp? I love nature
-    but not whatever this place is."
+    best idea you could manage in that brain of yours? \r\nA swamp?"
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Next Dialogue
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: b518898ce99f4eb43b850c60cefc08d0, type: 2}
   <m_bachelorImageData>k__BackingField: {fileID: 21300000, guid: 35a4b7bef345b3f4db947b0e9547a2a6, type: 3}
-  <m_dialogueAudioData>k__BackingField: {fileID: 0}
+  <m_dialogueAudioData>k__BackingField: {fileID: 8300000, guid: ec5198371c0d4594a958a6e01efe6034, type: 3}
   <m_dialogueTypeData>k__BackingField: 0
   <m_isStartingDialogueData>k__BackingField: 0
   <m_propertyToCheckData>k__BackingField: 
