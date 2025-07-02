@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: Q2A4
   m_EditorClassIdentifier: 
   <m_dialogueNameData>k__BackingField: Q2A4
-  <m_dialogueTextData>k__BackingField: "Well I do prefer a tea over coffee, \nbut
+  <m_dialogueTextData>k__BackingField: "ehhmm I do prefer a tea over coffee, \nbut
     if it's sweetened like yourself then I'm sure I'd love it."
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Next Dialogue
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 1ac2816122dacce47958820c8d848d92, type: 2}
   <m_bachelorImageData>k__BackingField: {fileID: 21300000, guid: 1b752948b3bd324418758c36f01fb7d3, type: 3}
-  <m_dialogueAudioData>k__BackingField: {fileID: 0}
+  <m_dialogueAudioData>k__BackingField: {fileID: 8300000, guid: d7fe9f1300827c543bd902dd27aabc2e, type: 3}
   <m_dialogueTypeData>k__BackingField: 0
   <m_isStartingDialogueData>k__BackingField: 1
   <m_propertyToCheckData>k__BackingField: 

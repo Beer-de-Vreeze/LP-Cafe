@@ -16,7 +16,7 @@ MonoBehaviour:
   <m_graphGroupsData>k__BackingField:
   - <m_groupIDData>k__BackingField: 9a2be9e8-7bcf-4baf-99a0-653a09eb8a23
     <m_groupNameData>k__BackingField: JamesSpeedDate
-    <m_groupPositionData>k__BackingField: {x: 656, y: 342}
+    <m_groupPositionData>k__BackingField: {x: 656.0007, y: 400.00003}
   <m_graphNodesData>k__BackingField:
   - <m_nodeIDData>k__BackingField: 3a874771-1c40-4643-9952-b6e222256bf5
     <m_nodeNameData>k__BackingField: NotebookSweetFoods
@@ -121,7 +121,7 @@ MonoBehaviour:
   - <m_nodeIDData>k__BackingField: 8efddd55-ec3d-418e-b5c2-ef81e32df58e
     <m_nodeNameData>k__BackingField: QuestionsPets
     <m_nodeBachelorImageData>k__BackingField: {fileID: 21300000, guid: dedee01b113aef245a775f2239a733c6, type: 3}
-    <m_nodeAudioLinesData>k__BackingField: {fileID: 8300000, guid: 0790b48d9d2e20a4eb1d1c75168a04ef, type: 3}
+    <m_nodeAudioLinesData>k__BackingField: {fileID: 8300000, guid: 9b5e6dae62231ff4aad31bb2ed17b609, type: 3}
     <m_nodeTextData>k__BackingField: 'Do you have any pets? '
     <m_nodeChoicesData>k__BackingField:
     - <m_choiceTextData>k__BackingField: I have five cats and I love all of my furyball
@@ -204,7 +204,7 @@ MonoBehaviour:
   - <m_nodeIDData>k__BackingField: d34f530f-4337-4a5f-877a-65ee36d170ca
     <m_nodeNameData>k__BackingField: TellsAboutMartini
     <m_nodeBachelorImageData>k__BackingField: {fileID: 21300000, guid: dedee01b113aef245a775f2239a733c6, type: 3}
-    <m_nodeAudioLinesData>k__BackingField: {fileID: 8300000, guid: 66ee063dc76f52b4aa784e9b593719f3, type: 3}
+    <m_nodeAudioLinesData>k__BackingField: {fileID: 8300000, guid: 18b48b330f301f342a1056b9cd8e70e6, type: 3}
     <m_nodeTextData>k__BackingField: "\rI would like a dirty martini shrimp cocktail.
       \r\nIt's my favorite. \r\nI always order it.\r\nI always hate those overly
       sugary and sweet nonsense drinks and foods.\r\nA healthy life style is important."
@@ -256,7 +256,7 @@ MonoBehaviour:
   - <m_nodeIDData>k__BackingField: 33616e80-4265-4898-b474-aafa26a08e83
     <m_nodeNameData>k__BackingField: Question1BroughtYouHere
     <m_nodeBachelorImageData>k__BackingField: {fileID: 21300000, guid: dedee01b113aef245a775f2239a733c6, type: 3}
-    <m_nodeAudioLinesData>k__BackingField: {fileID: 8300000, guid: d69345052aad2964e83cd61567fd53ce, type: 3}
+    <m_nodeAudioLinesData>k__BackingField: {fileID: 8300000, guid: a89a4976800a8bf498c0983fa268702a, type: 3}
     <m_nodeTextData>k__BackingField: 'So what brought here? '
     <m_nodeChoicesData>k__BackingField:
     - <m_choiceTextData>k__BackingField: Searching for love.
@@ -290,7 +290,7 @@ MonoBehaviour:
   - <m_nodeIDData>k__BackingField: 16844ecd-cee2-4974-b49a-9b6d123f4109
     <m_nodeNameData>k__BackingField: BaristaLines
     <m_nodeBachelorImageData>k__BackingField: {fileID: 21300000, guid: 6ffe8caacb35ebc49a3fe4106b8afb48, type: 3}
-    <m_nodeAudioLinesData>k__BackingField: {fileID: 0}
+    <m_nodeAudioLinesData>k__BackingField: {fileID: 8300000, guid: 25a982c8092f25547b49f19f974b8f9a, type: 3}
     <m_nodeTextData>k__BackingField: "Heyy good afternoon! \r\nThank you for waiting,
       welcome to LP Cafe.\r\nWe hope you're enjoying the speed dating program so
       far!\r\nI hope you've had the chance to look at our menu.\r\r\nWe have a wide
@@ -318,7 +318,7 @@ MonoBehaviour:
   - <m_nodeIDData>k__BackingField: cd33c835-0519-4068-bb20-876683dd6d63
     <m_nodeNameData>k__BackingField: AnswerBaristaGirl
     <m_nodeBachelorImageData>k__BackingField: {fileID: 21300000, guid: dedee01b113aef245a775f2239a733c6, type: 3}
-    <m_nodeAudioLinesData>k__BackingField: {fileID: 8300000, guid: b8df28fddcc0198488947852dbd1b620, type: 3}
+    <m_nodeAudioLinesData>k__BackingField: {fileID: 8300000, guid: 3cba4fb75058b0c4daf37ce304b86c33, type: 3}
     <m_nodeTextData>k__BackingField: That's an interesting route to end up here,
       do you like it so far?
     <m_nodeChoicesData>k__BackingField:
@@ -369,7 +369,7 @@ MonoBehaviour:
   - <m_nodeIDData>k__BackingField: b7051749-7533-4ef1-bf37-c6bc1ff04c30
     <m_nodeNameData>k__BackingField: AnswerSearchingLove
     <m_nodeBachelorImageData>k__BackingField: {fileID: 21300000, guid: a3d83c6850d504041837522c43dcf67c, type: 3}
-    <m_nodeAudioLinesData>k__BackingField: {fileID: 8300000, guid: 16cfb3dabadcc53419c003504ec67070, type: 3}
+    <m_nodeAudioLinesData>k__BackingField: {fileID: 8300000, guid: 1b4098bc4c2227c49816edb10050b97d, type: 3}
     <m_nodeTextData>k__BackingField: allright, great that's what I'm here for too!
     <m_nodeChoicesData>k__BackingField:
     - <m_choiceTextData>k__BackingField: Next Dialogue
@@ -419,7 +419,7 @@ MonoBehaviour:
   - <m_nodeIDData>k__BackingField: db43861c-ef52-498a-bdf7-a9ecb4f025bd
     <m_nodeNameData>k__BackingField: AnswerDitched
     <m_nodeBachelorImageData>k__BackingField: {fileID: 21300000, guid: f4403704d59b42e4b91c8f234ee0ff46, type: 3}
-    <m_nodeAudioLinesData>k__BackingField: {fileID: 8300000, guid: 5c75aa887636a8449995194da7fa8aff, type: 3}
+    <m_nodeAudioLinesData>k__BackingField: {fileID: 8300000, guid: dad14d3d0ea776b4c89e98e8eec72308, type: 3}
     <m_nodeTextData>k__BackingField: Oh well if you don't wanna be here... kinda
       a player move there....
     <m_nodeChoicesData>k__BackingField:
@@ -445,7 +445,7 @@ MonoBehaviour:
   - <m_nodeIDData>k__BackingField: 8eab8766-9c1a-4d7c-b394-7c50d15022ec
     <m_nodeNameData>k__BackingField: QuestionBarista
     <m_nodeBachelorImageData>k__BackingField: {fileID: 21300000, guid: 6ffe8caacb35ebc49a3fe4106b8afb48, type: 3}
-    <m_nodeAudioLinesData>k__BackingField: {fileID: 0}
+    <m_nodeAudioLinesData>k__BackingField: {fileID: 8300000, guid: 42fe2de02a553324cb245b14322ec3c6, type: 3}
     <m_nodeTextData>k__BackingField: So is there anything you would like to order?
     <m_nodeChoicesData>k__BackingField:
     - <m_choiceTextData>k__BackingField: A burger with fries.
@@ -552,7 +552,7 @@ MonoBehaviour:
   - <m_nodeIDData>k__BackingField: 502b7dc1-9e6b-44d7-83a5-018a40a31433
     <m_nodeNameData>k__BackingField: LoveMyCat
     <m_nodeBachelorImageData>k__BackingField: {fileID: 21300000, guid: dedee01b113aef245a775f2239a733c6, type: 3}
-    <m_nodeAudioLinesData>k__BackingField: {fileID: 8300000, guid: 0dd86d87cd1fa474ca496964d1a454eb, type: 3}
+    <m_nodeAudioLinesData>k__BackingField: {fileID: 8300000, guid: 7b1361ed861580a4899ecec832d8b6f3, type: 3}
     <m_nodeTextData>k__BackingField: I love my cat a lot, but she often hunts rodents,
       which irritates me. I hate rodents... so gross.
     <m_nodeChoicesData>k__BackingField:
@@ -578,7 +578,7 @@ MonoBehaviour:
   - <m_nodeIDData>k__BackingField: 5ca88a3e-dae3-48ef-b0fd-c5f0e3ecadfb
     <m_nodeNameData>k__BackingField: MartialArts
     <m_nodeBachelorImageData>k__BackingField: {fileID: 21300000, guid: dedee01b113aef245a775f2239a733c6, type: 3}
-    <m_nodeAudioLinesData>k__BackingField: {fileID: 8300000, guid: eb37116f9336f5448af876ecd16a8cb7, type: 3}
+    <m_nodeAudioLinesData>k__BackingField: {fileID: 8300000, guid: 2056b1680ed6b09468894d45337c4754, type: 3}
     <m_nodeTextData>k__BackingField: "I've been doing martial arts sinds I was allowed
       to go to the gym. \r\nMy favortie detective idol loves martial arts, so I got
       into it as well."
@@ -605,7 +605,7 @@ MonoBehaviour:
   - <m_nodeIDData>k__BackingField: d74657a7-5a09-4e4e-8c66-40f16d28f6fb
     <m_nodeNameData>k__BackingField: EndingDate
     <m_nodeBachelorImageData>k__BackingField: {fileID: 21300000, guid: dedee01b113aef245a775f2239a733c6, type: 3}
-    <m_nodeAudioLinesData>k__BackingField: {fileID: 8300000, guid: 930fb5ba2147c1b40a2a1573cb568038, type: 3}
+    <m_nodeAudioLinesData>k__BackingField: {fileID: 8300000, guid: 6de7d0fda3c02d04e9528cee972b4fb3, type: 3}
     <m_nodeTextData>k__BackingField: "Oh well looks like our time's up. \r\nI hope
       you had fun. \r\nMaybe we'll meet again."
     <m_nodeChoicesData>k__BackingField:
@@ -631,14 +631,14 @@ MonoBehaviour:
   - <m_nodeIDData>k__BackingField: 7e6590ca-d1ae-4608-b690-6190992c55d1
     <m_nodeNameData>k__BackingField: QuestionHobbiesOrSports
     <m_nodeBachelorImageData>k__BackingField: {fileID: 21300000, guid: dedee01b113aef245a775f2239a733c6, type: 3}
-    <m_nodeAudioLinesData>k__BackingField: {fileID: 8300000, guid: 242c3cec959b3244b941d4d3db41f334, type: 3}
+    <m_nodeAudioLinesData>k__BackingField: {fileID: 8300000, guid: a9115a7a6db4d7f42bf4ac0a33d9fa03, type: 3}
     <m_nodeTextData>k__BackingField: 'Do you have any hobbies or are you in any sports
       clubs? '
     <m_nodeChoicesData>k__BackingField:
     - <m_choiceTextData>k__BackingField: No ew? working out??
       <m_choiceNodeIDData>k__BackingField: 54fcff2d-df4e-48c8-8a3f-530c2719efaa
-    - <m_choiceTextData>k__BackingField: does shopping at the mall count for sport?
-        I can also be found in a casino in my weekends off.
+    - <m_choiceTextData>k__BackingField: does shopping count for sport? I can also
+        be found in a casino in my weekends off.
       <m_choiceNodeIDData>k__BackingField: 8d2c2e90-da4e-4adc-92fe-b067b20bc004
     - <m_choiceTextData>k__BackingField: yes I'm a crazzyyyy gym rat (not to mention
         rodents...).
@@ -691,7 +691,7 @@ MonoBehaviour:
   - <m_nodeIDData>k__BackingField: 023bb419-3213-48ef-9548-639564b00da9
     <m_nodeNameData>k__BackingField: AnswerFiveCats
     <m_nodeBachelorImageData>k__BackingField: {fileID: 21300000, guid: a3d83c6850d504041837522c43dcf67c, type: 3}
-    <m_nodeAudioLinesData>k__BackingField: {fileID: 8300000, guid: 2bc44f1fcb4a0a14ab430b0b612ea152, type: 3}
+    <m_nodeAudioLinesData>k__BackingField: {fileID: 8300000, guid: 52c41d877b2eb6847afb83938f8a42c9, type: 3}
     <m_nodeTextData>k__BackingField: I have a cat too! and his name is Ernst.
     <m_nodeChoicesData>k__BackingField:
     - <m_choiceTextData>k__BackingField: Next Dialogue
@@ -741,7 +741,7 @@ MonoBehaviour:
   - <m_nodeIDData>k__BackingField: bb00d445-24d9-4da8-9dcb-97949113f235
     <m_nodeNameData>k__BackingField: AnswerBallPython
     <m_nodeBachelorImageData>k__BackingField: {fileID: 21300000, guid: f4403704d59b42e4b91c8f234ee0ff46, type: 3}
-    <m_nodeAudioLinesData>k__BackingField: {fileID: 8300000, guid: 932b8519d44e66c429ee15482ff04174, type: 3}
+    <m_nodeAudioLinesData>k__BackingField: {fileID: 8300000, guid: bea097376396eef4cbdeafad18a4def9, type: 3}
     <m_nodeTextData>k__BackingField: Don't those things... eat rodents and stuff?
       ew....
     <m_nodeChoicesData>k__BackingField:
@@ -868,7 +868,7 @@ MonoBehaviour:
   - <m_nodeIDData>k__BackingField: 16343a0c-a5af-43d8-bea2-300c944c77ad
     <m_nodeNameData>k__BackingField: AnswerGymRat
     <m_nodeBachelorImageData>k__BackingField: {fileID: 21300000, guid: f4403704d59b42e4b91c8f234ee0ff46, type: 3}
-    <m_nodeAudioLinesData>k__BackingField: {fileID: 8300000, guid: 41f4608f7227be343b82e68561f0f959, type: 3}
+    <m_nodeAudioLinesData>k__BackingField: {fileID: 8300000, guid: 039962bae09430144b7c08c68fad5684, type: 3}
     <m_nodeTextData>k__BackingField: Ew rats.....
     <m_nodeChoicesData>k__BackingField:
     - <m_choiceTextData>k__BackingField: Next Dialogue
@@ -943,7 +943,7 @@ MonoBehaviour:
   - <m_nodeIDData>k__BackingField: 22a5aad9-1c28-459d-bc2a-b70a6accac42
     <m_nodeNameData>k__BackingField: AnswerShoppingCount
     <m_nodeBachelorImageData>k__BackingField: {fileID: 21300000, guid: a3d83c6850d504041837522c43dcf67c, type: 3}
-    <m_nodeAudioLinesData>k__BackingField: {fileID: 8300000, guid: ae80245606aca2042ad8e8e4c653e833, type: 3}
+    <m_nodeAudioLinesData>k__BackingField: {fileID: 8300000, guid: 2f53c65d93f9ef7428b74c60e507eb3f, type: 3}
     <m_nodeTextData>k__BackingField: 'Spending gold can be a real workout. A fellow
       gambling enthousiant huh? '
     <m_nodeChoicesData>k__BackingField:
@@ -966,36 +966,10 @@ MonoBehaviour:
     <m_isLikePreference>k__BackingField: 0
     <m_selectedPreference>k__BackingField: 
     <m_enumSetter>k__BackingField: 0
-  - <m_nodeIDData>k__BackingField: 54fcff2d-df4e-48c8-8a3f-530c2719efaa
-    <m_nodeNameData>k__BackingField: AnswerEw
-    <m_nodeBachelorImageData>k__BackingField: {fileID: 21300000, guid: dedee01b113aef245a775f2239a733c6, type: 3}
-    <m_nodeAudioLinesData>k__BackingField: {fileID: 8300000, guid: b6cdc3b73aa0ffb458e9885f2b1559fd, type: 3}
-    <m_nodeTextData>k__BackingField: It's not everyone I guess, I personally love
-      martial arts.
-    <m_nodeChoicesData>k__BackingField:
-    - <m_choiceTextData>k__BackingField: Next Dialogue
-      <m_choiceNodeIDData>k__BackingField: bf3537a8-b8aa-4e3c-9c1a-997fe45bbd5a
-    <m_nodeGroupIDData>k__BackingField: 9a2be9e8-7bcf-4baf-99a0-653a09eb8a23
-    <m_dialogueTypeData>k__BackingField: 0
-    <m_nodePositionData>k__BackingField: {x: 9113, y: 401}
-    <m_nodePropertyToCheckData>k__BackingField: Love
-    <m_nodeComparisonTypeData>k__BackingField: '>='
-    <m_nodeComparisonValueData>k__BackingField: 0
-    <m_nodeOperationTypeData>k__BackingField: '>='
-    <m_nodeValueToSetData>k__BackingField: 
-    <m_nodeVariableNameData>k__BackingField: 
-    <m_nodeSetterOperationTypeData>k__BackingField: 0
-    <m_nodeLoveScoreAmountData>k__BackingField: 0
-    <m_nodeBoolValueData>k__BackingField: 0
-    <m_nodeLoveMeterData>k__BackingField: {fileID: 0}
-    <m_bachelorData>k__BackingField: {fileID: 0}
-    <m_isLikePreference>k__BackingField: 0
-    <m_selectedPreference>k__BackingField: 
-    <m_enumSetter>k__BackingField: 0
   - <m_nodeIDData>k__BackingField: df3e26f3-7d52-46eb-bf64-186f0fd37db8
     <m_nodeNameData>k__BackingField: AnswerFromTimeToTime
     <m_nodeBachelorImageData>k__BackingField: {fileID: 21300000, guid: dedee01b113aef245a775f2239a733c6, type: 3}
-    <m_nodeAudioLinesData>k__BackingField: {fileID: 8300000, guid: 527c038bee311a9478a12ff8f05f0f38, type: 3}
+    <m_nodeAudioLinesData>k__BackingField: {fileID: 8300000, guid: a709e0d3180fd8a45825d612258543db, type: 3}
     <m_nodeTextData>k__BackingField: Sounds great, my gym recently opened a martial
       art class for beginners!
     <m_nodeChoicesData>k__BackingField:
@@ -1046,7 +1020,7 @@ MonoBehaviour:
   - <m_nodeIDData>k__BackingField: 25088235-903c-465f-9526-aff2e527373f
     <m_nodeNameData>k__BackingField: AnswerFriendsWithMore
     <m_nodeBachelorImageData>k__BackingField: {fileID: 21300000, guid: dedee01b113aef245a775f2239a733c6, type: 3}
-    <m_nodeAudioLinesData>k__BackingField: {fileID: 8300000, guid: b290ef4c92b7dd641ae276c284707cba, type: 3}
+    <m_nodeAudioLinesData>k__BackingField: {fileID: 8300000, guid: b7f2fe01ab2bede4d9a283bbd5871664, type: 3}
     <m_nodeTextData>k__BackingField: 'Oh.. more huh, yea I DEFINATLY KNOW what you
       mean... '
     <m_nodeChoicesData>k__BackingField:
@@ -1072,7 +1046,7 @@ MonoBehaviour:
   - <m_nodeIDData>k__BackingField: 516db9a5-2838-44a9-804a-93d9289fa2ed
     <m_nodeNameData>k__BackingField: IntroJames
     <m_nodeBachelorImageData>k__BackingField: {fileID: 21300000, guid: dedee01b113aef245a775f2239a733c6, type: 3}
-    <m_nodeAudioLinesData>k__BackingField: {fileID: 8300000, guid: 004e8c248c45fda41a8b8c60961b213c, type: 3}
+    <m_nodeAudioLinesData>k__BackingField: {fileID: 8300000, guid: 716e1d9621a8c59469350860c6c717ea, type: 3}
     <m_nodeTextData>k__BackingField: "Hi I'm James, call me James B.\r\nOr should
       i rather, i'm James and I feel a bond- \r\nNice to meet you."
     <m_nodeChoicesData>k__BackingField:
@@ -1081,6 +1055,32 @@ MonoBehaviour:
     <m_nodeGroupIDData>k__BackingField: 9a2be9e8-7bcf-4baf-99a0-653a09eb8a23
     <m_dialogueTypeData>k__BackingField: 0
     <m_nodePositionData>k__BackingField: {x: 681, y: 841}
+    <m_nodePropertyToCheckData>k__BackingField: Love
+    <m_nodeComparisonTypeData>k__BackingField: '>='
+    <m_nodeComparisonValueData>k__BackingField: 0
+    <m_nodeOperationTypeData>k__BackingField: '>='
+    <m_nodeValueToSetData>k__BackingField: 
+    <m_nodeVariableNameData>k__BackingField: 
+    <m_nodeSetterOperationTypeData>k__BackingField: 0
+    <m_nodeLoveScoreAmountData>k__BackingField: 0
+    <m_nodeBoolValueData>k__BackingField: 0
+    <m_nodeLoveMeterData>k__BackingField: {fileID: 0}
+    <m_bachelorData>k__BackingField: {fileID: 0}
+    <m_isLikePreference>k__BackingField: 0
+    <m_selectedPreference>k__BackingField: 
+    <m_enumSetter>k__BackingField: 0
+  - <m_nodeIDData>k__BackingField: 54fcff2d-df4e-48c8-8a3f-530c2719efaa
+    <m_nodeNameData>k__BackingField: AnswerEw
+    <m_nodeBachelorImageData>k__BackingField: {fileID: 21300000, guid: dedee01b113aef245a775f2239a733c6, type: 3}
+    <m_nodeAudioLinesData>k__BackingField: {fileID: 8300000, guid: 939cff955bed5eb4bbad86ad903200d4, type: 3}
+    <m_nodeTextData>k__BackingField: It's not everyone I guess, I personally love
+      martial arts.
+    <m_nodeChoicesData>k__BackingField:
+    - <m_choiceTextData>k__BackingField: Next Dialogue
+      <m_choiceNodeIDData>k__BackingField: bf3537a8-b8aa-4e3c-9c1a-997fe45bbd5a
+    <m_nodeGroupIDData>k__BackingField: 9a2be9e8-7bcf-4baf-99a0-653a09eb8a23
+    <m_dialogueTypeData>k__BackingField: 0
+    <m_nodePositionData>k__BackingField: {x: 9079, y: 459}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -1138,8 +1138,8 @@ MonoBehaviour:
       - SetterGymRat
       - SetterShoppingCount
       - AnswerShoppingCount
-      - AnswerEw
       - AnswerFromTimeToTime
       - NotebookDetective
       - AnswerFriendsWithMore
       - IntroJames
+      - AnswerEw

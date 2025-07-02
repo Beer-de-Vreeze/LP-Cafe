@@ -27,7 +27,7 @@ MonoBehaviour:
       move by the rainpipe. Is that a rat?'
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: ca4307839af1511468973e36f2b5a653, type: 2}
   <m_bachelorImageData>k__BackingField: {fileID: 21300000, guid: dedee01b113aef245a775f2239a733c6, type: 3}
-  <m_dialogueAudioData>k__BackingField: {fileID: 0}
+  <m_dialogueAudioData>k__BackingField: {fileID: 8300000, guid: dcd8708f9478fe842bcd0daf1b2d6a0c, type: 3}
   <m_dialogueTypeData>k__BackingField: 1
   <m_isStartingDialogueData>k__BackingField: 1
   <m_propertyToCheckData>k__BackingField: 

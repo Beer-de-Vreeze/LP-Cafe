@@ -27,7 +27,7 @@ MonoBehaviour:
       by the view of the woods around you.'
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 2b8228e79b6f1314fb20838140bc3ac2, type: 2}
   <m_bachelorImageData>k__BackingField: {fileID: 21300000, guid: 4d7a66a9cea93b246a1057f95ed0764f, type: 3}
-  <m_dialogueAudioData>k__BackingField: {fileID: 0}
+  <m_dialogueAudioData>k__BackingField: {fileID: 8300000, guid: 16967b88d20e7f7418d730a1e2ed120c, type: 3}
   <m_dialogueTypeData>k__BackingField: 1
   <m_isStartingDialogueData>k__BackingField: 1
   <m_propertyToCheckData>k__BackingField: 

@@ -28,7 +28,7 @@ MonoBehaviour:
       on long walks with my dog.
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: fcb9beaaf6b6575488a6f02f1ab28d65, type: 2}
   <m_bachelorImageData>k__BackingField: {fileID: 21300000, guid: 1b752948b3bd324418758c36f01fb7d3, type: 3}
-  <m_dialogueAudioData>k__BackingField: {fileID: 0}
+  <m_dialogueAudioData>k__BackingField: {fileID: 8300000, guid: 35faeafc712fb8d468e028ea4ab96f69, type: 3}
   <m_dialogueTypeData>k__BackingField: 1
   <m_isStartingDialogueData>k__BackingField: 1
   <m_propertyToCheckData>k__BackingField: 

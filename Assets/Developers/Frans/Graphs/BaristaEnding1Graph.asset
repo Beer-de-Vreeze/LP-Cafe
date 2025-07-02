@@ -21,7 +21,7 @@ MonoBehaviour:
   - <m_nodeIDData>k__BackingField: 7a720435-a130-489a-901e-990cf8a77d15
     <m_nodeNameData>k__BackingField: 1
     <m_nodeBachelorImageData>k__BackingField: {fileID: 21300000, guid: 6ffe8caacb35ebc49a3fe4106b8afb48, type: 3}
-    <m_nodeAudioLinesData>k__BackingField: {fileID: 0}
+    <m_nodeAudioLinesData>k__BackingField: {fileID: 8300000, guid: 9824eeba36740dc4f871e77ca1ee3dce, type: 3}
     <m_nodeTextData>k__BackingField: "I'm glad to see you've managed to find someone
       that works for you! \r\nYou seem happy.\r\nYou're always welcome here for a
       drink.\r\nHappy the speed dating program worked for you!"

@@ -13,13 +13,12 @@ MonoBehaviour:
   m_Name: Q1A3
   m_EditorClassIdentifier: 
   <m_dialogueNameData>k__BackingField: Q1A3
-  <m_dialogueTextData>k__BackingField: "Eweeee- You hunt those little babies? \nGosh
-    I can't even imagine all the blood. You're going to make my tail puff up!"
+  <m_dialogueTextData>k__BackingField: Nwha baby, you're such a romantic.
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Next Dialogue
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 1ed7ce9b0470ee643957c329c17e8ae5, type: 2}
   <m_bachelorImageData>k__BackingField: {fileID: 21300000, guid: 162140bc96836f3468df2bafe26c4678, type: 3}
-  <m_dialogueAudioData>k__BackingField: {fileID: 0}
+  <m_dialogueAudioData>k__BackingField: {fileID: 8300000, guid: 29491914e97a08544a1735ed76810499, type: 3}
   <m_dialogueTypeData>k__BackingField: 0
   <m_isStartingDialogueData>k__BackingField: 1
   <m_propertyToCheckData>k__BackingField: 

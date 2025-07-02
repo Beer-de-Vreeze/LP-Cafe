@@ -28,7 +28,7 @@ MonoBehaviour:
       the different shades of the clouds. '
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 7a4a1434167b7ee418db6b90fc526b97, type: 2}
   <m_bachelorImageData>k__BackingField: {fileID: 21300000, guid: 4d7a66a9cea93b246a1057f95ed0764f, type: 3}
-  <m_dialogueAudioData>k__BackingField: {fileID: 0}
+  <m_dialogueAudioData>k__BackingField: {fileID: 8300000, guid: dc53ce2600edc5448b8c564207026c48, type: 3}
   <m_dialogueTypeData>k__BackingField: 1
   <m_isStartingDialogueData>k__BackingField: 1
   <m_propertyToCheckData>k__BackingField: 

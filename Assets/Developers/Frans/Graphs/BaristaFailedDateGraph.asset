@@ -16,12 +16,12 @@ MonoBehaviour:
   <m_graphGroupsData>k__BackingField:
   - <m_groupIDData>k__BackingField: f9c35689-2d7d-4cb9-ab22-ede5a27684cd
     <m_groupNameData>k__BackingField: Barista
-    <m_groupPositionData>k__BackingField: {x: 578, y: 323.6}
+    <m_groupPositionData>k__BackingField: {x: 578, y: 323}
   <m_graphNodesData>k__BackingField:
   - <m_nodeIDData>k__BackingField: abd7f08f-5377-421f-af75-26c884eed56f
     <m_nodeNameData>k__BackingField: 1
     <m_nodeBachelorImageData>k__BackingField: {fileID: 21300000, guid: 6ffe8caacb35ebc49a3fe4106b8afb48, type: 3}
-    <m_nodeAudioLinesData>k__BackingField: {fileID: 0}
+    <m_nodeAudioLinesData>k__BackingField: {fileID: 8300000, guid: b979c618ac1b8954fae4c9490cbe3b5c, type: 3}
     <m_nodeTextData>k__BackingField: "Yikes, rough date? Don\u2019t worry about it.\nThere
       are plenty more people to meet.\nOne of them\u2019s gotta be a better match,
       right?"
@@ -30,7 +30,7 @@ MonoBehaviour:
       <m_choiceNodeIDData>k__BackingField: 
     <m_nodeGroupIDData>k__BackingField: f9c35689-2d7d-4cb9-ab22-ede5a27684cd
     <m_dialogueTypeData>k__BackingField: 0
-    <m_nodePositionData>k__BackingField: {x: 603.2, y: 382}
+    <m_nodePositionData>k__BackingField: {x: 603, y: 382}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
