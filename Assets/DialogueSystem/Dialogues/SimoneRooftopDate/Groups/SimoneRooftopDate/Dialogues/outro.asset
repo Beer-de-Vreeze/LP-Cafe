@@ -19,7 +19,7 @@ MonoBehaviour:
     do sincerely hope our fates may intertwine once more.'
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Next Dialogue
-    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 0efce5c2e71aa5b4c96042b1e3b9c8e6, type: 2}
+    <m_nextDialogue>k__BackingField: {fileID: 0}
   <m_bachelorImageData>k__BackingField: {fileID: 21300000, guid: 1b752948b3bd324418758c36f01fb7d3, type: 3}
   <m_dialogueAudioData>k__BackingField: {fileID: 0}
   <m_dialogueTypeData>k__BackingField: 0

@@ -16,7 +16,7 @@ MonoBehaviour:
   <m_graphGroupsData>k__BackingField:
   - <m_groupIDData>k__BackingField: 606cb09b-a00f-46dc-9846-b6555f1e73d2
     <m_groupNameData>k__BackingField: SimoneAqariumDate
-    <m_groupPositionData>k__BackingField: {x: 5514.6665, y: -837.3333}
+    <m_groupPositionData>k__BackingField: {x: 5515.001, y: -838.00006}
   <m_graphNodesData>k__BackingField:
   - <m_nodeIDData>k__BackingField: fd8c9561-6f8c-435d-9eea-3f2fdef8ec66
     <m_nodeNameData>k__BackingField: Q2L2
@@ -28,7 +28,7 @@ MonoBehaviour:
       <m_choiceNodeIDData>k__BackingField: c50e48a8-1eda-40a6-8194-54551d540e83
     <m_nodeGroupIDData>k__BackingField: 606cb09b-a00f-46dc-9846-b6555f1e73d2
     <m_dialogueTypeData>k__BackingField: 3
-    <m_nodePositionData>k__BackingField: {x: 8151.3335, y: -486}
+    <m_nodePositionData>k__BackingField: {x: 8151, y: -486}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -53,7 +53,7 @@ MonoBehaviour:
       <m_choiceNodeIDData>k__BackingField: 2a487305-b8d0-4cd2-904c-98dc7c3c0130
     <m_nodeGroupIDData>k__BackingField: 606cb09b-a00f-46dc-9846-b6555f1e73d2
     <m_dialogueTypeData>k__BackingField: 3
-    <m_nodePositionData>k__BackingField: {x: 8153.3335, y: -284.66666}
+    <m_nodePositionData>k__BackingField: {x: 8153, y: -285}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -78,7 +78,7 @@ MonoBehaviour:
       <m_choiceNodeIDData>k__BackingField: 3ddcef48-409e-4065-bb02-e7a0db22bcdb
     <m_nodeGroupIDData>k__BackingField: 606cb09b-a00f-46dc-9846-b6555f1e73d2
     <m_dialogueTypeData>k__BackingField: 3
-    <m_nodePositionData>k__BackingField: {x: 8154, y: -84.66667}
+    <m_nodePositionData>k__BackingField: {x: 8154, y: -85}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -137,7 +137,7 @@ MonoBehaviour:
       <m_choiceNodeIDData>k__BackingField: cddd844f-d8d0-4d9d-b879-709f15ff4ad3
     <m_nodeGroupIDData>k__BackingField: 606cb09b-a00f-46dc-9846-b6555f1e73d2
     <m_dialogueTypeData>k__BackingField: 0
-    <m_nodePositionData>k__BackingField: {x: 8525.333, y: -732}
+    <m_nodePositionData>k__BackingField: {x: 8525, y: -732}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -192,10 +192,10 @@ MonoBehaviour:
     <m_nodeTextData>k__BackingField: You are such a sweetheart! Warms my heart.
     <m_nodeChoicesData>k__BackingField:
     - <m_choiceTextData>k__BackingField: Next Dialogue
-      <m_choiceNodeIDData>k__BackingField: 4eaaf4ee-0a5a-4909-a193-d046d5d70f44
+      <m_choiceNodeIDData>k__BackingField: 
     <m_nodeGroupIDData>k__BackingField: 606cb09b-a00f-46dc-9846-b6555f1e73d2
     <m_dialogueTypeData>k__BackingField: 0
-    <m_nodePositionData>k__BackingField: {x: 12477.333, y: -542.6667}
+    <m_nodePositionData>k__BackingField: {x: 12477, y: -543}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -219,10 +219,10 @@ MonoBehaviour:
       need some calming tea I think."
     <m_nodeChoicesData>k__BackingField:
     - <m_choiceTextData>k__BackingField: Next Dialogue
-      <m_choiceNodeIDData>k__BackingField: 4eaaf4ee-0a5a-4909-a193-d046d5d70f44
+      <m_choiceNodeIDData>k__BackingField: 
     <m_nodeGroupIDData>k__BackingField: 606cb09b-a00f-46dc-9846-b6555f1e73d2
     <m_dialogueTypeData>k__BackingField: 0
-    <m_nodePositionData>k__BackingField: {x: 12481.333, y: -314}
+    <m_nodePositionData>k__BackingField: {x: 12481, y: -314}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -247,10 +247,10 @@ MonoBehaviour:
       tastes I suppose.'
     <m_nodeChoicesData>k__BackingField:
     - <m_choiceTextData>k__BackingField: Next Dialogue
-      <m_choiceNodeIDData>k__BackingField: 4eaaf4ee-0a5a-4909-a193-d046d5d70f44
+      <m_choiceNodeIDData>k__BackingField: 
     <m_nodeGroupIDData>k__BackingField: 606cb09b-a00f-46dc-9846-b6555f1e73d2
     <m_dialogueTypeData>k__BackingField: 0
-    <m_nodePositionData>k__BackingField: {x: 12487.333, y: -84.66667}
+    <m_nodePositionData>k__BackingField: {x: 12487, y: -85}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -273,10 +273,10 @@ MonoBehaviour:
       exist?\r"
     <m_nodeChoicesData>k__BackingField:
     - <m_choiceTextData>k__BackingField: Next Dialogue
-      <m_choiceNodeIDData>k__BackingField: 4eaaf4ee-0a5a-4909-a193-d046d5d70f44
+      <m_choiceNodeIDData>k__BackingField: 
     <m_nodeGroupIDData>k__BackingField: 606cb09b-a00f-46dc-9846-b6555f1e73d2
     <m_dialogueTypeData>k__BackingField: 0
-    <m_nodePositionData>k__BackingField: {x: 12473.333, y: -778.6667}
+    <m_nodePositionData>k__BackingField: {x: 12473, y: -779}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -326,7 +326,7 @@ MonoBehaviour:
       <m_choiceNodeIDData>k__BackingField: cde18f46-29a4-49f3-ac14-db06cf2695d0
     <m_nodeGroupIDData>k__BackingField: 606cb09b-a00f-46dc-9846-b6555f1e73d2
     <m_dialogueTypeData>k__BackingField: 3
-    <m_nodePositionData>k__BackingField: {x: 12059.333, y: -138.66666}
+    <m_nodePositionData>k__BackingField: {x: 12059, y: -139}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -359,7 +359,7 @@ MonoBehaviour:
       <m_choiceNodeIDData>k__BackingField: 9e803658-5f05-43b5-a87a-37d10a37ef63
     <m_nodeGroupIDData>k__BackingField: 606cb09b-a00f-46dc-9846-b6555f1e73d2
     <m_dialogueTypeData>k__BackingField: 1
-    <m_nodePositionData>k__BackingField: {x: 11317.333, y: -448.66666}
+    <m_nodePositionData>k__BackingField: {x: 11317, y: -449}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -384,7 +384,7 @@ MonoBehaviour:
       <m_choiceNodeIDData>k__BackingField: 3bab4ab0-643c-4b20-9bec-dbd7dad94b5b
     <m_nodeGroupIDData>k__BackingField: 606cb09b-a00f-46dc-9846-b6555f1e73d2
     <m_dialogueTypeData>k__BackingField: 3
-    <m_nodePositionData>k__BackingField: {x: 12047.333, y: -520}
+    <m_nodePositionData>k__BackingField: {x: 12047, y: -520}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -410,7 +410,7 @@ MonoBehaviour:
       <m_choiceNodeIDData>k__BackingField: 3cdae116-b7e1-4712-830e-6e7e4116ea23
     <m_nodeGroupIDData>k__BackingField: 606cb09b-a00f-46dc-9846-b6555f1e73d2
     <m_dialogueTypeData>k__BackingField: 0
-    <m_nodePositionData>k__BackingField: {x: 10863.333, y: -384.66666}
+    <m_nodePositionData>k__BackingField: {x: 10863, y: -385}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -436,7 +436,7 @@ MonoBehaviour:
       <m_choiceNodeIDData>k__BackingField: cddd844f-d8d0-4d9d-b879-709f15ff4ad3
     <m_nodeGroupIDData>k__BackingField: 606cb09b-a00f-46dc-9846-b6555f1e73d2
     <m_dialogueTypeData>k__BackingField: 0
-    <m_nodePositionData>k__BackingField: {x: 8528, y: -84.66667}
+    <m_nodePositionData>k__BackingField: {x: 8528, y: -85}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -461,7 +461,7 @@ MonoBehaviour:
       <m_choiceNodeIDData>k__BackingField: 28269015-99bf-45e8-94b6-e98afba1de04
     <m_nodeGroupIDData>k__BackingField: 606cb09b-a00f-46dc-9846-b6555f1e73d2
     <m_dialogueTypeData>k__BackingField: 3
-    <m_nodePositionData>k__BackingField: {x: 8151.3335, y: -732}
+    <m_nodePositionData>k__BackingField: {x: 8151, y: -732}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -486,7 +486,7 @@ MonoBehaviour:
       <m_choiceNodeIDData>k__BackingField: 77fe8081-3486-46c9-a698-4dec2f2174fc
     <m_nodeGroupIDData>k__BackingField: 606cb09b-a00f-46dc-9846-b6555f1e73d2
     <m_dialogueTypeData>k__BackingField: 3
-    <m_nodePositionData>k__BackingField: {x: 12053.333, y: -338}
+    <m_nodePositionData>k__BackingField: {x: 12053, y: -338}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -501,31 +501,6 @@ MonoBehaviour:
     <m_isLikePreference>k__BackingField: 1
     <m_selectedPreference>k__BackingField: 
     <m_enumSetter>k__BackingField: 0
-  - <m_nodeIDData>k__BackingField: 4eaaf4ee-0a5a-4909-a193-d046d5d70f44
-    <m_nodeNameData>k__BackingField: Ending
-    <m_nodeBachelorImageData>k__BackingField: {fileID: 0}
-    <m_nodeAudioLinesData>k__BackingField: {fileID: 0}
-    <m_nodeTextData>k__BackingField: ' '
-    <m_nodeChoicesData>k__BackingField:
-    - <m_choiceTextData>k__BackingField: Next Dialogue
-      <m_choiceNodeIDData>k__BackingField: 
-    <m_nodeGroupIDData>k__BackingField: 606cb09b-a00f-46dc-9846-b6555f1e73d2
-    <m_dialogueTypeData>k__BackingField: 0
-    <m_nodePositionData>k__BackingField: {x: 12979.333, y: -460}
-    <m_nodePropertyToCheckData>k__BackingField: Love
-    <m_nodeComparisonTypeData>k__BackingField: '>='
-    <m_nodeComparisonValueData>k__BackingField: 0
-    <m_nodeOperationTypeData>k__BackingField: '>='
-    <m_nodeValueToSetData>k__BackingField: 
-    <m_nodeVariableNameData>k__BackingField: 
-    <m_nodeSetterOperationTypeData>k__BackingField: 0
-    <m_nodeLoveScoreAmountData>k__BackingField: 0
-    <m_nodeBoolValueData>k__BackingField: 0
-    <m_nodeLoveMeterData>k__BackingField: {fileID: 0}
-    <m_bachelorData>k__BackingField: {fileID: 0}
-    <m_isLikePreference>k__BackingField: 0
-    <m_selectedPreference>k__BackingField: 
-    <m_enumSetter>k__BackingField: 0
   - <m_nodeIDData>k__BackingField: 36e7bd2e-d942-443e-950e-76ab52e895c9
     <m_nodeNameData>k__BackingField: Q1L2
     <m_nodeBachelorImageData>k__BackingField: {fileID: 0}
@@ -536,7 +511,7 @@ MonoBehaviour:
       <m_choiceNodeIDData>k__BackingField: dd344f47-44be-4d05-94ce-dfb056920c75
     <m_nodeGroupIDData>k__BackingField: 606cb09b-a00f-46dc-9846-b6555f1e73d2
     <m_dialogueTypeData>k__BackingField: 3
-    <m_nodePositionData>k__BackingField: {x: 6571.3335, y: -532.6666}
+    <m_nodePositionData>k__BackingField: {x: 6571, y: -533}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -561,7 +536,7 @@ MonoBehaviour:
       <m_choiceNodeIDData>k__BackingField: f2e50913-aeba-4af6-9cef-197568e06d88
     <m_nodeGroupIDData>k__BackingField: 606cb09b-a00f-46dc-9846-b6555f1e73d2
     <m_dialogueTypeData>k__BackingField: 3
-    <m_nodePositionData>k__BackingField: {x: 6570, y: -146.66666}
+    <m_nodePositionData>k__BackingField: {x: 6570, y: -147}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -587,7 +562,7 @@ MonoBehaviour:
       <m_choiceNodeIDData>k__BackingField: fd3e2ec6-7f52-4c83-920b-577cf32c4b4c
     <m_nodeGroupIDData>k__BackingField: 606cb09b-a00f-46dc-9846-b6555f1e73d2
     <m_dialogueTypeData>k__BackingField: 0
-    <m_nodePositionData>k__BackingField: {x: 6981.3335, y: -536}
+    <m_nodePositionData>k__BackingField: {x: 6981, y: -536}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -637,7 +612,7 @@ MonoBehaviour:
       <m_choiceNodeIDData>k__BackingField: 83aa7cad-c348-4892-96aa-b6f4bc8c3a98
     <m_nodeGroupIDData>k__BackingField: 606cb09b-a00f-46dc-9846-b6555f1e73d2
     <m_dialogueTypeData>k__BackingField: 3
-    <m_nodePositionData>k__BackingField: {x: 6574, y: -344.66666}
+    <m_nodePositionData>k__BackingField: {x: 6574, y: -345}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -670,7 +645,7 @@ MonoBehaviour:
       <m_choiceNodeIDData>k__BackingField: c2bb3bcf-46dc-4870-8dfd-9f8fc0d23ea3
     <m_nodeGroupIDData>k__BackingField: 606cb09b-a00f-46dc-9846-b6555f1e73d2
     <m_dialogueTypeData>k__BackingField: 1
-    <m_nodePositionData>k__BackingField: {x: 5908, y: -540.6667}
+    <m_nodePositionData>k__BackingField: {x: 5908, y: -541}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -700,7 +675,7 @@ MonoBehaviour:
       <m_choiceNodeIDData>k__BackingField: fd3e2ec6-7f52-4c83-920b-577cf32c4b4c
     <m_nodeGroupIDData>k__BackingField: 606cb09b-a00f-46dc-9846-b6555f1e73d2
     <m_dialogueTypeData>k__BackingField: 0
-    <m_nodePositionData>k__BackingField: {x: 6986, y: -146.66666}
+    <m_nodePositionData>k__BackingField: {x: 6986, y: -147}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -728,7 +703,7 @@ MonoBehaviour:
       <m_choiceNodeIDData>k__BackingField: fd3e2ec6-7f52-4c83-920b-577cf32c4b4c
     <m_nodeGroupIDData>k__BackingField: 606cb09b-a00f-46dc-9846-b6555f1e73d2
     <m_dialogueTypeData>k__BackingField: 0
-    <m_nodePositionData>k__BackingField: {x: 6986, y: -344.66666}
+    <m_nodePositionData>k__BackingField: {x: 6986, y: -345}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -754,7 +729,7 @@ MonoBehaviour:
       <m_choiceNodeIDData>k__BackingField: fd3e2ec6-7f52-4c83-920b-577cf32c4b4c
     <m_nodeGroupIDData>k__BackingField: 606cb09b-a00f-46dc-9846-b6555f1e73d2
     <m_dialogueTypeData>k__BackingField: 0
-    <m_nodePositionData>k__BackingField: {x: 6981.3335, y: -732}
+    <m_nodePositionData>k__BackingField: {x: 6981, y: -732}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -779,7 +754,7 @@ MonoBehaviour:
       <m_choiceNodeIDData>k__BackingField: cddd844f-d8d0-4d9d-b879-709f15ff4ad3
     <m_nodeGroupIDData>k__BackingField: 606cb09b-a00f-46dc-9846-b6555f1e73d2
     <m_dialogueTypeData>k__BackingField: 0
-    <m_nodePositionData>k__BackingField: {x: 8573.333, y: -486}
+    <m_nodePositionData>k__BackingField: {x: 8573, y: -486}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -804,7 +779,7 @@ MonoBehaviour:
       <m_choiceNodeIDData>k__BackingField: e8b0a138-754d-4897-9b18-f5e4383dd2e2
     <m_nodeGroupIDData>k__BackingField: 606cb09b-a00f-46dc-9846-b6555f1e73d2
     <m_dialogueTypeData>k__BackingField: 3
-    <m_nodePositionData>k__BackingField: {x: 9813.333, y: -322.66666}
+    <m_nodePositionData>k__BackingField: {x: 9813, y: -323}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -830,7 +805,7 @@ MonoBehaviour:
       <m_choiceNodeIDData>k__BackingField: e923209c-7fbe-4564-a803-76404bf52bff
     <m_nodeGroupIDData>k__BackingField: 606cb09b-a00f-46dc-9846-b6555f1e73d2
     <m_dialogueTypeData>k__BackingField: 0
-    <m_nodePositionData>k__BackingField: {x: 10224, y: -748.6667}
+    <m_nodePositionData>k__BackingField: {x: 10224, y: -749}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -881,7 +856,7 @@ MonoBehaviour:
       <m_choiceNodeIDData>k__BackingField: b0a1168b-8259-4a7d-868d-c9b08aac5d90
     <m_nodeGroupIDData>k__BackingField: 606cb09b-a00f-46dc-9846-b6555f1e73d2
     <m_dialogueTypeData>k__BackingField: 3
-    <m_nodePositionData>k__BackingField: {x: 9806, y: -530.6666}
+    <m_nodePositionData>k__BackingField: {x: 9806, y: -531}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -906,7 +881,7 @@ MonoBehaviour:
       <m_choiceNodeIDData>k__BackingField: c7f8f822-26b4-4ac6-b923-55197777aae3
     <m_nodeGroupIDData>k__BackingField: 606cb09b-a00f-46dc-9846-b6555f1e73d2
     <m_dialogueTypeData>k__BackingField: 3
-    <m_nodePositionData>k__BackingField: {x: 9797.333, y: -732}
+    <m_nodePositionData>k__BackingField: {x: 9797, y: -732}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -932,7 +907,7 @@ MonoBehaviour:
       <m_choiceNodeIDData>k__BackingField: e923209c-7fbe-4564-a803-76404bf52bff
     <m_nodeGroupIDData>k__BackingField: 606cb09b-a00f-46dc-9846-b6555f1e73d2
     <m_dialogueTypeData>k__BackingField: 0
-    <m_nodePositionData>k__BackingField: {x: 10229.333, y: -540.6667}
+    <m_nodePositionData>k__BackingField: {x: 10229, y: -541}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -960,7 +935,7 @@ MonoBehaviour:
       <m_choiceNodeIDData>k__BackingField: e923209c-7fbe-4564-a803-76404bf52bff
     <m_nodeGroupIDData>k__BackingField: 606cb09b-a00f-46dc-9846-b6555f1e73d2
     <m_dialogueTypeData>k__BackingField: 0
-    <m_nodePositionData>k__BackingField: {x: 10231.333, y: -114.666664}
+    <m_nodePositionData>k__BackingField: {x: 10231, y: -115}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -985,7 +960,7 @@ MonoBehaviour:
       <m_choiceNodeIDData>k__BackingField: 33cb6662-e26f-4abe-ac38-e05976559f8d
     <m_nodeGroupIDData>k__BackingField: 606cb09b-a00f-46dc-9846-b6555f1e73d2
     <m_dialogueTypeData>k__BackingField: 3
-    <m_nodePositionData>k__BackingField: {x: 9813.333, y: -114.666664}
+    <m_nodePositionData>k__BackingField: {x: 9813, y: -115}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -1010,7 +985,7 @@ MonoBehaviour:
       <m_choiceNodeIDData>k__BackingField: 01d38fb5-3b08-4a71-9c81-3696282e4616
     <m_nodeGroupIDData>k__BackingField: 606cb09b-a00f-46dc-9846-b6555f1e73d2
     <m_dialogueTypeData>k__BackingField: 0
-    <m_nodePositionData>k__BackingField: {x: 5540, y: -532.6666}
+    <m_nodePositionData>k__BackingField: {x: 5540, y: -533}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -1043,7 +1018,7 @@ MonoBehaviour:
       <m_choiceNodeIDData>k__BackingField: d82a3b1e-e429-4977-8ac2-149fcf8a187b
     <m_nodeGroupIDData>k__BackingField: 606cb09b-a00f-46dc-9846-b6555f1e73d2
     <m_dialogueTypeData>k__BackingField: 1
-    <m_nodePositionData>k__BackingField: {x: 7515.3335, y: -442.66666}
+    <m_nodePositionData>k__BackingField: {x: 7515, y: -443}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -1083,7 +1058,6 @@ MonoBehaviour:
       - Q2A4
       - Q2L1
       - Q4L3
-      - Ending
       - Q1L2
       - Q1L4
       - Q1A2

@@ -142,6 +142,9 @@ public class DialogueDisplay : MonoBehaviour
 
     /// <summary>Stores choices that should be displayed after the typewriter finishes</summary>
     private List<DS.Data.DSDialogueChoiceData> _pendingChoices = null;
+
+    /// <summary>Tracks whether the dialogue system is waiting for user input to clear text before showing end buttons</summary>
+    private bool _waitingForClearBeforeEndButtons = false;
     #endregion
 
     #region Love System
@@ -324,11 +327,38 @@ public class DialogueDisplay : MonoBehaviour
             return;
         }
 
+        // Handle clearing text before showing end buttons
+        if (
+            _waitingForClearBeforeEndButtons
+            && (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
+        )
+        {
+            _waitingForClearBeforeEndButtons = false;
+            _canAdvance = false;
+
+            // Clear the text
+            if (_displayText != null)
+            {
+                _displayText.text = "";
+            }
+
+            // Hide continue icon
+            if (_continueIcon != null)
+            {
+                _continueIcon.SetActive(false);
+            }
+
+            // Now show the end dialogue buttons
+            ShowEndDialogueButtons();
+            return;
+        }
+
         // Allow advancing dialogue if possible, no choices are being shown, and delay is not active
         if (
             _canAdvance
             && !_isDelayActive
             && _activeChoiceButtons.Count == 0
+            && !_waitingForClearBeforeEndButtons
             && (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
         )
         {
@@ -412,6 +442,9 @@ public class DialogueDisplay : MonoBehaviour
     {
         ClearChoices();
         EnsureVerticalLayoutSettings();
+
+        // Reset the state for waiting to clear before end buttons
+        _waitingForClearBeforeEndButtons = false;
 
         // Ensure love meter UI has the correct data before showing dialogue
         EnsureLoveMeterSetup();
@@ -515,7 +548,7 @@ public class DialogueDisplay : MonoBehaviour
     }
 
     /// <summary>
-    /// Advances to the next dialogue if available, otherwise shows end dialogue options.
+    /// Advances to the next dialogue if available, otherwise sets up state for clearing text before end buttons.
     /// Called when player clicks/presses space during single dialogue or through choice selection.
     /// </summary>
     public void NextDialogue()
@@ -530,8 +563,18 @@ public class DialogueDisplay : MonoBehaviour
             }
             else
             {
-                Debug.Log("No next dialogue found. Showing end dialogue buttons.");
-                ShowEndDialogueButtons();
+                Debug.Log(
+                    "No next dialogue found. Waiting for user input to clear text before showing end buttons."
+                );
+                // Instead of directly showing end buttons, set state to wait for user input to clear text first
+                _waitingForClearBeforeEndButtons = true;
+                _canAdvance = true; // Allow input to clear text
+
+                // Keep the continue icon visible to indicate user can interact
+                if (_continueIcon != null)
+                {
+                    _continueIcon.SetActive(true);
+                }
             }
         }
     }
@@ -620,15 +663,24 @@ public class DialogueDisplay : MonoBehaviour
             _typewriter.StopShowingText();
         }
 
-        // Show the final dialogue or end dialogue buttons
+        // Show the final dialogue or set up for end dialogue buttons
         if (currentNode != null)
         {
             ShowDialogue();
         }
         else
         {
-            Debug.Log("[TEST] Reached end of dialogue chain, showing end dialogue buttons");
-            ShowEndDialogueButtons();
+            Debug.Log(
+                "[TEST] Reached end of dialogue chain, setting up to clear text before showing end buttons"
+            );
+            // Set up the state to wait for user input to clear text before showing end buttons
+            _waitingForClearBeforeEndButtons = true;
+            _canAdvance = true;
+
+            if (_continueIcon != null)
+            {
+                _continueIcon.SetActive(true);
+            }
         }
 
         Debug.Log($"[TEST] Skipped through {iterations} dialogue nodes to reach the end");
@@ -644,6 +696,9 @@ public class DialogueDisplay : MonoBehaviour
     {
         _dialogue = dialogue;
         _bachelor = bachelor;
+
+        // Reset the state for waiting to clear before end buttons
+        _waitingForClearBeforeEndButtons = false;
 
         if (_bachelor != null)
         {
@@ -767,6 +822,9 @@ public class DialogueDisplay : MonoBehaviour
     {
         _bachelor = bachelor;
 
+        // Reset the state for waiting to clear before end buttons
+        _waitingForClearBeforeEndButtons = false;
+
         // Set up the UI
         if (_bachelor != null && _nameText != null)
         {
@@ -835,6 +893,9 @@ public class DialogueDisplay : MonoBehaviour
     public void ShowPostRealDateOptionsInCafe(NewBachelorSO bachelor)
     {
         _bachelor = bachelor;
+
+        // Reset the state for waiting to clear before end buttons
+        _waitingForClearBeforeEndButtons = false;
 
         // Set up the UI
         if (_bachelor != null && _nameText != null)

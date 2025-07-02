@@ -60,7 +60,6 @@ MonoBehaviour:
       - {fileID: 11400000, guid: 3a8b7997ac589fc40b997bee2f24b2c5, type: 2}
       - {fileID: 11400000, guid: 167bb1d7894fbb541ae86e970bb3431f, type: 2}
       - {fileID: 11400000, guid: 716f83600f39e154d9d1bec2b6adead8, type: 2}
-      - {fileID: 11400000, guid: 77d03e4a31083a4499859c7b5eaa672c, type: 2}
       - {fileID: 11400000, guid: 69c3743167536c241a2cf3b86dddee03, type: 2}
       - {fileID: 11400000, guid: 48450f8c3f02f5f4aa6f51d0afaddead, type: 2}
   <m_containerUngroupedDialoguesData>k__BackingField: []
