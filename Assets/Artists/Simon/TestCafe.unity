@@ -3504,7 +3504,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3952595216175766055, guid: a45930d7ad5ece64d8d27e47bbcbf4a6, type: 3}
       propertyPath: _baristaDialogues.Array.size
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3952595216175766055, guid: a45930d7ad5ece64d8d27e47bbcbf4a6, type: 3}
       propertyPath: _mixedResultsBaristaDialogue
@@ -3532,6 +3532,10 @@ PrefabInstance:
       objectReference: {fileID: 1681331436}
     - target: {fileID: 3952595216175766055, guid: a45930d7ad5ece64d8d27e47bbcbf4a6, type: 3}
       propertyPath: '_baristaDialogues.Array.data[4]'
+      value: 
+      objectReference: {fileID: 1681331435}
+    - target: {fileID: 3952595216175766055, guid: a45930d7ad5ece64d8d27e47bbcbf4a6, type: 3}
+      propertyPath: _allDatesSucceededBaristaDialogue
       value: 
       objectReference: {fileID: 1681331435}
     - target: {fileID: 3959460017288424381, guid: a45930d7ad5ece64d8d27e47bbcbf4a6, type: 3}
