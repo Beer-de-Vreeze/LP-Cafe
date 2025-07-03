@@ -18,7 +18,7 @@ MonoBehaviour:
   - <m_dialogueChoiceText>k__BackingField: I'm a personal trainer for a weight lifting
       gym near my house.
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: c84bd435fd520b244aa306539d89a4d7, type: 2}
-  - <m_dialogueChoiceText>k__BackingField: "I'm trying to get a job at my local caf\xE9."
+  - <m_dialogueChoiceText>k__BackingField: I'm trying to get a job at my local cafe.
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 1beab1cf193e6694da14fefc3f670087, type: 2}
   - <m_dialogueChoiceText>k__BackingField: I work for customer service for a catering
       company.
