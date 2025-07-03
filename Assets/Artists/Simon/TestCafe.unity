@@ -3203,11 +3203,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_dialogueContainer: {fileID: 11400000, guid: 2089ee1f8b3873f4e92a743306bfa087, type: 2}
   m_dialogueGroup: {fileID: 11400000, guid: a197429d8590e8d48b5292276b80af12, type: 2}
-  m_dialogue: {fileID: 11400000, guid: 3c53dd80198c35d43bb3d052b0cc5d5f, type: 2}
+  m_dialogue: {fileID: 11400000, guid: 4eb0fce5770813b4db57cdc6abcb4061, type: 2}
   m_groupedDialogues: 1
   m_startingDialoguesOnly: 0
   m_selectedDialogueGroupIndex: 0
-  m_selectedDialogueIndex: 0
+  m_selectedDialogueIndex: 41
 --- !u!114 &1982111755
 MonoBehaviour:
   m_ObjectHideFlags: 0
