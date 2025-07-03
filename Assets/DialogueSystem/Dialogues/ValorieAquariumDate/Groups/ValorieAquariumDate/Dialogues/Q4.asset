@@ -17,7 +17,7 @@ MonoBehaviour:
     them?
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: I don't know, I only have eyes on you.
-    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: abfc5289cb28913439003c47f1bdc77e, type: 2}
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 684b9003f9bce1248b912551798ff3de, type: 2}
   - <m_dialogueChoiceText>k__BackingField: I think they're too brain dead and simple
       to understand complex emotion.
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: f62db69e3f79da241bc949a6592519b2, type: 2}

@@ -20,7 +20,7 @@ MonoBehaviour:
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: da0cda3cf1e5311448909dbc55df5159, type: 2}
   - <m_dialogueChoiceText>k__BackingField: In this place? that's asking to be starred
       in a murder mystery podcast.
-    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 905006eca9d0dfe4fb57bd08d11dd586, type: 2}
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 6a8d75791afba374f8ad02d96d797ef6, type: 2}
   - <m_dialogueChoiceText>k__BackingField: Yea, maybe we can go out to forage and
       look for herbs for you tea.
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: b12951e5644c77542baccfd46f0172d2, type: 2}

@@ -17,7 +17,7 @@ MonoBehaviour:
     no thank you..."
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Next Dialogue
-    <m_nextDialogue>k__BackingField: {fileID: 0}
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 8ebced45aceaa4c458e748b5f711184a, type: 2}
   <m_bachelorImageData>k__BackingField: {fileID: 21300000, guid: 1bf1240224094ac4c98e6c1f7df08010, type: 3}
   <m_dialogueAudioData>k__BackingField: {fileID: 8300000, guid: fa62d5f0b8366954bb3174c804dac931, type: 3}
   <m_dialogueTypeData>k__BackingField: 0

@@ -26,7 +26,7 @@ MonoBehaviour:
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 379f73a666b88dd4dbe9be3f41305010, type: 2}
   - <m_dialogueChoiceText>k__BackingField: Sure how about that little cafe at the
       beginning? That pink looking building?
-    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 855c0ec6232b6f649a650658cebd9e39, type: 2}
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: a0c2b3fc8ce8ec1459987fd9a1dc9db9, type: 2}
   <m_bachelorImageData>k__BackingField: {fileID: 21300000, guid: 35a4b7bef345b3f4db947b0e9547a2a6, type: 3}
   <m_dialogueAudioData>k__BackingField: {fileID: 8300000, guid: 3bb5d853b254efa439d920fea14665d5, type: 3}
   <m_dialogueTypeData>k__BackingField: 1

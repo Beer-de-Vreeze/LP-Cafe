@@ -16,7 +16,7 @@ MonoBehaviour:
   <m_dialogueTextData>k__BackingField: "\rWould you like some?"
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Gross.... *gags
-    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 5c5a4a001d0950c4084e101aec94e6b0, type: 2}
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 2827847b08ba6fa42ab1cbe62918c769, type: 2}
   - <m_dialogueChoiceText>k__BackingField: Oh yea that sounds nice! can I have some
       sugar with it?
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 4348dcda00ed37049b6dd4dadb37ac7d, type: 2}

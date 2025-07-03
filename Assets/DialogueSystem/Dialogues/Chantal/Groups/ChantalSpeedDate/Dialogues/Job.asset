@@ -27,7 +27,7 @@ MonoBehaviour:
       I had a life insurance settlement.
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: e8dca7f4ac2a05449b7f658195872481, type: 2}
   <m_bachelorImageData>k__BackingField: {fileID: 21300000, guid: 84a876f81e079bf40beb58c595c98cf5, type: 3}
-  <m_dialogueAudioData>k__BackingField: {fileID: 8300000, guid: f20a2eb9720a289478edf3d9f0fde3f2, type: 3}
+  <m_dialogueAudioData>k__BackingField: {fileID: 8300000, guid: 3ef9c3bd3db36d04aaddba7650a97a90, type: 3}
   <m_dialogueTypeData>k__BackingField: 1
   <m_isStartingDialogueData>k__BackingField: 1
   <m_propertyToCheckData>k__BackingField: 

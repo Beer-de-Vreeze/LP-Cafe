@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: Q1
   m_EditorClassIdentifier: 
   <m_dialogueNameData>k__BackingField: Q1
-  <m_dialogueTextData>k__BackingField: Why don't you tell me a little bit about yourself,
-    Lovely?
+  <m_dialogueTextData>k__BackingField: Why don't you tell me a little bit about yourself?
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: I like to drink my coffee with one sugar
       and lots of milk and I often like some flavour in it.

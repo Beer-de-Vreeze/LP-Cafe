@@ -16,7 +16,7 @@ MonoBehaviour:
   <m_graphGroupsData>k__BackingField:
   - <m_groupIDData>k__BackingField: 955c72d5-0b24-4758-840b-00e03305c39c
     <m_groupNameData>k__BackingField: ChantalRooftopDate
-    <m_groupPositionData>k__BackingField: {x: 18.00016, y: 107.99999}
+    <m_groupPositionData>k__BackingField: {x: 17.999926, y: 108.000015}
   <m_graphNodesData>k__BackingField:
   - <m_nodeIDData>k__BackingField: 1c2de1af-3f78-48eb-9681-6a1aabbfe0da
     <m_nodeNameData>k__BackingField: Intro
@@ -606,7 +606,7 @@ MonoBehaviour:
     <m_nodeTextData>k__BackingField: Excuse me??? I'm no ones SECOND choice!
     <m_nodeChoicesData>k__BackingField:
     - <m_choiceTextData>k__BackingField: Next Dialogue
-      <m_choiceNodeIDData>k__BackingField: 4c5432e6-67ae-425e-8b9e-707ddd9cb4e8
+      <m_choiceNodeIDData>k__BackingField: 6fec8b34-37ae-4d8c-b54c-afd5ee2f2d53
     <m_nodeGroupIDData>k__BackingField: 955c72d5-0b24-4758-840b-00e03305c39c
     <m_dialogueTypeData>k__BackingField: 0
     <m_nodePositionData>k__BackingField: {x: 6254, y: 914}
@@ -797,31 +797,6 @@ MonoBehaviour:
     <m_nodeGroupIDData>k__BackingField: 955c72d5-0b24-4758-840b-00e03305c39c
     <m_dialogueTypeData>k__BackingField: 0
     <m_nodePositionData>k__BackingField: {x: 6227, y: 528}
-    <m_nodePropertyToCheckData>k__BackingField: Love
-    <m_nodeComparisonTypeData>k__BackingField: '>='
-    <m_nodeComparisonValueData>k__BackingField: 0
-    <m_nodeOperationTypeData>k__BackingField: '>='
-    <m_nodeValueToSetData>k__BackingField: 
-    <m_nodeVariableNameData>k__BackingField: 
-    <m_nodeSetterOperationTypeData>k__BackingField: 0
-    <m_nodeLoveScoreAmountData>k__BackingField: 0
-    <m_nodeBoolValueData>k__BackingField: 0
-    <m_nodeLoveMeterData>k__BackingField: {fileID: 0}
-    <m_bachelorData>k__BackingField: {fileID: 0}
-    <m_isLikePreference>k__BackingField: 0
-    <m_selectedPreference>k__BackingField: 
-    <m_enumSetter>k__BackingField: 0
-  - <m_nodeIDData>k__BackingField: 4c5432e6-67ae-425e-8b9e-707ddd9cb4e8
-    <m_nodeNameData>k__BackingField: InstantEnding1
-    <m_nodeBachelorImageData>k__BackingField: {fileID: 0}
-    <m_nodeAudioLinesData>k__BackingField: {fileID: 0}
-    <m_nodeTextData>k__BackingField: ' '
-    <m_nodeChoicesData>k__BackingField:
-    - <m_choiceTextData>k__BackingField: Next Dialogue
-      <m_choiceNodeIDData>k__BackingField: 
-    <m_nodeGroupIDData>k__BackingField: 955c72d5-0b24-4758-840b-00e03305c39c
-    <m_dialogueTypeData>k__BackingField: 0
-    <m_nodePositionData>k__BackingField: {x: 6693, y: 884}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -1098,6 +1073,31 @@ MonoBehaviour:
     <m_isLikePreference>k__BackingField: 0
     <m_selectedPreference>k__BackingField: 
     <m_enumSetter>k__BackingField: 0
+  - <m_nodeIDData>k__BackingField: 6fec8b34-37ae-4d8c-b54c-afd5ee2f2d53
+    <m_nodeNameData>k__BackingField: InstantFaillure
+    <m_nodeBachelorImageData>k__BackingField: {fileID: 0}
+    <m_nodeAudioLinesData>k__BackingField: {fileID: 0}
+    <m_nodeTextData>k__BackingField: Dialogue text.
+    <m_nodeChoicesData>k__BackingField:
+    - <m_choiceTextData>k__BackingField: Next Dialogue
+      <m_choiceNodeIDData>k__BackingField: 
+    <m_nodeGroupIDData>k__BackingField: 955c72d5-0b24-4758-840b-00e03305c39c
+    <m_dialogueTypeData>k__BackingField: 3
+    <m_nodePositionData>k__BackingField: {x: 6694, y: 914}
+    <m_nodePropertyToCheckData>k__BackingField: Love
+    <m_nodeComparisonTypeData>k__BackingField: '>='
+    <m_nodeComparisonValueData>k__BackingField: 0
+    <m_nodeOperationTypeData>k__BackingField: '>='
+    <m_nodeValueToSetData>k__BackingField: 
+    <m_nodeVariableNameData>k__BackingField: variableName
+    <m_nodeSetterOperationTypeData>k__BackingField: 1
+    <m_nodeLoveScoreAmountData>k__BackingField: -5
+    <m_nodeBoolValueData>k__BackingField: 0
+    <m_nodeLoveMeterData>k__BackingField: {fileID: 11400000, guid: 1185f448d7f788340855341bed53796d, type: 2}
+    <m_bachelorData>k__BackingField: {fileID: 0}
+    <m_isLikePreference>k__BackingField: 1
+    <m_selectedPreference>k__BackingField: 
+    <m_enumSetter>k__BackingField: 0
   <m_graphOldGroupNamesData>k__BackingField:
   - ChantalRooftopDate
   <m_graphOldUngroupedNodeNamesData>k__BackingField: []
@@ -1135,7 +1135,6 @@ MonoBehaviour:
       - Q2L2
       - Q3L2
       - Q3A2
-      - InstantEnding1
       - Q4
       - Q4L2
       - Q4L1
@@ -1146,3 +1145,4 @@ MonoBehaviour:
       - Q4A3
       - Q4A1
       - Q4A4
+      - InstantFaillure

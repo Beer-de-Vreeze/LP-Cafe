@@ -17,7 +17,7 @@ MonoBehaviour:
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Oh I think that's my great grandma, her
       spirit say hi sometimes
-    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 65e8f88d7f6c7a544b3e2550732a573b, type: 2}
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: bc59fdd1246efce40a491abba7f85dd8, type: 2}
   - <m_dialogueChoiceText>k__BackingField: Th...that's a rock.
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 41850bb57bf56354fb9dda36638dfff7, type: 2}
   - <m_dialogueChoiceText>k__BackingField: There is this thing, with fluffy ears,
