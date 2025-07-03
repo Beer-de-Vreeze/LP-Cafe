@@ -16,7 +16,7 @@ MonoBehaviour:
   <m_dialogueTextData>k__BackingField: "At least those large animals look exquisite.
     \r\nYou'll have to make some good photo's of me with the large whale thing on
     the background.\r\nAt least then it will be good for my socials.\nThis is a new
-    experience for me, the animals look majestical."
+    experience for me, the animals look majestic."
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Next Dialogue
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 16e6f67b8d06af340b5615bfddaad9d8, type: 2}
