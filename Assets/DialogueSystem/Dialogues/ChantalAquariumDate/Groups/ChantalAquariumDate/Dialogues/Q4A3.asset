@@ -17,7 +17,7 @@ MonoBehaviour:
     more. \nDon't be so bland and flavorless.\r"
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Next Dialogue
-    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 5e1a3464dc07bd842b023da375894b3d, type: 2}
+    <m_nextDialogue>k__BackingField: {fileID: 0}
   <m_bachelorImageData>k__BackingField: {fileID: 21300000, guid: 84a876f81e079bf40beb58c595c98cf5, type: 3}
   <m_dialogueAudioData>k__BackingField: {fileID: 0}
   <m_dialogueTypeData>k__BackingField: 0
