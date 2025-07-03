@@ -760,7 +760,7 @@ MonoBehaviour:
   m_groupedDialogues: 1
   m_startingDialoguesOnly: 0
   m_selectedDialogueGroupIndex: 0
-  m_selectedDialogueIndex: 44
+  m_selectedDialogueIndex: 37
 --- !u!114 &533133506
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -776,8 +776,8 @@ MonoBehaviour:
   m_bachelor: {fileID: 11400000, guid: 7e0db3f5f0480c142bb95e946112c3a2, type: 2}
   m_dialogue: {fileID: 533133505}
   m_rooftopDateDialogue: {fileID: 533133513}
-  m_aquariumDateDialogue: {fileID: 533133513}
-  m_forestDateDialogue: {fileID: 533133512}
+  m_aquariumDateDialogue: {fileID: 533133512}
+  m_forestDateDialogue: {fileID: 533133511}
   m_dialogueCanvas: {fileID: 476807508}
   m_dialogueDisplay: {fileID: 1818962892}
   currentlyDating: 0
@@ -918,7 +918,7 @@ MonoBehaviour:
   m_groupedDialogues: 1
   m_startingDialoguesOnly: 0
   m_selectedDialogueGroupIndex: 0
-  m_selectedDialogueIndex: 21
+  m_selectedDialogueIndex: 19
 --- !u!114 &533133512
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -956,7 +956,7 @@ MonoBehaviour:
   m_groupedDialogues: 1
   m_startingDialoguesOnly: 0
   m_selectedDialogueGroupIndex: 0
-  m_selectedDialogueIndex: 40
+  m_selectedDialogueIndex: 28
 --- !u!1 &549066915
 GameObject:
   m_ObjectHideFlags: 0
@@ -1064,7 +1064,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &646413793
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1937,7 +1937,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1251715768
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3498,6 +3498,10 @@ PrefabInstance:
       propertyPath: _badDateBaristaDialogue
       value: 
       objectReference: {fileID: 1681331443}
+    - target: {fileID: 3952595216175766055, guid: a45930d7ad5ece64d8d27e47bbcbf4a6, type: 3}
+      propertyPath: _loveNeededForSuccefulDate
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3952595216175766055, guid: a45930d7ad5ece64d8d27e47bbcbf4a6, type: 3}
       propertyPath: _baristaDialogues.Array.size
       value: 5

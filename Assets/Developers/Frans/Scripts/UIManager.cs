@@ -99,9 +99,70 @@ public class UIManager : MonoBehaviour
 
     private bool HasPlayedBefore()
     {
-        // Check if the player has any progress (dated any bachelors)
-        return _currentSaveData.DatedBachelors.Count > 0
-            || _currentSaveData.RealDatedBachelors.Count > 0;
+        // Check if save data exists and is not null
+        if (_currentSaveData == null)
+            return false;
+
+        // Check for meaningful progress using the new save system format
+        if (
+            _currentSaveData.BachelorPreferences != null
+            && _currentSaveData.BachelorPreferences.Count > 0
+        )
+        {
+            // Check if player has any meaningful progress with bachelors
+            foreach (var bachelorData in _currentSaveData.BachelorPreferences)
+            {
+                if (bachelorData == null || string.IsNullOrEmpty(bachelorData.bachelorName))
+                    continue;
+
+                // Consider it meaningful progress if:
+                // 1. Player has dated (speed or real) any bachelor
+                // 2. Player has discovered any preferences
+                if (
+                    bachelorData.hasBeenSpeedDated
+                    || bachelorData.hasCompletedRealDate
+                    || (
+                        bachelorData.discoveredLikes != null
+                        && bachelorData.discoveredLikes.Count > 0
+                    )
+                    || (
+                        bachelorData.discoveredDislikes != null
+                        && bachelorData.discoveredDislikes.Count > 0
+                    )
+                )
+                {
+                    return true;
+                }
+            }
+        }
+
+        // Fallback: Check legacy lists for backward compatibility
+        // (These should be empty in new saves but might exist in old saves)
+        if (_currentSaveData.DatedBachelors != null && _currentSaveData.DatedBachelors.Count > 0)
+        {
+            // Check if there's actual data (not just empty strings)
+            bool hasRealData = _currentSaveData.DatedBachelors.Exists(name =>
+                !string.IsNullOrEmpty(name)
+            );
+            if (hasRealData)
+                return true;
+        }
+
+        if (
+            _currentSaveData.RealDatedBachelors != null
+            && _currentSaveData.RealDatedBachelors.Count > 0
+        )
+        {
+            // Check if there's actual data (not just empty strings)
+            bool hasRealData = _currentSaveData.RealDatedBachelors.Exists(name =>
+                !string.IsNullOrEmpty(name)
+            );
+            if (hasRealData)
+                return true;
+        }
+
+        // No meaningful progress found
+        return false;
     }
 
     public void GoToGame()
