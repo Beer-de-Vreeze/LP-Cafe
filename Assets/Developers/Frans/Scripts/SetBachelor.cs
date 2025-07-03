@@ -78,6 +78,10 @@ public class SetBachelor : MonoBehaviour
                 }
             }
         }
+
+        // Ensure preferences are synchronized with save data before starting dialogue
+        SynchronizePreferencesWithSaveData();
+
         m_dialogueDisplay.StartDialogue(
             m_bachelor,
             m_dialogue,
@@ -88,6 +92,157 @@ public class SetBachelor : MonoBehaviour
     }
 
     /// <summary>
+    /// Call this when the dialogue is finished to mark the bachelor as dated and save the progress.
+    /// This is called by DialogueDisplay when a speed date completes successfully.
+    /// </summary>
+    public void CompleteSpeedDateAndSave()
+    {
+        if (m_bachelor != null)
+        {
+            // Mark the bachelor as speed dated (this will save the changes)
+            m_bachelor.MarkAsDated();
+            Debug.Log(
+                $"[SetBachelor] Completed speed dating with {m_bachelor._name} and saved progress"
+            );
+
+            // Force one more synchronization to ensure UI and save data are in sync
+            SynchronizePreferencesWithSaveData();
+        }
+    }
+
+    /// <summary>
+    /// Call this when a real date is completed to mark the bachelor as real dated and save the progress.
+    /// This should be called by DialogueDisplay when a real date session completes successfully.
+    /// </summary>
+    public void CompleteRealDateAndSave(string location)
+    {
+        if (m_bachelor != null && !string.IsNullOrEmpty(location))
+        {
+            // Mark the bachelor as real dated (this will save the changes)
+            m_bachelor.MarkAsRealDated(location);
+            Debug.Log(
+                $"[SetBachelor] Completed real date with {m_bachelor._name} at {location} and saved progress"
+            );
+
+            // Force one more synchronization to ensure UI and save data are in sync
+            SynchronizePreferencesWithSaveData();
+        }
+        else
+        {
+            Debug.LogWarning(
+                "[SetBachelor] Cannot complete real date: bachelor or location missing"
+            );
+        }
+    }
+
+    /// <summary>
+    /// Synchronizes the bachelor's preferences between the NoteBook UI and the save data
+    /// </summary>
+    private void SynchronizePreferencesWithSaveData()
+    {
+        if (m_bachelor == null)
+        {
+            Debug.LogError(
+                "[SetBachelor] Cannot synchronize preferences: No bachelor assigned",
+                this
+            );
+            return;
+        }
+
+        if (string.IsNullOrEmpty(m_bachelor._name))
+        {
+            Debug.LogError(
+                "[SetBachelor] Cannot synchronize preferences: Bachelor has empty name",
+                this
+            );
+            return;
+        }
+
+        // Load bachelor data from save system
+        SaveData saveData = SaveSystem.Deserialize();
+        if (saveData == null)
+        {
+            Debug.Log("[SetBachelor] No save data found, creating new save data");
+            saveData = new SaveData();
+        }
+
+        // Get or create this bachelor's data in the save system
+        BachelorPreferencesData prefData = saveData.GetOrCreateBachelorData(m_bachelor._name);
+        if (prefData == null)
+        {
+            Debug.LogError(
+                $"[SetBachelor] Failed to get/create bachelor data for {m_bachelor._name}"
+            );
+            return;
+        }
+
+        // Find the notebook to ensure the UI stays in sync
+        NoteBook notebook = FindFirstObjectByType<NoteBook>();
+        if (notebook == null)
+        {
+            Debug.LogWarning("[SetBachelor] No NoteBook found in scene");
+            // Continue anyway - we can still sync the bachelor data
+        }
+
+        // Ensure the notebook is connected to this bachelor
+        if (notebook != null)
+        {
+            notebook.EnsureBachelorConnection(m_bachelor);
+        }
+
+        Debug.Log($"[SetBachelor] Synchronizing preferences for {m_bachelor._name}");
+        // Track the dating flags before synchronization
+        bool wasSpeedDated = m_bachelor._HasBeenSpeedDated;
+        bool wasRealDated = m_bachelor._HasCompletedRealDate;
+
+        // Log the state before synchronization
+        Debug.Log(
+            $"[SetBachelor] Before sync - SpeedDated: {wasSpeedDated}, RealDated: {wasRealDated}"
+        );
+
+        // Force a load from save data to local memory
+        m_bachelor.SynchronizeWithSaveData();
+
+        // After synchronization, if there are any discovered preferences that aren't
+        // saved yet, make sure they get saved
+        SaveDiscoveredPreferences();
+
+        // Check if the flags changed during synchronization
+        bool flagsChanged =
+            (wasSpeedDated != m_bachelor._HasBeenSpeedDated)
+            || (wasRealDated != m_bachelor._HasCompletedRealDate);
+
+        // If flags changed during synchronization or they are true but not in save data,
+        // make sure they get saved back
+        if (flagsChanged || m_bachelor._HasBeenSpeedDated || m_bachelor._HasCompletedRealDate)
+        {
+            m_bachelor.SaveCurrentDatingState();
+            Debug.Log($"[SetBachelor] Dating flags resaved after synchronization");
+        }
+
+        // Log the final state after synchronization
+        Debug.Log(
+            $"[SetBachelor] After sync - SpeedDated: {m_bachelor._HasBeenSpeedDated}, RealDated: {m_bachelor._HasCompletedRealDate}"
+        );
+
+        Debug.Log($"[SetBachelor] Preferences synchronized for {m_bachelor._name}");
+    }
+
+    /// <summary>
+    /// Saves any discovered preferences to the save system
+    /// </summary>
+    private void SaveDiscoveredPreferences()
+    {
+        if (m_bachelor == null || string.IsNullOrEmpty(m_bachelor._name))
+        {
+            return;
+        }
+
+        // Use the bachelor's own method to save preferences
+        m_bachelor.SaveDiscoveredPreferences();
+    }
+
+    /// <summary>
     /// Resets the dating state, allowing the bachelor to be interacted with again.
     /// Called by DialogueDisplay when a date session ends.
     /// </summary>
@@ -95,16 +250,20 @@ public class SetBachelor : MonoBehaviour
     {
         currentlyDating = false;
 
-        // Reset the bachelor's discovered preferences
-        if (m_bachelor != null)
-        {
-            m_bachelor.ResetDiscoveries();
-        }
-        // Reset notebook entries while keeping the bachelor reference
+        // DO NOT reset the bachelor's discovered preferences - they should persist
+
+        // Reset notebook entries UI while keeping the bachelor reference
         NoteBook notebook = FindFirstObjectByType<NoteBook>();
         if (notebook != null)
         {
+            // This only resets UI elements, not the actual preference data
             notebook.ResetNotebookEntries();
+        }
+
+        // Ensure the bachelor's preferences are loaded from save data
+        if (m_bachelor != null)
+        {
+            m_bachelor.SynchronizeWithSaveData();
         }
 
         // Re-enable all other bachelors
@@ -477,43 +636,5 @@ public class SetBachelor : MonoBehaviour
 
             Debug.Log($"[SetBachelor] Local flags reset for {m_bachelor._name}", this);
         }
-    }
-
-    /// <summary>
-    /// Simulate completing a real date for testing - accessible from component context menu
-    /// </summary>
-    [ContextMenu("Simulate Real Date Completion")]
-    public void SimulateRealDateCompletion()
-    {
-        if (m_bachelor == null)
-        {
-            Debug.LogError(
-                "[SetBachelor] No bachelor assigned to this SetBachelor component!",
-                this
-            );
-            return;
-        }
-
-        string[] testLocations = { "Rooftop", "Aquarium", "Forest" };
-        string randomLocation = testLocations[UnityEngine.Random.Range(0, testLocations.Length)];
-
-        m_bachelor.MarkAsRealDated(randomLocation);
-
-        // Set a random love level for testing
-        if (m_bachelor._loveMeter != null)
-        {
-            int randomLove = UnityEngine.Random.Range(0, 6);
-            m_bachelor._loveMeter._currentLove = randomLove;
-            Debug.Log($"Set love level to {randomLove} for testing");
-        }
-
-        Debug.Log(
-            $"[SetBachelor] Simulated real date completion at {randomLocation} for {m_bachelor._name}",
-            this
-        );
-
-        // Test the real date message
-        string message = m_bachelor.GetRealDateMessage();
-        Debug.Log($"Real Date Message: {message}");
     }
 }

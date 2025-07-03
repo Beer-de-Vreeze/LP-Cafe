@@ -55,6 +55,9 @@ public class BachelorResetTester : MonoBehaviour
                 testBachelor._loveMeter.IncreaseLove(10);
             }
 
+            // Save the changes to the save file
+            testBachelor.MarkAsDated(); // This properly saves the speed dated flag
+
             Debug.Log(
                 $"Before reset - {testBachelor._name}: SpeedDated={testBachelor._HasBeenSpeedDated}, Love={testBachelor._loveMeter?.GetCurrentLove() ?? -1}"
             );

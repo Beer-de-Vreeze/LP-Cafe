@@ -35,7 +35,7 @@ MonoBehaviour:
     icon: {fileID: 0}
   _dislikes:
   - description: Broke people
-    discovered: 1
+    discovered: 0
     icon: {fileID: 0}
   - description: Junk food
     discovered: 0
@@ -50,7 +50,7 @@ MonoBehaviour:
     discovered: 0
     icon: {fileID: 0}
   _isLikeDiscovered: 0
-  _isDislikeDiscovered: 0
+  _isDislikeDiscovered: 1
   _dialogue: {fileID: 0}
   _loveMeter: {fileID: 11400000, guid: 1185f448d7f788340855341bed53796d, type: 2}
   _nextSceneName: 
