@@ -43,6 +43,15 @@ public class SetBachelor : MonoBehaviour
 
     private void OnMouseDown()
     {
+        // Check if bachelors are currently clickable (to handle barista events)
+        if (m_dialogueDisplay != null && !m_dialogueDisplay.AreBachelorsClickable())
+        {
+            Debug.Log(
+                $"[SetBachelor] Bachelor {m_bachelor?._name ?? "Unknown"} not clickable right now"
+            );
+            return;
+        }
+
         if (!currentlyDating)
         {
             m_dialogueCanvas.enabled = true;
@@ -329,11 +338,17 @@ public class SetBachelor : MonoBehaviour
         // Check if this bachelor has completed a real date
         if (HasCompletedRealDate())
         {
+            // Ensure preferences and love meter data are synchronized before showing the message
+            SynchronizePreferencesWithSaveData();
+
             // Show personalized message and only Come Back Later option
             m_dialogueDisplay.ShowPostRealDateOptionsInCafe(m_bachelor);
         }
         else
         {
+            // Ensure preferences are synchronized for post-speed-date options too
+            SynchronizePreferencesWithSaveData();
+
             // Show standard post-speed-date options (Come Back Later and Ask on a Date)
             m_dialogueDisplay.ShowPostDateOptions(m_bachelor);
         }
@@ -636,5 +651,59 @@ public class SetBachelor : MonoBehaviour
 
             Debug.Log($"[SetBachelor] Local flags reset for {m_bachelor._name}", this);
         }
+    }
+
+    /// <summary>
+    /// Test love-dependent post-real-date messages - accessible from component context menu
+    /// </summary>
+    [ContextMenu("Test Love-Dependent Messages")]
+    public void TestLoveDependentMessages()
+    {
+        if (m_bachelor == null)
+        {
+            Debug.LogError(
+                "[SetBachelor] No bachelor assigned to this SetBachelor component!",
+                this
+            );
+            return;
+        }
+
+        if (m_bachelor._loveMeter == null)
+        {
+            Debug.LogError($"[SetBachelor] No love meter assigned to {m_bachelor._name}!", this);
+            return;
+        }
+
+        Debug.Log($"=== Testing Love-Dependent Messages for {m_bachelor._name} ===", this);
+
+        // Save original state
+        bool originalRealDated = m_bachelor._HasCompletedRealDate;
+        string originalLocation = m_bachelor._LastRealDateLocation;
+        int originalLove = m_bachelor._loveMeter.GetCurrentLove();
+
+        // Set up for testing - mark as real dated
+        m_bachelor._HasCompletedRealDate = true;
+        m_bachelor._LastRealDateLocation = "Rooftop";
+
+        // Test different love levels
+        int[] testLoveLevels = { 0, 1, 2, 3, 4, 5 };
+
+        foreach (int loveLevel in testLoveLevels)
+        {
+            // Set the love level using the CurrentLove property
+            m_bachelor._loveMeter.CurrentLove = loveLevel;
+
+            // Get the message
+            string message = m_bachelor.GetRealDateMessage();
+
+            Debug.Log($"Love Level {loveLevel}: \"{message}\"");
+        }
+
+        // Restore original state
+        m_bachelor._HasCompletedRealDate = originalRealDated;
+        m_bachelor._LastRealDateLocation = originalLocation;
+        m_bachelor._loveMeter.CurrentLove = originalLove;
+
+        Debug.Log($"=== End Love-Dependent Message Test ===");
     }
 }

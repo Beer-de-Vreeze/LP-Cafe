@@ -962,6 +962,15 @@ public class DialogueDisplay : MonoBehaviour
         // Reset the state for waiting to clear before end buttons
         _waitingForClearBeforeEndButtons = false;
 
+        // Initialize love meter if available and update love score BEFORE getting the message
+        if (_bachelor != null && _bachelor._loveMeter != null)
+        {
+            _loveMeter = _bachelor._loveMeter;
+            _loveScore = _loveMeter.GetCurrentLove();
+            EnsureLoveMeterSetup();
+            Debug.Log($"Updated love score for post-real-date message: {_loveScore}");
+        }
+
         // Set up the UI
         if (_bachelor != null && _nameText != null)
         {
@@ -974,7 +983,7 @@ public class DialogueDisplay : MonoBehaviour
             _bachelorImage.enabled = true;
         }
 
-        // Show personalized message for real date completion
+        // Show personalized message for real date completion (now uses updated love score)
         if (_displayText != null)
         {
             string personalizedMessage = _bachelor.GetRealDateMessage();
@@ -986,12 +995,17 @@ public class DialogueDisplay : MonoBehaviour
             }
         }
 
-        // Initialize love meter if available
+        // Initialize love meter if available (already done above, so just ensure consistency)
         if (_bachelor != null && _bachelor._loveMeter != null)
         {
-            _loveMeter = _bachelor._loveMeter;
-            _loveScore = _loveMeter.GetCurrentLove();
-            EnsureLoveMeterSetup();
+            // Love meter already initialized above, just ensure consistency
+            if (_loveMeter != _bachelor._loveMeter)
+            {
+                _loveMeter = _bachelor._loveMeter;
+                _loveScore = _loveMeter.GetCurrentLove();
+                EnsureLoveMeterSetup();
+                Debug.Log($"Re-synchronized love meter for consistency: {_loveScore}");
+            }
         }
 
         // Ensure notebook connection
@@ -1814,6 +1828,13 @@ public class DialogueDisplay : MonoBehaviour
     /// </summary>
     private void ShowEndDialogueButtons()
     {
+        // Update love score from love meter to ensure consistency
+        if (_bachelor != null && _bachelor._loveMeter != null)
+        {
+            _loveScore = _bachelor._loveMeter.GetCurrentLove();
+            Debug.Log($"Updated love score for end dialogue buttons: {_loveScore}");
+        }
+
         // Mark the bachelor as having completed a speed date
         if (_bachelor != null)
         {
@@ -2259,6 +2280,7 @@ public class DialogueDisplay : MonoBehaviour
         }
 
         // End the date session to reset bachelor interaction states
+
         EndDate();
 
         // Load the next scene
@@ -2771,6 +2793,10 @@ public class DialogueDisplay : MonoBehaviour
     /// </summary>
     private IEnumerator ShowBaristaAfterRealDate()
     {
+        // Make bachelors non-clickable during barista event
+        SetBachelorsClickable(false);
+        Debug.Log("Bachelors set to non-clickable during barista event");
+
         // Hide all date backgrounds to return to cafe environment
         TurnOffAllDateBackgrounds();
 
@@ -2794,6 +2820,21 @@ public class DialogueDisplay : MonoBehaviour
                 _dialogueCanvas.enabled = false;
             }
             yield break;
+        }
+
+        // Update love score from love meter to get the most current value
+        if (_bachelor != null && _bachelor._loveMeter != null)
+        {
+            _loveScore = _bachelor._loveMeter.GetCurrentLove();
+            Debug.Log(
+                $"Updated love score from love meter for barista dialogue: {_loveScore}/{_loveNeededForSuccefulDate}"
+            );
+        }
+        else
+        {
+            Debug.LogWarning(
+                "Could not update love score for barista dialogue - bachelor or love meter is null"
+            );
         }
 
         // Determine if the date was successful or failed
@@ -3083,6 +3124,10 @@ public class DialogueDisplay : MonoBehaviour
 
             // Reset all bachelor states after barista dialogue completes (for non-final dialogues)
             ResetAllBachelorStates();
+
+            // Re-enable bachelor clickability with a 0.5 second delay after barista event
+            EnableBachelorsClickableWithDelay(0.5f);
+            Debug.Log("Scheduled re-enabling of bachelor clickability after 0.5 seconds");
         }
     }
     #endregion
@@ -3391,6 +3436,19 @@ public class DialogueDisplay : MonoBehaviour
             _dialogueCanvas.enabled = false;
         }
 
+        // Update love score from love meter to get the most current value
+        if (_bachelor != null && _bachelor._loveMeter != null)
+        {
+            _loveScore = _bachelor._loveMeter.GetCurrentLove();
+            Debug.Log(
+                $"Updated love score from love meter: {_loveScore}/{_loveNeededForSuccefulDate}"
+            );
+        }
+        else
+        {
+            Debug.LogWarning("Could not update love score - bachelor or love meter is null");
+        }
+
         // Determine if the date was successful
         bool isGoodDate = _loveScore >= _loveNeededForSuccefulDate;
 
@@ -3473,5 +3531,35 @@ public class DialogueDisplay : MonoBehaviour
     // =====================================================================================
     // CORE DIALOGUE DISPLAY
     // =====================================================================================
+
+    // Controls whether bachelors are currently clickable
+    private bool _bachelorsClickable = true;
+
+    /// <summary>
+    /// Call this to make bachelors not clickable (e.g., during barista event)
+    /// </summary>
+    public void SetBachelorsClickable(bool clickable)
+    {
+        _bachelorsClickable = clickable;
+    }
+
+    /// <summary>
+    /// Call this after barista event to delay re-enabling bachelor clickability
+    /// </summary>
+    public void EnableBachelorsClickableWithDelay(float delaySeconds = 0.5f)
+    {
+        StartCoroutine(EnableBachelorsClickableCoroutine(delaySeconds));
+    }
+
+    private IEnumerator EnableBachelorsClickableCoroutine(float delaySeconds)
+    {
+        yield return new WaitForSeconds(delaySeconds);
+        _bachelorsClickable = true;
+    }
+
+    /// <summary>
+    /// Returns whether bachelors are currently clickable
+    /// </summary>
+    public bool AreBachelorsClickable() => _bachelorsClickable;
 }
     #endregion

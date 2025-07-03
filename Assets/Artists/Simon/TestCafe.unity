@@ -2083,7 +2083,7 @@ MonoBehaviour:
   m_groupedDialogues: 1
   m_startingDialoguesOnly: 0
   m_selectedDialogueGroupIndex: 0
-  m_selectedDialogueIndex: 38
+  m_selectedDialogueIndex: 34
 --- !u!114 &1260297398
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2102,7 +2102,7 @@ MonoBehaviour:
   m_groupedDialogues: 1
   m_startingDialoguesOnly: 0
   m_selectedDialogueGroupIndex: 0
-  m_selectedDialogueIndex: 35
+  m_selectedDialogueIndex: 31
 --- !u!1 &1294286153
 GameObject:
   m_ObjectHideFlags: 0
