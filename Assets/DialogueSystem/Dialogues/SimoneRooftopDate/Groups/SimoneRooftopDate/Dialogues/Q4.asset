@@ -17,7 +17,7 @@ MonoBehaviour:
     what do you think would happen next?
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: I don't know, probably the endi-
-    <m_nextDialogue>k__BackingField: {fileID: 0}
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 83b1676937525a14b80604618ca29af3, type: 2}
   - <m_dialogueChoiceText>k__BackingField: Oh I do so love to think about such hypotheticals.
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 70ad2611b93ce7d4e8c88cfaf2165028, type: 2}
   - <m_dialogueChoiceText>k__BackingField: Probably some cutscene of a dinner?

@@ -19,8 +19,7 @@ MonoBehaviour:
   - <m_dialogueChoiceText>k__BackingField: Oh I love horror though, sad we can't
       see those weird deep sea creatures on display.
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 2f279787cc709084da741408f12e088e, type: 2}
-  - <m_dialogueChoiceText>k__BackingField: Next Dialogu like the horror more but
-      oke.
+  - <m_dialogueChoiceText>k__BackingField: Like the horror more but oke.
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 7e53230f05a053a4dac96d919f08ba8c, type: 2}
   - <m_dialogueChoiceText>k__BackingField: I can see the beauty in it I guess.
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 29b2de2d864858240b36ad8cf9b34438, type: 2}

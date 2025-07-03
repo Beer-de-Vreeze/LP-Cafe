@@ -18,7 +18,7 @@ MonoBehaviour:
     should start your date!"
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Next Dialogue
-    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 83b1676937525a14b80604618ca29af3, type: 2}
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 910d6fe033e26264b81f23460c5843bc, type: 2}
   <m_bachelorImageData>k__BackingField: {fileID: 21300000, guid: 1bf1240224094ac4c98e6c1f7df08010, type: 3}
   <m_dialogueAudioData>k__BackingField: {fileID: 8300000, guid: 6058094616cfb1f42bb833b942e5aa5d, type: 3}
   <m_dialogueTypeData>k__BackingField: 0

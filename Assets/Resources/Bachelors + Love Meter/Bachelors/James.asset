@@ -28,7 +28,7 @@ MonoBehaviour:
     discovered: 0
     icon: {fileID: 0}
   - description: Detective Stuff
-    discovered: 1
+    discovered: 0
     icon: {fileID: 0}
   _dislikes:
   - description: A Bragger
@@ -41,7 +41,7 @@ MonoBehaviour:
     discovered: 0
     icon: {fileID: 0}
   - description: Rodents
-    discovered: 1
+    discovered: 0
     icon: {fileID: 0}
   _isLikeDiscovered: 0
   _isDislikeDiscovered: 0

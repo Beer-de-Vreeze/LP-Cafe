@@ -16,7 +16,7 @@ MonoBehaviour:
   <m_graphGroupsData>k__BackingField:
   - <m_groupIDData>k__BackingField: 606cb09b-a00f-46dc-9846-b6555f1e73d2
     <m_groupNameData>k__BackingField: SimoneAqariumDate
-    <m_groupPositionData>k__BackingField: {x: 5515.0005, y: -838.00006}
+    <m_groupPositionData>k__BackingField: {x: 5514.9995, y: -838}
   <m_graphNodesData>k__BackingField:
   - <m_nodeIDData>k__BackingField: fd8c9561-6f8c-435d-9eea-3f2fdef8ec66
     <m_nodeNameData>k__BackingField: Q2L2
@@ -162,7 +162,7 @@ MonoBehaviour:
     - <m_choiceTextData>k__BackingField: Oh I love horror though, sad we can't see
         those weird deep sea creatures on display.
       <m_choiceNodeIDData>k__BackingField: de1e6af9-0fa0-45a0-966c-2f57c09b2642
-    - <m_choiceTextData>k__BackingField: Next Dialogu like the horror more but oke.
+    - <m_choiceTextData>k__BackingField: Like the horror more but oke.
       <m_choiceNodeIDData>k__BackingField: e26ca390-7d25-476c-bb0f-c908141ccc4f
     - <m_choiceTextData>k__BackingField: I can see the beauty in it I guess.
       <m_choiceNodeIDData>k__BackingField: 506f52b6-0957-4f21-ba60-12db8a230f36
