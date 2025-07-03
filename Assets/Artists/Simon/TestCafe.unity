@@ -913,12 +913,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_dialogueContainer: {fileID: 11400000, guid: a75ef1809b400f74f92e0e5469a826d0, type: 2}
-  m_dialogueGroup: {fileID: 0}
-  m_dialogue: {fileID: 0}
-  m_groupedDialogues: 0
+  m_dialogueGroup: {fileID: 11400000, guid: c3a485986bf18e647bf1b19eb2a91083, type: 2}
+  m_dialogue: {fileID: 11400000, guid: a04165f35f00bb94aaedc1be30924b7b, type: 2}
+  m_groupedDialogues: 1
   m_startingDialoguesOnly: 0
   m_selectedDialogueGroupIndex: 0
-  m_selectedDialogueIndex: 0
+  m_selectedDialogueIndex: 21
 --- !u!114 &533133512
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -932,12 +932,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_dialogueContainer: {fileID: 11400000, guid: bc4da9d51b5fab6408610b07a1425b49, type: 2}
-  m_dialogueGroup: {fileID: 0}
-  m_dialogue: {fileID: 0}
-  m_groupedDialogues: 0
+  m_dialogueGroup: {fileID: 11400000, guid: b205a0a481cce674a8240c27e4015404, type: 2}
+  m_dialogue: {fileID: 11400000, guid: 6c3414ffdfc5e3b4fa6408a4bdae31b6, type: 2}
+  m_groupedDialogues: 1
   m_startingDialoguesOnly: 0
   m_selectedDialogueGroupIndex: 0
-  m_selectedDialogueIndex: 0
+  m_selectedDialogueIndex: 5
 --- !u!114 &533133513
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -951,12 +951,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_dialogueContainer: {fileID: 11400000, guid: 7bdf5111e2f23c242b080b12a357cd15, type: 2}
-  m_dialogueGroup: {fileID: 0}
-  m_dialogue: {fileID: 0}
-  m_groupedDialogues: 0
+  m_dialogueGroup: {fileID: 11400000, guid: c07a3a4dc3e516b468a26a3de386eb2d, type: 2}
+  m_dialogue: {fileID: 11400000, guid: 86daa40d104316e4c84058501c04a534, type: 2}
+  m_groupedDialogues: 1
   m_startingDialoguesOnly: 0
   m_selectedDialogueGroupIndex: 0
-  m_selectedDialogueIndex: 0
+  m_selectedDialogueIndex: 40
 --- !u!1 &549066915
 GameObject:
   m_ObjectHideFlags: 0
@@ -3201,13 +3201,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de97b5429e9cc0c45aac19c9b876fa50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_dialogueContainer: {fileID: 11400000, guid: 5cd11aeb6ebffd040a0753e704f6b254, type: 2}
-  m_dialogueGroup: {fileID: 11400000, guid: c24d84258643f8147b65b400570c5d07, type: 2}
-  m_dialogue: {fileID: 11400000, guid: 74781e35ef5bc3f49ab86b7e17a8248e, type: 2}
+  m_dialogueContainer: {fileID: 11400000, guid: 2089ee1f8b3873f4e92a743306bfa087, type: 2}
+  m_dialogueGroup: {fileID: 11400000, guid: a197429d8590e8d48b5292276b80af12, type: 2}
+  m_dialogue: {fileID: 11400000, guid: 3c53dd80198c35d43bb3d052b0cc5d5f, type: 2}
   m_groupedDialogues: 1
   m_startingDialoguesOnly: 0
   m_selectedDialogueGroupIndex: 0
-  m_selectedDialogueIndex: 36
+  m_selectedDialogueIndex: 0
 --- !u!114 &1982111755
 MonoBehaviour:
   m_ObjectHideFlags: 0
