@@ -19,7 +19,7 @@ MonoBehaviour:
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 81dc81f300774fa448636c6f01f53bf5, type: 2}
   - <m_dialogueChoiceText>k__BackingField: '*You''re staring at the whale that passes
       you by, the colors are magical and your gaze is fixated.'
-    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 2111aff2ac13f2441ad9087bfe0ee0c2, type: 2}
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 591495fc712ebe346836b08ebbeb4288, type: 2}
   - <m_dialogueChoiceText>k__BackingField: I mean probably? does it matter what animal
       you are?
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 0850fa13132671b48a7fab800f93fa62, type: 2}

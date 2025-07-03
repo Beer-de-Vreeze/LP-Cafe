@@ -144,31 +144,6 @@ MonoBehaviour:
     <m_isLikePreference>k__BackingField: 1
     <m_selectedPreference>k__BackingField: Boba Tea
     <m_enumSetter>k__BackingField: 0
-  - <m_nodeIDData>k__BackingField: ba93fca4-1ed1-41d4-97cc-419df55f5fd4
-    <m_nodeNameData>k__BackingField: Q2D2
-    <m_nodeBachelorImageData>k__BackingField: {fileID: 0}
-    <m_nodeAudioLinesData>k__BackingField: {fileID: 0}
-    <m_nodeTextData>k__BackingField: Dialogue text.
-    <m_nodeChoicesData>k__BackingField:
-    - <m_choiceTextData>k__BackingField: Next Dialogue
-      <m_choiceNodeIDData>k__BackingField: b0c92b23-1b16-496a-b425-4c80e3bc77d6
-    <m_nodeGroupIDData>k__BackingField: 4e6c83d3-c344-4f99-93eb-fd50f953aa65
-    <m_dialogueTypeData>k__BackingField: 2
-    <m_nodePositionData>k__BackingField: {x: 3534, y: 835}
-    <m_nodePropertyToCheckData>k__BackingField: Love
-    <m_nodeComparisonTypeData>k__BackingField: '>='
-    <m_nodeComparisonValueData>k__BackingField: 0
-    <m_nodeOperationTypeData>k__BackingField: '>='
-    <m_nodeValueToSetData>k__BackingField: 
-    <m_nodeVariableNameData>k__BackingField: variableName
-    <m_nodeSetterOperationTypeData>k__BackingField: 3
-    <m_nodeLoveScoreAmountData>k__BackingField: 0
-    <m_nodeBoolValueData>k__BackingField: 0
-    <m_nodeLoveMeterData>k__BackingField: {fileID: 0}
-    <m_bachelorData>k__BackingField: {fileID: 11400000, guid: 7e0db3f5f0480c142bb95e946112c3a2, type: 2}
-    <m_isLikePreference>k__BackingField: 1
-    <m_selectedPreference>k__BackingField: Cats
-    <m_enumSetter>k__BackingField: 0
   - <m_nodeIDData>k__BackingField: aefff934-523f-4cde-aa11-eeeb359a202a
     <m_nodeNameData>k__BackingField: Q2
     <m_nodeBachelorImageData>k__BackingField: {fileID: 21300000, guid: 4d7a66a9cea93b246a1057f95ed0764f, type: 3}
@@ -427,40 +402,6 @@ MonoBehaviour:
     <m_nodeGroupIDData>k__BackingField: 4e6c83d3-c344-4f99-93eb-fd50f953aa65
     <m_dialogueTypeData>k__BackingField: 1
     <m_nodePositionData>k__BackingField: {x: 4973, y: 622}
-    <m_nodePropertyToCheckData>k__BackingField: Love
-    <m_nodeComparisonTypeData>k__BackingField: '>='
-    <m_nodeComparisonValueData>k__BackingField: 0
-    <m_nodeOperationTypeData>k__BackingField: '>='
-    <m_nodeValueToSetData>k__BackingField: 
-    <m_nodeVariableNameData>k__BackingField: 
-    <m_nodeSetterOperationTypeData>k__BackingField: 0
-    <m_nodeLoveScoreAmountData>k__BackingField: 0
-    <m_nodeBoolValueData>k__BackingField: 0
-    <m_nodeLoveMeterData>k__BackingField: {fileID: 0}
-    <m_bachelorData>k__BackingField: {fileID: 0}
-    <m_isLikePreference>k__BackingField: 0
-    <m_selectedPreference>k__BackingField: 
-    <m_enumSetter>k__BackingField: 0
-  - <m_nodeIDData>k__BackingField: 26e7ad19-218a-45e9-a450-9214555db5e2
-    <m_nodeNameData>k__BackingField: Q1
-    <m_nodeBachelorImageData>k__BackingField: {fileID: 21300000, guid: 4d7a66a9cea93b246a1057f95ed0764f, type: 3}
-    <m_nodeAudioLinesData>k__BackingField: {fileID: 8300000, guid: 82d6fcd8dc73eeb45a666e1ca1a848bb, type: 3}
-    <m_nodeTextData>k__BackingField: If you could talk to animals, what's the first
-      thing you would ask?
-    <m_nodeChoicesData>k__BackingField:
-    - <m_choiceTextData>k__BackingField: I don't remember, whats the first thing
-        I asked you again?
-      <m_choiceNodeIDData>k__BackingField: 7d757f25-3338-4df0-8c22-5e5215978f0c
-    - <m_choiceTextData>k__BackingField: Why would I want to talk to animals? They're
-        more fun to hunt.
-      <m_choiceNodeIDData>k__BackingField: 4078edb0-6e4e-4e9b-9534-ab8050f09bfc
-    - <m_choiceTextData>k__BackingField: You're the only one I want to talk to.
-      <m_choiceNodeIDData>k__BackingField: 72b85776-5567-47dd-a0f6-29c1cede474c
-    - <m_choiceTextData>k__BackingField: Dunno, what would you ask?
-      <m_choiceNodeIDData>k__BackingField: 0f9af46e-385e-411f-87bc-b8d9fd7eafcc
-    <m_nodeGroupIDData>k__BackingField: 4e6c83d3-c344-4f99-93eb-fd50f953aa65
-    <m_dialogueTypeData>k__BackingField: 1
-    <m_nodePositionData>k__BackingField: {x: 885, y: 563}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -1042,6 +983,65 @@ MonoBehaviour:
     <m_isLikePreference>k__BackingField: 0
     <m_selectedPreference>k__BackingField: 
     <m_enumSetter>k__BackingField: 0
+  - <m_nodeIDData>k__BackingField: 26e7ad19-218a-45e9-a450-9214555db5e2
+    <m_nodeNameData>k__BackingField: Q1
+    <m_nodeBachelorImageData>k__BackingField: {fileID: 21300000, guid: 4d7a66a9cea93b246a1057f95ed0764f, type: 3}
+    <m_nodeAudioLinesData>k__BackingField: {fileID: 8300000, guid: 82d6fcd8dc73eeb45a666e1ca1a848bb, type: 3}
+    <m_nodeTextData>k__BackingField: If you could talk to animals, what's the first
+      thing you would ask?
+    <m_nodeChoicesData>k__BackingField:
+    - <m_choiceTextData>k__BackingField: I don't remember, whats the first thing
+        I asked you again?
+      <m_choiceNodeIDData>k__BackingField: 7d757f25-3338-4df0-8c22-5e5215978f0c
+    - <m_choiceTextData>k__BackingField: Why would I want to talk to animals? They're
+        more fun to hunt.
+      <m_choiceNodeIDData>k__BackingField: 4078edb0-6e4e-4e9b-9534-ab8050f09bfc
+    - <m_choiceTextData>k__BackingField: You're the only one I want to talk to.
+      <m_choiceNodeIDData>k__BackingField: 72b85776-5567-47dd-a0f6-29c1cede474c
+    - <m_choiceTextData>k__BackingField: Dunno, what would you ask?
+      <m_choiceNodeIDData>k__BackingField: 0f9af46e-385e-411f-87bc-b8d9fd7eafcc
+    <m_nodeGroupIDData>k__BackingField: 4e6c83d3-c344-4f99-93eb-fd50f953aa65
+    <m_dialogueTypeData>k__BackingField: 1
+    <m_nodePositionData>k__BackingField: {x: 885, y: 563}
+    <m_nodePropertyToCheckData>k__BackingField: Love
+    <m_nodeComparisonTypeData>k__BackingField: '>='
+    <m_nodeComparisonValueData>k__BackingField: 0
+    <m_nodeOperationTypeData>k__BackingField: '>='
+    <m_nodeValueToSetData>k__BackingField: 
+    <m_nodeVariableNameData>k__BackingField: 
+    <m_nodeSetterOperationTypeData>k__BackingField: 0
+    <m_nodeLoveScoreAmountData>k__BackingField: 0
+    <m_nodeBoolValueData>k__BackingField: 0
+    <m_nodeLoveMeterData>k__BackingField: {fileID: 0}
+    <m_bachelorData>k__BackingField: {fileID: 0}
+    <m_isLikePreference>k__BackingField: 0
+    <m_selectedPreference>k__BackingField: 
+    <m_enumSetter>k__BackingField: 0
+  - <m_nodeIDData>k__BackingField: ba93fca4-1ed1-41d4-97cc-419df55f5fd4
+    <m_nodeNameData>k__BackingField: Q2D2
+    <m_nodeBachelorImageData>k__BackingField: {fileID: 0}
+    <m_nodeAudioLinesData>k__BackingField: {fileID: 0}
+    <m_nodeTextData>k__BackingField: Dialogue text.
+    <m_nodeChoicesData>k__BackingField:
+    - <m_choiceTextData>k__BackingField: Next Dialogue
+      <m_choiceNodeIDData>k__BackingField: b0c92b23-1b16-496a-b425-4c80e3bc77d6
+    <m_nodeGroupIDData>k__BackingField: 4e6c83d3-c344-4f99-93eb-fd50f953aa65
+    <m_dialogueTypeData>k__BackingField: 2
+    <m_nodePositionData>k__BackingField: {x: 3535, y: 928}
+    <m_nodePropertyToCheckData>k__BackingField: Love
+    <m_nodeComparisonTypeData>k__BackingField: '>='
+    <m_nodeComparisonValueData>k__BackingField: 0
+    <m_nodeOperationTypeData>k__BackingField: '>='
+    <m_nodeValueToSetData>k__BackingField: 
+    <m_nodeVariableNameData>k__BackingField: variableName
+    <m_nodeSetterOperationTypeData>k__BackingField: 3
+    <m_nodeLoveScoreAmountData>k__BackingField: 0
+    <m_nodeBoolValueData>k__BackingField: 0
+    <m_nodeLoveMeterData>k__BackingField: {fileID: 0}
+    <m_bachelorData>k__BackingField: {fileID: 11400000, guid: 7e0db3f5f0480c142bb95e946112c3a2, type: 2}
+    <m_isLikePreference>k__BackingField: 1
+    <m_selectedPreference>k__BackingField: Cats
+    <m_enumSetter>k__BackingField: 0
   <m_graphOldGroupNamesData>k__BackingField:
   - BeerForestDate
   <m_graphOldUngroupedNodeNamesData>k__BackingField: []
@@ -1054,7 +1054,6 @@ MonoBehaviour:
       - Q2L4
       - Q2L3
       - Q2D1
-      - Q2D2
       - Q2
       - Q1A3
       - Q1A4
@@ -1065,7 +1064,6 @@ MonoBehaviour:
       - Q2A3
       - Q2A4
       - Q3
-      - Q1
       - Q1L1
       - Q1L2
       - Q1L4
@@ -1088,3 +1086,5 @@ MonoBehaviour:
       - Q4A2
       - Q4A3
       - Q4A4
+      - Q1
+      - Q2D2

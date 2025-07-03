@@ -21,8 +21,8 @@ MonoBehaviour:
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 8a83c6a9c60f45a47905ab6efe04036f, type: 2}
   - <m_dialogueChoiceText>k__BackingField: Erm- I think... I'd notice.
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: a5e1bd90fcf59574684e8db0c0ec8a1b, type: 2}
-  - <m_dialogueChoiceText>k__BackingField: h I'd most likely be too oblivious and
-      make all the wrong choices.
+  - <m_dialogueChoiceText>k__BackingField: I'd most likely be too oblivious and make
+      all the wrong choices.
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 7deb8e4215c89344abc5a3b4d2d84304, type: 2}
   - <m_dialogueChoiceText>k__BackingField: Any experience?
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 36e376f967e969f47a590ac1c74bad95, type: 2}

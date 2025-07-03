@@ -16,7 +16,7 @@ MonoBehaviour:
   <m_graphGroupsData>k__BackingField:
   - <m_groupIDData>k__BackingField: 606cb09b-a00f-46dc-9846-b6555f1e73d2
     <m_groupNameData>k__BackingField: SimoneAqariumDate
-    <m_groupPositionData>k__BackingField: {x: 5515, y: -838}
+    <m_groupPositionData>k__BackingField: {x: 5515.0005, y: -838.00006}
   <m_graphNodesData>k__BackingField:
   - <m_nodeIDData>k__BackingField: fd8c9561-6f8c-435d-9eea-3f2fdef8ec66
     <m_nodeNameData>k__BackingField: Q2L2
@@ -210,33 +210,6 @@ MonoBehaviour:
     <m_isLikePreference>k__BackingField: 0
     <m_selectedPreference>k__BackingField: 
     <m_enumSetter>k__BackingField: 0
-  - <m_nodeIDData>k__BackingField: 77fe8081-3486-46c9-a698-4dec2f2174fc
-    <m_nodeNameData>k__BackingField: Q4A3
-    <m_nodeBachelorImageData>k__BackingField: {fileID: 21300000, guid: 1bf1240224094ac4c98e6c1f7df08010, type: 3}
-    <m_nodeAudioLinesData>k__BackingField: {fileID: 8300000, guid: 7085f7a6ec06dc6409775d9755e1ce86, type: 3}
-    <m_nodeTextData>k__BackingField: "I had not thought about that-...\nUntil now,
-      there's a lot of people here huh? \r\nI euhmm- \nI am going to departed now.\nI
-      need some calming tea I think."
-    <m_nodeChoicesData>k__BackingField:
-    - <m_choiceTextData>k__BackingField: Next Dialogue
-      <m_choiceNodeIDData>k__BackingField: 
-    <m_nodeGroupIDData>k__BackingField: 606cb09b-a00f-46dc-9846-b6555f1e73d2
-    <m_dialogueTypeData>k__BackingField: 0
-    <m_nodePositionData>k__BackingField: {x: 12481, y: -314}
-    <m_nodePropertyToCheckData>k__BackingField: Love
-    <m_nodeComparisonTypeData>k__BackingField: '>='
-    <m_nodeComparisonValueData>k__BackingField: 0
-    <m_nodeOperationTypeData>k__BackingField: '>='
-    <m_nodeValueToSetData>k__BackingField: 
-    <m_nodeVariableNameData>k__BackingField: 
-    <m_nodeSetterOperationTypeData>k__BackingField: 0
-    <m_nodeLoveScoreAmountData>k__BackingField: 0
-    <m_nodeBoolValueData>k__BackingField: 0
-    <m_nodeLoveMeterData>k__BackingField: {fileID: 0}
-    <m_bachelorData>k__BackingField: {fileID: 0}
-    <m_isLikePreference>k__BackingField: 0
-    <m_selectedPreference>k__BackingField: 
-    <m_enumSetter>k__BackingField: 0
   - <m_nodeIDData>k__BackingField: cde18f46-29a4-49f3-ac14-db06cf2695d0
     <m_nodeNameData>k__BackingField: Q4A4
     <m_nodeBachelorImageData>k__BackingField: {fileID: 21300000, guid: 1bf1240224094ac4c98e6c1f7df08010, type: 3}
@@ -354,7 +327,7 @@ MonoBehaviour:
         as I'm with you.
       <m_choiceNodeIDData>k__BackingField: 0e895166-508d-46f6-9756-8fa7ba8ab22c
     - <m_choiceTextData>k__BackingField: Not too crowded for you though?
-      <m_choiceNodeIDData>k__BackingField: f1abc37b-9d8a-4dbb-909c-c6d2c68b845e
+      <m_choiceNodeIDData>k__BackingField: 77fe8081-3486-46c9-a698-4dec2f2174fc
     - <m_choiceTextData>k__BackingField: I like chaos more, so I'm a little bored.
       <m_choiceNodeIDData>k__BackingField: 9e803658-5f05-43b5-a87a-37d10a37ef63
     <m_nodeGroupIDData>k__BackingField: 606cb09b-a00f-46dc-9846-b6555f1e73d2
@@ -470,31 +443,6 @@ MonoBehaviour:
     <m_nodeVariableNameData>k__BackingField: variableName
     <m_nodeSetterOperationTypeData>k__BackingField: 1
     <m_nodeLoveScoreAmountData>k__BackingField: 0
-    <m_nodeBoolValueData>k__BackingField: 0
-    <m_nodeLoveMeterData>k__BackingField: {fileID: 11400000, guid: 7f80e95effe6e3b48b732ad3facc2721, type: 2}
-    <m_bachelorData>k__BackingField: {fileID: 0}
-    <m_isLikePreference>k__BackingField: 1
-    <m_selectedPreference>k__BackingField: 
-    <m_enumSetter>k__BackingField: 0
-  - <m_nodeIDData>k__BackingField: f1abc37b-9d8a-4dbb-909c-c6d2c68b845e
-    <m_nodeNameData>k__BackingField: Q4L3
-    <m_nodeBachelorImageData>k__BackingField: {fileID: 0}
-    <m_nodeAudioLinesData>k__BackingField: {fileID: 0}
-    <m_nodeTextData>k__BackingField: Dialogue text.
-    <m_nodeChoicesData>k__BackingField:
-    - <m_choiceTextData>k__BackingField: Next Dialogue
-      <m_choiceNodeIDData>k__BackingField: 77fe8081-3486-46c9-a698-4dec2f2174fc
-    <m_nodeGroupIDData>k__BackingField: 606cb09b-a00f-46dc-9846-b6555f1e73d2
-    <m_dialogueTypeData>k__BackingField: 3
-    <m_nodePositionData>k__BackingField: {x: 12053, y: -338}
-    <m_nodePropertyToCheckData>k__BackingField: Love
-    <m_nodeComparisonTypeData>k__BackingField: '>='
-    <m_nodeComparisonValueData>k__BackingField: 0
-    <m_nodeOperationTypeData>k__BackingField: '>='
-    <m_nodeValueToSetData>k__BackingField: 
-    <m_nodeVariableNameData>k__BackingField: variableName
-    <m_nodeSetterOperationTypeData>k__BackingField: 1
-    <m_nodeLoveScoreAmountData>k__BackingField: -1
     <m_nodeBoolValueData>k__BackingField: 0
     <m_nodeLoveMeterData>k__BackingField: {fileID: 11400000, guid: 7f80e95effe6e3b48b732ad3facc2721, type: 2}
     <m_bachelorData>k__BackingField: {fileID: 0}
@@ -1033,6 +981,58 @@ MonoBehaviour:
     <m_isLikePreference>k__BackingField: 0
     <m_selectedPreference>k__BackingField: 
     <m_enumSetter>k__BackingField: 0
+  - <m_nodeIDData>k__BackingField: 77fe8081-3486-46c9-a698-4dec2f2174fc
+    <m_nodeNameData>k__BackingField: Q4A3
+    <m_nodeBachelorImageData>k__BackingField: {fileID: 21300000, guid: 1bf1240224094ac4c98e6c1f7df08010, type: 3}
+    <m_nodeAudioLinesData>k__BackingField: {fileID: 8300000, guid: 7085f7a6ec06dc6409775d9755e1ce86, type: 3}
+    <m_nodeTextData>k__BackingField: "I had not thought about that-...\nUntil now,
+      there's a lot of people here huh? \r\nI euhmm- \nI am going to departed now.\nI
+      need some calming tea I think."
+    <m_nodeChoicesData>k__BackingField:
+    - <m_choiceTextData>k__BackingField: Next Dialogue
+      <m_choiceNodeIDData>k__BackingField: 74e2ab1c-65da-4c5e-b83d-716c4db1cea4
+    <m_nodeGroupIDData>k__BackingField: 606cb09b-a00f-46dc-9846-b6555f1e73d2
+    <m_dialogueTypeData>k__BackingField: 0
+    <m_nodePositionData>k__BackingField: {x: 12059, y: -361}
+    <m_nodePropertyToCheckData>k__BackingField: Love
+    <m_nodeComparisonTypeData>k__BackingField: '>='
+    <m_nodeComparisonValueData>k__BackingField: 0
+    <m_nodeOperationTypeData>k__BackingField: '>='
+    <m_nodeValueToSetData>k__BackingField: 
+    <m_nodeVariableNameData>k__BackingField: 
+    <m_nodeSetterOperationTypeData>k__BackingField: 0
+    <m_nodeLoveScoreAmountData>k__BackingField: 0
+    <m_nodeBoolValueData>k__BackingField: 0
+    <m_nodeLoveMeterData>k__BackingField: {fileID: 0}
+    <m_bachelorData>k__BackingField: {fileID: 0}
+    <m_isLikePreference>k__BackingField: 0
+    <m_selectedPreference>k__BackingField: 
+    <m_enumSetter>k__BackingField: 0
+  - <m_nodeIDData>k__BackingField: 74e2ab1c-65da-4c5e-b83d-716c4db1cea4
+    <m_nodeNameData>k__BackingField: InstantEnd
+    <m_nodeBachelorImageData>k__BackingField: {fileID: 0}
+    <m_nodeAudioLinesData>k__BackingField: {fileID: 0}
+    <m_nodeTextData>k__BackingField: Dialogue text.
+    <m_nodeChoicesData>k__BackingField:
+    - <m_choiceTextData>k__BackingField: Next Dialogue
+      <m_choiceNodeIDData>k__BackingField: 
+    <m_nodeGroupIDData>k__BackingField: 606cb09b-a00f-46dc-9846-b6555f1e73d2
+    <m_dialogueTypeData>k__BackingField: 3
+    <m_nodePositionData>k__BackingField: {x: 12390, y: -361}
+    <m_nodePropertyToCheckData>k__BackingField: Love
+    <m_nodeComparisonTypeData>k__BackingField: '>='
+    <m_nodeComparisonValueData>k__BackingField: 0
+    <m_nodeOperationTypeData>k__BackingField: '>='
+    <m_nodeValueToSetData>k__BackingField: 
+    <m_nodeVariableNameData>k__BackingField: variableName
+    <m_nodeSetterOperationTypeData>k__BackingField: 1
+    <m_nodeLoveScoreAmountData>k__BackingField: -5
+    <m_nodeBoolValueData>k__BackingField: 0
+    <m_nodeLoveMeterData>k__BackingField: {fileID: 11400000, guid: 60b63660c8262df40b22074d24b3938e, type: 2}
+    <m_bachelorData>k__BackingField: {fileID: 0}
+    <m_isLikePreference>k__BackingField: 1
+    <m_selectedPreference>k__BackingField: 
+    <m_enumSetter>k__BackingField: 0
   <m_graphOldGroupNamesData>k__BackingField:
   - SimoneAqariumDate
   <m_graphOldUngroupedNodeNamesData>k__BackingField: []
@@ -1047,7 +1047,6 @@ MonoBehaviour:
       - Q2A1
       - Q3
       - Q4A2
-      - Q4A3
       - Q4A4
       - Q4A1
       - Q4L1
@@ -1057,7 +1056,6 @@ MonoBehaviour:
       - Q4P1
       - Q2A4
       - Q2L1
-      - Q4L3
       - Q1L2
       - Q1L4
       - Q1A2
@@ -1078,3 +1076,5 @@ MonoBehaviour:
       - intro
       - Q2
       - Q1
+      - Q4A3
+      - InstantEnd

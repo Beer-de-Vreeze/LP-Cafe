@@ -24,7 +24,7 @@ MonoBehaviour:
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 885e2fd06a8db59498bca401de9f034b, type: 2}
   - <m_dialogueChoiceText>k__BackingField: Wanna see if you can fly? I can help you
       over?
-    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: b20bcded1d31def499dad84ab7a7c134, type: 2}
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 053f1b4498ca44b4a84774e5261927c5, type: 2}
   <m_bachelorImageData>k__BackingField: {fileID: 21300000, guid: 4d7a66a9cea93b246a1057f95ed0764f, type: 3}
   <m_dialogueAudioData>k__BackingField: {fileID: 0}
   <m_dialogueTypeData>k__BackingField: 1

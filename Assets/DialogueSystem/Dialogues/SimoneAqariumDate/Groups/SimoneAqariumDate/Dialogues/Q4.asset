@@ -22,7 +22,7 @@ MonoBehaviour:
       long as I'm with you.
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: fcad9b7c0b4da6040b635ab55e660793, type: 2}
   - <m_dialogueChoiceText>k__BackingField: Not too crowded for you though?
-    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: f1cb3f2787d545c41872dc979332b321, type: 2}
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 92f63f6031a0f944a8d9ae8568acb9ff, type: 2}
   - <m_dialogueChoiceText>k__BackingField: I like chaos more, so I'm a little bored.
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 1c71bf0f6caf35945917811f1a19f0b6, type: 2}
   <m_bachelorImageData>k__BackingField: {fileID: 21300000, guid: 1b752948b3bd324418758c36f01fb7d3, type: 3}

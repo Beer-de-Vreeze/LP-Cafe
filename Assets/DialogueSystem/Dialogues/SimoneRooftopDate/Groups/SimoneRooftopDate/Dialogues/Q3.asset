@@ -26,7 +26,7 @@ MonoBehaviour:
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 4574fad58b291ff4db92add9f763f6c7, type: 2}
   - <m_dialogueChoiceText>k__BackingField: If there was a reset button I wouldn't
       be here and star anew with someone else.
-    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 2dbc10b944d60354db7f7baa7eb21a61, type: 2}
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 9f5d7d42ed6460b499d9264b88f909e7, type: 2}
   <m_bachelorImageData>k__BackingField: {fileID: 21300000, guid: 1b752948b3bd324418758c36f01fb7d3, type: 3}
   <m_dialogueAudioData>k__BackingField: {fileID: 8300000, guid: 6dac0ce13fd4bbd4fbf32ce823fd3601, type: 3}
   <m_dialogueTypeData>k__BackingField: 1

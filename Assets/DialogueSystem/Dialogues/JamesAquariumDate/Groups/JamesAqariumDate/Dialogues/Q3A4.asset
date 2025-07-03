@@ -16,7 +16,7 @@ MonoBehaviour:
   <m_dialogueTextData>k__BackingField: This date also could have been better!
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Next Dialogue
-    <m_nextDialogue>k__BackingField: {fileID: 0}
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 3f39930e211a5aa4dbb7f43127cce439, type: 2}
   <m_bachelorImageData>k__BackingField: {fileID: 21300000, guid: f4403704d59b42e4b91c8f234ee0ff46, type: 3}
   <m_dialogueAudioData>k__BackingField: {fileID: 8300000, guid: 081846917bf9d8947acae5673a2f3bfe, type: 3}
   <m_dialogueTypeData>k__BackingField: 0

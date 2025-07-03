@@ -14,8 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <m_dialogueNameData>k__BackingField: Q3P1
   <m_dialogueTextData>k__BackingField: "I'm going to order a tea, they serve the
-    most delicious butterfly pea tea here. \r\nWould you like some, love?\r\nI love
-    little cafe's like this."
+    most delicious butterfly pea tea here. \r\nWould you like some, love?\r"
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Next Dialogue
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 716f83600f39e154d9d1bec2b6adead8, type: 2}

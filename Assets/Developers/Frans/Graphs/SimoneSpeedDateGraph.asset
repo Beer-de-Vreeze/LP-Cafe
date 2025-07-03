@@ -16,7 +16,7 @@ MonoBehaviour:
   <m_graphGroupsData>k__BackingField:
   - <m_groupIDData>k__BackingField: d24f43ae-e314-46ba-a377-6e352ad983dd
     <m_groupNameData>k__BackingField: Simone
-    <m_groupPositionData>k__BackingField: {x: 2057.9998, y: 7.999962}
+    <m_groupPositionData>k__BackingField: {x: 2058, y: 8}
   <m_graphNodesData>k__BackingField:
   - <m_nodeIDData>k__BackingField: 634fbfe5-f396-45ea-88c5-0bf4ced01742
     <m_nodeNameData>k__BackingField: Q2L2
@@ -547,8 +547,7 @@ MonoBehaviour:
     <m_nodeNameData>k__BackingField: Q1
     <m_nodeBachelorImageData>k__BackingField: {fileID: 21300000, guid: 1b752948b3bd324418758c36f01fb7d3, type: 3}
     <m_nodeAudioLinesData>k__BackingField: {fileID: 8300000, guid: 35faeafc712fb8d468e028ea4ab96f69, type: 3}
-    <m_nodeTextData>k__BackingField: Why don't you tell me a little bit about yourself,
-      Lovely?
+    <m_nodeTextData>k__BackingField: Why don't you tell me a little bit about yourself?
     <m_nodeChoicesData>k__BackingField:
     - <m_choiceTextData>k__BackingField: I like to drink my coffee with one sugar
         and lots of milk and I often like some flavour in it.
@@ -786,8 +785,7 @@ MonoBehaviour:
     <m_nodeBachelorImageData>k__BackingField: {fileID: 21300000, guid: 1b752948b3bd324418758c36f01fb7d3, type: 3}
     <m_nodeAudioLinesData>k__BackingField: {fileID: 8300000, guid: 135369e0bcce84c488d77405541c447f, type: 3}
     <m_nodeTextData>k__BackingField: "I'm going to order a tea, they serve the most
-      delicious butterfly pea tea here. \r\nWould you like some, love?\r\nI love
-      little cafe's like this."
+      delicious butterfly pea tea here. \r\nWould you like some, love?\r"
     <m_nodeChoicesData>k__BackingField:
     - <m_choiceTextData>k__BackingField: Next Dialogue
       <m_choiceNodeIDData>k__BackingField: d45923dc-c4fc-4f5b-8dd9-ef282f90e507

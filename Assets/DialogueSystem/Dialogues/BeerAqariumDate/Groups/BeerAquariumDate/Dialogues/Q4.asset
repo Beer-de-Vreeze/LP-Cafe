@@ -17,7 +17,7 @@ MonoBehaviour:
     beginning??
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: I'm hoping the ending.
-    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 80550a44973fd7c4fa6e41119cec6f8b, type: 2}
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: b1163581ae362f94fae86587879e4917, type: 2}
   - <m_dialogueChoiceText>k__BackingField: You're my beginning.
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 12e51d15bc5b95a4686a8b53990b5171, type: 2}
   - <m_dialogueChoiceText>k__BackingField: We'd be in the beach episode, ya know?

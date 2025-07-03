@@ -17,7 +17,7 @@ MonoBehaviour:
     and escort me out of the forest please?"
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Next Dialogue
-    <m_nextDialogue>k__BackingField: {fileID: 0}
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: efbc878097765a146a2981e574160ae8, type: 2}
   <m_bachelorImageData>k__BackingField: {fileID: 21300000, guid: 1bf1240224094ac4c98e6c1f7df08010, type: 3}
   <m_dialogueAudioData>k__BackingField: {fileID: 8300000, guid: 4e3a7b60c5e533f4e93e2e3d11b8472c, type: 3}
   <m_dialogueTypeData>k__BackingField: 0

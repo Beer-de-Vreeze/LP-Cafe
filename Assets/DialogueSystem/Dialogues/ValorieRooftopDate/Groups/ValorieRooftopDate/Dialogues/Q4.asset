@@ -21,7 +21,7 @@ MonoBehaviour:
   - <m_dialogueChoiceText>k__BackingField: Sorry? I was distracted by the neon lights.
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: ffd34e3a0e8698e40b4780b9903b51bf, type: 2}
   - <m_dialogueChoiceText>k__BackingField: Are you projecting?
-    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 56e19287ba4b6004ebd7f903e9cd4dbc, type: 2}
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 8e38374d7f61d3843a8751adf94a18c1, type: 2}
   - <m_dialogueChoiceText>k__BackingField: Maybe, let's see where this dinner takes
       us, how about another drink?
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 691e522a2eca9bc4fa5ae7f93ceb8a7b, type: 2}
