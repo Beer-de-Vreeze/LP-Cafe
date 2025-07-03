@@ -35,7 +35,7 @@ MonoBehaviour:
     icon: {fileID: 0}
   _dislikes:
   - description: Broke people
-    discovered: 1
+    discovered: 0
     icon: {fileID: 0}
   - description: Junk food
     discovered: 0

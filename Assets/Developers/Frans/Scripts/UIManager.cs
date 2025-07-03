@@ -22,13 +22,27 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private Button quitButton;
 
+    [SerializeField]
+    private Button creditsButton;
+
+    [SerializeField]
+    private Button backButton;
+
+    [Header("Credits Screen")]
+    [SerializeField]
+    private GameObject creditsScreen;
+
+    [Header("Main Menu Background")]
+    [SerializeField]
+    private GameObject mainMenuBackgroundImage;
+
     private void Start()
     {
+        // Initialize credits UI elements
+        InitializeCreditsUI();
+
         // Check save file and update UI on start
         UpdateUIBasedOnSaveFile();
-
-        // In builds, check if we need to reset bachelor data
-        CheckForRuntimeReset();
 
         // Hide quit button on WebGL builds
         HideQuitButtonOnWebGL();
@@ -63,6 +77,24 @@ public class UIManager : MonoBehaviour
 
             Debug.Log("No save file found. Showing go to game button.");
         }
+
+        // Always show credits button in main menu
+        if (creditsButton != null)
+            creditsButton.gameObject.SetActive(true);
+
+        // Always show quit button in main menu (unless WebGL)
+#if !UNITY_WEBGL
+        if (quitButton != null)
+            quitButton.gameObject.SetActive(true);
+#endif
+
+        // Always hide back button in main menu (only shown in credits)
+        if (backButton != null)
+            backButton.gameObject.SetActive(false);
+
+        // Ensure credits screen is hidden in main menu
+        if (creditsScreen != null)
+            creditsScreen.SetActive(false);
     }
 
     private bool HasPlayedBefore()
@@ -241,88 +273,60 @@ public class UIManager : MonoBehaviour
     /// </summary>
     private void VerifyBachelorReset()
     {
+        Debug.Log("[UIManager] Starting bachelor reset verification");
+
         NewBachelorSO[] allBachelors = Resources.FindObjectsOfTypeAll<NewBachelorSO>();
         bool allResetCorrectly = true;
+        int bachelorCount = 0;
 
 #if !UNITY_EDITOR
         // In builds, also check if reset flag is set properly
         SaveData saveData = SaveSystem.Deserialize();
         if (saveData != null && !saveData.ShouldResetBachelors)
         {
-            Debug.Log("Build mode: Reset flag is properly cleared in save data");
+            Debug.Log("[UIManager] ✓ Build mode: Reset flag is properly cleared in save data");
         }
         else if (saveData != null && saveData.ShouldResetBachelors)
         {
             Debug.LogWarning(
-                "Build mode: Reset flag is still set - runtime reset may not have been applied yet"
+                "[UIManager] ⚠ Build mode: Reset flag is still set - runtime reset may not have been applied yet"
             );
         }
 #endif
+
         foreach (NewBachelorSO bachelor in allBachelors)
         {
             if (bachelor != null)
             {
-                // Check if bachelor is properly reset
-                if (bachelor._HasBeenSpeedDated)
+                bachelorCount++;
+                Debug.Log($"[UIManager] Verifying reset for bachelor: {bachelor._name}");
+
+                // Use the bachelor's own verification method for comprehensive checking
+                bool bachelorResetCorrectly = bachelor.VerifyCompleteReset();
+
+                if (!bachelorResetCorrectly)
                 {
-                    Debug.LogError($"✗ Bachelor {bachelor._name} still marked as speed dated!");
                     allResetCorrectly = false;
-                }
-
-                // Check if preferences are reset
-                bool hasDiscoveredLikes = false;
-                bool hasDiscoveredDislikes = false;
-
-                if (bachelor._likes != null)
-                {
-                    foreach (var like in bachelor._likes)
-                    {
-                        if (like.discovered)
-                        {
-                            hasDiscoveredLikes = true;
-                            break;
-                        }
-                    }
-                }
-
-                if (bachelor._dislikes != null)
-                {
-                    foreach (var dislike in bachelor._dislikes)
-                    {
-                        if (dislike.discovered)
-                        {
-                            hasDiscoveredDislikes = true;
-                            break;
-                        }
-                    }
-                }
-
-                if (hasDiscoveredLikes || hasDiscoveredDislikes)
-                {
                     Debug.LogError(
-                        $"✗ Bachelor {bachelor._name} still has discovered preferences!"
+                        $"[UIManager] ❌ Bachelor {bachelor._name} failed reset verification!"
                     );
-                    allResetCorrectly = false;
                 }
-
-                // Check love meter
-                if (bachelor._loveMeter != null && bachelor._loveMeter.GetCurrentLove() != 3)
+                else
                 {
-                    Debug.LogError(
-                        $"✗ Bachelor {bachelor._name} love meter not reset to 3! Current: {bachelor._loveMeter.GetCurrentLove()}"
-                    );
-                    allResetCorrectly = false;
+                    Debug.Log($"[UIManager] ✅ Bachelor {bachelor._name} passed reset verification");
                 }
             }
         }
 
+        Debug.Log($"[UIManager] Verified reset for {bachelorCount} bachelors");
+
         if (allResetCorrectly)
         {
-            Debug.Log("✓ All bachelors verified as properly reset!");
+            Debug.Log("[UIManager] ✅ ALL BACHELORS VERIFIED AS PROPERLY RESET!");
         }
         else
         {
-            Debug.LogError("✗ Some bachelors were not properly reset!");
+            Debug.LogError("[UIManager] ❌ SOME BACHELORS WERE NOT PROPERLY RESET!");
         }
     }
 
@@ -417,161 +421,133 @@ public class UIManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Temporarily modify bachelor data to test reset functionality
+    /// Shows the credits screen and hides all main menu buttons
     /// </summary>
-    [ContextMenu("Modify Bachelors for Testing")]
-    public void ModifyBachelorsForTesting()
+    public void ShowCredits()
     {
-        Debug.Log("=== MODIFYING BACHELORS FOR TESTING ===");
+        Debug.Log("Showing credits screen");
 
-#if UNITY_EDITOR
-        string[] bachelorGuids = UnityEditor.AssetDatabase.FindAssets("t:NewBachelorSO");
+        // Hide all main menu buttons
+        HideAllMainMenuButtons();
 
-        foreach (string guid in bachelorGuids)
+        // Hide main menu background image
+        if (mainMenuBackgroundImage != null)
         {
-            string path = UnityEditor.AssetDatabase.GUIDToAssetPath(guid);
-            NewBachelorSO bachelor = UnityEditor.AssetDatabase.LoadAssetAtPath<NewBachelorSO>(path);
-
-            if (bachelor != null)
-            {
-                Debug.Log($"Modifying {bachelor._name} for testing");
-
-                // Set some test data
-                bachelor._HasBeenSpeedDated = true;
-                bachelor._isLikeDiscovered = true;
-                bachelor._isDislikeDiscovered = true;
-
-                // Discover first preference if available
-                if (bachelor._likes != null && bachelor._likes.Length > 0)
-                {
-                    bachelor._likes[0].discovered = true;
-                }
-
-                if (bachelor._dislikes != null && bachelor._dislikes.Length > 0)
-                {
-                    bachelor._dislikes[0].discovered = true;
-                }
-
-                // Increase love meter
-                if (bachelor._loveMeter != null)
-                {
-                    bachelor._loveMeter.IncreaseLove(2); // Should go from 3 to 5
-                }
-
-                UnityEditor.EditorUtility.SetDirty(bachelor);
-                if (bachelor._loveMeter != null)
-                {
-                    UnityEditor.EditorUtility.SetDirty(bachelor._loveMeter);
-                }
-            }
+            mainMenuBackgroundImage.SetActive(false);
+            Debug.Log("Main menu background image hidden");
+        }
+        else
+        {
+            Debug.LogWarning("Main menu background image is not assigned!");
         }
 
-        UnityEditor.AssetDatabase.SaveAssets();
-        Debug.Log("=== BACHELOR MODIFICATION COMPLETED ===");
-#endif
+        // Show credits screen
+        if (creditsScreen != null)
+        {
+            creditsScreen.SetActive(true);
+        }
+        else
+        {
+            Debug.LogError("Credits screen is not assigned!");
+        }
+
+        // Show back button
+        if (backButton != null)
+        {
+            backButton.gameObject.SetActive(true);
+        }
+        else
+        {
+            Debug.LogError("Back button is not assigned!");
+        }
     }
 
     /// <summary>
-    /// Check if any bachelor has been modified from default state
+    /// Hides the credits screen and returns to the main menu
     /// </summary>
-    [ContextMenu("Check Bachelor States")]
-    public void CheckBachelorStates()
+    public void BackToMainMenu()
     {
-        Debug.Log("=== CHECKING BACHELOR STATES ===");
+        Debug.Log("Returning to main menu from credits");
 
-#if UNITY_EDITOR
-        string[] bachelorGuids = UnityEditor.AssetDatabase.FindAssets("t:NewBachelorSO");
-        Debug.Log($"Found {bachelorGuids.Length} bachelor assets to check");
-
-        foreach (string guid in bachelorGuids)
+        // Hide credits screen
+        if (creditsScreen != null)
         {
-            string path = UnityEditor.AssetDatabase.GUIDToAssetPath(guid);
-            NewBachelorSO bachelor = UnityEditor.AssetDatabase.LoadAssetAtPath<NewBachelorSO>(path);
-
-            if (bachelor != null)
-            {
-                Debug.Log($"Bachelor: {bachelor._name}");
-                Debug.Log($"  - Speed Dated: {bachelor._HasBeenSpeedDated}");
-                Debug.Log($"  - Like Discovered: {bachelor._isLikeDiscovered}");
-                Debug.Log($"  - Dislike Discovered: {bachelor._isDislikeDiscovered}");
-
-                if (bachelor._loveMeter != null)
-                {
-                    Debug.Log($"  - Love Value: {bachelor._loveMeter.GetCurrentLove()}");
-                }
-
-                // Check individual preferences
-                if (bachelor._likes != null)
-                {
-                    foreach (var like in bachelor._likes)
-                    {
-                        if (like.discovered)
-                        {
-                            Debug.Log($"  - DISCOVERED LIKE: {like.description}");
-                        }
-                    }
-                }
-
-                if (bachelor._dislikes != null)
-                {
-                    foreach (var dislike in bachelor._dislikes)
-                    {
-                        if (dislike.discovered)
-                        {
-                            Debug.Log($"  - DISCOVERED DISLIKE: {dislike.description}");
-                        }
-                    }
-                }
-            }
+            creditsScreen.SetActive(false);
         }
-#else
-        NewBachelorSO[] allBachelors = Resources.FindObjectsOfTypeAll<NewBachelorSO>();
-        Debug.Log($"Found {allBachelors.Length} bachelor instances to check");
 
-        foreach (NewBachelorSO bachelor in allBachelors)
+        // Hide back button
+        if (backButton != null)
         {
-            if (bachelor != null)
-            {
-                Debug.Log($"Bachelor: {bachelor._name}");
-                if (bachelor._loveMeter != null)
-                {
-                    Debug.Log($"  - Love Value: {bachelor._loveMeter.GetCurrentLove()}");
-                }
-            }
+            backButton.gameObject.SetActive(false);
         }
-#endif
 
-        Debug.Log("=== BACHELOR STATE CHECK COMPLETED ===");
+        // Show main menu background image
+        if (mainMenuBackgroundImage != null)
+        {
+            mainMenuBackgroundImage.SetActive(true);
+            Debug.Log("Main menu background image shown");
+        }
+        else
+        {
+            Debug.LogWarning("Main menu background image is not assigned!");
+        }
+
+        // Show appropriate main menu buttons based on save data
+        UpdateUIBasedOnSaveFile();
     }
 
     /// <summary>
-    /// Checks if bachelor data should be reset based on save data flag
-    /// Used in builds where we can't modify ScriptableObject assets
+    /// Hides all main menu buttons
     /// </summary>
-    private void CheckForRuntimeReset()
+    private void HideAllMainMenuButtons()
     {
-#if !UNITY_EDITOR
-        SaveData saveData = SaveSystem.Deserialize();
-        if (saveData != null && saveData.ShouldResetBachelors)
+        if (goToGameButton != null)
+            goToGameButton.gameObject.SetActive(false);
+        if (continueButton != null)
+            continueButton.gameObject.SetActive(false);
+        if (newGameButton != null)
+            newGameButton.gameObject.SetActive(false);
+        if (quitButton != null)
+            quitButton.gameObject.SetActive(false);
+        if (creditsButton != null)
+            creditsButton.gameObject.SetActive(false);
+    }
+
+    /// <summary>
+    /// Initializes credits UI elements on start
+    /// </summary>
+    private void InitializeCreditsUI()
+    {
+        // Ensure credits screen starts hidden
+        if (creditsScreen != null)
+            creditsScreen.SetActive(false);
+
+        // Ensure back button starts hidden
+        if (backButton != null)
+            backButton.gameObject.SetActive(false);
+
+        // Ensure main menu background starts visible
+        if (mainMenuBackgroundImage != null)
+            mainMenuBackgroundImage.SetActive(true);
+    }
+
+    /// <summary>
+    /// Check if we're currently showing the credits screen
+    /// </summary>
+    public bool IsShowingCredits()
+    {
+        return creditsScreen != null && creditsScreen.activeInHierarchy;
+    }
+
+    /// <summary>
+    /// Handle keyboard input for credits navigation
+    /// </summary>
+    private void Update()
+    {
+        // ESC key to go back from credits to main menu
+        if (Input.GetKeyDown(KeyCode.Escape) && IsShowingCredits())
         {
-            Debug.Log("Build mode: Applying runtime bachelor reset based on save data flag");
-
-            // Find all bachelors and reset their runtime state
-            NewBachelorSO[] allBachelors = Resources.FindObjectsOfTypeAll<NewBachelorSO>();
-            foreach (NewBachelorSO bachelor in allBachelors)
-            {
-                if (bachelor != null)
-                {
-                    bachelor.ResetRuntimeState();
-                }
-            }
-
-            // Clear the reset flag since we've applied it
-            saveData.ShouldResetBachelors = false;
-            SaveSystem.SerializeData(saveData);
-
-            Debug.Log($"Applied runtime reset to {allBachelors.Length} bachelors");
+            BackToMainMenu();
         }
-#endif
     }
 }

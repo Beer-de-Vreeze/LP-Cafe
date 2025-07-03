@@ -27,7 +27,7 @@ MonoBehaviour:
   - <m_dialogueChoiceText>k__BackingField: I think imma go for a curry, wanna share?
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 3f6c15e05e9f0094385e91a2df0a0b6c, type: 2}
   <m_bachelorImageData>k__BackingField: {fileID: 21300000, guid: dedee01b113aef245a775f2239a733c6, type: 3}
-  <m_dialogueAudioData>k__BackingField: {fileID: 0}
+  <m_dialogueAudioData>k__BackingField: {fileID: 8300000, guid: 4f505ddbd3266fa4c994d475efa26aed, type: 3}
   <m_dialogueTypeData>k__BackingField: 1
   <m_isStartingDialogueData>k__BackingField: 1
   <m_propertyToCheckData>k__BackingField: 

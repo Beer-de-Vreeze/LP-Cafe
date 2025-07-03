@@ -17,9 +17,9 @@ MonoBehaviour:
     not to get the poisonous plants!!"
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Next Dialogue
-    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 9e6150ea90c013c439f8fa7d8bd15b59, type: 2}
+    <m_nextDialogue>k__BackingField: {fileID: 0}
   <m_bachelorImageData>k__BackingField: {fileID: 21300000, guid: 1b752948b3bd324418758c36f01fb7d3, type: 3}
-  <m_dialogueAudioData>k__BackingField: {fileID: 0}
+  <m_dialogueAudioData>k__BackingField: {fileID: 8300000, guid: fb7787d129d30f143b6ec3b1ba05d635, type: 3}
   <m_dialogueTypeData>k__BackingField: 0
   <m_isStartingDialogueData>k__BackingField: 1
   <m_propertyToCheckData>k__BackingField: 

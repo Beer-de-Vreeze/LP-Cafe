@@ -16,12 +16,12 @@ MonoBehaviour:
   <m_graphGroupsData>k__BackingField:
   - <m_groupIDData>k__BackingField: ebd0930c-9287-40b4-87e3-a50db2691e0d
     <m_groupNameData>k__BackingField: BaristaEnding2
-    <m_groupPositionData>k__BackingField: {x: 470.00003, y: 372}
+    <m_groupPositionData>k__BackingField: {x: 470, y: 372}
   <m_graphNodesData>k__BackingField:
   - <m_nodeIDData>k__BackingField: 3550a15a-3da3-4efb-952a-a8ecccbe2912
     <m_nodeNameData>k__BackingField: 1
     <m_nodeBachelorImageData>k__BackingField: {fileID: 21300000, guid: 6ffe8caacb35ebc49a3fe4106b8afb48, type: 3}
-    <m_nodeAudioLinesData>k__BackingField: {fileID: 0}
+    <m_nodeAudioLinesData>k__BackingField: {fileID: 8300000, guid: b1c69767d8a27c34ab6532294df5a0af, type: 3}
     <m_nodeTextData>k__BackingField: "Wow not one but two dates? \r\nIs that notebook
       of yours magical or something? \r\nYou're doing really well for yourself.\r\nYou
       want the same drink as last time?"

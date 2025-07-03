@@ -14,14 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <m_dialogueNameData>k__BackingField: JamesB
   <m_dialogueTextData>k__BackingField: 'As the worlds best detective I found out
-    about schemes.
+    about your schemes.
 
     I shared my passions with you! And what for?'
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Next Dialogue
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 0cb710ad3c0a8f646b2c11d27055deb3, type: 2}
   <m_bachelorImageData>k__BackingField: {fileID: 21300000, guid: f4403704d59b42e4b91c8f234ee0ff46, type: 3}
-  <m_dialogueAudioData>k__BackingField: {fileID: 0}
+  <m_dialogueAudioData>k__BackingField: {fileID: 8300000, guid: 035ea3b6018f1604e8cdc1ed26f6fd11, type: 3}
   <m_dialogueTypeData>k__BackingField: 0
   <m_isStartingDialogueData>k__BackingField: 1
   <m_propertyToCheckData>k__BackingField: 

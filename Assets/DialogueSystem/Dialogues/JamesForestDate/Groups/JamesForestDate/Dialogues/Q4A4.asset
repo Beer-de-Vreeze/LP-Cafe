@@ -17,9 +17,9 @@ MonoBehaviour:
     person such as yourself couldn't possible be at the sophisticated level I'm at."
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Next Dialogue
-    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 5f496bd46af43dc49b38801ec05f7fca, type: 2}
+    <m_nextDialogue>k__BackingField: {fileID: 0}
   <m_bachelorImageData>k__BackingField: {fileID: 21300000, guid: f4403704d59b42e4b91c8f234ee0ff46, type: 3}
-  <m_dialogueAudioData>k__BackingField: {fileID: 0}
+  <m_dialogueAudioData>k__BackingField: {fileID: 8300000, guid: 3b1313463fc08be42880fb4ec8a2e3d4, type: 3}
   <m_dialogueTypeData>k__BackingField: 0
   <m_isStartingDialogueData>k__BackingField: 1
   <m_propertyToCheckData>k__BackingField: 

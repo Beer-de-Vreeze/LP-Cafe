@@ -16,13 +16,13 @@ MonoBehaviour:
   <m_graphGroupsData>k__BackingField:
   - <m_groupIDData>k__BackingField: d24f43ae-e314-46ba-a377-6e352ad983dd
     <m_groupNameData>k__BackingField: Valorie
-    <m_groupPositionData>k__BackingField: {x: 1280.0001, y: 828.6666}
+    <m_groupPositionData>k__BackingField: {x: 1280, y: 828}
   <m_graphNodesData>k__BackingField:
   - <m_nodeIDData>k__BackingField: d5e3c706-7bcc-421e-8a15-d14da7c6afaf
     <m_nodeNameData>k__BackingField: intro
     <m_nodeBachelorImageData>k__BackingField: {fileID: 21300000, guid: 35a4b7bef345b3f4db947b0e9547a2a6, type: 3}
-    <m_nodeAudioLinesData>k__BackingField: {fileID: 0}
-    <m_nodeTextData>k__BackingField: "Hi, I'm valorie. \r\nWow I never knew dating
+    <m_nodeAudioLinesData>k__BackingField: {fileID: 8300000, guid: 9bbf6967fc6402f4e868aa55d1f9c0e6, type: 3}
+    <m_nodeTextData>k__BackingField: "Hi, I'm Valorie. \r\nWow I never knew dating
       cafe's existed.\r\nI don't have enough caffeine in my system for this right
       now\r\r"
     <m_nodeChoicesData>k__BackingField:
@@ -30,7 +30,7 @@ MonoBehaviour:
       <m_choiceNodeIDData>k__BackingField: 52ebb82f-adef-4ebf-bdea-d496fce23a3a
     <m_nodeGroupIDData>k__BackingField: d24f43ae-e314-46ba-a377-6e352ad983dd
     <m_dialogueTypeData>k__BackingField: 0
-    <m_nodePositionData>k__BackingField: {x: 1305.3334, y: 1038}
+    <m_nodePositionData>k__BackingField: {x: 1305, y: 1038}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -55,7 +55,7 @@ MonoBehaviour:
       <m_choiceNodeIDData>k__BackingField: f6fddf86-59e7-49f7-996f-30acbcdceccf
     <m_nodeGroupIDData>k__BackingField: d24f43ae-e314-46ba-a377-6e352ad983dd
     <m_dialogueTypeData>k__BackingField: 3
-    <m_nodePositionData>k__BackingField: {x: 2457.3333, y: 1078}
+    <m_nodePositionData>k__BackingField: {x: 2457, y: 1078}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -95,70 +95,10 @@ MonoBehaviour:
     <m_isLikePreference>k__BackingField: 1
     <m_selectedPreference>k__BackingField: 
     <m_enumSetter>k__BackingField: 0
-  - <m_nodeIDData>k__BackingField: 1c8da3a7-8798-4421-ab4e-50f71c867a42
-    <m_nodeNameData>k__BackingField: Q1L3
-    <m_nodeBachelorImageData>k__BackingField: {fileID: 0}
-    <m_nodeAudioLinesData>k__BackingField: {fileID: 0}
-    <m_nodeTextData>k__BackingField: Dialogue text.
-    <m_nodeChoicesData>k__BackingField:
-    - <m_choiceTextData>k__BackingField: Next Dialogue
-      <m_choiceNodeIDData>k__BackingField: a5936c02-218d-4188-b038-4bc13f8cb83d
-    <m_nodeGroupIDData>k__BackingField: d24f43ae-e314-46ba-a377-6e352ad983dd
-    <m_dialogueTypeData>k__BackingField: 3
-    <m_nodePositionData>k__BackingField: {x: 2461.3333, y: 1231.3334}
-    <m_nodePropertyToCheckData>k__BackingField: Love
-    <m_nodeComparisonTypeData>k__BackingField: '>='
-    <m_nodeComparisonValueData>k__BackingField: 0
-    <m_nodeOperationTypeData>k__BackingField: '>='
-    <m_nodeValueToSetData>k__BackingField: 
-    <m_nodeVariableNameData>k__BackingField: variableName
-    <m_nodeSetterOperationTypeData>k__BackingField: 1
-    <m_nodeLoveScoreAmountData>k__BackingField: -1
-    <m_nodeBoolValueData>k__BackingField: 0
-    <m_nodeLoveMeterData>k__BackingField: {fileID: 11400000, guid: e565d59697c82c249911d1161e2466dd, type: 2}
-    <m_bachelorData>k__BackingField: {fileID: 0}
-    <m_isLikePreference>k__BackingField: 1
-    <m_selectedPreference>k__BackingField: 
-    <m_enumSetter>k__BackingField: 0
-  - <m_nodeIDData>k__BackingField: 52ebb82f-adef-4ebf-bdea-d496fce23a3a
-    <m_nodeNameData>k__BackingField: Q1
-    <m_nodeBachelorImageData>k__BackingField: {fileID: 21300000, guid: 35a4b7bef345b3f4db947b0e9547a2a6, type: 3}
-    <m_nodeAudioLinesData>k__BackingField: {fileID: 0}
-    <m_nodeTextData>k__BackingField: So how about you start?
-    <m_nodeChoicesData>k__BackingField:
-    - <m_choiceTextData>k__BackingField: Why are you in complete armored leather?
-        It's like... 26 degrees in here... it's mid summer.
-      <m_choiceNodeIDData>k__BackingField: d44bf8d2-abfe-4a1e-b297-e4a6043575c8
-    - <m_choiceTextData>k__BackingField: Do the tattoo's I see peeking out under
-        vest have any meaning? Must've hurt, if they're on your throat.
-      <m_choiceNodeIDData>k__BackingField: e22d5f14-265b-481f-93b0-45ccdd0e1d29
-    - <m_choiceTextData>k__BackingField: Don't you love the sound of the little jingle
-        the door makes, when a new customer walks in?
-      <m_choiceNodeIDData>k__BackingField: 1c8da3a7-8798-4421-ab4e-50f71c867a42
-    - <m_choiceTextData>k__BackingField: Do you ever like go out? Like clubs and
-        stuff?
-      <m_choiceNodeIDData>k__BackingField: 2826775d-c870-4ed8-ab08-49a9b7fae9c6
-    <m_nodeGroupIDData>k__BackingField: d24f43ae-e314-46ba-a377-6e352ad983dd
-    <m_dialogueTypeData>k__BackingField: 1
-    <m_nodePositionData>k__BackingField: {x: 1671.3334, y: 1028}
-    <m_nodePropertyToCheckData>k__BackingField: Love
-    <m_nodeComparisonTypeData>k__BackingField: '>='
-    <m_nodeComparisonValueData>k__BackingField: 0
-    <m_nodeOperationTypeData>k__BackingField: '>='
-    <m_nodeValueToSetData>k__BackingField: 
-    <m_nodeVariableNameData>k__BackingField: 
-    <m_nodeSetterOperationTypeData>k__BackingField: 0
-    <m_nodeLoveScoreAmountData>k__BackingField: 0
-    <m_nodeBoolValueData>k__BackingField: 0
-    <m_nodeLoveMeterData>k__BackingField: {fileID: 0}
-    <m_bachelorData>k__BackingField: {fileID: 0}
-    <m_isLikePreference>k__BackingField: 0
-    <m_selectedPreference>k__BackingField: 
-    <m_enumSetter>k__BackingField: 0
   - <m_nodeIDData>k__BackingField: ef6b3c9f-9e55-47fd-9323-bad409ec1c17
     <m_nodeNameData>k__BackingField: Q1A4
     <m_nodeBachelorImageData>k__BackingField: {fileID: 21300000, guid: 35a4b7bef345b3f4db947b0e9547a2a6, type: 3}
-    <m_nodeAudioLinesData>k__BackingField: {fileID: 0}
+    <m_nodeAudioLinesData>k__BackingField: {fileID: 8300000, guid: d12aac17cbea4824d9fa96999841e481, type: 3}
     <m_nodeTextData>k__BackingField: "I like the clubs, cus I can often get free
       drinks. \r\nHowever the glowsticks and neon lights hurt my eyes.\r"
     <m_nodeChoicesData>k__BackingField:
@@ -166,7 +106,7 @@ MonoBehaviour:
       <m_choiceNodeIDData>k__BackingField: b8a0fc92-d04c-40d8-a040-ed80555b493a
     <m_nodeGroupIDData>k__BackingField: d24f43ae-e314-46ba-a377-6e352ad983dd
     <m_dialogueTypeData>k__BackingField: 0
-    <m_nodePositionData>k__BackingField: {x: 2849.3333, y: 1455.3334}
+    <m_nodePositionData>k__BackingField: {x: 2849, y: 1455}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -184,7 +124,7 @@ MonoBehaviour:
   - <m_nodeIDData>k__BackingField: 57deeaba-de4e-427e-ad1a-aa531c6e77dc
     <m_nodeNameData>k__BackingField: Q1A1
     <m_nodeBachelorImageData>k__BackingField: {fileID: 21300000, guid: c5cf4cce892c8cf439b866953f89e346, type: 3}
-    <m_nodeAudioLinesData>k__BackingField: {fileID: 0}
+    <m_nodeAudioLinesData>k__BackingField: {fileID: 8300000, guid: e58272782aaf7154ba4f9e0d1c432918, type: 3}
     <m_nodeTextData>k__BackingField: "You could've just asked... normally... \r\nWhat's
       wrong with my outfit?\nIt's so I don't get injured on my motor, protection
       is key. \r"
@@ -193,7 +133,7 @@ MonoBehaviour:
       <m_choiceNodeIDData>k__BackingField: c28aeb63-4a6a-4d90-b01a-162cfc45f263
     <m_nodeGroupIDData>k__BackingField: d24f43ae-e314-46ba-a377-6e352ad983dd
     <m_dialogueTypeData>k__BackingField: 0
-    <m_nodePositionData>k__BackingField: {x: 2847.3333, y: 887.3333}
+    <m_nodePositionData>k__BackingField: {x: 2847, y: 887}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -218,7 +158,7 @@ MonoBehaviour:
       <m_choiceNodeIDData>k__BackingField: ccac43b3-7468-45bb-91cf-1ead73c64fcb
     <m_nodeGroupIDData>k__BackingField: d24f43ae-e314-46ba-a377-6e352ad983dd
     <m_dialogueTypeData>k__BackingField: 3
-    <m_nodePositionData>k__BackingField: {x: 3377.3333, y: 1460}
+    <m_nodePositionData>k__BackingField: {x: 3377, y: 1460}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -236,7 +176,7 @@ MonoBehaviour:
   - <m_nodeIDData>k__BackingField: a5936c02-218d-4188-b038-4bc13f8cb83d
     <m_nodeNameData>k__BackingField: Q1A3
     <m_nodeBachelorImageData>k__BackingField: {fileID: 21300000, guid: c5cf4cce892c8cf439b866953f89e346, type: 3}
-    <m_nodeAudioLinesData>k__BackingField: {fileID: 0}
+    <m_nodeAudioLinesData>k__BackingField: {fileID: 8300000, guid: ebee721939643dc448ee46320bf18ad8, type: 3}
     <m_nodeTextData>k__BackingField: "The sound scrapes against my brain and it makes
       my skin crawl. \nBells are so unnecessarily loud."
     <m_nodeChoicesData>k__BackingField:
@@ -244,7 +184,7 @@ MonoBehaviour:
       <m_choiceNodeIDData>k__BackingField: 4f794e47-ea61-4504-91a4-3eea8dbd5214
     <m_nodeGroupIDData>k__BackingField: d24f43ae-e314-46ba-a377-6e352ad983dd
     <m_dialogueTypeData>k__BackingField: 0
-    <m_nodePositionData>k__BackingField: {x: 2849.3333, y: 1254}
+    <m_nodePositionData>k__BackingField: {x: 2849, y: 1254}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -259,31 +199,6 @@ MonoBehaviour:
     <m_isLikePreference>k__BackingField: 0
     <m_selectedPreference>k__BackingField: 
     <m_enumSetter>k__BackingField: 0
-  - <m_nodeIDData>k__BackingField: d44bf8d2-abfe-4a1e-b297-e4a6043575c8
-    <m_nodeNameData>k__BackingField: Q1L1
-    <m_nodeBachelorImageData>k__BackingField: {fileID: 0}
-    <m_nodeAudioLinesData>k__BackingField: {fileID: 0}
-    <m_nodeTextData>k__BackingField: Dialogue text.
-    <m_nodeChoicesData>k__BackingField:
-    - <m_choiceTextData>k__BackingField: Next Dialogue
-      <m_choiceNodeIDData>k__BackingField: 57deeaba-de4e-427e-ad1a-aa531c6e77dc
-    <m_nodeGroupIDData>k__BackingField: d24f43ae-e314-46ba-a377-6e352ad983dd
-    <m_dialogueTypeData>k__BackingField: 3
-    <m_nodePositionData>k__BackingField: {x: 2461.3333, y: 892}
-    <m_nodePropertyToCheckData>k__BackingField: Love
-    <m_nodeComparisonTypeData>k__BackingField: '>='
-    <m_nodeComparisonValueData>k__BackingField: 0
-    <m_nodeOperationTypeData>k__BackingField: '>='
-    <m_nodeValueToSetData>k__BackingField: 
-    <m_nodeVariableNameData>k__BackingField: variableName
-    <m_nodeSetterOperationTypeData>k__BackingField: 1
-    <m_nodeLoveScoreAmountData>k__BackingField: -1
-    <m_nodeBoolValueData>k__BackingField: 0
-    <m_nodeLoveMeterData>k__BackingField: {fileID: 11400000, guid: e565d59697c82c249911d1161e2466dd, type: 2}
-    <m_bachelorData>k__BackingField: {fileID: 0}
-    <m_isLikePreference>k__BackingField: 1
-    <m_selectedPreference>k__BackingField: 
-    <m_enumSetter>k__BackingField: 0
   - <m_nodeIDData>k__BackingField: c28aeb63-4a6a-4d90-b01a-162cfc45f263
     <m_nodeNameData>k__BackingField: Q1D1
     <m_nodeBachelorImageData>k__BackingField: {fileID: 0}
@@ -294,7 +209,7 @@ MonoBehaviour:
       <m_choiceNodeIDData>k__BackingField: ccac43b3-7468-45bb-91cf-1ead73c64fcb
     <m_nodeGroupIDData>k__BackingField: d24f43ae-e314-46ba-a377-6e352ad983dd
     <m_dialogueTypeData>k__BackingField: 3
-    <m_nodePositionData>k__BackingField: {x: 3377.3333, y: 892}
+    <m_nodePositionData>k__BackingField: {x: 3377, y: 892}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -319,7 +234,7 @@ MonoBehaviour:
       <m_choiceNodeIDData>k__BackingField: ccac43b3-7468-45bb-91cf-1ead73c64fcb
     <m_nodeGroupIDData>k__BackingField: d24f43ae-e314-46ba-a377-6e352ad983dd
     <m_dialogueTypeData>k__BackingField: 3
-    <m_nodePositionData>k__BackingField: {x: 3377.3333, y: 1280}
+    <m_nodePositionData>k__BackingField: {x: 3377, y: 1280}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -337,7 +252,7 @@ MonoBehaviour:
   - <m_nodeIDData>k__BackingField: ccac43b3-7468-45bb-91cf-1ead73c64fcb
     <m_nodeNameData>k__BackingField: Interval1
     <m_nodeBachelorImageData>k__BackingField: {fileID: 21300000, guid: 35a4b7bef345b3f4db947b0e9547a2a6, type: 3}
-    <m_nodeAudioLinesData>k__BackingField: {fileID: 0}
+    <m_nodeAudioLinesData>k__BackingField: {fileID: 8300000, guid: 7f491e671c7aab04fb885117e8e2e557, type: 3}
     <m_nodeTextData>k__BackingField: "Is it five yet?\r\nI mean... it's five pm somewhere
       right. \r\nI'm getting Irish coffee. \r\nI missed my usual morning Irish coffee
       in a hurry to get here. \r\nSo be happy I made the effort.\r"
@@ -346,7 +261,7 @@ MonoBehaviour:
       <m_choiceNodeIDData>k__BackingField: 6c5a7cc0-03ce-4eb4-8148-1a7af8d48b7e
     <m_nodeGroupIDData>k__BackingField: d24f43ae-e314-46ba-a377-6e352ad983dd
     <m_dialogueTypeData>k__BackingField: 0
-    <m_nodePositionData>k__BackingField: {x: 3723.3333, y: 1214}
+    <m_nodePositionData>k__BackingField: {x: 3723, y: 1214}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -371,7 +286,7 @@ MonoBehaviour:
       <m_choiceNodeIDData>k__BackingField: 27cad21a-a8bb-49e5-acf9-38e6782ae685
     <m_nodeGroupIDData>k__BackingField: d24f43ae-e314-46ba-a377-6e352ad983dd
     <m_dialogueTypeData>k__BackingField: 3
-    <m_nodePositionData>k__BackingField: {x: 4112, y: 1217.3334}
+    <m_nodePositionData>k__BackingField: {x: 4112, y: 1217}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -388,9 +303,9 @@ MonoBehaviour:
     <m_enumSetter>k__BackingField: 0
   - <m_nodeIDData>k__BackingField: 27cad21a-a8bb-49e5-acf9-38e6782ae685
     <m_nodeNameData>k__BackingField: Interval
-    <m_nodeBachelorImageData>k__BackingField: {fileID: 0}
-    <m_nodeAudioLinesData>k__BackingField: {fileID: 0}
-    <m_nodeTextData>k__BackingField: Dialogue textIt's so light in her.
+    <m_nodeBachelorImageData>k__BackingField: {fileID: 21300000, guid: 35a4b7bef345b3f4db947b0e9547a2a6, type: 3}
+    <m_nodeAudioLinesData>k__BackingField: {fileID: 8300000, guid: 8a5caeb9454aeff4895b360a32a88883, type: 3}
+    <m_nodeTextData>k__BackingField: It's so light in her.
     <m_nodeChoicesData>k__BackingField:
     - <m_choiceTextData>k__BackingField: Next Dialogue
       <m_choiceNodeIDData>k__BackingField: 189da2bd-7691-4a88-9818-61675532d15a
@@ -414,7 +329,7 @@ MonoBehaviour:
   - <m_nodeIDData>k__BackingField: f6fddf86-59e7-49f7-996f-30acbcdceccf
     <m_nodeNameData>k__BackingField: Q1A2
     <m_nodeBachelorImageData>k__BackingField: {fileID: 21300000, guid: 860319ff84a52b94697f5e5967ff73fc, type: 3}
-    <m_nodeAudioLinesData>k__BackingField: {fileID: 0}
+    <m_nodeAudioLinesData>k__BackingField: {fileID: 8300000, guid: be2d9535ac8e8934ebec4d9284b7e9f5, type: 3}
     <m_nodeTextData>k__BackingField: Nha I just got wasted and my bestie has her
       own tattoo shop so... Woke up with it.
     <m_nodeChoicesData>k__BackingField:
@@ -422,7 +337,7 @@ MonoBehaviour:
       <m_choiceNodeIDData>k__BackingField: ccac43b3-7468-45bb-91cf-1ead73c64fcb
     <m_nodeGroupIDData>k__BackingField: d24f43ae-e314-46ba-a377-6e352ad983dd
     <m_dialogueTypeData>k__BackingField: 0
-    <m_nodePositionData>k__BackingField: {x: 3222, y: 1089.3334}
+    <m_nodePositionData>k__BackingField: {x: 3222, y: 1089}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -440,7 +355,7 @@ MonoBehaviour:
   - <m_nodeIDData>k__BackingField: 189da2bd-7691-4a88-9818-61675532d15a
     <m_nodeNameData>k__BackingField: Q2
     <m_nodeBachelorImageData>k__BackingField: {fileID: 21300000, guid: 35a4b7bef345b3f4db947b0e9547a2a6, type: 3}
-    <m_nodeAudioLinesData>k__BackingField: {fileID: 0}
+    <m_nodeAudioLinesData>k__BackingField: {fileID: 8300000, guid: ba4ae6fb2a9540549a1f7ae3627282b0, type: 3}
     <m_nodeTextData>k__BackingField: I usually don't like all the soft toned colors.
       How about you?
     <m_nodeChoicesData>k__BackingField:
@@ -456,7 +371,7 @@ MonoBehaviour:
       <m_choiceNodeIDData>k__BackingField: b5721cb6-3ab6-4915-b5cf-04b96b132a15
     <m_nodeGroupIDData>k__BackingField: d24f43ae-e314-46ba-a377-6e352ad983dd
     <m_dialogueTypeData>k__BackingField: 1
-    <m_nodePositionData>k__BackingField: {x: 4801.3335, y: 1186}
+    <m_nodePositionData>k__BackingField: {x: 4801, y: 1186}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -481,7 +396,7 @@ MonoBehaviour:
       <m_choiceNodeIDData>k__BackingField: 4eaa2106-f3e5-41e0-9f7d-c13f8ac5ec7c
     <m_nodeGroupIDData>k__BackingField: d24f43ae-e314-46ba-a377-6e352ad983dd
     <m_dialogueTypeData>k__BackingField: 3
-    <m_nodePositionData>k__BackingField: {x: 5409.3335, y: 1096}
+    <m_nodePositionData>k__BackingField: {x: 5409, y: 1096}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -506,7 +421,7 @@ MonoBehaviour:
       <m_choiceNodeIDData>k__BackingField: 7058b1e9-35e0-4d21-8394-9be0c741befa
     <m_nodeGroupIDData>k__BackingField: d24f43ae-e314-46ba-a377-6e352ad983dd
     <m_dialogueTypeData>k__BackingField: 3
-    <m_nodePositionData>k__BackingField: {x: 5403.3335, y: 926}
+    <m_nodePositionData>k__BackingField: {x: 5403, y: 926}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -531,7 +446,7 @@ MonoBehaviour:
       <m_choiceNodeIDData>k__BackingField: 5d6dd638-df9a-4f23-ab05-012ff85352d3
     <m_nodeGroupIDData>k__BackingField: d24f43ae-e314-46ba-a377-6e352ad983dd
     <m_dialogueTypeData>k__BackingField: 3
-    <m_nodePositionData>k__BackingField: {x: 5401.3335, y: 1275.3334}
+    <m_nodePositionData>k__BackingField: {x: 5401, y: 1275}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -556,7 +471,7 @@ MonoBehaviour:
       <m_choiceNodeIDData>k__BackingField: 905688c0-62cc-4ca9-8de0-cab4c4a10c56
     <m_nodeGroupIDData>k__BackingField: d24f43ae-e314-46ba-a377-6e352ad983dd
     <m_dialogueTypeData>k__BackingField: 3
-    <m_nodePositionData>k__BackingField: {x: 6240, y: 899.3333}
+    <m_nodePositionData>k__BackingField: {x: 6240, y: 899}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -574,7 +489,7 @@ MonoBehaviour:
   - <m_nodeIDData>k__BackingField: 7058b1e9-35e0-4d21-8394-9be0c741befa
     <m_nodeNameData>k__BackingField: Q2A1
     <m_nodeBachelorImageData>k__BackingField: {fileID: 21300000, guid: c5cf4cce892c8cf439b866953f89e346, type: 3}
-    <m_nodeAudioLinesData>k__BackingField: {fileID: 0}
+    <m_nodeAudioLinesData>k__BackingField: {fileID: 8300000, guid: 01161d46043d073438a1fc5e3d581a0a, type: 3}
     <m_nodeTextData>k__BackingField: "Do you have an issue with your eyes? \r\nOr
       do you purposely have bad taste? \r\n*she sips her irish coffee in awkward
       silence."
@@ -583,7 +498,7 @@ MonoBehaviour:
       <m_choiceNodeIDData>k__BackingField: abfca945-df0f-4318-bcba-3a23f4597c17
     <m_nodeGroupIDData>k__BackingField: d24f43ae-e314-46ba-a377-6e352ad983dd
     <m_dialogueTypeData>k__BackingField: 0
-    <m_nodePositionData>k__BackingField: {x: 5867.3335, y: 899.3333}
+    <m_nodePositionData>k__BackingField: {x: 5867, y: 899}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -608,7 +523,7 @@ MonoBehaviour:
       <m_choiceNodeIDData>k__BackingField: 905688c0-62cc-4ca9-8de0-cab4c4a10c56
     <m_nodeGroupIDData>k__BackingField: d24f43ae-e314-46ba-a377-6e352ad983dd
     <m_dialogueTypeData>k__BackingField: 3
-    <m_nodePositionData>k__BackingField: {x: 6242, y: 1101.3334}
+    <m_nodePositionData>k__BackingField: {x: 6242, y: 1101}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -626,7 +541,7 @@ MonoBehaviour:
   - <m_nodeIDData>k__BackingField: 4eaa2106-f3e5-41e0-9f7d-c13f8ac5ec7c
     <m_nodeNameData>k__BackingField: Q2A2
     <m_nodeBachelorImageData>k__BackingField: {fileID: 21300000, guid: 860319ff84a52b94697f5e5967ff73fc, type: 3}
-    <m_nodeAudioLinesData>k__BackingField: {fileID: 0}
+    <m_nodeAudioLinesData>k__BackingField: {fileID: 8300000, guid: cc7f008b1e87cdb4f9badf3c27697693, type: 3}
     <m_nodeTextData>k__BackingField: I love red! It's my favorite, it reminds me
       of blood.
     <m_nodeChoicesData>k__BackingField:
@@ -634,7 +549,7 @@ MonoBehaviour:
       <m_choiceNodeIDData>k__BackingField: ad998483-794f-4c36-865b-cad423472d5b
     <m_nodeGroupIDData>k__BackingField: d24f43ae-e314-46ba-a377-6e352ad983dd
     <m_dialogueTypeData>k__BackingField: 0
-    <m_nodePositionData>k__BackingField: {x: 5865.3335, y: 1102}
+    <m_nodePositionData>k__BackingField: {x: 5865, y: 1102}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -651,8 +566,8 @@ MonoBehaviour:
     <m_enumSetter>k__BackingField: 0
   - <m_nodeIDData>k__BackingField: 905688c0-62cc-4ca9-8de0-cab4c4a10c56
     <m_nodeNameData>k__BackingField: Q3
-    <m_nodeBachelorImageData>k__BackingField: {fileID: 0}
-    <m_nodeAudioLinesData>k__BackingField: {fileID: 0}
+    <m_nodeBachelorImageData>k__BackingField: {fileID: 21300000, guid: 35a4b7bef345b3f4db947b0e9547a2a6, type: 3}
+    <m_nodeAudioLinesData>k__BackingField: {fileID: 8300000, guid: 4fd9018e7dd3d3c4c8fee1d11de16a65, type: 3}
     <m_nodeTextData>k__BackingField: What do you do in your free time?
     <m_nodeChoicesData>k__BackingField:
     - <m_choiceTextData>k__BackingField: Next Dialogue
@@ -677,7 +592,7 @@ MonoBehaviour:
   - <m_nodeIDData>k__BackingField: 5d6dd638-df9a-4f23-ab05-012ff85352d3
     <m_nodeNameData>k__BackingField: Q2A3
     <m_nodeBachelorImageData>k__BackingField: {fileID: 21300000, guid: 860319ff84a52b94697f5e5967ff73fc, type: 3}
-    <m_nodeAudioLinesData>k__BackingField: {fileID: 0}
+    <m_nodeAudioLinesData>k__BackingField: {fileID: 8300000, guid: d3e17b64fd878764fa598a26467e8b8a, type: 3}
     <m_nodeTextData>k__BackingField: "I don't care much for black, it's depthless.
       \r\nHOWEVER I support the notion of coffee. \r\nSpeaking off, let's order more.
       \r\nTwo Irish coffee's please.\r"
@@ -686,7 +601,7 @@ MonoBehaviour:
       <m_choiceNodeIDData>k__BackingField: 905688c0-62cc-4ca9-8de0-cab4c4a10c56
     <m_nodeGroupIDData>k__BackingField: d24f43ae-e314-46ba-a377-6e352ad983dd
     <m_dialogueTypeData>k__BackingField: 0
-    <m_nodePositionData>k__BackingField: {x: 6296, y: 1275.3334}
+    <m_nodePositionData>k__BackingField: {x: 6296, y: 1275}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -711,7 +626,7 @@ MonoBehaviour:
       <m_choiceNodeIDData>k__BackingField: 905688c0-62cc-4ca9-8de0-cab4c4a10c56
     <m_nodeGroupIDData>k__BackingField: d24f43ae-e314-46ba-a377-6e352ad983dd
     <m_dialogueTypeData>k__BackingField: 3
-    <m_nodePositionData>k__BackingField: {x: 6242, y: 1497.3334}
+    <m_nodePositionData>k__BackingField: {x: 6242, y: 1497}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -736,7 +651,7 @@ MonoBehaviour:
       <m_choiceNodeIDData>k__BackingField: 593220e7-1fef-4be3-857c-91d9f10bbbc2
     <m_nodeGroupIDData>k__BackingField: d24f43ae-e314-46ba-a377-6e352ad983dd
     <m_dialogueTypeData>k__BackingField: 3
-    <m_nodePositionData>k__BackingField: {x: 5409.3335, y: 1497.3334}
+    <m_nodePositionData>k__BackingField: {x: 5409, y: 1497}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -754,7 +669,7 @@ MonoBehaviour:
   - <m_nodeIDData>k__BackingField: d45923dc-c4fc-4f5b-8dd9-ef282f90e507
     <m_nodeNameData>k__BackingField: QQ3
     <m_nodeBachelorImageData>k__BackingField: {fileID: 21300000, guid: 35a4b7bef345b3f4db947b0e9547a2a6, type: 3}
-    <m_nodeAudioLinesData>k__BackingField: {fileID: 0}
+    <m_nodeAudioLinesData>k__BackingField: {fileID: 8300000, guid: 4f231281f4dbd344b88281119fd410aa, type: 3}
     <m_nodeTextData>k__BackingField: " \rOther than trying to find someone to date?\r"
     <m_nodeChoicesData>k__BackingField:
     - <m_choiceTextData>k__BackingField: I stay home and game.
@@ -769,7 +684,7 @@ MonoBehaviour:
       <m_choiceNodeIDData>k__BackingField: e5dd2fff-ccb3-4d08-9107-15433ff3e82c
     <m_nodeGroupIDData>k__BackingField: d24f43ae-e314-46ba-a377-6e352ad983dd
     <m_dialogueTypeData>k__BackingField: 1
-    <m_nodePositionData>k__BackingField: {x: 7053.3335, y: 1160}
+    <m_nodePositionData>k__BackingField: {x: 7053, y: 1160}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -787,7 +702,7 @@ MonoBehaviour:
   - <m_nodeIDData>k__BackingField: 593220e7-1fef-4be3-857c-91d9f10bbbc2
     <m_nodeNameData>k__BackingField: Q2A4
     <m_nodeBachelorImageData>k__BackingField: {fileID: 21300000, guid: c5cf4cce892c8cf439b866953f89e346, type: 3}
-    <m_nodeAudioLinesData>k__BackingField: {fileID: 0}
+    <m_nodeAudioLinesData>k__BackingField: {fileID: 8300000, guid: 38d08d0982edbe841bc55675f219112a, type: 3}
     <m_nodeTextData>k__BackingField: "FIRST of all, its GREY, so not a color, a SHADE.
       \r\nSecondly, don't try that corny stuff again. \r\nI'm too sober for that.\r"
     <m_nodeChoicesData>k__BackingField:
@@ -795,7 +710,7 @@ MonoBehaviour:
       <m_choiceNodeIDData>k__BackingField: 22a33e93-7a15-4d7c-b18d-3af780f1706f
     <m_nodeGroupIDData>k__BackingField: d24f43ae-e314-46ba-a377-6e352ad983dd
     <m_dialogueTypeData>k__BackingField: 0
-    <m_nodePositionData>k__BackingField: {x: 5879.3335, y: 1471.3334}
+    <m_nodePositionData>k__BackingField: {x: 5879, y: 1471}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -845,7 +760,7 @@ MonoBehaviour:
       <m_choiceNodeIDData>k__BackingField: 697407e9-b8e0-4ea5-bd0d-b385f933021e
     <m_nodeGroupIDData>k__BackingField: d24f43ae-e314-46ba-a377-6e352ad983dd
     <m_dialogueTypeData>k__BackingField: 3
-    <m_nodePositionData>k__BackingField: {x: 7773.3335, y: 1310}
+    <m_nodePositionData>k__BackingField: {x: 7773, y: 1310}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -870,7 +785,7 @@ MonoBehaviour:
       <m_choiceNodeIDData>k__BackingField: a815d7f2-5706-46f0-96ff-c9618f24339a
     <m_nodeGroupIDData>k__BackingField: d24f43ae-e314-46ba-a377-6e352ad983dd
     <m_dialogueTypeData>k__BackingField: 3
-    <m_nodePositionData>k__BackingField: {x: 7767.3335, y: 1142}
+    <m_nodePositionData>k__BackingField: {x: 7767, y: 1142}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -895,7 +810,7 @@ MonoBehaviour:
       <m_choiceNodeIDData>k__BackingField: 86593ecc-d50b-4f6e-a158-ef22e3973348
     <m_nodeGroupIDData>k__BackingField: d24f43ae-e314-46ba-a377-6e352ad983dd
     <m_dialogueTypeData>k__BackingField: 3
-    <m_nodePositionData>k__BackingField: {x: 7777.3335, y: 1485.3334}
+    <m_nodePositionData>k__BackingField: {x: 7777, y: 1485}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -920,7 +835,7 @@ MonoBehaviour:
       <m_choiceNodeIDData>k__BackingField: 7729debd-194d-4130-9978-22223e0890f4
     <m_nodeGroupIDData>k__BackingField: d24f43ae-e314-46ba-a377-6e352ad983dd
     <m_dialogueTypeData>k__BackingField: 3
-    <m_nodePositionData>k__BackingField: {x: 8725.333, y: 1128}
+    <m_nodePositionData>k__BackingField: {x: 8725, y: 1128}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -945,7 +860,7 @@ MonoBehaviour:
       <m_choiceNodeIDData>k__BackingField: 7729debd-194d-4130-9978-22223e0890f4
     <m_nodeGroupIDData>k__BackingField: d24f43ae-e314-46ba-a377-6e352ad983dd
     <m_dialogueTypeData>k__BackingField: 3
-    <m_nodePositionData>k__BackingField: {x: 8729.333, y: 1321.3334}
+    <m_nodePositionData>k__BackingField: {x: 8729, y: 1321}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -963,14 +878,14 @@ MonoBehaviour:
   - <m_nodeIDData>k__BackingField: a815d7f2-5706-46f0-96ff-c9618f24339a
     <m_nodeNameData>k__BackingField: Q3A2
     <m_nodeBachelorImageData>k__BackingField: {fileID: 21300000, guid: 860319ff84a52b94697f5e5967ff73fc, type: 3}
-    <m_nodeAudioLinesData>k__BackingField: {fileID: 0}
+    <m_nodeAudioLinesData>k__BackingField: {fileID: 8300000, guid: 93b7f9f11557e2d4ab97f8744fdf4e45, type: 3}
     <m_nodeTextData>k__BackingField: That's so nice to hear, I love nature.
     <m_nodeChoicesData>k__BackingField:
     - <m_choiceTextData>k__BackingField: Next Dialogue
       <m_choiceNodeIDData>k__BackingField: 58b17229-b06a-4c9e-be0c-f6b212403496
     <m_nodeGroupIDData>k__BackingField: d24f43ae-e314-46ba-a377-6e352ad983dd
     <m_dialogueTypeData>k__BackingField: 0
-    <m_nodePositionData>k__BackingField: {x: 8179.3335, y: 1144}
+    <m_nodePositionData>k__BackingField: {x: 8179, y: 1144}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -988,7 +903,7 @@ MonoBehaviour:
   - <m_nodeIDData>k__BackingField: 697407e9-b8e0-4ea5-bd0d-b385f933021e
     <m_nodeNameData>k__BackingField: Q3A3
     <m_nodeBachelorImageData>k__BackingField: {fileID: 21300000, guid: 35a4b7bef345b3f4db947b0e9547a2a6, type: 3}
-    <m_nodeAudioLinesData>k__BackingField: {fileID: 0}
+    <m_nodeAudioLinesData>k__BackingField: {fileID: 8300000, guid: 90e93316847fe194daec428be13da530, type: 3}
     <m_nodeTextData>k__BackingField: A bit of a waste of time, but I can understand
       the violent ones with the knives and stuff.
     <m_nodeChoicesData>k__BackingField:
@@ -996,7 +911,7 @@ MonoBehaviour:
       <m_choiceNodeIDData>k__BackingField: 9cde1e08-893c-4ab3-ae5a-caa7e4041e10
     <m_nodeGroupIDData>k__BackingField: d24f43ae-e314-46ba-a377-6e352ad983dd
     <m_dialogueTypeData>k__BackingField: 0
-    <m_nodePositionData>k__BackingField: {x: 8181.3335, y: 1326}
+    <m_nodePositionData>k__BackingField: {x: 8181, y: 1326}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -1014,7 +929,7 @@ MonoBehaviour:
   - <m_nodeIDData>k__BackingField: 86593ecc-d50b-4f6e-a158-ef22e3973348
     <m_nodeNameData>k__BackingField: Q3A4
     <m_nodeBachelorImageData>k__BackingField: {fileID: 21300000, guid: 860319ff84a52b94697f5e5967ff73fc, type: 3}
-    <m_nodeAudioLinesData>k__BackingField: {fileID: 0}
+    <m_nodeAudioLinesData>k__BackingField: {fileID: 8300000, guid: bb6ebb687dcc0c24f98db2dcb551733e, type: 3}
     <m_nodeTextData>k__BackingField: I totally get what you mean, clubbing is a GREAT
       pastime.
     <m_nodeChoicesData>k__BackingField:
@@ -1022,7 +937,7 @@ MonoBehaviour:
       <m_choiceNodeIDData>k__BackingField: 7729debd-194d-4130-9978-22223e0890f4
     <m_nodeGroupIDData>k__BackingField: d24f43ae-e314-46ba-a377-6e352ad983dd
     <m_dialogueTypeData>k__BackingField: 0
-    <m_nodePositionData>k__BackingField: {x: 8699.333, y: 1490}
+    <m_nodePositionData>k__BackingField: {x: 8699, y: 1490}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -1040,7 +955,7 @@ MonoBehaviour:
   - <m_nodeIDData>k__BackingField: 441d4afd-83c8-4d96-b6b5-2d36c443da61
     <m_nodeNameData>k__BackingField: Q3A1
     <m_nodeBachelorImageData>k__BackingField: {fileID: 21300000, guid: c5cf4cce892c8cf439b866953f89e346, type: 3}
-    <m_nodeAudioLinesData>k__BackingField: {fileID: 0}
+    <m_nodeAudioLinesData>k__BackingField: {fileID: 8300000, guid: b549f07cfe4111348a3f06259dbc8d65, type: 3}
     <m_nodeTextData>k__BackingField: "Okay so you have no personality outside of
       an online persona. \r"
     <m_nodeChoicesData>k__BackingField:
@@ -1066,7 +981,7 @@ MonoBehaviour:
   - <m_nodeIDData>k__BackingField: 7729debd-194d-4130-9978-22223e0890f4
     <m_nodeNameData>k__BackingField: Q4
     <m_nodeBachelorImageData>k__BackingField: {fileID: 21300000, guid: 35a4b7bef345b3f4db947b0e9547a2a6, type: 3}
-    <m_nodeAudioLinesData>k__BackingField: {fileID: 0}
+    <m_nodeAudioLinesData>k__BackingField: {fileID: 8300000, guid: fbeb0722265460345b157b8620723714, type: 3}
     <m_nodeTextData>k__BackingField: "Why haven't you touched your Irish coffee?
       \r"
     <m_nodeChoicesData>k__BackingField:
@@ -1106,7 +1021,7 @@ MonoBehaviour:
       <m_choiceNodeIDData>k__BackingField: 238e06da-722c-48ee-8c7e-09d9064e1db8
     <m_nodeGroupIDData>k__BackingField: d24f43ae-e314-46ba-a377-6e352ad983dd
     <m_dialogueTypeData>k__BackingField: 3
-    <m_nodePositionData>k__BackingField: {x: 9739.333, y: 1138}
+    <m_nodePositionData>k__BackingField: {x: 9739, y: 1138}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -1131,7 +1046,7 @@ MonoBehaviour:
       <m_choiceNodeIDData>k__BackingField: e1f754c4-4f9e-440e-88f9-8f80d37ee892
     <m_nodeGroupIDData>k__BackingField: d24f43ae-e314-46ba-a377-6e352ad983dd
     <m_dialogueTypeData>k__BackingField: 3
-    <m_nodePositionData>k__BackingField: {x: 9741.333, y: 1449.3334}
+    <m_nodePositionData>k__BackingField: {x: 9741, y: 1449}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -1156,7 +1071,7 @@ MonoBehaviour:
       <m_choiceNodeIDData>k__BackingField: 99113387-ead5-4a1e-9372-c0cc53b3c62f
     <m_nodeGroupIDData>k__BackingField: d24f43ae-e314-46ba-a377-6e352ad983dd
     <m_dialogueTypeData>k__BackingField: 3
-    <m_nodePositionData>k__BackingField: {x: 9739.333, y: 1293.3334}
+    <m_nodePositionData>k__BackingField: {x: 9739, y: 1293}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -1181,7 +1096,7 @@ MonoBehaviour:
       <m_choiceNodeIDData>k__BackingField: 0e08d44d-d332-4dd3-af2b-219894084da2
     <m_nodeGroupIDData>k__BackingField: d24f43ae-e314-46ba-a377-6e352ad983dd
     <m_dialogueTypeData>k__BackingField: 3
-    <m_nodePositionData>k__BackingField: {x: 9737.333, y: 983.3333}
+    <m_nodePositionData>k__BackingField: {x: 9737, y: 983}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -1199,7 +1114,7 @@ MonoBehaviour:
   - <m_nodeIDData>k__BackingField: 99113387-ead5-4a1e-9372-c0cc53b3c62f
     <m_nodeNameData>k__BackingField: Q4A3
     <m_nodeBachelorImageData>k__BackingField: {fileID: 21300000, guid: c5cf4cce892c8cf439b866953f89e346, type: 3}
-    <m_nodeAudioLinesData>k__BackingField: {fileID: 0}
+    <m_nodeAudioLinesData>k__BackingField: {fileID: 8300000, guid: 652bd79dfed43dc4fa7985d6b74eb88d, type: 3}
     <m_nodeTextData>k__BackingField: You even manage to make the alcohol taste bad
       with your word vomit.
     <m_nodeChoicesData>k__BackingField:
@@ -1207,7 +1122,7 @@ MonoBehaviour:
       <m_choiceNodeIDData>k__BackingField: a85eb7cb-f523-44ce-9cf2-826d70ce66bb
     <m_nodeGroupIDData>k__BackingField: d24f43ae-e314-46ba-a377-6e352ad983dd
     <m_dialogueTypeData>k__BackingField: 0
-    <m_nodePositionData>k__BackingField: {x: 10273.333, y: 1315.3334}
+    <m_nodePositionData>k__BackingField: {x: 10273, y: 1315}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -1225,7 +1140,7 @@ MonoBehaviour:
   - <m_nodeIDData>k__BackingField: 238e06da-722c-48ee-8c7e-09d9064e1db8
     <m_nodeNameData>k__BackingField: Q4A2
     <m_nodeBachelorImageData>k__BackingField: {fileID: 21300000, guid: c5cf4cce892c8cf439b866953f89e346, type: 3}
-    <m_nodeAudioLinesData>k__BackingField: {fileID: 0}
+    <m_nodeAudioLinesData>k__BackingField: {fileID: 8300000, guid: ae367b8a67177b1419109bb5bdde6b7c, type: 3}
     <m_nodeTextData>k__BackingField: Are you going to apologise to the trees after,
       for wasting precious oxygen?
     <m_nodeChoicesData>k__BackingField:
@@ -1233,7 +1148,7 @@ MonoBehaviour:
       <m_choiceNodeIDData>k__BackingField: 7418b3a8-c9b0-4834-843c-7f1cc24e0feb
     <m_nodeGroupIDData>k__BackingField: d24f43ae-e314-46ba-a377-6e352ad983dd
     <m_dialogueTypeData>k__BackingField: 0
-    <m_nodePositionData>k__BackingField: {x: 10271.333, y: 1139.3334}
+    <m_nodePositionData>k__BackingField: {x: 10271, y: 1139}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -1258,7 +1173,7 @@ MonoBehaviour:
       <m_choiceNodeIDData>k__BackingField: d4d2e3d9-2b6d-489a-9468-6d929a952c61
     <m_nodeGroupIDData>k__BackingField: d24f43ae-e314-46ba-a377-6e352ad983dd
     <m_dialogueTypeData>k__BackingField: 3
-    <m_nodePositionData>k__BackingField: {x: 10859.333, y: 1122}
+    <m_nodePositionData>k__BackingField: {x: 10859, y: 1122}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -1283,7 +1198,7 @@ MonoBehaviour:
       <m_choiceNodeIDData>k__BackingField: d4d2e3d9-2b6d-489a-9468-6d929a952c61
     <m_nodeGroupIDData>k__BackingField: d24f43ae-e314-46ba-a377-6e352ad983dd
     <m_dialogueTypeData>k__BackingField: 3
-    <m_nodePositionData>k__BackingField: {x: 10861.333, y: 1302}
+    <m_nodePositionData>k__BackingField: {x: 10861, y: 1302}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -1301,7 +1216,7 @@ MonoBehaviour:
   - <m_nodeIDData>k__BackingField: 0e08d44d-d332-4dd3-af2b-219894084da2
     <m_nodeNameData>k__BackingField: Q4A1
     <m_nodeBachelorImageData>k__BackingField: {fileID: 21300000, guid: 35a4b7bef345b3f4db947b0e9547a2a6, type: 3}
-    <m_nodeAudioLinesData>k__BackingField: {fileID: 0}
+    <m_nodeAudioLinesData>k__BackingField: {fileID: 8300000, guid: dc74b3501526b88439694531fa7e3fd5, type: 3}
     <m_nodeTextData>k__BackingField: "I can respect that, I'm aware some people are
       boring and don't have much of a personality.\r."
     <m_nodeChoicesData>k__BackingField:
@@ -1309,7 +1224,7 @@ MonoBehaviour:
       <m_choiceNodeIDData>k__BackingField: d4d2e3d9-2b6d-489a-9468-6d929a952c61
     <m_nodeGroupIDData>k__BackingField: d24f43ae-e314-46ba-a377-6e352ad983dd
     <m_dialogueTypeData>k__BackingField: 0
-    <m_nodePositionData>k__BackingField: {x: 10677.333, y: 940}
+    <m_nodePositionData>k__BackingField: {x: 10677, y: 940}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -1353,16 +1268,16 @@ MonoBehaviour:
   - <m_nodeIDData>k__BackingField: d4d2e3d9-2b6d-489a-9468-6d929a952c61
     <m_nodeNameData>k__BackingField: Ending
     <m_nodeBachelorImageData>k__BackingField: {fileID: 21300000, guid: 35a4b7bef345b3f4db947b0e9547a2a6, type: 3}
-    <m_nodeAudioLinesData>k__BackingField: {fileID: 0}
+    <m_nodeAudioLinesData>k__BackingField: {fileID: 8300000, guid: ce740bc110b2907419688c9fd6829ecc, type: 3}
     <m_nodeTextData>k__BackingField: "Well...\r\nGoodluck with the next person.\r\nYou
       seem like you need it. \r\nLike.... a lot. \r\nI have to go to the barista
       for more Irish coffee.\r"
     <m_nodeChoicesData>k__BackingField:
     - <m_choiceTextData>k__BackingField: Next Dialogue
-      <m_choiceNodeIDData>k__BackingField: 54f4aa73-6b65-48a8-ae79-31f38f9b1f6b
+      <m_choiceNodeIDData>k__BackingField: 
     <m_nodeGroupIDData>k__BackingField: d24f43ae-e314-46ba-a377-6e352ad983dd
     <m_dialogueTypeData>k__BackingField: 0
-    <m_nodePositionData>k__BackingField: {x: 11347.333, y: 1224}
+    <m_nodePositionData>k__BackingField: {x: 11347, y: 1224}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -1377,17 +1292,77 @@ MonoBehaviour:
     <m_isLikePreference>k__BackingField: 0
     <m_selectedPreference>k__BackingField: 
     <m_enumSetter>k__BackingField: 0
-  - <m_nodeIDData>k__BackingField: 54f4aa73-6b65-48a8-ae79-31f38f9b1f6b
-    <m_nodeNameData>k__BackingField: Ending2
+  - <m_nodeIDData>k__BackingField: 1c8da3a7-8798-4421-ab4e-50f71c867a42
+    <m_nodeNameData>k__BackingField: Q1L3
     <m_nodeBachelorImageData>k__BackingField: {fileID: 0}
     <m_nodeAudioLinesData>k__BackingField: {fileID: 0}
-    <m_nodeTextData>k__BackingField: ' '
+    <m_nodeTextData>k__BackingField: Dialogue text.
     <m_nodeChoicesData>k__BackingField:
     - <m_choiceTextData>k__BackingField: Next Dialogue
-      <m_choiceNodeIDData>k__BackingField: 
+      <m_choiceNodeIDData>k__BackingField: a5936c02-218d-4188-b038-4bc13f8cb83d
     <m_nodeGroupIDData>k__BackingField: d24f43ae-e314-46ba-a377-6e352ad983dd
-    <m_dialogueTypeData>k__BackingField: 0
-    <m_nodePositionData>k__BackingField: {x: 11668, y: 1224}
+    <m_dialogueTypeData>k__BackingField: 3
+    <m_nodePositionData>k__BackingField: {x: 2461, y: 1231}
+    <m_nodePropertyToCheckData>k__BackingField: Love
+    <m_nodeComparisonTypeData>k__BackingField: '>='
+    <m_nodeComparisonValueData>k__BackingField: 0
+    <m_nodeOperationTypeData>k__BackingField: '>='
+    <m_nodeValueToSetData>k__BackingField: 
+    <m_nodeVariableNameData>k__BackingField: variableName
+    <m_nodeSetterOperationTypeData>k__BackingField: 1
+    <m_nodeLoveScoreAmountData>k__BackingField: -1
+    <m_nodeBoolValueData>k__BackingField: 0
+    <m_nodeLoveMeterData>k__BackingField: {fileID: 11400000, guid: e565d59697c82c249911d1161e2466dd, type: 2}
+    <m_bachelorData>k__BackingField: {fileID: 0}
+    <m_isLikePreference>k__BackingField: 1
+    <m_selectedPreference>k__BackingField: 
+    <m_enumSetter>k__BackingField: 0
+  - <m_nodeIDData>k__BackingField: d44bf8d2-abfe-4a1e-b297-e4a6043575c8
+    <m_nodeNameData>k__BackingField: Q1L1
+    <m_nodeBachelorImageData>k__BackingField: {fileID: 0}
+    <m_nodeAudioLinesData>k__BackingField: {fileID: 0}
+    <m_nodeTextData>k__BackingField: Dialogue text.
+    <m_nodeChoicesData>k__BackingField:
+    - <m_choiceTextData>k__BackingField: Next Dialogue
+      <m_choiceNodeIDData>k__BackingField: 57deeaba-de4e-427e-ad1a-aa531c6e77dc
+    <m_nodeGroupIDData>k__BackingField: d24f43ae-e314-46ba-a377-6e352ad983dd
+    <m_dialogueTypeData>k__BackingField: 3
+    <m_nodePositionData>k__BackingField: {x: 2461, y: 892}
+    <m_nodePropertyToCheckData>k__BackingField: Love
+    <m_nodeComparisonTypeData>k__BackingField: '>='
+    <m_nodeComparisonValueData>k__BackingField: 0
+    <m_nodeOperationTypeData>k__BackingField: '>='
+    <m_nodeValueToSetData>k__BackingField: 
+    <m_nodeVariableNameData>k__BackingField: variableName
+    <m_nodeSetterOperationTypeData>k__BackingField: 1
+    <m_nodeLoveScoreAmountData>k__BackingField: -1
+    <m_nodeBoolValueData>k__BackingField: 0
+    <m_nodeLoveMeterData>k__BackingField: {fileID: 11400000, guid: e565d59697c82c249911d1161e2466dd, type: 2}
+    <m_bachelorData>k__BackingField: {fileID: 0}
+    <m_isLikePreference>k__BackingField: 1
+    <m_selectedPreference>k__BackingField: 
+    <m_enumSetter>k__BackingField: 0
+  - <m_nodeIDData>k__BackingField: 52ebb82f-adef-4ebf-bdea-d496fce23a3a
+    <m_nodeNameData>k__BackingField: Q1
+    <m_nodeBachelorImageData>k__BackingField: {fileID: 21300000, guid: 35a4b7bef345b3f4db947b0e9547a2a6, type: 3}
+    <m_nodeAudioLinesData>k__BackingField: {fileID: 8300000, guid: a70f01e5cd34f9642b115d91cd121c26, type: 3}
+    <m_nodeTextData>k__BackingField: So how about you start?
+    <m_nodeChoicesData>k__BackingField:
+    - <m_choiceTextData>k__BackingField: Why are you in complete armored leather?
+        It's like...  it's mid summer.
+      <m_choiceNodeIDData>k__BackingField: d44bf8d2-abfe-4a1e-b297-e4a6043575c8
+    - <m_choiceTextData>k__BackingField: Do the tattoo's I see  have any meaning?
+        Must've hurt, if they're on your throat.
+      <m_choiceNodeIDData>k__BackingField: e22d5f14-265b-481f-93b0-45ccdd0e1d29
+    - <m_choiceTextData>k__BackingField: Don't you love the little jingle the door
+        makes, when a new customer walks in?
+      <m_choiceNodeIDData>k__BackingField: 1c8da3a7-8798-4421-ab4e-50f71c867a42
+    - <m_choiceTextData>k__BackingField: Do you ever like go out? Like clubs and
+        stuff?
+      <m_choiceNodeIDData>k__BackingField: 2826775d-c870-4ed8-ab08-49a9b7fae9c6
+    <m_nodeGroupIDData>k__BackingField: d24f43ae-e314-46ba-a377-6e352ad983dd
+    <m_dialogueTypeData>k__BackingField: 1
+    <m_nodePositionData>k__BackingField: {x: 1671, y: 1028}
     <m_nodePropertyToCheckData>k__BackingField: Love
     <m_nodeComparisonTypeData>k__BackingField: '>='
     <m_nodeComparisonValueData>k__BackingField: 0
@@ -1412,13 +1387,10 @@ MonoBehaviour:
       - intro
       - Q1L2
       - Q1L4
-      - Q1L3
-      - Q1
       - Q1A4
       - Q1A1
       - Q1D3
       - Q1A3
-      - Q1L1
       - Q1D1
       - Q1D2
       - Interval1
@@ -1461,4 +1433,6 @@ MonoBehaviour:
       - Q4A1
       - Q4A4
       - Ending
-      - Ending2
+      - Q1L3
+      - Q1L1
+      - Q1

@@ -27,7 +27,7 @@ MonoBehaviour:
       perfect you are to harm you.
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 05bcd120f21b2b44faecb7e007c90963, type: 2}
   <m_bachelorImageData>k__BackingField: {fileID: 21300000, guid: 35a4b7bef345b3f4db947b0e9547a2a6, type: 3}
-  <m_dialogueAudioData>k__BackingField: {fileID: 0}
+  <m_dialogueAudioData>k__BackingField: {fileID: 8300000, guid: 53f82efc4f709ad4a853f2f3394f95a4, type: 3}
   <m_dialogueTypeData>k__BackingField: 1
   <m_isStartingDialogueData>k__BackingField: 1
   <m_propertyToCheckData>k__BackingField: 

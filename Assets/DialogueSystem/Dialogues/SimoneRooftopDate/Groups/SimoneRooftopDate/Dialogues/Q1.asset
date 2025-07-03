@@ -27,7 +27,7 @@ MonoBehaviour:
   - <m_dialogueChoiceText>k__BackingField: Ahh yes, maybe with a few scented candles?
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 2bf1bd215986ef9429faa27a0a0cc80b, type: 2}
   <m_bachelorImageData>k__BackingField: {fileID: 21300000, guid: a941980c13e496242b3ce89720725a55, type: 3}
-  <m_dialogueAudioData>k__BackingField: {fileID: 0}
+  <m_dialogueAudioData>k__BackingField: {fileID: 8300000, guid: b924a20ec08e6d343b69a97eef2fbc25, type: 3}
   <m_dialogueTypeData>k__BackingField: 1
   <m_isStartingDialogueData>k__BackingField: 1
   <m_propertyToCheckData>k__BackingField: 

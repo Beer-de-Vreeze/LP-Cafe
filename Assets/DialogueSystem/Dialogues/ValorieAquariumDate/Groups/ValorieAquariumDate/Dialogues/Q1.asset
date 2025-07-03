@@ -26,7 +26,7 @@ MonoBehaviour:
   - <m_dialogueChoiceText>k__BackingField: None.. of the above?
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 23e6065d73ecda143ad778d171a006d0, type: 2}
   <m_bachelorImageData>k__BackingField: {fileID: 21300000, guid: 35a4b7bef345b3f4db947b0e9547a2a6, type: 3}
-  <m_dialogueAudioData>k__BackingField: {fileID: 0}
+  <m_dialogueAudioData>k__BackingField: {fileID: 8300000, guid: 2479c25a2bfae5a4f9795450e781e167, type: 3}
   <m_dialogueTypeData>k__BackingField: 1
   <m_isStartingDialogueData>k__BackingField: 1
   <m_propertyToCheckData>k__BackingField: 

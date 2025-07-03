@@ -51,6 +51,21 @@ public class NoteBook : MonoBehaviour
     {
         if (currentBachelor != null)
         {
+            // Validate bachelor name
+            if (string.IsNullOrEmpty(currentBachelor._name))
+            {
+                Debug.LogError(
+                    "NoteBook: Bachelor has empty name! Cannot synchronize with save data."
+                );
+            }
+            else
+            {
+                Debug.Log($"NoteBook: OnEnable for bachelor {currentBachelor._name}");
+
+                // Force synchronization with save data when notebook is opened
+                currentBachelor.SynchronizeWithSaveData();
+            }
+
             // Ensure we're properly registered to the current bachelor's events
             RegisterToBachelorEvents(currentBachelor);
 
@@ -125,6 +140,9 @@ public class NoteBook : MonoBehaviour
 
         // Create the entry when it's discovered
         CreateEntryForPreference(preference);
+
+        // Ensure the preference is saved with the bachelor name
+        currentBachelor.SaveDiscoveredPreferences();
 
         // Visual feedback for new discoveries
         UpdateVisibility();
@@ -203,6 +221,15 @@ public class NoteBook : MonoBehaviour
             Debug.LogWarning("Cannot initialize notebook: No bachelor assigned!");
             return;
         }
+
+        // Validate bachelor name
+        if (string.IsNullOrEmpty(currentBachelor._name))
+        {
+            Debug.LogError("NoteBook: Cannot initialize notebook: Bachelor has empty name!");
+            return;
+        }
+
+        Debug.Log($"NoteBook: Initializing notebook for {currentBachelor._name}");
 
         // Clear any existing entries
         ClearEntries();
@@ -312,9 +339,22 @@ public class NoteBook : MonoBehaviour
         // Register for new bachelor events using helper method
         RegisterToBachelorEvents(currentBachelor);
 
-        // Only reset discoveries if this is a completely new bachelor setup
-        // Comment out the line below if you want to preserve discovered preferences
-        // currentBachelor.EnsureUndiscoveredState();
+        // Always ensure bachelor preferences are loaded from save data
+        if (currentBachelor != null)
+        {
+            // Validate bachelor name
+            if (string.IsNullOrEmpty(currentBachelor._name))
+            {
+                Debug.LogError(
+                    "NoteBook: SetBachelor called with bachelor that has empty name! Cannot synchronize with save data."
+                );
+            }
+            else
+            {
+                Debug.Log($"NoteBook: Setting bachelor to {currentBachelor._name}");
+                currentBachelor.SynchronizeWithSaveData();
+            }
+        }
 
         // Re-initialize with the new bachelor
         isInitialized = false;
@@ -519,14 +559,37 @@ public class NoteBook : MonoBehaviour
     /// </summary>
     public void EnsureBachelorConnection(NewBachelorSO bachelor)
     {
+        if (bachelor == null)
+        {
+            Debug.LogWarning("NoteBook: EnsureBachelorConnection called with null bachelor!");
+            return;
+        }
+
+        // Validate bachelor name
+        if (string.IsNullOrEmpty(bachelor._name))
+        {
+            Debug.LogError(
+                "NoteBook: EnsureBachelorConnection called with bachelor that has empty name!"
+            );
+            return;
+        }
+
         if (currentBachelor != bachelor)
         {
+            Debug.Log($"NoteBook: Connecting to different bachelor: {bachelor._name}");
             SetBachelor(bachelor);
         }
         else if (currentBachelor != null)
         {
+            Debug.Log(
+                $"NoteBook: Refreshing connection to current bachelor: {currentBachelor._name}"
+            );
+
             // Even if it's the same bachelor, ensure we're properly registered
             RegisterToBachelorEvents(currentBachelor);
+
+            // Reload preferences from save data
+            ReloadFromSaveData();
 
             // Refresh the notebook to catch any state changes
             if (isInitialized)
@@ -537,19 +600,133 @@ public class NoteBook : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Manually saves the current bachelor's discovered preferences
+    /// Called automatically when preferences are discovered, but can be called manually if needed
+    /// </summary>
+    public void SaveCurrentBachelorPreferences()
+    {
+        if (currentBachelor == null)
+        {
+            Debug.LogWarning(
+                "NoteBook: SaveCurrentBachelorPreferences called but no bachelor is assigned!"
+            );
+            return;
+        }
+
+        // Validate bachelor name
+        if (string.IsNullOrEmpty(currentBachelor._name))
+        {
+            Debug.LogError(
+                "NoteBook: SaveCurrentBachelorPreferences called with bachelor that has empty name! Cannot save preferences."
+            );
+            return;
+        }
+
+        Debug.Log($"NoteBook: Manually saving preferences for {currentBachelor._name}");
+        currentBachelor.SaveDiscoveredPreferences();
+    }
+
+    /// <summary>
+    /// Forces the notebook to reload from saved data
+    /// Useful for debugging or when save data changes externally
+    /// </summary>
+    public void ReloadFromSaveData()
+    {
+        if (currentBachelor != null)
+        {
+            // Validate bachelor name
+            if (string.IsNullOrEmpty(currentBachelor._name))
+            {
+                Debug.LogError(
+                    "NoteBook: ReloadFromSaveData called with bachelor that has empty name! Cannot synchronize with save data."
+                );
+                return;
+            }
+
+            Debug.Log($"NoteBook: Reloading save data for {currentBachelor._name}");
+
+            // Clear current state
+            ClearEntries();
+
+            // Force bachelor to reload from save data
+            currentBachelor.SynchronizeWithSaveData();
+
+            // Reinitialize notebook with updated data
+            isInitialized = false;
+            InitializeNotebook();
+        }
+        else
+        {
+            Debug.LogWarning("NoteBook: ReloadFromSaveData called but no bachelor is assigned!");
+        }
+    }
+
+    /// <summary>
+    /// NoteBook system for tracking and displaying bachelor preferences
+    ///
+    /// SAVE/LOAD FUNCTIONALITY:
+    /// - Automatically saves discovered preferences when they are found
+    /// - Loads previously discovered preferences when talking to a bachelor again
+    /// - Preferences are saved to the game's save file (save.json) in the persistent data folder
+    /// - Each bachelor's preferences and dating status are stored separately by bachelor name
+    ///
+    /// REFACTORED SAVE SYSTEM:
+    /// - Bachelor preferences are now stored in BachelorPreferencesData objects in the SaveData.BachelorPreferences list
+    /// - Each BachelorPreferencesData object contains:
+    ///   - bachelorName: The unique identifier for the bachelor
+    ///   - hasBeenSpeedDated: Boolean flag for speed dating status
+    ///   - hasCompletedRealDate: Boolean flag for real dating status
+    ///   - lastRealDateLocation: String storing the location of the last real date
+    ///   - discoveredLikes: List of strings representing discovered likes
+    ///   - discoveredDislikes: List of strings representing discovered dislikes
+    /// - The bachelor name is CRITICAL for data integrity - never use a bachelor with an empty name
+    /// - The system automatically migrates legacy data to the new format
+    ///
+    /// HOW IT WORKS:
+    /// 1. When a preference is discovered via DiscoverLike() or DiscoverDislike(), it's automatically saved
+    /// 2. When SetBachelor() is called, the bachelor's SynchronizeWithSaveData() loads previously discovered preferences
+    /// 3. The notebook then displays all discovered preferences from the save data
+    /// 4. No manual save/load calls are needed - it's all automatic
+    /// 5. All data is stored by bachelor name to ensure the correct preferences are loaded
+    ///
+    /// IMPORTANT NOTES:
+    /// - Always ensure the bachelor has a valid, non-empty name before using with the notebook
+    /// - Use EnsureBachelorConnection() when switching bachelors to ensure proper synchronization
+    /// - The save system now avoids empty strings and properly handles bachelor-specific data
+    ///
+    /// DEBUG METHODS:
+    /// - "Debug: Discover All Preferences" - Discovers all preferences for testing
+    /// - "Debug: Save Current Preferences" - Manually saves current state
+    /// - "Debug: Reload From Save Data" - Reloads notebook from save data
+    /// - "Debug: Clear Save Data" - Resets and clears saved preferences
+    /// - "Debug: Log Current State" - Shows current state in console
+    /// - "Debug: Test Save System Integration" - Tests the refactored save system integration
+    /// </summary>
     // Debug methods for testing
     [ContextMenu("Debug: Discover All Preferences")]
     public void DebugDiscoverAllPreferences()
     {
-        if (currentBachelor != null)
-        {
-            currentBachelor.DiscoverAllPreferencesForTesting();
-            Debug.Log($"Discovered all preferences for {currentBachelor._name}");
-        }
-        else
+        if (currentBachelor == null)
         {
             Debug.LogWarning("No bachelor assigned to discover preferences for!");
+            return;
         }
+
+        // Validate bachelor name
+        if (string.IsNullOrEmpty(currentBachelor._name))
+        {
+            Debug.LogError(
+                "NoteBook: DebugDiscoverAllPreferences called with bachelor that has empty name!"
+            );
+            return;
+        }
+
+        currentBachelor.DiscoverAllPreferencesForTesting();
+        Debug.Log($"Discovered all preferences for {currentBachelor._name}");
+
+        // Force save to ensure preferences are stored properly per-bachelor
+        currentBachelor.SaveDiscoveredPreferences();
     }
 
     [ContextMenu("Debug: Log Current State")]
@@ -584,6 +761,198 @@ public class NoteBook : MonoBehaviour
                     $"Dislike {i}: '{dislike.description}' - Discovered: {dislike.discovered}"
                 );
             }
+        }
+    }
+
+    [ContextMenu("Debug: Save Current Preferences")]
+    public void DebugSaveCurrentPreferences()
+    {
+        if (currentBachelor != null)
+        {
+            SaveCurrentBachelorPreferences();
+            Debug.Log($"Manually saved preferences for {currentBachelor._name}");
+        }
+        else
+        {
+            Debug.LogWarning("No bachelor assigned to save preferences for!");
+        }
+    }
+
+    [ContextMenu("Debug: Reload From Save Data")]
+    public void DebugReloadFromSaveData()
+    {
+        if (currentBachelor != null)
+        {
+            Debug.Log($"Reloading notebook from save data for {currentBachelor._name}");
+            ReloadFromSaveData();
+            Debug.Log(
+                $"Reload complete. Current entries - Likes: {likeEntryObjects.Count}, Dislikes: {dislikeEntryObjects.Count}"
+            );
+        }
+        else
+        {
+            Debug.LogWarning("No bachelor assigned to reload for!");
+        }
+    }
+
+    [ContextMenu("Debug: Clear Save Data")]
+    public void DebugClearSaveData()
+    {
+        if (currentBachelor != null)
+        {
+            // Validate bachelor name
+            if (string.IsNullOrEmpty(currentBachelor._name))
+            {
+                Debug.LogError(
+                    "NoteBook: DebugClearSaveData called with bachelor that has empty name! Cannot clear preferences."
+                );
+                return;
+            }
+
+            Debug.Log($"NoteBook: Clearing save data for {currentBachelor._name}");
+
+            // Reset discoveries in memory
+            currentBachelor.ResetDiscoveries();
+
+            // Save the reset state with proper bachelor name
+            currentBachelor.SaveDiscoveredPreferences();
+
+            // Refresh the notebook
+            ReloadFromSaveData();
+
+            Debug.Log($"Cleared saved preferences for {currentBachelor._name}");
+        }
+        else
+        {
+            Debug.LogWarning("No bachelor assigned to clear preferences for!");
+        }
+    }
+
+    [ContextMenu("Debug: Test Save System Integration")]
+    public void DebugTestSaveSystemIntegration()
+    {
+        if (currentBachelor == null)
+        {
+            Debug.LogError("NoteBook: Cannot test save system integration - no bachelor assigned!");
+            return;
+        }
+
+        if (string.IsNullOrEmpty(currentBachelor._name))
+        {
+            Debug.LogError(
+                "NoteBook: Cannot test save system integration - bachelor has empty name!"
+            );
+            return;
+        }
+
+        Debug.Log($"NoteBook: Testing save system integration for {currentBachelor._name}");
+
+        // 1. Load current save data
+        SaveData saveData = SaveSystem.Deserialize();
+        if (saveData == null)
+        {
+            Debug.LogWarning("No save data found. Creating new save data.");
+            saveData = new SaveData();
+        }
+
+        // 2. Look for this bachelor's data
+        BachelorPreferencesData prefData = saveData.BachelorPreferences.Find(bp =>
+            bp.bachelorName == currentBachelor._name
+        );
+
+        if (prefData != null)
+        {
+            Debug.Log($"Found existing data for {currentBachelor._name}:");
+            Debug.Log($"  - Speed dated: {prefData.hasBeenSpeedDated}");
+            Debug.Log($"  - Real dated: {prefData.hasCompletedRealDate}");
+            Debug.Log($"  - Real date location: {prefData.lastRealDateLocation}");
+            Debug.Log($"  - Discovered likes: {prefData.discoveredLikes.Count}");
+            Debug.Log($"  - Discovered dislikes: {prefData.discoveredDislikes.Count}");
+
+            // List all preferences
+            if (prefData.discoveredLikes.Count > 0)
+            {
+                Debug.Log("  - Likes:");
+                foreach (var like in prefData.discoveredLikes)
+                {
+                    Debug.Log($"    • {like}");
+                }
+            }
+
+            if (prefData.discoveredDislikes.Count > 0)
+            {
+                Debug.Log("  - Dislikes:");
+                foreach (var dislike in prefData.discoveredDislikes)
+                {
+                    Debug.Log($"    • {dislike}");
+                }
+            }
+        }
+        else
+        {
+            Debug.Log($"No saved preferences found for {currentBachelor._name}");
+        }
+
+        // 3. Test saving a preference if we have any undiscovered ones
+        bool discoveredNewPreference = false;
+
+        if (currentBachelor._likes != null)
+        {
+            foreach (var like in currentBachelor._likes)
+            {
+                if (!like.discovered)
+                {
+                    Debug.Log($"Discovering new like preference for testing: {like.description}");
+                    like.discovered = true;
+                    discoveredNewPreference = true;
+                    break;
+                }
+            }
+        }
+
+        if (!discoveredNewPreference && currentBachelor._dislikes != null)
+        {
+            foreach (var dislike in currentBachelor._dislikes)
+            {
+                if (!dislike.discovered)
+                {
+                    Debug.Log(
+                        $"Discovering new dislike preference for testing: {dislike.description}"
+                    );
+                    dislike.discovered = true;
+                    discoveredNewPreference = true;
+                    break;
+                }
+            }
+        }
+
+        if (discoveredNewPreference)
+        {
+            // Save the discovered preference
+            currentBachelor.SaveDiscoveredPreferences();
+
+            // Refresh the notebook UI
+            RefreshDiscoveredEntries();
+            UpdateVisibility();
+
+            Debug.Log("Saved new preference and refreshed notebook UI");
+
+            // Verify it was saved correctly
+            SaveData updatedSaveData = SaveSystem.Deserialize();
+            BachelorPreferencesData updatedPrefData = updatedSaveData.BachelorPreferences.Find(bp =>
+                bp.bachelorName == currentBachelor._name
+            );
+
+            if (updatedPrefData != null)
+            {
+                Debug.Log($"Updated data for {currentBachelor._name}:");
+                Debug.Log($"  - Discovered likes: {updatedPrefData.discoveredLikes.Count}");
+                Debug.Log($"  - Discovered dislikes: {updatedPrefData.discoveredDislikes.Count}");
+            }
+        }
+        else
+        {
+            Debug.Log("No undiscovered preferences found to test with.");
         }
     }
 }

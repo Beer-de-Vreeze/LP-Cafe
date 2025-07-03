@@ -40,7 +40,6 @@ MonoBehaviour:
       - {fileID: 11400000, guid: af0352be1b949d04c825eb6d14ddb068, type: 2}
       - {fileID: 11400000, guid: 084262095e51f2842b711925314982dd, type: 2}
       - {fileID: 11400000, guid: 6e192005bc09565489ceb08335bd4c49, type: 2}
-      - {fileID: 11400000, guid: 9e6150ea90c013c439f8fa7d8bd15b59, type: 2}
       - {fileID: 11400000, guid: fb015dfe8eb98d148807646e2ccf9f84, type: 2}
       - {fileID: 11400000, guid: 4348dcda00ed37049b6dd4dadb37ac7d, type: 2}
       - {fileID: 11400000, guid: f0a6fc05d7352674cb33b683a7fcdec2, type: 2}
@@ -48,17 +47,15 @@ MonoBehaviour:
       - {fileID: 11400000, guid: 7560ad1d4bc685143ae9979fd82865b9, type: 2}
       - {fileID: 11400000, guid: 2827847b08ba6fa42ab1cbe62918c769, type: 2}
       - {fileID: 11400000, guid: 5ff2fb1837fd5c849bef76d5a8476644, type: 2}
-      - {fileID: 11400000, guid: b33413863de1ac2479b4c3901b335e60, type: 2}
       - {fileID: 11400000, guid: 6a51e2f2a286b7f44a735d2a57152a9d, type: 2}
-      - {fileID: 11400000, guid: 6789bb39f6985a54d8ab4f3df5c25b8f, type: 2}
       - {fileID: 11400000, guid: 3517b8861514546448eb2a1495406d59, type: 2}
       - {fileID: 11400000, guid: 898dd9b6abac6c64fa8082fabc689803, type: 2}
       - {fileID: 11400000, guid: 73af95a6575f3c44f8fb983cc5a61c07, type: 2}
       - {fileID: 11400000, guid: 9ec790d9b69991a4386ad1e358fa1824, type: 2}
-      - {fileID: 11400000, guid: 905006eca9d0dfe4fb57bd08d11dd586, type: 2}
-      - {fileID: 11400000, guid: 6a8d75791afba374f8ad02d96d797ef6, type: 2}
-      - {fileID: 11400000, guid: 9f051db97e7af6742b6f7eca956caf06, type: 2}
       - {fileID: 11400000, guid: f04d075a11745f944b83458c8fb21c86, type: 2}
       - {fileID: 11400000, guid: 30ed08653ed894547a1a6f1c25630aa3, type: 2}
       - {fileID: 11400000, guid: 01c5653a6f4a40f46bda2260a2e9e342, type: 2}
+      - {fileID: 11400000, guid: b33413863de1ac2479b4c3901b335e60, type: 2}
+      - {fileID: 11400000, guid: 6a8d75791afba374f8ad02d96d797ef6, type: 2}
+      - {fileID: 11400000, guid: 905006eca9d0dfe4fb57bd08d11dd586, type: 2}
   <m_containerUngroupedDialoguesData>k__BackingField: []

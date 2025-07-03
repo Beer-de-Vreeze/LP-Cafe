@@ -27,7 +27,7 @@ MonoBehaviour:
       for sure.
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 5bc0a0fdcbb002344818a682112c0e0e, type: 2}
   <m_bachelorImageData>k__BackingField: {fileID: 21300000, guid: 4d7a66a9cea93b246a1057f95ed0764f, type: 3}
-  <m_dialogueAudioData>k__BackingField: {fileID: 0}
+  <m_dialogueAudioData>k__BackingField: {fileID: 8300000, guid: 574ddd121dd3e27428f1e02b8c6bbae4, type: 3}
   <m_dialogueTypeData>k__BackingField: 1
   <m_isStartingDialogueData>k__BackingField: 1
   <m_propertyToCheckData>k__BackingField: 

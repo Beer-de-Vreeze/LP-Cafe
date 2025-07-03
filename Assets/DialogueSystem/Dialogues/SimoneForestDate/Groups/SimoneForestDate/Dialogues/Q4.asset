@@ -28,7 +28,7 @@ MonoBehaviour:
       a small clearing?
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: cf7f76b5653bf824bb4070286add9e4b, type: 2}
   <m_bachelorImageData>k__BackingField: {fileID: 21300000, guid: 1b752948b3bd324418758c36f01fb7d3, type: 3}
-  <m_dialogueAudioData>k__BackingField: {fileID: 0}
+  <m_dialogueAudioData>k__BackingField: {fileID: 8300000, guid: 4d425ddadf8be3440aad13cd9f4798a4, type: 3}
   <m_dialogueTypeData>k__BackingField: 1
   <m_isStartingDialogueData>k__BackingField: 1
   <m_propertyToCheckData>k__BackingField: 

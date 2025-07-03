@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using DS;
 using UnityEngine;
 
@@ -69,6 +70,7 @@ public class NewBachelorSO : ScriptableObject
             _likes[index].discovered = true;
             _isLikeDiscovered = true;
             OnPreferenceDiscovered?.Invoke(_likes[index]);
+            SaveDiscoveredPreferences();
         }
     }
 
@@ -82,6 +84,7 @@ public class NewBachelorSO : ScriptableObject
             _dislikes[index].discovered = true;
             _isDislikeDiscovered = true;
             OnPreferenceDiscovered?.Invoke(_dislikes[index]);
+            SaveDiscoveredPreferences();
         }
     }
 
@@ -98,6 +101,7 @@ public class NewBachelorSO : ScriptableObject
                 OnPreferenceDiscovered?.Invoke(like);
             }
             _isLikeDiscovered = true;
+            SaveDiscoveredPreferences();
         }
     }
 
@@ -114,6 +118,7 @@ public class NewBachelorSO : ScriptableObject
                 OnPreferenceDiscovered?.Invoke(dislike);
             }
             _isDislikeDiscovered = true;
+            SaveDiscoveredPreferences();
         }
     }
 
@@ -140,6 +145,9 @@ public class NewBachelorSO : ScriptableObject
 
         _isLikeDiscovered = false;
         _isDislikeDiscovered = false;
+
+        // Save the reset state
+        SaveDiscoveredPreferences();
     }
 
     /// <summary>
@@ -159,14 +167,19 @@ public class NewBachelorSO : ScriptableObject
     /// </summary>
     private void OnEnable()
     {
-        // Only reset discoveries at the very start of the game, not every time the SO is enabled
-        // This prevents discovered preferences from being reset during gameplay
+        // Only initialize at the very start of the game, not every time the SO is enabled
         if (Application.isPlaying && !hasBeenInitializedInPlayMode)
         {
-            EnsureUndiscoveredState();
-
-            // Synchronize state with save data
+            // For new game, first synchronize with save data instead of resetting
+            // This ensures we don't lose preferences when re-enabling
             SynchronizeWithSaveData();
+
+            // Only reset if there are no saved preferences for this bachelor
+            // This allows a clean start for new game sessions
+            if (!HasSavedPreferences())
+            {
+                EnsureUndiscoveredState();
+            }
 
             hasBeenInitializedInPlayMode = true;
         }
@@ -197,6 +210,8 @@ public class NewBachelorSO : ScriptableObject
     /// </summary>
     public void ResetRuntimeState()
     {
+        Debug.Log($"[ResetRuntimeState] Starting runtime reset for bachelor: {_name}");
+
         // Reset runtime values without modifying the asset
         _HasBeenSpeedDated = false;
         _HasCompletedRealDate = false;
@@ -228,9 +243,52 @@ public class NewBachelorSO : ScriptableObject
         if (_loveMeter != null)
         {
             _loveMeter.Reset();
+            Debug.Log(
+                $"[ResetRuntimeState] Reset love meter for {_name} to {_loveMeter.GetCurrentLove()}"
+            );
         }
 
-        Debug.Log($"Reset runtime state for bachelor: {_name}");
+        // Clean up save data references as well
+        SaveData saveData = SaveSystem.Deserialize();
+        if (saveData != null)
+        {
+            bool saveDataChanged = false;
+
+            // Remove from legacy lists
+            if (saveData.DatedBachelors != null && saveData.DatedBachelors.Contains(_name))
+            {
+                saveData.DatedBachelors.Remove(_name);
+                saveDataChanged = true;
+            }
+
+            if (saveData.RealDatedBachelors != null && saveData.RealDatedBachelors.Contains(_name))
+            {
+                saveData.RealDatedBachelors.Remove(_name);
+                saveDataChanged = true;
+            }
+
+            // Remove from bachelor-specific preferences
+            if (saveData.BachelorPreferences != null)
+            {
+                for (int i = saveData.BachelorPreferences.Count - 1; i >= 0; i--)
+                {
+                    if (saveData.BachelorPreferences[i].bachelorName == _name)
+                    {
+                        saveData.BachelorPreferences.RemoveAt(i);
+                        saveDataChanged = true;
+                        break;
+                    }
+                }
+            }
+
+            if (saveDataChanged)
+            {
+                SaveSystem.SerializeData(saveData);
+                Debug.Log($"[ResetRuntimeState] Cleaned save data references for {_name}");
+            }
+        }
+
+        Debug.Log($"[ResetRuntimeState] Runtime reset complete for bachelor: {_name}");
     }
 #endif
 
@@ -271,24 +329,54 @@ public class NewBachelorSO : ScriptableObject
 
         // Always check the save system first (authoritative source)
         SaveData saveData = SaveSystem.Deserialize();
-        if (saveData != null && saveData.DatedBachelors != null)
+        if (saveData != null)
         {
-            bool savedAsDated = saveData.DatedBachelors.Contains(_name);
-            Debug.Log(
-                $"[HasBeenDated] Save data check - DatedBachelors contains {_name}: {savedAsDated}"
-            );
-
-            if (savedAsDated && !_HasBeenSpeedDated)
+            // Check in the bachelor-specific preferences (new format)
+            BachelorPreferencesData prefData = saveData.GetOrCreateBachelorData(_name);
+            if (prefData != null)
             {
-                // Update the local flag to match save data
-                _HasBeenSpeedDated = true;
-                Debug.Log($"[HasBeenDated] Updated local flag to match save data");
+                bool savedAsDated = prefData.hasBeenSpeedDated;
+                Debug.Log(
+                    $"[HasBeenDated] Bachelor preferences data check - hasBeenSpeedDated for {_name}: {savedAsDated}"
+                );
+
+                if (savedAsDated && !_HasBeenSpeedDated)
+                {
+                    // Update the local flag to match save data
+                    _HasBeenSpeedDated = true;
+                    Debug.Log($"[HasBeenDated] Updated local flag to match save data");
+                }
+                return savedAsDated;
             }
-            return savedAsDated;
+
+            // Legacy check for backward compatibility
+            if (saveData.DatedBachelors != null && saveData.DatedBachelors.Contains(_name))
+            {
+                Debug.Log(
+                    $"[HasBeenDated] Legacy save data check - DatedBachelors contains {_name}: true"
+                );
+
+                // Migrate the data to the new format
+                prefData = saveData.GetOrCreateBachelorData(_name);
+                prefData.hasBeenSpeedDated = true;
+                SaveSystem.SerializeData(saveData);
+                Debug.Log($"[HasBeenDated] Migrated legacy data to new format");
+
+                if (!_HasBeenSpeedDated)
+                {
+                    // Update the local flag to match save data
+                    _HasBeenSpeedDated = true;
+                    Debug.Log($"[HasBeenDated] Updated local flag to match legacy save data");
+                }
+
+                return true;
+            }
+
+            Debug.Log($"[HasBeenDated] Bachelor not found in save data");
         }
         else
         {
-            Debug.Log($"[HasBeenDated] No save data or DatedBachelors list found");
+            Debug.Log($"[HasBeenDated] No save data found");
         }
 
         // Fallback to local flag if no save data
@@ -323,16 +411,86 @@ public class NewBachelorSO : ScriptableObject
             Debug.Log($"[MarkAsDated] Created new SaveData");
         }
 
+        // Update the bachelor-specific data
+        BachelorPreferencesData prefData = saveData.GetOrCreateBachelorData(_name);
+        prefData.hasBeenSpeedDated = true;
+        Debug.Log($"[MarkAsDated] Set hasBeenSpeedDated flag for {_name} in save system");
+
+        // Add to legacy DatedBachelors list for backward compatibility
         if (!saveData.DatedBachelors.Contains(_name))
         {
             saveData.DatedBachelors.Add(_name);
-            SaveSystem.SerializeData(saveData);
-            Debug.Log($"[MarkAsDated] Added {_name} to DatedBachelors in save system and saved");
+            Debug.Log(
+                $"[MarkAsDated] Also added {_name} to legacy DatedBachelors list for compatibility"
+            );
         }
-        else
+
+        // Also update BachelorPreferences to save discovered likes/dislikes
+        SaveBachelorPreferencesToSaveData(saveData);
+
+        // Save the updated data
+        SaveSystem.SerializeData(saveData);
+        Debug.Log($"[MarkAsDated] Save data serialized to disk");
+    }
+
+    /// <summary>
+    /// Saves bachelor preferences to the save data system
+    /// </summary>
+    private void SaveBachelorPreferencesToSaveData(SaveData saveData)
+    {
+        if (saveData == null || string.IsNullOrEmpty(_name))
+            return;
+
+        // Find existing preference data or create new one
+        BachelorPreferencesData prefData = saveData.BachelorPreferences.Find(bp =>
+            bp.bachelorName == _name
+        );
+        if (prefData == null)
         {
-            Debug.Log($"[MarkAsDated] {_name} already exists in DatedBachelors list");
+            prefData = new BachelorPreferencesData(_name);
+            saveData.BachelorPreferences.Add(prefData);
+            Debug.Log(
+                $"[SaveBachelorPreferencesToSaveData] Created new preferences entry for {_name}"
+            );
         }
+
+        // Clear and update the discovered likes and dislikes
+        prefData.discoveredLikes.Clear();
+        prefData.discoveredDislikes.Clear();
+
+        // Add all discovered likes
+        if (_likes != null)
+        {
+            foreach (var like in _likes)
+            {
+                if (like.discovered)
+                {
+                    prefData.discoveredLikes.Add(like.description);
+                    Debug.Log(
+                        $"[SaveBachelorPreferencesToSaveData] Added discovered like: {like.description}"
+                    );
+                }
+            }
+        }
+
+        // Add all discovered dislikes
+        if (_dislikes != null)
+        {
+            foreach (var dislike in _dislikes)
+            {
+                if (dislike.discovered)
+                {
+                    prefData.discoveredDislikes.Add(dislike.description);
+                    Debug.Log(
+                        $"[SaveBachelorPreferencesToSaveData] Added discovered dislike: {dislike.description}"
+                    );
+                }
+            }
+        }
+
+        Debug.Log(
+            $"[SaveBachelorPreferencesToSaveData] Saved {prefData.discoveredLikes.Count} likes and {prefData.discoveredDislikes.Count} dislikes for {_name}"
+        );
     }
 
     /// <summary>
@@ -367,18 +525,34 @@ public class NewBachelorSO : ScriptableObject
             saveData = new SaveData();
         }
 
-        // Add to both lists to ensure compatibility
+        // Update the bachelor-specific data
+        BachelorPreferencesData prefData = saveData.GetOrCreateBachelorData(_name);
+        prefData.hasBeenSpeedDated = true;
+        prefData.hasCompletedRealDate = true;
+        prefData.lastRealDateLocation = dateLocation;
+        Debug.Log(
+            $"[MarkAsRealDated] Updated bachelor preferences with real date info for {_name}"
+        );
+
+        // Add to legacy lists for backward compatibility
         if (!saveData.DatedBachelors.Contains(_name))
         {
             saveData.DatedBachelors.Add(_name);
-            Debug.Log($"[MarkAsRealDated] Added {_name} to DatedBachelors list");
+            Debug.Log(
+                $"[MarkAsRealDated] Added {_name} to legacy DatedBachelors list for compatibility"
+            );
         }
 
         if (!saveData.RealDatedBachelors.Contains(_name))
         {
             saveData.RealDatedBachelors.Add(_name);
-            Debug.Log($"[MarkAsRealDated] Added {_name} to RealDatedBachelors list");
+            Debug.Log(
+                $"[MarkAsRealDated] Added {_name} to legacy RealDatedBachelors list for compatibility"
+            );
         }
+
+        // Also update BachelorPreferences to save discovered likes/dislikes
+        SaveBachelorPreferencesToSaveData(saveData);
 
         SaveSystem.SerializeData(saveData);
         Debug.Log(
@@ -400,25 +574,83 @@ public class NewBachelorSO : ScriptableObject
 
         // Always check the save system first (authoritative source)
         SaveData saveData = SaveSystem.Deserialize();
-        if (saveData != null && saveData.RealDatedBachelors != null)
+        if (saveData != null)
         {
-            bool savedAsRealDated = saveData.RealDatedBachelors.Contains(_name);
-            Debug.Log(
-                $"[HasCompletedRealDate] Save data check - RealDatedBachelors contains {_name}: {savedAsRealDated}"
-            );
-
-            if (savedAsRealDated && !_HasCompletedRealDate)
+            // Check in the bachelor-specific preferences (new format)
+            BachelorPreferencesData prefData = saveData.GetOrCreateBachelorData(_name);
+            if (prefData != null)
             {
-                // Update the local flags to match save data
-                _HasCompletedRealDate = true;
-                _HasBeenSpeedDated = true; // Real dates also count as speed dates
-                Debug.Log($"[HasCompletedRealDate] Updated local flags based on save data");
+                bool savedAsRealDated = prefData.hasCompletedRealDate;
+                Debug.Log(
+                    $"[HasCompletedRealDate] Bachelor preferences data check - hasCompletedRealDate for {_name}: {savedAsRealDated}"
+                );
+
+                // Also check for real date location
+                if (
+                    savedAsRealDated
+                    && !string.IsNullOrEmpty(prefData.lastRealDateLocation)
+                    && string.IsNullOrEmpty(_LastRealDateLocation)
+                )
+                {
+                    _LastRealDateLocation = prefData.lastRealDateLocation;
+                    Debug.Log(
+                        $"[HasCompletedRealDate] Updated local date location to: {_LastRealDateLocation}"
+                    );
+                }
+
+                if (savedAsRealDated && !_HasCompletedRealDate)
+                {
+                    // Update the local flags to match save data
+                    _HasCompletedRealDate = true;
+                    _HasBeenSpeedDated = true; // Real dates also count as speed dates
+                    Debug.Log($"[HasCompletedRealDate] Updated local flags based on save data");
+                }
+                return savedAsRealDated;
             }
-            return savedAsRealDated;
+
+            // Legacy check for backward compatibility
+            if (saveData.RealDatedBachelors != null && saveData.RealDatedBachelors.Contains(_name))
+            {
+                Debug.Log(
+                    $"[HasCompletedRealDate] Legacy save data check - RealDatedBachelors contains {_name}: true"
+                );
+
+                // Migrate the data to the new format
+                prefData = saveData.GetOrCreateBachelorData(_name);
+                prefData.hasCompletedRealDate = true;
+                prefData.hasBeenSpeedDated = true; // Also mark as speed dated
+
+                // Use a default location for legacy migration if we don't have one
+                if (string.IsNullOrEmpty(_LastRealDateLocation))
+                {
+                    prefData.lastRealDateLocation = "Unknown";
+                }
+                else
+                {
+                    prefData.lastRealDateLocation = _LastRealDateLocation;
+                }
+
+                SaveSystem.SerializeData(saveData);
+                Debug.Log($"[HasCompletedRealDate] Migrated legacy data to new format");
+
+                if (!_HasCompletedRealDate)
+                {
+                    // Update the local flags to match save data
+                    _HasCompletedRealDate = true;
+                    _HasBeenSpeedDated = true; // Real dates also count as speed dates
+                    Debug.Log(
+                        $"[HasCompletedRealDate] Updated local flags based on legacy save data"
+                    );
+                }
+
+                return true;
+            }
+
+            Debug.Log($"[HasCompletedRealDate] Bachelor not found as real dated in save data");
         }
         else
         {
-            Debug.Log($"[HasCompletedRealDate] No save data or RealDatedBachelors list found");
+            Debug.Log($"[HasCompletedRealDate] No save data found");
         }
 
         // Fallback to local flag if no save data
@@ -463,27 +695,51 @@ public class NewBachelorSO : ScriptableObject
         SaveData saveData = SaveSystem.Deserialize();
         if (saveData != null)
         {
-            bool removedFromDated = false;
-            bool removedFromRealDated = false;
+            bool saveDataChanged = false;
 
+            // Remove from legacy DatedBachelors list
             if (saveData.DatedBachelors != null && saveData.DatedBachelors.Contains(_name))
             {
                 saveData.DatedBachelors.Remove(_name);
-                removedFromDated = true;
-                Debug.Log($"[NewBachelorSO] Removed {_name} from DatedBachelors in save data");
+                saveDataChanged = true;
+                Debug.Log(
+                    $"[NewBachelorSO] Removed {_name} from legacy DatedBachelors in save data"
+                );
             }
 
+            // Remove from legacy RealDatedBachelors list
             if (saveData.RealDatedBachelors != null && saveData.RealDatedBachelors.Contains(_name))
             {
                 saveData.RealDatedBachelors.Remove(_name);
-                removedFromRealDated = true;
-                Debug.Log($"[NewBachelorSO] Removed {_name} from RealDatedBachelors in save data");
+                saveDataChanged = true;
+                Debug.Log(
+                    $"[NewBachelorSO] Removed {_name} from legacy RealDatedBachelors in save data"
+                );
             }
 
-            if (removedFromDated || removedFromRealDated)
+            // Remove from new bachelor-specific preferences data
+            if (saveData.BachelorPreferences != null)
+            {
+                for (int i = saveData.BachelorPreferences.Count - 1; i >= 0; i--)
+                {
+                    if (saveData.BachelorPreferences[i].bachelorName == _name)
+                    {
+                        saveData.BachelorPreferences.RemoveAt(i);
+                        saveDataChanged = true;
+                        Debug.Log(
+                            $"[NewBachelorSO] Removed {_name} from BachelorPreferences in save data"
+                        );
+                        break;
+                    }
+                }
+            }
+
+            if (saveDataChanged)
             {
                 SaveSystem.SerializeData(saveData);
-                Debug.Log($"[NewBachelorSO] Saved updated save data");
+                Debug.Log(
+                    $"[NewBachelorSO] Saved updated save data after cleaning all references to {_name}"
+                );
             }
         }
 
@@ -495,6 +751,129 @@ public class NewBachelorSO : ScriptableObject
         );
 
         Debug.Log($"Bachelor {_name} has been completely reset to initial state");
+    }
+
+    /// <summary>
+    /// Verifies that this bachelor has been completely reset to initial state
+    /// Returns true if the bachelor is in a clean initial state
+    /// </summary>
+    public bool VerifyCompleteReset()
+    {
+        Debug.Log($"[VerifyCompleteReset] Checking reset state for {_name}");
+
+        // Check local flags
+        if (_HasBeenSpeedDated)
+        {
+            Debug.LogError($"[VerifyCompleteReset] ❌ {_name} still marked as speed dated");
+            return false;
+        }
+
+        if (_HasCompletedRealDate)
+        {
+            Debug.LogError($"[VerifyCompleteReset] ❌ {_name} still marked as real dated");
+            return false;
+        }
+
+        if (!string.IsNullOrEmpty(_LastRealDateLocation))
+        {
+            Debug.LogError(
+                $"[VerifyCompleteReset] ❌ {_name} still has real date location: {_LastRealDateLocation}"
+            );
+            return false;
+        }
+
+        // Check preferences
+        if (_isLikeDiscovered)
+        {
+            Debug.LogError($"[VerifyCompleteReset] ❌ {_name} still has likes discovered flag set");
+            return false;
+        }
+
+        if (_isDislikeDiscovered)
+        {
+            Debug.LogError(
+                $"[VerifyCompleteReset] ❌ {_name} still has dislikes discovered flag set"
+            );
+            return false;
+        }
+
+        // Check individual preferences
+        if (_likes != null)
+        {
+            foreach (var like in _likes)
+            {
+                if (like.discovered)
+                {
+                    Debug.LogError(
+                        $"[VerifyCompleteReset] ❌ {_name} still has discovered like: {like.description}"
+                    );
+                    return false;
+                }
+            }
+        }
+
+        if (_dislikes != null)
+        {
+            foreach (var dislike in _dislikes)
+            {
+                if (dislike.discovered)
+                {
+                    Debug.LogError(
+                        $"[VerifyCompleteReset] ❌ {_name} still has discovered dislike: {dislike.description}"
+                    );
+                    return false;
+                }
+            }
+        }
+
+        // Check love meter
+        if (_loveMeter != null && _loveMeter.GetCurrentLove() != 3)
+        {
+            Debug.LogError(
+                $"[VerifyCompleteReset] ❌ {_name} love meter not at initial value. Current: {_loveMeter.GetCurrentLove()}, Expected: 3"
+            );
+            return false;
+        }
+
+        // Check save data
+        SaveData saveData = SaveSystem.Deserialize();
+        if (saveData != null)
+        {
+            // Check legacy lists
+            if (saveData.DatedBachelors != null && saveData.DatedBachelors.Contains(_name))
+            {
+                Debug.LogError(
+                    $"[VerifyCompleteReset] ❌ {_name} still in DatedBachelors save data"
+                );
+                return false;
+            }
+
+            if (saveData.RealDatedBachelors != null && saveData.RealDatedBachelors.Contains(_name))
+            {
+                Debug.LogError(
+                    $"[VerifyCompleteReset] ❌ {_name} still in RealDatedBachelors save data"
+                );
+                return false;
+            }
+
+            // Check bachelor-specific data
+            if (saveData.BachelorPreferences != null)
+            {
+                foreach (var prefData in saveData.BachelorPreferences)
+                {
+                    if (prefData.bachelorName == _name)
+                    {
+                        Debug.LogError(
+                            $"[VerifyCompleteReset] ❌ {_name} still has BachelorPreferences data in save file"
+                        );
+                        return false;
+                    }
+                }
+            }
+        }
+
+        Debug.Log($"[VerifyCompleteReset] ✅ {_name} is completely reset to initial state");
+        return true;
     }
 
     /// <summary>
@@ -537,29 +916,6 @@ public class NewBachelorSO : ScriptableObject
         string message = GetRealDateMessage();
         Debug.Log($"Current Message: {message}");
         Debug.Log("=== End Test ===");
-    }
-
-    /// <summary>
-    /// For testing purposes - simulate completing a real date
-    /// </summary>
-    [ContextMenu("Simulate Real Date Completion")]
-    public void SimulateRealDateCompletion()
-    {
-        string[] testLocations = { "Rooftop", "Aquarium", "Forest" };
-        string randomLocation = testLocations[UnityEngine.Random.Range(0, testLocations.Length)];
-
-        MarkAsRealDated(randomLocation);
-
-        // Set a random love level for testing
-        if (_loveMeter != null)
-        {
-            int randomLove = UnityEngine.Random.Range(0, 6);
-            _loveMeter._currentLove = randomLove;
-            Debug.Log($"Set love level to {randomLove} for testing");
-        }
-
-        Debug.Log($"Simulated real date completion at {randomLocation}");
-        TestRealDateMessages();
     }
 
     /// <summary>
@@ -715,7 +1071,7 @@ public class NewBachelorSO : ScriptableObject
     /// <summary>
     /// Synchronizes the local flags with the save data to ensure consistency
     /// </summary>
-    private void SynchronizeWithSaveData()
+    public void SynchronizeWithSaveData()
     {
         Debug.Log($"[SynchronizeWithSaveData] Synchronizing state for {_name}");
 
@@ -735,40 +1091,204 @@ public class NewBachelorSO : ScriptableObject
             return;
         }
 
-        // Check speed dating status
-        bool savedAsSpeedDated =
-            saveData.DatedBachelors != null && saveData.DatedBachelors.Contains(_name);
-        if (savedAsSpeedDated != _HasBeenSpeedDated)
-        {
-            Debug.Log(
-                $"[SynchronizeWithSaveData] Updating speed dated flag from {_HasBeenSpeedDated} to {savedAsSpeedDated}"
-            );
-            _HasBeenSpeedDated = savedAsSpeedDated;
-        }
+        // Get this bachelor's data from the new per-bachelor format
+        BachelorPreferencesData prefData = saveData.GetOrCreateBachelorData(_name);
 
-        // Check real dating status
-        bool savedAsRealDated =
-            saveData.RealDatedBachelors != null && saveData.RealDatedBachelors.Contains(_name);
-        if (savedAsRealDated != _HasCompletedRealDate)
+        if (prefData != null)
         {
-            Debug.Log(
-                $"[SynchronizeWithSaveData] Updating real dated flag from {_HasCompletedRealDate} to {savedAsRealDated}"
-            );
-            _HasCompletedRealDate = savedAsRealDated;
-
-            // If they completed a real date, they must have also speed dated
-            if (savedAsRealDated && !_HasBeenSpeedDated)
+            // Check speed dating status from bachelor preferences
+            bool savedAsSpeedDated = prefData.hasBeenSpeedDated;
+            if (savedAsSpeedDated != _HasBeenSpeedDated)
             {
-                _HasBeenSpeedDated = true;
                 Debug.Log(
-                    $"[SynchronizeWithSaveData] Also set speed dated flag to true since real date was completed"
+                    $"[SynchronizeWithSaveData] Updating speed dated flag from {_HasBeenSpeedDated} to {savedAsSpeedDated}"
                 );
+                _HasBeenSpeedDated = savedAsSpeedDated;
+            }
+
+            // Check real dating status from bachelor preferences
+            bool savedAsRealDated = prefData.hasCompletedRealDate;
+            if (savedAsRealDated != _HasCompletedRealDate)
+            {
+                Debug.Log(
+                    $"[SynchronizeWithSaveData] Updating real dated flag from {_HasCompletedRealDate} to {savedAsRealDated}"
+                );
+                _HasCompletedRealDate = savedAsRealDated;
+
+                // Also update the date location if it exists
+                if (savedAsRealDated && !string.IsNullOrEmpty(prefData.lastRealDateLocation))
+                {
+                    _LastRealDateLocation = prefData.lastRealDateLocation;
+                    Debug.Log(
+                        $"[SynchronizeWithSaveData] Updated date location to {_LastRealDateLocation}"
+                    );
+                }
+
+                // If they completed a real date, they must have also speed dated
+                if (savedAsRealDated && !_HasBeenSpeedDated)
+                {
+                    _HasBeenSpeedDated = true;
+                    prefData.hasBeenSpeedDated = true; // Make sure it's consistent in save data too
+                    Debug.Log(
+                        $"[SynchronizeWithSaveData] Also set speed dated flag to true since real date was completed"
+                    );
+                }
             }
         }
+        else
+        {
+            Debug.LogWarning($"[SynchronizeWithSaveData] Failed to get bachelor data for {_name}");
+
+            // Legacy check as fallback
+            // Check speed dating status
+            bool legacySpeedDated =
+                saveData.DatedBachelors != null && saveData.DatedBachelors.Contains(_name);
+
+            // Check real dating status
+            bool legacyRealDated =
+                saveData.RealDatedBachelors != null && saveData.RealDatedBachelors.Contains(_name);
+
+            if (legacySpeedDated || legacyRealDated)
+            {
+                Debug.Log(
+                    $"[SynchronizeWithSaveData] Found legacy dating data for {_name}, migrating..."
+                );
+
+                // Create new bachelor data
+                prefData = saveData.GetOrCreateBachelorData(_name);
+
+                if (legacySpeedDated)
+                {
+                    prefData.hasBeenSpeedDated = true;
+                    _HasBeenSpeedDated = true;
+                }
+
+                if (legacyRealDated)
+                {
+                    prefData.hasCompletedRealDate = true;
+                    prefData.hasBeenSpeedDated = true;
+                    prefData.lastRealDateLocation = string.IsNullOrEmpty(_LastRealDateLocation)
+                        ? "Unknown"
+                        : _LastRealDateLocation;
+
+                    _HasCompletedRealDate = true;
+                    _HasBeenSpeedDated = true;
+                }
+
+                // Save the migrated data
+                SaveSystem.SerializeData(saveData);
+            }
+        }
+
+        // Synchronize discovered preferences
+        SynchronizeDiscoveredPreferences(saveData);
 
         Debug.Log(
             $"[SynchronizeWithSaveData] Final state - SpeedDated: {_HasBeenSpeedDated}, RealDated: {_HasCompletedRealDate}"
         );
+    }
+
+    /// <summary>
+    /// Synchronizes discovered preferences with save data
+    /// </summary>
+    private void SynchronizeDiscoveredPreferences(SaveData saveData)
+    {
+        if (saveData == null || saveData.BachelorPreferences == null)
+        {
+            Debug.Log($"[SynchronizeDiscoveredPreferences] No preference data found for {_name}");
+            return;
+        }
+
+        // Find this bachelor's preference data
+        BachelorPreferencesData bachelorPrefs = null;
+        foreach (var prefData in saveData.BachelorPreferences)
+        {
+            if (prefData.bachelorName == _name)
+            {
+                bachelorPrefs = prefData;
+                break;
+            }
+        }
+
+        if (bachelorPrefs == null)
+        {
+            Debug.Log($"[SynchronizeDiscoveredPreferences] No saved preferences found for {_name}");
+            return;
+        }
+
+        Debug.Log($"[SynchronizeDiscoveredPreferences] Loading preferences for {_name}");
+
+        // Restore discovered likes
+        if (_likes != null && bachelorPrefs.discoveredLikes != null)
+        {
+            foreach (var like in _likes)
+            {
+                bool wasDiscovered = bachelorPrefs.discoveredLikes.Contains(like.description);
+                if (wasDiscovered && !like.discovered)
+                {
+                    like.discovered = true;
+                    Debug.Log(
+                        $"[SynchronizeDiscoveredPreferences] Restored like: {like.description}"
+                    );
+                }
+            }
+        }
+
+        // Restore discovered dislikes
+        if (_dislikes != null && bachelorPrefs.discoveredDislikes != null)
+        {
+            foreach (var dislike in _dislikes)
+            {
+                bool wasDiscovered = bachelorPrefs.discoveredDislikes.Contains(dislike.description);
+                if (wasDiscovered && !dislike.discovered)
+                {
+                    dislike.discovered = true;
+                    Debug.Log(
+                        $"[SynchronizeDiscoveredPreferences] Restored dislike: {dislike.description}"
+                    );
+                }
+            }
+        }
+
+        // Update discovery flags
+        UpdateDiscoveryFlags();
+
+        Debug.Log(
+            $"[SynchronizeDiscoveredPreferences] Preference restoration complete for {_name}"
+        );
+    }
+
+    /// <summary>
+    /// Updates the _isLikeDiscovered and _isDislikeDiscovered flags based on current preference states
+    /// </summary>
+    private void UpdateDiscoveryFlags()
+    {
+        _isLikeDiscovered = false;
+        _isDislikeDiscovered = false;
+
+        if (_likes != null)
+        {
+            foreach (var like in _likes)
+            {
+                if (like.discovered)
+                {
+                    _isLikeDiscovered = true;
+                    break;
+                }
+            }
+        }
+
+        if (_dislikes != null)
+        {
+            foreach (var dislike in _dislikes)
+            {
+                if (dislike.discovered)
+                {
+                    _isDislikeDiscovered = true;
+                    break;
+                }
+            }
+        }
     }
 
     /// <summary>
@@ -982,6 +1502,181 @@ public class NewBachelorSO : ScriptableObject
         else
         {
             Debug.Log($"[ValidateBachelorName] ✅ Bachelor '{_name}' has a proper name set.", this);
+        }
+    }
+
+    /// <summary>
+    /// Saves the current discovered preferences to the save system
+    /// </summary>
+    public void SaveDiscoveredPreferences()
+    {
+        if (string.IsNullOrEmpty(_name))
+        {
+            Debug.LogError(
+                $"[SaveDiscoveredPreferences] Bachelor has empty name! Cannot save preferences."
+            );
+            return;
+        }
+
+        SaveData saveData = SaveSystem.Deserialize();
+        if (saveData == null)
+        {
+            saveData = new SaveData();
+        }
+
+        if (saveData.BachelorPreferences == null)
+        {
+            saveData.BachelorPreferences = new List<BachelorPreferencesData>();
+        }
+
+        // Find or create bachelor preferences data
+        BachelorPreferencesData bachelorPrefs = null;
+        foreach (var prefData in saveData.BachelorPreferences)
+        {
+            if (prefData.bachelorName == _name)
+            {
+                bachelorPrefs = prefData;
+                break;
+            }
+        }
+
+        if (bachelorPrefs == null)
+        {
+            bachelorPrefs = new BachelorPreferencesData(_name);
+            saveData.BachelorPreferences.Add(bachelorPrefs);
+        }
+
+        // Clear existing preferences
+        bachelorPrefs.discoveredLikes.Clear();
+        bachelorPrefs.discoveredDislikes.Clear();
+
+        // Save discovered likes
+        if (_likes != null)
+        {
+            foreach (var like in _likes)
+            {
+                if (like.discovered)
+                {
+                    bachelorPrefs.discoveredLikes.Add(like.description);
+                }
+            }
+        }
+
+        // Save discovered dislikes
+        if (_dislikes != null)
+        {
+            foreach (var dislike in _dislikes)
+            {
+                if (dislike.discovered)
+                {
+                    bachelorPrefs.discoveredDislikes.Add(dislike.description);
+                }
+            }
+        }
+
+        // Save to file
+        SaveSystem.SerializeData(saveData);
+        Debug.Log(
+            $"[SaveDiscoveredPreferences] Saved preferences for {_name}: {bachelorPrefs.discoveredLikes.Count} likes, {bachelorPrefs.discoveredDislikes.Count} dislikes"
+        );
+    }
+
+    /// <summary>
+    /// Checks if there are any saved preferences for this bachelor in the save data
+    /// </summary>
+    /// <returns>True if there are saved preferences for this bachelor</returns>
+    private bool HasSavedPreferences()
+    {
+        if (string.IsNullOrEmpty(_name))
+        {
+            Debug.LogWarning($"[HasSavedPreferences] Bachelor has no name!");
+            return false;
+        }
+
+        SaveData saveData = SaveSystem.Deserialize();
+        if (saveData == null || saveData.BachelorPreferences == null)
+        {
+            return false;
+        }
+
+        // Look for preferences for this bachelor
+        foreach (var prefData in saveData.BachelorPreferences)
+        {
+            if (prefData.bachelorName == _name)
+            {
+                // Check if there are any discovered preferences
+                return (prefData.discoveredLikes != null && prefData.discoveredLikes.Count > 0)
+                    || (
+                        prefData.discoveredDislikes != null && prefData.discoveredDislikes.Count > 0
+                    );
+            }
+        }
+
+        return false;
+    }
+
+    /// <summary>
+    /// Ensures the current dating state flags are saved to the save file
+    /// This is needed when flags are modified directly without using MarkAsDated/MarkAsRealDated
+    /// </summary>
+    public void SaveCurrentDatingState()
+    {
+        if (string.IsNullOrEmpty(_name))
+        {
+            Debug.LogError(
+                $"[SaveCurrentDatingState] Cannot save bachelor with empty name! Bachelor object: {name}"
+            );
+            return;
+        }
+
+        SaveData saveData = SaveSystem.Deserialize();
+        if (saveData == null)
+        {
+            saveData = new SaveData();
+        }
+
+        // Update the bachelor-specific data
+        BachelorPreferencesData prefData = saveData.GetOrCreateBachelorData(_name);
+
+        // Update flags from memory to save data
+        prefData.hasBeenSpeedDated = _HasBeenSpeedDated;
+        prefData.hasCompletedRealDate = _HasCompletedRealDate;
+
+        if (!string.IsNullOrEmpty(_LastRealDateLocation))
+        {
+            prefData.lastRealDateLocation = _LastRealDateLocation;
+        }
+
+        // Also update legacy lists for backward compatibility
+        if (_HasBeenSpeedDated && !saveData.DatedBachelors.Contains(_name))
+        {
+            saveData.DatedBachelors.Add(_name);
+        }
+
+        if (_HasCompletedRealDate && !saveData.RealDatedBachelors.Contains(_name))
+        {
+            saveData.RealDatedBachelors.Add(_name);
+        }
+
+        // Save the updated data
+        SaveSystem.SerializeData(saveData);
+        Debug.Log($"[SaveCurrentDatingState] Dating state saved for {_name}");
+    }
+
+    /// <summary>
+    /// Test method to verify complete reset from the inspector
+    /// </summary>
+    [ContextMenu("Verify Complete Reset")]
+    private void TestVerifyCompleteReset()
+    {
+        bool isReset = VerifyCompleteReset();
+        if (isReset)
+        {
+            Debug.Log($"✅ {_name} verification passed - bachelor is completely reset");
+        }
+        else
+        {
+            Debug.LogError($"❌ {_name} verification failed - bachelor is not completely reset");
         }
     }
 }

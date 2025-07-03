@@ -17,9 +17,9 @@ MonoBehaviour:
     groom my fur to look pwetty for you.
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Next Dialogue
-    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 161c28a7cab160c4ab4c012347ed9735, type: 2}
+    <m_nextDialogue>k__BackingField: {fileID: 0}
   <m_bachelorImageData>k__BackingField: {fileID: 21300000, guid: 9ed62502198a9fc4b96150e12f314981, type: 3}
-  <m_dialogueAudioData>k__BackingField: {fileID: 0}
+  <m_dialogueAudioData>k__BackingField: {fileID: 8300000, guid: f20973783baee9c4d8d2edb2499bf582, type: 3}
   <m_dialogueTypeData>k__BackingField: 0
   <m_isStartingDialogueData>k__BackingField: 1
   <m_propertyToCheckData>k__BackingField: 
