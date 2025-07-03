@@ -1835,6 +1835,32 @@ public class DialogueDisplay : MonoBehaviour
             Debug.Log($"Updated love score for end dialogue buttons: {_loveScore}");
         }
 
+        // Ensure bachelor image is displayed when showing end dialogue buttons
+        if (_bachelor != null && _bachelor._portrait != null && _bachelorImage != null)
+        {
+            _bachelorImage.sprite = _bachelor._portrait;
+            _bachelorImage.color = new Color(
+                _bachelorImage.color.r,
+                _bachelorImage.color.g,
+                _bachelorImage.color.b,
+                1f
+            );
+            _bachelorImage.enabled = true;
+            Debug.Log($"Set bachelor image for end dialogue buttons: {_bachelor._name}");
+        }
+        else if (_bachelorImage != null)
+        {
+            _bachelorImage.sprite = null;
+            _bachelorImage.color = new Color(
+                _bachelorImage.color.r,
+                _bachelorImage.color.g,
+                _bachelorImage.color.b,
+                0f
+            );
+            _bachelorImage.enabled = false;
+            Debug.Log("No bachelor image available for end dialogue buttons");
+        }
+
         // Mark the bachelor as having completed a speed date
         if (_bachelor != null)
         {
@@ -1943,6 +1969,32 @@ public class DialogueDisplay : MonoBehaviour
     private void ShowPostRealDateOptions()
     {
         Debug.Log("Showing post-real-date options at end of real date scene");
+
+        // Ensure bachelor image is displayed
+        if (_bachelor != null && _bachelor._portrait != null && _bachelorImage != null)
+        {
+            _bachelorImage.sprite = _bachelor._portrait;
+            _bachelorImage.color = new Color(
+                _bachelorImage.color.r,
+                _bachelorImage.color.g,
+                _bachelorImage.color.b,
+                1f
+            );
+            _bachelorImage.enabled = true;
+            Debug.Log($"Set bachelor image for post-real-date options: {_bachelor._name}");
+        }
+        else if (_bachelorImage != null)
+        {
+            _bachelorImage.sprite = null;
+            _bachelorImage.color = new Color(
+                _bachelorImage.color.r,
+                _bachelorImage.color.g,
+                _bachelorImage.color.b,
+                0f
+            );
+            _bachelorImage.enabled = false;
+            Debug.Log("No bachelor image available for post-real-date options");
+        }
 
         // Clear the display text - no message shown at the end of real date scenes
         if (_displayText != null)

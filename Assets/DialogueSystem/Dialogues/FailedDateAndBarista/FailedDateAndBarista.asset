@@ -17,7 +17,6 @@ MonoBehaviour:
     list:
     - Key: {fileID: 11400000, guid: 282b549b8d5291c4eb67def867ddb107, type: 2}
       Value:
-      - {fileID: 11400000, guid: 80d25dbe86229f7499d80bdd9f234fe7, type: 2}
       - {fileID: 11400000, guid: 8e1e4d3c6f8cfd54f81053ac474ca5e9, type: 2}
       - {fileID: 11400000, guid: 5a51737a4d40f584d913ff250f6976d7, type: 2}
       - {fileID: 11400000, guid: 385bd47296b61a74fb7ae1aac36ec6b8, type: 2}
@@ -28,4 +27,5 @@ MonoBehaviour:
       - {fileID: 11400000, guid: 49e91445bdb0162479da63c12fffe2ae, type: 2}
       - {fileID: 11400000, guid: 41a6094a376944343a250f86bdcc6ceb, type: 2}
       - {fileID: 11400000, guid: 8c2c99a88cda440419c2a0afef5e86c0, type: 2}
+      - {fileID: 11400000, guid: 80d25dbe86229f7499d80bdd9f234fe7, type: 2}
   <m_containerUngroupedDialoguesData>k__BackingField: []
