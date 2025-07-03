@@ -870,6 +870,10 @@ public class DialogueDisplay : MonoBehaviour
     /// <param name="bachelor">The bachelor who has already been dated</param>
     public void ShowPostDateOptions(NewBachelorSO bachelor)
     {
+        Debug.Log(
+            $"[ShowPostDateOptions] Starting. Bachelor: {(bachelor != null ? bachelor._name : "null")}"
+        );
+
         // Clear all previous dialogue state to ensure clean setup
         ClearDialogueState();
 
@@ -881,16 +885,46 @@ public class DialogueDisplay : MonoBehaviour
         // Reset the state for waiting to clear before end buttons
         _waitingForClearBeforeEndButtons = false;
 
-        // Set up the UI
-        if (_bachelor != null && _nameText != null)
-        {
-            _nameText.text = _bachelor._name;
-        }
-
+        // Ensure bachelor image is displayed when showing post-date options
         if (_bachelor != null && _bachelor._portrait != null && _bachelorImage != null)
         {
             _bachelorImage.sprite = _bachelor._portrait;
+            _bachelorImage.color = new Color(
+                _bachelorImage.color.r,
+                _bachelorImage.color.g,
+                _bachelorImage.color.b,
+                1f
+            );
             _bachelorImage.enabled = true;
+            Debug.Log(
+                $"✓ Set bachelor image for post-date options: {_bachelor._name} (Portrait: {_bachelor._portrait.name})"
+            );
+        }
+        else if (_bachelorImage != null)
+        {
+            _bachelorImage.sprite = null;
+            _bachelorImage.color = new Color(
+                _bachelorImage.color.r,
+                _bachelorImage.color.g,
+                _bachelorImage.color.b,
+                0f
+            );
+            _bachelorImage.enabled = false;
+            Debug.LogWarning(
+                $"✗ No bachelor image available for post-date options. Bachelor: {(_bachelor != null ? "exists" : "null")}, Portrait: {(_bachelor?._portrait != null ? "exists" : "null")}, BachelorImage: {(_bachelorImage != null ? "exists" : "null")}"
+            );
+        }
+
+        // Set up the UI - bachelor name
+        if (_bachelor != null && _nameText != null)
+        {
+            _nameText.text = _bachelor._name;
+            Debug.Log($"Set bachelor name for post-date options: {_bachelor._name}");
+        }
+        else if (_nameText != null)
+        {
+            _nameText.text = "";
+            Debug.Log("No bachelor name available for post-date options");
         }
 
         if (_displayText != null)
@@ -918,15 +952,17 @@ public class DialogueDisplay : MonoBehaviour
             _noteBook.EnsureBachelorConnection(_bachelor);
         }
 
-        // Show the canvas
+        // Show the canvas and ensure proper UI state
         if (_dialogueCanvas != null)
         {
             _dialogueCanvas.enabled = true;
+            Debug.Log("Enabled dialogue canvas for post-date options");
         }
 
         if (_moveCanvas != null)
         {
             _moveCanvas.enabled = false;
+            Debug.Log("Disabled move canvas for post-date options");
         }
 
         // Hide continue icon and show post-date options
@@ -1828,6 +1864,10 @@ public class DialogueDisplay : MonoBehaviour
     /// </summary>
     private void ShowEndDialogueButtons()
     {
+        Debug.Log(
+            $"[ShowEndDialogueButtons] Starting. Bachelor: {(_bachelor != null ? _bachelor._name : "null")}"
+        );
+
         // Update love score from love meter to ensure consistency
         if (_bachelor != null && _bachelor._loveMeter != null)
         {
@@ -1846,7 +1886,9 @@ public class DialogueDisplay : MonoBehaviour
                 1f
             );
             _bachelorImage.enabled = true;
-            Debug.Log($"Set bachelor image for end dialogue buttons: {_bachelor._name}");
+            Debug.Log(
+                $"✓ Set bachelor image for end dialogue buttons: {_bachelor._name} (Portrait: {_bachelor._portrait.name})"
+            );
         }
         else if (_bachelorImage != null)
         {
@@ -1858,7 +1900,35 @@ public class DialogueDisplay : MonoBehaviour
                 0f
             );
             _bachelorImage.enabled = false;
-            Debug.Log("No bachelor image available for end dialogue buttons");
+            Debug.LogWarning(
+                $"✗ No bachelor image available for end dialogue buttons. Bachelor: {(_bachelor != null ? "exists" : "null")}, Portrait: {(_bachelor?._portrait != null ? "exists" : "null")}, BachelorImage: {(_bachelorImage != null ? "exists" : "null")}"
+            );
+        }
+
+        // Ensure bachelor name is displayed when showing end dialogue buttons
+        if (_bachelor != null && _nameText != null)
+        {
+            _nameText.text = _bachelor._name;
+            Debug.Log($"Set bachelor name for end dialogue buttons: {_bachelor._name}");
+        }
+        else if (_nameText != null)
+        {
+            _nameText.text = "";
+            Debug.Log("No bachelor name available for end dialogue buttons");
+        }
+
+        // Ensure dialogue canvas is enabled when showing end dialogue buttons
+        if (_dialogueCanvas != null)
+        {
+            _dialogueCanvas.enabled = true;
+            Debug.Log("Enabled dialogue canvas for end dialogue buttons");
+        }
+
+        // Ensure move canvas is disabled when showing end dialogue buttons
+        if (_moveCanvas != null)
+        {
+            _moveCanvas.enabled = false;
+            Debug.Log("Disabled move canvas for end dialogue buttons");
         }
 
         // Mark the bachelor as having completed a speed date
@@ -1968,7 +2038,9 @@ public class DialogueDisplay : MonoBehaviour
     /// </summary>
     private void ShowPostRealDateOptions()
     {
-        Debug.Log("Showing post-real-date options at end of real date scene");
+        Debug.Log(
+            $"[ShowPostRealDateOptions] Starting. Bachelor: {(_bachelor != null ? _bachelor._name : "null")}"
+        );
 
         // Ensure bachelor image is displayed
         if (_bachelor != null && _bachelor._portrait != null && _bachelorImage != null)
@@ -1981,7 +2053,9 @@ public class DialogueDisplay : MonoBehaviour
                 1f
             );
             _bachelorImage.enabled = true;
-            Debug.Log($"Set bachelor image for post-real-date options: {_bachelor._name}");
+            Debug.Log(
+                $"✓ Set bachelor image for post-real-date options: {_bachelor._name} (Portrait: {_bachelor._portrait.name})"
+            );
         }
         else if (_bachelorImage != null)
         {
@@ -1993,7 +2067,35 @@ public class DialogueDisplay : MonoBehaviour
                 0f
             );
             _bachelorImage.enabled = false;
-            Debug.Log("No bachelor image available for post-real-date options");
+            Debug.LogWarning(
+                $"✗ No bachelor image available for post-real-date options. Bachelor: {(_bachelor != null ? "exists" : "null")}, Portrait: {(_bachelor?._portrait != null ? "exists" : "null")}, BachelorImage: {(_bachelorImage != null ? "exists" : "null")}"
+            );
+        }
+
+        // Ensure bachelor name is displayed
+        if (_bachelor != null && _nameText != null)
+        {
+            _nameText.text = _bachelor._name;
+            Debug.Log($"Set bachelor name for post-real-date options: {_bachelor._name}");
+        }
+        else if (_nameText != null)
+        {
+            _nameText.text = "";
+            Debug.Log("No bachelor name available for post-real-date options");
+        }
+
+        // Ensure dialogue canvas is enabled
+        if (_dialogueCanvas != null)
+        {
+            _dialogueCanvas.enabled = true;
+            Debug.Log("Enabled dialogue canvas for post-real-date options");
+        }
+
+        // Ensure move canvas is disabled
+        if (_moveCanvas != null)
+        {
+            _moveCanvas.enabled = false;
+            Debug.Log("Disabled move canvas for post-real-date options");
         }
 
         // Clear the display text - no message shown at the end of real date scenes
