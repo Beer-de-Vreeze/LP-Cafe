@@ -472,6 +472,18 @@ public class DialogueDisplay : MonoBehaviour
         _canAdvance = false;
         _isDelayActive = false;
 
+        // Disable movement while dialogue is playing
+        if (_moveCanvas != null)
+        {
+            _moveCanvas.enabled = false;
+        }
+
+        // Ensure dialogue canvas is enabled
+        if (_dialogueCanvas != null)
+        {
+            _dialogueCanvas.enabled = true;
+        }
+
         // Ensure love meter UI has the correct data before showing dialogue
         EnsureLoveMeterSetup();
 
