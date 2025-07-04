@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: Q1A1
   m_EditorClassIdentifier: 
   <m_dialogueNameData>k__BackingField: Q1A1
-  <m_dialogueTextData>k__BackingField: I mean it would've been better if we were
-    ON the ocean on a cruise, but this will do for now.
+  <m_dialogueTextData>k__BackingField: I mean t would've been better if we were ON
+    the ocean on a cruise, but this will do for now.
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Next Dialogue
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: e9f332d25daad664388525ef749a865b, type: 2}
   <m_bachelorImageData>k__BackingField: {fileID: 21300000, guid: 84a876f81e079bf40beb58c595c98cf5, type: 3}
-  <m_dialogueAudioData>k__BackingField: {fileID: 0}
+  <m_dialogueAudioData>k__BackingField: {fileID: 8300000, guid: b3eb637354dd7e745b1c94bd1e86c186, type: 3}
   <m_dialogueTypeData>k__BackingField: 0
   <m_isStartingDialogueData>k__BackingField: 1
   <m_propertyToCheckData>k__BackingField: 
