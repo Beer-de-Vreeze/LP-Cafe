@@ -35,8 +35,8 @@ public class TurningButtons : MonoBehaviour
     private BoxCollider[] m_bachelorsColliders;
 
     [SerializeField]
-    private DialogueDisplay dialogueDisplay; // Reference to DialogueDisplay for bachelor clickability control
-
+    private GameObject textHolder; // Reference to TextHolder GameObject for bachelor clickability control
+    private DialogueDisplay dialogueDisplay; // Reference to DialogueDisplay component for managing bachelor clickabilit
     private int currentPositionIndex = 0; // Index of the current/target position in the Positions list
     private Vector3 targetPosition; // The target position the camera is moving towards
     private Quaternion targetRotation; // The target rotation the camera is rotating towards
@@ -62,7 +62,7 @@ public class TurningButtons : MonoBehaviour
             mainCamera = Camera.main;
 
         // Find DialogueDisplay if not assigned
-        if (dialogueDisplay == null)
+        if (textHolder == null)
             dialogueDisplay = FindFirstObjectByType<DialogueDisplay>();
 
         foreach (var collider in m_bachelorsColliders)
@@ -238,5 +238,18 @@ public class TurningButtons : MonoBehaviour
         }
 
         isOnCooldown = false;
+    }
+
+    /// <summary>
+    /// Sets the interactable state of the movement buttons
+    /// </summary>
+    /// <param name="interactable">Whether the buttons should be interactable</param>
+    public void SetButtonsInteractable(bool interactable)
+    {
+        if (leftButton != null)
+            leftButton.interactable = interactable;
+
+        if (rightButton != null)
+            rightButton.interactable = interactable;
     }
 }

@@ -3861,5 +3861,40 @@ public class DialogueDisplay : MonoBehaviour
     /// Returns whether bachelors are currently clickable
     /// </summary>
     public bool AreBachelorsClickable() => _bachelorsClickable;
+
+    /// <summary>
+    /// Returns whether the dialogue system is currently active (showing dialogue)
+    /// </summary>
+    public bool IsInDialogue()
+    {
+        // Check if dialogue canvas is active and enabled
+        if (
+            _dialogueCanvas == null
+            || !_dialogueCanvas.gameObject.activeInHierarchy
+            || !_dialogueCanvas.enabled
+        )
+            return false;
+
+        // Check if we have actual dialogue content being displayed
+        bool hasDialogueContent = false;
+
+        // Check if there's text being displayed
+        if (_displayText != null && !string.IsNullOrEmpty(_displayText.text))
+            hasDialogueContent = true;
+
+        // Check if typewriter is actively showing text
+        if (_typewriter != null && _typewriter.isShowingText)
+            hasDialogueContent = true;
+
+        // Check if there are active choice buttons
+        if (_activeChoiceButtons != null && _activeChoiceButtons.Count > 0)
+            hasDialogueContent = true;
+
+        // Check if we have a current bachelor set (indicating we're in a dialogue session)
+        if (_bachelor != null)
+            hasDialogueContent = true;
+
+        return hasDialogueContent;
+    }
 }
     #endregion

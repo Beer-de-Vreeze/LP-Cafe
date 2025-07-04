@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 3d71864bca3f8424b96f8fd2507f8ccb
+guid: f27ce8e052a88134d8da2633430d905e
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,13 +110,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Optie3plus_0
+      name: LPCAFE_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1825
-        height: 826
+        width: 2356
+        height: 2362
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -125,8 +125,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bce0da2c06aa1a9489b91928f7e24532
-      internalID: -1607050944
+      spriteID: 36787d9590633f0469e26ba52df34286
+      internalID: -1080127502
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 991bd041f7ac5444fae9f312ec9b60f4
+    spriteID: 9dfde5d47701c2443bc26f871d5fccf9
     internalID: 0
     vertices: []
     indices: 
@@ -145,7 +145,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Optie3plus_0: -1607050944
+      LPCAFE_0: -1080127502
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
