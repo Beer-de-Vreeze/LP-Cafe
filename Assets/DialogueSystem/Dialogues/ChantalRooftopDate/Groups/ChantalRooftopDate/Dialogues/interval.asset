@@ -13,13 +13,14 @@ MonoBehaviour:
   m_Name: interval
   m_EditorClassIdentifier: 
   <m_dialogueNameData>k__BackingField: interval
-  <m_dialogueTextData>k__BackingField: " \rNormally I'd NEVER be found in a place
-    like that. \r\nBut they have a high rating on insta."
+  <m_dialogueTextData>k__BackingField: "What was your first thought when you saw
+    me back at the caf\xE9?\r\nNormally I'd NEVER be found in a place like that.\r\nBut
+    they have a high rating on insta."
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Next Dialogue
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 7be103c549f67424a9f9387632915b2c, type: 2}
   <m_bachelorImageData>k__BackingField: {fileID: 21300000, guid: 84a876f81e079bf40beb58c595c98cf5, type: 3}
-  <m_dialogueAudioData>k__BackingField: {fileID: 0}
+  <m_dialogueAudioData>k__BackingField: {fileID: 8300000, guid: 306001b6640715a42831ec319d5dd610, type: 3}
   <m_dialogueTypeData>k__BackingField: 0
   <m_isStartingDialogueData>k__BackingField: 1
   <m_propertyToCheckData>k__BackingField: 

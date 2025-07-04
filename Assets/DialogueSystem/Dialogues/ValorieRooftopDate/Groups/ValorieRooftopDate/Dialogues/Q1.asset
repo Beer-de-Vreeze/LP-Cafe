@@ -27,7 +27,7 @@ MonoBehaviour:
       sun would be nice.
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 3e44ad59dcaad254f8bce4c3156d5302, type: 2}
   <m_bachelorImageData>k__BackingField: {fileID: 21300000, guid: c5cf4cce892c8cf439b866953f89e346, type: 3}
-  <m_dialogueAudioData>k__BackingField: {fileID: 0}
+  <m_dialogueAudioData>k__BackingField: {fileID: 8300000, guid: 252be782c3576f4489c37c60181d7d64, type: 3}
   <m_dialogueTypeData>k__BackingField: 1
   <m_isStartingDialogueData>k__BackingField: 1
   <m_propertyToCheckData>k__BackingField: 

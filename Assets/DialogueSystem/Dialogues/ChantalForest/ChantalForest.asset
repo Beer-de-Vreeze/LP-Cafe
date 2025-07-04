@@ -35,11 +35,13 @@ MonoBehaviour:
       - {fileID: 11400000, guid: 15ca1f31178d5ed4f9a20868e197c935, type: 2}
       - {fileID: 11400000, guid: 88cf4a7fe96a2514283a80723838150c, type: 2}
       - {fileID: 11400000, guid: 5f3c698a5ec68c14f9d2ec8e7737bb61, type: 2}
+      - {fileID: 11400000, guid: ced442d4236d233419b3babdeb80c5c5, type: 2}
       - {fileID: 11400000, guid: f60e0501d9ec4184b8863e6526fd783d, type: 2}
       - {fileID: 11400000, guid: e379d314c304606429f3c03e92549e22, type: 2}
       - {fileID: 11400000, guid: 7d7013f8d32911d4b8074a6c32a2f9b6, type: 2}
       - {fileID: 11400000, guid: f40a45fd8d53d3d41b86a3877999da0a, type: 2}
       - {fileID: 11400000, guid: d1dea73d76879404aaa80e5c0ee0600b, type: 2}
+      - {fileID: 11400000, guid: 523f9a8bb47cda24d94290213eba7144, type: 2}
       - {fileID: 11400000, guid: 41850bb57bf56354fb9dda36638dfff7, type: 2}
       - {fileID: 11400000, guid: 621a9f806c020754f931ddda1f1deb9e, type: 2}
       - {fileID: 11400000, guid: 6ab64530f0bc35249b595ff4c0a5a8da, type: 2}
@@ -53,14 +55,12 @@ MonoBehaviour:
       - {fileID: 11400000, guid: 8cf08ff175b89024f977130f658def18, type: 2}
       - {fileID: 11400000, guid: c9cda8f8f6803f843afa934418c82495, type: 2}
       - {fileID: 11400000, guid: 5655433bad86dbb4cb3cb9ded2fe726c, type: 2}
-      - {fileID: 11400000, guid: 57c3443fc3377a448b2559463d65e48e, type: 2}
       - {fileID: 11400000, guid: 4e90fb98acfda04469da97b4cbf85b8c, type: 2}
       - {fileID: 11400000, guid: 5aacd70170f20144c88f2db6786ac36c, type: 2}
       - {fileID: 11400000, guid: 7f39f8b417ee2fa46b7ade16df27a3c4, type: 2}
       - {fileID: 11400000, guid: 545b0887622dca74fbce66c8c51cfcc1, type: 2}
+      - {fileID: 11400000, guid: 2afd4a17b36a03743997b9cca628ae05, type: 2}
       - {fileID: 11400000, guid: bc59fdd1246efce40a491abba7f85dd8, type: 2}
       - {fileID: 11400000, guid: 090929fed19b9fb47ae6ba84dda763cb, type: 2}
-      - {fileID: 11400000, guid: ced442d4236d233419b3babdeb80c5c5, type: 2}
-      - {fileID: 11400000, guid: 2afd4a17b36a03743997b9cca628ae05, type: 2}
-      - {fileID: 11400000, guid: 523f9a8bb47cda24d94290213eba7144, type: 2}
+      - {fileID: 11400000, guid: 57c3443fc3377a448b2559463d65e48e, type: 2}
   <m_containerUngroupedDialoguesData>k__BackingField: []
