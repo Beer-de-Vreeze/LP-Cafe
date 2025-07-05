@@ -9,8 +9,8 @@ namespace DS.Utilities
     using System.IO;
     using System.Linq;
     using Data.Save;
-    using Elements;
     using DS.Data;
+    using Elements;
     using Enumerations;
     using ScriptableObjects;
     using Windows;
@@ -166,9 +166,10 @@ namespace DS.Utilities
 
         #region Nodes
         private static void SaveNodes(
-           DSGraphSaveDataSO graphData,
-           DSDialogueContainerSO dialogueContainer
-        ){
+            DSGraphSaveDataSO graphData,
+            DSDialogueContainerSO dialogueContainer
+        )
+        {
             SerializableDictionary<string, List<string>> groupedNodeNames =
                 new SerializableDictionary<string, List<string>>();
             List<string> ungroupedNodeNames = new List<string>();
@@ -262,7 +263,10 @@ namespace DS.Utilities
                 dialogueContainer.m_containerUngroupedDialoguesData.Add(dialogue);
             }
 
-            if(node.m_nodeDialogueType == DSDialogueType.MultipleChoice || node.m_nodeDialogueType == DSDialogueType.SingleChoice)
+            if (
+                node.m_nodeDialogueType == DSDialogueType.MultipleChoice
+                || node.m_nodeDialogueType == DSDialogueType.SingleChoice
+            )
             {
                 dialogue.Initialize(
                     node.m_nodeDialogueName,
@@ -273,7 +277,8 @@ namespace DS.Utilities
                     node.m_nodeDialogueType,
                     node.IsStartingNode()
                 );
-            }            else if (node.m_nodeDialogueType == DSDialogueType.Condition)
+            }
+            else if (node.m_nodeDialogueType == DSDialogueType.Condition)
             {
                 dialogue.InitializeSetterNode(
                     node.m_nodeDialogueName,
@@ -292,8 +297,7 @@ namespace DS.Utilities
                     node.IsStartingNode()
                 );
             }
-
-            else if(node.m_nodeDialogueType == DSDialogueType.Setter)
+            else if (node.m_nodeDialogueType == DSDialogueType.Setter)
             {
                 dialogue.InitializeSetterNode(
                     node.m_nodeDialogueName,
@@ -515,16 +519,19 @@ namespace DS.Utilities
 
                 node.m_nodeID = nodeSaveData.m_nodeIDData;
                 node.m_nodeChoices = choices;
-                if (nodeSaveData.m_dialogueTypeData == DSDialogueType.SingleChoice || nodeSaveData.m_dialogueTypeData == DSDialogueType.MultipleChoice)
+                if (
+                    nodeSaveData.m_dialogueTypeData == DSDialogueType.SingleChoice
+                    || nodeSaveData.m_dialogueTypeData == DSDialogueType.MultipleChoice
+                )
                 {
                     node.m_nodeAudio = nodeSaveData.m_nodeAudioLinesData;
                     node.m_nodeCharacterImage = nodeSaveData.m_nodeBachelorImageData;
                     node.m_nodeText = nodeSaveData.m_nodeTextData;
                 }
-
-
-
-                if(nodeSaveData.m_dialogueTypeData == DSDialogueType.Setter || nodeSaveData.m_dialogueTypeData == DSDialogueType.Condition)
+                if (
+                    nodeSaveData.m_dialogueTypeData == DSDialogueType.Condition
+                    || nodeSaveData.m_dialogueTypeData == DSDialogueType.Setter
+                )
                 {
                     node.m_operationType = nodeSaveData.m_nodeSetterOperationTypeData;
                     node.m_valueToSet = nodeSaveData.m_nodeValueToSetData;

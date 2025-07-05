@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8656580f96a63714d889c7daeb915b7a, type: 3}
+  m_Name: Q1
+  m_EditorClassIdentifier: 
+  <m_dialogueNameData>k__BackingField: Q1
+  <m_dialogueTextData>k__BackingField: These fishies look sooooo cuteee!! Do you
+    think they're cuter or am I cuter?
+  <m_dialogueChoiceData>k__BackingField:
+  - <m_dialogueChoiceText>k__BackingField: I think they're magestical and I think
+      you're more whimsical.
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: bd2c68ddd4a9e8143869dbdb08c7fe42, type: 2}
+  - <m_dialogueChoiceText>k__BackingField: You're equal I'd say.
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 44daf50be670d0441814c4af2dc9d103, type: 2}
+  - <m_dialogueChoiceText>k__BackingField: Can't compare to be honest, two entirely
+      different species.
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: a6df0a945836d9144a60ca87d852185a, type: 2}
+  - <m_dialogueChoiceText>k__BackingField: I think cats are cuter than either.
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 9ca328b967f04644cb38b8abbc8a186b, type: 2}
+  <m_bachelorImageData>k__BackingField: {fileID: 21300000, guid: 4d7a66a9cea93b246a1057f95ed0764f, type: 3}
+  <m_dialogueAudioData>k__BackingField: {fileID: 8300000, guid: 9bd58981c64b15f489c6479e081d8777, type: 3}
+  <m_dialogueTypeData>k__BackingField: 1
+  <m_isStartingDialogueData>k__BackingField: 1
+  <m_propertyToCheckData>k__BackingField: 
+  <m_comparisonTypeData>k__BackingField: 
+  <m_comparisonValueData>k__BackingField: 
+  <m_operationTypeData>k__BackingField: 0
+  <m_variableNameData>k__BackingField: 
+  <m_valueToSetData>k__BackingField: 
+  <m_loveScoreAmountData>k__BackingField: 0
+  <m_boolValueData>k__BackingField: 0
+  <m_loveMeterData>k__BackingField: {fileID: 0}
+  <m_bachelorData>k__BackingField: {fileID: 0}
+  <m_isLikePreferenceData>k__BackingField: 0
+  <m_selectedPreferenceData>k__BackingField: 

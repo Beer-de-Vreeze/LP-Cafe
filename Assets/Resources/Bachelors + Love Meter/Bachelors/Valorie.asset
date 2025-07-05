@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dafdbd3029b57714ba28974d73bb6956, type: 3}
+  m_Name: Valorie
+  m_EditorClassIdentifier: 
+  _name: Valorie
+  _portrait: {fileID: 0}
+  _likes:
+  - description: Alcohol
+    discovered: 0
+    icon: {fileID: 0}
+  - description: Motorcycles
+    discovered: 0
+    icon: {fileID: 0}
+  - description: Nature
+    discovered: 0
+    icon: {fileID: 0}
+  - description: Caffeine
+    discovered: 0
+    icon: {fileID: 0}
+  - description: Knives
+    discovered: 0
+    icon: {fileID: 0}
+  - description: Red
+    discovered: 0
+    icon: {fileID: 0}
+  _dislikes:
+  - description: Yoga
+    discovered: 0
+    icon: {fileID: 0}
+  - description: Pink
+    discovered: 0
+    icon: {fileID: 0}
+  - description: Glowsticks
+    discovered: 0
+    icon: {fileID: 0}
+  - description: Bells
+    discovered: 0
+    icon: {fileID: 0}
+  - description: Corny Stuff
+    discovered: 0
+    icon: {fileID: 0}
+  _isLikeDiscovered: 0
+  _isDislikeDiscovered: 0
+  _dialogue: {fileID: 0}
+  _loveMeter: {fileID: 11400000, guid: e565d59697c82c249911d1161e2466dd, type: 2}
+  _nextSceneName: 
+  _HasBeenSpeedDated: 0
+  _HasCompletedRealDate: 0
+  _LastRealDateLocation: 

@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8656580f96a63714d889c7daeb915b7a, type: 3}
+  m_Name: Q2
+  m_EditorClassIdentifier: 
+  <m_dialogueNameData>k__BackingField: q2
+  <m_dialogueTextData>k__BackingField: Or would you trust me to guide you?
+  <m_dialogueChoiceData>k__BackingField:
+  - <m_dialogueChoiceText>k__BackingField: I'd always take the left, at some point
+      you'd circle back right?
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: dd6321bf707107d449b5bec9d63bcccc, type: 2}
+  - <m_dialogueChoiceText>k__BackingField: Ehh right seems? fun? because I'm always
+      right- so...?
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: f5ad8a833b09f5f4da571213da7c2d2a, type: 2}
+  - <m_dialogueChoiceText>k__BackingField: I'd follow you, you seem to know what
+      you're doing, sinds you're such an expert.
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: a6b1346c0fe1ad64294f13a4910bc05f, type: 2}
+  - <m_dialogueChoiceText>k__BackingField: And get lost together? Nha I'm good right
+      here.
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: ccf84f2bb5f93794fa981649ad8563dc, type: 2}
+  <m_bachelorImageData>k__BackingField: {fileID: 0}
+  <m_dialogueAudioData>k__BackingField: {fileID: 0}
+  <m_dialogueTypeData>k__BackingField: 1
+  <m_isStartingDialogueData>k__BackingField: 1
+  <m_propertyToCheckData>k__BackingField: 
+  <m_comparisonTypeData>k__BackingField: 
+  <m_comparisonValueData>k__BackingField: 
+  <m_operationTypeData>k__BackingField: 0
+  <m_variableNameData>k__BackingField: 
+  <m_valueToSetData>k__BackingField: 
+  <m_loveScoreAmountData>k__BackingField: 0
+  <m_boolValueData>k__BackingField: 0
+  <m_loveMeterData>k__BackingField: {fileID: 0}
+  <m_bachelorData>k__BackingField: {fileID: 0}
+  <m_isLikePreferenceData>k__BackingField: 0
+  <m_selectedPreferenceData>k__BackingField: 
