@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <m_containerFileNameData>k__BackingField: BaristaEnding2
   <m_containerDialogueGroupsData>k__BackingField:
-    list: []
-  <m_containerUngroupedDialoguesData>k__BackingField:
-  - {fileID: 11400000, guid: ee71974fa134ebe408f54a29268bd3ae, type: 2}
+    list:
+    - Key: {fileID: 11400000, guid: a158332769f6c144f803e868f72d8d05, type: 2}
+      Value:
+      - {fileID: 11400000, guid: 4c00316b7b2295b43895bd9f53c06f84, type: 2}
+  <m_containerUngroupedDialoguesData>k__BackingField: []

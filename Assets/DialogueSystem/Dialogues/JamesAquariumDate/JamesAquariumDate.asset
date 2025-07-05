@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2651e6138de3984dbf11454fa21a045, type: 3}
+  m_Name: JamesAquariumDate
+  m_EditorClassIdentifier: 
+  <m_containerFileNameData>k__BackingField: JamesAquariumDate
+  <m_containerDialogueGroupsData>k__BackingField:
+    list:
+    - Key: {fileID: 11400000, guid: a197429d8590e8d48b5292276b80af12, type: 2}
+      Value:
+      - {fileID: 11400000, guid: 3c53dd80198c35d43bb3d052b0cc5d5f, type: 2}
+      - {fileID: 11400000, guid: 27772c8daffd40a4995886c1e6f47f38, type: 2}
+      - {fileID: 11400000, guid: 4b05877fbe431d240bb039544807f3bf, type: 2}
+      - {fileID: 11400000, guid: c0ae618fdbfd7044cae444414b3ba176, type: 2}
+      - {fileID: 11400000, guid: cac6c48ef9f8f0b48aedfe719722bd93, type: 2}
+      - {fileID: 11400000, guid: 9e84b7806ec44114ea49abd156d2ade7, type: 2}
+      - {fileID: 11400000, guid: 98d9705da8c634347a42d9d1278d892e, type: 2}
+      - {fileID: 11400000, guid: 508e1690823793643a818d368b543ba2, type: 2}
+      - {fileID: 11400000, guid: c64cd0a508fba9549a9f75377ad35898, type: 2}
+      - {fileID: 11400000, guid: cdac1957ae238ca46b2baff419f53eeb, type: 2}
+      - {fileID: 11400000, guid: bf252cd3c85559e4186b6d1df169f610, type: 2}
+      - {fileID: 11400000, guid: 19d1059a84155a34bb8459e0a49789c8, type: 2}
+      - {fileID: 11400000, guid: 8f3117fb2a85429459b3c82e72b0405e, type: 2}
+      - {fileID: 11400000, guid: 70e81fcfcfb544f42bd40fa6ee73514a, type: 2}
+      - {fileID: 11400000, guid: ee2a3ee1d0ead524ca9c0b0110c0cbe8, type: 2}
+      - {fileID: 11400000, guid: 4ecf8214484c5044d8103688c6dc6484, type: 2}
+      - {fileID: 11400000, guid: 032367fbe77b0474a8f07311ff31deb9, type: 2}
+      - {fileID: 11400000, guid: 4224e126e4105914e8bc0a2d0288ac3c, type: 2}
+      - {fileID: 11400000, guid: ebecdd481c8e6d4458324a3b432bae8f, type: 2}
+      - {fileID: 11400000, guid: 3ae14c13b99015341af2f6afe0b03749, type: 2}
+      - {fileID: 11400000, guid: 913e36026604b8141927e23143abe80a, type: 2}
+      - {fileID: 11400000, guid: e86ef96999601de4aad3a29459b400c5, type: 2}
+      - {fileID: 11400000, guid: e9b70ed59a0308a439b97550110a1c73, type: 2}
+      - {fileID: 11400000, guid: 2a26b440e1322564f8c4e3f501edd6f5, type: 2}
+      - {fileID: 11400000, guid: 8d3954f801fbffc4ab5401b148b01b23, type: 2}
+      - {fileID: 11400000, guid: d97b2909cfd233e429dd5a7ab9e0e7af, type: 2}
+      - {fileID: 11400000, guid: 88791914f6435cc468acc9ace5b3f645, type: 2}
+      - {fileID: 11400000, guid: 830d21fb3d7a91845923ea76b4ff7dcc, type: 2}
+      - {fileID: 11400000, guid: 6740951689b23f94c84e8de05b8212e4, type: 2}
+      - {fileID: 11400000, guid: abb24e73ec4c66d43b55a005cd0b3a69, type: 2}
+      - {fileID: 11400000, guid: 71c5627ca8846bd4784041ff4fc1452b, type: 2}
+      - {fileID: 11400000, guid: c15e494f27948f743b7e29b937987dc9, type: 2}
+      - {fileID: 11400000, guid: 869e1914a60bc5545b6a9991d89a3c20, type: 2}
+      - {fileID: 11400000, guid: c1409d3cb0615fa48a3aa2eb01605765, type: 2}
+      - {fileID: 11400000, guid: d86302bc672dea3438d947ec7b9219c1, type: 2}
+      - {fileID: 11400000, guid: af78f16e3dc839346b715b6bae56a08e, type: 2}
+      - {fileID: 11400000, guid: a4a1d166f6cfaad4596e43f585b86b0a, type: 2}
+      - {fileID: 11400000, guid: 4b35747d47fbaa344b7b4853e18a9997, type: 2}
+      - {fileID: 11400000, guid: eb952d41b61862948875dee1712df909, type: 2}
+      - {fileID: 11400000, guid: 9e2dfd6318500e1438607927c14508c1, type: 2}
+      - {fileID: 11400000, guid: 123f64ad25345e446a18e340363d5ff8, type: 2}
+      - {fileID: 11400000, guid: 4eb0fce5770813b4db57cdc6abcb4061, type: 2}
+      - {fileID: 11400000, guid: 32684ea20d87d0d4484bc04f2a543fae, type: 2}
+      - {fileID: 11400000, guid: 3f39930e211a5aa4dbb7f43127cce439, type: 2}
+  <m_containerUngroupedDialoguesData>k__BackingField: []

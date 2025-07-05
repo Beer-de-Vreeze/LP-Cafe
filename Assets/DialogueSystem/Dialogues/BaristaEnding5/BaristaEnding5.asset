@@ -14,14 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <m_containerFileNameData>k__BackingField: BaristaEnding5
   <m_containerDialogueGroupsData>k__BackingField:
-    list: []
-  <m_containerUngroupedDialoguesData>k__BackingField:
-  - {fileID: 11400000, guid: 8f0c3954b0c3ba343a4e24b39f09f499, type: 2}
-  - {fileID: 11400000, guid: fa70642d01564e141a558da97656b17d, type: 2}
-  - {fileID: 11400000, guid: d9ad33201544ef745a0217583d04e9d0, type: 2}
-  - {fileID: 11400000, guid: 00e17006c65bf40458817bc0a9e4c2af, type: 2}
-  - {fileID: 11400000, guid: c0c29c17fc5bb204e8988848d90c3ae0, type: 2}
-  - {fileID: 11400000, guid: 918ce4f21228899458100c9c01103dbf, type: 2}
-  - {fileID: 11400000, guid: 2e512ce37c1817a48aa4fc01e7c5ff24, type: 2}
-  - {fileID: 11400000, guid: a4bd781e64a64fb419106595aec02c28, type: 2}
-  - {fileID: 11400000, guid: e945b475d5fa55a4ab5cca1033625c48, type: 2}
+    list:
+    - Key: {fileID: 11400000, guid: c8d0485c51495a846a6d04576476dc31, type: 2}
+      Value:
+      - {fileID: 11400000, guid: b17b97d3488c61f40bff1acf7ee3f186, type: 2}
+      - {fileID: 11400000, guid: 402143b742325af41b68f8bac9a0d21c, type: 2}
+      - {fileID: 11400000, guid: c1bf72dbdd24739418fe7ea20bb01873, type: 2}
+      - {fileID: 11400000, guid: 0cb710ad3c0a8f646b2c11d27055deb3, type: 2}
+      - {fileID: 11400000, guid: e3443169a4d13e742b7fa826ea3cb2af, type: 2}
+      - {fileID: 11400000, guid: f2004d4676cf259479eec78292d35def, type: 2}
+      - {fileID: 11400000, guid: 217ecd32df08bcd4da8dbcdc34bdda2e, type: 2}
+      - {fileID: 11400000, guid: df6778f288c7e154599a40e897a112aa, type: 2}
+      - {fileID: 11400000, guid: 54c9f075b5df4ba47a77686decf6b177, type: 2}
+  <m_containerUngroupedDialoguesData>k__BackingField: []

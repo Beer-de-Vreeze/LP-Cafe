@@ -26,7 +26,7 @@ MonoBehaviour:
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: ce330af01eae97e4abcc03837524170f, type: 2}
   - <m_dialogueChoiceText>k__BackingField: I think cats are cuter than either.
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: b8d6b422dfca9d1468233ac532048d1f, type: 2}
-  <m_bachelorImageData>k__BackingField: {fileID: 0}
+  <m_bachelorImageData>k__BackingField: {fileID: 21300000, guid: 4d7a66a9cea93b246a1057f95ed0764f, type: 3}
   <m_dialogueAudioData>k__BackingField: {fileID: 0}
   <m_dialogueTypeData>k__BackingField: 1
   <m_isStartingDialogueData>k__BackingField: 1

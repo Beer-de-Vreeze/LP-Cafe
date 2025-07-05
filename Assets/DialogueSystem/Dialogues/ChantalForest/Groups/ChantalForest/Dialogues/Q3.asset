@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8656580f96a63714d889c7daeb915b7a, type: 3}
+  m_Name: Q3
+  m_EditorClassIdentifier: 
+  <m_dialogueNameData>k__BackingField: Q3
+  <m_dialogueTextData>k__BackingField: What we're you thinking???
+  <m_dialogueChoiceData>k__BackingField:
+  - <m_dialogueChoiceText>k__BackingField: If you'll give me another chance, I'll
+      take you on that boat ride you wanted.
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 66e1ec92681926b489666e33ed084cb5, type: 2}
+  - <m_dialogueChoiceText>k__BackingField: I thought it was a beautiful place.
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 8cf08ff175b89024f977130f658def18, type: 2}
+  - <m_dialogueChoiceText>k__BackingField: Enjoy some nature for once.  At least
+      this is all natural, unlike you.
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: d1dea73d76879404aaa80e5c0ee0600b, type: 2}
+  - <m_dialogueChoiceText>k__BackingField: I'm sorry, I'll make it up to you, just
+      stay a little bit longer. Okay?
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: f40a45fd8d53d3d41b86a3877999da0a, type: 2}
+  <m_bachelorImageData>k__BackingField: {fileID: 21300000, guid: 84a876f81e079bf40beb58c595c98cf5, type: 3}
+  <m_dialogueAudioData>k__BackingField: {fileID: 8300000, guid: 738d0042150cda7448bad7d69e347d69, type: 3}
+  <m_dialogueTypeData>k__BackingField: 1
+  <m_isStartingDialogueData>k__BackingField: 1
+  <m_propertyToCheckData>k__BackingField: 
+  <m_comparisonTypeData>k__BackingField: 
+  <m_comparisonValueData>k__BackingField: 
+  <m_operationTypeData>k__BackingField: 0
+  <m_variableNameData>k__BackingField: 
+  <m_valueToSetData>k__BackingField: 
+  <m_loveScoreAmountData>k__BackingField: 0
+  <m_boolValueData>k__BackingField: 0
+  <m_loveMeterData>k__BackingField: {fileID: 0}
+  <m_bachelorData>k__BackingField: {fileID: 0}
+  <m_isLikePreferenceData>k__BackingField: 0
+  <m_selectedPreferenceData>k__BackingField: 

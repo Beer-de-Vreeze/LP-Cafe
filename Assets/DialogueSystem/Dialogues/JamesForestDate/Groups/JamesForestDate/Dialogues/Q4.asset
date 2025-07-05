@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8656580f96a63714d889c7daeb915b7a, type: 3}
+  m_Name: Q4
+  m_EditorClassIdentifier: 
+  <m_dialogueNameData>k__BackingField: Q4
+  <m_dialogueTextData>k__BackingField: but you're such a distraction.
+  <m_dialogueChoiceData>k__BackingField:
+  - <m_dialogueChoiceText>k__BackingField: Really? You look like you couldn't hurt
+      a fly.
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 2d8586c181c0e4e4286c4de545619100, type: 2}
+  - <m_dialogueChoiceText>k__BackingField: Not my fault you have the attention spawn
+      of a dead tree branch.
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 2cc34008d10ba9c4da012afd2cad32e4, type: 2}
+  - <m_dialogueChoiceText>k__BackingField: Such a flirt, don't get too distracted
+      now
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: b5ee87262ab3e5d46ab4902c1f642e22, type: 2}
+  - <m_dialogueChoiceText>k__BackingField: What the hell does martial arts have to
+      do with being in the middle of the woods?
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 44c21e99b8c1c4446ac084fde39e7dba, type: 2}
+  <m_bachelorImageData>k__BackingField: {fileID: 21300000, guid: dedee01b113aef245a775f2239a733c6, type: 3}
+  <m_dialogueAudioData>k__BackingField: {fileID: 8300000, guid: 0d454d2a0b82d60499fd1a3cd7c0c094, type: 3}
+  <m_dialogueTypeData>k__BackingField: 1
+  <m_isStartingDialogueData>k__BackingField: 1
+  <m_propertyToCheckData>k__BackingField: 
+  <m_comparisonTypeData>k__BackingField: 
+  <m_comparisonValueData>k__BackingField: 
+  <m_operationTypeData>k__BackingField: 0
+  <m_variableNameData>k__BackingField: 
+  <m_valueToSetData>k__BackingField: 
+  <m_loveScoreAmountData>k__BackingField: 0
+  <m_boolValueData>k__BackingField: 0
+  <m_loveMeterData>k__BackingField: {fileID: 0}
+  <m_bachelorData>k__BackingField: {fileID: 0}
+  <m_isLikePreferenceData>k__BackingField: 0
+  <m_selectedPreferenceData>k__BackingField: 

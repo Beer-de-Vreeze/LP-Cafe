@@ -13,19 +13,22 @@ MonoBehaviour:
   m_Name: BaristaEnding3Graph
   m_EditorClassIdentifier: 
   <m_graphFileNameData>k__BackingField: BaristaEnding3
-  <m_graphGroupsData>k__BackingField: []
+  <m_graphGroupsData>k__BackingField:
+  - <m_groupIDData>k__BackingField: 81104477-de43-4d5a-8075-3eb2f8ba0cf8
+    <m_groupNameData>k__BackingField: BaristaEnding3
+    <m_groupPositionData>k__BackingField: {x: 605, y: 337}
   <m_graphNodesData>k__BackingField:
   - <m_nodeIDData>k__BackingField: df4c8498-0698-4a8b-b5f8-517a4f8aedda
-    <m_nodeNameData>k__BackingField: DialogueName
-    <m_nodeBachelorImageData>k__BackingField: {fileID: 0}
-    <m_nodeAudioLinesData>k__BackingField: {fileID: 0}
+    <m_nodeNameData>k__BackingField: 1
+    <m_nodeBachelorImageData>k__BackingField: {fileID: 21300000, guid: 6ffe8caacb35ebc49a3fe4106b8afb48, type: 3}
+    <m_nodeAudioLinesData>k__BackingField: {fileID: 8300000, guid: df4e51fd0af598c479b34d8ed1d8fc5c, type: 3}
     <m_nodeTextData>k__BackingField: "You're turning into a real player huh?\r\nShould
       I fix you up with your usual? \r\nYou've been getting the same coffee after
       every date you completed. \r\nWatch out, your choices are becoming predictable.\r"
     <m_nodeChoicesData>k__BackingField:
     - <m_choiceTextData>k__BackingField: Next Dialogue
       <m_choiceNodeIDData>k__BackingField: 
-    <m_nodeGroupIDData>k__BackingField: 
+    <m_nodeGroupIDData>k__BackingField: 81104477-de43-4d5a-8075-3eb2f8ba0cf8
     <m_dialogueTypeData>k__BackingField: 0
     <m_nodePositionData>k__BackingField: {x: 630, y: 396}
     <m_nodePropertyToCheckData>k__BackingField: Love
@@ -42,8 +45,11 @@ MonoBehaviour:
     <m_isLikePreference>k__BackingField: 0
     <m_selectedPreference>k__BackingField: 
     <m_enumSetter>k__BackingField: 0
-  <m_graphOldGroupNamesData>k__BackingField: []
-  <m_graphOldUngroupedNodeNamesData>k__BackingField:
-  - DialogueName
+  <m_graphOldGroupNamesData>k__BackingField:
+  - BaristaEnding3
+  <m_graphOldUngroupedNodeNamesData>k__BackingField: []
   <m_graphOldGroupedNodeNamesData>k__BackingField:
-    list: []
+    list:
+    - Key: BaristaEnding3
+      Value:
+      - 1
