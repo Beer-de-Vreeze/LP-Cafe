@@ -31,6 +31,7 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using DS;
 using DS.Enumerations;
 using DS.ScriptableObjects;
@@ -124,6 +125,9 @@ public class DialogueDisplay : MonoBehaviour
     /// <summary>Reference to the NoteBook script for tracking discovered preferences</summary>
     [SerializeField]
     private NoteBook _noteBook;
+
+    /// <summary>Reference to the SetBachelor component that manages bachelor initialization</summary>
+    private SetBachelor _setBachelor;
     #endregion
 
     #region State Management
@@ -138,6 +142,15 @@ public class DialogueDisplay : MonoBehaviour
 
     /// <summary>Dictionary to store gameplay variables used in dialogue conditions</summary>
     private Dictionary<string, string> _gameVariables = new Dictionary<string, string>();
+
+    /// <summary>Stores choices that should be displayed after the typewriter finishes</summary>
+    private List<DS.Data.DSDialogueChoiceData> _pendingChoices = null;
+
+    /// <summary>Tracks whether the dialogue system is waiting for user input to clear text before showing end buttons</summary>
+    private bool _waitingForClearBeforeEndButtons = false;
+
+    /// <summary>Tracks whether end dialogue buttons have already been shown to prevent chaining</summary>
+    private bool _endDialogueButtonsShown = false;
     #endregion
 
     #region Love System
@@ -149,6 +162,64 @@ public class DialogueDisplay : MonoBehaviour
     /// <summary>Reference to the love meter scriptable object for score management</summary>
     [SerializeField]
     private LoveMeterSO _loveMeter;
+    #endregion
+
+    #region Date Dialogues
+    /// <summary>Dialogue for rooftop date location</summary>
+    private DSDialogue _rooftopDateDialogue;
+
+    /// <summary>Dialogue for aquarium date location</summary>
+    private DSDialogue _aquariumDateDialogue;
+
+    /// <summary>Dialogue for forest date location</summary>
+    private DSDialogue _forestDateDialogue;
+    #endregion
+    [Header("☕ BARISTA DIALOGUES")]
+    #region Barista Dialogues
+
+    /// <summary>List of barista dialogues to display after real dates, indexed by number of completed real dates. Does not include special ending dialogues.</summary>
+    [SerializeField]
+    private List<DSDialogue> _baristaDialogues = new List<DSDialogue>();
+
+    /// <summary>Barista dialogue to display when a real date fails (love score too low)</summary>
+    [SerializeField]
+    private DSDialogue _badDateBaristaDialogue;
+
+    /// <summary>Barista dialogue to display when some dates succeeded and some failed, triggers game end</summary>
+    [SerializeField]
+    private DSDialogue _mixedResultsBaristaDialogue;
+
+    /// <summary>Barista dialogue to display when all dates have failed, triggers game end</summary>
+    [SerializeField]
+    private DSDialogue _allDateFailedBaristaDialogue;
+
+    /// <summary>Barista dialogue to display when all dates have succeeded, triggers game end</summary>
+    [SerializeField]
+    private DSDialogue _allDatesSucceededBaristaDialogue;
+    #endregion
+
+    #region Background System
+    [Header("🌄 BACKGROUND SYSTEM")]
+    /// <summary>Background sprite for rooftop date location</summary>
+    [SerializeField]
+    private Image _rooftopBackground;
+
+    /// <summary>Background sprite for aquarium date location</summary>
+    [SerializeField]
+    private Image _aquariumBackground;
+
+    /// <summary>Background sprite for forest date location</summary>
+    [SerializeField]
+    private Image _forestBackground;
+
+    /// <summary>Tracks the currently loaded background to avoid unnecessary changes</summary>
+    private Image _currentBackground;
+
+    /// <summary>Tracks whether we just completed a real date and should show "Back to Cafe" button</summary>
+    private bool _justCompletedRealDate = false;
+
+    /// <summary>Stores the current real date location name for completion tracking</summary>
+    private string _currentRealDateLocation = "";
     #endregion
 
     #region UI Styling
@@ -164,25 +235,53 @@ public class DialogueDisplay : MonoBehaviour
     /// <summary>Color for disabled choice button text</summary>
     [SerializeField]
     private Color _disabledTextColor = Color.gray;
+
+    [Header("🎬 CHOICE ANIMATION SETTINGS")]
+    /// <summary>Duration for each choice button fade-in animation</summary>
+    [SerializeField]
+    private float _choiceFadeDuration = 0.3f;
+
+    /// <summary>Delay between each choice button appearing</summary>
+    [SerializeField]
+    private float _choiceAppearDelay = 0.2f;
     #endregion
+    #region Good/Bad Date Screens
+    [Header("🎉 DATE RESULT SCREENS")]
+    /// <summary>Screen displayed for a good date result</summary>
+    [SerializeField]
+    private GameObject _goodDateScreen;
+
+    /// <summary>Screen displayed for a bad date result</summary>
+    [SerializeField]
+    private GameObject _badDateScreen;
+    #endregion
+
 
     #region Save System
     [Header("💾 SAVE & PROGRESS TRACKING")]
     /// <summary>Counter for tracking successful dates completed</summary>
     [SerializeField]
-    public int _succesfulDateCount = 0;
+    public int _speedDateCount = 0;
+
+    /// <summary>Counter for tracking real dates (aquarium, forest, rooftop) completed</summary>
+    [SerializeField]
+    public int _realDateCount = 0;
+
+    [SerializeField]
+    public int _loveNeededForSuccefulDate = 3;
 
     /// <summary>Save data reference for persisting game progress</summary>
     private SaveData _saveData;
     #endregion
 
-    #region Unity Lifecycle    /// <summary>
+    #region Unity Lifecycle
+    /// <summary>
     /// Initializes the dialogue system, loads save data, and sets up event listeners.
     /// Called once when the component is first created.
     /// </summary>
     private void Start()
     {
-        // Load successful date count from save data
+        // Load successful date count and real date count from save data
         LoadSuccessfulDateCountFromSave(); // Initialize variables with default values
         InitializeGameVariables();
 
@@ -204,6 +303,19 @@ public class DialogueDisplay : MonoBehaviour
         if (_loveMeterUI != null)
         {
             _loveMeterUI.HideLoveMeter();
+        }
+
+        // Turn off all date backgrounds initially
+        TurnOffAllDateBackgrounds();
+
+        // Turn off good/bad date screens initially
+        if (_goodDateScreen != null)
+        {
+            _goodDateScreen.SetActive(false);
+        }
+        if (_badDateScreen != null)
+        {
+            _badDateScreen.SetActive(false);
         }
     }
 
@@ -227,11 +339,47 @@ public class DialogueDisplay : MonoBehaviour
             return;
         }
 
+        // Test function: Press 'E' to skip to end of dialogue
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            Debug.Log("[TEST] Skipping to end of dialogue");
+            GoToEndOfDialogue();
+            return;
+        }
+
+        // Handle clearing text before showing end buttons
+        if (
+            _waitingForClearBeforeEndButtons
+            && !_endDialogueButtonsShown
+            && (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
+        )
+        {
+            _waitingForClearBeforeEndButtons = false;
+            _canAdvance = false;
+
+            // Clear the text
+            if (_displayText != null)
+            {
+                _displayText.text = "";
+            }
+
+            // Hide continue icon
+            if (_continueIcon != null)
+            {
+                _continueIcon.SetActive(false);
+            }
+
+            // Now show the end dialogue buttons
+            ShowEndDialogueButtons();
+            return;
+        }
+
         // Allow advancing dialogue if possible, no choices are being shown, and delay is not active
         if (
             _canAdvance
             && !_isDelayActive
             && _activeChoiceButtons.Count == 0
+            && !_waitingForClearBeforeEndButtons
             && (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
         )
         {
@@ -305,7 +453,8 @@ public class DialogueDisplay : MonoBehaviour
     }
     #endregion
 
-    #region Core Dialogue Display    /// <summary>
+    #region Core Dialogue Display
+    /// <summary>
     /// Displays the current dialogue and sets up choices if available.
     /// Handles condition nodes, setter nodes, character images, audio, and choice generation.
     /// This is the main method that orchestrates dialogue presentation.
@@ -314,6 +463,26 @@ public class DialogueDisplay : MonoBehaviour
     {
         ClearChoices();
         EnsureVerticalLayoutSettings();
+
+        // Reset the state for waiting to clear before end buttons
+        _waitingForClearBeforeEndButtons = false;
+        _endDialogueButtonsShown = false;
+
+        // Reset advancement state - must wait for typewriter
+        _canAdvance = false;
+        _isDelayActive = false;
+
+        // Disable movement while dialogue is playing
+        if (_moveCanvas != null)
+        {
+            _moveCanvas.enabled = false;
+        }
+
+        // Ensure dialogue canvas is enabled
+        if (_dialogueCanvas != null)
+        {
+            _dialogueCanvas.enabled = true;
+        }
 
         // Ensure love meter UI has the correct data before showing dialogue
         EnsureLoveMeterSetup();
@@ -404,14 +573,20 @@ public class DialogueDisplay : MonoBehaviour
             var choices = _dialogue.m_dialogue.m_dialogueChoiceData;
             if (choices != null && choices.Count > 1)
             {
-                ShowChoices(choices);
+                // Store choices to be shown after typewriter finishes
+                _pendingChoices = choices;
                 _canAdvance = false;
+            }
+            else
+            {
+                // No multiple choices, clear any pending choices
+                _pendingChoices = null;
             }
         }
     }
 
     /// <summary>
-    /// Advances to the next dialogue if available, otherwise shows end dialogue options.
+    /// Advances to the next dialogue if available, otherwise sets up state for clearing text before end buttons.
     /// Called when player clicks/presses space during single dialogue or through choice selection.
     /// </summary>
     public void NextDialogue()
@@ -421,15 +596,134 @@ public class DialogueDisplay : MonoBehaviour
             var choices = _dialogue.m_dialogue.m_dialogueChoiceData;
             if (choices != null && choices.Count > 0 && choices[0].m_nextDialogue != null)
             {
+                // Reset the flag since we're continuing with more dialogue
+                _endDialogueButtonsShown = false;
                 _dialogue.m_dialogue = choices[0].m_nextDialogue;
                 ShowDialogue();
             }
             else
             {
-                Debug.Log("No next dialogue found. Showing end dialogue buttons.");
-                ShowEndDialogueButtons();
+                Debug.Log(
+                    "No next dialogue found. Waiting for user input to clear text before showing end buttons."
+                );
+                // Instead of directly showing end buttons, set state to wait for user input to clear text first
+                _waitingForClearBeforeEndButtons = true;
+                _canAdvance = true; // Allow input to clear text
+
+                // Keep the continue icon visible to indicate user can interact
+                if (_continueIcon != null)
+                {
+                    _continueIcon.SetActive(true);
+                }
             }
         }
+    }
+
+    /// <summary>
+    /// TEST FUNCTION: Skips to the end of the current dialogue chain.
+    /// Traverses through all dialogue nodes following the first choice until reaching the end.
+    /// Useful for testing end dialogue functionality without going through the entire conversation.
+    /// </summary>
+    [ContextMenu("TEST: Go To End Of Dialogue")]
+    private void GoToEndOfDialogue()
+    {
+        if (_dialogue == null || _dialogue.m_dialogue == null)
+        {
+            Debug.LogWarning("[TEST] No dialogue to skip through");
+            return;
+        }
+
+        DSDialogueSO currentNode = _dialogue.m_dialogue;
+        int maxIterations = 100; // Safety limit to prevent infinite loops
+        int iterations = 0;
+
+        // Traverse through the dialogue chain until we reach the end
+        while (currentNode != null && iterations < maxIterations)
+        {
+            iterations++;
+
+            // Skip condition and setter nodes automatically
+            if (
+                currentNode.m_dialogueTypeData == DS.Enumerations.DSDialogueType.Condition
+                || currentNode.m_dialogueTypeData == DS.Enumerations.DSDialogueType.Setter
+            )
+            {
+                // For condition/setter nodes, just follow the first choice
+                var choices = currentNode.m_dialogueChoiceData;
+                if (choices != null && choices.Count > 0 && choices[0].m_nextDialogue != null)
+                {
+                    currentNode = choices[0].m_nextDialogue;
+                    continue;
+                }
+                else
+                {
+                    break; // No next dialogue, we've reached the end
+                }
+            }
+
+            // For regular dialogue nodes, check if there's a next dialogue
+            var dialogueChoices = currentNode.m_dialogueChoiceData;
+            if (
+                dialogueChoices != null
+                && dialogueChoices.Count > 0
+                && dialogueChoices[0].m_nextDialogue != null
+            )
+            {
+                currentNode = dialogueChoices[0].m_nextDialogue;
+            }
+            else
+            {
+                // No next dialogue, we've reached the end
+                break;
+            }
+        }
+
+        if (iterations >= maxIterations)
+        {
+            Debug.LogWarning(
+                "[TEST] Reached maximum iterations while skipping dialogue. Possible infinite loop detected."
+            );
+        }
+
+        // Set the dialogue to the final node we found
+        _dialogue.m_dialogue = currentNode;
+
+        // Clear any pending choices and active buttons
+        ClearChoices();
+        _pendingChoices = null;
+
+        // Stop any audio and typewriter
+        if (_audioSource != null)
+        {
+            _audioSource.Stop();
+        }
+
+        if (_typewriter != null)
+        {
+            _typewriter.StopShowingText();
+        }
+
+        // Show the final dialogue or set up for end dialogue buttons
+        if (currentNode != null)
+        {
+            ShowDialogue();
+        }
+        else
+        {
+            Debug.Log(
+                "[TEST] Reached end of dialogue chain, setting up to clear text before showing end buttons"
+            );
+            // Set up the state to wait for user input to clear text before showing end buttons
+            _waitingForClearBeforeEndButtons = true;
+            _canAdvance = true;
+
+            if (_continueIcon != null)
+            {
+                _continueIcon.SetActive(true);
+            }
+        }
+
+        Debug.Log($"[TEST] Skipped through {iterations} dialogue nodes to reach the end");
     }
 
     /// <summary>
@@ -440,12 +734,28 @@ public class DialogueDisplay : MonoBehaviour
     /// <param name="bachelor">The character data associated with this dialogue</param>
     public void SetDialogue(DSDialogue dialogue, NewBachelorSO bachelor)
     {
+        // Clear all previous dialogue state to ensure clean setup
+        ClearDialogueState();
+
         _dialogue = dialogue;
         _bachelor = bachelor;
+
+        // Reset the state for waiting to clear before end buttons
+        _waitingForClearBeforeEndButtons = false;
+        _endDialogueButtonsShown = false;
+
         if (_bachelor != null)
         {
-            // Ensure all preferences start as undiscovered
-            _bachelor.EnsureUndiscoveredState(); // Use the bachelor's love meter if available
+            // Ensure bachelor synchronizes with save data to load discovered preferences
+            _bachelor.SynchronizeWithSaveData();
+
+            // Ensure notebook is properly connected to the new bachelor
+            if (_noteBook != null)
+            {
+                _noteBook.EnsureBachelorConnection(_bachelor);
+            }
+
+            // Use the bachelor's love meter if available
             if (_bachelor._loveMeter != null)
             {
                 _loveMeter = _bachelor._loveMeter;
@@ -470,11 +780,54 @@ public class DialogueDisplay : MonoBehaviour
     /// <param name="dialogueSO">The initial dialogue to display</param>
     public void StartDialogue(NewBachelorSO bachelor, DSDialogue dialogueSO)
     {
+        // Clear all previous dialogue state to ensure clean setup
+        ClearDialogueState();
+
         bachelor._dialogue = dialogueSO;
         if (bachelor == null || bachelor._dialogue == null)
+        {
+            Debug.LogError("[StartDialogue] Bachelor or dialogue is null!");
             return;
+        }
+
         _bachelor = bachelor;
-        _dialogue = dialogueSO; // Initialize love meter with bachelor's data
+        _dialogue = dialogueSO;
+
+        Debug.Log($"[StartDialogue] Started dialogue with bachelor: {_bachelor._name}");
+
+        // Find and cache the SetBachelor component for later use
+        _setBachelor = FindFirstObjectByType<SetBachelor>();
+        if (_setBachelor == null)
+        {
+            Debug.LogWarning(
+                "[DialogueDisplay] No SetBachelor found in scene, dating status may not be properly saved"
+            );
+
+            // Try a more aggressive search as a fallback
+            SetBachelor[] allSetBachelors = FindObjectsByType<SetBachelor>(
+                FindObjectsSortMode.None
+            );
+            if (allSetBachelors != null && allSetBachelors.Length > 0)
+            {
+                _setBachelor = allSetBachelors[0];
+                Debug.Log($"[DialogueDisplay] Found SetBachelor through alternative search method");
+            }
+        }
+        else
+        {
+            Debug.Log($"[DialogueDisplay] Found SetBachelor component in the scene");
+        }
+
+        // Ensure bachelor synchronizes with save data to load discovered preferences
+        _bachelor.SynchronizeWithSaveData();
+
+        // Ensure notebook is properly connected to the new bachelor
+        if (_noteBook != null)
+        {
+            _noteBook.EnsureBachelorConnection(_bachelor);
+        }
+
+        // Initialize love meter with bachelor's data
         if (_bachelor != null && _bachelor._loveMeter != null)
         {
             _loveMeter = _bachelor._loveMeter;
@@ -484,7 +837,298 @@ public class DialogueDisplay : MonoBehaviour
             EnsureLoveMeterSetup();
         }
 
+        // Reference to SetBachelor already found above, no need to search again
+        if (_setBachelor != null)
+        {
+            Debug.Log(
+                $"[DialogueDisplay] Using SetBachelor for bachelor: {_setBachelor.GetBachelor()?._name}"
+            );
+        }
+
         ShowDialogue();
+    }
+
+    /// <summary>
+    /// Starts a new dialogue conversation with a bachelor character and sets up date dialogues.
+    /// This overloaded version allows date dialogues to be passed from SetBachelor instead of stored in the SO.
+    /// </summary>
+    /// <param name="bachelor">The bachelor character data</param>
+    /// <param name="dialogueSO">The main dialogue to display</param>
+    /// <param name="rooftopDateDialogue">Dialogue for rooftop date location</param>
+    /// <param name="aquariumDateDialogue">Dialogue for aquarium date location</param>
+    /// <param name="forestDateDialogue">Dialogue for forest date location</param>
+    public void StartDialogue(
+        NewBachelorSO bachelor,
+        DSDialogue dialogueSO,
+        DSDialogue rooftopDateDialogue,
+        DSDialogue aquariumDateDialogue,
+        DSDialogue forestDateDialogue
+    )
+    {
+        // Clear all previous dialogue state to ensure clean setup
+        ClearDialogueState();
+
+        bachelor._dialogue = dialogueSO;
+        if (bachelor == null || bachelor._dialogue == null)
+            return;
+
+        _bachelor = bachelor;
+        _dialogue = dialogueSO;
+
+        // Set the date dialogues from the parameters instead of the SO
+        _rooftopDateDialogue = rooftopDateDialogue;
+        _aquariumDateDialogue = aquariumDateDialogue;
+        _forestDateDialogue = forestDateDialogue;
+
+        // Ensure bachelor synchronizes with save data to load discovered preferences
+        _bachelor.SynchronizeWithSaveData();
+
+        // Ensure notebook is properly connected to the new bachelor
+        if (_noteBook != null)
+        {
+            _noteBook.EnsureBachelorConnection(_bachelor);
+        }
+
+        // Initialize love meter with bachelor's data
+        if (_bachelor != null && _bachelor._loveMeter != null)
+        {
+            _loveMeter = _bachelor._loveMeter;
+            _loveScore = _loveMeter.GetCurrentLove();
+
+            // Set up the love meter UI component
+            EnsureLoveMeterSetup();
+        }
+        ShowDialogue();
+    }
+
+    /// <summary>
+    /// Shows limited dialogue options for a bachelor who has already been dated.
+    /// Only displays "Come Back Later" and "Ask on a Date" options.
+    /// </summary>
+    /// <param name="bachelor">The bachelor who has already been dated</param>
+    public void ShowPostDateOptions(NewBachelorSO bachelor)
+    {
+        Debug.Log(
+            $"[ShowPostDateOptions] Starting. Bachelor: {(bachelor != null ? bachelor._name : "null")}"
+        );
+
+        // Clear all previous dialogue state to ensure clean setup
+        ClearDialogueState();
+
+        _bachelor = bachelor;
+
+        // Ensure bachelor synchronizes with save data to load discovered preferences
+        _bachelor.SynchronizeWithSaveData();
+
+        // Reset the state for waiting to clear before end buttons
+        _waitingForClearBeforeEndButtons = false;
+        _endDialogueButtonsShown = false;
+
+        // Reset advancement state - must wait for typewriter
+        _canAdvance = false;
+        _isDelayActive = false;
+
+        // Ensure bachelor image is displayed when showing post-date options
+        if (_bachelor != null && _bachelor._portrait != null && _bachelorImage != null)
+        {
+            _bachelorImage.sprite = _bachelor._portrait;
+            _bachelorImage.color = new Color(
+                _bachelorImage.color.r,
+                _bachelorImage.color.g,
+                _bachelorImage.color.b,
+                1f
+            );
+            _bachelorImage.enabled = true;
+            Debug.Log(
+                $"✓ Set bachelor image for post-date options: {_bachelor._name} (Portrait: {_bachelor._portrait.name})"
+            );
+        }
+        else if (_bachelorImage != null)
+        {
+            _bachelorImage.sprite = null;
+            _bachelorImage.color = new Color(
+                _bachelorImage.color.r,
+                _bachelorImage.color.g,
+                _bachelorImage.color.b,
+                0f
+            );
+            _bachelorImage.enabled = false;
+            Debug.LogWarning(
+                $"✗ No bachelor image available for post-date options. Bachelor: {(_bachelor != null ? "exists" : "null")}, Portrait: {(_bachelor?._portrait != null ? "exists" : "null")}, BachelorImage: {(_bachelorImage != null ? "exists" : "null")}"
+            );
+        }
+
+        // Set up the UI - bachelor name
+        if (_bachelor != null && _nameText != null)
+        {
+            _nameText.text = _bachelor._name;
+            Debug.Log($"Set bachelor name for post-date options: {_bachelor._name}");
+        }
+        else if (_nameText != null)
+        {
+            _nameText.text = "";
+            Debug.Log("No bachelor name available for post-date options");
+        }
+
+        if (_displayText != null)
+        {
+            string greetingText = $"Hey {_bachelor?._name ?? ""}! What would you like to do?";
+            _displayText.text = greetingText;
+
+            if (_typewriter != null)
+            {
+                _typewriter.ShowText(greetingText);
+            }
+        }
+
+        // Initialize love meter if available
+        if (_bachelor != null && _bachelor._loveMeter != null)
+        {
+            _loveMeter = _bachelor._loveMeter;
+            _loveScore = _loveMeter.GetCurrentLove();
+            EnsureLoveMeterSetup();
+        }
+
+        // Ensure notebook connection
+        if (_noteBook != null)
+        {
+            _noteBook.EnsureBachelorConnection(_bachelor);
+        }
+
+        // Show the canvas and ensure proper UI state
+        if (_dialogueCanvas != null)
+        {
+            _dialogueCanvas.enabled = true;
+            Debug.Log("Enabled dialogue canvas for post-date options");
+        }
+
+        if (_moveCanvas != null)
+        {
+            _moveCanvas.enabled = false;
+            Debug.Log("Disabled move canvas for post-date options");
+        }
+
+        // Hide continue icon and show post-date options
+        if (_continueIcon != null)
+        {
+            _continueIcon.SetActive(false);
+        }
+
+        // Clear any existing choices and show the post-date options
+        ClearChoices();
+        CreateEndDialogueButton("Come Back Later", OnComeBackLaterClicked);
+        CreateEndDialogueButton("Ask on a Date", OnAskOnDateClicked);
+
+        // Don't animate the choices immediately - wait for typewriter to finish
+        // The OnTypewriterEnd method will handle the animation
+    }
+
+    /// <summary>
+    /// Shows limited dialogue options for a bachelor who has completed a real date.
+    /// Displays personalized message and only "Come Back Later" option.
+    /// </summary>
+    /// <param name="bachelor">The bachelor who has completed a real date</param>
+    public void ShowPostRealDateOptionsInCafe(NewBachelorSO bachelor)
+    {
+        // Clear all previous dialogue state to ensure clean setup
+        ClearDialogueState();
+
+        _bachelor = bachelor;
+
+        // Ensure bachelor synchronizes with save data to load discovered preferences
+        _bachelor.SynchronizeWithSaveData();
+
+        // Reset the state for waiting to clear before end buttons
+        _waitingForClearBeforeEndButtons = false;
+        _endDialogueButtonsShown = false;
+
+        // Reset advancement state - must wait for typewriter
+        _canAdvance = false;
+        _isDelayActive = false;
+
+        // Initialize love meter if available and update love score BEFORE getting the message
+        if (_bachelor != null && _bachelor._loveMeter != null)
+        {
+            _loveMeter = _bachelor._loveMeter;
+            _loveScore = _loveMeter.GetCurrentLove();
+            EnsureLoveMeterSetup();
+            Debug.Log($"Updated love score for post-real-date message: {_loveScore}");
+        }
+
+        // Set up the UI
+        if (_bachelor != null && _nameText != null)
+        {
+            _nameText.text = _bachelor._name;
+        }
+
+        if (_bachelor != null && _bachelor._portrait != null && _bachelorImage != null)
+        {
+            _bachelorImage.sprite = _bachelor._portrait;
+            _bachelorImage.enabled = true;
+            _bachelorImage.color = new Color(
+                _bachelorImage.color.r,
+                _bachelorImage.color.g,
+                _bachelorImage.color.b,
+                1f // Fully visible immediately
+            );
+
+            Debug.Log($"✓ Set bachelor image for post-real-date: {_bachelor._name}");
+        }
+
+        // Show personalized message for real date completion (now uses updated love score)
+        if (_displayText != null)
+        {
+            string personalizedMessage = _bachelor.GetRealDateMessage();
+            _displayText.text = personalizedMessage;
+
+            if (_typewriter != null)
+            {
+                _typewriter.ShowText(personalizedMessage);
+            }
+        }
+
+        // Initialize love meter if available (already done above, so just ensure consistency)
+        if (_bachelor != null && _bachelor._loveMeter != null)
+        {
+            // Love meter already initialized above, just ensure consistency
+            if (_loveMeter != _bachelor._loveMeter)
+            {
+                _loveMeter = _bachelor._loveMeter;
+                _loveScore = _loveMeter.GetCurrentLove();
+                EnsureLoveMeterSetup();
+                Debug.Log($"Re-synchronized love meter for consistency: {_loveScore}");
+            }
+        }
+
+        // Ensure notebook connection
+        if (_noteBook != null)
+        {
+            _noteBook.EnsureBachelorConnection(_bachelor);
+        }
+
+        // Show the canvas
+        if (_dialogueCanvas != null)
+        {
+            _dialogueCanvas.enabled = true;
+        }
+
+        if (_moveCanvas != null)
+        {
+            _moveCanvas.enabled = false;
+        }
+
+        // Hide continue icon and show only Come Back Later option
+        if (_continueIcon != null)
+        {
+            _continueIcon.SetActive(false);
+        }
+
+        // Clear any existing choices and show only the Come Back Later option
+        ClearChoices();
+        CreateEndDialogueButton("Come Back Later", OnComeBackLaterClicked);
+
+        // Don't animate the choices immediately - wait for typewriter to finish
+        // The OnTypewriterEnd method will handle the animation
     }
     #endregion
 
@@ -548,24 +1192,18 @@ public class DialogueDisplay : MonoBehaviour
                     Debug.LogWarning($"Unknown condition operation type: {operationType}");
                     break;
             }
-
             Debug.Log($"Condition result: {conditionMet}");
 
-            // Follow the appropriate path based on condition result
+            // Follow the single "Next Dialogue" path after evaluating condition
             var choices = conditionNode.m_dialogueChoiceData;
-            if (choices != null && choices.Count > 0)
+            if (choices != null && choices.Count > 0 && choices[0].m_nextDialogue != null)
             {
-                int pathIndex = conditionMet ? 0 : 1;
-
-                if (pathIndex < choices.Count && choices[pathIndex].m_nextDialogue != null)
-                {
-                    _dialogue.m_dialogue = choices[pathIndex].m_nextDialogue;
-                    ShowDialogue();
-                }
-                else
-                {
-                    Debug.LogError($"No valid path found for condition result: {conditionMet}");
-                }
+                _dialogue.m_dialogue = choices[0].m_nextDialogue;
+                ShowDialogue();
+            }
+            else
+            {
+                Debug.LogError("No valid next dialogue found after condition node");
             }
         }
         catch (System.Exception e)
@@ -817,23 +1455,47 @@ public class DialogueDisplay : MonoBehaviour
     /// </summary>
     private void OnTypewriterEnd()
     {
-        // Only start coroutine if the GameObject is active
-        if (gameObject.activeInHierarchy)
+        // Show pending choices if there are any (multiple choice dialogue)
+        if (_pendingChoices != null && _pendingChoices.Count > 1)
         {
-            // Start the delay before allowing advancement
-            StartCoroutine(DelayBeforeAdvancement());
+            ShowChoices(_pendingChoices);
+            _pendingChoices = null; // Clear pending choices after showing them
+
+            // For multiple choice dialogues, don't allow manual advancement
+            // The player must click a choice button to advance
+            _isDelayActive = false;
+            _canAdvance = false;
         }
+        // If there are active choice buttons (like post-date options), animate them in
+        else if (_activeChoiceButtons.Count > 0)
+        {
+            StartCoroutine(FadeInChoicesSequentially(_activeChoiceButtons));
+
+            // For pre-created choice buttons, don't allow manual advancement
+            _isDelayActive = false;
+            _canAdvance = false;
+        }
+        // For single dialogue with no choices, allow manual advancement after delay
         else
         {
-            // If GameObject is inactive, immediately allow advancement without delay
-            _isDelayActive = false;
-            _canAdvance = true;
-        }
+            // Only start coroutine if the GameObject is active
+            if (gameObject.activeInHierarchy)
+            {
+                // Start the delay before allowing advancement
+                StartCoroutine(DelayBeforeAdvancement());
+            }
+            else
+            {
+                // If GameObject is inactive, immediately allow advancement without delay
+                _isDelayActive = false;
+                _canAdvance = true;
+            }
 
-        // Show continue icon only if there are no multiple choices (single dialogue)
-        if (_activeChoiceButtons.Count == 0 && _continueIcon != null)
-        {
-            _continueIcon.SetActive(true);
+            // Show continue icon only if there are no choices at all (single dialogue)
+            if (_continueIcon != null)
+            {
+                _continueIcon.SetActive(true);
+            }
         }
     }
 
@@ -868,6 +1530,9 @@ public class DialogueDisplay : MonoBehaviour
             _continueIcon.SetActive(false);
         }
 
+        // Create all buttons first, but make them invisible
+        List<GameObject> buttonsToAnimate = new List<GameObject>();
+
         foreach (var choice in choices)
         {
             var btnObj = Instantiate(_choiceButtonPrefab, _choicesParent);
@@ -877,6 +1542,14 @@ public class DialogueDisplay : MonoBehaviour
 
             // Ensure proper button sizing and layout
             EnsureContentSizeFitter(btnObj);
+
+            // Set initial alpha to 0 (invisible)
+            var canvasGroup = btnObj.GetComponent<CanvasGroup>();
+            if (canvasGroup == null)
+            {
+                canvasGroup = btnObj.AddComponent<CanvasGroup>();
+            }
+            canvasGroup.alpha = 0f;
 
             var button = btnObj.GetComponent<UnityEngine.UI.Button>();
             if (button != null)
@@ -908,7 +1581,11 @@ public class DialogueDisplay : MonoBehaviour
             }
 
             _activeChoiceButtons.Add(btnObj);
+            buttonsToAnimate.Add(btnObj);
         }
+
+        // Start the fade-in animation for all buttons
+        StartCoroutine(FadeInChoicesSequentially(buttonsToAnimate));
 
         // Refresh layout after all buttons are created
         StartCoroutine(RefreshLayoutAfterDelay(0.05f));
@@ -926,6 +1603,9 @@ public class DialogueDisplay : MonoBehaviour
                 Destroy(btn);
         }
         _activeChoiceButtons.Clear();
+
+        // Also clear any pending choices
+        _pendingChoices = null;
     }
 
     /// <summary>
@@ -936,6 +1616,10 @@ public class DialogueDisplay : MonoBehaviour
     private void OnChoiceSelected(DS.Data.DSDialogueChoiceData choice)
     {
         ClearChoices();
+
+        // Reset the flag since we're continuing with more dialogue
+        _endDialogueButtonsShown = false;
+
         if (choice != null && choice.m_nextDialogue != null)
         {
             _dialogue.m_dialogue = choice.m_nextDialogue;
@@ -1102,6 +1786,51 @@ public class DialogueDisplay : MonoBehaviour
             vertLayout.spacing = 15f;
         }
     }
+
+    /// <summary>
+    /// Coroutine that fades in choice buttons one by one with a smooth DOTween animation.
+    /// Creates a sequential reveal effect for dialogue choices.
+    /// </summary>
+    /// <param name="buttons">List of button GameObjects to animate</param>
+    /// <returns>Coroutine enumerator</returns>
+    private System.Collections.IEnumerator FadeInChoicesSequentially(List<GameObject> buttons)
+    {
+        for (int i = 0; i < buttons.Count; i++)
+        {
+            if (buttons[i] != null)
+            {
+                var canvasGroup = buttons[i].GetComponent<CanvasGroup>();
+                var button = buttons[i].GetComponent<UnityEngine.UI.Button>();
+
+                if (canvasGroup != null)
+                {
+                    // Disable button interaction during fade-in
+                    if (button != null && button.interactable)
+                    {
+                        canvasGroup.interactable = false;
+                    }
+
+                    // Use DOTween to animate alpha from 0 to 1 with smooth easing
+                    yield return canvasGroup
+                        .DOFade(1f, _choiceFadeDuration)
+                        .SetEase(Ease.OutQuad)
+                        .WaitForCompletion();
+
+                    // Re-enable interaction after fade-in completes
+                    if (button != null && button.interactable)
+                    {
+                        canvasGroup.interactable = true;
+                    }
+                }
+            }
+
+            // Wait before showing the next button (except for the last one)
+            if (i < buttons.Count - 1)
+            {
+                yield return new WaitForSeconds(_choiceAppearDelay);
+            }
+        }
+    }
     #endregion
 
     #region Preference Discovery System
@@ -1196,16 +1925,131 @@ public class DialogueDisplay : MonoBehaviour
     }
     #endregion
 
-    #region End Dialogue Management    /// <summary>
+    #region End Dialogue Management
+    /// <summary>
     /// Shows end dialogue buttons when the conversation is complete.
-    /// Shows "Enter Cafe" button only at the last dialogue of FirstDate scene, otherwise shows standard buttons in Cafe scenes.
+    /// Uses boolean flag to determine if showing post-real-date options or regular dialogue options.
     /// </summary>
     private void ShowEndDialogueButtons()
     {
+        // Prevent multiple calls to avoid chaining endings
+        if (_endDialogueButtonsShown)
+        {
+            Debug.Log(
+                "[ShowEndDialogueButtons] End dialogue buttons already shown, preventing chain"
+            );
+            return;
+        }
+
+        _endDialogueButtonsShown = true;
+
+        Debug.Log(
+            $"[ShowEndDialogueButtons] Starting. Bachelor: {(_bachelor != null ? _bachelor._name : "null")}"
+        );
+
+        // Update love score from love meter to ensure consistency
+        if (_bachelor != null && _bachelor._loveMeter != null)
+        {
+            _loveScore = _bachelor._loveMeter.GetCurrentLove();
+            Debug.Log($"Updated love score for end dialogue buttons: {_loveScore}");
+        }
+
+        // Ensure bachelor image is displayed when showing end dialogue buttons
+        if (_bachelor != null && _bachelor._portrait != null && _bachelorImage != null)
+        {
+            _bachelorImage.sprite = _bachelor._portrait;
+            _bachelorImage.color = new Color(
+                _bachelorImage.color.r,
+                _bachelorImage.color.g,
+                _bachelorImage.color.b,
+                1f
+            );
+            _bachelorImage.enabled = true;
+            Debug.Log(
+                $"✓ Set bachelor image for end dialogue buttons: {_bachelor._name} (Portrait: {_bachelor._portrait.name})"
+            );
+        }
+        else if (_bachelorImage != null)
+        {
+            _bachelorImage.sprite = null;
+            _bachelorImage.color = new Color(
+                _bachelorImage.color.r,
+                _bachelorImage.color.g,
+                _bachelorImage.color.b,
+                0f
+            );
+            _bachelorImage.enabled = false;
+            Debug.LogWarning(
+                $"✗ No bachelor image available for end dialogue buttons. Bachelor: {(_bachelor != null ? "exists" : "null")}, Portrait: {(_bachelor?._portrait != null ? "exists" : "null")}, BachelorImage: {(_bachelorImage != null ? "exists" : "null")}"
+            );
+        }
+
+        // Ensure bachelor name is displayed when showing end dialogue buttons
+        if (_bachelor != null && _nameText != null)
+        {
+            _nameText.text = _bachelor._name;
+            Debug.Log($"Set bachelor name for end dialogue buttons: {_bachelor._name}");
+        }
+        else if (_nameText != null)
+        {
+            _nameText.text = "";
+            Debug.Log("No bachelor name available for end dialogue buttons");
+        }
+
+        // Ensure dialogue canvas is enabled when showing end dialogue buttons
+        if (_dialogueCanvas != null)
+        {
+            _dialogueCanvas.enabled = true;
+            Debug.Log("Enabled dialogue canvas for end dialogue buttons");
+        }
+
+        // Ensure move canvas is disabled when showing end dialogue buttons
+        if (_moveCanvas != null)
+        {
+            _moveCanvas.enabled = false;
+            Debug.Log("Disabled move canvas for end dialogue buttons");
+        }
+
+        // Mark the bachelor as having completed a speed date
+        if (_bachelor != null)
+        {
+            // Use the bachelor's own method which handles both local flags and save data consistency
+            MarkBachelorAsDated(_bachelor);
+
+            // Also notify SetBachelor to ensure full synchronization with save data
+            if (_setBachelor != null)
+            {
+                _setBachelor.CompleteSpeedDateAndSave();
+                Debug.Log(
+                    "[DialogueDisplay] Called CompleteSpeedDateAndSave() to ensure bachelor dating status is saved"
+                );
+            }
+        }
+
         string currentSceneName = SceneManager.GetActiveScene().name;
+        string sceneLower = currentSceneName.ToLower();
+
+        // Check if we're at the end of a real date - detect by having a real date location set
+        bool isEndOfRealDate = !string.IsNullOrEmpty(_currentRealDateLocation);
+
+        if (isEndOfRealDate)
+        {
+            Debug.Log(
+                $"End of real date detected ({_currentRealDateLocation}). Setting flag and showing Good/Bad Date result screen, then proceeding to barista."
+            );
+
+            // NOW set the flag since we're truly at the end of the real date
+            _justCompletedRealDate = true;
+
+            ClearChoices();
+
+            // Trigger the Good/Bad Date result screen immediately
+            StartCoroutine(ShowDateResultAndProceedToBarista());
+            return;
+        }
 
         // Check if we're in the FirstDate scene AND this is truly the last dialogue
-        bool isFirstDateScene = currentSceneName.ToLower().Contains("firstdate");
+        bool isFirstDateScene = sceneLower.Contains("firstdate");
         bool isLastDialogue =
             _dialogue?.m_dialogue?.m_dialogueChoiceData == null
             || _dialogue.m_dialogue.m_dialogueChoiceData.Count == 0
@@ -1218,6 +2062,8 @@ public class DialogueDisplay : MonoBehaviour
             );
             ClearChoices();
             CreateEnterCafeButton();
+            // Apply fade-in animation to the Enter Cafe button
+            StartCoroutine(FadeInChoicesSequentially(_activeChoiceButtons));
             return;
         }
         else if (isFirstDateScene && !isLastDialogue)
@@ -1229,8 +2075,8 @@ public class DialogueDisplay : MonoBehaviour
         }
 
         bool isCafeScene =
-            currentSceneName.ToLower().Contains("cafe")
-            || currentSceneName.ToLower().Contains("cafescene")
+            sceneLower.Contains("cafe")
+            || sceneLower.Contains("cafescene")
             || currentSceneName.Equals("CafeScene", System.StringComparison.OrdinalIgnoreCase);
 
         if (!isCafeScene)
@@ -1248,11 +2094,310 @@ public class DialogueDisplay : MonoBehaviour
         // Create "Come Back Later" button
         CreateEndDialogueButton("Come Back Later", OnComeBackLaterClicked);
 
-        // Create "Next Scene" button
-        string nextSceneText = !string.IsNullOrEmpty(_bachelor?._nextSceneName)
-            ? $"Go to {_bachelor._nextSceneName}"
-            : "Continue";
-        CreateEndDialogueButton(nextSceneText, OnNextSceneClicked);
+        // Only create "Ask on a Date" button if bachelor has enough love for a real date
+        if (
+            _bachelor != null
+            && _bachelor._loveMeter != null
+            && _bachelor._loveMeter.CanGoOnRealDate()
+        )
+        {
+            CreateEndDialogueButton("Ask on a Date", OnAskOnDateClicked);
+            Debug.Log(
+                $"Ask on a Date button shown - {_bachelor._name} has {_bachelor._loveMeter.GetCurrentLove()}/{_bachelor._loveMeter._loveNeededForRealDate} love"
+            );
+        }
+        else
+        {
+            Debug.Log(
+                $"Ask on a Date button hidden - {_bachelor?.name ?? "Unknown"} needs more love (Current: {_bachelor?._loveMeter?.GetCurrentLove() ?? 0}, Required: {_bachelor?._loveMeter?._loveNeededForRealDate ?? 0})"
+            );
+        }
+
+        // Apply fade-in animation to all created buttons
+        StartCoroutine(FadeInChoicesSequentially(_activeChoiceButtons));
+    }
+
+    /// <summary>
+    /// Shows the post-real-date options with no message and only Come Back Later button
+    /// Used at the end of real date scenes (aquarium, forest, rooftop)
+    /// </summary>
+    private void ShowPostRealDateOptions()
+    {
+        Debug.Log(
+            $"[ShowPostRealDateOptions] Starting. Bachelor: {(_bachelor != null ? _bachelor._name : "null")}"
+        );
+
+        // Ensure bachelor image is displayed
+        if (_bachelor != null && _bachelor._portrait != null && _bachelorImage != null)
+        {
+            _bachelorImage.sprite = _bachelor._portrait;
+            _bachelorImage.color = new Color(
+                _bachelorImage.color.r,
+                _bachelorImage.color.g,
+                _bachelorImage.color.b,
+                1f
+            );
+            _bachelorImage.enabled = true;
+            Debug.Log(
+                $"✓ Set bachelor image for post-real-date options: {_bachelor._name} (Portrait: {_bachelor._portrait.name})"
+            );
+        }
+        else if (_bachelorImage != null)
+        {
+            _bachelorImage.sprite = null;
+            _bachelorImage.color = new Color(
+                _bachelorImage.color.r,
+                _bachelorImage.color.g,
+                _bachelorImage.color.b,
+                0f
+            );
+            _bachelorImage.enabled = false;
+            Debug.LogWarning(
+                $"✗ No bachelor image available for post-real-date options. Bachelor: {(_bachelor != null ? "exists" : "null")}, Portrait: {(_bachelor?._portrait != null ? "exists" : "null")}, BachelorImage: {(_bachelorImage != null ? "exists" : "null")}"
+            );
+        }
+
+        // Ensure bachelor name is displayed
+        if (_bachelor != null && _nameText != null)
+        {
+            _nameText.text = _bachelor._name;
+            Debug.Log($"Set bachelor name for post-real-date options: {_bachelor._name}");
+        }
+        else if (_nameText != null)
+        {
+            _nameText.text = "";
+            Debug.Log("No bachelor name available for post-real-date options");
+        }
+
+        // Ensure dialogue canvas is enabled
+        if (_dialogueCanvas != null)
+        {
+            _dialogueCanvas.enabled = true;
+            Debug.Log("Enabled dialogue canvas for post-real-date options");
+        }
+
+        // Ensure move canvas is disabled
+        if (_moveCanvas != null)
+        {
+            _moveCanvas.enabled = false;
+            Debug.Log("Disabled move canvas for post-real-date options");
+        }
+
+        // Clear the display text - no message shown at the end of real date scenes
+        if (_displayText != null)
+        {
+            _displayText.text = "";
+
+            if (_typewriter != null)
+            {
+                _typewriter.ShowText("");
+            }
+        }
+        // Hide continue icon and show only the Come Back Later option
+        if (_continueIcon != null)
+        {
+            _continueIcon.SetActive(false);
+        }
+
+        // Only show "Back to Cafe" button for real dates
+        CreateEndDialogueButton("Back to Cafe", OnComeBackLaterClicked);
+
+        // Apply fade-in animation to the Back to Cafe button
+        StartCoroutine(FadeInChoicesSequentially(_activeChoiceButtons));
+    }
+
+    /// <summary>
+    /// Handles the "Come Back Later" button click after a real date
+    /// </summary>
+    private void OnPostRealDateComeBackLaterClicked()
+    {
+        Debug.Log(
+            $"[OnPostRealDateComeBackLaterClicked] Come Back Later button clicked after real date. Bachelor: {(_bachelor != null ? _bachelor._name : "null")}, Location: {_currentRealDateLocation}"
+        );
+
+        // Mark bachelor as real dated and save progress
+        if (_bachelor != null && !string.IsNullOrEmpty(_currentRealDateLocation))
+        {
+            Debug.Log(
+                $"[OnPostRealDateComeBackLaterClicked] About to mark {_bachelor._name} as real dated at {_currentRealDateLocation}"
+            );
+
+            // Use SetBachelor to ensure proper synchronization with save data
+            if (_setBachelor != null)
+            {
+                _setBachelor.CompleteRealDateAndSave(_currentRealDateLocation);
+                Debug.Log(
+                    $"[OnPostRealDateComeBackLaterClicked] Called CompleteRealDateAndSave({_currentRealDateLocation}) via SetBachelor"
+                );
+            }
+            else
+            {
+                // Fallback to direct method if SetBachelor isn't available
+                MarkBachelorAsRealDated(_bachelor);
+                Debug.LogWarning(
+                    "[OnPostRealDateComeBackLaterClicked] SetBachelor not found, using direct method instead"
+                );
+            }
+
+            IncrementRealDateCount();
+        }
+        else
+        {
+            Debug.LogError(
+                "[OnPostRealDateComeBackLaterClicked] Bachelor is null or location is empty when trying to save real date progress!"
+            );
+        }
+
+        // Clear notebook
+        if (_noteBook != null)
+        {
+            _noteBook.ClearBachelor();
+        }
+
+        // End the date session
+        EndDate();
+
+        // Return to the cafe scene
+        SceneManager.LoadScene("CafeScene"); // Adjust scene name as needed
+    }
+
+    /// <summary>
+    /// Handles the "Return to Cafe" button click after a real date
+    /// </summary>
+    private void OnReturnToCafeClicked()
+    {
+        Debug.Log("Return to Cafe button clicked");
+
+        // Mark bachelor as real dated and save progress
+        if (_bachelor != null && !string.IsNullOrEmpty(_currentRealDateLocation))
+        {
+            // Use SetBachelor to ensure proper synchronization with save data
+            if (_setBachelor != null)
+            {
+                _setBachelor.CompleteRealDateAndSave(_currentRealDateLocation);
+                Debug.Log(
+                    $"[OnReturnToCafeClicked] Called CompleteRealDateAndSave({_currentRealDateLocation}) via SetBachelor"
+                );
+            }
+            else
+            {
+                // Fallback to direct method if SetBachelor isn't available
+                MarkBachelorAsRealDated(_bachelor);
+                Debug.LogWarning(
+                    "[OnReturnToCafeClicked] SetBachelor not found, using direct method instead"
+                );
+            }
+
+            IncrementRealDateCount();
+        }
+
+        // Clear notebook
+        if (_noteBook != null)
+        {
+            _noteBook.ClearBachelor();
+        }
+
+        // End the date session
+        EndDate();
+
+        // Load the cafe scene
+        SceneManager.LoadScene("CafeScene"); // Adjust scene name as needed
+    }
+
+    /// <summary>
+    /// Handles the "Back to Menu" button click after a real date
+    /// </summary>
+    private void OnBackToMenuClicked()
+    {
+        Debug.Log("Back to Menu button clicked");
+
+        // Mark bachelor as real dated and save progress
+        if (_bachelor != null && !string.IsNullOrEmpty(_currentRealDateLocation))
+        {
+            // Use SetBachelor to ensure proper synchronization with save data
+            if (_setBachelor != null)
+            {
+                _setBachelor.CompleteRealDateAndSave(_currentRealDateLocation);
+                Debug.Log(
+                    $"[OnBackToMenuClicked] Called CompleteRealDateAndSave({_currentRealDateLocation}) via SetBachelor"
+                );
+            }
+            else
+            {
+                // Fallback to direct method if SetBachelor isn't available
+                MarkBachelorAsRealDated(_bachelor);
+                Debug.LogWarning(
+                    "[OnBackToMenuClicked] SetBachelor not found, using direct method instead"
+                );
+            }
+
+            IncrementRealDateCount();
+        }
+
+        // Clear notebook
+        if (_noteBook != null)
+        {
+            _noteBook.ClearBachelor();
+        }
+
+        // Turn off all date backgrounds before leaving
+        TurnOffAllDateBackgrounds();
+
+        // End the date session
+        EndDate();
+
+        // Load the main menu scene
+        SceneManager.LoadScene("Main Menu"); // Adjust scene name as needed
+    }
+
+    /// <summary>
+    /// Handles the "Quit Game" button click after a real date
+    /// </summary>
+    private void OnQuitGameClicked()
+    {
+        Debug.Log("Quit Game button clicked");
+
+        // Mark bachelor as real dated and save progress
+        if (_bachelor != null && !string.IsNullOrEmpty(_currentRealDateLocation))
+        {
+            // Use SetBachelor to ensure proper synchronization with save data
+            if (_setBachelor != null)
+            {
+                _setBachelor.CompleteRealDateAndSave(_currentRealDateLocation);
+                Debug.Log(
+                    $"[OnQuitGameClicked] Called CompleteRealDateAndSave({_currentRealDateLocation}) via SetBachelor"
+                );
+            }
+            else
+            {
+                // Fallback to direct method if SetBachelor isn't available
+                MarkBachelorAsRealDated(_bachelor);
+                Debug.LogWarning(
+                    "[OnQuitGameClicked] SetBachelor not found, using direct method instead"
+                );
+            }
+
+            IncrementRealDateCount();
+        }
+
+        // Clear notebook
+        if (_noteBook != null)
+        {
+            _noteBook.ClearBachelor();
+        }
+
+        // Turn off all date backgrounds before quitting
+        TurnOffAllDateBackgrounds();
+
+        // End the date session
+        EndDate();
+
+        // Quit the application
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
     }
 
     /// <summary>
@@ -1268,6 +2413,15 @@ public class DialogueDisplay : MonoBehaviour
             btnText.text = buttonText;
 
         EnsureContentSizeFitter(btnObj);
+
+        // Add canvas group for fade effect if it doesn't exist
+        var canvasGroup = btnObj.GetComponent<CanvasGroup>();
+        if (canvasGroup == null)
+        {
+            canvasGroup = btnObj.AddComponent<CanvasGroup>();
+        }
+        // Set initial alpha to 0 (invisible)
+        canvasGroup.alpha = 0f;
 
         var button = btnObj.GetComponent<UnityEngine.UI.Button>();
         if (button != null)
@@ -1295,10 +2449,19 @@ public class DialogueDisplay : MonoBehaviour
 
         EnsureContentSizeFitter(btnObj);
 
+        // Add canvas group for fade effect if it doesn't exist
+        var canvasGroup = btnObj.GetComponent<CanvasGroup>();
+        if (canvasGroup == null)
+        {
+            canvasGroup = btnObj.AddComponent<CanvasGroup>();
+        }
+        // Set initial alpha to 0 (invisible)
+        canvasGroup.alpha = 0f;
+
         var button = btnObj.GetComponent<UnityEngine.UI.Button>();
         if (button != null)
         {
-            button.onClick.AddListener(() => OnEnterCafeClicked());
+            button.onClick.AddListener(() => OnNextSceneClicked());
 
             if (btnText != null)
                 btnText.color = _normalTextColor;
@@ -1310,22 +2473,152 @@ public class DialogueDisplay : MonoBehaviour
     }
 
     /// <summary>
-    /// Handles the Enter Cafe button click - transitions to Test Cafe scene
+    /// Handles the "Next Scene" button click.
+    /// Tracks successful date completion and loads the next scene.
     /// </summary>
-    private void OnEnterCafeClicked()
+    private void OnNextSceneClicked()
     {
-        Debug.Log("Enter Cafe button clicked. Loading Test Cafe scene...");
-        SceneManager.LoadScene("TestCafe");
+        Debug.Log("Next Scene button clicked");
+
+        // Check if this was a successful date completion
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        bool isDateScene =
+            !currentSceneName.ToLower().Contains("cafe")
+            && !currentSceneName.ToLower().Contains("barista")
+            && !currentSceneName.ToLower().Contains("menu")
+            && !currentSceneName.ToLower().Contains("main");
+
+        Debug.Log(
+            $"[FinishDialogue] Current scene: {currentSceneName}, IsDateScene: {isDateScene}, Bachelor: {(_bachelor != null ? _bachelor._name : "null")}"
+        );
+
+        if (isDateScene)
+        {
+            IncrementSuccessfulDateCount();
+            Debug.Log("Date completed successfully!");
+            // Mark bachelor as dated and disable their setter
+            if (_bachelor != null)
+            {
+                Debug.Log(
+                    $"[FinishDialogue] About to mark {_bachelor._name} as dated in scene {currentSceneName}"
+                );
+                MarkBachelorAsDated(_bachelor);
+            }
+            else
+            {
+                Debug.LogError(
+                    "[FinishDialogue] Bachelor is null when trying to save in date scene!"
+                );
+            }
+        }
+
+        // Remove bachelor from notebook after date is over
+        if (_noteBook != null)
+        {
+            _noteBook.ClearBachelor();
+        }
+
+        // End the date session to reset bachelor interaction states
+
+        EndDate();
+
+        // Load the next scene
+        if (_bachelor != null && !string.IsNullOrEmpty(_bachelor._nextSceneName))
+        {
+            Debug.Log($"Loading scene: {_bachelor._nextSceneName}");
+            SceneManager.LoadScene(_bachelor._nextSceneName);
+        }
+        else
+        {
+            // Fallback: load next scene in build settings or main menu
+            int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
+            if (nextSceneIndex < SceneManager.sceneCountInBuildSettings)
+            {
+                SceneManager.LoadScene(nextSceneIndex);
+            }
+            else
+            {
+                SceneManager.LoadScene("Main Menu");
+            }
+        }
     }
 
     /// <summary>
     /// Handles the "Come Back Later" button click.
     /// Returns to the main menu and hides the dialogue display.
+    /// If coming from a real date, handles post-real-date cleanup.
     /// </summary>
     private void OnComeBackLaterClicked()
     {
-        Debug.Log("Come Back Later button clicked - returning to main menu");
+        Debug.Log("Come Back Later button clicked");
         ClearChoices();
+
+        // Reset end dialogue button state for next interaction
+        _endDialogueButtonsShown = false;
+
+        // Check if this is coming from a real date
+        if (_justCompletedRealDate)
+        {
+            Debug.Log("Returning from real date - handling post-real-date cleanup");
+
+            // Mark bachelor as real dated and save progress
+            if (_bachelor != null && !string.IsNullOrEmpty(_currentRealDateLocation))
+            {
+                // Use SetBachelor to ensure proper synchronization with save data
+                if (_setBachelor != null)
+                {
+                    _setBachelor.CompleteRealDateAndSave(_currentRealDateLocation);
+                    Debug.Log(
+                        $"[OnComeBackLaterClicked] Called CompleteRealDateAndSave({_currentRealDateLocation}) via SetBachelor"
+                    );
+                }
+                else
+                {
+                    // Fallback to direct method if SetBachelor isn't available
+                    MarkBachelorAsRealDated(_bachelor);
+                    Debug.LogWarning(
+                        "[OnComeBackLaterClicked] SetBachelor not found, using direct method instead"
+                    );
+                }
+
+                IncrementRealDateCount();
+            }
+            else if (_bachelor == null)
+            {
+                Debug.LogError(
+                    "[OnComeBackLaterClicked] Cannot mark real dated - bachelor is null"
+                );
+            }
+            else if (string.IsNullOrEmpty(_currentRealDateLocation))
+            {
+                Debug.LogError(
+                    "[OnComeBackLaterClicked] Cannot mark real dated - location is empty"
+                );
+            }
+
+            // Clear notebook
+            if (_noteBook != null)
+            {
+                _noteBook.ClearBachelor();
+            }
+
+            // Reset the flags and clear location
+            _justCompletedRealDate = false;
+            _currentRealDateLocation = "";
+
+            // Turn off all date backgrounds
+            TurnOffAllDateBackgrounds();
+
+            // End the date session
+            EndDate();
+            return;
+        }
+
+        // Regular "Come Back Later" logic for cafe scenes
+        Debug.Log("Come Back Later button clicked - returning to main menu");
+
+        // Turn off all date backgrounds to return to cafe scene
+        TurnOffAllDateBackgrounds();
 
         // End the date session to reset bachelor interaction states
         EndDate();
@@ -1347,218 +2640,998 @@ public class DialogueDisplay : MonoBehaviour
     }
 
     /// <summary>
-    /// Handles the "Next Scene" button click.
-    /// Tracks successful date completion and loads the next scene.
+    /// Handles the "Ask on a Date" button click.
+    /// Shows asking on a date text and then presents three date location options.
     /// </summary>
-    private void OnNextSceneClicked()
+    private void OnAskOnDateClicked()
     {
-        Debug.Log("Next Scene button clicked");
+        Debug.Log("Ask on a Date button clicked");
+        ClearChoices();
 
-        // Check if this was a successful date completion
-        string currentSceneName = SceneManager.GetActiveScene().name;
-        bool isDateScene =
-            !currentSceneName.ToLower().Contains("cafe")
-            && !currentSceneName.ToLower().Contains("barista")
-            && !currentSceneName.ToLower().Contains("menu")
-            && !currentSceneName.ToLower().Contains("main");
+        // Reset end dialogue button state for next interaction
+        _endDialogueButtonsShown = false;
 
-        if (isDateScene)
+        // Show the asking on a date text
+        ShowAskOnDateText();
+    }
+
+    /// <summary>
+    /// Shows the text for asking the bachelor on a date and then displays location options.
+    /// </summary>
+    private void ShowAskOnDateText()
+    {
+        // Reset advancement state - must wait for typewriter
+        _canAdvance = false;
+        _isDelayActive = false;
+
+        // Display asking on a date text
+        if (_displayText != null)
         {
-            IncrementSuccessfulDateCount();
-            Debug.Log("Date completed successfully!");
-            // Mark bachelor as dated and disable their setter
-            MarkBachelorAsDated(_bachelor);
+            string askDateText =
+                $"Would you like to go on a date with me, {_bachelor?._name ?? ""}?";
+            _displayText.text = askDateText;
+
+            if (_typewriter != null)
+            {
+                _typewriter.ShowText(askDateText);
+            }
         }
 
-        // Remove bachelor from notebook after date is over
-        if (_noteBook != null)
+        // Hide continue icon since we'll show choices
+        if (_continueIcon != null)
         {
-            _noteBook.ClearBachelor();
+            _continueIcon.SetActive(false);
         }
 
-        // End the date session to reset bachelor interaction states
-        EndDate();
+        // Clear any existing choices and prepare date location buttons (they will be animated when typewriter finishes)
+        ClearChoices();
+        CreateDateLocationButton("Rooftop", OnRooftopDateSelected);
+        CreateDateLocationButton("Aquarium", OnAquariumDateSelected);
+        CreateDateLocationButton("Forest", OnForestDateSelected);
+    }
 
-        // Load the next scene
-        if (_bachelor != null && !string.IsNullOrEmpty(_bachelor._nextSceneName))
+    /// <summary>
+    /// Shows the three date location options: Rooftop, Aquarium, and Forest.
+    /// This is now called by OnTypewriterEnd when the ask date text finishes.
+    /// </summary>
+    private void ShowDateLocationOptions()
+    {
+        // Apply fade-in animation to all created buttons
+        StartCoroutine(FadeInChoicesSequentially(_activeChoiceButtons));
+    }
+
+    /// <summary>
+    /// Creates a date location selection button with consistent styling.
+    /// </summary>
+    private void CreateDateLocationButton(string locationName, System.Action onClickAction)
+    {
+        var btnObj = Instantiate(_choiceButtonPrefab, _choicesParent);
+        var btnText = btnObj.GetComponentInChildren<TextMeshProUGUI>();
+        if (btnText != null)
+            btnText.text = locationName;
+
+        EnsureContentSizeFitter(btnObj);
+
+        // Add canvas group for fade effect if it doesn't exist
+        var canvasGroup = btnObj.GetComponent<CanvasGroup>();
+        if (canvasGroup == null)
         {
-            Debug.Log($"Loading scene: {_bachelor._nextSceneName}");
-            SceneManager.LoadScene(_bachelor._nextSceneName);
+            canvasGroup = btnObj.AddComponent<CanvasGroup>();
+        }
+        // Set initial alpha to 0 (invisible)
+        canvasGroup.alpha = 0f;
+
+        var button = btnObj.GetComponent<UnityEngine.UI.Button>();
+        if (button != null)
+        {
+            button.onClick.AddListener(() => onClickAction());
+
+            if (btnText != null)
+                btnText.color = _normalTextColor;
+
+            AddHoverEffects(btnObj, btnText);
+        }
+
+        _activeChoiceButtons.Add(btnObj);
+    }
+
+    /// <summary>
+    /// Handles selection of the Rooftop date location.
+    /// </summary>
+    private void OnRooftopDateSelected()
+    {
+        Debug.Log("Rooftop date selected");
+        SetDateBackground("Rooftop");
+        StartDateWithLocation("Rooftop", _rooftopDateDialogue);
+    }
+
+    /// <summary>
+    /// Handles selection of the Aquarium date location.
+    /// </summary>
+    private void OnAquariumDateSelected()
+    {
+        Debug.Log("Aquarium date selected");
+        SetDateBackground("Aquarium");
+        StartDateWithLocation("Aquarium", _aquariumDateDialogue);
+    }
+
+    /// <summary>
+    /// Handles selection of the Forest date location.
+    /// </summary>
+    private void OnForestDateSelected()
+    {
+        Debug.Log("Forest date selected");
+        SetDateBackground("Forest");
+        StartDateWithLocation("Forest", _forestDateDialogue);
+    }
+
+    /// <summary>
+    /// Starts a date with the specified location and dialogue.
+    /// </summary>
+    private void StartDateWithLocation(string locationName, DSDialogue dateDialogue)
+    {
+        if (dateDialogue == null)
+        {
+            Debug.LogError($"No dialogue assigned for {locationName} date!");
+            return;
+        }
+
+        // Set the date dialogue
+        _dialogue = dateDialogue;
+
+        // DON'T set _justCompletedRealDate to true here - only set it when the date actually ends
+        // Instead, just store the location so we know we're in a real date
+
+        // Validate and store the date location
+        if (string.IsNullOrEmpty(locationName))
+        {
+            Debug.LogWarning(
+                "StartRealDateDialogue called with empty location name! Using 'Unknown' as fallback."
+            );
+            _currentRealDateLocation = "Unknown"; // Fallback to ensure we don't have an empty location
         }
         else
         {
-            // Fallback: load next scene in build settings or main menu
-            int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
-            if (nextSceneIndex < SceneManager.sceneCountInBuildSettings)
-            {
-                Debug.Log($"Loading next scene in build order: {nextSceneIndex}");
-                SceneManager.LoadScene(nextSceneIndex);
-            }
-            else
-            {
-                Debug.Log("No more scenes available");
-            }
+            _currentRealDateLocation = locationName;
         }
+
+        Debug.Log(
+            $"Starting real date at {_currentRealDateLocation}. Will mark as completed when dialogue ends."
+        );
+
+        // Clear choices and start the date dialogue
+        ClearChoices();
+        ShowDialogue();
     }
 
-    // Helper to mark a bachelor as dated and disable their setter
+    /// <summary>
+    /// Marks a bachelor as having been dated and saves the data.
+    /// </summary>
     private void MarkBachelorAsDated(NewBachelorSO bachelor)
     {
         if (bachelor == null)
+        {
+            Debug.LogError("[MarkBachelorAsDated] Bachelor is null! Cannot save dating progress.");
             return;
-        _saveData = SaveSystem.Deserialize() ?? new SaveData();
-        if (!_saveData.DatedBachelors.Contains(bachelor.name))
-        {
-            _saveData.DatedBachelors.Add(bachelor.name);
-            SaveSystem.SerializeData(_saveData);
         }
-        var setters = FindObjectsByType<BachelorSetter>(FindObjectsSortMode.None);
-        foreach (var setter in setters)
+
+        Debug.Log($"[MarkBachelorAsDated] About to mark {bachelor._name} as dated");
+
+        // Mark in the ScriptableObject (this also handles saving to the save system)
+        bachelor.MarkAsDated();
+
+        Debug.Log(
+            $"[MarkBachelorAsDated] Successfully marked {bachelor._name} as dated and saved progress"
+        );
+    }
+
+    /// <summary>
+    /// Marks a bachelor as having completed a real date (aquarium, forest, rooftop) and saves the data.
+    /// </summary>
+    private void MarkBachelorAsRealDated(NewBachelorSO bachelor)
+    {
+        if (bachelor == null)
         {
-            if (setter != null && setter.GetBachelor() == bachelor)
+            Debug.LogError(
+                "[MarkBachelorAsRealDated] Bachelor is null! Cannot save real dating progress."
+            );
+            return;
+        }
+
+        if (string.IsNullOrEmpty(_currentRealDateLocation))
+        {
+            Debug.LogError(
+                $"[MarkBachelorAsRealDated] Current real date location is empty! Cannot save location for {bachelor._name}"
+            );
+            return;
+        }
+
+        Debug.Log(
+            $"[MarkBachelorAsRealDated] About to mark {bachelor._name} as real dated at {_currentRealDateLocation}"
+        );
+
+        // Mark in the ScriptableObject with the date location (this also handles saving to the save system)
+        bachelor.MarkAsRealDated(_currentRealDateLocation);
+
+        Debug.Log(
+            $"[MarkBachelorAsRealDated] Successfully marked {bachelor._name} as real dated at {_currentRealDateLocation} and saved progress"
+        );
+    }
+
+    /// <summary>
+    /// Checks if a bachelor has completed a real date (not just a speed date)
+    /// </summary>
+    private bool HasCompletedRealDate(NewBachelorSO bachelor)
+    {
+        if (bachelor == null)
+            return false;
+
+        // Use the bachelor's own method which handles both local flags and save data consistency
+        return bachelor.HasCompletedRealDate();
+    }
+
+    /// <summary>
+    /// Increments the successful date count and saves the data.
+    /// </summary>
+    private void IncrementSuccessfulDateCount()
+    {
+        _speedDateCount++;
+        Debug.Log($"Successful date count incremented to: {_speedDateCount}");
+    }
+
+    /// <summary>
+    /// Increments the real date count specifically for real dates (aquarium, forest, rooftop).
+    /// /// </summary>
+    private void IncrementRealDateCount()
+    {
+        _realDateCount++;
+        Debug.Log($"Real date count incremented to: {_realDateCount}");
+    }
+
+    /// <summary>
+    /// Resets all SetBachelor dating states when a date session ends.
+    /// </summary>
+    private void ResetAllBachelorStates()
+    {
+        // Find all SetBachelor components in the scene and reset their dating state
+        SetBachelor[] setBachelors = FindObjectsByType<SetBachelor>(FindObjectsSortMode.None);
+        foreach (var setBachelor in setBachelors)
+        {
+            if (setBachelor != null)
             {
-                setter.DisableSetter();
+                setBachelor.ResetDatingState();
             }
         }
-    }
-    #endregion
-
-    #region Love Meter Control
-    /// <summary>
-    /// Sets the visibility of the love meter UI
-    /// </summary>
-    /// <param name="visible">Whether the love meter should be visible</param>
-    public void SetLoveMeterVisibility(bool visible)
-    {
-        if (_loveMeterUI != null)
-        {
-            _loveMeterUI.gameObject.SetActive(visible);
-        }
-    }
-
-    /// <summary>
-    /// Updates the love meter UI with the current love value
-    /// </summary>
-    public void UpdateLoveMeterDisplay()
-    {
-        if (_loveMeterUI != null && _loveMeter != null)
-        {
-            _loveMeterUI.RefreshMeter();
-        }
-    }
-
-    #endregion
-
-    #region Date Tracking System
-    /// <summary>
-    /// Increments the successful date count and syncs with save data.
-    /// Called when a date is completed successfully.
-    /// </summary>
-    public void IncrementSuccessfulDateCount()
-    {
-        _succesfulDateCount++;
-        Debug.Log($"Successful date count incremented to: {_succesfulDateCount}");
-        SyncWithSaveData();
-    }
-
-    /// <summary>
-    /// Handles a failed date scenario.
-    /// Tracks the failure and returns to the main menu.
-    /// </summary>
-    public void OnDateFailed()
-    {
-        Debug.Log("Date failed!");
-
-        string currentSceneName = SceneManager.GetActiveScene().name;
-        bool isDateScene =
-            !currentSceneName.ToLower().Contains("cafe")
-            && !currentSceneName.ToLower().Contains("barista")
-            && !currentSceneName.ToLower().Contains("menu")
-            && !currentSceneName.ToLower().Contains("main");
-
-        if (isDateScene)
-        {
-            Debug.Log("Date failure tracked!");
-        }
-
-        // Remove bachelor from notebook after date is over
-        if (_noteBook != null)
-        {
-            _noteBook.ClearBachelor();
-        }
-
-        // End the date session to reset bachelor interaction states
-        EndDate();
-
-        SceneManager.LoadScene("MainMenu");
-    }
-
-    /// <summary>
-    /// Syncs the current successful date count with the save system.
-    /// Ensures progress is properly persisted.
-    /// </summary>
-    public void SyncWithSaveData()
-    {
-        _saveData = SaveSystem.Deserialize() ?? new SaveData();
-        // _saveData.SuccessfulDateCount = _succesfulDateCount; // No longer needed, count is from DatedBachelors
-        SaveSystem.SerializeData(_saveData);
-        Debug.Log($"Synced successful date count with save data: {_succesfulDateCount}");
+        Debug.Log("Date session ended and bachelor states reset");
     }
 
     /// <summary>
     /// Loads the successful date count from save data.
-    /// Called during initialization to restore progress.
     /// </summary>
-    public void LoadSuccessfulDateCountFromSave()
+    private void LoadSuccessfulDateCountFromSave()
     {
-        _saveData = SaveSystem.Deserialize();
-
-        if (_saveData != null)
+        // Load from save system
+        SaveData saveData = SaveSystem.Deserialize();
+        if (saveData != null)
         {
-            _succesfulDateCount =
-                _saveData.DatedBachelors != null ? _saveData.DatedBachelors.Count : 0;
+            // Get counts from the new per-bachelor system
+            _speedDateCount = saveData.GetAllSpeedDatedBachelors().Count;
+            _realDateCount = saveData.GetAllRealDatedBachelors().Count;
+
             Debug.Log(
-                $"Loaded successful date count from DatedBachelors list: {_succesfulDateCount}"
+                $"Loaded from save data - Successful dates: {_speedDateCount}, Real dates: {_realDateCount}"
             );
         }
         else
         {
-            Debug.Log("No save data found, keeping current successful date count");
+            // No save data exists, initialize to 0
+            _speedDateCount = 0;
+            _realDateCount = 0;
+            Debug.Log("No save data found, initialized date counts to 0");
         }
     }
-    #endregion
 
-    #region Date State Management
     /// <summary>
-    /// Ends the current dating session and notifies any SetBachelor components to reset their state.
-    /// This allows players to interact with bachelors again after a dialogue session ends.
+    /// Ends the current date and performs cleanup.
     /// </summary>
-    public void EndDate()
-    { // Find all SetBachelor components in the scene and reset their dating state
-        SetBachelor[] setBachelorComponents = FindObjectsByType<SetBachelor>(FindObjectsSortMode.None);
-        foreach (SetBachelor setBachelor in setBachelorComponents)
-        {
-            setBachelor.ResetDatingState();
-        }
+    private void EndDate()
+    {
+        ResetAllBachelorStates();
 
-        // Hide the dialogue canvas
+        // Turn off all date backgrounds when ending a date
+        TurnOffAllDateBackgrounds();
+
+        // Hide dialogue UI
         if (_dialogueCanvas != null)
         {
             _dialogueCanvas.enabled = false;
         }
 
-        // Hide the love meter
+        // Re-enable movement if move canvas exists
+        if (_moveCanvas != null)
+        {
+            _moveCanvas.enabled = true;
+        }
+    }
+
+    #region Background Management
+    /// <summary>
+    /// Turns off all date background images to ensure clean state
+    /// </summary>
+    private void TurnOffAllDateBackgrounds()
+    {
+        if (_rooftopBackground != null)
+        {
+            _rooftopBackground.gameObject.SetActive(false);
+        }
+
+        if (_aquariumBackground != null)
+        {
+            _aquariumBackground.gameObject.SetActive(false);
+        }
+
+        if (_forestBackground != null)
+        {
+            _forestBackground.gameObject.SetActive(false);
+        }
+
+        _currentBackground = null;
+        Debug.Log("All date backgrounds turned off");
+    }
+
+    /// <summary>
+    /// Sets the active background for the specified date location
+    /// </summary>
+    /// <param name="location">The date location (Rooftop, Aquarium, or Forest)</param>
+    private void SetDateBackground(string location)
+    {
+        // First turn off all backgrounds
+        TurnOffAllDateBackgrounds();
+
+        // Then turn on the appropriate background
+        switch (location.ToLower())
+        {
+            case "rooftop":
+                if (_rooftopBackground != null)
+                {
+                    _rooftopBackground.gameObject.SetActive(true);
+                    _currentBackground = _rooftopBackground;
+                    Debug.Log("Rooftop background activated");
+                }
+                break;
+
+            case "aquarium":
+                if (_aquariumBackground != null)
+                {
+                    _aquariumBackground.gameObject.SetActive(true);
+                    _currentBackground = _aquariumBackground;
+                    Debug.Log("Aquarium background activated");
+                }
+                break;
+
+            case "forest":
+                if (_forestBackground != null)
+                {
+                    _forestBackground.gameObject.SetActive(true);
+                    _currentBackground = _forestBackground;
+                    Debug.Log("Forest background activated");
+                }
+                break;
+
+            default:
+                Debug.LogWarning($"Unknown date location: {location}");
+                break;
+        }
+    }
+    #endregion
+
+    #region Barista Event
+    /// <summary>
+    /// Shows the barista event in the cafe after a real date, with no background, displaying dialogue based on number of completed real dates.
+    /// No ending buttons are created for barista dialogues.
+    /// </summary>
+    private IEnumerator ShowBaristaAfterRealDate()
+    {
+        // Make bachelors non-clickable during barista event
+        SetBachelorsClickable(false);
+        Debug.Log("Bachelors set to non-clickable during barista event");
+
+        // Hide all date backgrounds to return to cafe environment
+        TurnOffAllDateBackgrounds();
+
+        // Clear any existing choices/buttons to ensure no buttons are shown
+        ClearChoices();
+
+        // Ensure we're back in cafe environment - restore basic UI elements
+        RestoreCafeEnvironment();
+
+        // Get the dialogue index based on real date count (0-indexed)
+        int dialogueIndex = Mathf.Max(0, _realDateCount - 1);
+
+        // Safety check: if no barista dialogues exist, don't delete save file
+        if (_baristaDialogues == null || _baristaDialogues.Count == 0)
+        {
+            Debug.LogWarning("No barista dialogues configured. Skipping barista event.");
+
+            // Close dialogue UI and return to cafe normally
+            if (_dialogueCanvas != null)
+            {
+                _dialogueCanvas.enabled = false;
+            }
+            yield break;
+        }
+
+        // Update love score from love meter to get the most current value
+        if (_bachelor != null && _bachelor._loveMeter != null)
+        {
+            _loveScore = _bachelor._loveMeter.GetCurrentLove();
+            Debug.Log(
+                $"Updated love score from love meter for barista dialogue: {_loveScore}/{_loveNeededForSuccefulDate}"
+            );
+        }
+        else
+        {
+            Debug.LogWarning(
+                "Could not update love score for barista dialogue - bachelor or love meter is null"
+            );
+        }
+
+        // Determine if the date was successful or failed
+        bool isGoodDate = _loveScore >= _loveNeededForSuccefulDate;
+        DSDialogue baristaDialogue = null;
+        bool isAllDateFailedDialogue = false;
+
+        // Check if we're at the final dialogue and determine which special dialogue to use
+        bool isAtFinalDialogue = dialogueIndex >= _baristaDialogues.Count - 1;
+
+        // If we're at the final dialogue position, check for special ending scenarios
+        if (isAtFinalDialogue)
+        {
+            if (AllDatesFailed() && _allDateFailedBaristaDialogue != null)
+            {
+                baristaDialogue = _allDateFailedBaristaDialogue;
+                isAllDateFailedDialogue = true;
+                Debug.Log(
+                    "Using 'all dates failed' barista dialogue - triggering game end sequence"
+                );
+            }
+            else if (HasMixedResults() && _mixedResultsBaristaDialogue != null)
+            {
+                baristaDialogue = _mixedResultsBaristaDialogue;
+                isAllDateFailedDialogue = true; // This also triggers game end
+                Debug.Log("Using 'mixed results' barista dialogue - triggering game end sequence");
+            }
+            else if (AllDatesSucceeded() && _allDatesSucceededBaristaDialogue != null)
+            {
+                baristaDialogue = _allDatesSucceededBaristaDialogue;
+                isAllDateFailedDialogue = true; // This also triggers game end
+                Debug.Log(
+                    "Using 'all dates succeeded' barista dialogue - triggering game end sequence"
+                );
+            }
+            // If no special ending conditions are met, fall through to regular dialogue
+        }
+        // If date failed, use the bad date barista dialogue (for individual date failures)
+        else if (!isGoodDate && _badDateBaristaDialogue != null)
+        {
+            baristaDialogue = _badDateBaristaDialogue;
+            Debug.Log(
+                $"Using bad date barista dialogue (Love: {_loveScore}/{_loveNeededForSuccefulDate})"
+            );
+        }
+        // If date succeeded, use the regular barista dialogue based on real date count
+        else if (
+            dialogueIndex < _baristaDialogues.Count
+            && _baristaDialogues[dialogueIndex] != null
+        )
+        {
+            baristaDialogue = _baristaDialogues[dialogueIndex];
+            Debug.Log(
+                $"Using regular barista dialogue #{dialogueIndex + 1} after {_realDateCount} real dates"
+            );
+        }
+
+        // Check if we have a dialogue to show
+        if (baristaDialogue != null)
+        {
+            // Use the selected dialogue for this date result
+
+            // Set the barista name
+            if (_nameText != null)
+            {
+                _nameText.text = "Barista";
+            }
+
+            // Set the bachelor image from the dialogue data
+            if (baristaDialogue.m_dialogue != null && _bachelorImage != null)
+            {
+                Debug.Log(
+                    $"Setting up barista image. Current enabled state: {_bachelorImage.enabled}"
+                );
+
+                // If barista dialogue has a specific image, use it
+                if (baristaDialogue.m_dialogue.m_bachelorImageData != null)
+                {
+                    _bachelorImage.sprite = baristaDialogue.m_dialogue.m_bachelorImageData;
+                    Debug.Log("Set barista sprite from dialogue data");
+                }
+                else
+                {
+                    Debug.Log(
+                        "No specific barista sprite in dialogue data, keeping current sprite"
+                    );
+                }
+
+                // Always ensure the image is visible for barista dialogue
+                _bachelorImage.color = new Color(
+                    _bachelorImage.color.r,
+                    _bachelorImage.color.g,
+                    _bachelorImage.color.b,
+                    1f
+                );
+                _bachelorImage.enabled = true;
+                Debug.Log(
+                    $"Barista image enabled and made visible. Final state - Enabled: {_bachelorImage.enabled}, Alpha: {_bachelorImage.color.a}"
+                );
+            }
+            else if (_bachelorImage != null)
+            {
+                // Fallback: ensure image is enabled even without dialogue data
+                _bachelorImage.enabled = true;
+                _bachelorImage.color = new Color(
+                    _bachelorImage.color.r,
+                    _bachelorImage.color.g,
+                    _bachelorImage.color.b,
+                    1f
+                );
+                Debug.Log("Barista image enabled as fallback (no dialogue data)");
+            }
+            else
+            {
+                Debug.LogWarning("Bachelor image component is null - barista won't be visible!");
+            }
+
+            // Hide continue icon initially
+            if (_continueIcon != null)
+            {
+                _continueIcon.SetActive(false);
+            }
+            if (_loveMeterUI != null)
+            {
+                _loveMeterUI.HideLoveMeter();
+            }
+
+            // Show the dialogue canvas
+            if (_dialogueCanvas != null)
+            {
+                _dialogueCanvas.enabled = true;
+            }
+
+            // Display the barista dialogue
+            if (baristaDialogue.m_dialogue != null && _displayText != null)
+            {
+                _displayText.text = baristaDialogue.m_dialogue.m_dialogueTextData;
+
+                // Play dialogue audio if available
+                if (_audioSource != null)
+                {
+                    var audioClip = baristaDialogue.m_dialogue.m_dialogueAudioData;
+                    if (audioClip != null)
+                    {
+                        _audioSource.Stop();
+                        _audioSource.clip = audioClip;
+                        _audioSource.Play();
+                        Debug.Log("Playing barista audio: " + audioClip.name);
+                    }
+                    else
+                    {
+                        _audioSource.Stop();
+                        _audioSource.clip = null;
+                        Debug.Log("No audio clip found for barista dialogue");
+                    }
+                }
+
+                if (_typewriter != null)
+                {
+                    _typewriter.ShowText(_displayText.text);
+
+                    // Wait for typewriter to finish
+                    yield return new WaitUntil(() => !_typewriter.isShowingText);
+                }
+
+                Debug.Log(
+                    $"Showing barista dialogue #{dialogueIndex + 1} after {_realDateCount} real dates: {_displayText.text}"
+                );
+            }
+        }
+        else
+        {
+            // Fallback to generic message if no dialogue is available
+            if (_displayText != null)
+            {
+                if (isGoodDate)
+                {
+                    _displayText.text =
+                        $"The barista approaches you after your successful real date #{_realDateCount}.";
+                }
+                else
+                {
+                    _displayText.text =
+                        "The barista notices you didn't have the best time on your date.";
+                }
+            }
+            if (_nameText != null)
+            {
+                _nameText.text = "Barista";
+            }
+            if (_continueIcon != null)
+            {
+                _continueIcon.SetActive(false);
+            }
+            if (_loveMeterUI != null)
+            {
+                _loveMeterUI.HideLoveMeter();
+            }
+            if (_dialogueCanvas != null)
+            {
+                _dialogueCanvas.enabled = true;
+            }
+
+            Debug.LogWarning(
+                $"No barista dialogue found for date result (Success: {isGoodDate}). Using fallback message."
+            );
+        }
+
+        // Fixed condition: delete save if we reached the last configured dialogue OR if it's the "all dates failed" dialogue
+        bool isLastDialogue =
+            (dialogueIndex >= _baristaDialogues.Count - 1) || isAllDateFailedDialogue;
+
+        if (isLastDialogue || isAllDateFailedDialogue)
+        {
+            if (isAllDateFailedDialogue)
+            {
+                Debug.Log("All dates failed dialogue completed. Ending game and deleting save.");
+            }
+            else
+            {
+                Debug.Log(
+                    "Last barista dialogue completed. Waiting for player input before ending game."
+                );
+            }
+
+            // Add delay like regular dialogue
+            yield return new WaitForSeconds(1f);
+
+            // Show continue icon for final dialogue too
+            if (_continueIcon != null)
+            {
+                _continueIcon.SetActive(true);
+            }
+
+            // Wait for player input before ending
+            yield return new WaitUntil(
+                () => (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
+            );
+
+            // Hide continue icon when advancing
+            if (_continueIcon != null)
+            {
+                _continueIcon.SetActive(false);
+            }
+
+            // Reset all bachelor states before ending the game
+            ResetAllBachelorStates();
+
+            // Delete the save file immediately
+            DeleteSaveFile();
+
+            // Load the main menu scene immediately without waiting
+            UnityEngine.SceneManagement.SceneManager.LoadScene("Main Menu");
+        }
+        else
+        {
+            // Wait for spacebar input like regular dialogue for non-final dialogues
+            _canAdvance = false;
+            _isDelayActive = false;
+
+            // Add delay like regular dialogue
+            yield return new WaitForSeconds(1f);
+
+            // Show continue icon to indicate player can advance
+            if (_continueIcon != null)
+            {
+                _continueIcon.SetActive(true);
+            }
+
+            // Wait for player input (spacebar or mouse click)
+            yield return new WaitUntil(
+                () => (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
+            );
+
+            // Hide continue icon when advancing
+            if (_continueIcon != null)
+            {
+                _continueIcon.SetActive(false);
+            }
+
+            // Close the dialogue UI for non-final dialogues
+            if (_dialogueCanvas != null)
+            {
+                _dialogueCanvas.enabled = false;
+            }
+
+            // Reset all bachelor states after barista dialogue completes (for non-final dialogues)
+            ResetAllBachelorStates();
+
+            // Re-enable bachelor clickability with a 0.5 second delay after barista event
+            EnableBachelorsClickableWithDelay(0.5f);
+            Debug.Log("Scheduled re-enabling of bachelor clickability after 0.5 seconds");
+        }
+    }
+    #endregion
+
+    /// <summary>
+    /// Determines if all dates have failed (no successful dates)
+    /// </summary>
+    private bool AllDatesFailed()
+    {
+        SaveData saveData = SaveSystem.Deserialize();
+        if (saveData == null)
+            return false;
+
+        // Check if all 5 real dates have been completed
+        int realDatedCount = saveData.GetAllRealDatedBachelors().Count;
+        if (realDatedCount < 5)
+            return false;
+
+        // Get all bachelors in the scene to check their love scores
+        SetBachelor[] allSetBachelors = FindObjectsByType<SetBachelor>(FindObjectsSortMode.None);
+        if (allSetBachelors == null || allSetBachelors.Length == 0)
+            return false;
+
+        // Count successful dates
+        int successfulDates = 0;
+
+        foreach (var setBachelor in allSetBachelors)
+        {
+            if (setBachelor != null)
+            {
+                NewBachelorSO bachelor = setBachelor.GetBachelor();
+                if (bachelor != null && bachelor._loveMeter != null)
+                {
+                    // Check if this bachelor was real dated
+                    if (bachelor.HasCompletedRealDate())
+                    {
+                        int currentLove = bachelor._loveMeter.GetCurrentLove();
+                        if (currentLove >= _loveNeededForSuccefulDate)
+                        {
+                            successfulDates++;
+                        }
+                    }
+                }
+            }
+        }
+
+        // All dates failed if no successful dates
+        bool allFailed = successfulDates == 0;
+        Debug.Log(
+            $"All dates failed check: Real dated: {realDatedCount}/5, Successful: {successfulDates}, All failed: {allFailed}"
+        );
+
+        return realDatedCount >= 5 && allFailed;
+    }
+
+    /// <summary>
+    /// Determines if there are mixed results (some successful, some failed)
+    /// </summary>
+    private bool HasMixedResults()
+    {
+        SaveData saveData = SaveSystem.Deserialize();
+        if (saveData == null)
+            return false;
+
+        // Check if all 5 real dates have been completed
+        int realDatedCount = saveData.GetAllRealDatedBachelors().Count;
+        if (realDatedCount < 5)
+            return false;
+
+        // Get all bachelors in the scene to check their love scores
+        SetBachelor[] allSetBachelors = FindObjectsByType<SetBachelor>(FindObjectsSortMode.None);
+        if (allSetBachelors == null || allSetBachelors.Length == 0)
+            return false;
+
+        // Count successful and failed dates
+        int successfulDates = 0;
+        int failedDates = 0;
+
+        foreach (var setBachelor in allSetBachelors)
+        {
+            if (setBachelor != null)
+            {
+                NewBachelorSO bachelor = setBachelor.GetBachelor();
+                if (bachelor != null && bachelor._loveMeter != null)
+                {
+                    // Check if this bachelor was real dated
+                    if (bachelor.HasCompletedRealDate())
+                    {
+                        int currentLove = bachelor._loveMeter.GetCurrentLove();
+                        if (currentLove >= _loveNeededForSuccefulDate)
+                        {
+                            successfulDates++;
+                        }
+                        else
+                        {
+                            failedDates++;
+                        }
+                    }
+                }
+            }
+        }
+
+        // Mixed results if both successful and failed dates exist
+        bool mixedResults = successfulDates > 0 && failedDates > 0;
+        Debug.Log(
+            $"Mixed results check: Real dated: {realDatedCount}/5, Successful: {successfulDates}, Failed: {failedDates}, Mixed: {mixedResults}"
+        );
+
+        return realDatedCount >= 5 && mixedResults;
+    }
+
+    /// <summary>
+    /// Determines if all dates have succeeded (all 5 real dates completed successfully)
+    /// </summary>
+    private bool AllDatesSucceeded()
+    {
+        SaveData saveData = SaveSystem.Deserialize();
+        if (saveData == null)
+            return false;
+
+        // Check if all 5 real dates have been completed
+        int realDatedCount = saveData.GetAllRealDatedBachelors().Count;
+        if (realDatedCount < 5)
+            return false;
+
+        // Get all bachelors in the scene to check their love scores
+        SetBachelor[] allSetBachelors = FindObjectsByType<SetBachelor>(FindObjectsSortMode.None);
+        if (allSetBachelors == null || allSetBachelors.Length == 0)
+            return false;
+
+        // Count successful dates
+        int successfulDates = 0;
+
+        foreach (var setBachelor in allSetBachelors)
+        {
+            if (setBachelor != null)
+            {
+                NewBachelorSO bachelor = setBachelor.GetBachelor();
+                if (bachelor != null && bachelor._loveMeter != null)
+                {
+                    // Check if this bachelor was real dated
+                    if (bachelor.HasCompletedRealDate())
+                    {
+                        int currentLove = bachelor._loveMeter.GetCurrentLove();
+                        if (currentLove >= _loveNeededForSuccefulDate)
+                        {
+                            successfulDates++;
+                        }
+                    }
+                }
+            }
+        }
+
+        // All dates succeeded if all 5 real dates were successful
+        bool allSucceeded = successfulDates >= 5;
+        Debug.Log(
+            $"All dates succeeded check: Real dated: {realDatedCount}/5, Successful: {successfulDates}, All succeeded: {allSucceeded}"
+        );
+
+        return realDatedCount >= 5 && allSucceeded;
+    }
+
+    /// <summary>
+    /// Restores the cafe environment after a date by ensuring UI elements are properly configured
+    /// </summary>
+    private void RestoreCafeEnvironment()
+    {
+        Debug.Log("Restoring cafe environment after date");
+
+        // Ensure move canvas is enabled (player should be able to move in cafe)
+        if (_moveCanvas != null)
+        {
+            _moveCanvas.enabled = true;
+            Debug.Log("Move canvas enabled");
+        }
+
+        // Ensure dialogue canvas is ready for barista dialogue
+        if (_dialogueCanvas != null)
+        {
+            _dialogueCanvas.enabled = true;
+            Debug.Log("Dialogue canvas enabled");
+        }
+
+        // Ensure bachelor image is enabled and ready for barista sprite
+        if (_bachelorImage != null)
+        {
+            _bachelorImage.enabled = true;
+            _bachelorImage.color = new Color(
+                _bachelorImage.color.r,
+                _bachelorImage.color.g,
+                _bachelorImage.color.b,
+                1f
+            );
+            Debug.Log("Bachelor image enabled and made visible for barista");
+        }
+
+        // Hide any leftover UI elements from the date
+        if (_continueIcon != null)
+        {
+            _continueIcon.SetActive(false);
+        }
+
+        // Hide love meter as it's not relevant for barista dialogue
         if (_loveMeterUI != null)
         {
             _loveMeterUI.HideLoveMeter();
         }
 
-        // Clear any active choices
-        ClearChoices();
+        Debug.Log("Cafe environment restored - all backgrounds off, UI elements ready");
+    }
 
-        // Reset dialogue advancement state
+    /// <summary>
+    /// Clears all dialogue state to ensure clean setup when switching between bachelors.
+    /// This prevents issues where UI elements or dialogue data from the previous bachelor persist.
+    /// </summary>
+    private void ClearDialogueState()
+    {
+        Debug.Log("[ClearDialogueState] Clearing all dialogue state for clean bachelor switch");
+
+        // Clear dialogue references
+        string previousBachelorName = _bachelor != null ? _bachelor._name : "null";
+        _dialogue = null;
+        _bachelor = null;
+        _loveMeter = null;
+        _loveScore = 0;
+
+        Debug.Log(
+            $"[ClearDialogueState] Cleared references for previous bachelor: {previousBachelorName}"
+        );
+
+        // Clear UI elements
+        if (_nameText != null)
+        {
+            _nameText.text = "";
+        }
+
+        if (_displayText != null)
+        {
+            _displayText.text = "";
+        }
+
+        if (_bachelorImage != null)
+        {
+            _bachelorImage.sprite = null;
+            _bachelorImage.color = new Color(1f, 1f, 1f, 0f); // Make transparent
+            _bachelorImage.enabled = false;
+        }
+
+        // Clear choices and pending state
+        ClearChoices();
+        _pendingChoices = null;
         _canAdvance = false;
         _isDelayActive = false;
+
+        // Stop and clear audio
+        if (_audioSource != null)
+        {
+            _audioSource.Stop();
+            _audioSource.clip = null;
+        }
+
+        // Stop typewriter if it's running
+        if (_typewriter != null)
+        {
+            _typewriter.StopShowingText();
+        }
 
         // Hide continue icon
         if (_continueIcon != null)
@@ -1566,32 +3639,274 @@ public class DialogueDisplay : MonoBehaviour
             _continueIcon.SetActive(false);
         }
 
-        Debug.Log("[DialogueDisplay] Date ended - bachelor interaction reset");
+        // Hide love meter
+        if (_loveMeterUI != null)
+        {
+            _loveMeterUI.HideLoveMeter();
+        }
+
+        // Clear date-related state
+        _justCompletedRealDate = false;
+        _currentRealDateLocation = "";
+        _waitingForClearBeforeEndButtons = false;
+        _endDialogueButtonsShown = false;
+
+        // Turn off all date backgrounds
+        TurnOffAllDateBackgrounds();
+
+        // Reset game variables that might be bachelor-specific
+        if (_gameVariables != null)
+        {
+            _gameVariables["Love"] = "0";
+            _gameVariables["NotebookLikeEntry"] = "false";
+            _gameVariables["NotebookDislikeEntry"] = "false";
+        }
+
+        // Clear notebook reference
+        if (_noteBook != null)
+        {
+            _noteBook.ClearBachelor();
+        }
+
+        Debug.Log("[ClearDialogueState] Dialogue state cleared successfully");
     }
 
-    #endregion
-    #region Test
-      [ContextMenu("Go To Last Dialogue (Test)")]
-    public void GoToLastDialogueForTest()
+    /// <summary>
+    /// TEST METHOD: Manually clear dialogue state - accessible from component context menu
+    /// </summary>
+    [ContextMenu("TEST: Clear Dialogue State")]
+    public void TestClearDialogueState()
     {
-        if (_dialogue == null || _dialogue.m_dialogue == null)
-        {
-            Debug.LogWarning("No dialogue loaded to traverse.");
-            return;
-        }
-        var current = _dialogue.m_dialogue;
-        // Traverse until there are no further choices or next dialogues
-        while (
-            current.m_dialogueChoiceData != null
-            && current.m_dialogueChoiceData.Count > 0
-            && current.m_dialogueChoiceData[0].m_nextDialogue != null
-        )
-        {
-            current = current.m_dialogueChoiceData[0].m_nextDialogue;
-        }
-        _dialogue.m_dialogue = current;
-        ShowDialogue();
-        Debug.Log("Jumped to last dialogue node for test.");
+        Debug.Log("[TEST] Manually clearing dialogue state");
+        ClearDialogueState();
+        Debug.Log("[TEST] Dialogue state cleared manually");
     }
-    #endregion
+
+    /// <summary>
+    /// TEST METHOD: Log current dialogue state - accessible from component context menu
+    /// </summary>
+    [ContextMenu("TEST: Debug Current Dialogue State")]
+    public void DebugCurrentDialogueState()
+    {
+        Debug.Log("=== CURRENT DIALOGUE STATE DEBUG ===");
+        Debug.Log($"Bachelor: {(_bachelor != null ? _bachelor._name : "null")}");
+        Debug.Log($"Dialogue: {(_dialogue != null ? _dialogue.name : "null")}");
+        Debug.Log($"Love Meter: {(_loveMeter != null ? _loveMeter.name : "null")}");
+        Debug.Log($"Love Score: {_loveScore}");
+        Debug.Log($"Can Advance: {_canAdvance}");
+        Debug.Log($"Is Delay Active: {_isDelayActive}");
+        Debug.Log($"Waiting for Clear: {_waitingForClearBeforeEndButtons}");
+        Debug.Log($"End Dialogue Buttons Shown: {_endDialogueButtonsShown}");
+        Debug.Log($"Just Completed Real Date: {_justCompletedRealDate}");
+        Debug.Log($"Current Real Date Location: '{_currentRealDateLocation}'");
+        Debug.Log($"Active Choice Buttons: {_activeChoiceButtons.Count}");
+        Debug.Log($"Pending Choices: {(_pendingChoices != null ? _pendingChoices.Count : 0)}");
+
+        if (_nameText != null)
+            Debug.Log($"Name Text: '{_nameText.text}'");
+        if (_displayText != null)
+            Debug.Log($"Display Text: '{_displayText.text}'");
+        if (_bachelorImage != null)
+            Debug.Log(
+                $"Bachelor Image: {(_bachelorImage.sprite != null ? _bachelorImage.sprite.name : "null")} (enabled: {_bachelorImage.enabled})"
+            );
+
+        Debug.Log("=== END DIALOGUE STATE DEBUG ===");
+    }
+
+    /// <summary>
+    /// Shows the date result screen (good/bad date) and then proceeds to show barista dialogue
+    /// </summary>
+    private IEnumerator ShowDateResultAndProceedToBarista()
+    {
+        Debug.Log("Starting ShowDateResultAndProceedToBarista coroutine");
+
+        // Hide dialogue UI temporarily
+        if (_dialogueCanvas != null)
+        {
+            _dialogueCanvas.enabled = false;
+        }
+
+        // Update love score from love meter to get the most current value
+        if (_bachelor != null && _bachelor._loveMeter != null)
+        {
+            _loveScore = _bachelor._loveMeter.GetCurrentLove();
+            Debug.Log(
+                $"Updated love score from love meter: {_loveScore}/{_loveNeededForSuccefulDate}"
+            );
+        }
+        else
+        {
+            Debug.LogWarning("Could not update love score - bachelor or love meter is null");
+        }
+
+        // Determine if the date was successful
+        bool isGoodDate = _loveScore >= _loveNeededForSuccefulDate;
+
+        // Show appropriate result screen with DOTween fade-in animation
+        GameObject screenToShow = null;
+        if (isGoodDate && _goodDateScreen != null)
+        {
+            Debug.Log("Showing good date result screen with DOTween fade-in");
+            screenToShow = _goodDateScreen;
+        }
+        else if (!isGoodDate && _badDateScreen != null)
+        {
+            Debug.Log("Showing bad date result screen with DOTween fade-in");
+            screenToShow = _badDateScreen;
+        }
+
+        if (screenToShow != null)
+        {
+            // Get or add CanvasGroup for fade effect BEFORE activating
+            CanvasGroup canvasGroup = screenToShow.GetComponent<CanvasGroup>();
+            if (canvasGroup == null)
+            {
+                canvasGroup = screenToShow.AddComponent<CanvasGroup>();
+            }
+
+            // Set alpha to 0 BEFORE activating to ensure it starts invisible
+            canvasGroup.alpha = 0f;
+
+            // Now activate the screen (it will be invisible due to alpha = 0)
+            screenToShow.SetActive(true); // Fade in using DOTween
+            yield return canvasGroup.DOFade(1f, 0.5f).SetEase(Ease.OutQuad).WaitForCompletion();
+        }
+
+        // Wait for 0 seconds to let player see the result (changed from 1.5f)
+        yield return new WaitForSeconds(0f);
+
+        // Fade out using DOTween and hide result screens
+        if (screenToShow != null)
+        {
+            CanvasGroup canvasGroup = screenToShow.GetComponent<CanvasGroup>();
+            if (canvasGroup != null)
+            {
+                // Fade out using DOTween with a smooth ease
+                yield return canvasGroup.DOFade(0f, 0.3f).SetEase(Ease.InQuad).WaitForCompletion();
+            }
+
+            screenToShow.SetActive(false);
+        }
+
+        // Mark bachelor as real dated and save progress
+        if (_bachelor != null && !string.IsNullOrEmpty(_currentRealDateLocation))
+        {
+            if (_setBachelor != null)
+            {
+                _setBachelor.CompleteRealDateAndSave(_currentRealDateLocation);
+                Debug.Log(
+                    $"Called CompleteRealDateAndSave({_currentRealDateLocation}) via SetBachelor"
+                );
+            }
+            else
+            {
+                // Fallback to direct method if SetBachelor isn't available
+                MarkBachelorAsRealDated(_bachelor);
+                Debug.LogWarning("SetBachelor not found, using direct method instead");
+            }
+
+            IncrementRealDateCount();
+        }
+
+        // Clear notebook
+        if (_noteBook != null)
+        {
+            _noteBook.ClearBachelor();
+        }
+
+        // End the date session
+        EndDate();
+
+        // Now proceed to barista dialogue
+        Debug.Log("Proceeding to barista dialogue after date result");
+        StartCoroutine(ShowBaristaAfterRealDate());
+    }
+
+    /// <summary>
+    /// Deletes the save file completely - used when the game ends
+    /// </summary>
+    private void DeleteSaveFile()
+    {
+        try
+        {
+            // Use the SaveSystem to reset the save file
+            SaveSystem.ResetSaveFile();
+            Debug.Log("Save file deleted successfully");
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError($"Failed to delete save file: {ex.Message}");
+        }
+    }
+
+    // =====================================================================================
+    // CORE DIALOGUE DISPLAY
+    // =====================================================================================
+
+    // Controls whether bachelors are currently clickable
+    private bool _bachelorsClickable = true;
+
+    /// <summary>
+    /// Call this to make bachelors not clickable (e.g., during barista event)
+    /// </summary>
+    public void SetBachelorsClickable(bool clickable)
+    {
+        _bachelorsClickable = clickable;
+    }
+
+    /// <summary>
+    /// Call this after barista event to delay re-enabling bachelor clickability
+    /// </summary>
+    public void EnableBachelorsClickableWithDelay(float delaySeconds = 0.5f)
+    {
+        StartCoroutine(EnableBachelorsClickableCoroutine(delaySeconds));
+    }
+
+    private IEnumerator EnableBachelorsClickableCoroutine(float delaySeconds)
+    {
+        yield return new WaitForSeconds(delaySeconds);
+        _bachelorsClickable = true;
+    }
+
+    /// <summary>
+    /// Returns whether bachelors are currently clickable
+    /// </summary>
+    public bool AreBachelorsClickable() => _bachelorsClickable;
+
+    /// <summary>
+    /// Returns whether the dialogue system is currently active (showing dialogue)
+    /// </summary>
+    public bool IsInDialogue()
+    {
+        // Check if dialogue canvas is active and enabled
+        if (
+            _dialogueCanvas == null
+            || !_dialogueCanvas.gameObject.activeInHierarchy
+            || !_dialogueCanvas.enabled
+        )
+            return false;
+
+        // Check if we have actual dialogue content being displayed
+        bool hasDialogueContent = false;
+
+        // Check if there's text being displayed
+        if (_displayText != null && !string.IsNullOrEmpty(_displayText.text))
+            hasDialogueContent = true;
+
+        // Check if typewriter is actively showing text
+        if (_typewriter != null && _typewriter.isShowingText)
+            hasDialogueContent = true;
+
+        // Check if there are active choice buttons
+        if (_activeChoiceButtons != null && _activeChoiceButtons.Count > 0)
+            hasDialogueContent = true;
+
+        // Check if we have a current bachelor set (indicating we're in a dialogue session)
+        if (_bachelor != null)
+            hasDialogueContent = true;
+
+        return hasDialogueContent;
+    }
 }
+    #endregion

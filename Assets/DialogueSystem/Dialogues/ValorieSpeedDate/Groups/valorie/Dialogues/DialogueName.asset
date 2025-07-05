@@ -13,22 +13,13 @@ MonoBehaviour:
   m_Name: DialogueName
   m_EditorClassIdentifier: 
   <m_dialogueNameData>k__BackingField: DialogueName
-  <m_dialogueTextData>k__BackingField: "What do you do in your free time? \r\nOther
-    than trying to find someone to date?\r"
+  <m_dialogueTextData>k__BackingField: Dialogue textIt's so light in her.
   <m_dialogueChoiceData>k__BackingField:
-  - <m_dialogueChoiceText>k__BackingField: I stay home and game.
-    <m_nextDialogue>k__BackingField: {fileID: 0}
-  - <m_dialogueChoiceText>k__BackingField: I like to exploring new places, especially
-      now that summer has come around.
-    <m_nextDialogue>k__BackingField: {fileID: 0}
-  - <m_dialogueChoiceText>k__BackingField: I read books until it's midnight and I
-      get lost in the stories.
-    <m_nextDialogue>k__BackingField: {fileID: 0}
-  - <m_dialogueChoiceText>k__BackingField: Going out with friends.
-    <m_nextDialogue>k__BackingField: {fileID: 0}
+  - <m_dialogueChoiceText>k__BackingField: Next Dialogue
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 776125c5809f94d4589a962cce0610c0, type: 2}
   <m_bachelorImageData>k__BackingField: {fileID: 0}
   <m_dialogueAudioData>k__BackingField: {fileID: 0}
-  <m_dialogueTypeData>k__BackingField: 1
+  <m_dialogueTypeData>k__BackingField: 0
   <m_isStartingDialogueData>k__BackingField: 1
   <m_propertyToCheckData>k__BackingField: 
   <m_comparisonTypeData>k__BackingField: 

@@ -27,7 +27,7 @@ MonoBehaviour:
       is a waste of money and valuable time.
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 99c888c29d223b5408212fe0fac66030, type: 2}
   <m_bachelorImageData>k__BackingField: {fileID: 21300000, guid: 84a876f81e079bf40beb58c595c98cf5, type: 3}
-  <m_dialogueAudioData>k__BackingField: {fileID: 8300000, guid: ed4d989ee9b40f446817eb90436bceb7, type: 3}
+  <m_dialogueAudioData>k__BackingField: {fileID: 8300000, guid: a82d8e24eba0f194c947bf1351e5ce06, type: 3}
   <m_dialogueTypeData>k__BackingField: 1
   <m_isStartingDialogueData>k__BackingField: 1
   <m_propertyToCheckData>k__BackingField: 

@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8656580f96a63714d889c7daeb915b7a, type: 3}
+  m_Name: Q1
+  m_EditorClassIdentifier: 
+  <m_dialogueNameData>k__BackingField: Q1
+  <m_dialogueTextData>k__BackingField: If you could talk to animals, what's the first
+    thing you would ask?
+  <m_dialogueChoiceData>k__BackingField:
+  - <m_dialogueChoiceText>k__BackingField: I don't remember, whats the first thing
+      I asked you again?
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 36cf8ec21856a2645bf2b187aa42f48e, type: 2}
+  - <m_dialogueChoiceText>k__BackingField: Why would I want to talk to animals? They're
+      more fun to hunt.
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: edb3aad61963759488df77537fdb052e, type: 2}
+  - <m_dialogueChoiceText>k__BackingField: You're the only one I want to talk to.
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: ad7dec01c84d53340ae13c6dca137269, type: 2}
+  - <m_dialogueChoiceText>k__BackingField: Dunno, what would you ask?
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 20e1f182994422e4fb464623ae7abae5, type: 2}
+  <m_bachelorImageData>k__BackingField: {fileID: 21300000, guid: 4d7a66a9cea93b246a1057f95ed0764f, type: 3}
+  <m_dialogueAudioData>k__BackingField: {fileID: 8300000, guid: 82d6fcd8dc73eeb45a666e1ca1a848bb, type: 3}
+  <m_dialogueTypeData>k__BackingField: 1
+  <m_isStartingDialogueData>k__BackingField: 1
+  <m_propertyToCheckData>k__BackingField: 
+  <m_comparisonTypeData>k__BackingField: 
+  <m_comparisonValueData>k__BackingField: 
+  <m_operationTypeData>k__BackingField: 0
+  <m_variableNameData>k__BackingField: 
+  <m_valueToSetData>k__BackingField: 
+  <m_loveScoreAmountData>k__BackingField: 0
+  <m_boolValueData>k__BackingField: 0
+  <m_loveMeterData>k__BackingField: {fileID: 0}
+  <m_bachelorData>k__BackingField: {fileID: 0}
+  <m_isLikePreferenceData>k__BackingField: 0
+  <m_selectedPreferenceData>k__BackingField: 

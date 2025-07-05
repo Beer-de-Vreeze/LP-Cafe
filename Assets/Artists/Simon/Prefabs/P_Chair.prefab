@@ -13,16 +13,28 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: 507242019a42b5b49b0070b296cbb035, type: 2}
     - target: {fileID: -8679921383154817045, guid: c9fe2d22b9e5fa242b4b615d5629a022, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.8724872
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c9fe2d22b9e5fa242b4b615d5629a022, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.8724872
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c9fe2d22b9e5fa242b4b615d5629a022, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.8724872
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c9fe2d22b9e5fa242b4b615d5629a022, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.820032
+      value: -0.81558
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c9fe2d22b9e5fa242b4b615d5629a022, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.5201362
+      value: -1.4368
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c9fe2d22b9e5fa242b4b615d5629a022, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2
+      value: -2.0139
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c9fe2d22b9e5fa242b4b615d5629a022, type: 3}
       propertyPath: m_LocalRotation.w
@@ -62,7 +74,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 507242019a42b5b49b0070b296cbb035, type: 2}
     - target: {fileID: 919132149155446097, guid: c9fe2d22b9e5fa242b4b615d5629a022, type: 3}
       propertyPath: m_Name
-      value: Chair_lowpoly
+      value: P_Chair
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

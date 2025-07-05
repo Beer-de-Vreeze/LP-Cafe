@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8656580f96a63714d889c7daeb915b7a, type: 3}
+  m_Name: Q3
+  m_EditorClassIdentifier: 
+  <m_dialogueNameData>k__BackingField: Q3
+  <m_dialogueTextData>k__BackingField: The clouds look so lonely up therreeeee, don't
+    you think?
+  <m_dialogueChoiceData>k__BackingField:
+  - <m_dialogueChoiceText>k__BackingField: Not as alone as you're about to be.
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 61544fda6e2c9674ca118759d8a4406c, type: 2}
+  - <m_dialogueChoiceText>k__BackingField: I don't... don't think clouds have feelings-
+      they're inanimate  objects.
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: f0d4ce401b8fae54680b7b44171a16e7, type: 2}
+  - <m_dialogueChoiceText>k__BackingField: Nothing is real, everything is a collection
+      of matter we give a name to, so they're not lonely.
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 4dbea50d4546ebe4882e5c6647e99091, type: 2}
+  - <m_dialogueChoiceText>k__BackingField: '*You stare at the sky and get lost in
+      the different shades of the clouds. The sunset is beautiful tonight.'
+    <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 1922e069e56e81a4d941c5f78d5b1511, type: 2}
+  <m_bachelorImageData>k__BackingField: {fileID: 21300000, guid: 4d7a66a9cea93b246a1057f95ed0764f, type: 3}
+  <m_dialogueAudioData>k__BackingField: {fileID: 0}
+  <m_dialogueTypeData>k__BackingField: 1
+  <m_isStartingDialogueData>k__BackingField: 1
+  <m_propertyToCheckData>k__BackingField: 
+  <m_comparisonTypeData>k__BackingField: 
+  <m_comparisonValueData>k__BackingField: 
+  <m_operationTypeData>k__BackingField: 0
+  <m_variableNameData>k__BackingField: 
+  <m_valueToSetData>k__BackingField: 
+  <m_loveScoreAmountData>k__BackingField: 0
+  <m_boolValueData>k__BackingField: 0
+  <m_loveMeterData>k__BackingField: {fileID: 0}
+  <m_bachelorData>k__BackingField: {fileID: 0}
+  <m_isLikePreferenceData>k__BackingField: 0
+  <m_selectedPreferenceData>k__BackingField: 

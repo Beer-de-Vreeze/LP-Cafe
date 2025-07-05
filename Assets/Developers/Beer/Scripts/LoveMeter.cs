@@ -45,7 +45,7 @@ public class LoveMeter : MonoBehaviour
     [Header("Movement Settings")]
     // Animation range (in degrees)
     private const float MIN_ANGLE = 80f;
-    private const float MAX_ANGLE = -80f;
+    private const float MAX_ANGLE = -65f;
     private float currentAngle;
     private Vector2 currentPosition;
     private Vector2 initialDialPosition;

@@ -1,0 +1,83 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: beb9a63dbd6015942ab1d5ccf8100789, type: 3}
+  m_Name: BaristaEnding4Graph
+  m_EditorClassIdentifier: 
+  <m_graphFileNameData>k__BackingField: BaristaEnding4
+  <m_graphGroupsData>k__BackingField:
+  - <m_groupIDData>k__BackingField: 61c0e621-eeef-453d-a8a1-dac70f4fa26d
+    <m_groupNameData>k__BackingField: BaristaEnding4
+    <m_groupPositionData>k__BackingField: {x: 597, y: 472}
+  <m_graphNodesData>k__BackingField:
+  - <m_nodeIDData>k__BackingField: fbaf7c7d-a9e6-454f-b269-9df268985d39
+    <m_nodeNameData>k__BackingField: 1
+    <m_nodeBachelorImageData>k__BackingField: {fileID: 21300000, guid: 6ffe8caacb35ebc49a3fe4106b8afb48, type: 3}
+    <m_nodeAudioLinesData>k__BackingField: {fileID: 8300000, guid: c2ec55260cf236d4e9ce3338d6f55355, type: 3}
+    <m_nodeTextData>k__BackingField: "You might wanna watch out with what you're
+      doing.\r\nDon't worry, I already had your usual prepped. \r\nTold you you've
+      become predictable.\r\nSeriously though, you see no faults in your masterplan
+      to date all of them? \r\nConsequences to actions and all that.\r"
+    <m_nodeChoicesData>k__BackingField:
+    - <m_choiceTextData>k__BackingField: Next Dialogue
+      <m_choiceNodeIDData>k__BackingField: 3d6faf8b-ee51-4f7f-bfbd-15544704b823
+    <m_nodeGroupIDData>k__BackingField: 61c0e621-eeef-453d-a8a1-dac70f4fa26d
+    <m_dialogueTypeData>k__BackingField: 0
+    <m_nodePositionData>k__BackingField: {x: 622, y: 531}
+    <m_nodePropertyToCheckData>k__BackingField: Love
+    <m_nodeComparisonTypeData>k__BackingField: '>='
+    <m_nodeComparisonValueData>k__BackingField: 0
+    <m_nodeOperationTypeData>k__BackingField: '>='
+    <m_nodeValueToSetData>k__BackingField: 
+    <m_nodeVariableNameData>k__BackingField: 
+    <m_nodeSetterOperationTypeData>k__BackingField: 0
+    <m_nodeLoveScoreAmountData>k__BackingField: 0
+    <m_nodeBoolValueData>k__BackingField: 0
+    <m_nodeLoveMeterData>k__BackingField: {fileID: 0}
+    <m_bachelorData>k__BackingField: {fileID: 0}
+    <m_isLikePreference>k__BackingField: 0
+    <m_selectedPreference>k__BackingField: 
+    <m_enumSetter>k__BackingField: 0
+  - <m_nodeIDData>k__BackingField: 3d6faf8b-ee51-4f7f-bfbd-15544704b823
+    <m_nodeNameData>k__BackingField: 2
+    <m_nodeBachelorImageData>k__BackingField: {fileID: 21300000, guid: 6ffe8caacb35ebc49a3fe4106b8afb48, type: 3}
+    <m_nodeAudioLinesData>k__BackingField: {fileID: 8300000, guid: 4eea03591fedeaf4da725676e8fb2622, type: 3}
+    <m_nodeTextData>k__BackingField: "I wish you the best of luck, only one left
+      to go. \r\nYou've come this far. \r\nApparently you've said all the right things."
+    <m_nodeChoicesData>k__BackingField:
+    - <m_choiceTextData>k__BackingField: Next Dialogue
+      <m_choiceNodeIDData>k__BackingField: 
+    <m_nodeGroupIDData>k__BackingField: 61c0e621-eeef-453d-a8a1-dac70f4fa26d
+    <m_dialogueTypeData>k__BackingField: 0
+    <m_nodePositionData>k__BackingField: {x: 1195, y: 557}
+    <m_nodePropertyToCheckData>k__BackingField: Love
+    <m_nodeComparisonTypeData>k__BackingField: '>='
+    <m_nodeComparisonValueData>k__BackingField: 0
+    <m_nodeOperationTypeData>k__BackingField: '>='
+    <m_nodeValueToSetData>k__BackingField: 
+    <m_nodeVariableNameData>k__BackingField: 
+    <m_nodeSetterOperationTypeData>k__BackingField: 0
+    <m_nodeLoveScoreAmountData>k__BackingField: 0
+    <m_nodeBoolValueData>k__BackingField: 0
+    <m_nodeLoveMeterData>k__BackingField: {fileID: 0}
+    <m_bachelorData>k__BackingField: {fileID: 0}
+    <m_isLikePreference>k__BackingField: 0
+    <m_selectedPreference>k__BackingField: 
+    <m_enumSetter>k__BackingField: 0
+  <m_graphOldGroupNamesData>k__BackingField:
+  - BaristaEnding4
+  <m_graphOldUngroupedNodeNamesData>k__BackingField: []
+  <m_graphOldGroupedNodeNamesData>k__BackingField:
+    list:
+    - Key: BaristaEnding4
+      Value:
+      - 1
+      - 2

@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: intro
   m_EditorClassIdentifier: 
   <m_dialogueNameData>k__BackingField: intro
-  <m_dialogueTextData>k__BackingField: "Hi, I'm valorie. \r\nWow I never knew dating
+  <m_dialogueTextData>k__BackingField: "Hi, I'm Valorie. \r\nWow I never knew dating
     cafe's existed.\r\nI don't have enough caffeine in my system for this right now\r\r"
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Next Dialogue
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: cc9633d2fff65544f8c34fbc78bff4a6, type: 2}
   <m_bachelorImageData>k__BackingField: {fileID: 21300000, guid: 35a4b7bef345b3f4db947b0e9547a2a6, type: 3}
-  <m_dialogueAudioData>k__BackingField: {fileID: 0}
+  <m_dialogueAudioData>k__BackingField: {fileID: 8300000, guid: 9bbf6967fc6402f4e868aa55d1f9c0e6, type: 3}
   <m_dialogueTypeData>k__BackingField: 0
   <m_isStartingDialogueData>k__BackingField: 0
   <m_propertyToCheckData>k__BackingField: 

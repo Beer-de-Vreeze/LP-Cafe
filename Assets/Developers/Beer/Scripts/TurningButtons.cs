@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -27,12 +28,20 @@ public class TurningButtons : MonoBehaviour
     private float rotationSpeed = 2.0f; // Speed multiplier for camera rotation
 
     [SerializeField]
+    [Tooltip("Time to wait between camera moves to prevent rapid clicking")]
+    private float cooldownTime = 0.5f; // Time to wait between moves in seconds
+
+    [SerializeField]
     private BoxCollider[] m_bachelorsColliders;
 
+    [SerializeField]
+    private GameObject textHolder; // Reference to TextHolder GameObject for bachelor clickability control
+    private DialogueDisplay dialogueDisplay; // Reference to DialogueDisplay component for managing bachelor clickabilit
     private int currentPositionIndex = 0; // Index of the current/target position in the Positions list
     private Vector3 targetPosition; // The target position the camera is moving towards
     private Quaternion targetRotation; // The target rotation the camera is rotating towards
     private bool isTransitioning = false; // Flag to track if camera is currently moving between positions
+    private bool isOnCooldown = false; // Flag to prevent rapid button clicks
 
     /// <summary>
     /// Initializes buttons, camera reference, and sets initial camera position.
@@ -42,15 +51,19 @@ public class TurningButtons : MonoBehaviour
         // Set up button click listeners
         if (leftButton != null)
             leftButton.onClick.AddListener(OnLeftButtonClick);
-            leftButton.onClick.AddListener(BachelorColliderActive);
+        leftButton.onClick.AddListener(BachelorColliderActive);
 
         if (rightButton != null)
             rightButton.onClick.AddListener(OnRightButtonClick);
-            rightButton.onClick.AddListener(BachelorColliderActive);
+        rightButton.onClick.AddListener(BachelorColliderActive);
 
         // If no camera is assigned, use the main camera
         if (mainCamera == null)
             mainCamera = Camera.main;
+
+        // Find DialogueDisplay if not assigned
+        if (textHolder == null)
+            dialogueDisplay = FindFirstObjectByType<DialogueDisplay>();
 
         foreach (var collider in m_bachelorsColliders)
         {
@@ -113,7 +126,7 @@ public class TurningButtons : MonoBehaviour
                 break;
         }
     }
-    
+
     public void BachelorColliderActive()
     {
         switch (currentPositionIndex)
@@ -139,15 +152,18 @@ public class TurningButtons : MonoBehaviour
         }
     }
 
-
     /// <summary>
     /// Handles left button click to move camera to previous position.
+    /// Includes cooldown to prevent rapid clicking.
     /// </summary>
     private void OnLeftButtonClick()
     {
-        // Prevent clicks during transition
-        if (isTransitioning)
+        // Prevent clicks during transition or cooldown
+        if (isTransitioning || isOnCooldown)
             return;
+
+        // Start cooldown
+        StartCoroutine(ButtonCooldown());
 
         // Decrease index and wrap around to end if needed
         currentPositionIndex--;
@@ -159,12 +175,16 @@ public class TurningButtons : MonoBehaviour
 
     /// <summary>
     /// Handles right button click to move camera to next position.
+    /// Includes cooldown to prevent rapid clicking.
     /// </summary>
     private void OnRightButtonClick()
     {
-        // Prevent clicks during transition
-        if (isTransitioning)
+        // Prevent clicks during transition or cooldown
+        if (isTransitioning || isOnCooldown)
             return;
+
+        // Start cooldown
+        StartCoroutine(ButtonCooldown());
 
         // Increase index and wrap around to beginning if needed
         currentPositionIndex++;
@@ -192,5 +212,44 @@ public class TurningButtons : MonoBehaviour
 
         // Begin transition to new position
         isTransitioning = true;
+    }
+
+    /// <summary>
+    /// Coroutine that creates a cooldown period between button clicks to prevent rapid camera movement.
+    /// Also manages bachelor clickability during transitions.
+    /// </summary>
+    /// <returns>Coroutine enumerator</returns>
+    private IEnumerator ButtonCooldown()
+    {
+        isOnCooldown = true;
+
+        // Make bachelors non-clickable during camera transition
+        if (dialogueDisplay != null)
+        {
+            dialogueDisplay.SetBachelorsClickable(false);
+        }
+
+        yield return new WaitForSeconds(cooldownTime);
+
+        // Re-enable bachelor clickability after cooldown
+        if (dialogueDisplay != null)
+        {
+            dialogueDisplay.SetBachelorsClickable(true);
+        }
+
+        isOnCooldown = false;
+    }
+
+    /// <summary>
+    /// Sets the interactable state of the movement buttons
+    /// </summary>
+    /// <param name="interactable">Whether the buttons should be interactable</param>
+    public void SetButtonsInteractable(bool interactable)
+    {
+        if (leftButton != null)
+            leftButton.interactable = interactable;
+
+        if (rightButton != null)
+            rightButton.interactable = interactable;
     }
 }

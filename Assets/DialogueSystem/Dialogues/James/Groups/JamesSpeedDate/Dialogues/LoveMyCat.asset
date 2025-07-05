@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <m_dialogueNameData>k__BackingField: LoveMyCat
   <m_dialogueTextData>k__BackingField: I love my cat a lot, but she often hunts rodents,
-    which irritates me. I hate rodents... so gross
+    which irritates me. I hate rodents... so gross.
   <m_dialogueChoiceData>k__BackingField:
   - <m_dialogueChoiceText>k__BackingField: Next Dialogue
     <m_nextDialogue>k__BackingField: {fileID: 11400000, guid: 6ed57575ab0fd7b48be89a1f26e63632, type: 2}
   <m_bachelorImageData>k__BackingField: {fileID: 21300000, guid: dedee01b113aef245a775f2239a733c6, type: 3}
-  <m_dialogueAudioData>k__BackingField: {fileID: 8300000, guid: 0dd86d87cd1fa474ca496964d1a454eb, type: 3}
+  <m_dialogueAudioData>k__BackingField: {fileID: 8300000, guid: 7b1361ed861580a4899ecec832d8b6f3, type: 3}
   <m_dialogueTypeData>k__BackingField: 0
   <m_isStartingDialogueData>k__BackingField: 1
   <m_propertyToCheckData>k__BackingField: 

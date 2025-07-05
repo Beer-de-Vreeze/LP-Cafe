@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2651e6138de3984dbf11454fa21a045, type: 3}
+  m_Name: BaristaBadEnding
+  m_EditorClassIdentifier: 
+  <m_containerFileNameData>k__BackingField: BaristaBadEnding
+  <m_containerDialogueGroupsData>k__BackingField:
+    list:
+    - Key: {fileID: 11400000, guid: c045608e24c85064eb2a32e87bb25936, type: 2}
+      Value:
+      - {fileID: 11400000, guid: a71a5434fa071244280e3c2af6160ab8, type: 2}
+      - {fileID: 11400000, guid: ad5ce0e733936454c85f048dd0554650, type: 2}
+      - {fileID: 11400000, guid: 5811f5d5a8bee84468cebc0182573106, type: 2}
+      - {fileID: 11400000, guid: f10c095da9dd2cc4e9147ceff82d1ea8, type: 2}
+      - {fileID: 11400000, guid: 8401eec290aa7fa449c8c22bfac5c6c2, type: 2}
+      - {fileID: 11400000, guid: 044a156b1911fdb479db461484d04dad, type: 2}
+      - {fileID: 11400000, guid: 6edd58abdb928534f931288ed6b4a3c4, type: 2}
+      - {fileID: 11400000, guid: 6c2f36662769cb348b182ba4127e66e9, type: 2}
+      - {fileID: 11400000, guid: 2ab636d4827f48142862164979e8173e, type: 2}
+  <m_containerUngroupedDialoguesData>k__BackingField: []
