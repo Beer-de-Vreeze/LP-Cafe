@@ -734,11 +734,15 @@ public class DialogueDisplay : MonoBehaviour
     /// <param name="bachelor">The character data associated with this dialogue</param>
     public void SetDialogue(DSDialogue dialogue, NewBachelorSO bachelor)
     {
+        Debug.Log($"[SetDialogue] Setting dialogue for bachelor: {bachelor?._name ?? "null"}");
+
         // Clear all previous dialogue state to ensure clean setup
         ClearDialogueState();
 
         _dialogue = dialogue;
         _bachelor = bachelor;
+
+        Debug.Log($"[SetDialogue] Bachelor set to: {_bachelor?._name ?? "null"}");
 
         // Reset the state for waiting to clear before end buttons
         _waitingForClearBeforeEndButtons = false;
@@ -780,6 +784,8 @@ public class DialogueDisplay : MonoBehaviour
     /// <param name="dialogueSO">The initial dialogue to display</param>
     public void StartDialogue(NewBachelorSO bachelor, DSDialogue dialogueSO)
     {
+        Debug.Log($"[StartDialogue] Starting dialogue with bachelor: {bachelor?._name ?? "null"}");
+
         // Clear all previous dialogue state to ensure clean setup
         ClearDialogueState();
 
@@ -793,7 +799,10 @@ public class DialogueDisplay : MonoBehaviour
         _bachelor = bachelor;
         _dialogue = dialogueSO;
 
-        Debug.Log($"[StartDialogue] Started dialogue with bachelor: {_bachelor._name}");
+        Debug.Log($"[StartDialogue] Bachelor successfully set to: {_bachelor._name}");
+        Debug.Log(
+            $"[StartDialogue] Date dialogues cleared, will need to be set via overloaded method if real dates are needed"
+        );
 
         // Find and cache the SetBachelor component for later use
         _setBachelor = FindFirstObjectByType<SetBachelor>();
@@ -865,6 +874,10 @@ public class DialogueDisplay : MonoBehaviour
         DSDialogue forestDateDialogue
     )
     {
+        Debug.Log(
+            $"[StartDialogue with dates] Starting dialogue with bachelor: {bachelor?._name ?? "null"}"
+        );
+
         // Clear all previous dialogue state to ensure clean setup
         ClearDialogueState();
 
@@ -875,10 +888,16 @@ public class DialogueDisplay : MonoBehaviour
         _bachelor = bachelor;
         _dialogue = dialogueSO;
 
+        Debug.Log($"[StartDialogue with dates] Bachelor set to: {_bachelor._name}");
+
         // Set the date dialogues from the parameters instead of the SO
         _rooftopDateDialogue = rooftopDateDialogue;
         _aquariumDateDialogue = aquariumDateDialogue;
         _forestDateDialogue = forestDateDialogue;
+
+        Debug.Log(
+            $"[StartDialogue with dates] Date dialogues set - Rooftop: {(_rooftopDateDialogue != null ? "✓" : "✗")}, Aquarium: {(_aquariumDateDialogue != null ? "✓" : "✗")}, Forest: {(_forestDateDialogue != null ? "✓" : "✗")}"
+        );
 
         // Ensure bachelor synchronizes with save data to load discovered preferences
         _bachelor.SynchronizeWithSaveData();
@@ -1530,15 +1549,21 @@ public class DialogueDisplay : MonoBehaviour
             _continueIcon.SetActive(false);
         }
 
+        // FIX: Capture current bachelor reference for validation
+        var currentBachelor = _bachelor;
+
         // Create all buttons first, but make them invisible
         List<GameObject> buttonsToAnimate = new List<GameObject>();
 
-        foreach (var choice in choices)
+        for (int i = 0; i < choices.Count; i++)
         {
+            // FIX: Create local copy to avoid closure issues
+            var currentChoice = choices[i];
+
             var btnObj = Instantiate(_choiceButtonPrefab, _choicesParent);
             var btnText = btnObj.GetComponentInChildren<TextMeshProUGUI>();
             if (btnText != null)
-                btnText.text = choice.m_dialogueChoiceText;
+                btnText.text = currentChoice.m_dialogueChoiceText;
 
             // Ensure proper button sizing and layout
             EnsureContentSizeFitter(btnObj);
@@ -1554,8 +1579,11 @@ public class DialogueDisplay : MonoBehaviour
             var button = btnObj.GetComponent<UnityEngine.UI.Button>();
             if (button != null)
             {
+                // FIX: Clear any existing listeners to prevent double-registration
+                button.onClick.RemoveAllListeners();
+
                 // Check if this choice's condition would pass
-                bool conditionPassesIfSelected = WouldChoiceConditionPass(choice);
+                bool conditionPassesIfSelected = WouldChoiceConditionPass(currentChoice);
 
                 if (!conditionPassesIfSelected)
                 {
@@ -1565,7 +1593,7 @@ public class DialogueDisplay : MonoBehaviour
                         btnText.color = _disabledTextColor;
 
                     Debug.Log(
-                        $"Disabled choice '{choice.m_dialogueChoiceText}' due to failed condition"
+                        $"Disabled choice '{currentChoice.m_dialogueChoiceText}' due to failed condition"
                     );
                 }
                 else
@@ -1576,8 +1604,42 @@ public class DialogueDisplay : MonoBehaviour
                     AddHoverEffects(button.gameObject, btnText);
                 }
 
-                // Add click listener
-                button.onClick.AddListener(() => OnChoiceSelected(choice));
+                // FIX: Add click listener with local copy and bachelor validation
+                button.onClick.AddListener(() =>
+                {
+                    Debug.Log(
+                        $"[ShowChoices] Choice button clicked: '{currentChoice.m_dialogueChoiceText}', Current Bachelor: {(_bachelor != null ? _bachelor._name : "null")}, Expected Bachelor: {(currentBachelor != null ? currentBachelor._name : "null")}"
+                    );
+
+                    // Validate bachelor consistency before processing choice
+                    if (_bachelor != currentBachelor)
+                    {
+                        Debug.LogWarning(
+                            $"[ShowChoices] Bachelor mismatch for choice! Expected {currentBachelor?._name}, got {_bachelor?._name}. Attempting recovery..."
+                        );
+
+                        // Attempt to recover the correct bachelor
+                        if (TryRecoverCorrectBachelor(currentBachelor))
+                        {
+                            Debug.Log(
+                                $"[ShowChoices] Successfully recovered bachelor: {_bachelor._name}"
+                            );
+                        }
+                        else
+                        {
+                            Debug.LogError(
+                                $"[ShowChoices] Failed to recover bachelor {currentBachelor?._name}. Skipping choice selection."
+                            );
+                            return;
+                        }
+                    }
+
+                    OnChoiceSelected(currentChoice);
+                });
+
+                Debug.Log(
+                    $"[ShowChoices] Created button for choice: '{currentChoice.m_dialogueChoiceText}' (Button #{i})"
+                );
             }
 
             _activeChoiceButtons.Add(btnObj);
@@ -1597,15 +1659,27 @@ public class DialogueDisplay : MonoBehaviour
     /// </summary>
     private void ClearChoices()
     {
+        // FIX: Enhanced button cleanup to prevent old listeners from persisting
         foreach (var btn in _activeChoiceButtons)
         {
             if (btn != null)
+            {
+                // Clear any button listeners before destroying
+                var button = btn.GetComponent<UnityEngine.UI.Button>();
+                if (button != null)
+                {
+                    button.onClick.RemoveAllListeners();
+                }
+
                 Destroy(btn);
+            }
         }
         _activeChoiceButtons.Clear();
 
         // Also clear any pending choices
         _pendingChoices = null;
+
+        Debug.Log("[ClearChoices] Cleared all choice buttons and pending choices");
     }
 
     /// <summary>
@@ -1615,6 +1689,26 @@ public class DialogueDisplay : MonoBehaviour
     /// <param name="choice">The selected choice data</param>
     private void OnChoiceSelected(DS.Data.DSDialogueChoiceData choice)
     {
+        Debug.Log(
+            $"[OnChoiceSelected] Choice selected: '{choice?.m_dialogueChoiceText}' for bachelor: {(_bachelor != null ? _bachelor._name : "null")}"
+        );
+
+        // FIX: Validate that we have valid choice data before proceeding
+        if (choice == null)
+        {
+            Debug.LogError("[OnChoiceSelected] Received null choice data! Ignoring click.");
+            return;
+        }
+
+        // FIX: Validate that we still have a bachelor (in case it was cleared between button creation and click)
+        if (_bachelor == null)
+        {
+            Debug.LogWarning(
+                $"[OnChoiceSelected] No bachelor assigned when processing choice '{choice.m_dialogueChoiceText}'. This might be a stale button click."
+            );
+            return;
+        }
+
         ClearChoices();
 
         // Reset the flag since we're continuing with more dialogue
@@ -1627,7 +1721,9 @@ public class DialogueDisplay : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("Selected choice has no valid next dialogue");
+            Debug.LogWarning(
+                $"[OnChoiceSelected] Selected choice '{choice.m_dialogueChoiceText}' has no valid next dialogue"
+            );
         }
     }
 
@@ -2407,6 +2503,9 @@ public class DialogueDisplay : MonoBehaviour
     /// <param name="onClickAction">Action to perform when button is clicked</param>
     private void CreateEndDialogueButton(string buttonText, System.Action onClickAction)
     {
+        // FIX: Store current bachelor reference to prevent issues if _bachelor changes
+        var currentBachelor = _bachelor;
+
         var btnObj = Instantiate(_choiceButtonPrefab, _choicesParent);
         var btnText = btnObj.GetComponentInChildren<TextMeshProUGUI>();
         if (btnText != null)
@@ -2426,7 +2525,41 @@ public class DialogueDisplay : MonoBehaviour
         var button = btnObj.GetComponent<UnityEngine.UI.Button>();
         if (button != null)
         {
-            button.onClick.AddListener(() => onClickAction());
+            // FIX: Clear any existing listeners
+            button.onClick.RemoveAllListeners();
+
+            // FIX: Add validation to ensure we're clicking for the right bachelor
+            button.onClick.AddListener(() =>
+            {
+                Debug.Log(
+                    $"[CreateEndDialogueButton] Button '{buttonText}' clicked. Current Bachelor: {(_bachelor != null ? _bachelor._name : "null")}, Expected Bachelor: {(currentBachelor != null ? currentBachelor._name : "null")}"
+                );
+
+                // For certain actions, validate bachelor consistency
+                if (buttonText.Contains("Date") && _bachelor != currentBachelor)
+                {
+                    Debug.LogWarning(
+                        $"[CreateEndDialogueButton] Bachelor mismatch for date action! Expected {currentBachelor?._name}, got {_bachelor?._name}. Attempting recovery..."
+                    );
+
+                    // Attempt to recover the correct bachelor
+                    if (TryRecoverCorrectBachelor(currentBachelor))
+                    {
+                        Debug.Log(
+                            $"[CreateEndDialogueButton] Successfully recovered bachelor: {_bachelor._name}"
+                        );
+                    }
+                    else
+                    {
+                        Debug.LogError(
+                            $"[CreateEndDialogueButton] Failed to recover bachelor {currentBachelor?._name}. Skipping action."
+                        );
+                        return;
+                    }
+                }
+
+                onClickAction();
+            });
 
             if (btnText != null)
                 btnText.color = _normalTextColor;
@@ -2435,6 +2568,10 @@ public class DialogueDisplay : MonoBehaviour
         }
 
         _activeChoiceButtons.Add(btnObj);
+
+        Debug.Log(
+            $"[CreateEndDialogueButton] Created button '{buttonText}' for Bachelor: {(currentBachelor != null ? currentBachelor._name : "null")}"
+        );
     }
 
     /// <summary>
@@ -2645,7 +2782,13 @@ public class DialogueDisplay : MonoBehaviour
     /// </summary>
     private void OnAskOnDateClicked()
     {
-        Debug.Log("Ask on a Date button clicked");
+        Debug.Log(
+            $"[OnAskOnDateClicked] Ask on a Date button clicked for bachelor: {_bachelor?._name ?? "null"}"
+        );
+        Debug.Log(
+            $"[OnAskOnDateClicked] Date dialogues status - Rooftop: {(_rooftopDateDialogue != null ? "✓" : "✗")}, Aquarium: {(_aquariumDateDialogue != null ? "✓" : "✗")}, Forest: {(_forestDateDialogue != null ? "✓" : "✗")}"
+        );
+
         ClearChoices();
 
         // Reset end dialogue button state for next interaction
@@ -2705,6 +2848,9 @@ public class DialogueDisplay : MonoBehaviour
     /// </summary>
     private void CreateDateLocationButton(string locationName, System.Action onClickAction)
     {
+        // FIX: Store current bachelor reference to prevent issues if _bachelor changes
+        var currentBachelor = _bachelor;
+
         var btnObj = Instantiate(_choiceButtonPrefab, _choicesParent);
         var btnText = btnObj.GetComponentInChildren<TextMeshProUGUI>();
         if (btnText != null)
@@ -2724,7 +2870,41 @@ public class DialogueDisplay : MonoBehaviour
         var button = btnObj.GetComponent<UnityEngine.UI.Button>();
         if (button != null)
         {
-            button.onClick.AddListener(() => onClickAction());
+            // FIX: Clear any existing listeners
+            button.onClick.RemoveAllListeners();
+
+            // FIX: Add validation to ensure we're clicking for the right bachelor
+            button.onClick.AddListener(() =>
+            {
+                Debug.Log(
+                    $"[CreateDateLocationButton] Button clicked for location: {locationName}, Current Bachelor: {(_bachelor != null ? _bachelor._name : "null")}, Expected Bachelor: {(currentBachelor != null ? currentBachelor._name : "null")}"
+                );
+
+                // Validate that we're still dealing with the same bachelor
+                if (_bachelor != currentBachelor)
+                {
+                    Debug.LogWarning(
+                        $"[CreateDateLocationButton] Bachelor mismatch! Expected {currentBachelor?._name}, got {_bachelor?._name}. Attempting recovery..."
+                    );
+
+                    // Attempt to recover the correct bachelor
+                    if (TryRecoverCorrectBachelor(currentBachelor))
+                    {
+                        Debug.Log(
+                            $"[CreateDateLocationButton] Successfully recovered bachelor: {_bachelor._name}"
+                        );
+                    }
+                    else
+                    {
+                        Debug.LogError(
+                            $"[CreateDateLocationButton] Failed to recover bachelor {currentBachelor?._name}. Skipping date selection."
+                        );
+                        return;
+                    }
+                }
+
+                onClickAction();
+            });
 
             if (btnText != null)
                 btnText.color = _normalTextColor;
@@ -2733,6 +2913,10 @@ public class DialogueDisplay : MonoBehaviour
         }
 
         _activeChoiceButtons.Add(btnObj);
+
+        Debug.Log(
+            $"[CreateDateLocationButton] Created date button for location: {locationName}, Bachelor: {(currentBachelor != null ? currentBachelor._name : "null")}"
+        );
     }
 
     /// <summary>
@@ -2740,7 +2924,27 @@ public class DialogueDisplay : MonoBehaviour
     /// </summary>
     private void OnRooftopDateSelected()
     {
-        Debug.Log("Rooftop date selected");
+        Debug.Log(
+            $"[OnRooftopDateSelected] Rooftop date selected for bachelor: {_bachelor?._name ?? "null"}"
+        );
+
+        // FIX: Validate bachelor and dialogue data before proceeding
+        if (_bachelor == null)
+        {
+            Debug.LogError(
+                "[OnRooftopDateSelected] No bachelor assigned! Cannot start rooftop date."
+            );
+            return;
+        }
+
+        if (_rooftopDateDialogue == null)
+        {
+            Debug.LogError(
+                $"[OnRooftopDateSelected] No rooftop date dialogue assigned for {_bachelor._name}! Cannot start date."
+            );
+            return;
+        }
+
         SetDateBackground("Rooftop");
         StartDateWithLocation("Rooftop", _rooftopDateDialogue);
     }
@@ -2750,7 +2954,27 @@ public class DialogueDisplay : MonoBehaviour
     /// </summary>
     private void OnAquariumDateSelected()
     {
-        Debug.Log("Aquarium date selected");
+        Debug.Log(
+            $"[OnAquariumDateSelected] Aquarium date selected for bachelor: {_bachelor?._name ?? "null"}"
+        );
+
+        // FIX: Validate bachelor and dialogue data before proceeding
+        if (_bachelor == null)
+        {
+            Debug.LogError(
+                "[OnAquariumDateSelected] No bachelor assigned! Cannot start aquarium date."
+            );
+            return;
+        }
+
+        if (_aquariumDateDialogue == null)
+        {
+            Debug.LogError(
+                $"[OnAquariumDateSelected] No aquarium date dialogue assigned for {_bachelor._name}! Cannot start date."
+            );
+            return;
+        }
+
         SetDateBackground("Aquarium");
         StartDateWithLocation("Aquarium", _aquariumDateDialogue);
     }
@@ -2760,7 +2984,27 @@ public class DialogueDisplay : MonoBehaviour
     /// </summary>
     private void OnForestDateSelected()
     {
-        Debug.Log("Forest date selected");
+        Debug.Log(
+            $"[OnForestDateSelected] Forest date selected for bachelor: {_bachelor?._name ?? "null"}"
+        );
+
+        // FIX: Validate bachelor and dialogue data before proceeding
+        if (_bachelor == null)
+        {
+            Debug.LogError(
+                "[OnForestDateSelected] No bachelor assigned! Cannot start forest date."
+            );
+            return;
+        }
+
+        if (_forestDateDialogue == null)
+        {
+            Debug.LogError(
+                $"[OnForestDateSelected] No forest date dialogue assigned for {_bachelor._name}! Cannot start date."
+            );
+            return;
+        }
+
         SetDateBackground("Forest");
         StartDateWithLocation("Forest", _forestDateDialogue);
     }
@@ -2772,7 +3016,16 @@ public class DialogueDisplay : MonoBehaviour
     {
         if (dateDialogue == null)
         {
-            Debug.LogError($"No dialogue assigned for {locationName} date!");
+            Debug.LogError(
+                $"No dialogue assigned for {locationName} date! Current bachelor: {_bachelor?._name ?? "null"}. This might be due to date dialogues not being properly set for this bachelor."
+            );
+            return;
+        }
+
+        // Additional safety check - ensure we have a valid bachelor
+        if (_bachelor == null)
+        {
+            Debug.LogError($"Cannot start {locationName} date - no bachelor is currently set!");
             return;
         }
 
@@ -3648,6 +3901,11 @@ public class DialogueDisplay : MonoBehaviour
         // Clear date-related state
         _justCompletedRealDate = false;
         _currentRealDateLocation = "";
+
+        // Clear date dialogues to prevent using previous bachelor's dates
+        _rooftopDateDialogue = null;
+        _aquariumDateDialogue = null;
+        _forestDateDialogue = null;
         _waitingForClearBeforeEndButtons = false;
         _endDialogueButtonsShown = false;
 
@@ -3907,6 +4165,114 @@ public class DialogueDisplay : MonoBehaviour
             hasDialogueContent = true;
 
         return hasDialogueContent;
+    }
+
+    /// <summary>
+    /// Attempts to recover the correct bachelor when a mismatch is detected.
+    /// Tries multiple methods to find and restore the expected bachelor.
+    /// </summary>
+    /// <param name="expectedBachelor">The bachelor we expected to be working with</param>
+    /// <returns>True if recovery was successful, false otherwise</returns>
+    private bool TryRecoverCorrectBachelor(NewBachelorSO expectedBachelor)
+    {
+        if (expectedBachelor == null)
+        {
+            Debug.LogError(
+                "[TryRecoverCorrectBachelor] Expected bachelor is null, cannot recover."
+            );
+            return false;
+        }
+
+        Debug.Log(
+            $"[TryRecoverCorrectBachelor] Attempting to recover bachelor: {expectedBachelor._name}"
+        );
+
+        // Method 1: Try to find SetBachelor component and check if it has the right bachelor
+        if (_setBachelor != null)
+        {
+            var setBachelorBachelor = _setBachelor.GetBachelor();
+            if (setBachelorBachelor != null && setBachelorBachelor._name == expectedBachelor._name)
+            {
+                Debug.Log(
+                    $"[TryRecoverCorrectBachelor] Found matching bachelor via SetBachelor: {setBachelorBachelor._name}"
+                );
+                _bachelor = setBachelorBachelor;
+
+                // Re-sync the dialogue and love meter data
+                if (_bachelor._dialogue != null)
+                {
+                    _dialogue = _bachelor._dialogue;
+                }
+
+                if (_bachelor._loveMeter != null)
+                {
+                    _loveMeter = _bachelor._loveMeter;
+                    _loveScore = _loveMeter.GetCurrentLove();
+                    EnsureLoveMeterSetup();
+                }
+
+                return true;
+            }
+        }
+
+        // Method 2: Search the scene for SetBachelor components that might have the right bachelor
+        SetBachelor[] allSetBachelors = FindObjectsByType<SetBachelor>(FindObjectsSortMode.None);
+        foreach (var setBachelor in allSetBachelors)
+        {
+            var candidate = setBachelor.GetBachelor();
+            if (candidate != null && candidate._name == expectedBachelor._name)
+            {
+                Debug.Log(
+                    $"[TryRecoverCorrectBachelor] Found matching bachelor via scene search: {candidate._name}"
+                );
+                _bachelor = candidate;
+                _setBachelor = setBachelor; // Update the reference too
+
+                // Re-sync the dialogue and love meter data
+                if (_bachelor._dialogue != null)
+                {
+                    _dialogue = _bachelor._dialogue;
+                }
+
+                if (_bachelor._loveMeter != null)
+                {
+                    _loveMeter = _bachelor._loveMeter;
+                    _loveScore = _loveMeter.GetCurrentLove();
+                    EnsureLoveMeterSetup();
+                }
+
+                return true;
+            }
+        }
+
+        // Method 3: If we can find the exact same SO reference, use it directly
+        if (expectedBachelor != null)
+        {
+            Debug.Log(
+                $"[TryRecoverCorrectBachelor] Using expected bachelor directly: {expectedBachelor._name}"
+            );
+            _bachelor = expectedBachelor;
+
+            // Re-sync the dialogue and love meter data
+            if (_bachelor._dialogue != null)
+            {
+                _dialogue = _bachelor._dialogue;
+            }
+
+            if (_bachelor._loveMeter != null)
+            {
+                _loveMeter = _bachelor._loveMeter;
+                _loveScore = _loveMeter.GetCurrentLove();
+                EnsureLoveMeterSetup();
+            }
+
+            return true;
+        }
+
+        Debug.LogError(
+            $"[TryRecoverCorrectBachelor] Failed to recover bachelor: {expectedBachelor._name}"
+        );
+        return false;
     }
 }
     #endregion

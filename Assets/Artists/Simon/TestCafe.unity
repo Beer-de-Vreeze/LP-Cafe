@@ -627,7 +627,7 @@ MonoBehaviour:
   m_groupedDialogues: 1
   m_startingDialoguesOnly: 0
   m_selectedDialogueGroupIndex: 0
-  m_selectedDialogueIndex: 38
+  m_selectedDialogueIndex: 37
 --- !u!1 &227314392 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3959460017288424381, guid: a45930d7ad5ece64d8d27e47bbcbf4a6, type: 3}
