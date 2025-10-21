@@ -12,9 +12,12 @@ public class BachelorSetter : MonoBehaviour
     [SerializeField]
     private Canvas m_canvas;
 
+    private PauzeScreen m_pauseScreen;
+
     void Start()
     {
         m_dialogueDisplay = FindFirstObjectByType<DialogueDisplay>();
+        m_pauseScreen = FindFirstObjectByType<PauzeScreen>();
         // Check if this bachelor has already been dated using the bachelor's method
         if (m_bachelor != null && m_bachelor.HasBeenDated())
         {
@@ -28,6 +31,15 @@ public class BachelorSetter : MonoBehaviour
 
     public void OnClick(BaseEventData data)
     {
+        // Check if game is paused
+        if (m_pauseScreen != null && m_pauseScreen.IsPaused)
+        {
+            Debug.Log(
+                $"[BachelorSetter] Bachelor {m_bachelor?._name ?? "Unknown"} not clickable while game is paused"
+            );
+            return;
+        }
+
         PointerEventData pData = (PointerEventData)data;
         Debug.Log(data);
         SetBatchelor();
@@ -36,6 +48,15 @@ public class BachelorSetter : MonoBehaviour
     public void OnMouseDown( /*BaseEventData data*/
     )
     {
+        // Check if game is paused
+        if (m_pauseScreen != null && m_pauseScreen.IsPaused)
+        {
+            Debug.Log(
+                $"[BachelorSetter] Bachelor {m_bachelor?._name ?? "Unknown"} not clickable while game is paused"
+            );
+            return;
+        }
+
         /*        PointerEventData pData = (PointerEventData)data;
                 Debug.Log(data);*/
         Debug.Log("m_dialogueDisplay");

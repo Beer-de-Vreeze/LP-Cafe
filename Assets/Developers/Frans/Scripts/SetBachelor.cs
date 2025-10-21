@@ -34,15 +34,26 @@ public class SetBachelor : MonoBehaviour
     private GameObject m_dialogueObject;
 
     private GameObject[] otherBachelors;
+    private PauzeScreen m_pauseScreen;
 
     void Start()
     {
         m_dialogueDisplay = FindFirstObjectByType<DialogueDisplay>();
+        m_pauseScreen = FindFirstObjectByType<PauzeScreen>();
         m_dialogueCanvas.enabled = false;
     }
 
     private void OnMouseDown()
     {
+        // Check if game is paused
+        if (m_pauseScreen != null && m_pauseScreen.IsPaused)
+        {
+            Debug.Log(
+                $"[SetBachelor] Bachelor {m_bachelor?._name ?? "Unknown"} not clickable while game is paused"
+            );
+            return;
+        }
+
         // Check if bachelors are currently clickable (to handle barista events)
         if (m_dialogueDisplay != null && !m_dialogueDisplay.AreBachelorsClickable())
         {
