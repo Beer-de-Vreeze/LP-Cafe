@@ -15,9 +15,9 @@ namespace DS.Elements
     public class DSSetterNode : NodeBase
     {
         // Events for different operation types
-        public event Action<string, string> OnValueSet;
-        public event Action<LoveMeterSO, int> OnLoveScoreChanged;
-        public event Action<string, bool> OnBooleanChanged;
+        // public event Action<string, string> OnValueSet;
+        // public event Action<LoveMeterSO, int> OnLoveScoreChanged;
+        // public event Action<string, bool> OnBooleanChanged;
 
         private DropdownField operationTypeDropdown;
         private VisualElement valueContainer;
